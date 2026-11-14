@@ -185,7 +185,7 @@ const fmtPrice = (l, lang) => {
 const priceAttrs = (l) => (l.fiyat ? ` data-amt="${l.fiyat}" data-ccy="${({ TL: 'TRY', USD: 'USD', EUR: 'EUR', GBP: 'GBP' })[l.para || 'TL'] || 'TRY'}"` : '');
 const tipLabel = (l, lang) => (l.tip === 'Kiralık' ? T[lang].rent : T[lang].sale);
 const statusBadge = (l, lang) => l.durum === 'Satıldı' ? `<span class="badge sold">${T[lang].sold}</span>` : l.durum === 'Opsiyonlu' ? `<span class="badge opt">${T[lang].option}</span>` : '';
-const segOf = (lang, seg) => (PAGES[seg] ? (PAGES[seg].seg[lang] || PAGES[seg].seg.en) : seg === 'blog' ? 'blog' : seg === 'projects' ? SEGS.projects[lang] : seg === 'buyersguide' ? GUIDE_SEG[lang] : seg === 'favorites' ? (SEGS.favorites[lang] || 'favorites') : seg === 'reviews' ? SEGS.reviews[lang] : T[lang].seg[seg]);
+const segOf = (lang, seg) => (PAGES[seg] ? (PAGES[seg].seg[lang] || PAGES[seg].seg.en) : seg === 'blog' ? 'blog' : seg === 'projects' ? SEGS.projects[lang] : seg === 'buyersguide' ? GUIDE_SEG[lang] : seg === 'downloads' ? (SEGS.downloads[lang] || 'free-guides') : seg === 'favorites' ? (SEGS.favorites[lang] || 'favorites') : seg === 'reviews' ? SEGS.reviews[lang] : T[lang].seg[seg]);
 const url = (lang, seg, slug) => `${BASE[lang]}/${segOf(lang, seg)}/${slug ? slug + '/' : ''}`;
 const home = (lang) => `${BASE[lang]}/`;
 const waLink = (text) => `https://wa.me/${SITE.whatsapp}?text=${encodeURIComponent(text)}`;
@@ -223,20 +223,50 @@ function callPopup(lang) {
   const t = T[lang];
   return `<div class="cpop" data-cpop hidden role="dialog" aria-modal="true" aria-labelledby="cpop-h"><div class="cpbox"><button type="button" class="cpx" data-cpop-close aria-label="${s('close', lang)}">✕</button>
 <div class="cptext"><h2 id="cpop-h">${s('callTitle', lang)}</h2><p>${s('callSub', lang)}</p></div>
-<form class="cpform" name="beni-ara" method="POST" data-netlify="true" netlify-honeypot="bot" action="${url(lang, 'contact')}?ok=1" data-cpop-form><input type="hidden" name="form-name" value="beni-ara"><input type="hidden" name="dil" value="${lang}"><input type="hidden" name="sayfa" value="" data-cpop-page><p hidden><input name="bot"></p>
+<form class="cpform" name="beni-ara" method="POST" data-netlify="true" netlify-honeypot="bot" action="${url(lang, 'contact')}?ok=1" data-cpop-form><input type="hidden" name="form-name" value="beni-ara"><input type="hidden" name="dil" value="${lang}"><input type="hidden" name="sayfa" value="" data-cpop-page><input type="hidden" name="ilan" value="" data-cpop-ilan><p hidden><input name="bot"></p>
 <input name="ad" placeholder="${t.name} *" required autocomplete="name">
 <div class="cptel"><select name="ulke_kodu" aria-label="${s('dialCode', lang)}">${DIAL.map(([c, d]) => `<option value="${d}"${d === (DEF_DIAL[lang] || '+90') && (c !== 'KZ') ? ' selected' : ''}>${c} ${d}</option>`).join('')}</select><input name="telefon" type="tel" placeholder="${t.phone} *" required autocomplete="tel-national"></div>
 <label class="chk"><input type="checkbox" name="kvkk_onay" value="evet" required> <span>${s('consent', lang).replace('{{LINK}}', `<a href="${url(lang, 'privacy')}" target="_blank" rel="noopener">${PAGES.privacy.nav[lang] || PAGES.privacy.nav.en}</a>`)} *</span></label>
 <button class="btn" type="submit">${s('callMe', lang)}</button></form></div></div>`;
 }
 
+// ---------- alt bilgi (açık renk, Property Turkey düzeni) ----------
+const AREAS = [['Muratpaşa', '🏙️'], ['Konyaaltı', '🏖️'], ['Aksu', '✈️'], ['Döşemealtı', '🌿'], ['Kepez', '🏘️'], ['Serik', '⛳'], ['Kemer', '⛰️']];
+const POPULAR = {
+  tr: [['Antalya satılık daire', '?tip=Satılık&tur=Daire'], ['Antalya satılık villa', '?tip=Satılık&tur=Villa'], ['Lara satılık daire', '?tip=Satılık&ilce=Muratpaşa'], ['Konyaaltı satılık daire', '?tip=Satılık&ilce=Konyaaltı'], ['Altıntaş satılık daire', '?tip=Satılık&ilce=Aksu'], ['Döşemealtı satılık villa', '?tip=Satılık&tur=Villa&ilce=Döşemealtı'], ['Antalya kiralık daire', '?tip=Kiralık'], ['Vatandaşlığa uygun evler', '?etiket=vatandaslik']],
+  en: [['Apartments for sale in Antalya', '?tip=Satılık&tur=Daire'], ['Villas for sale in Antalya', '?tip=Satılık&tur=Villa'], ['Property in Lara', '?ilce=Muratpaşa'], ['Property in Konyaaltı', '?ilce=Konyaaltı'], ['Property in Altıntaş', '?ilce=Aksu'], ['Villas in Döşemealtı', '?tur=Villa&ilce=Döşemealtı'], ['Antalya rentals', '?tip=Kiralık'], ['Citizenship-eligible homes', '?etiket=vatandaslik']],
+};
+function footer(lang) {
+  const t = T[lang]; const nv = (k) => PAGES[k].nav[lang] || PAGES[k].nav.en;
+  const pop = POPULAR[lang] || POPULAR.en;
+  const L = GL(lang);
+  const col = (h, links) => `<div><h4>${h}</h4><p class="flinks">${links.map(([n, u]) => `<a href="${u}">${esc(n)}</a>`).join('')}</p></div>`;
+  return `<footer class="foot"><div class="wrap fcols">
+${col(s('popSearches', lang), pop.map(([n, q]) => [n, url(lang, 'list') + q]))}
+${col(s('popAreas', lang), AREAS.map(([a]) => [a, `${url(lang, 'list')}?ilce=${encodeURIComponent(a)}`]))}
+${col(GUIDE_TITLE[lang], GUIDES.map((g) => [gC(g, L).title, gUrl(L, g)]))}
+${col(t.company, [[nv('about'), url(lang, 'about')], [nv('broker'), url(lang, 'broker')], [nv('team'), url(lang, 'team')], [t.revTitle, url(lang, 'reviews')], [nv('licences'), url(lang, 'licences')], [nv('join'), url(lang, 'join')]])}
+${col(s('usefulLinks', lang), [[nv('services'), url(lang, 'services')], [nv('sell'), url(lang, 'sell')], [nv('viewing'), url(lang, 'viewing')], [s('dlPageTitle', lang), url(lang, 'downloads')], [t.projects, url(lang, 'projects')], [t.blog, url(lang, 'blog')], [t.nav.contact, url(lang, 'contact')]])}
+</div>
+<div class="wrap fmid">
+<div class="fbrand"><img src="/img/logo/acc-siyah.svg" alt="ACC HOMES International Real Estate" width="171" height="50" loading="lazy"><p class="slogan">${esc(SITE.slogan[lang])}</p><p>${esc(t.footerAbout)}</p></div>
+<div class="fcontact"><p><b>${t.office}</b><br>${esc(SITE.address.street)}<br>${esc(SITE.address.area)}, ${esc(SITE.address.district)} / ${esc(SITE.address.city)}</p><p><a href="tel:${SITE.phoneRaw}"><b dir="ltr">${SITE.phone}</b></a><br><a href="mailto:${SITE.email}">${SITE.email}</a></p></div>
+<div class="fcenter"><div class="fpills"><a href="${url(lang, 'join')}">🤝 ${s('partnerPill', lang)}</a><a href="${url(lang, 'viewing')}">📱 ${nv('viewing')}</a></div>
+<div class="social"><a href="${SITE.instagram.url}" target="_blank" rel="noopener" aria-label="Instagram">${ICON_IG}</a><a href="${waLink(t.waGeneral)}" target="_blank" rel="noopener" aria-label="WhatsApp">${ICON_WA}</a><a href="${SITE.google.mapsUrl}" target="_blank" rel="noopener" aria-label="Google">${ICON_G}</a></div>
+<a class="frating" href="${SITE.google.mapsUrl}" target="_blank" rel="noopener">${ICON_G}<b>${fmtRating(lang)}</b>${stars}<span>${t.gReviews(SITE.google.reviews)}</span></a></div>
+</div>
+<div class="wrap flangs">${LANGS.map((l) => `<a href="${home(l)}" lang="${l}"${l === lang ? ' aria-current="true"' : ''}>${ENDONYM[l]}</a>`).join('')}</div>
+<div class="wrap freg"><b>${s('licence', lang)}</b> · ${SITE.licence.join(' · ')}</div>
+<div class="wrap copy">© 2024–${new Date().getFullYear()} ${esc(SITE.brand)} · ${t.rights} · <a href="${url(lang, 'privacy')}">${nv('privacy')}</a></div></footer>`;
+}
+
 // ---------- sayfa iskeleti ----------
-function layout({ lang, title, desc, canonical, alternates, body, schema = [], ogImage }) {
+function layout({ lang, title, desc, canonical, alternates, body, schema = [], ogImage, noindex }) {
   const t = T[lang];
   const alt = alternates ? Object.entries(alternates).map(([l, u]) => `<link rel="alternate" hreflang="${l}" href="${SITE.domain}${u}">`).join('') + `<link rel="alternate" hreflang="x-default" href="${SITE.domain}${alternates.tr}">` : '';
   const langSwitch = alternates ? LANGS.map((l) => `<a href="${alternates[l] || (alternates.tr && alternates.tr.startsWith('/alici-rehberi') ? url(l, 'buyersguide') : home(l))}"${l === lang ? ' aria-current="true"' : ''}>${l.toUpperCase()}</a>`).join('') : '';
   return `<!doctype html><html lang="${t.htmlLang}"${RTL.has(lang) ? ' dir="rtl"' : ''}><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>${esc(title)}</title><meta name="description" content="${esc(desc)}"><link rel="canonical" href="${SITE.domain}${canonical}">${alt}
+<title>${esc(title)}</title>${noindex ? '<meta name="robots" content="noindex">' : ''}<meta name="description" content="${esc(desc)}"><link rel="canonical" href="${SITE.domain}${canonical}">${alt}
 <meta property="og:type" content="website"><meta property="og:title" content="${esc(title)}"><meta property="og:description" content="${esc(desc)}"><meta property="og:url" content="${SITE.domain}${canonical}"><meta property="og:locale" content="${t.locale}">${ogImage ? `<meta property="og:image" content="${SITE.domain}${ogImage}">` : ''}
 <meta name="theme-color" content="#E02A3C"><link rel="icon" href="/favicon.svg" type="image/svg+xml"><link rel="apple-touch-icon" href="/apple-touch-icon.png">${FONTS_OK ? `<link rel="preload" href="/assets/fonts.css" as="style"><link rel="stylesheet" href="/assets/fonts.css">` : ''}<link rel="stylesheet" href="/assets/style.css?v=${VER}">
 ${[agentSchema, ...schema].map((s) => `<script type="application/ld+json">${JSON.stringify(s)}</script>`).join('')}
@@ -250,12 +280,7 @@ ${settingsBtn(lang)}
 <a class="btn sm" href="tel:${SITE.phoneRaw}">${t.call}</a>
 </div>${settingsPanel(lang, alternates)}</header>
 <main>${body}</main>
-<footer class="foot"><div class="wrap fgrid">
-<div><div class="logo flogo"><img src="/img/logo/acc-siyah.svg" alt="ACC HOMES International Real Estate" width="171" height="50" loading="lazy"></div><p class="slogan">${esc(SITE.slogan[lang])}</p><p>${esc(t.footerAbout)}</p></div>
-<div><h4>${t.company}</h4><p class="flinks"><a href="${url(lang, 'about')}">${PAGES.about.nav[lang]}</a><a href="${url(lang, 'broker')}">${PAGES.broker.nav[lang]}</a><a href="${url(lang, 'team')}">${PAGES.team.nav[lang]}</a><a href="${url(lang, 'services')}">${PAGES.services.nav[lang]}</a><a href="${url(lang, 'sell')}">${PAGES.sell.nav[lang] || PAGES.sell.nav.en}</a><a href="${url(lang, 'viewing')}">${PAGES.viewing.nav[lang] || PAGES.viewing.nav.en}</a><a href="${url(lang, 'licences')}">${PAGES.licences.nav[lang] || PAGES.licences.nav.en}</a><a href="${url(lang, 'join')}">${PAGES.join.nav[lang]}</a><a href="${url(lang, 'guide')}">${t.nav.guide}</a><a href="${url(lang, 'blog')}">${t.blog}</a></p></div>
-<div><h4>${t.office}</h4><p>${esc(SITE.address.street)}<br>${esc(SITE.address.area)}, ${esc(SITE.address.district)} / ${esc(SITE.address.city)}</p><p class="lic">${s('licence', lang)}: ${SITE.licence.join(' · ')}</p></div>
-<div><h4>${t.nav.contact}</h4><p><a href="tel:${SITE.phoneRaw}">${SITE.phone}</a><br><a href="mailto:${SITE.email}">${SITE.email}</a><br><a href="${SITE.corporateSite}">${t.corporate}</a></p><div class="social"><a href="${SITE.instagram.url}" target="_blank" rel="noopener" aria-label="Instagram">${ICON_IG}</a><a href="${SITE.google.mapsUrl}" target="_blank" rel="noopener" aria-label="Google">${ICON_G}</a></div></div>
-</div><div class="wrap copy">© ${new Date().getFullYear()} ${esc(SITE.brand)} · ${t.rights} · <a href="${url(lang, 'privacy')}">${PAGES.privacy.nav[lang] || PAGES.privacy.nav.en}</a></div></footer>
+${footer(lang)}
 ${callPopup(lang)}
 ${stickyBar(lang)}
 <script src="/assets/app.js?v=${VER}" defer></script></body></html>`;
@@ -322,6 +347,7 @@ ${p.badges ? `<div class="lbadges">${p.badges.map(([i, h, d]) => `<div><span>${i
 }
 
 const ICON_IG = `<svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path fill="currentColor" d="M12 2.2c3.2 0 3.6 0 4.8.1 1.2.1 1.8.2 2.2.4.6.2 1 .5 1.4.9.4.4.7.8.9 1.4.2.4.4 1 .4 2.2.1 1.3.1 1.6.1 4.8s0 3.6-.1 4.8c-.1 1.2-.2 1.8-.4 2.2-.2.6-.5 1-.9 1.4-.4.4-.8.7-1.4.9-.4.2-1 .4-2.2.4-1.3.1-1.6.1-4.8.1s-3.6 0-4.8-.1c-1.2-.1-1.8-.2-2.2-.4-.6-.2-1-.5-1.4-.9-.4-.4-.7-.8-.9-1.4-.2-.4-.4-1-.4-2.2C2.2 15.6 2.2 15.2 2.2 12s0-3.6.1-4.8c.1-1.2.2-1.8.4-2.2.2-.6.5-1 .9-1.4.4-.4.8-.7 1.4-.9.4-.2 1-.4 2.2-.4C8.4 2.2 8.8 2.2 12 2.2zm0 2c-3.1 0-3.5 0-4.7.1-1 0-1.6.2-2 .3-.5.2-.8.4-1.1.7-.3.3-.6.7-.7 1.1-.1.4-.3.9-.3 2-.1 1.2-.1 1.6-.1 4.7s0 3.5.1 4.7c0 1 .2 1.6.3 2 .2.5.4.8.7 1.1.3.3.7.6 1.1.7.4.1.9.3 2 .3 1.2.1 1.6.1 4.7.1s3.5 0 4.7-.1c1 0 1.6-.2 2-.3.5-.2.8-.4 1.1-.7.3-.3.6-.7.7-1.1.1-.4.3-.9.3-2 .1-1.2.1-1.6.1-4.7s0-3.5-.1-4.7c0-1-.2-1.6-.3-2-.2-.5-.4-.8-.7-1.1-.3-.3-.7-.6-1.1-.7-.4-.1-.9-.3-2-.3-1.2-.1-1.6-.1-4.7-.1zm0 3.4a4.4 4.4 0 1 1 0 8.8 4.4 4.4 0 0 1 0-8.8zm0 2a2.4 2.4 0 1 0 0 4.8 2.4 2.4 0 0 0 0-4.8zm5.6-2.2a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"/></svg>`;
+const ICON_WA = `<svg viewBox="0 0 32 32" width="20" height="20" aria-hidden="true"><path fill="currentColor" d="M16 3a13 13 0 0 0-11.3 19.4L3 29l6.8-1.8A13 13 0 1 0 16 3zm0 23.6c-2 0-4-.6-5.7-1.6l-.4-.2-4 1 1.1-3.9-.3-.4A10.6 10.6 0 1 1 16 26.6zm5.8-7.9c-.3-.2-1.9-.9-2.2-1-.3-.1-.5-.2-.7.2l-1 1.2c-.2.2-.4.2-.7.1a8.7 8.7 0 0 1-4.3-3.8c-.3-.6.3-.5.9-1.6.1-.2 0-.4 0-.5l-1-2.4c-.3-.6-.5-.5-.7-.5h-.6a1.2 1.2 0 0 0-.9.4 3.6 3.6 0 0 0-1.1 2.7 6.3 6.3 0 0 0 1.3 3.3 14.4 14.4 0 0 0 5.5 4.9c2 .9 2.8.9 3.8.8.6-.1 1.9-.8 2.2-1.5.3-.7.3-1.4.2-1.5-.1-.2-.3-.3-.7-.4z"/></svg>`;
 const ICON_G = `<svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path fill="#4285F4" d="M23.5 12.3c0-.8-.1-1.6-.2-2.3H12v4.4h6.5a5.6 5.6 0 0 1-2.4 3.6v3h3.9c2.3-2.1 3.5-5.2 3.5-8.7z"/><path fill="#34A853" d="M12 24c3.2 0 6-1.1 8-2.9l-3.9-3c-1.1.7-2.5 1.2-4.1 1.2-3.1 0-5.8-2.1-6.7-5H1.3v3.1A12 12 0 0 0 12 24z"/><path fill="#FBBC05" d="M5.3 14.3a7.2 7.2 0 0 1 0-4.6V6.6H1.3a12 12 0 0 0 0 10.8l4-3.1z"/><path fill="#EA4335" d="M12 4.8c1.8 0 3.3.6 4.6 1.8l3.4-3.4A12 12 0 0 0 1.3 6.6l4 3.1c.9-2.9 3.6-4.9 6.7-4.9z"/></svg>`;
 const stars = '<span class="stars" aria-hidden="true">★★★★★</span>';
 const fmtRating = (lang) => new Intl.NumberFormat(LOCALE[lang], { minimumFractionDigits: 1 }).format(SITE.google.rating);
@@ -458,12 +484,58 @@ function pageReviews(lang) {
 }
 // ---------- ana sayfa banner + arama ----------
 function heroSlider(lang) {
-  const tr = lang === 'tr';
+  const t = T[lang]; const nv = (k) => PAGES[k].nav[lang] || PAGES[k].nav.en;
   const slides = [
-    { img: '/img/acc-plaza-1200.webp', eyebrow: 'ACC PLAZA', title: PLAZA[lang].title, href: url(lang, 'about'), cta: s('aboutUs', lang) },
-    ...PROJECTS.filter((p) => p.media.hero && MEDIA[p.media.hero]).map((p) => ({ img: cdn(p.media.hero, 1600), eyebrow: `${p.area} · ${p.developer}`, title: p.title, href: `/projeler/${p.slug}/`, cta: T[lang].projectsCta })),
+    { img: '/img/acc-plaza-1200.webp', eyebrow: SITE.slogan[lang], title: t.heroTitle, sub: t.heroSub, href: url(lang, 'list'), cta: t.heroCta, h1: true },
+    ...PROJECTS.filter((p) => p.media.hero && MEDIA[p.media.hero]).map((p) => ({ img: cdn(p.media.hero, 1600), eyebrow: `${p.area} · ${p.developer}`, title: p.title, sub: p.sub, href: `/projeler/${p.slug}/`, cta: t.projectsCta })),
+    { img: '/img/ofis/sunum.webp', eyebrow: s('dlPageTitle', lang), title: s('dlCostTitle', lang), sub: s('dlCostSub', lang), href: url(lang, 'downloads'), cta: s('dlCta', lang), red: true },
+    { img: '/img/ofis/toplanti.webp', eyebrow: s('dlPageTitle', lang), title: s('dlCitTitle', lang), sub: s('dlCitSub', lang), href: url(lang, 'downloads'), cta: s('dlCta', lang), red: true },
+    { img: '/img/ofis/oturma.webp', eyebrow: nv('sell'), title: PAGES.sell[lang] ? PAGES.sell[lang].title : PAGES.sell.en.title, sub: '', href: url(lang, 'sell'), cta: s('sellCta', lang), red: true },
   ];
-  return `<section class="slider" aria-label="${T[lang].projects}"><div class="slides">${slides.map((s, i) => `<a class="slide" href="${s.href}" style="background-image:linear-gradient(90deg,rgba(20,4,6,.75),rgba(20,4,6,.15)),url('${s.img}')"><div class="wrap"><p class="eyebrow">${esc(s.eyebrow)}</p><h2>${esc(s.title)}</h2><span class="btn">${esc(s.cta)} →</span></div></a>`).join('')}</div><div class="dots">${slides.map((_, i) => `<button aria-label="${i + 1}"${i ? '' : ' aria-current="true"'}></button>`).join('')}</div></section>`;
+  const ov = (r) => (r ? 'linear-gradient(90deg,rgba(150,18,32,.92),rgba(224,42,60,.55))' : 'linear-gradient(90deg,rgba(20,4,6,.78),rgba(20,4,6,.2))');
+  return `<section class="slider hero2" aria-roledescription="carousel"><div class="slides">${slides.map((x) => `<div class="slide" style="background-image:${ov(x.red)},url('${x.img}')"><div class="wrap"><p class="eyebrow">${esc(x.eyebrow)}</p>${x.h1 ? `<h1>${esc(x.title)}</h1>` : `<h2>${esc(x.title)}</h2>`}${x.sub ? `<p class="ssub">${esc(x.sub)}</p>` : ''}<a class="btn" href="${x.href}">${esc(x.cta)} →</a></div></div>`).join('')}</div><button class="sarrow prev" type="button" data-sprev aria-label="‹">‹</button><button class="sarrow next" type="button" data-snext aria-label="›">›</button><div class="dots">${slides.map((_, i) => `<button aria-label="${i + 1}"${i ? '' : ' aria-current="true"'}></button>`).join('')}</div></section>`;
+}
+function areaTabs(lang, mode) {
+  const used = AREAS.filter(([a]) => mode !== 'filter' || LISTINGS.some((l) => l.ilce === a));
+  const tab = (a, ic, lab) => mode === 'filter' ? `<button type="button" data-area="${esc(a)}"${a ? '' : ' aria-pressed="true"'}>${ic} ${esc(lab)}</button>` : `<a href="${url(lang, 'list')}${a ? `?ilce=${encodeURIComponent(a)}` : ''}">${ic} ${esc(lab)}</a>`;
+  return `<div class="atabs${mode === 'filter' ? ' small' : ''}"${mode === 'filter' ? ' data-areatabs' : ''}>${tab('', '🔎', s('allAreas', lang))}${used.map(([a, ic]) => tab(a, ic, a)).join('')}</div>`;
+}
+function consultBar(lang) {
+  const t = T[lang];
+  return `<section class="consult"><form class="wrap cbform" name="danismanlik" method="POST" data-netlify="true" netlify-honeypot="bot" action="${url(lang, 'contact')}?ok=1"><input type="hidden" name="form-name" value="danismanlik"><input type="hidden" name="dil" value="${lang}"><p hidden><input name="bot"></p>
+<b class="cbt">💬 ${s('consultTitle', lang)}</b><input name="ad" placeholder="${t.name} *" required autocomplete="name"><div class="cptel"><select name="ulke_kodu" aria-label="${s('dialCode', lang)}">${DIAL.map(([c, d]) => `<option value="${d}"${d === (DEF_DIAL[lang] || '+90') && c !== 'KZ' ? ' selected' : ''}>${c} ${d}</option>`).join('')}</select><input name="telefon" type="tel" placeholder="${t.phone} *" required></div><input name="eposta" type="email" placeholder="${s('email', lang)}"><label class="chk mini"><input type="checkbox" name="kvkk_onay" value="evet" required> <a href="${url(lang, 'privacy')}" target="_blank" rel="noopener">KVKK</a> ✓</label><button class="btn" type="submit">${s('consultBtn', lang)} →</button></form></section>`;
+}
+function citizenshipBand(lang) {
+  const L = GL(lang); const g = GUIDES.find((x) => /vatandas|citizen/.test(x.slug + (x.en && x.en.slug)));
+  return `<section class="citband"><div class="wrap cbgrid"><div class="cbimg"><img src="/img/ofis/maket.webp" alt="ACC Plaza" loading="lazy" width="900" height="1120"></div><div class="cbtext"><p class="eyebrow">ACC HOMES</p><h2>${s('citTitle', lang)}</h2><p>${s('citText', lang)}</p><div class="ctas"><a class="btn" href="${g ? gUrl(L, g) : url(lang, 'buyersguide')}">${s('citCta', lang)} →</a><a class="btn ghost" href="${url(lang, 'list')}?etiket=vatandaslik">${s('tag_vatandaslik', lang)}</a></div></div></div></section>`;
+}
+function whyBlock(lang) {
+  const t = T[lang]; const ic = ['📊', '🌍', '🧾', '🎬'];
+  return `<section class="wrap sec"><div class="sechead"><h2>${t.why}</h2></div><div class="whyg">${t.whyItems.map(([h, p], i) => `<div><span>${ic[i]}</span><h3>${esc(h)}</h3><p>${esc(p)}</p></div>`).join('')}</div></section>`;
+}
+function talkBlock(lang) {
+  const t = T[lang];
+  return `<section class="talk"><div class="wrap talkgrid"><form class="box form" name="danisman-gorusme" method="POST" data-netlify="true" netlify-honeypot="bot" action="${url(lang, 'contact')}?ok=1"><input type="hidden" name="form-name" value="danisman-gorusme"><input type="hidden" name="dil" value="${lang}"><p hidden><input name="bot"></p>
+<h2>${s('talkTitle', lang)}</h2><p class="sub sm">${s('talkSub', lang)}</p>
+<input name="ad" placeholder="${t.name} *" required><div class="cptel"><select name="ulke_kodu">${DIAL.map(([c, d]) => `<option value="${d}"${d === (DEF_DIAL[lang] || '+90') && c !== 'KZ' ? ' selected' : ''}>${c} ${d}</option>`).join('')}</select><input name="telefon" type="tel" placeholder="${t.phone} *" required></div><input name="eposta" type="email" placeholder="${s('email', lang)}"><input name="butce" placeholder="${s('budget', lang)}"><textarea name="mesaj" rows="3" placeholder="${t.msg}"></textarea>
+<label class="chk"><input type="checkbox" name="kvkk_onay" value="evet" required> <span>${s('consent', lang).replace('{{LINK}}', `<a href="${url(lang, 'privacy')}" target="_blank" rel="noopener">${PAGES.privacy.nav[lang] || PAGES.privacy.nav.en}</a>`)} *</span></label><button class="btn" type="submit">${t.send}</button></form>
+<div class="talkimg">${officeGallery(4)}</div></div></section>`;
+}
+const DL = [
+  { key: 'cost', title: 'dlCostTitle', sub: 'dlCostSub', file: { tr: '/rehber/acc-homes-2026-antalya-alim-maliyeti.pdf', en: '/rehber/acc-homes-2026-antalya-buying-costs.pdf' } },
+  { key: 'cit', title: 'dlCitTitle', sub: 'dlCitSub', file: { tr: '/rehber/acc-homes-yatirimla-vatandaslik-rehberi.pdf', en: '/rehber/acc-homes-citizenship-by-investment-guide.pdf' } },
+];
+function pageDownloads(lang) {
+  const t = T[lang]; const L = GL(lang);
+  const cards = DL.map((d) => `<div class="dlcard"><span>📘</span><h3>${s(d.title, lang)}</h3><p>${s(d.sub, lang)}</p></div>`).join('');
+  const body = `<section class="wrap sec narrow page"><nav class="crumbs"><a href="${home(lang)}">${t.nav.home}</a> / <span>${s('dlPageTitle', lang)}</span></nav><h1>${s('dlPageTitle', lang)}</h1><p class="sub">${s('dlPageLead', lang)}</p><div class="dlgrid">${cards}</div>
+<form class="box form sellform" name="rehber-indir" method="POST" data-netlify="true" netlify-honeypot="bot" action="${url(lang, 'downloads')}hazir/"><input type="hidden" name="form-name" value="rehber-indir"><input type="hidden" name="dil" value="${lang}"><p hidden><input name="bot"></p>
+<div class="fgrid3"><label>${t.name} *<input name="ad" required></label><label>${s('email', lang)} *<input name="eposta" type="email" required></label><label>${t.phone}<input name="telefon" type="tel"></label></div>
+<label class="chk"><input type="checkbox" name="kvkk_onay" value="evet" required> <span>${s('consent', lang).replace('{{LINK}}', `<a href="${url(lang, 'privacy')}" target="_blank" rel="noopener">${PAGES.privacy.nav[lang] || PAGES.privacy.nav.en}</a>`)} *</span></label>
+<button class="btn" type="submit">${s('dlCta', lang)} →</button></form></section>`;
+  write(path.join(url(lang, 'downloads'), 'index.html'), layout({ lang, title: `${s('dlPageTitle', lang)} | ACC HOMES`, desc: s('dlPageLead', lang), canonical: url(lang, 'downloads'), alternates: alts('downloads'), body }));
+  const ready = `<section class="wrap sec narrow page"><h1>✓ ${s('dlReady', lang)}</h1><div class="dlgrid">${DL.map((d) => `<a class="dlcard" href="${d.file[L]}" download><span>⬇️</span><h3>${s(d.title, lang)}</h3><p>PDF</p></a>`).join('')}</div><div class="ctas"><a class="btn" href="${waLink(t.waGeneral)}" target="_blank" rel="noopener">${s('askWa', lang)}</a><a class="btn ghost" href="${url(lang, 'list')}">${t.seeAll}</a></div></section>`;
+  write(path.join(url(lang, 'downloads'), 'hazir', 'index.html'), layout({ lang, title: `${s('dlReady', lang)} | ACC HOMES`, desc: '', canonical: url(lang, 'downloads') + 'hazir/', alternates: null, body: ready, noindex: true }));
 }
 function searchBox(lang) {
   const tr = lang === 'tr'; const f = T[lang].filters;
@@ -493,12 +565,13 @@ ${cardTools(l, lang)}
 <a href="${url(lang, 'listing', slugOf(l))}">
 <div class="img">${cover ? `<img src="${esc(cover)}" alt="${esc([l.mahalle, l.ilce, l.oda, l.tur].join(' '))}" loading="lazy">` : placeholder}<span class="tag">${tipLabel(l, lang)}</span>${statusBadge(l, lang)}</div>
 <div class="body"><div class="price"${priceAttrs(l)}>${fmtPrice(l, lang)}</div><h3>${esc(pick(l.baslik, lang))}</h3>${tags.length ? `<div class="ltags">${tags.slice(0, 3).map((k) => `<span class="lt-${k}">${tagLabel(k, lang)}</span>`).join('')}</div>` : ''}
-<div class="meta"><span>${esc(l.oda || '')}</span>${l.net ? `<span data-m2="${+l.net}">${+l.net} m²</span>` : ''}<span>${esc([l.mahalle, l.ilce].filter(Boolean).join(', '))}</span></div></div></a></article>`;
+<div class="meta"><span>${esc(l.oda || '')}</span>${l.net ? `<span data-m2="${+l.net}">${+l.net} m²</span>` : ''}<span>${esc([l.mahalle, l.ilce].filter(Boolean).join(', '))}</span></div></div></a>${enqBtn(l, lang)}</article>`;
 }
 
 const TAGS = { vatandaslik: '🛂', oturum: '🪪', deniz: '🌊', ilkSira: '🏖️', esyali: '🛋️', firsat: '🔥', yeni: '✨' };
 const tagLabel = (k, lang) => `${TAGS[k]} ${s('tag_' + k, lang)}`;
 const cardTools = (l, lang) => `<div class="ctools"><button type="button" class="favbtn" data-fav="${esc(l.id)}" aria-pressed="false" aria-label="${s('favAdd', lang)}" title="${s('favAdd', lang)}"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M12 21s-7.5-4.6-9.6-9.2C.9 8.4 3 4.5 6.7 4.5c2.1 0 3.6 1.2 4.3 2.4.7-1.2 2.2-2.4 4.3-2.4 3.7 0 5.8 3.9 4.3 7.3C19.5 16.4 12 21 12 21z" fill="currentColor"/></svg></button><button type="button" class="cmpbtn" data-cmp="${esc(l.id)}" aria-pressed="false" title="${s('compareAdd', lang)}">⇄ <span>${s('compare', lang)}</span></button></div>`;
+const enqBtn = (l, lang) => `<button type="button" class="enqbtn" data-enq="${esc(l.id)}">${s('quickEnq', lang)}</button>`;
 const cmpData = (list, lang) => `<script type="application/json" id="cmpdata">${JSON.stringify(list.map((l) => ({ id: l.id, u: url(lang, 'listing', slugOf(l)), t: pick(l.baslik, lang), p: fmtPrice(l, lang), a: l.fiyat || 0, c: ({ TL: 'TRY' })[l.para || 'TL'] || l.para, img: (l.foto || [])[0] || '', r: [[T[lang].fields.type, l.tur], [T[lang].fields.rooms, l.oda], [T[lang].fields.net, l.net ? l.net + ' m²' : ''], [T[lang].fields.gross, l.brut ? l.brut + ' m²' : ''], [T[lang].fields.floor, l.kat], [T[lang].fields.age, l.yas], [T[lang].fields.location, [l.mahalle, l.ilce].filter(Boolean).join(', ')], [s('tags', lang), (l.etiketler || []).filter((k) => TAGS[k]).map((k) => tagLabel(k, lang)).join(', ')]] }))).replace(/</g, '\\u003c')}</script>`;
 function tagFilter(lang) {
   const used = Object.keys(TAGS).filter((k) => LISTINGS.some((l) => (l.etiketler || []).includes(k)));
@@ -524,7 +597,7 @@ function pageFavorites(lang) {
 <p class="empty" data-fav-empty>${s('favEmpty', lang)} <a href="${url(lang, 'list')}">${t.seeAll} →</a></p>
 <div data-favpage>${grid(LISTINGS, lang)}</div>
 <h2 id="karsilastir">⇄ ${s('compareTitle', lang)}</h2><p class="sub sm">${s('compareHint', lang)}</p><div class="cmpwrap" data-cmptable></div>${cmpData(LISTINGS, lang)}</section>`;
-  write(path.join(url(lang, 'favorites'), 'index.html'), layout({ lang, title: `${s('favTitle', lang)} | ACC HOMES`, desc: s('favLead', lang), canonical: url(lang, 'favorites'), alternates: alts('favorites'), body }));
+  write(path.join(url(lang, 'favorites'), 'index.html'), layout({ lang, title: `${s('favTitle', lang)} | ACC HOMES`, desc: s('favLead', lang), canonical: url(lang, 'favorites'), alternates: alts('favorites'), body, noindex: true }));
 }
 
 function grid(list, lang) {
@@ -538,14 +611,16 @@ function pageHome(lang) {
   const t = T[lang];
   const feat = LISTINGS.filter((l) => l.oneCikan === 'Evet' && l.durum !== 'Satıldı').slice(0, 6);
   const show = feat.length ? feat : LISTINGS.slice(0, 6);
-  const body = `<section class="hero"><div class="wrap"><p class="eyebrow">${esc(SITE.slogan[lang])}</p><h1>${t.heroTitle}</h1><p class="sub">${t.heroSub}</p>
-${searchBox(lang)}
-<div class="ctas small"><a class="btn ghost" href="${waLink(t.waGeneral)}" target="_blank" rel="noopener">${t.heroCta2}</a><a class="btn ghost" href="${url(lang, 'buyersguide')}">${GUIDE_TITLE[lang]} →</a><a class="btn ghost" href="${url(lang, 'sell')}">${PAGES.sell.nav[lang] || PAGES.sell.nav.en} →</a></div></div></section>
-${heroSlider(lang)}
+  const body = `${heroSlider(lang)}
+<section class="hsearchbar"><div class="wrap">${areaTabs(lang, 'link')}${searchBox(lang)}</div></section>
+${consultBar(lang)}
 ${trustStrip(lang)}
+<section class="wrap sec"><div class="sechead"><h2>${t.featured}</h2><a href="${url(lang, 'list')}">${t.seeAll} →</a></div>${areaTabs(lang, 'filter')}${grid(show, lang)}</section>
 <section class="wrap sec"><div class="sechead"><h2>${t.projects}</h2><a href="${url(lang, 'projects')}">${t.projectsCta} →</a></div>${projectCards(lang)}</section>
-<section class="wrap sec"><div class="sechead"><h2>${t.featured}</h2><a href="${url(lang, 'list')}">${t.seeAll} →</a></div>${grid(show, lang)}</section>
+${citizenshipBand(lang)}
+${whyBlock(lang)}
 ${reviewsBlock(lang)}
+${talkBlock(lang)}
 ${plazaBlock(lang)}
 ${blogStrip(lang)}
 ${igBlock(lang)}
@@ -708,7 +783,7 @@ await fetchTeamPhotos();
 await fetchFonts();
 const urls = [];
 for (const lang of LANGS) {
-  pageHome(lang); pageList(lang); pageGuide(lang); pageContact(lang); pageBlog(lang); pageProjects(lang); pageGuideHub(lang); pageReviews(lang); pageFavorites(lang); urls.push(url(lang, 'projects'), url(lang, 'buyersguide'), url(lang, 'reviews'));
+  pageHome(lang); pageList(lang); pageGuide(lang); pageContact(lang); pageBlog(lang); pageProjects(lang); pageGuideHub(lang); pageReviews(lang); pageFavorites(lang); pageDownloads(lang); urls.push(url(lang, 'projects'), url(lang, 'buyersguide'), url(lang, 'reviews'));
   if (lang === 'tr' || lang === 'en') for (const g of GUIDES) { pageGuideItem(g, lang); urls.push(gUrl(lang, g)); }
   for (const k of Object.keys(PAGES)) { pageCorporate(k, lang); urls.push(url(lang, k)); }
   urls.push(home(lang), url(lang, 'list'), url(lang, 'guide'), url(lang, 'contact'), url(lang, 'blog'), ...POSTS.map((p) => url(lang, 'blog', p.slug)));

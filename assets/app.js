@@ -40,7 +40,11 @@
   var dots = document.querySelectorAll('.dots button'), n = dots.length, i = 0, t;
   function go(k) { i = (k + n) % n; s.scrollTo({ left: s.clientWidth * i, behavior: 'smooth' }); dots.forEach(function (d, j) { d.toggleAttribute('aria-current', j === i); }); }
   dots.forEach(function (d, j) { d.addEventListener('click', function () { go(j); clearInterval(t); }); });
-  if (n > 1) t = setInterval(function () { go(i + 1); }, 6000);
+  var nx = document.querySelector('[data-snext]'), pv = document.querySelector('[data-sprev]');
+  if (nx) nx.addEventListener('click', function () { go(i + 1); clearInterval(t); });
+  if (pv) pv.addEventListener('click', function () { go(i - 1); clearInterval(t); });
+  s.addEventListener('scroll', function () { var k = Math.round(s.scrollLeft / s.clientWidth); if (k !== i && k >= 0) { i = k; dots.forEach(function (d, j) { d.toggleAttribute('aria-current', j === i); }); } }, { passive: true });
+  if (n > 1) t = setInterval(function () { go(i + 1); }, 7000);
 })();
 // masraf hesaplayıcı
 (function () {
@@ -184,4 +188,20 @@
     if (ff) ff.addEventListener('change', run);
     tf.addEventListener('change', function () { if (ff) ff.dispatchEvent(new Event('change')); else { grid.querySelectorAll('.card').forEach(function (c) { c.style.display = ''; }); run(); } }); run();
   }
+})();
+
+// öne çıkan ilanlarda bölge sekmeleri ve "Hızlı bilgi al"
+(function () {
+  document.querySelectorAll('[data-areatabs]').forEach(function (bar) {
+    var grid = bar.nextElementSibling;
+    bar.querySelectorAll('[data-area]').forEach(function (b) { b.addEventListener('click', function () {
+      bar.querySelectorAll('[data-area]').forEach(function (x) { x.setAttribute('aria-pressed', x === b); });
+      if (grid) grid.querySelectorAll('.card').forEach(function (c) { c.style.display = !b.dataset.area || c.dataset.ilce === b.dataset.area ? '' : 'none'; });
+    }); });
+  });
+  var pop = document.querySelector('[data-cpop]');
+  document.querySelectorAll('[data-enq]').forEach(function (b) { b.addEventListener('click', function () {
+    if (!pop) return; pop.querySelector('[data-cpop-ilan]').value = b.dataset.enq; pop.querySelector('[data-cpop-page]').value = location.pathname;
+    pop.hidden = false; document.body.classList.add('noscroll'); var f = pop.querySelector('input[name=ad]'); f && f.focus();
+  }); });
 })();

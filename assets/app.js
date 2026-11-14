@@ -53,7 +53,7 @@
       c.querySelector('[data-out=deed]').textContent = fmt(deed);
       c.querySelector('[data-out=agency]').textContent = fmt(ag);
       c.querySelector('.fx').hidden = !fx.checked;
-      c.querySelector('[data-out=total]').textContent = fmt(deed + ag) + ' +';
+      c.querySelector('[data-out=total]').textContent = fmt(deed + ag) + ' +' + (window.accConv ? window.accConv(deed + ag, 'TRY') : '');
     }
     p.addEventListener('input', run); fx.addEventListener('change', function () { c.querySelector('.fx').hidden = !fx.checked; run(); });
     if (c.dataset.price) { p.value = c.dataset.price; run(); }
@@ -74,11 +74,28 @@
     }
   }
   document.querySelectorAll('[data-copy]').forEach(function (b) { b.addEventListener('click', function () { navigator.clipboard && navigator.clipboard.writeText(b.dataset.copy); b.textContent = '✓'; }); });
-  var p = document.querySelector('[data-try]'), fx = document.querySelector('[data-fx]');
-  if (p && fx && +p.dataset.try > 0) {
-    fetch('https://open.er-api.com/v6/latest/TRY').then(function (r) { return r.json(); }).then(function (j) {
-      if (!j || !j.rates) return; var v = +p.dataset.try, f = function (c, s) { return s + new Intl.NumberFormat('en-GB', { maximumFractionDigits: 0 }).format(v * j.rates[c]); };
-      fx.textContent = '≈ ' + f('USD', '$') + ' · ' + f('EUR', '€'); fx.hidden = false;
-    }).catch(function () {});
+})();
+
+// para birimi seçici: fiyatlar seçilen birimde (≈), asıl fiyat altta küçük
+(function () {
+  var sel = document.querySelector('[data-cur]'); if (!sel) return;
+  var cur; try { cur = localStorage.getItem('acc-cur'); } catch (e) {}
+  sel.value = cur || sel.dataset.def;
+  var loc = ({ tr: 'tr-TR', ru: 'ru-RU', de: 'de-DE', fa: 'fa-IR' })[document.documentElement.lang] || 'en-GB';
+  var sym = { TRY: '₺', USD: '$', EUR: '€', GBP: '£', RUB: '₽' }, rates = null;
+  var nf = function (n) { return new Intl.NumberFormat(loc, { maximumFractionDigits: 0 }).format(n); };
+  function conv(amt, from, to) { return amt / rates[from] * rates[to]; }
+  window.accConv = function (amt, from) { var to = sel.value; if (!rates || to === from) return ''; return ' (≈ ' + sym[to] + nf(conv(amt, from, to)) + ')'; };
+  function apply() {
+    var to = sel.value;
+    document.querySelectorAll('[data-amt]').forEach(function (el) {
+      if (!el.dataset.orig) el.dataset.orig = el.innerHTML;
+      var from = el.dataset.ccy;
+      if (!rates || to === from) { el.innerHTML = el.dataset.orig; return; }
+      el.innerHTML = '≈ ' + sym[to] + nf(conv(+el.dataset.amt, from, to)) + '<small class="orig">' + el.dataset.orig + '</small>';
+    });
+    document.querySelectorAll('[data-calc] [data-price]').forEach(function (i) { i.dispatchEvent(new Event('input')); });
   }
+  sel.addEventListener('change', function () { try { localStorage.setItem('acc-cur', sel.value); } catch (e) {} apply(); });
+  fetch('https://open.er-api.com/v6/latest/TRY').then(function (r) { return r.json(); }).then(function (j) { if (j && j.rates) { rates = j.rates; rates.TRY = 1; apply(); } }).catch(function () {});
 })();

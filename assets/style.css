@@ -179,3 +179,10 @@ body{padding-bottom:90px}
 [dir=rtl] .crumbs,[dir=rtl] .sechead{direction:rtl}
 [dir=rtl] .langs,[dir=rtl] .logo,[dir=rtl] .cbar a,[dir=rtl] input[type=tel],[dir=rtl] a[href^="tel:"]{direction:ltr}
 [dir=rtl] .slide{background-position:center}
+.cur{border:1px solid var(--line,#e5e0da);background:#fff;border-radius:8px;padding:5px 6px;font-size:12px;color:var(--ink);cursor:pointer}
+.price small.orig{display:block;font-size:12px;font-weight:400;color:var(--mute);margin-top:2px}
+.price.big small.orig{font-size:14px}
+@media (max-width:900px){.cur{padding:4px;font-size:11px}}
+.menu a,.menu .dd>button{white-space:nowrap}
+@media (max-width:1240px){.menu{gap:14px}.menu a,.menu .dd>button{font-size:14px}.logo .lt small{display:none}}
+@media (max-width:1100px){.menu{display:none}.mnav{display:block}.langs{margin-left:auto}}

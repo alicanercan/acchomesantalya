@@ -7,14 +7,18 @@
     "ilce": "Aksu",
     "mahalle": "Altıntaş",
     "proje": "Örnek Konsept Site",
-    "fiyat": 0,
+    "fiyat": 4250000,
     "para": "TL",
     "oda": "1+1",
     "brut": 0,
     "net": 0,
     "kat": "Ara kat",
     "site": "Evet",
-    "ozellikler": ["havuz", "otopark", "güvenlik"],
+    "ozellikler": [
+      "havuz",
+      "otopark",
+      "güvenlik"
+    ],
     "kredi": "",
     "baslik": {
       "tr": "Örnek İlan — Altıntaş'ta Konsept Sitede Ara Kat 1+1",
@@ -37,14 +41,17 @@
     "ilce": "Aksu",
     "mahalle": "Altıntaş",
     "proje": "Örnek Havuzlu Site",
-    "fiyat": 0,
+    "fiyat": 25000,
     "para": "TL",
     "oda": "1+1",
     "brut": 0,
     "net": 0,
     "kat": "",
     "site": "Evet",
-    "ozellikler": ["havuz", "boş"],
+    "ozellikler": [
+      "havuz",
+      "boş"
+    ],
     "baslik": {
       "tr": "Örnek İlan — Altıntaş'ta Havuzlu Sitede Kiralık 1+1",
       "en": "Sample Listing — 1+1 for Rent in a Complex with Pool, Altintas",

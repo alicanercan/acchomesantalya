@@ -57,6 +57,7 @@ export const S = {
     de: 'Biegen Sie an der Sampi-Kreuzung in die Portakal-Çiçeği-Straße ab; wir sind 200–250 m nach dem Schwimmbad Süleyman Erol auf der rechten Seite.',
     fa: 'از تقاطع Sampi وارد خیابان Portakal Çiçeği شوید؛ ۲۰۰ تا ۲۵۰ متر بعد از استخر Süleyman Erol، سمت راست هستیم.',
   },
+  currency: { tr: 'Para birimi', en: 'Currency', ru: 'Валюта', de: 'Währung', fa: 'واحد پول' },
   partnersTitle: { tr: 'İş ortaklarımız', en: 'Our partners', ru: 'Наши партнёры', de: 'Unsere Partner', fa: 'همکاران ما' },
   speaks: { tr: 'Diller', en: 'Languages', ru: 'Языки', de: 'Sprachen', fa: 'زبان‌ها' },
   projectsTr: { tr: '', en: '', ru: '', de: 'Projektseiten auf Türkisch', fa: 'صفحات پروژه به زبان ترکی' },

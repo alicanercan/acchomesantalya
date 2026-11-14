@@ -96,6 +96,8 @@ export const PAGES = {
 <li><b>Analitik yaklaşım:</b> Kararlarımızı tahminle değil veriyle veririz.</li>
 <li><b>Global vizyon:</b> Antalya’yı dünyaya, dünyayı Antalya’ya tanıtırız.</li>
 </ul>
+<h2>Yolculuğumuz</h2>
+{{TIMELINE}}
 <h2>Yetkili projelerimiz</h2>
 <p>ACC HOMES, Ekiciler Grup’un Altıntaş’taki <b>Prime Lara</b> projesinin ve Döşemealtı Altınkale’deki <b>Antalle Concept Houses</b> projesinin yetkili satış ofisidir. Proje sahiplerine satış ofisi yönetimi, satış koordinasyonu ve 360° pazarlama hizmeti veriyoruz.</p>
 <div class="ctas"><a class="btn" href="{{URL:team}}">Ekibimizle tanışın</a><a class="btn ghost" href="{{URL:services}}">Hizmetlerimiz</a></div>`,
@@ -123,6 +125,8 @@ export const PAGES = {
 <li><b>An analytical approach:</b> decisions based on data, not guesswork.</li>
 <li><b>A global outlook:</b> presenting Antalya to the world.</li>
 </ul>
+<h2>Our journey</h2>
+{{TIMELINE}}
 <h2>Authorised projects</h2>
 <p>ACC HOMES is the authorised sales office for Ekiciler Grup’s <b>Prime Lara</b> in Altıntaş and for <b>Antalle Concept Houses</b> in Döşemealtı Altınkale, managing the sales office, sales coordination and 360° marketing.</p>
 <div class="ctas"><a class="btn" href="{{URL:team}}">Meet the team</a><a class="btn ghost" href="{{URL:services}}">Our services</a></div>`,
@@ -143,6 +147,8 @@ export const PAGES = {
 <div><h3>Маркетинг 360°</h3><p>Профессиональные фото, дрон и видео, порталы, реклама в Meta и международный маркетинг.</p></div>
 <div><h3>Прозрачно до тапу</h3><p>Договор, показы, переговоры, банк и оформление тапу — всё документировано.</p></div>
 </div>
+<h2>Наш путь</h2>
+{{TIMELINE}}
 <h2>Проекты</h2>
 <p>ACC HOMES — официальный офис продаж проекта <b>Prime Lara</b> (Ekiciler Grup, Алтынташ) и <b>Antalle Concept Houses</b> (Дёшемеалты, Алтынкале).</p>
 <div class="ctas"><a class="btn" href="{{URL:team}}">Наша команда</a><a class="btn ghost" href="{{URL:services}}">Услуги</a></div>`,
@@ -269,6 +275,27 @@ export const PAGES = {
 <div><span>📈</span><h3>Yatırım danışmanlığı</h3><p>Kira getirisi, değer artışı ve proje yatırımları için bölge ve fırsat analizi.</p></div>
 <div><span>🏬</span><h3>Ticari mülk ve arsa</h3><p>Dükkan, ofis, otel ve yatırım arsası alım satımı ile kiralamasında uzman danışmanlık.</p></div>
 </div>
+<h2>Satış öncesi</h2>
+<ul class="ticks cols2">
+<li>Yerinde veya canlı görüntülü gösterim turları</li>
+<li>Satın alma sürecinin ve masrafların yazılı olarak anlatılması</li>
+<li>Amacınıza uygun yatırımın seçimi ve veriye dayalı fiyat analizi</li>
+<li>Konut kredisi için ön değerlendirme</li>
+<li>Tapu kaydı, iskan, imar ve aidat kontrolleri</li>
+<li>Satış sözleşmesinin hazırlanması, avukat, noter ve tercüman randevuları</li>
+</ul>
+<h2>Satış sonrası</h2>
+<div class="svc">
+<div><span>🔌</span><h3>Abonelikler</h3><p>Elektrik, su, doğalgaz ve internet aboneliklerinin adınıza açılması.</p></div>
+<div><span>🛡️</span><h3>DASK ve konut sigortası</h3><p>Zorunlu deprem sigortası ve isteğe bağlı konut sigortası için yönlendirme.</p></div>
+<div><span>🧾</span><h3>Vergi numarası ve banka hesabı</h3><p>Yabancı alıcılar için vergi numarası alma ve banka hesabı açma desteği.</p></div>
+<div><span>🛋️</span><h3>Eşyalandırma ve mobilya turu</h3><p>Evinizi döşemek için güvenilir mağazalara birlikte gezi ve öneriler.</p></div>
+<div><span>🔑</span><h3>Kiralama ve mülk yönetimi</h3><p>Kiracı bulma, sözleşme, kira takibi ve yıl boyu mülk yönetimi.</p></div>
+<div><span>🪪</span><h3>Oturum izni ve vatandaşlık desteği</h3><p>Başvuru dosyası için gayrimenkul tarafındaki tüm belgeler; hukuki süreç için anlaşmalı avukatlar.</p></div>
+<div><span>⚖️</span><h3>Hukuki destek ve vekaletname</h3><p>Avukat, noter ve online vekaletname işlemlerinde yönlendirme.</p></div>
+<div><span>🏢</span><h3>Şirket kuruluşu</h3><p>Yabancı sermayeli şirket kuruluşu süreçlerinde iş ortaklarımızla destek.</p></div>
+</div>
+<p><a href="/alici-rehberi/">Alıcı Rehberi’ni inceleyin →</a></p>
 <h2>Mülk sahiplerine ücretsiz sunduklarımız</h2>
 <ul class="ticks">
 <li>Profesyonel fotoğraf, drone ve video çekimi</li>
@@ -292,6 +319,27 @@ export const PAGES = {
 <div><span>📈</span><h3>Investment advice</h3><p>Area and opportunity analysis for rental yield, capital growth and off-plan investments.</p></div>
 <div><span>🏬</span><h3>Commercial and land</h3><p>Shops, offices, hotels and investment land, for sale or rent.</p></div>
 </div>
+<h2>Before the sale</h2>
+<ul class="ticks cols2">
+<li>In-person or live video viewing tours</li>
+<li>The buying process and costs explained in writing</li>
+<li>Choosing the right investment, with data-driven pricing</li>
+<li>Mortgage pre-assessment</li>
+<li>Deed, occupancy permit, zoning and service-charge checks</li>
+<li>Sales agreement, lawyer, notary and translator appointments</li>
+</ul>
+<h2>After the sale</h2>
+<div class="svc">
+<div><span>🔌</span><h3>Utilities</h3><p>Electricity, water, gas and internet set up in your name.</p></div>
+<div><span>🛡️</span><h3>DASK and home insurance</h3><p>Compulsory earthquake insurance and optional home insurance.</p></div>
+<div><span>🧾</span><h3>Tax number and bank account</h3><p>Help obtaining a tax number and opening a bank account.</p></div>
+<div><span>🛋️</span><h3>Furnishing tour</h3><p>A tour of trusted furniture stores and practical advice.</p></div>
+<div><span>🔑</span><h3>Rentals and property management</h3><p>Tenants, contracts, rent collection and year-round management.</p></div>
+<div><span>🪪</span><h3>Residence and citizenship support</h3><p>All property-side documents for your application; partner lawyers for the legal process.</p></div>
+<div><span>⚖️</span><h3>Legal support and power of attorney</h3><p>Lawyer, notary and power-of-attorney arrangements.</p></div>
+<div><span>🏢</span><h3>Company formation</h3><p>Support with setting up a foreign-owned company through our partners.</p></div>
+</div>
+<p><a href="/en/buyers-guide/">Read our Buyer’s Guide →</a></p>
 <h2>Free for property owners</h2>
 <ul class="ticks">
 <li>Professional photography, drone and video</li>
@@ -315,6 +363,8 @@ export const PAGES = {
 <div><span>📈</span><h3>Инвестиции</h3><p>Анализ доходности аренды и роста стоимости.</p></div>
 <div><span>🏬</span><h3>Коммерция и земля</h3><p>Магазины, офисы, отели и инвестиционные участки.</p></div>
 </div>
+<h2>После покупки</h2>
+<ul class="ticks cols2"><li>Подключение электричества, воды, газа и интернета</li><li>DASK и страхование жилья</li><li>Налоговый номер и банковский счёт</li><li>Меблировка и тур по магазинам</li><li>Аренда и управление недвижимостью</li><li>Документы для ВНЖ и гражданства</li></ul>
 <div class="ctas"><a class="btn" href="{{WA}}" target="_blank" rel="noopener">Бесплатная оценка</a><a class="btn ghost" href="{{URL:contact}}">Связаться</a></div>`,
     },
   },
@@ -454,3 +504,9 @@ export const POSTS = [
     },
   },
 ];
+
+export const TIMELINE = {
+  tr: [['2023', 'Ali Caner Can, Realty World MES Real Estate’in yılın şampiyon danışmanı oldu.'], ['2024', 'ACC HOMES International Real Estate Antalya’da kuruldu.'], ['2025', '“Emlakta Mükemmelliğin Adresi” marka sözümüzle ekibimiz ve portföyümüz büyüdü.'], ['2026', '1.000 m²’lik genel merkezimiz ACC Plaza açıldı; Prime Lara ve Antalle Concept Houses’un yetkili satış ofisi olduk; ekibimiz yaklaşık 50 iş ortağına ulaştı.']],
+  en: [['2023', 'Ali Caner Can was named champion consultant of the year at Realty World MES Real Estate.'], ['2024', 'ACC HOMES International Real Estate was founded in Antalya.'], ['2025', 'Under our promise “Excellence in Real Estate”, the team and portfolio grew.'], ['2026', 'Our 1,000 m² headquarters ACC Plaza opened; we became the authorised sales office for Prime Lara and Antalle Concept Houses; the team reached around 50 partners.']],
+  ru: [['2023', 'Али Джанер Джан — лучший консультант года в Realty World MES.'], ['2024', 'Основана компания ACC HOMES International Real Estate.'], ['2025', 'Рост команды и портфеля под девизом «Excellence in Real Estate».'], ['2026', 'Открыт главный офис ACC Plaza (1 000 м²); официальный офис продаж Prime Lara и Antalle; около 50 партнёров.']],
+};

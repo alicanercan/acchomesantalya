@@ -9,6 +9,8 @@ const OUT = path.join(ROOT, 'dist');
 const read = (p) => JSON.parse(fs.readFileSync(path.join(ROOT, p), 'utf8'));
 
 const SITE = read('data/site.json');
+const REVIEWS = read('data/reviews.json');
+const IG = read('data/instagram.json');
 let LISTINGS = read('data/portfoy.json');
 const DEMO = LISTINGS.length === 0 && !SITE.live;
 if (DEMO) LISTINGS = read('data/demo.json');
@@ -55,6 +57,9 @@ const T = {
     ],
     footerAbout: "Antalya merkezli ACC HOMES International Real Estate'in Altıntaş portföy sitesi.",
     corporate: 'Kurumsal site', rights: 'Tüm hakları saklıdır',
+    revTitle: 'Müşterilerimiz ne diyor', revSub: 'Google’daki yorumlarımızdan seçtiklerimiz', revAll: 'Tüm yorumları Google’da oku', revMore: 'Devamı Google’da',
+    igTitle: 'Instagram’da ACC HOMES', igFollowBtn: 'Takip et', igPosts: 'gönderi', igFollowers: 'takipçi',
+    barCall: 'Hemen Ara', barWa: 'WhatsApp’tan Yaz',
     gReviews: (n) => `${n} Google yorumu`, readReviews: 'Yorumları oku', igFollow: 'Instagram’da takip edin', mapTitle: 'Ofisimiz haritada', directions: 'Yol tarifi al', trustTitle: 'Müşterilerimiz bizi anlatıyor',
     metaHome: "Altıntaş satılık ve kiralık daire ilanları. ACC HOMES ile Antalya Altıntaş'ta doğrulanmış portföy, şeffaf fiyat ve uzman danışmanlık.",
   },
@@ -95,6 +100,9 @@ const T = {
     ],
     footerAbout: 'The Altintas listings site of Antalya-based ACC HOMES International Real Estate.',
     corporate: 'Corporate site', rights: 'All rights reserved',
+    revTitle: 'What our clients say', revSub: 'A selection of our Google reviews, in the words our clients wrote them', revAll: 'Read all reviews on Google', revMore: 'Read more on Google',
+    igTitle: 'ACC HOMES on Instagram', igFollowBtn: 'Follow', igPosts: 'posts', igFollowers: 'followers',
+    barCall: 'Call now', barWa: 'WhatsApp us',
     gReviews: (n) => `${n} Google reviews`, readReviews: 'Read reviews', igFollow: 'Follow us on Instagram', mapTitle: 'Find our office', directions: 'Get directions', trustTitle: 'What our clients say',
     metaHome: 'Apartments for sale and rent in Altintas, Antalya. Verified listings, transparent pricing and expert advice from ACC HOMES.',
   },
@@ -135,6 +143,9 @@ const T = {
     ],
     footerAbout: 'Сайт объектов в Алтынташе компании ACC HOMES International Real Estate, Анталия.',
     corporate: 'Корпоративный сайт', rights: 'Все права защищены',
+    revTitle: 'Отзывы клиентов', revSub: 'Подборка отзывов из Google на языке оригинала', revAll: 'Все отзывы в Google', revMore: 'Читать в Google',
+    igTitle: 'ACC HOMES в Instagram', igFollowBtn: 'Подписаться', igPosts: 'публикаций', igFollowers: 'подписчиков',
+    barCall: 'Позвонить', barWa: 'Написать в WhatsApp',
     gReviews: (n) => `${n} отзывов в Google`, readReviews: 'Читать отзывы', igFollow: 'Мы в Instagram', mapTitle: 'Наш офис на карте', directions: 'Проложить маршрут', trustTitle: 'Отзывы наших клиентов',
     metaHome: 'Квартиры на продажу и в аренду в Алтынташе, Анталия. Проверенные объекты и экспертные консультации ACC HOMES.',
   },
@@ -193,7 +204,7 @@ ${DEMO ? `<div class="demo">${t.demo}</div>` : ''}
 <div><h4>${t.office}</h4><p>${esc(SITE.address.street)}<br>${esc(SITE.address.area)}, ${esc(SITE.address.district)} / ${esc(SITE.address.city)}</p></div>
 <div><h4>${t.nav.contact}</h4><p><a href="tel:${SITE.phoneRaw}">${SITE.phone}</a><br><a href="mailto:${SITE.email}">${SITE.email}</a><br><a href="${SITE.corporateSite}">${t.corporate}</a></p><div class="social"><a href="${SITE.instagram.url}" target="_blank" rel="noopener" aria-label="Instagram">${ICON_IG}</a><a href="${SITE.google.mapsUrl}" target="_blank" rel="noopener" aria-label="Google">${ICON_G}</a></div></div>
 </div><div class="wrap copy">© ${new Date().getFullYear()} ${esc(SITE.brand)} · ${t.rights}</div></footer>
-<a class="wa-float" href="${waLink(t.waGeneral)}" aria-label="WhatsApp" target="_blank" rel="noopener"><svg viewBox="0 0 32 32" width="28" height="28"><path fill="#fff" d="M16 3a13 13 0 0 0-11.3 19.4L3 29l6.8-1.8A13 13 0 1 0 16 3zm0 23.6c-2 0-4-.6-5.7-1.6l-.4-.2-4 1 1.1-3.9-.3-.4A10.6 10.6 0 1 1 16 26.6zm5.8-7.9c-.3-.2-1.9-.9-2.2-1-.3-.1-.5-.2-.7.2l-1 1.2c-.2.2-.4.2-.7.1a8.7 8.7 0 0 1-4.3-3.8c-.3-.6.3-.5.9-1.6.1-.2 0-.4 0-.5l-1-2.4c-.3-.6-.5-.5-.7-.5h-.6a1.2 1.2 0 0 0-.9.4 3.6 3.6 0 0 0-1.1 2.7 6.3 6.3 0 0 0 1.3 3.3 14.4 14.4 0 0 0 5.5 4.9c2 .9 2.8.9 3.8.8.6-.1 1.9-.8 2.2-1.5.3-.7.3-1.4.2-1.5-.1-.2-.3-.3-.7-.4z"/></svg></a>
+${stickyBar(lang)}
 <script src="/assets/app.js?v=${VER}" defer></script></body></html>`;
 }
 
@@ -209,6 +220,31 @@ function trustStrip(lang) {
 <a class="tcard" href="${SITE.instagram.url}" target="_blank" rel="noopener"><span class="ig">${ICON_IG}</span><div><div class="tline"><b>@${SITE.instagram.handle}</b></div><small>${t.igFollow} →</small></div></a>
 <a class="tcard" href="${SITE.google.mapsUrl}" target="_blank" rel="noopener"><span class="pin">📍</span><div><div class="tline"><b>ACC PLAZA</b></div><small>Yeşilbahçe, Lara · ${t.directions} →</small></div></a>
 </div></section>`;
+}
+
+function reviewsBlock(lang) {
+  const t = T[lang];
+  const list = lang === 'tr' ? REVIEWS : [...REVIEWS.filter((r) => r.lang === 'en'), ...REVIEWS.filter((r) => r.lang !== 'en')];
+  return `<section class="reviews"><div class="wrap">
+<div class="sechead"><div><h2>${t.revTitle}</h2><p class="sub sm">${t.revSub}</p></div><a class="gbadge" href="${SITE.google.mapsUrl}" target="_blank" rel="noopener">${ICON_G}<b>${fmtRating(lang)}</b>${stars}<span>${t.gReviews(SITE.google.reviews)}</span></a></div>
+<div class="rtrack">${list.map((r) => `<figure class="rcard"><div class="rtop">${stars}<span class="rtopic">${esc(r.topic)}</span></div>
+<blockquote lang="${r.lang}">“${esc(r.text)}”</blockquote>
+<figcaption><span class="avatar">${esc(r.name.charAt(0))}</span><b>${esc(r.name)}</b>${ICON_G}</figcaption>${r.excerpt ? `<a class="rmore" href="${SITE.google.mapsUrl}" target="_blank" rel="noopener">${t.revMore} →</a>` : ''}</figure>`).join('')}</div>
+<p class="rall"><a class="btn ghost" href="${SITE.google.mapsUrl}" target="_blank" rel="noopener">${t.revAll} →</a></p></div></section>`;
+}
+function igBlock(lang) {
+  const t = T[lang]; const nf = new Intl.NumberFormat(lang === 'tr' ? 'tr-TR' : lang === 'ru' ? 'ru-RU' : 'en-GB');
+  const items = IG.media.slice(0, 9);
+  return `<section class="wrap sec igsec"><div class="ighead">
+<div class="igavatar"><span>ACC</span></div>
+<div class="igmeta"><div class="igname"><a href="${SITE.instagram.url}" target="_blank" rel="noopener"><b>@${esc(IG.username)}</b></a><a class="btn sm" href="${SITE.instagram.url}" target="_blank" rel="noopener">${ICON_IG} ${t.igFollowBtn}</a></div>
+<div class="igstats"><span><b>${nf.format(IG.posts)}</b> ${t.igPosts}</span><span><b>${nf.format(IG.followers)}</b> ${t.igFollowers}</span></div>
+<p class="igbio"><b>${esc(IG.name)}</b><br>${esc(IG.biography).replace(/\n/g, '<br>')}</p></div></div>
+<div class="iggrid">${items.map((m) => `<a class="igitem" href="${esc(m.permalink)}" target="_blank" rel="noopener" title="${esc(m.caption)}"><img src="${esc(m.local || m.image)}" alt="${esc(m.caption)}" loading="lazy">${m.type === 'VIDEO' ? '<span class="play" aria-hidden="true">▶</span>' : ''}<span class="igcap">${esc(m.caption)}</span></a>`).join('')}</div></section>`;
+}
+function stickyBar(lang) {
+  const t = T[lang];
+  return `<div class="cbar" role="navigation" aria-label="${t.nav.contact}"><a class="cbtn call" href="tel:${SITE.phoneRaw}"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path fill="currentColor" d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1A17 17 0 0 1 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1l-2.3 2.2z"/></svg>${t.barCall}</a><a class="cbtn wa" href="${waLink(t.waGeneral)}" target="_blank" rel="noopener"><svg viewBox="0 0 32 32" width="20" height="20" aria-hidden="true"><path fill="currentColor" d="M16 3a13 13 0 0 0-11.3 19.4L3 29l6.8-1.8A13 13 0 1 0 16 3zm0 23.6c-2 0-4-.6-5.7-1.6l-.4-.2-4 1 1.1-3.9-.3-.4A10.6 10.6 0 1 1 16 26.6zm5.8-7.9c-.3-.2-1.9-.9-2.2-1-.3-.1-.5-.2-.7.2l-1 1.2c-.2.2-.4.2-.7.1a8.7 8.7 0 0 1-4.3-3.8c-.3-.6.3-.5.9-1.6.1-.2 0-.4 0-.5l-1-2.4c-.3-.6-.5-.5-.7-.5h-.6a1.2 1.2 0 0 0-.9.4 3.6 3.6 0 0 0-1.1 2.7 6.3 6.3 0 0 0 1.3 3.3 14.4 14.4 0 0 0 5.5 4.9c2 .9 2.8.9 3.8.8.6-.1 1.9-.8 2.2-1.5.3-.7.3-1.4.2-1.5-.1-.2-.3-.3-.7-.4z"/></svg>${t.barWa}</a></div>`;
 }
 function mapBlock(lang) {
   const t = T[lang];
@@ -241,7 +277,9 @@ function pageHome(lang) {
 <div class="ctas"><a class="btn" href="${url(lang, 'list')}">${t.heroCta}</a><a class="btn ghost" href="${waLink(t.waGeneral)}" target="_blank" rel="noopener">${t.heroCta2}</a></div></div></section>
 ${trustStrip(lang)}
 <section class="wrap sec"><div class="sechead"><h2>${t.featured}</h2><a href="${url(lang, 'list')}">${t.seeAll} →</a></div>${grid(show, lang)}</section>
+${reviewsBlock(lang)}
 <section class="why"><div class="wrap"><h2>${t.why}</h2><div class="whygrid">${t.whyItems.map(([h, p]) => `<div><h3>${h}</h3><p>${p}</p></div>`).join('')}</div></div></section>
+${igBlock(lang)}
 ${mapBlock(lang)}
 <section class="wrap sec guidebox"><div><h2>${t.guideTitle}</h2><p>${t.guideSub}</p></div><a class="btn ghost" href="${url(lang, 'guide')}">${t.nav.guide} →</a></section>`;
   write(path.join(BASE[lang], 'index.html'), layout({ lang, title: `${t.heroTitle} | ACC HOMES`, desc: t.metaHome, canonical: home(lang), alternates: alts('home'), body }));
@@ -309,14 +347,30 @@ function pageContact(lang) {
 <p><a href="tel:${SITE.phoneRaw}">${SITE.phone}</a><br><a href="mailto:${SITE.email}">${SITE.email}</a></p>
 <div class="actions"><a class="btn" href="${waLink(t.waGeneral)}" target="_blank" rel="noopener">${t.wa}</a><a class="btn ghost" href="tel:${SITE.phoneRaw}">${t.call}</a></div></div>
 <form class="box form" name="iletisim" method="POST" data-netlify="true" netlify-honeypot="bot" action="${url(lang, 'contact')}?ok=1"><input type="hidden" name="form-name" value="iletisim"><p hidden><input name="bot"></p>
-<input name="ad" placeholder="${t.name}" required><input name="telefon" placeholder="${t.phone}" required><textarea name="mesaj" rows="4" placeholder="${t.msg}"></textarea><button class="btn" type="submit">${t.send}</button></form></div></section>${trustStrip(lang)}${mapBlock(lang)}`;
+<input name="ad" placeholder="${t.name}" required><input name="telefon" placeholder="${t.phone}" required><textarea name="mesaj" rows="4" placeholder="${t.msg}"></textarea><button class="btn" type="submit">${t.send}</button></form></div></section>${trustStrip(lang)}${reviewsBlock(lang)}${mapBlock(lang)}`;
   write(path.join(url(lang, 'contact'), 'index.html'), layout({ lang, title: `${t.contactTitle} | ACC HOMES`, desc: t.contactSub, canonical: url(lang, 'contact'), alternates: alts('contact'), body }));
+}
+
+
+// Instagram görsellerini derleme sırasında indir (CDN linkleri süreli olduğu için)
+async function fetchIgImages() {
+  const dir = path.join(OUT, 'ig'); fs.mkdirSync(dir, { recursive: true });
+  await Promise.all(IG.media.slice(0, 9).map(async (m) => {
+    const code = (m.permalink.match(/\/(?:p|reel)\/([^/]+)/) || [])[1] || String(Math.random()).slice(2);
+    try {
+      const r = await fetch(m.image, { signal: AbortSignal.timeout(15000) });
+      if (!r.ok) throw new Error(r.status);
+      fs.writeFileSync(path.join(dir, `${code}.jpg`), Buffer.from(await r.arrayBuffer()));
+      m.local = `/ig/${code}.jpg`;
+    } catch (e) { console.warn('IG görsel indirilemedi:', code, e.message); }
+  }));
 }
 
 // ---------- üretim ----------
 fs.rmSync(OUT, { recursive: true, force: true });
 fs.cpSync(path.join(ROOT, 'static'), OUT, { recursive: true });
 fs.cpSync(path.join(ROOT, 'assets'), path.join(OUT, 'assets'), { recursive: true });
+await fetchIgImages();
 const urls = [];
 for (const lang of LANGS) {
   pageHome(lang); pageList(lang); pageGuide(lang); pageContact(lang);

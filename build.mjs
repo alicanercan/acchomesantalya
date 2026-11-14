@@ -234,7 +234,9 @@ function reviewsBlock(lang) {
 }
 function igBlock(lang) {
   const t = T[lang]; const nf = new Intl.NumberFormat(lang === 'tr' ? 'tr-TR' : lang === 'ru' ? 'ru-RU' : 'en-GB');
-  const items = IG.media.slice(0, 9);
+  const ok = IG.media.filter((m) => m.local);
+  const pool = ok.length >= 3 ? ok : IG.media;
+  const items = pool.slice(0, Math.min(9, pool.length - (pool.length % 3) || pool.length));
   return `<section class="wrap sec igsec"><div class="ighead">
 <div class="igavatar"><span>ACC</span></div>
 <div class="igmeta"><div class="igname"><a href="${SITE.instagram.url}" target="_blank" rel="noopener"><b>@${esc(IG.username)}</b></a><a class="btn sm" href="${SITE.instagram.url}" target="_blank" rel="noopener">${ICON_IG} ${t.igFollowBtn}</a></div>
@@ -355,7 +357,7 @@ function pageContact(lang) {
 // Instagram görsellerini derleme sırasında indir (CDN linkleri süreli olduğu için)
 async function fetchIgImages() {
   const dir = path.join(OUT, 'ig'); fs.mkdirSync(dir, { recursive: true });
-  await Promise.all(IG.media.slice(0, 9).map(async (m) => {
+  await Promise.all(IG.media.slice(0, 12).map(async (m) => {
     const code = (m.permalink.match(/\/(?:p|reel)\/([^/]+)/) || [])[1] || String(Math.random()).slice(2);
     try {
       const r = await fetch(m.image, { signal: AbortSignal.timeout(15000) });

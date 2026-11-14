@@ -147,3 +147,41 @@
     document.addEventListener('mouseout', function (e) { if (!e.relatedTarget && e.clientY < 10) show(); });
   }, 12000);
 })();
+
+// favoriler ve karşılaştırma (bu cihazda saklanır)
+(function () {
+  var rd = function (k) { try { return JSON.parse(localStorage.getItem(k) || '[]'); } catch (e) { return []; } };
+  var wr = function (k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) {} };
+  var fav = rd('acc-fav'), cmp = rd('acc-cmp');
+  function paint() {
+    document.querySelectorAll('[data-fav]').forEach(function (b) { b.setAttribute('aria-pressed', fav.indexOf(b.dataset.fav) > -1); });
+    document.querySelectorAll('[data-cmp]').forEach(function (b) { b.setAttribute('aria-pressed', cmp.indexOf(b.dataset.cmp) > -1); });
+    document.querySelectorAll('[data-fav-count]').forEach(function (e) { e.textContent = fav.length; });
+    var fp = document.querySelector('[data-favpage]');
+    if (fp) {
+      var n = 0; fp.querySelectorAll('.card').forEach(function (c) { var on = fav.indexOf(c.dataset.id) > -1; c.style.display = on ? '' : 'none'; if (on) n++; });
+      var em = document.querySelector('[data-fav-empty]'); if (em) em.hidden = n > 0;
+    }
+    var tb = document.querySelector('[data-cmptable]'), dataEl = document.getElementById('cmpdata');
+    if (tb && dataEl) {
+      var all = JSON.parse(dataEl.textContent), sel = all.filter(function (x) { return cmp.indexOf(x.id) > -1; });
+      if (!sel.length) { tb.innerHTML = ''; return; }
+      var rows = sel[0].r.map(function (r, i) { return '<tr><th>' + r[0] + '</th>' + sel.map(function (x) { return '<td>' + (x.r[i][1] || '—') + '</td>'; }).join('') + '</tr>'; }).join('');
+      tb.innerHTML = '<table class="cmp"><thead><tr><th></th>' + sel.map(function (x) { return '<th><a href="' + x.u + '">' + (x.img ? '<img src="' + x.img + '" alt="">' : '') + '<b>' + x.t + '</b></a><div class="price" data-amt="' + x.a + '" data-ccy="' + x.c + '">' + x.p + '</div><button type="button" data-cmp="' + x.id + '">✕</button></th>'; }).join('') + '</tr></thead><tbody>' + rows + '</tbody></table>';
+      tb.querySelectorAll('[data-cmp]').forEach(bindCmp);
+    }
+  }
+  function bindCmp(b) { b.addEventListener('click', function (e) { e.preventDefault(); var id = b.dataset.cmp, i = cmp.indexOf(id); if (i > -1) cmp.splice(i, 1); else { if (cmp.length >= 3) cmp.shift(); cmp.push(id); } wr('acc-cmp', cmp); paint(); }); }
+  document.querySelectorAll('[data-fav]').forEach(function (b) { b.addEventListener('click', function (e) { e.preventDefault(); var id = b.dataset.fav, i = fav.indexOf(id); if (i > -1) fav.splice(i, 1); else fav.push(id); wr('acc-fav', fav); paint(); }); });
+  document.querySelectorAll('[data-cmp]').forEach(bindCmp);
+  paint();
+  // etiket filtresi
+  var tf = document.querySelector('[data-tagfilter]'), grid = document.querySelector('.grid');
+  if (tf && grid) {
+    var m = location.search.match(/[?&]etiket=([^&]+)/); if (m) { var c = tf.querySelector('input[value="' + decodeURIComponent(m[1]) + '"]'); if (c) c.checked = true; }
+    var ff = document.getElementById('filters');
+    var run = function () { var on = [].map.call(tf.querySelectorAll('input:checked'), function (i) { return i.value; }); grid.querySelectorAll('.card').forEach(function (c) { var t = (c.dataset.tags || '').split(' '); if (!on.every(function (x) { return t.indexOf(x) > -1; })) c.style.display = 'none'; }); };
+    if (ff) ff.addEventListener('change', run);
+    tf.addEventListener('change', function () { if (ff) ff.dispatchEvent(new Event('change')); else { grid.querySelectorAll('.card').forEach(function (c) { c.style.display = ''; }); run(); } }); run();
+  }
+})();

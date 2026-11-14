@@ -74,6 +74,27 @@ export const S = {
   callMe: { tr: 'Beni arayın', en: 'Call me', ru: 'Позвоните мне', de: 'Rufen Sie mich an', fa: 'با من تماس بگیرید' },
   dialCode: { tr: 'Ülke kodu', en: 'Country code', ru: 'Код страны', de: 'Ländervorwahl', fa: 'کد کشور' },
   consent: { tr: '{{LINK}}’ni okudum; talebime dönüş yapılması için verilerimin işlenmesini kabul ediyorum.', en: 'I have read the {{LINK}} and agree to my data being processed so you can respond to my request.', ru: 'Я ознакомился с документом «{{LINK}}» и согласен на обработку данных для ответа на мой запрос.', de: 'Ich habe den {{LINK}} gelesen und bin mit der Verarbeitung meiner Daten zur Beantwortung meiner Anfrage einverstanden.', fa: '{{LINK}} را خوانده‌ام و با پردازش اطلاعاتم برای پاسخ به درخواستم موافقم.' },
+  favAdd: { tr: 'Favorilere ekle', en: 'Save to favourites', ru: 'В избранное', de: 'Merken', fa: 'افزودن به علاقه‌مندی‌ها' },
+  favTitle: { tr: 'Favorilerim', en: 'My favourites', ru: 'Избранное', de: 'Meine Favoriten', fa: 'علاقه‌مندی‌های من' },
+  favLead: { tr: 'Beğendiğiniz ilanlar bu cihazda saklanır; üyelik gerekmez.', en: 'Saved listings are kept on this device; no account needed.', ru: 'Сохранённые объекты хранятся на этом устройстве, регистрация не нужна.', de: 'Gemerkte Objekte werden auf diesem Gerät gespeichert, ohne Konto.', fa: 'آگهی‌های ذخیره‌شده روی همین دستگاه می‌مانند؛ نیازی به ثبت‌نام نیست.' },
+  favEmpty: { tr: 'Henüz favori ilanınız yok. İlan kartlarındaki kalbe dokunarak ekleyebilirsiniz.', en: 'No favourites yet. Tap the heart on any listing to save it.', ru: 'Пока пусто. Нажмите на сердечко на объекте, чтобы сохранить его.', de: 'Noch keine Favoriten. Tippen Sie auf das Herz, um ein Objekt zu merken.', fa: 'هنوز آگهی ذخیره نکرده‌اید. برای ذخیره، روی قلب هر آگهی بزنید.' },
+  compare: { tr: 'Karşılaştır', en: 'Compare', ru: 'Сравнить', de: 'Vergleichen', fa: 'مقایسه' },
+  compareAdd: { tr: 'Karşılaştırmaya ekle (en fazla 3)', en: 'Add to comparison (max 3)', ru: 'Добавить к сравнению (до 3)', de: 'Zum Vergleich hinzufügen (max. 3)', fa: 'افزودن به مقایسه (حداکثر ۳)' },
+  compareTitle: { tr: 'Karşılaştırma', en: 'Comparison', ru: 'Сравнение', de: 'Vergleich', fa: 'مقایسه' },
+  compareHint: { tr: 'İlan kartlarındaki “Karşılaştır” düğmesiyle en fazla 3 ilanı yan yana görün.', en: 'Use “Compare” on listing cards to see up to 3 properties side by side.', ru: 'Нажмите «Сравнить» на карточках, чтобы сравнить до 3 объектов.', de: 'Mit „Vergleichen“ sehen Sie bis zu 3 Objekte nebeneinander.', fa: 'با دکمه «مقایسه» حداکثر ۳ آگهی را کنار هم ببینید.' },
+  tags: { tr: 'Avantajlar', en: 'Highlights', ru: 'Преимущества', de: 'Vorteile', fa: 'مزایا' },
+  similar: { tr: 'Benzer ilanlar', en: 'Similar properties', ru: 'Похожие объекты', de: 'Ähnliche Objekte', fa: 'آگهی‌های مشابه' },
+  priceChecked: { tr: 'Fiyat ve durum kontrol edildi', en: 'Price and availability checked', ru: 'Цена и наличие проверены', de: 'Preis und Verfügbarkeit geprüft', fa: 'قیمت و وضعیت بررسی شد' },
+  lastCheck: { tr: 'Son kontrol', en: 'Last checked', ru: 'Последняя проверка', de: 'Zuletzt geprüft', fa: 'آخرین بررسی' },
+  whyDiff: { tr: 'Aynı evi başka sitelerde farklı fiyatla mı gördünüz?', en: 'Seen this home elsewhere at a different price?', ru: 'Видели этот объект по другой цене?', de: 'Dieses Objekt woanders zu einem anderen Preis gesehen?', fa: 'این ملک را جای دیگر با قیمت متفاوت دیده‌اید؟' },
+  whyDiffText: { tr: 'Farklı sitelerdeki ilanlar çoğu zaman güncel değildir ya da kat, cephe, eşya veya ödeme koşulları farklıdır. Bulduğunuz ilanı bize gönderin; aynı mülk mü, koşullar aynı mı, yazılı olarak karşılaştıralım. Rezervasyondan önce fiyatı ve koşulları mal sahibiyle yeniden teyit ederiz.', en: 'Listings elsewhere are often out of date, or differ in floor, view, furniture or payment terms. Send us the listing you found and we will compare it with ours in writing. Before any reservation we reconfirm the price and terms with the owner.', ru: 'Объявления на других сайтах часто устарели или отличаются этажом, видом, мебелью и условиями оплаты. Пришлите нам найденное объявление — мы письменно сравним условия. Перед бронированием мы заново подтверждаем цену у владельца.', de: 'Inserate auf anderen Seiten sind oft veraltet oder unterscheiden sich in Etage, Ausblick, Möblierung oder Zahlungsbedingungen. Schicken Sie uns das Inserat, wir vergleichen schriftlich. Vor einer Reservierung bestätigen wir Preis und Bedingungen erneut beim Eigentümer.', fa: 'آگهی‌های سایت‌های دیگر اغلب به‌روز نیستند یا طبقه، چشم‌انداز، مبلمان یا شرایط پرداخت متفاوتی دارند. آگهی را برای ما بفرستید تا به‌صورت کتبی مقایسه کنیم. پیش از رزرو، قیمت و شرایط را دوباره با مالک تأیید می‌کنیم.' },
+  tag_vatandaslik: { tr: 'Vatandaşlığa uygun', en: 'Citizenship eligible', ru: 'Под гражданство', de: 'Für Staatsbürgerschaft geeignet', fa: 'مناسب شهروندی' },
+  tag_oturum: { tr: 'Oturum iznine uygun', en: 'Residence permit eligible', ru: 'Под ВНЖ', de: 'Für Aufenthaltserlaubnis', fa: 'مناسب اقامت' },
+  tag_deniz: { tr: 'Deniz manzaralı', en: 'Sea view', ru: 'Вид на море', de: 'Meerblick', fa: 'منظره دریا' },
+  tag_ilkSira: { tr: 'Denize sıfır', en: 'Seafront', ru: 'Первая линия', de: 'Erste Meereslinie', fa: 'ساحلی' },
+  tag_esyali: { tr: 'Eşyalı', en: 'Furnished', ru: 'С мебелью', de: 'Möbliert', fa: 'مبله' },
+  tag_firsat: { tr: 'Fırsat', en: 'Great value', ru: 'Выгодно', de: 'Top-Angebot', fa: 'فرصت ویژه' },
+  tag_yeni: { tr: 'Yeni yapı', en: 'New build', ru: 'Новостройка', de: 'Neubau', fa: 'نوساز' },
   currency: { tr: 'Para birimi', en: 'Currency', ru: 'Валюта', de: 'Währung', fa: 'واحد پول' },
   partnersTitle: { tr: 'İş ortaklarımız', en: 'Our partners', ru: 'Наши партнёры', de: 'Unsere Partner', fa: 'همکاران ما' },
   speaks: { tr: 'Diller', en: 'Languages', ru: 'Языки', de: 'Sprachen', fa: 'زبان‌ها' },
@@ -83,6 +104,7 @@ export const s = (k, lang) => (S[k] ? (S[k][lang] ?? S[k].en) : k);
 
 export const SEGS = {
   projects: { tr: 'projeler', en: 'projects', ru: 'proekty', de: 'projekte', fa: 'projeha' },
+  favorites: { tr: 'favorilerim', en: 'favourites', ru: 'izbrannoe', de: 'favoriten', fa: 'alaghemandiha' },
   reviews: { tr: 'musteri-yorumlari', en: 'reviews', ru: 'otzyvy', de: 'bewertungen', fa: 'nazarat' },
 };
 
@@ -419,7 +441,7 @@ export function extend({ PAGES, PLAZA, TIMELINE, LANGS_SPOKEN, TEAM, GUIDE_SEG, 
     const c = p.code;
     T[c] = p.T; PLAZA[c] = p.plaza; TIMELINE[c] = p.timeline; LANGS_SPOKEN[c] = p.langsSpoken;
     for (const [k, v] of Object.entries(p.S)) if (S[k]) S[k][c] = v;
-    SEGS.projects[c] = p.segs.projects; SEGS.reviews[c] = p.segs.reviews;
+    SEGS.projects[c] = p.segs.projects; if (p.segs.favorites) SEGS.favorites[c] = p.segs.favorites; SEGS.reviews[c] = p.segs.reviews;
     GUIDE_SEG[c] = p.segs.buyersguide; GUIDE_TITLE[c] = p.guide.title; GUIDE_LEAD[c] = p.guide.lead;
     SITE.slogan[c] = p.slogan; LANG_NAMES[c] = p.langNames; PARTNER_ROLE[c] = p.partnerRole; SWORN_ROLE[c] = p.swornRole;
     for (const m of TEAM) if (p.roles[m.name]) m.role[c] = p.roles[m.name];

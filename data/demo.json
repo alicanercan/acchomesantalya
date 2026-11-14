@@ -10,8 +10,8 @@
     "fiyat": 4250000,
     "para": "TL",
     "oda": "1+1",
-    "brut": 0,
-    "net": 0,
+    "brut": 70,
+    "net": 60,
     "kat": "Ara kat",
     "site": "Evet",
     "ozellikler": [
@@ -31,7 +31,12 @@
       "ru": "Это предварительный просмотр дизайна. Реальные данные появятся из базы объектов."
     },
     "foto": [],
-    "oneCikan": "Evet"
+    "oneCikan": "Evet",
+    "etiketler": [
+      "yeni",
+      "oturum"
+    ],
+    "fiyatKontrol": "15.11.2026"
   },
   {
     "id": "DEMO-2",
@@ -44,8 +49,8 @@
     "fiyat": 25000,
     "para": "TL",
     "oda": "1+1",
-    "brut": 0,
-    "net": 0,
+    "brut": 60,
+    "net": 50,
     "kat": "",
     "site": "Evet",
     "ozellikler": [
@@ -63,6 +68,10 @@
       "ru": "Это предварительный просмотр дизайна. Реальные данные появятся из базы объектов."
     },
     "foto": [],
-    "oneCikan": "Evet"
+    "oneCikan": "Evet",
+    "etiketler": [
+      "esyali"
+    ],
+    "fiyatKontrol": "15.11.2026"
   }
 ]

@@ -2,7 +2,7 @@
 export default {
   code: 'pl', locale: 'pl-PL', base: '/pl', rtl: false, defCur: 'PLN',
   slogan: 'Excellence in Real Estate',
-  segs: { projects: 'projekty', reviews: 'opinie', buyersguide: 'poradnik-kupujacego' },
+  segs: { favorites: 'ulubione', projects: 'projekty', reviews: 'opinie', buyersguide: 'poradnik-kupujacego' },
   guide: {
     title: 'Poradnik kupującego',
     lead: 'Wszystko o zakupie nieruchomości w Turcji i w Antalyi: proces, dokumenty, koszty, obywatelstwo, pozwolenie na pobyt i akt własności (artykuły w języku angielskim).',
@@ -70,6 +70,11 @@ export default {
     curNote: 'Przeliczone ceny są orientacyjne, według bieżących kursów. Płatność i wartość w akcie własności opierają się na cenie oryginalnej. Wartość w BTC ma charakter wyłącznie informacyjny; w Turcji nie można płacić za nieruchomość kryptowalutą.',
     callTitle: 'Zamów rozmowę', callSub: 'Zostaw dane, a nasz doradca wkrótce do Ciebie zadzwoni.', callMe: 'Zadzwońcie do mnie', dialCode: 'Kierunkowy kraju',
     consent: 'Zapoznałem(-am) się z dokumentem {{LINK}} i zgadzam się na przetwarzanie moich danych w celu odpowiedzi na zapytanie.',
+    favAdd: 'Dodaj do ulubionych', favTitle: 'Moje ulubione', favLead: 'Zapisane oferty są przechowywane na tym urządzeniu; konto nie jest potrzebne.', favEmpty: 'Brak ulubionych. Kliknij serduszko przy ofercie, aby ją zapisać.',
+    compare: 'Porównaj', compareAdd: 'Dodaj do porównania (maks. 3)', compareTitle: 'Porównanie', compareHint: 'Użyj „Porównaj” na kartach ofert, aby zobaczyć do 3 nieruchomości obok siebie.',
+    tags: 'Atuty', similar: 'Podobne oferty', priceChecked: 'Cena i dostępność sprawdzone', lastCheck: 'Ostatnia weryfikacja',
+    whyDiff: 'Widziałeś tę nieruchomość gdzie indziej w innej cenie?', whyDiffText: 'Ogłoszenia na innych portalach często są nieaktualne albo różnią się piętrem, widokiem, wyposażeniem lub warunkami płatności. Prześlij nam znalezione ogłoszenie – porównamy je na piśmie. Przed rezerwacją ponownie potwierdzamy cenę i warunki z właścicielem.',
+    tag_vatandaslik: 'Pod obywatelstwo', tag_oturum: 'Pod pozwolenie na pobyt', tag_deniz: 'Widok na morze', tag_ilkSira: 'Pierwsza linia', tag_esyali: 'Umeblowane', tag_firsat: 'Okazja', tag_yeni: 'Nowe budownictwo',
     currency: 'Waluta', partnersTitle: 'Nasi partnerzy', speaks: 'Języki',
   },
   plaza: {

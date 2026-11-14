@@ -41,7 +41,7 @@ const T = {
       ['Profesyonel tanıtım', 'Fotoğraf, video ve dijital pazarlama ekibimizle'],
     ],
     filters: { tip: 'İlan tipi', any: 'Tümü', sale: 'Satılık', rent: 'Kiralık', rooms: 'Oda', sort: 'Sırala', newest: 'En yeni', priceAsc: 'Fiyat artan', priceDesc: 'Fiyat azalan' },
-    fields: { price: 'Fiyat', rooms: 'Oda', gross: 'Brüt m²', net: 'Net m²', age: 'Bina yaşı', floor: 'Bulunduğu kat', floors: 'Kat sayısı', heat: 'Isıtma', inSite: 'Site içinde', credit: 'Krediye uygun', deed: 'Tapu durumu', project: 'Proje / Site', location: 'Konum', type: 'Emlak türü', no: 'İlan no', features: 'Özellikler', desc: 'Açıklama' },
+    fields: { price: 'Fiyat', rooms: 'Oda', gross: 'Brüt alan', net: 'Net alan', age: 'Bina yaşı', floor: 'Bulunduğu kat', floors: 'Kat sayısı', heat: 'Isıtma', inSite: 'Site içinde', credit: 'Krediye uygun', deed: 'Tapu durumu', project: 'Proje / Site', location: 'Konum', type: 'Emlak türü', no: 'İlan no', features: 'Özellikler', desc: 'Açıklama' },
     priceOnReq: 'Fiyat için arayın', sold: 'Satıldı', option: 'Opsiyonlu',
     sale: 'Satılık', rent: 'Kiralık',
     askTitle: 'Bu ilan hakkında bilgi alın', name: 'Adınız', phone: 'Telefon', msg: 'Mesajınız', send: 'Gönder',
@@ -86,7 +86,7 @@ const T = {
       ['Professional marketing', 'In-house photo, video and digital marketing team'],
     ],
     filters: { tip: 'Type', any: 'All', sale: 'For sale', rent: 'For rent', rooms: 'Rooms', sort: 'Sort', newest: 'Newest', priceAsc: 'Price low to high', priceDesc: 'Price high to low' },
-    fields: { price: 'Price', rooms: 'Rooms', gross: 'Gross m²', net: 'Net m²', age: 'Building age', floor: 'Floor', floors: 'Total floors', heat: 'Heating', inSite: 'In a complex', credit: 'Mortgage eligible', deed: 'Title deed', project: 'Project / Complex', location: 'Location', type: 'Property type', no: 'Listing no', features: 'Features', desc: 'Description' },
+    fields: { price: 'Price', rooms: 'Rooms', gross: 'Gross area', net: 'Net area', age: 'Building age', floor: 'Floor', floors: 'Total floors', heat: 'Heating', inSite: 'In a complex', credit: 'Mortgage eligible', deed: 'Title deed', project: 'Project / Complex', location: 'Location', type: 'Property type', no: 'Listing no', features: 'Features', desc: 'Description' },
     priceOnReq: 'Price on request', sold: 'Sold', option: 'Under offer',
     sale: 'For sale', rent: 'For rent',
     askTitle: 'Ask about this property', name: 'Your name', phone: 'Phone', msg: 'Message', send: 'Send',
@@ -131,7 +131,7 @@ const T = {
       ['Профессиональный маркетинг', 'Собственная команда фото, видео и digital-маркетинга'],
     ],
     filters: { tip: 'Тип', any: 'Все', sale: 'Продажа', rent: 'Аренда', rooms: 'Комнаты', sort: 'Сортировка', newest: 'Новые', priceAsc: 'Цена по возрастанию', priceDesc: 'Цена по убыванию' },
-    fields: { price: 'Цена', rooms: 'Комнаты', gross: 'Общая м²', net: 'Полезная м²', age: 'Возраст здания', floor: 'Этаж', floors: 'Этажность', heat: 'Отопление', inSite: 'В комплексе', credit: 'Ипотека', deed: 'Тапу', project: 'Проект / Комплекс', location: 'Расположение', type: 'Тип недвижимости', no: 'Номер объекта', features: 'Особенности', desc: 'Описание' },
+    fields: { price: 'Цена', rooms: 'Комнаты', gross: 'Общая площадь', net: 'Полезная площадь', age: 'Возраст здания', floor: 'Этаж', floors: 'Этажность', heat: 'Отопление', inSite: 'В комплексе', credit: 'Ипотека', deed: 'Тапу', project: 'Проект / Комплекс', location: 'Расположение', type: 'Тип недвижимости', no: 'Номер объекта', features: 'Особенности', desc: 'Описание' },
     priceOnReq: 'Цена по запросу', sold: 'Продано', option: 'Забронировано',
     sale: 'Продажа', rent: 'Аренда',
     askTitle: 'Узнать об этом объекте', name: 'Ваше имя', phone: 'Телефон', msg: 'Сообщение', send: 'Отправить',
@@ -197,6 +197,22 @@ const agentSchema = {
   sameAs: [SITE.instagram.url, SITE.google.mapsUrl, SITE.corporateSite],
 };
 
+// ---------- ayar paneli: dil, para birimi, ölçü birimi ----------
+const LANG_ORDER = ['en', 'fr', 'ru', 'ar', 'tr', 'zh', 'de', 'es', 'pl', 'sv', 'nl', 'fa'].filter((l) => LANGS.includes(l));
+const ENDONYM = { en: 'English', fr: 'Français', ru: 'Русский', ar: 'العربية', tr: 'Türkçe', zh: '中文', de: 'Deutsch', es: 'Español', pl: 'Polski', sv: 'Svenska', nl: 'Nederlands', fa: 'فارسی' };
+const CURRENCIES = ['EUR', 'USD', 'GBP', 'RUB', 'BTC', 'TRY', 'AED', 'CNY', 'PLN', 'SEK', 'SAR', 'CAD'];
+const DEF_CUR = { tr: 'TRY', en: 'USD', ru: 'USD', fa: 'USD', de: 'EUR', fr: 'EUR', es: 'EUR', nl: 'EUR', pl: 'PLN', sv: 'SEK', ar: 'AED', zh: 'CNY' };
+const settingsBtn = (lang) => `<button type="button" class="setbtn" data-set-open aria-haspopup="dialog" aria-label="${s('settings', lang)}"><span aria-hidden="true">🌐</span><b>${lang.toUpperCase()}</b><span class="sep">·</span><span data-cur-label>${DEF_CUR[lang] || 'USD'}</span><span class="sep">·</span><span data-unit-label>m²</span></button>`;
+function settingsPanel(lang, alternates) {
+  const href = (l) => (alternates && alternates[l]) || (alternates && alternates.tr && alternates.tr.startsWith('/alici-rehberi') ? url(l, 'buyersguide') : home(l));
+  return `<div class="setpanel" data-set-panel hidden role="dialog" aria-label="${s('settings', lang)}" data-def-cur="${DEF_CUR[lang] || 'USD'}"><div class="wrap spgrid">
+<button type="button" class="spclose" data-set-close>${s('close', lang)} ✕</button>
+<div><h4>${s('language', lang)}</h4><div class="opts">${LANG_ORDER.map((l) => `<a href="${href(l)}" lang="${l}" hreflang="${l}"${l === lang ? ' aria-current="true"' : ''}>${ENDONYM[l]}</a>`).join('')}</div></div>
+<div><h4>${s('currency', lang)}</h4><div class="opts">${CURRENCIES.map((c) => `<button type="button" data-cur-set="${c}">${c}</button>`).join('')}</div><small class="spnote">${s('curNote', lang)}</small></div>
+<div><h4>${s('unit', lang)}</h4><div class="opts two"><button type="button" data-unit-set="m2">${s('metric', lang)}</button><button type="button" data-unit-set="ft2">${s('imperial', lang)}</button></div></div>
+</div></div>`;
+}
+
 // ---------- sayfa iskeleti ----------
 function layout({ lang, title, desc, canonical, alternates, body, schema = [], ogImage }) {
   const t = T[lang];
@@ -212,10 +228,10 @@ ${DEMO ? `<div class="demo">${t.demo}</div>` : ''}
 <header class="top"><div class="wrap nav">
 <a class="logo" href="${home(lang)}"><img src="/img/logo/acc-siyah.svg" alt="ACC HOMES International Real Estate" width="154" height="45"></a>
 <nav class="menu"><a href="${url(lang, 'list')}">${t.nav.list}</a><a href="${url(lang, 'projects')}">${t.projects}</a><a href="${url(lang, 'buyersguide')}">${GUIDE_TITLE[lang]}</a><a href="${url(lang, 'services')}">${PAGES.services.nav[lang]}</a><div class="dd"><button type="button">${t.company} ▾</button><div class="ddm"><a href="${url(lang, 'about')}">${PAGES.about.nav[lang]}</a><a href="${url(lang, 'broker')}">${PAGES.broker.nav[lang]}</a><a href="${url(lang, 'team')}">${PAGES.team.nav[lang]}</a><a href="${url(lang, 'reviews')}">${t.revTitle}</a><a href="${url(lang, 'join')}">${PAGES.join.nav[lang]}</a></div></div><a href="${url(lang, 'blog')}">${t.blog}</a><a href="${url(lang, 'contact')}">${t.nav.contact}</a></nav>
-<details class="mnav"><summary aria-label="${t.menu}">☰</summary><div class="mpanel"><a href="${url(lang, 'list')}">${t.nav.list}</a><a href="${url(lang, 'projects')}">${t.projects}</a><a href="${url(lang, 'buyersguide')}">${GUIDE_TITLE[lang]}</a><a href="${url(lang, 'services')}">${PAGES.services.nav[lang]}</a><a href="${url(lang, 'about')}">${PAGES.about.nav[lang]}</a><a href="${url(lang, 'broker')}">${PAGES.broker.nav[lang]}</a><a href="${url(lang, 'team')}">${PAGES.team.nav[lang]}</a><a href="${url(lang, 'join')}">${PAGES.join.nav[lang]}</a><a href="${url(lang, 'guide')}">${t.nav.guide}</a><a href="${url(lang, 'blog')}">${t.blog}</a><a href="${url(lang, 'contact')}">${t.nav.contact}</a><div class="mlangs">${langSwitch}</div></div></details>
-<div class="langs">${langSwitch}</div><select class="cur" data-cur aria-label="${s('currency', lang)}" data-def="${({ tr: 'TRY', de: 'EUR' })[lang] || 'USD'}">${['TRY', 'USD', 'EUR', 'GBP', 'RUB'].map((c) => `<option value="${c}">${({ TRY: '₺ TL', USD: '$ USD', EUR: '€ EUR', GBP: '£ GBP', RUB: '₽ RUB' })[c]}</option>`).join('')}</select>
+<details class="mnav"><summary aria-label="${t.menu}">☰</summary><div class="mpanel"><a href="${url(lang, 'list')}">${t.nav.list}</a><a href="${url(lang, 'projects')}">${t.projects}</a><a href="${url(lang, 'buyersguide')}">${GUIDE_TITLE[lang]}</a><a href="${url(lang, 'services')}">${PAGES.services.nav[lang]}</a><a href="${url(lang, 'about')}">${PAGES.about.nav[lang]}</a><a href="${url(lang, 'broker')}">${PAGES.broker.nav[lang]}</a><a href="${url(lang, 'team')}">${PAGES.team.nav[lang]}</a><a href="${url(lang, 'join')}">${PAGES.join.nav[lang]}</a><a href="${url(lang, 'guide')}">${t.nav.guide}</a><a href="${url(lang, 'blog')}">${t.blog}</a><a href="${url(lang, 'contact')}">${t.nav.contact}</a></div></details>
+${settingsBtn(lang)}
 <a class="btn sm" href="tel:${SITE.phoneRaw}">${t.call}</a>
-</div></header>
+</div>${settingsPanel(lang, alternates)}</header>
 <main>${body}</main>
 <footer class="foot"><div class="wrap fgrid">
 <div><div class="logo flogo"><img src="/img/logo/acc-siyah.svg" alt="ACC HOMES International Real Estate" width="171" height="50" loading="lazy"></div><p class="slogan">${esc(SITE.slogan[lang])}</p><p>${esc(t.footerAbout)}</p></div>
@@ -457,7 +473,7 @@ function card(l, lang) {
 <a href="${url(lang, 'listing', slugOf(l))}">
 <div class="img">${cover ? `<img src="${esc(cover)}" alt="${esc([l.mahalle, l.ilce, l.oda, l.tur].join(' '))}" loading="lazy">` : placeholder}<span class="tag">${tipLabel(l, lang)}</span>${statusBadge(l, lang)}</div>
 <div class="body"><div class="price"${priceAttrs(l)}>${fmtPrice(l, lang)}</div><h3>${esc(pick(l.baslik, lang))}</h3>
-<div class="meta"><span>${esc(l.oda || '')}</span>${l.net ? `<span>${l.net} m²</span>` : ''}<span>${esc([l.mahalle, l.ilce].filter(Boolean).join(', '))}</span></div></div></a></article>`;
+<div class="meta"><span>${esc(l.oda || '')}</span>${l.net ? `<span data-m2="${+l.net}">${+l.net} m²</span>` : ''}<span>${esc([l.mahalle, l.ilce].filter(Boolean).join(', '))}</span></div></div></a></article>`;
 }
 
 function grid(list, lang) {
@@ -502,7 +518,7 @@ function pageListing(l, lang) {
   const title = pick(l.baslik, lang);
   const desc = (lang === 'tr' && l.meta) ? l.meta : pick(l.aciklama, lang).slice(0, 155);
   const rows = [
-    [F.no, l.id], [F.type, l.tur], [F.rooms, l.oda], [F.gross, l.brut || ''], [F.net, l.net || ''], [F.age, l.yas], [F.floor, l.kat], [F.floors, l.katSayisi],
+    [F.no, l.id], [F.type, l.tur], [F.rooms, l.oda], [F.gross, l.brut ? { m2: l.brut } : ''], [F.net, l.net ? { m2: l.net } : ''], [F.age, l.yas], [F.floor, l.kat], [F.floors, l.katSayisi],
     [F.heat, l.isitma], [F.inSite, l.site], [F.credit, l.kredi], [F.deed, l.tapu], [F.project, l.proje], [F.location, [l.mahalle, l.ilce, 'Antalya'].filter(Boolean).join(', ')],
   ].filter(([, v]) => v !== undefined && v !== null && v !== '');
   const photos = (l.foto || []);
@@ -528,7 +544,7 @@ ${dist.length ? `<h2>${L('distances')}</h2><ul class="chips">${dist.map(([k, v])
 ${l.video ? `<p><a class="btn ghost" href="${esc(l.video)}" target="_blank" rel="noopener">Video →</a></p>` : ''}
 ${l.tip !== 'Kiralık' ? `<h2>${L('costs')}</h2>${calcBlock(lang).replace('data-calc>', `data-calc data-price="${try_ || ''}">`)}<p><a href="${lang === 'tr' ? '/alici-rehberi/alim-masraflari/' : '/en/buyers-guide/purchase-costs/'}">${L('costsMore')}</a></p>` : ''}
 </div><aside class="side"><div class="box"><span class="tag static">${tipLabel(l, lang)}</span>${statusBadge(l, lang)}<div class="price big"${priceAttrs(l)}>${fmtPrice(l, lang)}</div>
-<table class="spec">${rows.map(([k, v]) => `<tr><th>${k}</th><td>${esc(v)}</td></tr>`).join('')}</table>
+<table class="spec">${rows.map(([k, v]) => `<tr><th>${k}</th><td>${v && v.m2 ? `<span data-m2="${+v.m2}">${+v.m2} m²</span>` : esc(v)}</td></tr>`).join('')}</table>
 <div class="actions"><a class="btn" href="${wa}" target="_blank" rel="noopener">${t.wa}</a><a class="btn ghost" href="tel:${SITE.phoneRaw}">${t.call}</a></div>
 <a class="gline" href="${SITE.google.mapsUrl}" target="_blank" rel="noopener">${ICON_G}<b>${fmtRating(lang)}</b>${stars}<span>${t.gReviews(SITE.google.reviews)}</span></a></div>
 <div class="box agent">${ag.foto ? `<img src="${ag.foto}" alt="${esc(ag.ad)}">` : `<span class="mav">${esc(ag.ad.split(' ').map((x) => x[0]).slice(0, 2).join(''))}</span>`}<div><b>${esc(ag.ad)}</b><small>${esc(ag.unvan || '')}</small><a href="tel:${ag.tel}">${esc(ag.telText || ag.tel)}</a></div><a class="wabtn sm" href="${agWa}" target="_blank" rel="noopener">WhatsApp</a></div>

@@ -76,26 +76,47 @@
   document.querySelectorAll('[data-copy]').forEach(function (b) { b.addEventListener('click', function () { navigator.clipboard && navigator.clipboard.writeText(b.dataset.copy); b.textContent = '✓'; }); });
 })();
 
-// para birimi seçici: fiyatlar seçilen birimde (≈), asıl fiyat altta küçük
+// ayar paneli: dil, para birimi (BTC dahil), ölçü birimi
 (function () {
-  var sel = document.querySelector('[data-cur]'); if (!sel) return;
-  var cur; try { cur = localStorage.getItem('acc-cur'); } catch (e) {}
-  sel.value = cur || sel.dataset.def;
-  var loc = ({ tr: 'tr-TR', ru: 'ru-RU', de: 'de-DE', fa: 'fa-IR' })[document.documentElement.lang] || 'en-GB';
-  var sym = { TRY: '₺', USD: '$', EUR: '€', GBP: '£', RUB: '₽' }, rates = null;
-  var nf = function (n) { return new Intl.NumberFormat(loc, { maximumFractionDigits: 0 }).format(n); };
+  var panel = document.querySelector('[data-set-panel]'), open = document.querySelector('[data-set-open]');
+  if (!panel) return;
+  var get = function (k) { try { return localStorage.getItem(k); } catch (e) { return null; } };
+  var put = function (k, v) { try { localStorage.setItem(k, v); } catch (e) {} };
+  var cur = get('acc-cur') || panel.dataset.defCur || 'USD', unit = get('acc-unit') || 'm2';
+  var loc = ({ tr: 'tr-TR', ru: 'ru-RU', de: 'de-DE', fa: 'fa-IR', pl: 'pl-PL', fr: 'fr-FR', es: 'es-ES', nl: 'nl-NL', sv: 'sv-SE', ar: 'ar-AE', zh: 'zh-CN' })[document.documentElement.lang] || 'en-GB';
+  var sym = { TRY: '₺', USD: '$', EUR: '€', GBP: '£', RUB: '₽', BTC: '₿', AED: 'AED ', CNY: '¥', PLN: 'zł ', SEK: 'kr ', SAR: 'SAR ', CAD: 'C$' }, rates = null;
+  var nf = function (n, c) { return new Intl.NumberFormat(loc, c === 'BTC' ? { maximumFractionDigits: n < 1 ? 4 : 2 } : { maximumFractionDigits: 0 }).format(n); };
   function conv(amt, from, to) { return amt / rates[from] * rates[to]; }
-  window.accConv = function (amt, from) { var to = sel.value; if (!rates || to === from) return ''; return ' (≈ ' + sym[to] + nf(conv(amt, from, to)) + ')'; };
-  function apply() {
-    var to = sel.value;
+  window.accConv = function (amt, from) { if (!rates || !rates[cur] || cur === from) return ''; return ' (≈ ' + sym[cur] + nf(conv(amt, from, cur), cur) + ')'; };
+  function applyCur() {
+    document.querySelectorAll('[data-cur-label]').forEach(function (e) { e.textContent = cur; });
+    panel.querySelectorAll('[data-cur-set]').forEach(function (b) { b.toggleAttribute('aria-pressed', b.dataset.curSet === cur); });
     document.querySelectorAll('[data-amt]').forEach(function (el) {
       if (!el.dataset.orig) el.dataset.orig = el.innerHTML;
       var from = el.dataset.ccy;
-      if (!rates || to === from) { el.innerHTML = el.dataset.orig; return; }
-      el.innerHTML = '≈ ' + sym[to] + nf(conv(+el.dataset.amt, from, to)) + '<small class="orig">' + el.dataset.orig + '</small>';
+      if (!rates || !rates[cur] || !rates[from] || cur === from) { el.innerHTML = el.dataset.orig; return; }
+      el.innerHTML = '≈ ' + sym[cur] + nf(conv(+el.dataset.amt, from, cur), cur) + '<small class="orig">' + el.dataset.orig + '</small>';
     });
     document.querySelectorAll('[data-calc] [data-price]').forEach(function (i) { i.dispatchEvent(new Event('input')); });
   }
-  sel.addEventListener('change', function () { try { localStorage.setItem('acc-cur', sel.value); } catch (e) {} apply(); });
-  fetch('https://open.er-api.com/v6/latest/TRY').then(function (r) { return r.json(); }).then(function (j) { if (j && j.rates) { rates = j.rates; rates.TRY = 1; apply(); } }).catch(function () {});
+  function applyUnit() {
+    document.querySelectorAll('[data-unit-label]').forEach(function (e) { e.textContent = unit === 'ft2' ? 'ft²' : 'm²'; });
+    panel.querySelectorAll('[data-unit-set]').forEach(function (b) { b.toggleAttribute('aria-pressed', b.dataset.unitSet === unit); });
+    document.querySelectorAll('[data-m2]').forEach(function (el) { var m = +el.dataset.m2; el.textContent = unit === 'ft2' ? new Intl.NumberFormat(loc, { maximumFractionDigits: 0 }).format(m * 10.7639) + ' ft²' : m + ' m²'; });
+  }
+  open.addEventListener('click', function () { panel.hidden = !panel.hidden; open.setAttribute('aria-expanded', !panel.hidden); });
+  panel.querySelector('[data-set-close]').addEventListener('click', function () { panel.hidden = true; open.setAttribute('aria-expanded', 'false'); });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape') panel.hidden = true; });
+  panel.querySelectorAll('[data-cur-set]').forEach(function (b) { b.addEventListener('click', function () { cur = b.dataset.curSet; put('acc-cur', cur); applyCur(); }); });
+  panel.querySelectorAll('[data-unit-set]').forEach(function (b) { b.addEventListener('click', function () { unit = b.dataset.unitSet; put('acc-unit', unit); applyUnit(); }); });
+  applyCur(); applyUnit();
+  Promise.all([
+    fetch('https://open.er-api.com/v6/latest/TRY').then(function (r) { return r.json(); }).catch(function () { return null; }),
+    fetch('https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=try').then(function (r) { return r.json(); }).catch(function () { return null; })
+  ]).then(function (res) {
+    if (!res[0] || !res[0].rates) return;
+    rates = res[0].rates; rates.TRY = 1;
+    if (res[1] && res[1].bitcoin && res[1].bitcoin.try) rates.BTC = 1 / res[1].bitcoin.try;
+    applyCur();
+  });
 })();

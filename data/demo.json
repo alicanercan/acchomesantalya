@@ -1,0 +1,61 @@
+[
+  {
+    "id": "DEMO-1",
+    "durum": "Yayında",
+    "tip": "Satılık",
+    "tur": "Daire",
+    "ilce": "Aksu",
+    "mahalle": "Altıntaş",
+    "proje": "Örnek Konsept Site",
+    "fiyat": 0,
+    "para": "TL",
+    "oda": "1+1",
+    "brut": 0,
+    "net": 0,
+    "kat": "Ara kat",
+    "site": "Evet",
+    "ozellikler": ["havuz", "otopark", "güvenlik"],
+    "kredi": "",
+    "baslik": {
+      "tr": "Örnek İlan — Altıntaş'ta Konsept Sitede Ara Kat 1+1",
+      "en": "Sample Listing — Mid-Floor 1+1 in a Concept Complex, Altintas",
+      "ru": "Пример объявления — 1+1 на среднем этаже, Алтынташ"
+    },
+    "aciklama": {
+      "tr": "Bu bir tasarım önizlemesidir. Gerçek ilan bilgileri Portföy Havuzu'ndan gelecek.",
+      "en": "This is a design preview. Real listing data will come from the Portfolio Pool.",
+      "ru": "Это предварительный просмотр дизайна. Реальные данные появятся из базы объектов."
+    },
+    "foto": [],
+    "oneCikan": "Evet"
+  },
+  {
+    "id": "DEMO-2",
+    "durum": "Yayında",
+    "tip": "Kiralık",
+    "tur": "Daire",
+    "ilce": "Aksu",
+    "mahalle": "Altıntaş",
+    "proje": "Örnek Havuzlu Site",
+    "fiyat": 0,
+    "para": "TL",
+    "oda": "1+1",
+    "brut": 0,
+    "net": 0,
+    "kat": "",
+    "site": "Evet",
+    "ozellikler": ["havuz", "boş"],
+    "baslik": {
+      "tr": "Örnek İlan — Altıntaş'ta Havuzlu Sitede Kiralık 1+1",
+      "en": "Sample Listing — 1+1 for Rent in a Complex with Pool, Altintas",
+      "ru": "Пример объявления — 1+1 в аренду в комплексе с бассейном"
+    },
+    "aciklama": {
+      "tr": "Bu bir tasarım önizlemesidir. Gerçek ilan bilgileri Portföy Havuzu'ndan gelecek.",
+      "en": "This is a design preview. Real listing data will come from the Portfolio Pool.",
+      "ru": "Это предварительный просмотр дизайна. Реальные данные появятся из базы объектов."
+    },
+    "foto": [],
+    "oneCikan": "Evet"
+  }
+]

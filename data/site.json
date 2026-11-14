@@ -1,0 +1,22 @@
+{
+  "domain": "https://altintassatilikdaire.com",
+  "brand": "ACC HOMES International Real Estate",
+  "shortBrand": "ACC HOMES",
+  "phone": "+90 549 804 38 43",
+  "phoneRaw": "+905498043843",
+  "whatsapp": "905498043843",
+  "email": "info@acchomesantalya.com",
+  "address": {
+    "street": "ACC PLAZA, Yeşilbahçe Mah. Portakal Çiçeği Bulvarı No:36/B",
+    "district": "Muratpaşa",
+    "area": "Lara",
+    "city": "Antalya",
+    "country": "TR"
+  },
+  "corporateSite": "https://acchomesantalya.com",
+  "slogan": {
+    "tr": "Emlakta Mükemmelliğin Adresi",
+    "en": "Excellence in Real Estate",
+    "ru": "Excellence in Real Estate"
+  }
+}

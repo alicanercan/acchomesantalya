@@ -3,6 +3,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import crypto from 'node:crypto';
+import { PAGES, POSTS, TEAM, LANGS_SPOKEN, PLAZA } from './content.mjs';
 
 const ROOT = path.dirname(new URL(import.meta.url).pathname);
 const OUT = path.join(ROOT, 'dist');
@@ -60,6 +61,7 @@ const T = {
     revTitle: 'Müşterilerimiz ne diyor', revSub: 'Google’daki yorumlarımızdan seçtiklerimiz', revAll: 'Tüm yorumları Google’da oku', revMore: 'Devamı Google’da',
     igTitle: 'Instagram’da ACC HOMES', igFollowBtn: 'Takip et', igPosts: 'gönderi', igFollowers: 'takipçi',
     barCall: 'Hemen Ara', barWa: 'WhatsApp’tan Yaz',
+    company: 'Kurumsal', blog: 'Blog', blogLead: 'Antalya ve Altıntaş gayrimenkul piyasası üzerine rehberler ve analizler', readMore: 'Devamını oku', menu: 'Menü',
     gReviews: (n) => `${n} Google yorumu`, readReviews: 'Yorumları oku', igFollow: 'Instagram’da takip edin', mapTitle: 'Ofisimiz haritada', directions: 'Yol tarifi al', trustTitle: 'Müşterilerimiz bizi anlatıyor',
     metaHome: "Altıntaş satılık ve kiralık daire ilanları. ACC HOMES ile Antalya Altıntaş'ta doğrulanmış portföy, şeffaf fiyat ve uzman danışmanlık.",
   },
@@ -103,6 +105,7 @@ const T = {
     revTitle: 'What our clients say', revSub: 'A selection of our Google reviews, in the words our clients wrote them', revAll: 'Read all reviews on Google', revMore: 'Read more on Google',
     igTitle: 'ACC HOMES on Instagram', igFollowBtn: 'Follow', igPosts: 'posts', igFollowers: 'followers',
     barCall: 'Call now', barWa: 'WhatsApp us',
+    company: 'Company', blog: 'Blog', blogLead: 'Guides and insights on the Antalya and Altintas property market', readMore: 'Read more', menu: 'Menu',
     gReviews: (n) => `${n} Google reviews`, readReviews: 'Read reviews', igFollow: 'Follow us on Instagram', mapTitle: 'Find our office', directions: 'Get directions', trustTitle: 'What our clients say',
     metaHome: 'Apartments for sale and rent in Altintas, Antalya. Verified listings, transparent pricing and expert advice from ACC HOMES.',
   },
@@ -146,6 +149,7 @@ const T = {
     revTitle: 'Отзывы клиентов', revSub: 'Подборка отзывов из Google на языке оригинала', revAll: 'Все отзывы в Google', revMore: 'Читать в Google',
     igTitle: 'ACC HOMES в Instagram', igFollowBtn: 'Подписаться', igPosts: 'публикаций', igFollowers: 'подписчиков',
     barCall: 'Позвонить', barWa: 'Написать в WhatsApp',
+    company: 'О компании', blog: 'Блог', blogLead: 'Гиды и аналитика по рынку недвижимости Анталии (на английском)', readMore: 'Читать', menu: 'Меню',
     gReviews: (n) => `${n} отзывов в Google`, readReviews: 'Читать отзывы', igFollow: 'Мы в Instagram', mapTitle: 'Наш офис на карте', directions: 'Проложить маршрут', trustTitle: 'Отзывы наших клиентов',
     metaHome: 'Квартиры на продажу и в аренду в Алтынташе, Анталия. Проверенные объекты и экспертные консультации ACC HOMES.',
   },
@@ -166,7 +170,8 @@ const fmtPrice = (l, lang) => {
 };
 const tipLabel = (l, lang) => (l.tip === 'Kiralık' ? T[lang].rent : T[lang].sale);
 const statusBadge = (l, lang) => l.durum === 'Satıldı' ? `<span class="badge sold">${T[lang].sold}</span>` : l.durum === 'Opsiyonlu' ? `<span class="badge opt">${T[lang].option}</span>` : '';
-const url = (lang, seg, slug) => `${BASE[lang]}/${T[lang].seg[seg]}/${slug ? slug + '/' : ''}`;
+const segOf = (lang, seg) => (PAGES[seg] ? PAGES[seg].seg[lang] : seg === 'blog' ? 'blog' : T[lang].seg[seg]);
+const url = (lang, seg, slug) => `${BASE[lang]}/${segOf(lang, seg)}/${slug ? slug + '/' : ''}`;
 const home = (lang) => `${BASE[lang]}/`;
 const waLink = (text) => `https://wa.me/${SITE.whatsapp}?text=${encodeURIComponent(text)}`;
 const write = (rel, html) => { const f = path.join(OUT, rel); fs.mkdirSync(path.dirname(f), { recursive: true }); fs.writeFileSync(f, html); };
@@ -194,13 +199,15 @@ ${[agentSchema, ...schema].map((s) => `<script type="application/ld+json">${JSON
 ${DEMO ? `<div class="demo">${t.demo}</div>` : ''}
 <header class="top"><div class="wrap nav">
 <a class="logo" href="${home(lang)}"><span class="mark">ACC</span><span class="lt"><b>ACC HOMES</b><small>International Real Estate</small></span></a>
-<nav class="menu"><a href="${url(lang, 'list')}">${t.nav.list}</a><a href="${url(lang, 'guide')}">${t.nav.guide}</a><a href="${url(lang, 'contact')}">${t.nav.contact}</a></nav>
+<nav class="menu"><a href="${url(lang, 'list')}">${t.nav.list}</a><a href="${url(lang, 'services')}">${PAGES.services.nav[lang]}</a><div class="dd"><button type="button">${t.company} ▾</button><div class="ddm"><a href="${url(lang, 'about')}">${PAGES.about.nav[lang]}</a><a href="${url(lang, 'broker')}">${PAGES.broker.nav[lang]}</a><a href="${url(lang, 'team')}">${PAGES.team.nav[lang]}</a><a href="${url(lang, 'join')}">${PAGES.join.nav[lang]}</a></div></div><a href="${url(lang, 'blog')}">${t.blog}</a><a href="${url(lang, 'contact')}">${t.nav.contact}</a></nav>
+<details class="mnav"><summary aria-label="${t.menu}">☰</summary><div class="mpanel"><a href="${url(lang, 'list')}">${t.nav.list}</a><a href="${url(lang, 'services')}">${PAGES.services.nav[lang]}</a><a href="${url(lang, 'about')}">${PAGES.about.nav[lang]}</a><a href="${url(lang, 'broker')}">${PAGES.broker.nav[lang]}</a><a href="${url(lang, 'team')}">${PAGES.team.nav[lang]}</a><a href="${url(lang, 'join')}">${PAGES.join.nav[lang]}</a><a href="${url(lang, 'guide')}">${t.nav.guide}</a><a href="${url(lang, 'blog')}">${t.blog}</a><a href="${url(lang, 'contact')}">${t.nav.contact}</a></div></details>
 <div class="langs">${langSwitch}</div>
 <a class="btn sm" href="tel:${SITE.phoneRaw}">${t.call}</a>
 </div></header>
 <main>${body}</main>
 <footer class="foot"><div class="wrap fgrid">
 <div><div class="logo"><span class="mark">ACC</span><span class="lt"><b>ACC HOMES</b><small>${esc(SITE.slogan[lang])}</small></span></div><p>${esc(t.footerAbout)}</p></div>
+<div><h4>${t.company}</h4><p class="flinks"><a href="${url(lang, 'about')}">${PAGES.about.nav[lang]}</a><a href="${url(lang, 'broker')}">${PAGES.broker.nav[lang]}</a><a href="${url(lang, 'team')}">${PAGES.team.nav[lang]}</a><a href="${url(lang, 'services')}">${PAGES.services.nav[lang]}</a><a href="${url(lang, 'join')}">${PAGES.join.nav[lang]}</a><a href="${url(lang, 'guide')}">${t.nav.guide}</a><a href="${url(lang, 'blog')}">${t.blog}</a></p></div>
 <div><h4>${t.office}</h4><p>${esc(SITE.address.street)}<br>${esc(SITE.address.area)}, ${esc(SITE.address.district)} / ${esc(SITE.address.city)}</p></div>
 <div><h4>${t.nav.contact}</h4><p><a href="tel:${SITE.phoneRaw}">${SITE.phone}</a><br><a href="mailto:${SITE.email}">${SITE.email}</a><br><a href="${SITE.corporateSite}">${t.corporate}</a></p><div class="social"><a href="${SITE.instagram.url}" target="_blank" rel="noopener" aria-label="Instagram">${ICON_IG}</a><a href="${SITE.google.mapsUrl}" target="_blank" rel="noopener" aria-label="Google">${ICON_G}</a></div></div>
 </div><div class="wrap copy">© ${new Date().getFullYear()} ${esc(SITE.brand)} · ${t.rights}</div></footer>
@@ -248,6 +255,51 @@ function stickyBar(lang) {
   const t = T[lang];
   return `<div class="cbar" role="navigation" aria-label="${t.nav.contact}"><a class="cbtn call" href="tel:${SITE.phoneRaw}"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path fill="currentColor" d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1A17 17 0 0 1 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1l-2.3 2.2z"/></svg>${t.barCall}</a><a class="cbtn wa" href="${waLink(t.waGeneral)}" target="_blank" rel="noopener"><svg viewBox="0 0 32 32" width="20" height="20" aria-hidden="true"><path fill="currentColor" d="M16 3a13 13 0 0 0-11.3 19.4L3 29l6.8-1.8A13 13 0 1 0 16 3zm0 23.6c-2 0-4-.6-5.7-1.6l-.4-.2-4 1 1.1-3.9-.3-.4A10.6 10.6 0 1 1 16 26.6zm5.8-7.9c-.3-.2-1.9-.9-2.2-1-.3-.1-.5-.2-.7.2l-1 1.2c-.2.2-.4.2-.7.1a8.7 8.7 0 0 1-4.3-3.8c-.3-.6.3-.5.9-1.6.1-.2 0-.4 0-.5l-1-2.4c-.3-.6-.5-.5-.7-.5h-.6a1.2 1.2 0 0 0-.9.4 3.6 3.6 0 0 0-1.1 2.7 6.3 6.3 0 0 0 1.3 3.3 14.4 14.4 0 0 0 5.5 4.9c2 .9 2.8.9 3.8.8.6-.1 1.9-.8 2.2-1.5.3-.7.3-1.4.2-1.5-.1-.2-.3-.3-.7-.4z"/></svg>${t.barWa}</a></div>`;
 }
+
+function fill(html, lang) {
+  const t = T[lang];
+  const nf = new Intl.NumberFormat(lang === 'tr' ? 'tr-TR' : lang === 'ru' ? 'ru-RU' : 'en-GB');
+  const stats = `<div class="stats"><div><b>1.000 m²</b><span>ACC Plaza</span></div><div><b>~50</b><span>${lang === 'tr' ? 'iş ortağı' : lang === 'ru' ? 'партнёров' : 'partners'}</span></div><div><b>10</b><span>${lang === 'tr' ? 'dilde hizmet' : lang === 'ru' ? 'языков' : 'languages'}</span></div><div><b>${fmtRating(lang)} ★</b><span>${t.gReviews(nf.format(SITE.google.reviews))}</span></div></div>`;
+  const team = `<div class="team">${TEAM.map((p) => `<div class="member">${p.photo ? `<img src="${p.photo}" alt="${esc(p.name)}" loading="lazy">` : `<span class="mav">${esc(p.initials)}</span>`}<b>${p.link ? `<a href="${url(lang, p.link)}">${esc(p.name)}</a>` : esc(p.name)}</b><small>${esc(p.role[lang])}</small></div>`).join('')}</div>`;
+  const langs = `<ul class="chips">${LANGS_SPOKEN[lang].map((l) => `<li>${l}</li>`).join('')}</ul>`;
+  const waJoin = waLink(lang === 'tr' ? 'Merhaba, ACC HOMES’ta iş ortağı olmak istiyorum.' : lang === 'ru' ? 'Здравствуйте, хочу стать партнёром ACC HOMES.' : 'Hello, I would like to join ACC HOMES as a partner.');
+  return html.replace(/\{\{URL:(\w+)\}\}/g, (_, k) => (k === 'list' || k === 'contact' || k === 'guide' ? url(lang, k) : url(lang, k)))
+    .replaceAll('{{STATS}}', stats).replaceAll('{{TEAM}}', team).replaceAll('{{LANGS}}', langs)
+    .replaceAll('{{WA_JOIN}}', waJoin).replaceAll('{{WA}}', waLink(t.waGeneral)).replaceAll('{{TEL}}', `tel:${SITE.phoneRaw}`)
+    .replaceAll('{{MAPS}}', SITE.google.mapsUrl).replaceAll('{{IG}}', SITE.instagram.url).replaceAll('{{IG_CANER}}', 'https://www.instagram.com/alicanercan.therealtor/')
+    .replaceAll('{{RATING}}', fmtRating(lang)).replaceAll('{{REVIEWS}}', nf.format(SITE.google.reviews))
+    .replaceAll('{{BROKER_PHOTO}}', SITE.brokerPhoto ? `<img src="${SITE.brokerPhoto}" alt="Ali Caner Can">` : '<span class="mav big">AC</span>');
+}
+function plazaBlock(lang) {
+  const p = PLAZA[lang];
+  return `<section class="plaza"><div class="wrap">
+<div class="pimg"><img src="/img/acc-plaza-1200.webp" alt="ACC PLAZA — ACC HOMES International Real Estate, Yeşilbahçe, Muratpaşa, Antalya" loading="lazy" width="1200" height="470"></div>
+<div class="ptext"><p class="eyebrow">${p.eyebrow}</p><h2>${p.title}</h2><p class="psub">${p.sub}</p>${p.body.map((x) => `<p>${x}</p>`).join('')}</div>
+<div class="pbadges">${p.badges.map(([i, h, d]) => `<div><span class="pi">${i}</span><b>${h}</b><small>${d}</small></div>`).join('')}</div>
+<div class="ctas"><a class="btn" href="${url(lang, 'team')}">${p.cta1}</a><a class="btn ghost" href="${SITE.google.mapsUrl}" target="_blank" rel="noopener">${p.cta2}</a></div>
+</div></section>`;
+}
+function pageCorporate(key, lang) {
+  const P = PAGES[key]; const c = P[lang];
+  const hero = key === 'about' ? `<div class="phero"><img src="/img/acc-plaza-1200.webp" alt="ACC PLAZA" width="1200" height="470"></div>` : '';
+  const body = `<section class="wrap sec narrow page">${hero}<nav class="crumbs"><a href="${home(lang)}">${T[lang].nav.home}</a> / <span>${esc(P.nav[lang])}</span></nav>
+<h1>${esc(c.title)}</h1><p class="sub">${esc(c.lead)}</p>${fill(c.html, lang)}</section>${key === 'about' ? reviewsBlock(lang) : ''}`;
+  const schema = key === 'broker' ? [{ '@context': 'https://schema.org', '@type': 'Person', name: 'Ali Caner Can', jobTitle: 'Broker', worksFor: { '@type': 'RealEstateAgent', name: SITE.brand }, alumniOf: 'Yıldız Teknik Üniversitesi', sameAs: ['https://www.instagram.com/alicanercan.therealtor/'] }] : [];
+  write(path.join(url(lang, key), 'index.html'), layout({ lang, title: `${c.title} | ACC HOMES`, desc: c.desc, canonical: url(lang, key), alternates: alts(key), body, schema, ogImage: '/img/acc-plaza-og.jpg' }));
+}
+const postFor = (p, lang) => p[lang] || p.en || p.tr;
+function pageBlog(lang) {
+  const t = T[lang];
+  const body = `<section class="wrap sec narrow page"><h1>${t.blog}</h1><p class="sub">${t.blogLead}</p>
+<div class="posts">${POSTS.map((p) => { const c = postFor(p, lang); return `<article class="post"><time>${p.date}</time><h2><a href="${url(lang, 'blog', p.slug)}">${esc(c.title)}</a></h2><p>${esc(c.desc)}</p><a class="more" href="${url(lang, 'blog', p.slug)}">${t.readMore} →</a></article>`; }).join('')}</div></section>`;
+  write(path.join(url(lang, 'blog'), 'index.html'), layout({ lang, title: `${t.blog} | ACC HOMES`, desc: t.blogLead, canonical: url(lang, 'blog'), alternates: alts('blog'), body }));
+  for (const p of POSTS) {
+    const c = postFor(p, lang);
+    const pb = `<article class="wrap sec narrow page"><nav class="crumbs"><a href="${home(lang)}">${t.nav.home}</a> / <a href="${url(lang, 'blog')}">${t.blog}</a></nav><time>${p.date}</time><h1>${esc(c.title)}</h1><div class="prose">${fill(c.html, lang)}</div></article>`;
+    const schema = [{ '@context': 'https://schema.org', '@type': 'BlogPosting', headline: c.title, description: c.desc, datePublished: p.date, author: { '@type': 'Person', name: 'Ali Caner Can' }, publisher: { '@type': 'Organization', name: SITE.brand } }];
+    write(path.join(url(lang, 'blog', p.slug), 'index.html'), layout({ lang, title: `${c.title} | ACC HOMES`, desc: c.desc, canonical: url(lang, 'blog', p.slug), alternates: alts('blog', () => p.slug), body: pb, schema }));
+  }
+}
 function mapBlock(lang) {
   const t = T[lang];
   return `<section class="wrap sec"><div class="sechead"><h2>${t.mapTitle}</h2><a href="${SITE.google.mapsUrl}" target="_blank" rel="noopener">${t.directions} →</a></div>
@@ -280,7 +332,7 @@ function pageHome(lang) {
 ${trustStrip(lang)}
 <section class="wrap sec"><div class="sechead"><h2>${t.featured}</h2><a href="${url(lang, 'list')}">${t.seeAll} →</a></div>${grid(show, lang)}</section>
 ${reviewsBlock(lang)}
-<section class="why"><div class="wrap"><h2>${t.why}</h2><div class="whygrid">${t.whyItems.map(([h, p]) => `<div><h3>${h}</h3><p>${p}</p></div>`).join('')}</div></div></section>
+${plazaBlock(lang)}
 ${igBlock(lang)}
 ${mapBlock(lang)}
 <section class="wrap sec guidebox"><div><h2>${t.guideTitle}</h2><p>${t.guideSub}</p></div><a class="btn ghost" href="${url(lang, 'guide')}">${t.nav.guide} →</a></section>`;
@@ -375,8 +427,9 @@ fs.cpSync(path.join(ROOT, 'assets'), path.join(OUT, 'assets'), { recursive: true
 await fetchIgImages();
 const urls = [];
 for (const lang of LANGS) {
-  pageHome(lang); pageList(lang); pageGuide(lang); pageContact(lang);
-  urls.push(home(lang), url(lang, 'list'), url(lang, 'guide'), url(lang, 'contact'));
+  pageHome(lang); pageList(lang); pageGuide(lang); pageContact(lang); pageBlog(lang);
+  for (const k of Object.keys(PAGES)) { pageCorporate(k, lang); urls.push(url(lang, k)); }
+  urls.push(home(lang), url(lang, 'list'), url(lang, 'guide'), url(lang, 'contact'), url(lang, 'blog'), ...POSTS.map((p) => url(lang, 'blog', p.slug)));
   for (const l of LISTINGS) { pageListing(l, lang); urls.push(url(lang, 'listing', slugOf(l))); }
 }
 write('sitemap.xml', `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">${urls.map((u) => `<url><loc>${SITE.domain}${u}</loc></url>`).join('')}</urlset>`);

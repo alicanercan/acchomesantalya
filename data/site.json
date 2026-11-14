@@ -19,5 +19,17 @@
     "en": "Excellence in Real Estate",
     "ru": "Excellence in Real Estate"
   },
-  "live": false
+  "live": false,
+  "instagram": {
+    "handle": "acchomesantalya",
+    "url": "https://www.instagram.com/acchomesantalya/"
+  },
+  "google": {
+    "name": "ACC HOMES International Real Estate",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=ACC+HOMES+International+Real+Estate+Ye%C5%9Filbah%C3%A7e+Portakal+%C3%87i%C3%A7e%C4%9Fi+Bulvar%C4%B1+36%2FB+Antalya",
+    "embedUrl": "https://www.google.com/maps?q=ACC+HOMES+International+Real+Estate,+Ye%C5%9Filbah%C3%A7e,+Portakal+%C3%87i%C3%A7e%C4%9Fi+Blv.+No:36%2FB,+Muratpa%C5%9Fa,+Antalya&output=embed",
+    "rating": 4.9,
+    "reviews": 452,
+    "asOf": "2026-11-12"
+  }
 }

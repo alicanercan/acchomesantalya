@@ -186,3 +186,13 @@ body{padding-bottom:90px}
 .menu a,.menu .dd>button{white-space:nowrap}
 @media (max-width:1240px){.menu{gap:14px}.menu a,.menu .dd>button{font-size:14px}.logo .lt small{display:none}}
 @media (max-width:1100px){.menu{display:none}.mnav{display:block}.langs{margin-left:auto}}
+/* resmi logo */
+.logo img{height:45px;width:auto;display:block}
+.flogo img{height:50px}
+.foot .slogan{font-weight:600;color:var(--ink);margin:6px 0 10px}
+.igavatar img{width:62%;height:auto}
+@media (max-width:600px){.logo img{height:36px}}
+.mlangs{display:none}
+@media (max-width:700px){.nav>.langs,.nav>.btn.sm{display:none}.mlangs{display:flex;gap:6px;flex-wrap:wrap;padding-top:10px;border-top:1px solid var(--line);margin-top:6px}.mlangs a{padding:6px 10px;border:1px solid var(--line);border-radius:8px;font-size:13px}.mlangs a[aria-current]{background:var(--red);color:#fff;border-color:var(--red)}.cur{margin-left:auto}}
+.reviews{overflow:hidden}.rtrack{max-width:100%}
+html,body{overflow-x:clip}

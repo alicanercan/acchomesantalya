@@ -45,7 +45,7 @@
 // masraf hesaplayıcı
 (function () {
   document.querySelectorAll('[data-calc]').forEach(function (c) {
-    var p = c.querySelector('[data-price]'), fx = c.querySelector('[data-foreign]'), loc = document.documentElement.lang === 'tr' ? 'tr-TR' : 'en-GB';
+    var p = c.querySelector('[data-price]'), fx = c.querySelector('[data-foreign]'), loc = ({ tr: 'tr-TR', ru: 'ru-RU', de: 'de-DE', fa: 'fa-IR' })[document.documentElement.lang] || 'en-GB';
     var fmt = function (n) { return new Intl.NumberFormat(loc, { maximumFractionDigits: 0 }).format(n) + ' TL'; };
     function run() {
       var v = parseFloat(p.value) || 0; if (!v) return;
@@ -64,7 +64,7 @@
 (function () {
   var d = document.querySelector('[data-days]');
   if (d) {
-    var lang = d.dataset.lang === 'tr' ? 'tr-TR' : d.dataset.lang === 'ru' ? 'ru-RU' : 'en-GB', hid = document.querySelector('[data-day]');
+    var lang = ({ tr: 'tr-TR', ru: 'ru-RU', de: 'de-DE', fa: 'fa-IR' })[d.dataset.lang] || 'en-GB', hid = document.querySelector('[data-day]');
     for (var i = 1; i <= 6; i++) {
       var x = new Date(); x.setDate(x.getDate() + i); if (x.getDay() === 0) continue;
       var b = document.createElement('button'); b.type = 'button'; b.textContent = x.toLocaleDateString(lang, { weekday: 'short', day: 'numeric', month: 'short' });

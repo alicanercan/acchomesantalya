@@ -163,3 +163,19 @@ body{padding-bottom:90px}
 @media print{.top,.foot,.cbar,.side .form,.ltools,.demo{display:none!important}.lgrid{grid-template-columns:1fr}}
 @media (max-width:900px){.hero .hsearch{grid-template-columns:1fr 1fr}.hsearch .btn{grid-column:1/-1}.glayout{grid-template-columns:1fr}.gside{position:static}.ticks.cols2{columns:1}.slide{min-height:320px}}
 .prose .btn,.page p a.btn{color:#fff;text-decoration:none}.prose .btn.ghost{color:var(--red)}
+/* ekip: iş ortakları ve fotoğraflar */
+.team .member img{width:120px;height:120px;border-radius:50%;object-fit:cover;object-position:top;display:block;margin:0 auto 10px;background:#eee}
+.team.partners{grid-template-columns:repeat(auto-fill,minmax(150px,1fr))}
+.team .mlang{display:block;color:var(--red);font-size:.75rem;margin-top:2px}
+.lic{font-size:.8rem;opacity:.8}
+/* Farsça (RTL) */
+[dir=rtl] body{font-family:Tahoma,"Segoe UI","Noto Sans Arabic",Arial,sans-serif}
+[dir=rtl] h1,[dir=rtl] h2,[dir=rtl] h3{font-family:Tahoma,"Segoe UI","Noto Naskh Arabic",serif;letter-spacing:0}
+[dir=rtl] .ticks li{padding:6px 28px 6px 0}
+[dir=rtl] .ticks li::before{left:auto;right:0}
+[dir=rtl] .timeline{border-left:0;border-right:3px solid var(--red);margin:16px 8px 0 0}
+[dir=rtl] .timeline li{padding:0 22px 18px 0}
+[dir=rtl] .timeline li::before{left:auto;right:-9px}
+[dir=rtl] .crumbs,[dir=rtl] .sechead{direction:rtl}
+[dir=rtl] .langs,[dir=rtl] .logo,[dir=rtl] .cbar a,[dir=rtl] input[type=tel],[dir=rtl] a[href^="tel:"]{direction:ltr}
+[dir=rtl] .slide{background-position:center}

@@ -10,6 +10,7 @@ export const TEAM = [
   { name: 'Bensu Taşbaş', initials: 'BT', role: { tr: 'Sosyal Medya Uzmanı', en: 'Social Media Specialist', ru: 'Специалист по соцсетям' } },
   { name: 'Derya Plyatner', initials: 'DP', role: { tr: 'Grafik Tasarım Uzmanı', en: 'Graphic Design Specialist', ru: 'Графический дизайнер' } },
   { name: 'Zeynep Çarıkçı', initials: 'ZÇ', role: { tr: 'Ofis Servis Yetkilisi', en: 'Office Services', ru: 'Офисный сервис' } },
+  { name: 'Kamil Bey', initials: 'KB', role: { tr: 'Ofis Kedimiz', en: 'Office Cat', ru: 'Офисный кот' } },
 ];
 
 export const LANGS_SPOKEN = {
@@ -226,6 +227,7 @@ export const PAGES = {
 {{TEAM}}
 <h2>İş ortaklarımız</h2>
 <p>ACC HOMES’ta danışmanlarımıza <b>iş ortağı</b> diyoruz. Her biri kendi bölgesinde ve uzmanlık alanında çalışan yaklaşık 50 profesyonel; konut, villa, yeni proje, ticari mülk ve arsa portföylerimizi yönetiyor. İş ortaklarımızın arkasında fotoğraf ve video ekibimiz, sosyal medya ve tasarım ekibimiz, CRM altyapımız ve düzenli ACC Akademi eğitimleri var.</p>
+{{PARTNERS}}
 <h3>Hizmet verdiğimiz diller</h3>
 {{LANGS}}
 <div class="ctas"><a class="btn" href="{{URL:join}}">İş ortağımız olun</a><a class="btn ghost" href="{{URL:contact}}">Bize ulaşın</a></div>`,
@@ -239,6 +241,7 @@ export const PAGES = {
 {{TEAM}}
 <h2>Our partners</h2>
 <p>At ACC HOMES we call our consultants <b>partners</b>. Around 50 professionals, each focused on their own area and specialism, manage our residential, villa, new-development, commercial and land portfolios, backed by our photo and video team, social media and design team, CRM and regular ACC Academy training.</p>
+{{PARTNERS}}
 <h3>Languages we speak</h3>
 {{LANGS}}
 <div class="ctas"><a class="btn" href="{{URL:join}}">Join us</a><a class="btn ghost" href="{{URL:contact}}">Contact us</a></div>`,
@@ -252,6 +255,7 @@ export const PAGES = {
 {{TEAM}}
 <h2>Наши партнёры</h2>
 <p>Наших консультантов мы называем <b>партнёрами</b>. Около 50 специалистов работают с жилой и коммерческой недвижимостью, виллами, новыми проектами и землёй при поддержке фото- и видеокоманды, отдела соцсетей и дизайна, CRM и регулярного обучения в ACC Academy.</p>
+{{PARTNERS}}
 <h3>Языки обслуживания</h3>
 {{LANGS}}
 <div class="ctas"><a class="btn" href="{{URL:contact}}">Связаться с нами</a></div>`,

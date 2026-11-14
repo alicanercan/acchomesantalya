@@ -31,5 +31,12 @@
     "rating": 4.9,
     "reviews": 460,
     "asOf": "2026-11-15"
+  },
+  "licence": [
+    "0703112",
+    "0705041"
+  ],
+  "directions": {
+    "tr": "Sampi Kavşağı’ndan Portakal Çiçeği Caddesi’ne döndüğünüzde Süleyman Erol Yüzme Havuzu’nu geçtikten 200-250 metre sonra sağda."
   }
 }

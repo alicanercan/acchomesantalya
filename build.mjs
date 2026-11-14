@@ -6,7 +6,7 @@ import crypto from 'node:crypto';
 import { PAGES, POSTS, TEAM, LANGS_SPOKEN, PLAZA, TIMELINE } from './content.mjs';
 import { PROJECTS } from './projects.mjs';
 import { GUIDES, FAQ, GUIDE_SEG, GUIDE_TITLE, GUIDE_LEAD, GUIDE_UPDATED } from './guide.mjs';
-import { T_EXTRA, S, s, SEGS, LOCALE, RTL, extend } from './i18n.mjs';
+import { T_EXTRA, S, s, SEGS, LOCALE, RTL, extend, PACKS } from './i18n.mjs';
 import { STAFF_PHOTOS, PARTNERS, PHOTO_BASE, LANG_NAMES, PARTNER_ROLE, SWORN_ROLE } from './team.mjs';
 
 const ROOT = path.dirname(new URL(import.meta.url).pathname);
@@ -22,8 +22,8 @@ if (DEMO) LISTINGS = read('data/demo.json');
 LISTINGS = LISTINGS.filter((l) => ['Yayında', 'Opsiyonlu', 'Satıldı'].includes(l.durum));
 
 const VER = crypto.createHash('md5').update(fs.readFileSync(path.join(ROOT, 'assets/style.css')) + fs.readFileSync(path.join(ROOT, 'assets/app.js'))).digest('hex').slice(0, 8);
-const LANGS = ['tr', 'en', 'de', 'ru', 'fa'];
-const BASE = { tr: '', en: '/en', ru: '/ru', de: '/de', fa: '/fa' };
+const LANGS = ['tr', 'en', 'de', 'ru', 'fa', ...PACKS.map((p) => p.code)];
+const BASE = { tr: '', en: '/en', ru: '/ru', de: '/de', fa: '/fa', ...Object.fromEntries(PACKS.map((p) => [p.code, p.base])) };
 const T = {
   tr: {
     htmlLang: 'tr', locale: 'tr_TR',
@@ -163,7 +163,7 @@ const T = {
 };
 
 Object.assign(T, T_EXTRA);
-extend({ PAGES, PLAZA, TIMELINE, LANGS_SPOKEN, TEAM, GUIDE_SEG, GUIDE_TITLE, GUIDE_LEAD, SITE });
+extend({ PAGES, PLAZA, TIMELINE, LANGS_SPOKEN, TEAM, GUIDE_SEG, GUIDE_TITLE, GUIDE_LEAD, SITE, T, LANG_NAMES, PARTNER_ROLE, SWORN_ROLE });
 const GL = (lang) => (lang === 'tr' || lang === 'en' ? lang : 'en'); // rehber makaleleri dili
 
 // ---------- yardımcılar ----------

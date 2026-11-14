@@ -1,8 +1,12 @@
 // Almanca (de) ve Farsça (fa) sürümleri + tüm dillerde ortak arayüz metinleri.
 // Farsça sağdan sola (RTL) yazılır; layout dir="rtl" verir.
 
+import pl from './langs/pl.mjs';
+// Yeni diller: langs/<kod>.mjs paketleri. Sıra = dil seçicideki sıra değil, derleme sırası.
+export const PACKS = [pl];
 export const LOCALE = { tr: 'tr-TR', en: 'en-GB', ru: 'ru-RU', de: 'de-DE', fa: 'fa-IR' };
 export const RTL = new Set(['fa']);
+for (const p of PACKS) { LOCALE[p.code] = p.locale; if (p.rtl) RTL.add(p.code); }
 
 // Sayfa içi kısa metinler: s(key, lang) — eksik dilde İngilizceye düşer
 export const S = {
@@ -405,7 +409,21 @@ const PAGES_X = {
   },
 };
 
-export function extend({ PAGES, PLAZA, TIMELINE, LANGS_SPOKEN, TEAM, GUIDE_SEG, GUIDE_TITLE, GUIDE_LEAD, SITE }) {
+export function extend({ PAGES, PLAZA, TIMELINE, LANGS_SPOKEN, TEAM, GUIDE_SEG, GUIDE_TITLE, GUIDE_LEAD, SITE, T, LANG_NAMES, PARTNER_ROLE, SWORN_ROLE }) {
+  for (const p of PACKS) {
+    const c = p.code;
+    T[c] = p.T; PLAZA[c] = p.plaza; TIMELINE[c] = p.timeline; LANGS_SPOKEN[c] = p.langsSpoken;
+    for (const [k, v] of Object.entries(p.S)) if (S[k]) S[k][c] = v;
+    SEGS.projects[c] = p.segs.projects; SEGS.reviews[c] = p.segs.reviews;
+    GUIDE_SEG[c] = p.segs.buyersguide; GUIDE_TITLE[c] = p.guide.title; GUIDE_LEAD[c] = p.guide.lead;
+    SITE.slogan[c] = p.slogan; LANG_NAMES[c] = p.langNames; PARTNER_ROLE[c] = p.partnerRole; SWORN_ROLE[c] = p.swornRole;
+    for (const m of TEAM) if (p.roles[m.name]) m.role[c] = p.roles[m.name];
+    for (const [k, pg] of Object.entries(p.pages)) {
+      if (!PAGES[k]) continue;
+      PAGES[k].seg[c] = pg.seg; PAGES[k].nav[c] = pg.nav;
+      PAGES[k][c] = { title: pg.title, desc: pg.desc, lead: pg.lead, html: pg.html };
+    }
+  }
   Object.assign(PLAZA, PLAZA_X);
   Object.assign(TIMELINE, TIMELINE_X);
   Object.assign(LANGS_SPOKEN, LANGS_SPOKEN_X);

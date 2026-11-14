@@ -120,3 +120,30 @@
     applyCur();
   });
 })();
+
+// "Beni arayın" penceresi: 40 sn sonra ya da masaüstünde sayfadan çıkarken; oturumda bir kez
+(function () {
+  var pop = document.querySelector('[data-cpop]'); if (!pop) return;
+  var ss = function (k, v) { try { if (v === undefined) return sessionStorage.getItem(k); sessionStorage.setItem(k, v); } catch (e) { return null; } };
+  var ls = function (k, v) { try { if (v === undefined) return localStorage.getItem(k); localStorage.setItem(k, v); } catch (e) { return null; } };
+  if (ls('acc-called') || ss('acc-pop') || /[?&]ok=1/.test(location.search)) return;
+  var shown = false, last;
+  function show() {
+    if (shown || ss('acc-pop')) return;
+    var sp = document.querySelector('[data-set-panel]'); if (sp && !sp.hidden) return;
+    if (document.activeElement && /INPUT|TEXTAREA|SELECT/.test(document.activeElement.tagName)) return;
+    shown = true; ss('acc-pop', '1'); last = document.activeElement;
+    pop.querySelector('[data-cpop-page]').value = location.pathname;
+    pop.hidden = false; document.body.classList.add('noscroll');
+    setTimeout(function () { var f = pop.querySelector('input[name=ad]'); f && f.focus(); }, 50);
+  }
+  function hide() { pop.hidden = true; document.body.classList.remove('noscroll'); last && last.focus && last.focus(); }
+  pop.querySelector('[data-cpop-close]').addEventListener('click', hide);
+  pop.addEventListener('click', function (e) { if (e.target === pop) hide(); });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && !pop.hidden) hide(); });
+  pop.querySelector('[data-cpop-form]').addEventListener('submit', function () { ls('acc-called', '1'); });
+  setTimeout(show, 40000);
+  if (window.matchMedia('(pointer:fine)').matches) setTimeout(function () {
+    document.addEventListener('mouseout', function (e) { if (!e.relatedTarget && e.clientY < 10) show(); });
+  }, 12000);
+})();

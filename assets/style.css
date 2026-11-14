@@ -212,3 +212,17 @@ html,body{overflow-x:clip}
 .spnote{display:block;margin-top:12px;font-size:12px;opacity:.85;line-height:1.5}
 @media (max-width:900px){.setpanel{position:fixed;inset:0;z-index:300;overflow:auto;padding:60px 0 30px}.spgrid{grid-template-columns:1fr;gap:28px}.spclose{top:-40px}.setpanel .opts{grid-template-columns:repeat(3,minmax(0,1fr))}}
 @media (max-width:700px){.setbtn{padding:6px 9px;font-size:12px;margin-left:auto}[dir=rtl] .setbtn{margin-left:0;margin-right:auto}}
+/* Beni arayın penceresi */
+.cpop{position:fixed;inset:0;background:rgba(20,20,22,.55);z-index:400;display:grid;place-items:center;padding:16px}
+.cpop[hidden]{display:none}
+.cpbox{position:relative;background:#fff;border-radius:18px;max-width:860px;width:100%;display:grid;grid-template-columns:1fr 1.1fr;gap:28px;padding:38px;box-shadow:0 30px 80px rgba(0,0,0,.3);border-top:6px solid var(--red)}
+.cptext h2{margin:0 0 10px;font-size:30px;text-transform:uppercase;letter-spacing:.01em}
+.cptext p{color:var(--red);font:600 20px/1.4 var(--serif);margin:0}
+.cpform{display:grid;gap:12px}.cpform input,.cpform select{width:100%;padding:13px 14px;border:1px solid var(--line);border-radius:10px;font:inherit;background:#fafafa}
+.cptel{display:grid;grid-template-columns:120px 1fr;gap:8px}
+.cpform .chk{display:flex;gap:8px;align-items:flex-start;font-size:13px;color:var(--mute)}.cpform .chk input{width:auto;margin-top:3px}
+.cpform .btn{justify-self:start;padding:13px 30px}
+.cpx{position:absolute;top:10px;inset-inline-end:12px;background:none;border:0;font-size:22px;cursor:pointer;color:var(--ink)}
+body.noscroll{overflow:hidden}
+@media (max-width:760px){.cpbox{grid-template-columns:1fr;padding:28px 20px;gap:16px}.cptext h2{font-size:22px}.cptext p{font-size:16px}.cpform .btn{justify-self:stretch}}
+.foot .copy a{color:inherit;text-decoration:underline}

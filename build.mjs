@@ -5,6 +5,7 @@ import path from 'node:path';
 import crypto from 'node:crypto';
 import { PAGES, POSTS, TEAM, LANGS_SPOKEN, PLAZA, TIMELINE } from './content.mjs';
 import { PROJECTS } from './projects.mjs';
+import { PRIVACY } from './privacy.mjs';
 import { GUIDES, FAQ, GUIDE_SEG, GUIDE_TITLE, GUIDE_LEAD, GUIDE_UPDATED } from './guide.mjs';
 import { T_EXTRA, S, s, SEGS, LOCALE, RTL, extend, PACKS } from './i18n.mjs';
 import { STAFF_PHOTOS, PARTNERS, PHOTO_BASE, LANG_NAMES, PARTNER_ROLE, SWORN_ROLE } from './team.mjs';
@@ -164,6 +165,7 @@ const T = {
 
 Object.assign(T, T_EXTRA);
 extend({ PAGES, PLAZA, TIMELINE, LANGS_SPOKEN, TEAM, GUIDE_SEG, GUIDE_TITLE, GUIDE_LEAD, SITE, T, LANG_NAMES, PARTNER_ROLE, SWORN_ROLE });
+PAGES.privacy = PRIVACY;
 const GL = (lang) => (lang === 'tr' || lang === 'en' ? lang : 'en'); // rehber makaleleri dili
 
 // ---------- yardımcılar ----------
@@ -182,7 +184,7 @@ const fmtPrice = (l, lang) => {
 const priceAttrs = (l) => (l.fiyat ? ` data-amt="${l.fiyat}" data-ccy="${({ TL: 'TRY', USD: 'USD', EUR: 'EUR', GBP: 'GBP' })[l.para || 'TL'] || 'TRY'}"` : '');
 const tipLabel = (l, lang) => (l.tip === 'Kiralık' ? T[lang].rent : T[lang].sale);
 const statusBadge = (l, lang) => l.durum === 'Satıldı' ? `<span class="badge sold">${T[lang].sold}</span>` : l.durum === 'Opsiyonlu' ? `<span class="badge opt">${T[lang].option}</span>` : '';
-const segOf = (lang, seg) => (PAGES[seg] ? PAGES[seg].seg[lang] : seg === 'blog' ? 'blog' : seg === 'projects' ? SEGS.projects[lang] : seg === 'buyersguide' ? GUIDE_SEG[lang] : seg === 'reviews' ? SEGS.reviews[lang] : T[lang].seg[seg]);
+const segOf = (lang, seg) => (PAGES[seg] ? (PAGES[seg].seg[lang] || PAGES[seg].seg.en) : seg === 'blog' ? 'blog' : seg === 'projects' ? SEGS.projects[lang] : seg === 'buyersguide' ? GUIDE_SEG[lang] : seg === 'reviews' ? SEGS.reviews[lang] : T[lang].seg[seg]);
 const url = (lang, seg, slug) => `${BASE[lang]}/${segOf(lang, seg)}/${slug ? slug + '/' : ''}`;
 const home = (lang) => `${BASE[lang]}/`;
 const waLink = (text) => `https://wa.me/${SITE.whatsapp}?text=${encodeURIComponent(text)}`;
@@ -213,6 +215,20 @@ function settingsPanel(lang, alternates) {
 </div></div>`;
 }
 
+// "Beni arayın" açılır penceresi (bir oturumda en fazla bir kez; form gönderen kişiye bir daha çıkmaz)
+const DIAL = [['TR', '+90'], ['GB', '+44'], ['DE', '+49'], ['PL', '+48'], ['RU', '+7'], ['UA', '+380'], ['IR', '+98'], ['FR', '+33'], ['NL', '+31'], ['ES', '+34'], ['SE', '+46'], ['AE', '+971'], ['SA', '+966'], ['CN', '+86'], ['US/CA', '+1'], ['KZ', '+7']];
+const DEF_DIAL = { tr: '+90', en: '+44', de: '+49', pl: '+48', ru: '+7', fa: '+98', fr: '+33', nl: '+31', es: '+34', sv: '+46', ar: '+971', zh: '+86' };
+function callPopup(lang) {
+  const t = T[lang];
+  return `<div class="cpop" data-cpop hidden role="dialog" aria-modal="true" aria-labelledby="cpop-h"><div class="cpbox"><button type="button" class="cpx" data-cpop-close aria-label="${s('close', lang)}">✕</button>
+<div class="cptext"><h2 id="cpop-h">${s('callTitle', lang)}</h2><p>${s('callSub', lang)}</p></div>
+<form class="cpform" name="beni-ara" method="POST" data-netlify="true" netlify-honeypot="bot" action="${url(lang, 'contact')}?ok=1" data-cpop-form><input type="hidden" name="form-name" value="beni-ara"><input type="hidden" name="dil" value="${lang}"><input type="hidden" name="sayfa" value="" data-cpop-page><p hidden><input name="bot"></p>
+<input name="ad" placeholder="${t.name} *" required autocomplete="name">
+<div class="cptel"><select name="ulke_kodu" aria-label="${s('dialCode', lang)}">${DIAL.map(([c, d]) => `<option value="${d}"${d === (DEF_DIAL[lang] || '+90') && (c !== 'KZ') ? ' selected' : ''}>${c} ${d}</option>`).join('')}</select><input name="telefon" type="tel" placeholder="${t.phone} *" required autocomplete="tel-national"></div>
+<label class="chk"><input type="checkbox" name="kvkk_onay" value="evet" required> <span>${s('consent', lang).replace('{{LINK}}', `<a href="${url(lang, 'privacy')}" target="_blank" rel="noopener">${PAGES.privacy.nav[lang] || PAGES.privacy.nav.en}</a>`)} *</span></label>
+<button class="btn" type="submit">${s('callMe', lang)}</button></form></div></div>`;
+}
+
 // ---------- sayfa iskeleti ----------
 function layout({ lang, title, desc, canonical, alternates, body, schema = [], ogImage }) {
   const t = T[lang];
@@ -238,7 +254,8 @@ ${settingsBtn(lang)}
 <div><h4>${t.company}</h4><p class="flinks"><a href="${url(lang, 'about')}">${PAGES.about.nav[lang]}</a><a href="${url(lang, 'broker')}">${PAGES.broker.nav[lang]}</a><a href="${url(lang, 'team')}">${PAGES.team.nav[lang]}</a><a href="${url(lang, 'services')}">${PAGES.services.nav[lang]}</a><a href="${url(lang, 'join')}">${PAGES.join.nav[lang]}</a><a href="${url(lang, 'guide')}">${t.nav.guide}</a><a href="${url(lang, 'blog')}">${t.blog}</a></p></div>
 <div><h4>${t.office}</h4><p>${esc(SITE.address.street)}<br>${esc(SITE.address.area)}, ${esc(SITE.address.district)} / ${esc(SITE.address.city)}</p><p class="lic">${s('licence', lang)}: ${SITE.licence.join(' · ')}</p></div>
 <div><h4>${t.nav.contact}</h4><p><a href="tel:${SITE.phoneRaw}">${SITE.phone}</a><br><a href="mailto:${SITE.email}">${SITE.email}</a><br><a href="${SITE.corporateSite}">${t.corporate}</a></p><div class="social"><a href="${SITE.instagram.url}" target="_blank" rel="noopener" aria-label="Instagram">${ICON_IG}</a><a href="${SITE.google.mapsUrl}" target="_blank" rel="noopener" aria-label="Google">${ICON_G}</a></div></div>
-</div><div class="wrap copy">© ${new Date().getFullYear()} ${esc(SITE.brand)} · ${t.rights}</div></footer>
+</div><div class="wrap copy">© ${new Date().getFullYear()} ${esc(SITE.brand)} · ${t.rights} · <a href="${url(lang, 'privacy')}">${PAGES.privacy.nav[lang] || PAGES.privacy.nav.en}</a></div></footer>
+${callPopup(lang)}
 ${stickyBar(lang)}
 <script src="/assets/app.js?v=${VER}" defer></script></body></html>`;
 }
@@ -370,9 +387,9 @@ ${officeGallery(4)}
 </div></section>`;
 }
 function pageCorporate(key, lang) {
-  const P = PAGES[key]; const c = P[lang];
+  const P = PAGES[key]; const c = P[lang] || P.en;
   const hero = key === 'about' ? `<div class="phero"><img src="/img/acc-plaza-1200.webp" alt="ACC PLAZA" width="1200" height="470"></div>` : '';
-  const body = `<section class="wrap sec narrow page">${hero}<nav class="crumbs"><a href="${home(lang)}">${T[lang].nav.home}</a> / <span>${esc(P.nav[lang])}</span></nav>
+  const body = `<section class="wrap sec narrow page">${hero}<nav class="crumbs"><a href="${home(lang)}">${T[lang].nav.home}</a> / <span>${esc(P.nav[lang] || P.nav.en)}</span></nav>
 <h1>${esc(c.title)}</h1><p class="sub">${esc(c.lead)}</p>${fill(c.html, lang)}</section>${key === 'about' ? reviewsBlock(lang) : ''}`;
   const schema = key === 'broker' ? [{ '@context': 'https://schema.org', '@type': 'Person', name: 'Ali Caner Can', jobTitle: 'Broker', worksFor: { '@type': 'RealEstateAgent', name: SITE.brand }, alumniOf: 'Yıldız Teknik Üniversitesi', sameAs: ['https://www.instagram.com/alicanercan.therealtor/'] }] : [];
   write(path.join(url(lang, key), 'index.html'), layout({ lang, title: `${c.title} | ACC HOMES`, desc: c.desc, canonical: url(lang, key), alternates: alts(key), body, schema, ogImage: '/img/acc-plaza-og.jpg' }));

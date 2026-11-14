@@ -68,6 +68,8 @@ export default {
     directionsText: 'Na skrzyżowaniu Sampi skręć w aleję Portakal Çiçeği; jesteśmy po prawej stronie, 200–250 m za pływalnią Süleyman Erol.',
     settings: 'Język, waluta i jednostki', language: 'Język', unit: 'Jednostka miary', metric: 'Metryczna (m²)', imperial: 'Imperialna (sq ft)', close: 'Zamknij',
     curNote: 'Przeliczone ceny są orientacyjne, według bieżących kursów. Płatność i wartość w akcie własności opierają się na cenie oryginalnej. Wartość w BTC ma charakter wyłącznie informacyjny; w Turcji nie można płacić za nieruchomość kryptowalutą.',
+    callTitle: 'Zamów rozmowę', callSub: 'Zostaw dane, a nasz doradca wkrótce do Ciebie zadzwoni.', callMe: 'Zadzwońcie do mnie', dialCode: 'Kierunkowy kraju',
+    consent: 'Zapoznałem(-am) się z dokumentem {{LINK}} i zgadzam się na przetwarzanie moich danych w celu odpowiedzi na zapytanie.',
     currency: 'Waluta', partnersTitle: 'Nasi partnerzy', speaks: 'Języki',
   },
   plaza: {

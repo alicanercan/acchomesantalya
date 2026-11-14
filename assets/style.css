@@ -226,3 +226,12 @@ html,body{overflow-x:clip}
 body.noscroll{overflow:hidden}
 @media (max-width:760px){.cpbox{grid-template-columns:1fr;padding:28px 20px;gap:16px}.cptext h2{font-size:22px}.cptext p{font-size:16px}.cpform .btn{justify-self:stretch}}
 .foot .copy a{color:inherit;text-decoration:underline}
+/* üstte sabit telefon şeridi */
+.tbar{background:var(--ink);color:#fff;font-size:13px}
+.tbin{display:flex;justify-content:space-between;align-items:center;gap:16px;min-height:34px}
+.tbar a{color:#fff;text-decoration:none}.tbar a:hover{text-decoration:underline}
+.tcon{display:flex;align-items:center;gap:18px}
+.tphone{display:inline-flex;align-items:center;gap:6px;background:var(--red);padding:4px 12px;border-radius:999px}.tphone b{font-weight:700;letter-spacing:.02em}
+.tloc{opacity:.8}
+@media (max-width:900px){.tloc,.tmail{display:none}.tbin{justify-content:center}}
+@media (max-width:420px){.twa{display:none}}

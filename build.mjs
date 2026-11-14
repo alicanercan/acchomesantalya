@@ -591,17 +591,19 @@ const TEAM_LOCAL = {};
 async function fetchTeamPhotos() {
   const dir = path.join(OUT, 'ekip'); fs.mkdirSync(dir, { recursive: true });
   const files = [...Object.values(STAFF_PHOTOS), ...PARTNERS.map((p) => p.photo)].filter(Boolean);
-  await Promise.all(files.map(async (f) => {
+  for (const f of files) {
     const name = path.basename(f).replace('-780x780', '');
     const local = path.join(ROOT, 'static/img/ekip/kisi', name);
-    if (fs.existsSync(local)) { TEAM_LOCAL[f] = `/img/ekip/kisi/${name}`; return; }
-    try {
-      const r = await fetch(PHOTO_BASE + f, { signal: AbortSignal.timeout(30000) });
-      if (!r.ok || !(r.headers.get('content-type') || '').startsWith('image/')) throw new Error(r.status);
-      fs.writeFileSync(path.join(dir, name), Buffer.from(await r.arrayBuffer()));
-      TEAM_LOCAL[f] = `/ekip/${name}`;
-    } catch (e) { console.warn('Ekip fotoğrafı indirilemedi:', name, e.message); }
-  }));
+    if (fs.existsSync(local)) { TEAM_LOCAL[f] = `/img/ekip/kisi/${name}`; continue; }
+    for (let i = 0; i < 3 && !TEAM_LOCAL[f]; i++) {
+      try {
+        const r = await fetch(PHOTO_BASE + f, { signal: AbortSignal.timeout(30000), headers: { 'User-Agent': 'Mozilla/5.0 (ACC HOMES site build)' } });
+        if (!r.ok || !(r.headers.get('content-type') || '').startsWith('image/')) throw new Error(r.status);
+        fs.writeFileSync(path.join(dir, name), Buffer.from(await r.arrayBuffer()));
+        TEAM_LOCAL[f] = `/ekip/${name}`;
+      } catch (e) { if (i === 2) console.warn('Ekip fotoğrafı indirilemedi:', name, e.message); else await new Promise((r) => setTimeout(r, 1500)); }
+    }
+  }
 }
 
 // ---------- üretim ----------

@@ -4,6 +4,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import crypto from 'node:crypto';
 import { PAGES, POSTS, TEAM, LANGS_SPOKEN, PLAZA } from './content.mjs';
+import { PROJECTS } from './projects.mjs';
 
 const ROOT = path.dirname(new URL(import.meta.url).pathname);
 const OUT = path.join(ROOT, 'dist');
@@ -25,8 +26,8 @@ const T = {
     htmlLang: 'tr', locale: 'tr_TR',
     nav: { home: 'Ana Sayfa', list: 'İlanlar', guide: 'Altıntaş Rehberi', contact: 'İletişim' },
     seg: { list: 'ilanlar', listing: 'ilan', guide: 'altintas-rehberi', contact: 'iletisim' },
-    heroTitle: 'Altıntaş Satılık ve Kiralık Daireler',
-    heroSub: "Antalya Altıntaş'ta doğrulanmış portföy, şeffaf fiyat ve veriye dayalı danışmanlık",
+    heroTitle: 'Antalya’da Satılık ve Kiralık Gayrimenkul',
+    heroSub: 'ACC Plaza’dan 50 iş ortağı ve 10 dilde hizmetle; konut, villa, yetkili projeler ve ticari yatırımlarda kurumsal, şeffaf ve veriye dayalı danışmanlık',
     heroCta: 'İlanları İncele', heroCta2: 'WhatsApp ile Sor',
     featured: 'Öne Çıkan İlanlar', all: 'Tüm İlanlar', seeAll: 'Tüm ilanları gör',
     why: "Neden ACC HOMES",
@@ -56,21 +57,22 @@ const T = {
       ['Ulaşım', 'Prime Lara projesinden Lara plajlarına yaklaşık 3 km, Antalya Havalimanı’na yaklaşık 5 km mesafe bulunur.'],
       ['Yatırım', 'Bölgedeki fiyat ve kira verilerini sizin için güncel emsallerle analiz ediyoruz. Ücretsiz değerleme için bize yazın.'],
     ],
-    footerAbout: "Antalya merkezli ACC HOMES International Real Estate'in Altıntaş portföy sitesi.",
+    footerAbout: 'Antalya merkezli kurumsal gayrimenkul ofisi. Satış, kiralama, yetkili projeler ve yatırım danışmanlığı.',
     corporate: 'Kurumsal site', rights: 'Tüm hakları saklıdır',
     revTitle: 'Müşterilerimiz ne diyor', revSub: 'Google’daki yorumlarımızdan seçtiklerimiz', revAll: 'Tüm yorumları Google’da oku', revMore: 'Devamı Google’da',
     igTitle: 'Instagram’da ACC HOMES', igFollowBtn: 'Takip et', igPosts: 'gönderi', igFollowers: 'takipçi',
     barCall: 'Hemen Ara', barWa: 'WhatsApp’tan Yaz',
+    projects: 'Projeler', projectsLead: 'ACC HOMES’un yetkili satış ofisi olduğu projeler', projectsCta: 'Projeyi incele',
     company: 'Kurumsal', blog: 'Blog', blogLead: 'Antalya ve Altıntaş gayrimenkul piyasası üzerine rehberler ve analizler', readMore: 'Devamını oku', menu: 'Menü',
     gReviews: (n) => `${n} Google yorumu`, readReviews: 'Yorumları oku', igFollow: 'Instagram’da takip edin', mapTitle: 'Ofisimiz haritada', directions: 'Yol tarifi al', trustTitle: 'Müşterilerimiz bizi anlatıyor',
-    metaHome: "Altıntaş satılık ve kiralık daire ilanları. ACC HOMES ile Antalya Altıntaş'ta doğrulanmış portföy, şeffaf fiyat ve uzman danışmanlık.",
+    metaHome: 'ACC HOMES International Real Estate: Antalya’da satılık ve kiralık daire, villa, yetkili projeler ve ticari gayrimenkul. ACC Plaza, 50 iş ortağı, 10 dilde hizmet.',
   },
   en: {
     htmlLang: 'en', locale: 'en_GB',
     nav: { home: 'Home', list: 'Listings', guide: 'Altintas Guide', contact: 'Contact' },
     seg: { list: 'listings', listing: 'listing', guide: 'altintas-guide', contact: 'contact' },
-    heroTitle: 'Apartments for Sale and Rent in Altintas, Antalya',
-    heroSub: 'Verified listings, transparent pricing and data-driven advice in Antalya’s Altintas district',
+    heroTitle: 'Property for Sale and Rent in Antalya',
+    heroSub: 'From ACC Plaza, 50 partners in 10 languages: homes, villas, authorised projects and commercial investments, with corporate, transparent, data-driven advice',
     heroCta: 'View Listings', heroCta2: 'Ask on WhatsApp',
     featured: 'Featured Listings', all: 'All Listings', seeAll: 'See all listings',
     why: 'Why ACC HOMES',
@@ -100,21 +102,22 @@ const T = {
       ['Getting around', 'From the Prime Lara project, Lara beaches are about 3 km and Antalya Airport about 5 km away.'],
       ['Investment', 'We analyse current sale and rental comparables in the area for you. Contact us for a free valuation.'],
     ],
-    footerAbout: 'The Altintas listings site of Antalya-based ACC HOMES International Real Estate.',
+    footerAbout: 'A corporate real estate agency based in Antalya: sales, rentals, authorised projects and investment advice.',
     corporate: 'Corporate site', rights: 'All rights reserved',
     revTitle: 'What our clients say', revSub: 'A selection of our Google reviews, in the words our clients wrote them', revAll: 'Read all reviews on Google', revMore: 'Read more on Google',
     igTitle: 'ACC HOMES on Instagram', igFollowBtn: 'Follow', igPosts: 'posts', igFollowers: 'followers',
     barCall: 'Call now', barWa: 'WhatsApp us',
+    projects: 'Projects', projectsLead: 'Developments for which ACC HOMES is the authorised sales office (pages in Turkish)', projectsCta: 'View project',
     company: 'Company', blog: 'Blog', blogLead: 'Guides and insights on the Antalya and Altintas property market', readMore: 'Read more', menu: 'Menu',
     gReviews: (n) => `${n} Google reviews`, readReviews: 'Read reviews', igFollow: 'Follow us on Instagram', mapTitle: 'Find our office', directions: 'Get directions', trustTitle: 'What our clients say',
-    metaHome: 'Apartments for sale and rent in Altintas, Antalya. Verified listings, transparent pricing and expert advice from ACC HOMES.',
+    metaHome: 'ACC HOMES International Real Estate: apartments, villas, authorised projects and commercial property for sale and rent in Antalya. Service in 10 languages.',
   },
   ru: {
     htmlLang: 'ru', locale: 'ru_RU',
     nav: { home: 'Главная', list: 'Объекты', guide: 'Гид по Алтынташу', contact: 'Контакты' },
     seg: { list: 'obekty', listing: 'obekt', guide: 'gid-altyntash', contact: 'kontakty' },
-    heroTitle: 'Квартиры на продажу и в аренду в Алтынташе, Анталия',
-    heroSub: 'Проверенные объекты, прозрачные цены и консультации на основе данных',
+    heroTitle: 'Недвижимость в Анталии: продажа и аренда',
+    heroSub: '50 партнёров и сервис на 10 языках: квартиры, виллы, проекты и коммерческая недвижимость',
     heroCta: 'Смотреть объекты', heroCta2: 'Написать в WhatsApp',
     featured: 'Избранные объекты', all: 'Все объекты', seeAll: 'Все объекты',
     why: 'Почему ACC HOMES',
@@ -144,11 +147,12 @@ const T = {
       ['Транспорт', 'От проекта Prime Lara до пляжей Лары около 3 км, до аэропорта Анталии около 5 км.'],
       ['Инвестиции', 'Мы анализируем актуальные цены продажи и аренды в районе. Свяжитесь с нами для бесплатной оценки.'],
     ],
-    footerAbout: 'Сайт объектов в Алтынташе компании ACC HOMES International Real Estate, Анталия.',
+    footerAbout: 'Корпоративное агентство недвижимости в Анталии: продажа, аренда, проекты и инвестиции.',
     corporate: 'Корпоративный сайт', rights: 'Все права защищены',
     revTitle: 'Отзывы клиентов', revSub: 'Подборка отзывов из Google на языке оригинала', revAll: 'Все отзывы в Google', revMore: 'Читать в Google',
     igTitle: 'ACC HOMES в Instagram', igFollowBtn: 'Подписаться', igPosts: 'публикаций', igFollowers: 'подписчиков',
     barCall: 'Позвонить', barWa: 'Написать в WhatsApp',
+    projects: 'Проекты', projectsLead: 'Проекты, официальным офисом продаж которых является ACC HOMES (на турецком)', projectsCta: 'Подробнее',
     company: 'О компании', blog: 'Блог', blogLead: 'Гиды и аналитика по рынку недвижимости Анталии (на английском)', readMore: 'Читать', menu: 'Меню',
     gReviews: (n) => `${n} отзывов в Google`, readReviews: 'Читать отзывы', igFollow: 'Мы в Instagram', mapTitle: 'Наш офис на карте', directions: 'Проложить маршрут', trustTitle: 'Отзывы наших клиентов',
     metaHome: 'Квартиры на продажу и в аренду в Алтынташе, Анталия. Проверенные объекты и экспертные консультации ACC HOMES.',
@@ -170,7 +174,7 @@ const fmtPrice = (l, lang) => {
 };
 const tipLabel = (l, lang) => (l.tip === 'Kiralık' ? T[lang].rent : T[lang].sale);
 const statusBadge = (l, lang) => l.durum === 'Satıldı' ? `<span class="badge sold">${T[lang].sold}</span>` : l.durum === 'Opsiyonlu' ? `<span class="badge opt">${T[lang].option}</span>` : '';
-const segOf = (lang, seg) => (PAGES[seg] ? PAGES[seg].seg[lang] : seg === 'blog' ? 'blog' : T[lang].seg[seg]);
+const segOf = (lang, seg) => (PAGES[seg] ? PAGES[seg].seg[lang] : seg === 'blog' ? 'blog' : seg === 'projects' ? ({ tr: 'projeler', en: 'projects', ru: 'proekty' })[lang] : T[lang].seg[seg]);
 const url = (lang, seg, slug) => `${BASE[lang]}/${segOf(lang, seg)}/${slug ? slug + '/' : ''}`;
 const home = (lang) => `${BASE[lang]}/`;
 const waLink = (text) => `https://wa.me/${SITE.whatsapp}?text=${encodeURIComponent(text)}`;
@@ -199,8 +203,8 @@ ${[agentSchema, ...schema].map((s) => `<script type="application/ld+json">${JSON
 ${DEMO ? `<div class="demo">${t.demo}</div>` : ''}
 <header class="top"><div class="wrap nav">
 <a class="logo" href="${home(lang)}"><span class="mark">ACC</span><span class="lt"><b>ACC HOMES</b><small>International Real Estate</small></span></a>
-<nav class="menu"><a href="${url(lang, 'list')}">${t.nav.list}</a><a href="${url(lang, 'services')}">${PAGES.services.nav[lang]}</a><div class="dd"><button type="button">${t.company} ▾</button><div class="ddm"><a href="${url(lang, 'about')}">${PAGES.about.nav[lang]}</a><a href="${url(lang, 'broker')}">${PAGES.broker.nav[lang]}</a><a href="${url(lang, 'team')}">${PAGES.team.nav[lang]}</a><a href="${url(lang, 'join')}">${PAGES.join.nav[lang]}</a></div></div><a href="${url(lang, 'blog')}">${t.blog}</a><a href="${url(lang, 'contact')}">${t.nav.contact}</a></nav>
-<details class="mnav"><summary aria-label="${t.menu}">☰</summary><div class="mpanel"><a href="${url(lang, 'list')}">${t.nav.list}</a><a href="${url(lang, 'services')}">${PAGES.services.nav[lang]}</a><a href="${url(lang, 'about')}">${PAGES.about.nav[lang]}</a><a href="${url(lang, 'broker')}">${PAGES.broker.nav[lang]}</a><a href="${url(lang, 'team')}">${PAGES.team.nav[lang]}</a><a href="${url(lang, 'join')}">${PAGES.join.nav[lang]}</a><a href="${url(lang, 'guide')}">${t.nav.guide}</a><a href="${url(lang, 'blog')}">${t.blog}</a><a href="${url(lang, 'contact')}">${t.nav.contact}</a></div></details>
+<nav class="menu"><a href="${url(lang, 'list')}">${t.nav.list}</a><a href="${url(lang, 'projects')}">${t.projects}</a><a href="${url(lang, 'services')}">${PAGES.services.nav[lang]}</a><div class="dd"><button type="button">${t.company} ▾</button><div class="ddm"><a href="${url(lang, 'about')}">${PAGES.about.nav[lang]}</a><a href="${url(lang, 'broker')}">${PAGES.broker.nav[lang]}</a><a href="${url(lang, 'team')}">${PAGES.team.nav[lang]}</a><a href="${url(lang, 'join')}">${PAGES.join.nav[lang]}</a></div></div><a href="${url(lang, 'blog')}">${t.blog}</a><a href="${url(lang, 'contact')}">${t.nav.contact}</a></nav>
+<details class="mnav"><summary aria-label="${t.menu}">☰</summary><div class="mpanel"><a href="${url(lang, 'list')}">${t.nav.list}</a><a href="${url(lang, 'projects')}">${t.projects}</a><a href="${url(lang, 'services')}">${PAGES.services.nav[lang]}</a><a href="${url(lang, 'about')}">${PAGES.about.nav[lang]}</a><a href="${url(lang, 'broker')}">${PAGES.broker.nav[lang]}</a><a href="${url(lang, 'team')}">${PAGES.team.nav[lang]}</a><a href="${url(lang, 'join')}">${PAGES.join.nav[lang]}</a><a href="${url(lang, 'guide')}">${t.nav.guide}</a><a href="${url(lang, 'blog')}">${t.blog}</a><a href="${url(lang, 'contact')}">${t.nav.contact}</a></div></details>
 <div class="langs">${langSwitch}</div>
 <a class="btn sm" href="tel:${SITE.phoneRaw}">${t.call}</a>
 </div></header>
@@ -216,6 +220,65 @@ ${stickyBar(lang)}
 }
 
 // ---------- bileşenler ----------
+// ---------- proje medyası (Google Drive → derlemede indirilir → Netlify Image CDN ile WebP) ----------
+const MEDIA = {};
+async function fetchDriveMedia() {
+  const ids = new Set();
+  for (const p of PROJECTS) { [p.cover, p.media.hero, p.media.location, ...(p.media.gallery || [])].filter(Boolean).forEach((i) => ids.add(i)); }
+  const dir = path.join(OUT, 'media'); fs.mkdirSync(dir, { recursive: true });
+  await Promise.all([...ids].map(async (id) => {
+    try {
+      const r = await fetch(`https://drive.google.com/uc?export=download&id=${id}`, { signal: AbortSignal.timeout(60000) });
+      const ct = r.headers.get('content-type') || '';
+      if (!r.ok || !ct.startsWith('image/')) throw new Error(`${r.status} ${ct}`);
+      const ext = ct.includes('png') ? 'png' : ct.includes('webp') ? 'webp' : 'jpg';
+      fs.writeFileSync(path.join(dir, `${id}.${ext}`), Buffer.from(await r.arrayBuffer()));
+      MEDIA[id] = `/media/${id}.${ext}`;
+    } catch (e) { console.warn('Drive görseli indirilemedi:', id, e.message); }
+  }));
+}
+const cdn = (id, w) => (MEDIA[id] ? `/.netlify/images?url=${encodeURIComponent(MEDIA[id])}&w=${w}&fm=webp&q=72` : null);
+const pimg = (id, w, alt, cls = '') => { const u = cdn(id, w); return u ? `<img class="${cls}" src="${u}" alt="${esc(alt)}" loading="lazy">` : ''; };
+
+const OFFICE = [['lobi', 'ACC Plaza lobi ve proje maketi'], ['oturma', 'ACC Plaza müşteri bekleme alanı'], ['amfi', 'ACC Plaza amfi ve etkinlik alanı'], ['sunum', 'ACC Plaza sunum ve eğitim salonu'], ['kahve', 'ACC Plaza kahve köşesi'], ['maket', 'ACC Plaza proje maketleri'], ['calisma', 'ACC Plaza ortak çalışma alanı'], ['toplanti', 'ACC Plaza toplantı masaları']];
+const officeGallery = (n = 8) => `<div class="ogal">${OFFICE.slice(0, n).map(([f, a]) => `<figure><img src="/img/ofis/${f}.webp" alt="${a}" loading="lazy" width="900" height="1120"></figure>`).join('')}</div>`;
+
+function projectCards(lang) {
+  const t = T[lang];
+  return `<div class="pcards">${PROJECTS.map((p) => { const c = p.cover && cdn(p.cover, 800); return `<a class="pcard" href="/projeler/${p.slug}/"><div class="pcimg">${c ? `<img src="${c}" alt="${esc(p.name)}" loading="lazy">` : `<div class="ph pname"><span>${esc(p.name)}</span></div>`}</div><div class="pcbody"><small>${esc(p.area)} · ${esc(p.developer)}</small><h3>${esc(p.name)}</h3><p>${esc(p.card)}</p><span class="more">${t.projectsCta} →</span></div></a>`; }).join('')}</div>`;
+}
+function pageProjects(lang) {
+  const t = T[lang];
+  const body = `<section class="wrap sec page"><h1>${t.projects}</h1><p class="sub">${t.projectsLead}</p>${projectCards(lang)}</section>`;
+  write(path.join(url(lang, 'projects'), 'index.html'), layout({ lang, title: `${t.projects} | ACC HOMES`, desc: t.projectsLead, canonical: url(lang, 'projects'), alternates: alts('projects'), body }));
+}
+function pageProject(p) {
+  const lang = 'tr'; const t = T.tr;
+  const wa = (num, name) => `https://wa.me/${num.replace('+', '')}?text=${encodeURIComponent(`Merhaba, ${p.name} hakkında bilgi almak istiyorum.`)}`;
+  const heroImg = p.media.hero ? cdn(p.media.hero, 1920) : null;
+  const S = [];
+  S.push(`<section class="lhero${heroImg ? '' : ' plain'}"${heroImg ? ` style="background-image:linear-gradient(180deg,rgba(0,0,0,.25),rgba(0,0,0,.6)),url('${heroImg}')"` : ''}><div class="wrap"><nav class="crumbs light"><a href="/">${t.nav.home}</a> / <a href="/projeler/">${t.projects}</a></nav>${p.eyebrow ? `<p class="eyebrow">${esc(p.eyebrow)}</p>` : `<p class="eyebrow">${esc(p.area)} · ${esc(p.developer)}</p>`}<h1>${esc(p.title)}</h1><p class="lsub">${esc(p.sub)}</p>
+${p.badges ? `<div class="lbadges">${p.badges.map(([i, h, d]) => `<div><span>${i}</span><b>${esc(h)}</b><small>${esc(d)}</small></div>`).join('')}</div>` : ''}
+<div class="ctas"><a class="btn" href="#form">Bilgi ve fiyat listesi isteyin</a>${p.phone ? `<a class="btn ghost light" href="tel:${p.phone}">Hemen ara</a>` : ''}</div></div></section>`);
+  if (p.badgeNote) S.push(`<p class="wrap lnote">${esc(p.badgeNote)}</p>`);
+  if (p.walk) S.push(`<section class="wrap sec"><h2>Eşsiz Lokasyon</h2><div class="dist"><div><h3>🚶 Yürüme mesafesinde</h3><ul>${p.walk.map(([i, n, d]) => `<li><span>${i} ${esc(n)}</span><b>${esc(d)}</b></li>`).join('')}</ul></div><div><h3>🚗 Sürüş mesafesinde</h3><ul>${p.drive.map(([i, n, d]) => `<li><span>${i} ${esc(n)}</span><b>${esc(d)}</b></li>`).join('')}</ul></div></div>${p.media.location ? `<div class="locimg">${pimg(p.media.location, 1400, `${p.name} konum`)}</div>` : ''}</section>`);
+  if (p.tabs) S.push(`<section class="wrap sec"><div class="tabs" role="tablist">${p.tabs.map((x, i) => `<button role="tab" data-tab="${x.id}"${i === 0 ? ' aria-selected="true"' : ''}>${esc(x.name)}<small>${esc(x.kicker)}</small></button>`).join('')}</div>${p.tabs.map((x, i) => `<div class="tabp" data-panel="${x.id}"${i ? ' hidden' : ''}><h2>${esc(x.name)}: ${esc(x.kicker)}</h2><p>${esc(x.text)}</p><div class="cards3"><div><h3>Birimler</h3><ul class="ticks">${x.units.map((u) => `<li>${esc(u)}</li>`).join('')}</ul></div><div class="span2"><h3>Öne çıkanlar</h3><ul class="ticks">${x.feats.map((u) => `<li>${esc(u)}</li>`).join('')}</ul></div></div></div>`).join('')}</section>`);
+  if (p.features) S.push(`<section class="lfeat"><div class="wrap"><h2>${esc(p.featuresTitle)}</h2><div class="fgrid2">${p.features.map(([i, x]) => `<div><span>${i}</span><p>${esc(x)}</p></div>`).join('')}</div></div></section>`);
+  if (p.phases) S.push(`<section class="wrap sec"><h2>${esc(p.phasesTitle)}</h2><div class="phases">${p.phases.map((x) => `<div class="phase${x.hot ? ' hot' : ''}"><span class="ptag">${esc(x.tag)}</span><h3>${esc(x.name)}</h3><p class="pstat">${esc(x.status)}</p><ul class="ticks">${x.items.map((i) => `<li>${esc(i)}</li>`).join('')}</ul><div class="pprice">${esc(x.price)}</div><a class="btn ${x.hot ? '' : 'ghost'}" href="#form">Teklif isteyin</a></div>`).join('')}</div></section>`);
+  if (p.plans) S.push(`<section class="wrap sec"><h2>Kat Planları</h2><div class="plans">${p.plans.map((x) => `<div class="plan"><h3>${esc(x.name)}</h3><b class="parea">${esc(x.area)}</b><table class="spec">${x.rows.map(([k, v]) => `<tr><th>${esc(k)}</th><td>${esc(v)}</td></tr>`).join('')}</table><p>${esc(x.note)}</p></div>`).join('')}</div></section>`);
+  const gal = (p.media.gallery || []).filter((id) => MEDIA[id]);
+  if (gal.length) S.push(`<section class="wrap sec"><h2>Galeri</h2><div class="lgal">${gal.map((id) => `<a href="${cdn(id, 1800)}" target="_blank" rel="noopener">${pimg(id, 900, p.name)}</a>`).join('')}</div></section>`);
+  if (p.tours && p.tours.length) S.push(`<section class="wrap sec"><h2>Sanal Tur</h2>${p.tours.map(([n, u]) => `<h3>${esc(n)}</h3><div class="tour"><iframe src="${esc(u)}" loading="lazy" allowfullscreen title="${esc(n)}"></iframe></div>`).join('')}</section>`);
+  if (p.devTitle) S.push(`<section class="ldev"><div class="wrap"><h2>${esc(p.devTitle)}</h2><p>${esc(p.devText)}</p></div></section>`);
+  if (p.mapQuery) S.push(`<section class="wrap sec"><div class="sechead"><h2>${esc(p.locTitle || 'Konum')}</h2></div>${p.locText ? `<p>${esc(p.locText)}</p>` : ''}<div class="map"><iframe src="https://www.google.com/maps?q=${encodeURIComponent(p.mapQuery)}&output=embed" loading="lazy" title="${esc(p.name)} konum"></iframe></div>${p.links ? `<div class="ctas">${p.links.map(([n, u]) => `<a class="btn ghost" href="${u}" target="_blank" rel="noopener">📍 ${esc(n)}</a>`).join('')}</div>` : ''}</section>`);
+  const contacts = p.contacts.length ? p.contacts : p.phone ? [['Proje satış ofisi', p.phone, p.phoneText]] : [['ACC HOMES', SITE.phoneRaw, SITE.phone]];
+  S.push(`<section class="lcta" id="form"><div class="wrap lctagrid"><div><h2>Bilgi ve Fiyat Listesi</h2><p>${esc(p.cta)}</p><div class="cbtns">${contacts.map(([n, num, txt]) => `<a class="wabtn" href="${wa(num, n)}" target="_blank" rel="noopener"><b>${esc(n)}</b><span>WhatsApp · ${esc(txt)}</span></a>`).join('')}</div>${p.instagram ? `<p><a href="${p.instagram}" target="_blank" rel="noopener">Instagram’da projeyi takip edin →</a></p>` : ''}</div>
+<form class="box form" name="proje-talep" method="POST" data-netlify="true" netlify-honeypot="bot" action="/iletisim/?ok=1"><input type="hidden" name="form-name" value="proje-talep"><input type="hidden" name="proje" value="${esc(p.name)}"><p hidden><input name="bot"></p><h3>Beni arayın</h3><input name="ad" placeholder="Ad Soyad" required><input name="telefon" placeholder="Telefon" required><input name="eposta" type="email" placeholder="E-posta"><button class="btn" type="submit">Beni arayın</button><small>Bilgileriniz yalnızca sizinle iletişim için kullanılır.</small></form></div></section>`);
+  const schema = [{ '@context': 'https://schema.org', '@type': 'Residence', name: p.name, description: p.desc, address: { '@type': 'PostalAddress', addressLocality: p.area, addressRegion: 'Antalya', addressCountry: 'TR' } }];
+  const og = p.media.hero && MEDIA[p.media.hero] ? MEDIA[p.media.hero] : '/img/acc-plaza-og.jpg';
+  write(path.join('/projeler', p.slug, 'index.html'), layout({ lang, title: `${p.name} | ${p.area} | ACC HOMES`, desc: p.desc, canonical: `/projeler/${p.slug}/`, alternates: null, body: S.join('\n'), schema, ogImage: og }));
+}
+
 const ICON_IG = `<svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path fill="currentColor" d="M12 2.2c3.2 0 3.6 0 4.8.1 1.2.1 1.8.2 2.2.4.6.2 1 .5 1.4.9.4.4.7.8.9 1.4.2.4.4 1 .4 2.2.1 1.3.1 1.6.1 4.8s0 3.6-.1 4.8c-.1 1.2-.2 1.8-.4 2.2-.2.6-.5 1-.9 1.4-.4.4-.8.7-1.4.9-.4.2-1 .4-2.2.4-1.3.1-1.6.1-4.8.1s-3.6 0-4.8-.1c-1.2-.1-1.8-.2-2.2-.4-.6-.2-1-.5-1.4-.9-.4-.4-.7-.8-.9-1.4-.2-.4-.4-1-.4-2.2C2.2 15.6 2.2 15.2 2.2 12s0-3.6.1-4.8c.1-1.2.2-1.8.4-2.2.2-.6.5-1 .9-1.4.4-.4.8-.7 1.4-.9.4-.2 1-.4 2.2-.4C8.4 2.2 8.8 2.2 12 2.2zm0 2c-3.1 0-3.5 0-4.7.1-1 0-1.6.2-2 .3-.5.2-.8.4-1.1.7-.3.3-.6.7-.7 1.1-.1.4-.3.9-.3 2-.1 1.2-.1 1.6-.1 4.7s0 3.5.1 4.7c0 1 .2 1.6.3 2 .2.5.4.8.7 1.1.3.3.7.6 1.1.7.4.1.9.3 2 .3 1.2.1 1.6.1 4.7.1s3.5 0 4.7-.1c1 0 1.6-.2 2-.3.5-.2.8-.4 1.1-.7.3-.3.6-.7.7-1.1.1-.4.3-.9.3-2 .1-1.2.1-1.6.1-4.7s0-3.5-.1-4.7c0-1-.2-1.6-.3-2-.2-.5-.4-.8-.7-1.1-.3-.3-.7-.6-1.1-.7-.4-.1-.9-.3-2-.3-1.2-.1-1.6-.1-4.7-.1zm0 3.4a4.4 4.4 0 1 1 0 8.8 4.4 4.4 0 0 1 0-8.8zm0 2a2.4 2.4 0 1 0 0 4.8 2.4 2.4 0 0 0 0-4.8zm5.6-2.2a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"/></svg>`;
 const ICON_G = `<svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path fill="#4285F4" d="M23.5 12.3c0-.8-.1-1.6-.2-2.3H12v4.4h6.5a5.6 5.6 0 0 1-2.4 3.6v3h3.9c2.3-2.1 3.5-5.2 3.5-8.7z"/><path fill="#34A853" d="M12 24c3.2 0 6-1.1 8-2.9l-3.9-3c-1.1.7-2.5 1.2-4.1 1.2-3.1 0-5.8-2.1-6.7-5H1.3v3.1A12 12 0 0 0 12 24z"/><path fill="#FBBC05" d="M5.3 14.3a7.2 7.2 0 0 1 0-4.6V6.6H1.3a12 12 0 0 0 0 10.8l4-3.1z"/><path fill="#EA4335" d="M12 4.8c1.8 0 3.3.6 4.6 1.8l3.4-3.4A12 12 0 0 0 1.3 6.6l4 3.1c.9-2.9 3.6-4.9 6.7-4.9z"/></svg>`;
 const stars = '<span class="stars" aria-hidden="true">★★★★★</span>';
@@ -264,7 +327,7 @@ function fill(html, lang) {
   const langs = `<ul class="chips">${LANGS_SPOKEN[lang].map((l) => `<li>${l}</li>`).join('')}</ul>`;
   const waJoin = waLink(lang === 'tr' ? 'Merhaba, ACC HOMES’ta iş ortağı olmak istiyorum.' : lang === 'ru' ? 'Здравствуйте, хочу стать партнёром ACC HOMES.' : 'Hello, I would like to join ACC HOMES as a partner.');
   return html.replace(/\{\{URL:(\w+)\}\}/g, (_, k) => (k === 'list' || k === 'contact' || k === 'guide' ? url(lang, k) : url(lang, k)))
-    .replaceAll('{{STATS}}', stats).replaceAll('{{TEAM}}', team).replaceAll('{{LANGS}}', langs)
+    .replaceAll('{{STATS}}', stats).replaceAll('{{OFFICE}}', officeGallery(8)).replaceAll('{{TEAMPHOTOS}}', '<div class="tphotos"><img src="/img/ekip/ekip-acc.webp" alt="ACC HOMES ekibi" loading="lazy" width="1600" height="533"><img src="/img/ekip/ekip-antalle.webp" alt="ACC HOMES ekibi Antalle Concept Houses açılışında" loading="lazy" width="1600" height="533"></div>').replaceAll('{{TEAM}}', team).replaceAll('{{LANGS}}', langs)
     .replaceAll('{{WA_JOIN}}', waJoin).replaceAll('{{WA}}', waLink(t.waGeneral)).replaceAll('{{TEL}}', `tel:${SITE.phoneRaw}`)
     .replaceAll('{{MAPS}}', SITE.google.mapsUrl).replaceAll('{{IG}}', SITE.instagram.url).replaceAll('{{IG_CANER}}', 'https://www.instagram.com/alicanercan.therealtor/')
     .replaceAll('{{RATING}}', fmtRating(lang)).replaceAll('{{REVIEWS}}', nf.format(SITE.google.reviews))
@@ -276,6 +339,7 @@ function plazaBlock(lang) {
 <div class="pimg"><img src="/img/acc-plaza-1200.webp" alt="ACC PLAZA — ACC HOMES International Real Estate, Yeşilbahçe, Muratpaşa, Antalya" loading="lazy" width="1200" height="470"></div>
 <div class="ptext"><p class="eyebrow">${p.eyebrow}</p><h2>${p.title}</h2><p class="psub">${p.sub}</p>${p.body.map((x) => `<p>${x}</p>`).join('')}</div>
 <div class="pbadges">${p.badges.map(([i, h, d]) => `<div><span class="pi">${i}</span><b>${h}</b><small>${d}</small></div>`).join('')}</div>
+${officeGallery(4)}
 <div class="ctas"><a class="btn" href="${url(lang, 'team')}">${p.cta1}</a><a class="btn ghost" href="${SITE.google.mapsUrl}" target="_blank" rel="noopener">${p.cta2}</a></div>
 </div></section>`;
 }
@@ -331,6 +395,7 @@ function pageHome(lang) {
 <div class="ctas"><a class="btn" href="${url(lang, 'list')}">${t.heroCta}</a><a class="btn ghost" href="${waLink(t.waGeneral)}" target="_blank" rel="noopener">${t.heroCta2}</a></div></div></section>
 ${trustStrip(lang)}
 <section class="wrap sec"><div class="sechead"><h2>${t.featured}</h2><a href="${url(lang, 'list')}">${t.seeAll} →</a></div>${grid(show, lang)}</section>
+<section class="wrap sec"><div class="sechead"><h2>${t.projects}</h2><a href="${url(lang, 'projects')}">${t.projectsCta} →</a></div>${projectCards(lang)}</section>
 ${reviewsBlock(lang)}
 ${plazaBlock(lang)}
 ${igBlock(lang)}
@@ -425,13 +490,15 @@ fs.rmSync(OUT, { recursive: true, force: true });
 fs.cpSync(path.join(ROOT, 'static'), OUT, { recursive: true });
 fs.cpSync(path.join(ROOT, 'assets'), path.join(OUT, 'assets'), { recursive: true });
 await fetchIgImages();
+await fetchDriveMedia();
 const urls = [];
 for (const lang of LANGS) {
-  pageHome(lang); pageList(lang); pageGuide(lang); pageContact(lang); pageBlog(lang);
+  pageHome(lang); pageList(lang); pageGuide(lang); pageContact(lang); pageBlog(lang); pageProjects(lang); urls.push(url(lang, 'projects'));
   for (const k of Object.keys(PAGES)) { pageCorporate(k, lang); urls.push(url(lang, k)); }
   urls.push(home(lang), url(lang, 'list'), url(lang, 'guide'), url(lang, 'contact'), url(lang, 'blog'), ...POSTS.map((p) => url(lang, 'blog', p.slug)));
   for (const l of LISTINGS) { pageListing(l, lang); urls.push(url(lang, 'listing', slugOf(l))); }
 }
+for (const p of PROJECTS) { pageProject(p); urls.push(`/projeler/${p.slug}/`); }
 write('sitemap.xml', `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">${urls.map((u) => `<url><loc>${SITE.domain}${u}</loc></url>`).join('')}</urlset>`);
 write('robots.txt', DEMO ? 'User-agent: *\nDisallow: /\n' : `User-agent: *\nAllow: /\nSitemap: ${SITE.domain}/sitemap.xml\n`);
 write('404.html', layout({ lang: 'tr', title: 'Sayfa bulunamadı | ACC HOMES', desc: '', canonical: '/404', body: `<section class="wrap sec narrow"><h1>Sayfa bulunamadı</h1><p><a class="btn" href="/">Ana sayfa</a></p></section>` }));

@@ -81,6 +81,8 @@ export const PAGES = {
 <p>ACC HOMES International Real Estate, mühendislik ve çok uluslu şirketlerde kurumsal satış geçmişine sahip Broker <a href="{{URL:broker}}">Ali Caner Can</a> tarafından 2024 yılında Antalya’da kuruldu. Çıkış noktamız basitti: Emlak sektörüne kurumsal dünyanın disiplinini, veriye dayalı fiyatlamayı ve gerçek bir müşteri deneyimini getirmek.</p>
 <p>Bugün Muratpaşa Yeşilbahçe’deki 1.000 m²’lik genel merkezimiz ACC Plaza’da, yaklaşık 50 iş ortağımız ve 10 dilde hizmet veren ekibimizle konut, villa, yeni proje, ticari mülk ve yatırım danışmanlığında hizmet veriyoruz.</p>
 {{STATS}}
+<h2>ACC Plaza’dan kareler</h2>
+{{OFFICE}}
 <h2>Nasıl çalışırız</h2>
 <div class="cards3">
 <div><h3>Veriye dayalı fiyat</h3><p>Her mülkü emsal satışlar, bölge verisi ve piyasa analiziyle değerlendiririz. Gerçekçi fiyat, mülkün daha hızlı satılmasını sağlar.</p></div>
@@ -106,6 +108,8 @@ export const PAGES = {
 <p>ACC HOMES International Real Estate was founded in Antalya in 2024 by broker <a href="{{URL:broker}}">Ali Caner Can</a>, an engineer with a background in corporate sales at multinational companies. The idea was simple: bring corporate discipline, data-driven pricing and a genuine client experience to real estate.</p>
 <p>Today, from ACC Plaza, our 1,000 m² headquarters in Yeşilbahçe, Muratpaşa, around 50 partners serve clients in 10 languages across residential sales and rentals, villas, new developments, commercial property and investment advisory.</p>
 {{STATS}}
+<h2>Inside ACC Plaza</h2>
+{{OFFICE}}
 <h2>How we work</h2>
 <div class="cards3">
 <div><h3>Data-driven pricing</h3><p>Every property is assessed against comparable sales and local market data. A realistic price sells faster.</p></div>
@@ -131,6 +135,8 @@ export const PAGES = {
 <p>ACC HOMES International Real Estate основано в Анталии в 2024 году брокером <a href="{{URL:broker}}">Али Джанером Джаном</a> — инженером с опытом корпоративных продаж в международных компаниях. Наша цель — привнести в сферу недвижимости корпоративную дисциплину, ценообразование на основе данных и настоящий клиентский сервис.</p>
 <p>Сегодня в главном офисе ACC Plaza (1 000 м², Ешильбахче, Муратпаша) около 50 партнёров обслуживают клиентов на 10 языках: продажа и аренда жилья, виллы, новые проекты, коммерческая недвижимость и инвестиционный консалтинг.</p>
 {{STATS}}
+<h2>ACC Plaza</h2>
+{{OFFICE}}
 <h2>Как мы работаем</h2>
 <div class="cards3">
 <div><h3>Цена на основе данных</h3><p>Каждый объект оценивается по сопоставимым продажам и данным рынка.</p></div>
@@ -209,6 +215,7 @@ export const PAGES = {
       title: 'Ekibimiz', desc: 'ACC HOMES ekibi: Broker, operasyon ve destek ekibi ile 10 dilde hizmet veren yaklaşık 50 iş ortağı.',
       lead: 'Yaklaşık 50 iş ortağı, 10 dil ve tek bir hedef: müşterimize kurumsal ve güvenilir bir deneyim yaşatmak.',
       html: `
+{{TEAMPHOTOS}}
 <h2>Yönetim ve destek ekibi</h2>
 {{TEAM}}
 <h2>İş ortaklarımız</h2>
@@ -221,6 +228,7 @@ export const PAGES = {
       title: 'Our Team', desc: 'The ACC HOMES team: broker, operations and support staff, and around 50 partners serving clients in 10 languages.',
       lead: 'Around 50 partners, 10 languages and one goal: a corporate, trustworthy experience for every client.',
       html: `
+{{TEAMPHOTOS}}
 <h2>Management and support</h2>
 {{TEAM}}
 <h2>Our partners</h2>
@@ -233,6 +241,7 @@ export const PAGES = {
       title: 'Наша команда', desc: 'Команда ACC HOMES: брокер, операционный отдел и около 50 партнёров, работающих на 10 языках.',
       lead: 'Около 50 партнёров, 10 языков и одна цель — надёжный корпоративный сервис для каждого клиента.',
       html: `
+{{TEAMPHOTOS}}
 <h2>Руководство и поддержка</h2>
 {{TEAM}}
 <h2>Наши партнёры</h2>

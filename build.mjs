@@ -205,7 +205,7 @@ function layout({ lang, title, desc, canonical, alternates, body, schema = [], o
   return `<!doctype html><html lang="${t.htmlLang}"${RTL.has(lang) ? ' dir="rtl"' : ''}><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>${esc(title)}</title><meta name="description" content="${esc(desc)}"><link rel="canonical" href="${SITE.domain}${canonical}">${alt}
 <meta property="og:type" content="website"><meta property="og:title" content="${esc(title)}"><meta property="og:description" content="${esc(desc)}"><meta property="og:url" content="${SITE.domain}${canonical}"><meta property="og:locale" content="${t.locale}">${ogImage ? `<meta property="og:image" content="${SITE.domain}${ogImage}">` : ''}
-<meta name="theme-color" content="#E02A3C"><link rel="icon" href="/favicon.svg" type="image/svg+xml"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><link rel="stylesheet" href="/assets/style.css?v=${VER}">
+<meta name="theme-color" content="#E02A3C"><link rel="icon" href="/favicon.svg" type="image/svg+xml"><link rel="apple-touch-icon" href="/apple-touch-icon.png">${FONTS_OK ? `<link rel="preload" href="/assets/fonts.css" as="style"><link rel="stylesheet" href="/assets/fonts.css">` : ''}<link rel="stylesheet" href="/assets/style.css?v=${VER}">
 ${[agentSchema, ...schema].map((s) => `<script type="application/ld+json">${JSON.stringify(s)}</script>`).join('')}
 </head><body>
 ${DEMO ? `<div class="demo">${t.demo}</div>` : ''}
@@ -607,6 +607,25 @@ async function fetchTeamPhotos() {
   }
 }
 
+// Yazı tipleri: Montserrat (logo ile uyumlu başlıklar) + Vazirmatn (Farsça). Derlemede Google Fonts'tan indirilip siteden sunulur.
+let FONTS_OK = false;
+async function fetchFonts() {
+  try {
+    const css = await (await fetch('https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&family=Vazirmatn:wght@400;700&display=swap', { headers: { 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0 Safari/537.36' }, signal: AbortSignal.timeout(20000) })).text();
+    const urls = [...new Set([...css.matchAll(/url\((https:[^)]+\.woff2)\)/g)].map((m) => m[1]))];
+    if (!urls.length) throw new Error('woff2 yok');
+    const dir = path.join(OUT, 'fonts'); fs.mkdirSync(dir, { recursive: true });
+    let out = css;
+    for (const u of urls) {
+      const name = crypto.createHash('md5').update(u).digest('hex').slice(0, 10) + '.woff2';
+      const r = await fetch(u, { signal: AbortSignal.timeout(20000) }); if (!r.ok) throw new Error(r.status);
+      fs.writeFileSync(path.join(dir, name), Buffer.from(await r.arrayBuffer()));
+      out = out.split(u).join(`/fonts/${name}`);
+    }
+    fs.writeFileSync(path.join(OUT, 'assets', 'fonts.css'), out); FONTS_OK = true;
+  } catch (e) { console.warn('Yazı tipleri indirilemedi, sistem fontu kullanılacak:', e.message); }
+}
+
 // ---------- üretim ----------
 fs.rmSync(OUT, { recursive: true, force: true });
 fs.cpSync(path.join(ROOT, 'static'), OUT, { recursive: true });
@@ -614,6 +633,7 @@ fs.cpSync(path.join(ROOT, 'assets'), path.join(OUT, 'assets'), { recursive: true
 await fetchIgImages();
 await fetchDriveMedia();
 await fetchTeamPhotos();
+await fetchFonts();
 const urls = [];
 for (const lang of LANGS) {
   pageHome(lang); pageList(lang); pageGuide(lang); pageContact(lang); pageBlog(lang); pageProjects(lang); pageGuideHub(lang); pageReviews(lang); urls.push(url(lang, 'projects'), url(lang, 'buyersguide'), url(lang, 'reviews'));

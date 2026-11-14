@@ -6,6 +6,7 @@ import crypto from 'node:crypto';
 import { PAGES, POSTS, TEAM, LANGS_SPOKEN, PLAZA, TIMELINE } from './content.mjs';
 import { PROJECTS } from './projects.mjs';
 import { PRIVACY } from './privacy.mjs';
+import { PAGES2 } from './pages2.mjs';
 import { GUIDES, FAQ, GUIDE_SEG, GUIDE_TITLE, GUIDE_LEAD, GUIDE_UPDATED } from './guide.mjs';
 import { T_EXTRA, S, s, SEGS, LOCALE, RTL, extend, PACKS } from './i18n.mjs';
 import { STAFF_PHOTOS, PARTNERS, PHOTO_BASE, LANG_NAMES, PARTNER_ROLE, SWORN_ROLE } from './team.mjs';
@@ -165,7 +166,7 @@ const T = {
 
 Object.assign(T, T_EXTRA);
 extend({ PAGES, PLAZA, TIMELINE, LANGS_SPOKEN, TEAM, GUIDE_SEG, GUIDE_TITLE, GUIDE_LEAD, SITE, T, LANG_NAMES, PARTNER_ROLE, SWORN_ROLE });
-PAGES.privacy = PRIVACY;
+PAGES.privacy = PRIVACY; Object.assign(PAGES, PAGES2);
 const GL = (lang) => (lang === 'tr' || lang === 'en' ? lang : 'en'); // rehber makaleleri dili
 
 // ---------- yardımcılar ----------
@@ -243,15 +244,15 @@ ${[agentSchema, ...schema].map((s) => `<script type="application/ld+json">${JSON
 ${DEMO ? `<div class="demo">${t.demo}</div>` : ''}
 <header class="top"><div class="tbar"><div class="wrap tbin"><span class="tloc">📍 ACC Plaza · Yeşilbahçe, Muratpaşa / Antalya</span><span class="tcon"><a class="tphone" href="tel:${SITE.phoneRaw}" aria-label="${t.call} ${SITE.phone}"><svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><path fill="currentColor" d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1A17 17 0 0 1 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1l-2.3 2.2z"/></svg><b dir="ltr">${SITE.phone}</b></a><a class="twa" href="${waLink(t.waGeneral)}" target="_blank" rel="noopener">WhatsApp</a><a class="tmail" href="mailto:${SITE.email}">${SITE.email}</a><a class="tfav" href="${url(lang, 'favorites')}">♡ <span data-fav-count>0</span></a></span></div></div><div class="wrap nav">
 <a class="logo" href="${home(lang)}"><img src="/img/logo/acc-siyah.svg" alt="ACC HOMES International Real Estate" width="154" height="45"></a>
-<nav class="menu"><a href="${url(lang, 'list')}">${t.nav.list}</a><a href="${url(lang, 'projects')}">${t.projects}</a><a href="${url(lang, 'buyersguide')}">${GUIDE_TITLE[lang]}</a><a href="${url(lang, 'services')}">${PAGES.services.nav[lang]}</a><div class="dd"><button type="button">${t.company} ▾</button><div class="ddm"><a href="${url(lang, 'about')}">${PAGES.about.nav[lang]}</a><a href="${url(lang, 'broker')}">${PAGES.broker.nav[lang]}</a><a href="${url(lang, 'team')}">${PAGES.team.nav[lang]}</a><a href="${url(lang, 'reviews')}">${t.revTitle}</a><a href="${url(lang, 'join')}">${PAGES.join.nav[lang]}</a></div></div><a href="${url(lang, 'blog')}">${t.blog}</a><a href="${url(lang, 'contact')}">${t.nav.contact}</a></nav>
-<details class="mnav"><summary aria-label="${t.menu}">☰</summary><div class="mpanel"><a href="${url(lang, 'list')}">${t.nav.list}</a><a href="${url(lang, 'projects')}">${t.projects}</a><a href="${url(lang, 'buyersguide')}">${GUIDE_TITLE[lang]}</a><a href="${url(lang, 'services')}">${PAGES.services.nav[lang]}</a><a href="${url(lang, 'about')}">${PAGES.about.nav[lang]}</a><a href="${url(lang, 'broker')}">${PAGES.broker.nav[lang]}</a><a href="${url(lang, 'team')}">${PAGES.team.nav[lang]}</a><a href="${url(lang, 'join')}">${PAGES.join.nav[lang]}</a><a href="${url(lang, 'guide')}">${t.nav.guide}</a><a href="${url(lang, 'blog')}">${t.blog}</a><a href="${url(lang, 'contact')}">${t.nav.contact}</a></div></details>
+<nav class="menu"><a href="${url(lang, 'list')}">${t.nav.list}</a><a href="${url(lang, 'projects')}">${t.projects}</a><a href="${url(lang, 'buyersguide')}">${GUIDE_TITLE[lang]}</a><a href="${url(lang, 'services')}">${PAGES.services.nav[lang]}</a><div class="dd"><button type="button">${t.company} ▾</button><div class="ddm"><a href="${url(lang, 'about')}">${PAGES.about.nav[lang]}</a><a href="${url(lang, 'broker')}">${PAGES.broker.nav[lang]}</a><a href="${url(lang, 'team')}">${PAGES.team.nav[lang]}</a><a href="${url(lang, 'reviews')}">${t.revTitle}</a><a href="${url(lang, 'licences')}">${PAGES.licences.nav[lang] || PAGES.licences.nav.en}</a><a href="${url(lang, 'join')}">${PAGES.join.nav[lang]}</a></div></div><a href="${url(lang, 'blog')}">${t.blog}</a><a href="${url(lang, 'contact')}">${t.nav.contact}</a></nav>
+<details class="mnav"><summary aria-label="${t.menu}">☰</summary><div class="mpanel"><a href="${url(lang, 'list')}">${t.nav.list}</a><a href="${url(lang, 'projects')}">${t.projects}</a><a href="${url(lang, 'buyersguide')}">${GUIDE_TITLE[lang]}</a><a href="${url(lang, 'services')}">${PAGES.services.nav[lang]}</a><a href="${url(lang, 'about')}">${PAGES.about.nav[lang]}</a><a href="${url(lang, 'broker')}">${PAGES.broker.nav[lang]}</a><a href="${url(lang, 'team')}">${PAGES.team.nav[lang]}</a><a href="${url(lang, 'sell')}">${PAGES.sell.nav[lang] || PAGES.sell.nav.en}</a><a href="${url(lang, 'join')}">${PAGES.join.nav[lang]}</a><a href="${url(lang, 'guide')}">${t.nav.guide}</a><a href="${url(lang, 'blog')}">${t.blog}</a><a href="${url(lang, 'contact')}">${t.nav.contact}</a></div></details>
 ${settingsBtn(lang)}
 <a class="btn sm" href="tel:${SITE.phoneRaw}">${t.call}</a>
 </div>${settingsPanel(lang, alternates)}</header>
 <main>${body}</main>
 <footer class="foot"><div class="wrap fgrid">
 <div><div class="logo flogo"><img src="/img/logo/acc-siyah.svg" alt="ACC HOMES International Real Estate" width="171" height="50" loading="lazy"></div><p class="slogan">${esc(SITE.slogan[lang])}</p><p>${esc(t.footerAbout)}</p></div>
-<div><h4>${t.company}</h4><p class="flinks"><a href="${url(lang, 'about')}">${PAGES.about.nav[lang]}</a><a href="${url(lang, 'broker')}">${PAGES.broker.nav[lang]}</a><a href="${url(lang, 'team')}">${PAGES.team.nav[lang]}</a><a href="${url(lang, 'services')}">${PAGES.services.nav[lang]}</a><a href="${url(lang, 'join')}">${PAGES.join.nav[lang]}</a><a href="${url(lang, 'guide')}">${t.nav.guide}</a><a href="${url(lang, 'blog')}">${t.blog}</a></p></div>
+<div><h4>${t.company}</h4><p class="flinks"><a href="${url(lang, 'about')}">${PAGES.about.nav[lang]}</a><a href="${url(lang, 'broker')}">${PAGES.broker.nav[lang]}</a><a href="${url(lang, 'team')}">${PAGES.team.nav[lang]}</a><a href="${url(lang, 'services')}">${PAGES.services.nav[lang]}</a><a href="${url(lang, 'sell')}">${PAGES.sell.nav[lang] || PAGES.sell.nav.en}</a><a href="${url(lang, 'viewing')}">${PAGES.viewing.nav[lang] || PAGES.viewing.nav.en}</a><a href="${url(lang, 'licences')}">${PAGES.licences.nav[lang] || PAGES.licences.nav.en}</a><a href="${url(lang, 'join')}">${PAGES.join.nav[lang]}</a><a href="${url(lang, 'guide')}">${t.nav.guide}</a><a href="${url(lang, 'blog')}">${t.blog}</a></p></div>
 <div><h4>${t.office}</h4><p>${esc(SITE.address.street)}<br>${esc(SITE.address.area)}, ${esc(SITE.address.district)} / ${esc(SITE.address.city)}</p><p class="lic">${s('licence', lang)}: ${SITE.licence.join(' · ')}</p></div>
 <div><h4>${t.nav.contact}</h4><p><a href="tel:${SITE.phoneRaw}">${SITE.phone}</a><br><a href="mailto:${SITE.email}">${SITE.email}</a><br><a href="${SITE.corporateSite}">${t.corporate}</a></p><div class="social"><a href="${SITE.instagram.url}" target="_blank" rel="noopener" aria-label="Instagram">${ICON_IG}</a><a href="${SITE.google.mapsUrl}" target="_blank" rel="noopener" aria-label="Google">${ICON_G}</a></div></div>
 </div><div class="wrap copy">© ${new Date().getFullYear()} ${esc(SITE.brand)} · ${t.rights} · <a href="${url(lang, 'privacy')}">${PAGES.privacy.nav[lang] || PAGES.privacy.nav.en}</a></div></footer>
@@ -373,7 +374,7 @@ function fill(html, lang) {
     .replaceAll('{{TIMELINE}}', `<ol class="timeline">${TIMELINE[lang].map(([y, x]) => `<li><b>${y}</b><p>${x}</p></li>`).join('')}</ol>`).replaceAll('{{STATS}}', stats).replaceAll('{{OFFICE}}', officeGallery(8)).replaceAll('{{TEAMPHOTOS}}', '<div class="tphotos"><img src="/img/ekip/ekip-acc.webp" alt="ACC HOMES ekibi" loading="lazy" width="1600" height="533"><img src="/img/ekip/ekip-antalle.webp" alt="ACC HOMES ekibi Antalle Concept Houses açılışında" loading="lazy" width="1600" height="533"></div>').replaceAll('{{TEAM}}', team).replaceAll('{{PARTNERS}}', partners).replaceAll('{{LANGS}}', langs)
     .replaceAll('{{WA_JOIN}}', waJoin).replaceAll('{{WA}}', waLink(t.waGeneral)).replaceAll('{{TEL}}', `tel:${SITE.phoneRaw}`)
     .replaceAll('{{MAPS}}', SITE.google.mapsUrl).replaceAll('{{IG}}', SITE.instagram.url).replaceAll('{{IG_CANER}}', 'https://www.instagram.com/alicanercan.therealtor/')
-    .replaceAll('{{RATING}}', fmtRating(lang)).replaceAll('{{REVIEWS}}', nf.format(SITE.google.reviews))
+    .replaceAll('{{RATING}}', `${fmtRating(lang)} ★ · ${t.gReviews(nf.format(SITE.google.reviews))}`).replaceAll('{{SELLFORM}}', sellForm(lang)).replaceAll('{{REVIEWS}}', nf.format(SITE.google.reviews))
     .replaceAll('{{BROKER_PHOTO}}', SITE.brokerPhoto ? `<img src="${SITE.brokerPhoto}" alt="Ali Caner Can">` : '<span class="mav big">AC</span>');
 }
 function plazaBlock(lang) {
@@ -503,6 +504,20 @@ function tagFilter(lang) {
   const used = Object.keys(TAGS).filter((k) => LISTINGS.some((l) => (l.etiketler || []).includes(k)));
   return used.length ? `<div class="tagfilter" data-tagfilter>${used.map((k) => `<label><input type="checkbox" value="${k}"> ${tagLabel(k, lang)}</label>`).join('')}</div>` : '';
 }
+function sellForm(lang) {
+  const t = T[lang]; const F = t.fields;
+  const dists = ['Muratpaşa', 'Konyaaltı', 'Aksu', 'Döşemealtı', 'Kepez', 'Serik', 'Kemer', 'Alanya', 'Manavgat'];
+  return `<form class="box form sellform" name="degerleme-talep" method="POST" data-netlify="true" netlify-honeypot="bot" action="${url(lang, 'contact')}?ok=1"><input type="hidden" name="form-name" value="degerleme-talep"><input type="hidden" name="dil" value="${lang}"><p hidden><input name="bot"></p>
+<div class="fgrid3"><label>${s('district', lang)}<select name="ilce" required><option value=""></option>${dists.map((d) => `<option>${d}</option>`).join('')}</select></label>
+<label>${s('neighbourhood', lang)}<input name="mahalle"></label>
+<label>${F.type}<select name="tur"><option>Daire</option><option>Villa</option><option>Dubleks</option><option>Müstakil</option><option>Arsa</option><option>Ticari</option></select></label>
+<label>${F.rooms}<input name="oda" placeholder="2+1"></label>
+<label>${F.net}<input name="net_m2" inputmode="numeric" placeholder="m²"></label>
+<label>${s('expectedPrice', lang)}<input name="beklenen_fiyat" inputmode="numeric"></label></div>
+<div class="fgrid3"><label>${t.name} *<input name="ad" required autocomplete="name"></label><label>${t.phone} *<input name="telefon" type="tel" required autocomplete="tel"></label><label>E-posta<input name="eposta" type="email" autocomplete="email"></label></div>
+<label class="chk"><input type="checkbox" name="kvkk_onay" value="evet" required> <span>${s('consent', lang).replace('{{LINK}}', `<a href="${url(lang, 'privacy')}" target="_blank" rel="noopener">${PAGES.privacy.nav[lang] || PAGES.privacy.nav.en}</a>`)} *</span></label>
+<button class="btn" type="submit">${s('sellReq', lang)}</button></form>`;
+}
 function pageFavorites(lang) {
   const t = T[lang];
   const body = `<section class="wrap sec page"><h1>♡ ${s('favTitle', lang)}</h1><p class="sub">${s('favLead', lang)}</p>
@@ -525,7 +540,7 @@ function pageHome(lang) {
   const show = feat.length ? feat : LISTINGS.slice(0, 6);
   const body = `<section class="hero"><div class="wrap"><p class="eyebrow">${esc(SITE.slogan[lang])}</p><h1>${t.heroTitle}</h1><p class="sub">${t.heroSub}</p>
 ${searchBox(lang)}
-<div class="ctas small"><a class="btn ghost" href="${waLink(t.waGeneral)}" target="_blank" rel="noopener">${t.heroCta2}</a><a class="btn ghost" href="${url(lang, 'buyersguide')}">${GUIDE_TITLE[lang]} →</a></div></div></section>
+<div class="ctas small"><a class="btn ghost" href="${waLink(t.waGeneral)}" target="_blank" rel="noopener">${t.heroCta2}</a><a class="btn ghost" href="${url(lang, 'buyersguide')}">${GUIDE_TITLE[lang]} →</a><a class="btn ghost" href="${url(lang, 'sell')}">${PAGES.sell.nav[lang] || PAGES.sell.nav.en} →</a></div></div></section>
 ${heroSlider(lang)}
 ${trustStrip(lang)}
 <section class="wrap sec"><div class="sechead"><h2>${t.projects}</h2><a href="${url(lang, 'projects')}">${t.projectsCta} →</a></div>${projectCards(lang)}</section>

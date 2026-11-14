@@ -249,3 +249,8 @@ body.noscroll{overflow:hidden}
 .tfav{font-weight:700}
 .cmpwrap{overflow-x:auto}.cmp{border-collapse:collapse;min-width:600px;width:100%;background:#fff}.cmp th,.cmp td{border:1px solid var(--line);padding:10px;vertical-align:top;text-align:start;font-size:14px}
 .cmp thead th{position:relative;width:30%}.cmp thead img{width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:8px;display:block;margin-bottom:6px}.cmp thead button{position:absolute;top:6px;inset-inline-end:6px;border:0;background:#fff;border-radius:50%;width:26px;height:26px;cursor:pointer}
+.fgrid3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:12px}.sellform label{display:grid;gap:4px;font-size:13px;color:var(--mute)}
+@media (max-width:700px){.fgrid3{grid-template-columns:1fr}}
+.sellform input,.sellform select{width:100%;box-sizing:border-box;margin:0}
+.sellform .chk,.form .chk{display:flex;gap:8px;align-items:flex-start;font-size:13px;color:var(--mute);margin:4px 0 12px}.sellform .chk input,.form .chk input{width:auto;margin-top:3px;flex:none}
+.sellform .btn{width:auto;justify-self:start}

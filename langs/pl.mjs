@@ -75,6 +75,7 @@ export default {
     tags: 'Atuty', similar: 'Podobne oferty', priceChecked: 'Cena i dostępność sprawdzone', lastCheck: 'Ostatnia weryfikacja',
     whyDiff: 'Widziałeś tę nieruchomość gdzie indziej w innej cenie?', whyDiffText: 'Ogłoszenia na innych portalach często są nieaktualne albo różnią się piętrem, widokiem, wyposażeniem lub warunkami płatności. Prześlij nam znalezione ogłoszenie – porównamy je na piśmie. Przed rezerwacją ponownie potwierdzamy cenę i warunki z właścicielem.',
     tag_vatandaslik: 'Pod obywatelstwo', tag_oturum: 'Pod pozwolenie na pobyt', tag_deniz: 'Widok na morze', tag_ilkSira: 'Pierwsza linia', tag_esyali: 'Umeblowane', tag_firsat: 'Okazja', tag_yeni: 'Nowe budownictwo',
+    neighbourhood: 'Osiedle / dzielnica', expectedPrice: 'Oczekiwana cena (opcjonalnie)', sellReq: 'Poproś o bezpłatną wycenę',
     currency: 'Waluta', partnersTitle: 'Nasi partnerzy', speaks: 'Języki',
   },
   plaza: {

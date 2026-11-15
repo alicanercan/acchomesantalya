@@ -167,13 +167,14 @@ export const PAGES = {
 <div class="biophoto">{{BROKER_PHOTO}}</div>
 <div>
 <p class="eyebrow">Broker & Owner · ACC HOMES International Real Estate</p>
-<p>Ali Caner Can, 1990’da Antalya’da doğdu. Kuleli Askeri Lisesi’nin ardından Yıldız Teknik Üniversitesi Makine Mühendisliği bölümünü onur derecesiyle bitirdi. Daha öğrenciyken global şirketlerde uzun dönem stajlar yaptı ve mezun olmadan iş hayatına başladı.</p>
+<p>Ali Caner Can, 1990’da Antalya’da doğdu. Antalya Başöğretmen Atatürk İlköğretim Okulu ve Kuleli Askeri Lisesi’nin ardından Yıldız Teknik Üniversitesi Makine Mühendisliği bölümünü onur derecesiyle bitirdi. Daha öğrenciyken global şirketlerde uzun dönem stajlar yaptı ve mezun olmadan iş hayatına başladı.</p>
 <p>Kariyerinin ilk on yılını Bosch, Reckitt Benckiser, Hasbro, Nestlé ve The Kraft Heinz Company gibi çok uluslu şirketlerde satış, pazarlama ve trade marketing alanında geçirdi; giriş seviyesinden kanal müdürlüğüne kadar yükseldi. 2021’de memleketi Antalya’ya dönerek gayrimenkule geçti, 2024’te ACC HOMES International Real Estate’i kurdu.</p>
-<p>Bugün 1.000 m²’lik ACC Plaza’da yaklaşık 50 iş ortağından oluşan ekibin Broker’ıdır ve kendi portföyünde 290’ı aşkın satış ve kiralama işlemi bulunur. İş dışında profesyonel düzeyde tenis oynar; kortta da sahadaki gibi disiplinli ve rekabetçidir.</p>
+<p>Bugün 1.000 m²’lik ACC Plaza’da yaklaşık 50 iş ortağından oluşan ekibin Broker’ıdır ve kendi portföyünde 290’ı aşkın satış ve kiralama işlemi bulunur. İş dışında profesyonel bir tenisçidir; kortta da sahadaki gibi disiplinli ve rekabetçidir.</p>
 </div></div>
 {{BROKER_STATS}}
 <h2>Kariyer yolculuğu</h2>
 <ol class="timeline">
+<li><b>Antalya</b><p>Antalya Başöğretmen Atatürk İlköğretim Okulu. İlk ve ortaokul yılları memleketi Antalya’da geçti.</p></li>
 <li><b>2004–2008</b><p>Kuleli Askeri Lisesi. Disiplin ve sorumluluk duygusunun temeli; bugün hâlâ geniş bir Kuleli mezunları ağıyla bağlantıda.</p></li>
 <li><b>2009–2013</b><p>Yıldız Teknik Üniversitesi, Makine Mühendisliği (onur derecesi). Öğrenciyken global şirketlerde uzun dönem stajlar.</p></li>
 <li><b>2013–2021</b><p>Bosch, Reckitt Benckiser, Hasbro, Nestlé ve The Kraft Heinz Company’de satış, pazarlama ve trade marketing; ulusal zincir hesaplar ve e-ticaret kanalı yönetimi, Körfez ülkelerinden sorumlu trade marketing görevleri; giriş seviyesinden kanal müdürlüğüne.</p></li>
@@ -200,7 +201,7 @@ export const PAGES = {
 <h2>Diller ve topluluk</h2>
 <ul class="chips"><li>Türkçe (anadil)</li><li>İngilizce (ileri)</li></ul>
 <p>Yabancı yatırımcılara, ekibinin konuştuğu 10 dilde hizmet verilir.</p>
-<p>ANTİAD (Antalya İş İnsanları Derneği) üyesi ve Beşiktaş JK Kongre Üyesi.</p>
+<p>Antalya İş İnsanları Derneği (ANTİAD) üyesi ve Beşiktaş JK Kongre Üyesi.</p>
 {{BROKER_GALLERY}}
 {{BROKER_LINKS}}
 <div class="ctas"><a class="btn" href="{{WA}}" target="_blank" rel="noopener">WhatsApp’tan yazın</a><a class="btn ghost" href="{{TEL}}">Hemen arayın</a></div>`,
@@ -213,13 +214,14 @@ export const PAGES = {
 <div class="biophoto">{{BROKER_PHOTO}}</div>
 <div>
 <p class="eyebrow">Broker & Owner · ACC HOMES International Real Estate</p>
-<p>Ali Caner Can was born in Antalya in 1990. After Kuleli Military High School he graduated with honours in Mechanical Engineering from Yıldız Technical University. While still a student he completed long internships at global companies and started his professional career before graduating.</p>
+<p>Ali Caner Can was born in Antalya in 1990. After Antalya Başöğretmen Atatürk Primary School and Kuleli Military High School he graduated with honours in Mechanical Engineering from Yıldız Technical University. While still a student he completed long internships at global companies and started his professional career before graduating.</p>
 <p>He spent the first decade of his career in sales, marketing and trade marketing at multinationals including Bosch, Reckitt Benckiser, Hasbro, Nestlé and The Kraft Heinz Company, rising from entry level to channel manager. In 2021 he returned to his home city of Antalya and moved into real estate, and in 2024 he founded ACC HOMES International Real Estate.</p>
-<p>Today he is the broker of a team of around 50 partners at the 1,000 m² ACC Plaza, and has completed more than 290 sales and rentals himself. Outside work he plays tennis at a professional level, bringing the same discipline and competitive drive to the court.</p>
+<p>Today he is the broker of a team of around 50 partners at the 1,000 m² ACC Plaza, and has completed more than 290 sales and rentals himself. Outside work he is a professional tennis player, bringing the same discipline and competitive drive to the court.</p>
 </div></div>
 {{BROKER_STATS}}
 <h2>Career journey</h2>
 <ol class="timeline">
+<li><b>Antalya</b><p>Antalya Başöğretmen Atatürk Primary School; he spent his school years in his home city of Antalya.</p></li>
 <li><b>2004–2008</b><p>Kuleli Military High School, the foundation of his discipline; he is still connected to a wide network of Kuleli alumni.</p></li>
 <li><b>2009–2013</b><p>Yıldız Technical University, Mechanical Engineering (honours), with long internships at global companies.</p></li>
 <li><b>2013–2021</b><p>Sales, marketing and trade marketing at Bosch, Reckitt Benckiser, Hasbro, Nestlé and The Kraft Heinz Company: national chain accounts, the e-commerce channel and Gulf-region trade marketing, rising from entry level to channel manager.</p></li>

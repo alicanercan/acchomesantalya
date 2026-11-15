@@ -308,3 +308,4 @@ body.noscroll{overflow:hidden}
 .blinks a{color:inherit;text-decoration:none}.blinks li:hover{border-color:var(--red)}
 .bio .eyebrow{margin-top:0}
 @media (max-width:900px){.hbroker .wrap{grid-template-columns:1fr}.hbimg{max-width:320px}}
+.bcreds{margin:0 0 14px}.bcreds li{font-size:13px}

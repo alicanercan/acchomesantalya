@@ -169,7 +169,7 @@ export const PAGES = {
 <p class="eyebrow">Broker & Owner · ACC HOMES International Real Estate</p>
 <p>Ali Caner Can, 1990’da Antalya’da doğdu. Kuleli Askeri Lisesi’nin ardından Yıldız Teknik Üniversitesi Makine Mühendisliği bölümünü onur derecesiyle bitirdi. Daha öğrenciyken global şirketlerde uzun dönem stajlar yaptı ve mezun olmadan iş hayatına başladı.</p>
 <p>Kariyerinin ilk on yılını Bosch, Reckitt Benckiser, Hasbro, Nestlé ve The Kraft Heinz Company gibi çok uluslu şirketlerde satış, pazarlama ve trade marketing alanında geçirdi; giriş seviyesinden kanal müdürlüğüne kadar yükseldi. 2021’de memleketi Antalya’ya dönerek gayrimenkule geçti, 2024’te ACC HOMES International Real Estate’i kurdu.</p>
-<p>Bugün 1.000 m²’lik ACC Plaza’da yaklaşık 50 iş ortağından oluşan ekibin Broker’ıdır ve kendi portföyünde 290’ı aşkın satış ve kiralama işlemi bulunur.</p>
+<p>Bugün 1.000 m²’lik ACC Plaza’da yaklaşık 50 iş ortağından oluşan ekibin Broker’ıdır ve kendi portföyünde 290’ı aşkın satış ve kiralama işlemi bulunur. İş dışında profesyonel düzeyde tenis oynar; kortta da sahadaki gibi disiplinli ve rekabetçidir.</p>
 </div></div>
 {{BROKER_STATS}}
 <h2>Kariyer yolculuğu</h2>
@@ -215,7 +215,7 @@ export const PAGES = {
 <p class="eyebrow">Broker & Owner · ACC HOMES International Real Estate</p>
 <p>Ali Caner Can was born in Antalya in 1990. After Kuleli Military High School he graduated with honours in Mechanical Engineering from Yıldız Technical University. While still a student he completed long internships at global companies and started his professional career before graduating.</p>
 <p>He spent the first decade of his career in sales, marketing and trade marketing at multinationals including Bosch, Reckitt Benckiser, Hasbro, Nestlé and The Kraft Heinz Company, rising from entry level to channel manager. In 2021 he returned to his home city of Antalya and moved into real estate, and in 2024 he founded ACC HOMES International Real Estate.</p>
-<p>Today he is the broker of a team of around 50 partners at the 1,000 m² ACC Plaza, and has completed more than 290 sales and rentals himself.</p>
+<p>Today he is the broker of a team of around 50 partners at the 1,000 m² ACC Plaza, and has completed more than 290 sales and rentals himself. Outside work he plays tennis at a professional level, bringing the same discipline and competitive drive to the court.</p>
 </div></div>
 {{BROKER_STATS}}
 <h2>Career journey</h2>

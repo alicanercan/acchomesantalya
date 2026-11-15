@@ -417,7 +417,7 @@ function fill(html, lang) {
     .replaceAll('{{MAPS}}', SITE.google.mapsUrl).replaceAll('{{IG}}', SITE.instagram.url).replaceAll('{{IG_CANER}}', 'https://www.instagram.com/alicanercan.therealtor/')
     .replaceAll('{{RATING}}', `${fmtRating(lang)} ★ · ${t.gReviews(nf.format(SITE.google.reviews))}`).replaceAll('{{SELLFORM}}', sellForm(lang)).replaceAll('{{REVIEWS}}', nf.format(SITE.google.reviews))
     .replaceAll('{{BROKER_PHOTO}}', SITE.brokerPhoto ? `<img src="${SITE.brokerPhoto}" alt="Ali Caner Can, Broker & Owner – ACC HOMES" width="600" height="655">` : '<span class="mav big">AC</span>')
-    .replaceAll('{{BROKER_STATS}}', brokerStats(lang)).replaceAll('{{BROKER_GALLERY}}', brokerGallery(lang)).replaceAll('{{BROKER_LINKS}}', brokerLinks(lang));
+    .replaceAll('{{BROKER_STATS}}', brokerCreds(lang) + brokerStats(lang)).replaceAll('{{BROKER_GALLERY}}', brokerGallery(lang)).replaceAll('{{BROKER_LINKS}}', brokerLinks(lang));
 }
 // Broker Ali Caner Can (broker.mjs): portre ve görseller derlemede indirilir
 const BROKER_LOCAL = {};
@@ -432,6 +432,7 @@ async function fetchBrokerImages() {
   if (p && !SITE.brokerPhoto) SITE.brokerPhoto = `/.netlify/images?url=${encodeURIComponent(p)}&w=600&fm=webp&q=78`;
 }
 const bT = (o, lang) => o[lang] || o.en;
+const brokerCreds = (lang) => `<ul class="chips bcreds">${BROKER.creds.map(([i, l]) => `<li>${i} ${esc(bT(l, lang))}</li>`).join('')}</ul>`;
 const brokerStats = (lang) => `<div class="stats">${BROKER.stats.map(([n, l]) => `<div><b>${n}</b><span>${esc(bT(l, lang))}</span></div>`).join('')}</div>`;
 function brokerGallery(lang) {
   const L = GL(lang);
@@ -445,7 +446,7 @@ const brokerLinks = (lang) => `<h3>${bT(BROKER.ui.links, lang)}</h3><ul class="c
 function brokerBlock(lang) {
   const h = BROKER.home;
   const img = SITE.brokerPhoto ? `<img src="${SITE.brokerPhoto}" alt="Ali Caner Can, Broker & Owner – ACC HOMES" loading="lazy" width="600" height="655">` : '<span class="mav big">AC</span>';
-  return `<section class="hbroker"><div class="wrap"><div class="hbimg">${img}</div><div class="hbtext"><p class="eyebrow">${bT(h.eyebrow, lang)}</p><h2>${bT(h.title, lang)}</h2><p>${esc(bT(h.text, lang))}</p>${brokerStats(lang)}<div class="ctas"><a class="btn" href="${url(lang, 'broker')}">${bT(h.cta, lang)}</a><a class="btn ghost" href="${waLink(T[lang].waGeneral)}" target="_blank" rel="noopener">${bT(h.wa, lang)}</a></div></div></div></section>`;
+  return `<section class="hbroker"><div class="wrap"><div class="hbimg">${img}</div><div class="hbtext"><p class="eyebrow">${bT(h.eyebrow, lang)}</p><h2>${bT(h.title, lang)}</h2>${brokerCreds(lang)}<p>${esc(bT(h.text, lang))}</p>${brokerStats(lang)}<div class="ctas"><a class="btn" href="${url(lang, 'broker')}">${bT(h.cta, lang)}</a><a class="btn ghost" href="${waLink(T[lang].waGeneral)}" target="_blank" rel="noopener">${bT(h.wa, lang)}</a></div></div></div></section>`;
 }
 function plazaBlock(lang) {
   const p = PLAZA[lang];

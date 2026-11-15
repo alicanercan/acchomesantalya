@@ -68,7 +68,7 @@ export const PAGES2 = {
 <tr><th>Ticari unvan</th><td>ACC HOMES International Real Estate Gayrimenkul</td></tr>
 <tr><th>Taşınmaz Ticareti Yetki Belgesi I</th><td>0703112</td></tr>
 <tr><th>Taşınmaz Ticareti Yetki Belgesi II</th><td>0705041</td></tr>
-<tr><th>Merkez ofis</th><td>ACC Plaza, Yeşilbahçe Mah. Portakal Çiçeği Bulvarı No:36/B, Muratpaşa / Antalya</td></tr>
+<tr><th>Merkez ofis</th><td>ACC Plaza, Yeşilbahçe Mah. Portakal Çiçeği Bulvarı Cd. No:36/B, Muratpaşa / Antalya</td></tr>
 <tr><th>Google değerlendirmesi</th><td>{{RATING}}</td></tr>
 </table>
 <p class="note">Yetki belgesi numaraları Ticaret Bakanlığı Emlak İletişim ve Denetim Sistemi (EİDS) üzerinden doğrulanabilir.</p>
@@ -84,7 +84,7 @@ export const PAGES2 = {
 <tr><th>Company name</th><td>ACC HOMES International Real Estate Gayrimenkul</td></tr>
 <tr><th>Real estate trade licence I (Türkiye)</th><td>0703112</td></tr>
 <tr><th>Real estate trade licence II (Türkiye)</th><td>0705041</td></tr>
-<tr><th>Head office</th><td>ACC Plaza, Yeşilbahçe Mah. Portakal Çiçeği Bulvarı No:36/B, Muratpaşa / Antalya</td></tr>
+<tr><th>Head office</th><td>ACC Plaza, Yeşilbahçe Mah. Portakal Çiçeği Bulvarı Cd. No:36/B, Muratpaşa / Antalya</td></tr>
 <tr><th>Google rating</th><td>{{RATING}}</td></tr>
 </table>
 <p class="note">Licence numbers can be verified on the Turkish Ministry of Trade’s real estate licensing system (EİDS).</p>
@@ -107,7 +107,7 @@ export function p2Html(kind, d) {
   };
   return {
     title: d.title, desc: d.desc, lead: d.lead,
-    html: `\n<table class="spec"><tr><th>${d.l[0]}</th><td>ACC HOMES International Real Estate Gayrimenkul</td></tr><tr><th>${d.l[1]} I</th><td>0703112</td></tr><tr><th>${d.l[1]} II</th><td>0705041</td></tr><tr><th>${d.l[2]}</th><td>ACC Plaza, Yeşilbahçe Mah. Portakal Çiçeği Bulvarı No:36/B, Muratpaşa / Antalya</td></tr><tr><th>${d.l[3]}</th><td>{{RATING}}</td></tr></table>\n<p class="note">${d.note}</p>\n<h2>${d.recTitle}</h2>\n<ul class="ticks">${d.rec.map((x) => `<li>${x}</li>`).join('')}</ul>\n<div class="ctas"><a class="btn" href="{{URL:about}}">${d.cta1}</a><a class="btn ghost" href="{{URL:reviews}}">${d.cta2}</a></div>`,
+    html: `\n<table class="spec"><tr><th>${d.l[0]}</th><td>ACC HOMES International Real Estate Gayrimenkul</td></tr><tr><th>${d.l[1]} I</th><td>0703112</td></tr><tr><th>${d.l[1]} II</th><td>0705041</td></tr><tr><th>${d.l[2]}</th><td>ACC Plaza, Yeşilbahçe Mah. Portakal Çiçeği Bulvarı Cd. No:36/B, Muratpaşa / Antalya</td></tr><tr><th>${d.l[3]}</th><td>{{RATING}}</td></tr></table>\n<p class="note">${d.note}</p>\n<h2>${d.recTitle}</h2>\n<ul class="ticks">${d.rec.map((x) => `<li>${x}</li>`).join('')}</ul>\n<div class="ctas"><a class="btn" href="{{URL:about}}">${d.cta1}</a><a class="btn ghost" href="{{URL:reviews}}">${d.cta2}</a></div>`,
   };
 }
 

@@ -9,7 +9,7 @@ export const PRIVACY = {
     lead: `6698 sayılı Kişisel Verilerin Korunması Kanunu (KVKK) kapsamında bilgilendirme · Son güncelleme: ${UPDATED}`,
     html: `
 <h2>1. Veri sorumlusu</h2>
-<p>Bu web sitesi ACC HOMES International Real Estate tarafından işletilmektedir. Veri sorumlusu: ACC Homes International Real Estate, ACC Plaza, Yeşilbahçe Mah. Portakal Çiçeği Bulvarı No:36/B, Muratpaşa / Antalya. E-posta: info@acchomesantalya.com · Telefon: +90 549 804 38 43.</p>
+<p>Bu web sitesi ACC HOMES International Real Estate tarafından işletilmektedir. Veri sorumlusu: ACC Homes International Real Estate, ACC Plaza, Yeşilbahçe Mah. Portakal Çiçeği Bulvarı Cd. No:36/B, Muratpaşa / Antalya. E-posta: info@acchomesantalya.com · Telefon: +90 549 804 38 43.</p>
 <h2>2. İşlediğimiz kişisel veriler</h2>
 <ul class="ticks">
 <li><b>Kimlik ve iletişim:</b> Ad soyad, telefon numarası ve ülke kodu, e-posta adresi.</li>
@@ -65,7 +65,7 @@ export const PRIVACY = {
     lead: `Information under Turkish Personal Data Protection Law No. 6698 (KVKK) · Last updated: ${UPDATED}`,
     html: `
 <h2>1. Data controller</h2>
-<p>This website is operated by ACC HOMES International Real Estate. Data controller: ACC Homes International Real Estate, ACC Plaza, Yeşilbahçe Mah. Portakal Çiçeği Bulvarı No:36/B, Muratpaşa / Antalya, Türkiye. Email: info@acchomesantalya.com · Phone: +90 549 804 38 43.</p>
+<p>This website is operated by ACC HOMES International Real Estate. Data controller: ACC Homes International Real Estate, ACC Plaza, Yeşilbahçe Mah. Portakal Çiçeği Bulvarı Cd. No:36/B, Muratpaşa / Antalya, Türkiye. Email: info@acchomesantalya.com · Phone: +90 549 804 38 43.</p>
 <h2>2. Personal data we process</h2>
 <ul class="ticks">
 <li><b>Identity and contact:</b> name, phone number and country code, email address.</li>

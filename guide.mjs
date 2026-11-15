@@ -227,7 +227,7 @@ export const FAQ = {
     ['Satın aldığım evi kiraya verebilir misiniz?', 'Evet. Kiracı bulma, sözleşme, kira takibi ve yıl boyu mülk yönetimi hizmeti veriyoruz.'],
     ['Hangi dillerde hizmet veriyorsunuz?', 'Türkçe, İngilizce, Rusça, Ukraynaca, Almanca, Fransızca, Felemenkçe, İspanyolca, Arapça ve Farsça.'],
     ['Kripto para ile ödeme yapabilir miyim?', 'Hayır. Türkiye’de kripto varlıkların ödemelerde kullanılması TCMB yönetmeliğiyle yasaktır; ödemeler bankacılık sistemi üzerinden yapılır.'],
-    ['Ofisinizi ziyaret edebilir miyim?', 'Elbette. ACC Plaza, Yeşilbahçe Mah. Portakal Çiçeği Bulvarı No:36/B, Muratpaşa / Antalya adresinde sizi kahve içmeye bekliyoruz.'],
+    ['Ofisinizi ziyaret edebilir miyim?', 'Elbette. ACC Plaza, Yeşilbahçe Mah. Portakal Çiçeği Bulvarı Cd. No:36/B, Muratpaşa / Antalya adresinde sizi kahve içmeye bekliyoruz.'],
   ],
   en: [
     ['Can foreigners buy property in Türkiye?', 'Yes. Citizens of most countries can buy homes and commercial property. Some areas, such as military or security zones, have extra approvals or restrictions; we check eligibility before you commit.'],
@@ -239,6 +239,6 @@ export const FAQ = {
     ['Can you rent out my property?', 'Yes. We find tenants, handle contracts and rent collection, and offer year-round property management.'],
     ['Can I pay with cryptocurrency?', 'No. A Central Bank regulation prohibits the use of crypto assets in payments in Türkiye; payments go through the banking system.'],
     ['Which languages do you speak?', 'Turkish, English, Russian, Ukrainian, German, French, Dutch, Spanish, Arabic and Persian.'],
-    ['Can I visit your office?', 'Of course. Visit us at ACC Plaza, Yeşilbahçe, Portakal Çiçeği Bulvarı No:36/B, Muratpaşa, Antalya.'],
+    ['Can I visit your office?', 'Of course. Visit us at ACC Plaza, Yeşilbahçe, Portakal Çiçeği Bulvarı Cd. No:36/B, Muratpaşa, Antalya.'],
   ],
 };

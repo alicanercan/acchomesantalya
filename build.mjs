@@ -264,7 +264,7 @@ ${col(s('usefulLinks', lang), [[nv('services'), url(lang, 'services')], [nv('sel
 </div>
 <div class="wrap fmid">
 <div class="fbrand"><img src="/img/logo/acc-siyah.svg" alt="ACC HOMES International Real Estate" width="171" height="50" loading="lazy"><p class="slogan">${esc(SITE.slogan[lang])}</p><p>${esc(t.footerAbout)}</p></div>
-<div class="fcontact"><p><b>${t.office}</b><br>${esc(SITE.address.street)}<br>${esc(SITE.address.area)}, ${esc(SITE.address.district)} / ${esc(SITE.address.city)}</p><p><a href="tel:${SITE.phoneRaw}"><b dir="ltr">${SITE.phone}</b></a><br><a href="mailto:${SITE.email}">${SITE.email}</a></p></div>
+<div class="fcontact"><p><b>${t.office}</b><br>${esc(SITE.address.street)}<br>${esc(SITE.address.district)} / ${esc(SITE.address.city)}</p><p><a href="tel:${SITE.phoneRaw}"><b dir="ltr">${SITE.phone}</b></a><br><a href="mailto:${SITE.email}">${SITE.email}</a></p></div>
 <div class="fcenter"><div class="fpills"><a href="${url(lang, 'join')}">🤝 ${s('partnerPill', lang)}</a><a href="${url(lang, 'viewing')}">📱 ${nv('viewing')}</a></div>
 <div class="social"><a href="${SITE.instagram.url}" target="_blank" rel="noopener" aria-label="Instagram">${ICON_IG}</a><a href="${waLink(t.waGeneral)}" target="_blank" rel="noopener" aria-label="WhatsApp">${ICON_WA}</a><a href="${SITE.google.mapsUrl}" target="_blank" rel="noopener" aria-label="Google">${ICON_G}</a></div>
 <a class="frating" href="${SITE.google.mapsUrl}" target="_blank" rel="noopener">${ICON_G}<b>${fmtRating(lang)}</b>${stars}<span>${t.gReviews(SITE.google.reviews)}</span></a></div>
@@ -370,7 +370,7 @@ function trustStrip(lang) {
   return `<section class="trust"><div class="wrap tgrid">
 <a class="tcard" href="${SITE.google.mapsUrl}" target="_blank" rel="noopener">${ICON_G}<div><div class="tline"><b>${fmtRating(lang)}</b>${stars}</div><small>${t.gReviews(SITE.google.reviews)} · ${t.readReviews} →</small></div></a>
 <a class="tcard" href="${SITE.instagram.url}" target="_blank" rel="noopener"><span class="ig">${ICON_IG}</span><div><div class="tline"><b>@${SITE.instagram.handle}</b></div><small>${t.igFollow} →</small></div></a>
-<a class="tcard" href="${SITE.google.mapsUrl}" target="_blank" rel="noopener"><span class="pin">📍</span><div><div class="tline"><b>ACC PLAZA</b></div><small>Yeşilbahçe, Lara · ${t.directions} →</small></div></a>
+<a class="tcard" href="${SITE.google.mapsUrl}" target="_blank" rel="noopener"><span class="pin">📍</span><div><div class="tline"><b>ACC PLAZA</b></div><small>Yeşilbahçe, Muratpaşa · ${t.directions} →</small></div></a>
 </div></section>`;
 }
 
@@ -790,7 +790,7 @@ function pageContact(lang) {
   const t = T[lang];
   const body = `<section class="wrap sec narrow"><h1>${t.contactTitle}</h1><p class="sub">${t.contactSub}</p>
 <p class="ok" hidden id="ok">${t.thanks}</p>
-<div class="cgrid"><div class="box"><h3>${t.office}</h3><p>${esc(SITE.address.street)}<br>${esc(SITE.address.area)}, ${esc(SITE.address.district)} / ${esc(SITE.address.city)}</p>
+<div class="cgrid"><div class="box"><h3>${t.office}</h3><p>${esc(SITE.address.street)}<br>${esc(SITE.address.district)} / ${esc(SITE.address.city)}</p>
 <p><a href="tel:${SITE.phoneRaw}">${SITE.phone}</a><br><a href="mailto:${SITE.email}">${SITE.email}</a></p>
 <h4>${s('directionsTitle', lang)}</h4><p>${s('directionsText', lang)}</p><p class="lic">${s('licence', lang)}: ${SITE.licence.join(' · ')}</p>
 <div class="actions"><a class="btn" href="${waLink(t.waGeneral)}" target="_blank" rel="noopener">${t.wa}</a><a class="btn ghost" href="tel:${SITE.phoneRaw}">${t.call}</a></div></div>

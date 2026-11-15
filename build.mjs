@@ -8,11 +8,13 @@ import { PROJECTS } from './projects.mjs';
 import { PRIVACY } from './privacy.mjs';
 import { PAGES2, P2X, p2Html } from './pages2.mjs';
 import { AREA_GUIDES } from './areas.mjs';
+import { MAHALLELER } from './mahalleler.mjs';
 import { EVENTS } from './events.mjs';
 import { BROKER } from './broker.mjs';
 import { ROADMAP, TRUST, FOUNDER } from './story.mjs';
 import { BLOG, BLOG_POSTS } from './blog.mjs';
 import { GUIDES, FAQ, GUIDE_SEG, GUIDE_TITLE, GUIDE_LEAD, GUIDE_UPDATED } from './guide.mjs';
+import { SEO_META } from './seo-meta.mjs';
 import { T_EXTRA, S, s, SEGS, LOCALE, RTL, extend, PACKS } from './i18n.mjs';
 import { STAFF_PHOTOS, PARTNERS, PHOTO_BASE, LANG_NAMES, PARTNER_ROLE, SWORN_ROLE } from './team.mjs';
 
@@ -198,13 +200,17 @@ const waLink = (text) => `https://wa.me/${SITE.whatsapp}?text=${encodeURICompone
 const write = (rel, html) => { const f = path.join(OUT, rel); fs.mkdirSync(path.dirname(f), { recursive: true }); fs.writeFileSync(f, html); };
 const placeholder = `<div class="ph"><svg viewBox="0 0 64 64" aria-hidden="true"><path d="M8 30 32 10l24 20v24H40V38H24v16H8z" fill="none" stroke="currentColor" stroke-width="3" stroke-linejoin="round"/></svg></div>`;
 
+const AREAS_SERVED = ['Muratpaşa', 'Konyaaltı', 'Kepez', 'Aksu', 'Döşemealtı', 'Serik', 'Kemer'];
 const agentSchema = {
-  '@context': 'https://schema.org', '@type': 'RealEstateAgent', name: SITE.brand, url: SITE.corporateSite, logo: `${SITE.domain}/img/logo/acc-homes-logo.png`, image: `${SITE.domain}/img/logo/acc-homes-logo.png`,
-  telephone: SITE.phone, email: SITE.email, slogan: SITE.slogan.tr,
+  '@context': 'https://schema.org', '@type': 'RealEstateAgent', '@id': `${SITE.domain}/#org`, name: SITE.brand, alternateName: SITE.shortBrand, url: `${SITE.domain}/`, logo: `${SITE.domain}/img/logo/acc-homes-logo.png`, image: `${SITE.domain}/img/acc-plaza-og.jpg`,
+  telephone: SITE.phone, email: SITE.email, slogan: SITE.slogan.tr, foundingDate: '2024', knowsLanguage: ['tr', 'en'], priceRange: '₺₺₺',
   address: { '@type': 'PostalAddress', streetAddress: SITE.address.street, addressLocality: SITE.address.district, addressRegion: SITE.address.city, addressCountry: SITE.address.country },
-  areaServed: ['Altıntaş', 'Aksu', 'Lara', 'Antalya'],
-  sameAs: [SITE.instagram.url, SITE.google.mapsUrl, SITE.corporateSite],
+  areaServed: [...AREAS_SERVED.map((n) => ({ '@type': 'AdministrativeArea', name: `${n}, Antalya` })), { '@type': 'City', name: 'Antalya' }],
+  founder: { '@type': 'Person', name: 'Ali Caner Can' },
+  hasMap: SITE.google.mapsUrl,
+  sameAs: [SITE.instagram.url, SITE.google.mapsUrl],
 };
+const websiteSchema = { '@context': 'https://schema.org', '@type': 'WebSite', '@id': `${SITE.domain}/#website`, url: `${SITE.domain}/`, name: SITE.shortBrand, publisher: { '@id': `${SITE.domain}/#org` }, inLanguage: ['tr', 'en'] };
 
 // ---------- ayar paneli: dil, para birimi, ölçü birimi ----------
 const LANG_ORDER = ['en', 'fr', 'ru', 'ar', 'tr', 'zh', 'de', 'es', 'pl', 'sv', 'nl', 'fa'].filter((l) => LANGS.includes(l));
@@ -278,7 +284,16 @@ ${col(s('usefulLinks', lang), [[nv('services'), url(lang, 'services')], [nv('sel
 }
 
 // ---------- sayfa iskeleti ----------
+function crumbSchema(body, title, canonical) {
+  const m = body.match(/<nav class="crumbs[^"]*">([\s\S]*?)<\/nav>/); if (!m) return [];
+  const items = [...m[1].matchAll(/<a href="([^"]+)">([\s\S]*?)<\/a>/g)].map(([, u, n]) => [n.replace(/<[^>]+>/g, '').trim(), u]);
+  const cur = title.replace(/\s*\|\s*ACC HOMES\s*$/, '').trim();
+  if (!items.length || items.at(-1)[1] !== canonical) items.push([cur, canonical]);
+  const clean = (x) => x.replace(/&amp;/g, '&').replace(/&#39;/g, "'").replace(/&quot;/g, '"');
+  return [{ '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: items.map(([n, u], i) => ({ '@type': 'ListItem', position: i + 1, name: clean(n), item: SITE.domain + u })) }];
+}
 function layout({ lang, title, desc, canonical, alternates, body, schema = [], ogImage, noindex }) {
+  if (SEO_META[canonical]) [title, desc] = SEO_META[canonical];
   const t = T[lang];
   const alt = alternates ? Object.entries(alternates).map(([l, u]) => `<link rel="alternate" hreflang="${l}" href="${SITE.domain}${u}">`).join('') + `<link rel="alternate" hreflang="x-default" href="${SITE.domain}${alternates.tr}">` : '';
   const langSwitch = alternates ? LANGS.map((l) => `<a href="${alternates[l] || (alternates.tr && alternates.tr.startsWith('/alici-rehberi') ? url(l, 'buyersguide') : home(l))}"${l === lang ? ' aria-current="true"' : ''}>${l.toUpperCase()}</a>`).join('') : '';
@@ -286,7 +301,7 @@ function layout({ lang, title, desc, canonical, alternates, body, schema = [], o
 <title>${esc(title)}</title>${noindex ? '<meta name="robots" content="noindex">' : ''}<meta name="description" content="${esc(desc)}"><link rel="canonical" href="${SITE.domain}${canonical}">${alt}
 <meta property="og:type" content="website"><meta property="og:title" content="${esc(title)}"><meta property="og:description" content="${esc(desc)}"><meta property="og:url" content="${SITE.domain}${canonical}"><meta property="og:locale" content="${t.locale}">${ogImage ? `<meta property="og:image" content="${SITE.domain}${ogImage}">` : ''}
 <meta name="theme-color" content="#E02A3C"><link rel="icon" href="/favicon.svg" type="image/svg+xml"><link rel="apple-touch-icon" href="/apple-touch-icon.png">${FONTS_OK ? `<link rel="preload" href="/assets/fonts.css" as="style"><link rel="stylesheet" href="/assets/fonts.css">` : ''}<link rel="stylesheet" href="/assets/style.css?v=${VER}">
-${[agentSchema, ...schema].map((s) => `<script type="application/ld+json">${JSON.stringify(s)}</script>`).join('')}
+${[agentSchema, ...(canonical === home(lang) ? [websiteSchema] : []), ...(schema.some((x) => x && x['@type'] === 'BreadcrumbList') ? [] : crumbSchema(body, title, canonical)), ...schema].filter(Boolean).map((s) => `<script type="application/ld+json">${JSON.stringify(s)}</script>`).join('')}
 </head><body>
 ${DEMO ? `<div class="demo">${t.demo}</div>` : ''}
 <header class="top"><div class="tbar"><div class="wrap tbin"><span class="tloc">📍 ACC Plaza · Yeşilbahçe, Muratpaşa / Antalya</span><span class="tcon"><a class="tphone" href="tel:${SITE.phoneRaw}" aria-label="${t.call} ${SITE.phone}"><svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><path fill="currentColor" d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1A17 17 0 0 1 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1l-2.3 2.2z"/></svg><b dir="ltr">${SITE.phone}</b></a><a class="twa" href="${waLink(t.waGeneral)}" target="_blank" rel="noopener">WhatsApp</a><a class="tmail" href="mailto:${SITE.email}">${SITE.email}</a><a class="tfav" href="${url(lang, 'favorites')}">♡ <span data-fav-count>0</span></a></span></div></div><div class="wrap nav">
@@ -329,7 +344,7 @@ const officeGallery = (n = 8) => `<div class="ogal">${OFFICE.slice(0, n).map(([f
 
 function projectCards(lang) {
   const t = T[lang];
-  return `<div class="pcards">${PROJECTS.map((p) => { const c = p.cover && cdn(p.cover, 800); return `<a class="pcard" href="/projeler/${p.slug}/"><div class="pcimg">${c ? `<img src="${c}" alt="${esc(p.name)}" loading="lazy">` : `<div class="ph pname"><span>${esc(p.name)}</span></div>`}</div><div class="pcbody"><small>${esc(p.area)} · ${esc(p.developer)}</small><h3>${esc(p.name)}</h3><p>${esc(p.card)}</p><span class="more">${t.projectsCta} →</span></div></a>`; }).join('')}</div>`;
+  return `<div class="pcards">${PROJECTS.map((p) => { const c = p.cover && cdn(p.cover, 800); return `<a class="pcard" href="/projeler/${p.slug}/"><div class="pcimg">${c ? `<img src="${c}" alt="${esc(p.name)}" width="800" height="500" loading="lazy">` : `<div class="ph pname"><span>${esc(p.name)}</span></div>`}</div><div class="pcbody"><small>${esc(p.area)} · ${esc(p.developer)}</small><h3>${esc(p.name)}</h3><p>${esc(p.card)}</p><span class="more">${t.projectsCta} →</span></div></a>`; }).join('')}</div>`;
 }
 function pageProjects(lang) {
   const t = T[lang];
@@ -401,7 +416,7 @@ function igBlock(lang) {
 <div class="igmeta"><div class="igname"><a href="${SITE.instagram.url}" target="_blank" rel="noopener"><b>@${esc(IG.username)}</b></a><a class="btn sm" href="${SITE.instagram.url}" target="_blank" rel="noopener">${ICON_IG} ${t.igFollowBtn}</a></div>
 <div class="igstats"><span><b>${nf.format(IG.posts)}</b> ${t.igPosts}</span><span><b>${nf.format(IG.followers)}</b> ${t.igFollowers}</span></div>
 <p class="igbio"><b>${esc(IG.name)}</b><br>${esc(IG.biography).replace(/\n/g, '<br>')}</p></div></div>
-<div class="iggrid">${items.map((m) => `<a class="igitem" href="${esc(m.permalink)}" target="_blank" rel="noopener" title="${esc(m.caption)}"><img src="${esc(m.local || m.image)}" alt="${esc(m.caption)}" loading="lazy">${m.type === 'VIDEO' ? '<span class="play" aria-hidden="true">▶</span>' : ''}<span class="igcap">${esc(m.caption)}</span></a>`).join('')}</div></section>`;
+<div class="iggrid">${items.map((m) => `<a class="igitem" href="${esc(m.permalink)}" target="_blank" rel="noopener" title="${esc(m.caption)}"><img src="${esc(m.local || m.image)}" alt="${esc(m.caption)}" width="400" height="400" loading="lazy">${m.type === 'VIDEO' ? '<span class="play" aria-hidden="true">▶</span>' : ''}<span class="igcap">${esc(m.caption)}</span></a>`).join('')}</div></section>`;
 }
 function stickyBar(lang) {
   const t = T[lang];
@@ -490,7 +505,7 @@ const ALLPOSTS = [...BLOG_POSTS, ...POSTS.map((p) => ({ ...p, cat: BLOG.catOf[p.
 const dmy = (d) => d.split('-').reverse().join('.');
 function postCard(p, lang, big) {
   const c = postFor(p, lang); const cat = BLOG.cats[p.cat];
-  return `<a class="bcard${big ? ' big' : ''}" href="${url(lang, 'blog', p.slug)}" data-cat="${p.cat}"><div class="bcov bc-${p.cat}">${p.cover ? `<img src="${p.cover}" alt="${esc(c.title)}" loading="lazy">` : (p.stat ? `<div class="bstat"><b>${p.stat[GL(lang)]}</b><small>${esc(p.stat.lab[GL(lang)])}</small></div>` : `<span>${p.icon || cat.icon}</span>`)}${p.live ? `<em>● ${bT(BLOG.ui.live, lang)}</em>` : ''}</div><div class="bcb"><small>${cat.icon} ${esc(bT(cat.name, lang))} · ${dmy(p.updated || p.date)}</small><h3>${esc(c.title)}</h3><p>${esc(c.desc)}</p></div></a>`;
+  return `<a class="bcard${big ? ' big' : ''}" href="${url(lang, 'blog', p.slug)}" data-cat="${p.cat}"><div class="bcov bc-${p.cat}">${p.cover ? `<img src="${p.cover}" alt="${esc(c.title)}" width="800" height="450" loading="lazy">` : (p.stat ? `<div class="bstat"><b>${p.stat[GL(lang)]}</b><small>${esc(p.stat.lab[GL(lang)])}</small></div>` : `<span>${p.icon || cat.icon}</span>`)}${p.live ? `<em>● ${bT(BLOG.ui.live, lang)}</em>` : ''}</div><div class="bcb"><small>${cat.icon} ${esc(bT(cat.name, lang))} · ${dmy(p.updated || p.date)}</small><h3>${esc(c.title)}</h3><p>${esc(c.desc)}</p></div></a>`;
 }
 function pageBlog(lang) {
   const t = T[lang];
@@ -521,8 +536,27 @@ function areaCards(lang) {
   const L = GL(lang);
   return `<div class="gcards">${AREA_GUIDES.map((a) => `<a class="gcard" href="${aUrl(L, a)}"><span>${a.icon}</span><h3>${esc(a[L].title)}</h3><p>${esc(a[L].short)}</p></a>`).join('')}</div>`;
 }
+const MH_UI = { tr: { hub: 'Mahalle rehberleri', hubLead: 'Sahada en çok çalıştığımız mahalleler: yaşam, konut yapısı, kimlere uygun olduğu ve alırken dikkat edilecekler.', in: 'Bu ilçedeki mahalle rehberleri', faq: 'Sık sorulan sorular', parent: 'İlçe rehberi', titleT: (n) => `${({ 'Lara ve Güzeloba': 'Lara ve Güzeloba’da', Fener: 'Fener’de', 'Şirinyalı': 'Şirinyalı’da', Kundu: 'Kundu’da', Hurma: 'Hurma’da', 'Liman ve Sarısu': 'Liman ve Sarısu’da', 'Altınkale ve Yeşilbayır': 'Altınkale ve Yeşilbayır’da', Belek: 'Belek’te', Kadriye: 'Kadriye’de' })[n] || n} Ev Almak: Mahalle Rehberi`, alt: 'Altıntaş', altShort: 'Havalimanı ve Lara’ya yakın yeni projeler; ayrıntılı rehber.' }, en: { hub: 'Neighbourhood guides', hubLead: 'The neighbourhoods we work in most: lifestyle, housing, who they suit and what to check before buying.', in: 'Neighbourhood guides in this district', faq: 'Frequently asked questions', parent: 'District guide', titleT: (n) => `Buying in ${n}, Antalya: Neighbourhood Guide`, alt: 'Altıntaş', altShort: 'New projects near the airport and Lara; full guide.' } };
+const mUrl = (lang, m) => aUrl(lang, { slug: m.slug, slugEn: m.slug });
+function mahalleCards(lang, list = MAHALLELER) {
+  const L = GL(lang); const u = MH_UI[L];
+  const alt = list === MAHALLELER || list.some((m) => m.parent === 'aksu-altintas') ? `<a class="gcard" href="${url(L, 'guide')}"><span>✈️</span><h3>${u.alt}</h3><p>${esc(u.altShort)}</p></a>` : '';
+  return `<div class="gcards">${list.map((m) => `<a class="gcard" href="${mUrl(L, m)}"><span>${m.icon}</span><h3>${esc(m[L].name)}</h3><p>${esc(m[L].short)}</p></a>`).join('')}${alt}</div>`;
+}
+function pageMahalle(m, lang) {
+  const c = m[lang]; const t = T[lang]; const u = MH_UI[lang]; const par = AREA_GUIDES.find((a) => a.slug === m.parent);
+  const sib = MAHALLELER.filter((x) => x !== m).map((x) => `<a href="${mUrl(lang, x)}">${x.icon} ${esc(x[lang].name)}</a>`).join('');
+  const faq = `<h2>${u.faq}</h2><div class="faq">${c.faq.map(([q, a]) => `<details><summary>${esc(q)}</summary><p>${esc(a)}</p></details>`).join('')}</div>`;
+  const body = `<section class="wrap sec page"><nav class="crumbs"><a href="${home(lang)}">${t.nav.home}</a> / <a href="${url(lang, 'areas')}">${s('areasTitle', lang)}</a> / <a href="${aUrl(lang, par)}">${esc(par[lang].title)}</a> / <span>${esc(c.name)}</span></nav><div class="glayout"><article class="prose"><h1>${m.icon} ${esc(c.title)}</h1><p class="sub">${esc(c.short)}</p>${fill(c.html, lang)}${faq}
+<div class="ctas"><a class="btn" href="${waLink(t.waGeneral)}" target="_blank" rel="noopener">${s('askConsultant', lang)}</a><a class="btn ghost" href="${aUrl(lang, par)}">${u.parent}: ${esc(par.ilce)} →</a></div>
+<p class="note">${s('areaNote', lang)}</p></article><aside class="gside"><b>${u.hub}</b>${sib}<b>${u.parent}</b><a href="${aUrl(lang, par)}">${par.icon} ${esc(par[lang].title)}</a></aside></div></section>`;
+  const canon = mUrl(lang, m);
+  const schema = [{ '@context': 'https://schema.org', '@type': 'Article', headline: c.title, description: c.short, inLanguage: lang, author: { '@type': 'Person', name: 'Ali Caner Can' }, publisher: { '@id': `${SITE.domain}/#org` }, about: { '@type': 'Place', name: `${c.name}, ${m.ilce}, Antalya`, containedInPlace: { '@type': 'AdministrativeArea', name: `${m.ilce}, Antalya` } }, mainEntityOfPage: SITE.domain + canon },
+    { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: c.faq.map(([q, a]) => ({ '@type': 'Question', name: q, acceptedAnswer: { '@type': 'Answer', text: a } })) }];
+  write(canon + 'index.html', layout({ lang, title: `${u.titleT(c.name)} | ACC HOMES`, desc: `${c.short} ${lang === 'tr' ? 'Yaşam, konut yapısı ve alırken dikkat edilecekler.' : 'Lifestyle, housing and what to check before buying.'}`.slice(0, 158), canonical: canon, alternates: { tr: mUrl('tr', m), en: mUrl('en', m) }, body, schema }));
+}
 function pageAreaHub(lang) {
-  const body = `<section class="wrap sec page"><nav class="crumbs"><a href="${home(lang)}">${T[lang].nav.home}</a> / <span>${s('areasTitle', lang)}</span></nav><h1>${s('areasTitle', lang)}</h1><p class="sub">${s('areasLead', lang)}</p>${['tr', 'en'].includes(lang) ? '' : `<p class="note">${s('guideEnNote', lang)}</p>`}${areaCards(lang)}</section>`;
+  const body = `<section class="wrap sec page"><nav class="crumbs"><a href="${home(lang)}">${T[lang].nav.home}</a> / <span>${s('areasTitle', lang)}</span></nav><h1>${s('areasTitle', lang)}</h1><p class="sub">${s('areasLead', lang)}</p>${['tr', 'en'].includes(lang) ? '' : `<p class="note">${s('guideEnNote', lang)}</p>`}${areaCards(lang)}<h2 class="mt">${MH_UI[GL(lang)].hub}</h2><p class="sub">${MH_UI[GL(lang)].hubLead}</p>${mahalleCards(lang)}</section>`;
   write(path.join(url(lang, 'areas'), 'index.html'), layout({ lang, title: `${s('areasTitle', lang)} | ACC HOMES`, desc: s('areasLead', lang), canonical: url(lang, 'areas'), alternates: alts('areas'), body }));
 }
 function pageAreaItem(a, lang) {
@@ -530,7 +564,7 @@ function pageAreaItem(a, lang) {
   const others = AREA_GUIDES.filter((x) => x !== a).map((x) => `<a href="${aUrl(lang, x)}">${x.icon} ${esc(x[lang].title)}</a>`).join('');
   const body = `<section class="wrap sec page"><nav class="crumbs"><a href="${home(lang)}">${t.nav.home}</a> / <a href="${url(lang, 'areas')}">${s('areasTitle', lang)}</a></nav><div class="glayout"><article class="prose"><h1>${a.icon} ${esc(c.title)}</h1><p class="sub">${esc(c.short)}</p>${c.html}
 <div class="ctas"><a class="btn" href="${url(lang, 'list')}?ilce=${encodeURIComponent(a.ilce)}">${s('areaListings', lang).replace('{{A}}', a.ilce)}</a><a class="btn ghost" href="${waLink(t.waGeneral)}" target="_blank" rel="noopener">${s('askConsultant', lang)}</a></div>
-<p class="note">${s('areaNote', lang)}</p></article><aside class="gside"><b>${s('areasTitle', lang)}</b>${others}</aside></div></section>`;
+${MAHALLELER.some((m) => m.parent === a.slug) || a.slug === 'aksu-altintas' ? `<h2>${MH_UI[lang].in}</h2>${mahalleCards(lang, MAHALLELER.filter((m) => m.parent === a.slug))}` : ''}<p class="note">${s('areaNote', lang)}</p></article><aside class="gside"><b>${s('areasTitle', lang)}</b>${others}</aside></div></section>`;
   const schema = [{ '@context': 'https://schema.org', '@type': 'Article', headline: c.title, description: c.short, inLanguage: lang, publisher: { '@type': 'Organization', name: SITE.brand }, about: { '@type': 'Place', name: `${a.ilce}, Antalya` } }];
   write(aUrl(lang, a) + 'index.html', layout({ lang, title: `${c.title} | ACC HOMES`, desc: c.short, canonical: aUrl(lang, a), alternates: { tr: aUrl('tr', a), en: aUrl('en', a) }, body, schema }));
 }
@@ -660,7 +694,7 @@ function card(l, lang) {
   return `<article class="card" data-id="${esc(l.id)}" data-tags="${tags.join(' ')}" data-tip="${esc(l.tip)}" data-tur="${esc(l.tur)}" data-ilce="${esc(l.ilce)}" data-oda="${esc(l.oda)}" data-fiyat="${l.fiyat || 0}" data-tarih="${esc(l.tarih || '')}">
 ${cardTools(l, lang)}
 <a href="${url(lang, 'listing', slugOf(l))}">
-<div class="img">${cover ? `<img src="${esc(cover)}" alt="${esc([l.mahalle, l.ilce, l.oda, l.tur].join(' '))}" loading="lazy">` : placeholder}<span class="tag">${tipLabel(l, lang)}</span>${statusBadge(l, lang)}</div>
+<div class="img">${cover ? `<img src="${esc(cover)}" alt="${esc([l.mahalle, l.ilce, l.oda, l.tur].join(' '))}" width="800" height="600" loading="lazy">` : placeholder}<span class="tag">${tipLabel(l, lang)}</span>${statusBadge(l, lang)}</div>
 <div class="body"><div class="price"${priceAttrs(l)}>${fmtPrice(l, lang)}</div><h3>${esc(pick(l.baslik, lang))}</h3>${tags.length ? `<div class="ltags">${tags.slice(0, 3).map((k) => `<span class="lt-${k}">${tagLabel(k, lang)}</span>`).join('')}</div>` : ''}
 <div class="meta"><span>${esc(l.oda || '')}</span>${l.net ? `<span data-m2="${+l.net}">${+l.net} m²</span>` : ''}<span>${esc([l.mahalle, l.ilce].filter(Boolean).join(', '))}</span></div></div></a>${enqBtn(l, lang)}</article>`;
 }
@@ -708,7 +742,7 @@ function evImgs(ev, c, w = 1000) {
 }
 function evCard(ev, lang) {
   const L = GL(lang); const c = ev[L]; const cat = EVENTS.cats[ev.cat]; const im = evImgs(ev, c, 800)[0];
-  return `<a class="pcard" href="${evUrl(lang, ev)}"><div class="pcimg">${im ? `<img src="${im.src}" alt="${esc(c.title)}" loading="lazy">` : `<div class="ph evph"><span>${cat.icon}</span><b>${esc(evT(cat.name, lang))}</b></div>`}</div><div class="pcbody"><small>${esc(ev.date)} · ${esc(evT(cat.name, lang))}</small><h3>${esc(c.title)}</h3><p>${esc(c.card)}</p><span class="more">${evT(EVENTS.ui.read, lang)} →</span></div></a>`;
+  return `<a class="pcard" href="${evUrl(lang, ev)}"><div class="pcimg">${im ? `<img src="${im.src}" alt="${esc(c.title)}" width="800" height="500" loading="lazy">` : `<div class="ph evph"><span>${cat.icon}</span><b>${esc(evT(cat.name, lang))}</b></div>`}</div><div class="pcbody"><small>${esc(ev.date)} · ${esc(evT(cat.name, lang))}</small><h3>${esc(c.title)}</h3><p>${esc(c.card)}</p><span class="more">${evT(EVENTS.ui.read, lang)} →</span></div></a>`;
 }
 function pageEvents(lang) {
   const t = T[lang]; const L = GL(lang); const nav = evT(EVENTS.nav, lang);
@@ -931,7 +965,7 @@ await fetchBrokerImages();
 const urls = [];
 for (const lang of LANGS) {
   pageHome(lang); pageList(lang); pageGuide(lang); pageContact(lang); pageBlog(lang); pageProjects(lang); pageGuideHub(lang); pageReviews(lang); pageFavorites(lang); pageEvents(lang); urls.push(url(lang, 'events'), ...EVENTS.events.map((e) => evUrl(lang, e))); pageDownloads(lang); urls.push(url(lang, 'projects'), url(lang, 'buyersguide'), url(lang, 'reviews'));
-  if (lang === 'tr' || lang === 'en') { for (const g of GUIDES) { pageGuideItem(g, lang); urls.push(gUrl(lang, g)); } for (const a of AREA_GUIDES) { pageAreaItem(a, lang); urls.push(aUrl(lang, a)); } }
+  if (lang === 'tr' || lang === 'en') { for (const g of GUIDES) { pageGuideItem(g, lang); urls.push(gUrl(lang, g)); } for (const a of AREA_GUIDES) { pageAreaItem(a, lang); urls.push(aUrl(lang, a)); } for (const m of MAHALLELER) { pageMahalle(m, lang); urls.push(mUrl(lang, m)); } }
   pageAreaHub(lang); urls.push(url(lang, 'areas'));
   for (const k of Object.keys(PAGES)) { pageCorporate(k, lang); urls.push(url(lang, k)); }
   urls.push(home(lang), url(lang, 'list'), url(lang, 'guide'), url(lang, 'contact'), url(lang, 'blog'), ...ALLPOSTS.map((p) => url(lang, 'blog', p.slug)));

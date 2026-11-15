@@ -743,7 +743,9 @@ function pageFavorites(lang) {
   write(path.join(url(lang, 'favorites'), 'index.html'), layout({ lang, title: `${s('favTitle', lang)} | ACC HOMES`, desc: s('favLead', lang), canonical: url(lang, 'favorites'), alternates: alts('favorites'), body, noindex: true }));
 }
 
+const SOON = { tr: ['Portföyümüz yenileniyor', 'Yeni sitemize ilanlarımızı aktarıyoruz. Bu süreçte Antalya’daki güncel satılık ve kiralık seçenekler için bize doğrudan yazın; bütçenize ve hedefinize uygun portföyü sizinle paylaşalım.', 'WhatsApp’tan yazın', 'Projelerimizi inceleyin'], en: ['Our portfolio is being updated', 'We are moving our listings to our new website. In the meantime, message us directly for current properties for sale and rent in Antalya and we will share options that fit your budget and goals.', 'Message us on WhatsApp', 'See our projects'] };
 function grid(list, lang) {
+  if (!list.length && !LISTINGS.length) { const c = SOON[GL(lang)]; return `<div class="soon"><h3>${c[0]}</h3><p>${c[1]}</p><p><a class="btn" href="${waLink(T[lang].waGeneral)}" target="_blank" rel="noopener">${c[2]}</a> <a class="more" href="${url(lang, 'projects')}">${c[3]} →</a></p></div>`; }
   return list.length ? `<div class="grid">${list.map((l) => card(l, lang)).join('')}</div>` : `<p class="empty">${T[lang].empty}</p>`;
 }
 
@@ -756,7 +758,7 @@ function pageHome(lang) {
   const show = feat.length ? feat : LISTINGS.slice(0, 6);
   const body = `${heroSlider(lang)}
 <section class="hsearchbar"><div class="wrap">${areaTabs(lang, 'link')}${searchBox(lang)}</div></section>
-<section class="wrap sec"><div class="sechead"><h2>${t.featured}</h2><a href="${url(lang, 'list')}">${t.seeAll} →</a></div>${areaTabs(lang, 'filter')}${grid(show, lang)}</section>
+${show.length ? `<section class="wrap sec"><div class="sechead"><h2>${t.featured}</h2><a href="${url(lang, 'list')}">${t.seeAll} →</a></div>${areaTabs(lang, 'filter')}${grid(show, lang)}</section>` : ''}
 <section class="wrap sec"><div class="sechead"><h2>${t.projects}</h2><a href="${url(lang, 'projects')}">${t.projectsCta} →</a></div>${projectCards(lang)}</section>
 ${consultBar(lang)}
 ${trustStrip(lang)}
@@ -779,7 +781,7 @@ function pageList(lang) {
 <label>${f.rooms}<select name="oda"><option value="">${f.any}</option>${rooms.map((r) => `<option>${esc(r)}</option>`).join('')}</select></label>
 <label>${f.sort}<select name="sort"><option value="new">${f.newest}</option><option value="asc">${f.priceAsc}</option><option value="desc">${f.priceDesc}</option></select></label></form>${tagFilter(lang)}
 ${grid(LISTINGS, lang)}</section>`;
-  write(path.join(url(lang, 'list'), 'index.html'), layout({ lang, title: `${t.all} — ${t.heroTitle} | ACC HOMES`, desc: t.metaHome, canonical: url(lang, 'list'), alternates: alts('list'), body }));
+  write(path.join(url(lang, 'list'), 'index.html'), layout({ lang, title: `${t.all} — ${t.heroTitle} | ACC HOMES`, desc: t.metaHome, canonical: url(lang, 'list'), alternates: alts('list'), body, noindex: !LISTINGS.length }));
 }
 
 function similar(l, lang) {
@@ -939,7 +941,37 @@ for (const p of PROJECTS) { pageProject(p); urls.push(`/projeler/${p.slug}/`); }
 const OLD_BLOG_TO = { kira: url('tr', 'blog', 'kira-artis-orani'), tuik: url('tr', 'blog', 'antalya-konut-satis-istatistikleri'), about: url('tr', 'about'), accday: url('tr', 'events', 'acc-day-2025'), blog: url('tr', 'blog') };
 const oldBlog = fs.readFileSync(path.join(ROOT, 'data/old-blog-urls.txt'), 'utf8').trim().split('\n').map((l) => l.trim().split(/\s+/)).filter(([u, k]) => OLD_BLOG_TO[k] || k.startsWith('/')).map(([u, k]) => `${u.replace(/\/$/, '')} ${OLD_BLOG_TO[k] || k} 301\n${u} ${OLD_BLOG_TO[k] || k} 301`);
 write('_redirects', oldBlog.join('\n') + '\n' + LANGS.flatMap((l) => { const to = evUrl(l, EVENTS.events.find((e) => e.id === 'acc-day-2025')); const from = `${BASE[l]}/${OLD_SOCIAL[l] || OLD_SOCIAL.en}`; return [`${from} ${to} 301`, `${from}/* ${to} 301`]; }).join('\n') + '\n');
-write('sitemap.xml', `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">${urls.map((u) => `<url><loc>${SITE.domain}${u}</loc></url>`).join('')}</urlset>`);
+// ---- Çeviri kalite kontrolü: TR/EN dışındaki dillerde içeriği İngilizce kalan sayfalar indekslenmez ----
+const OLD_SITE = fs.readFileSync(path.join(ROOT, 'data/old-site-redirects.txt'), 'utf8').split('\n').map((l) => l.trim()).filter((l) => l && !l.startsWith('#')).flatMap((l) => { const [u, t] = l.split(/\s+/); const forms = new Set([u, encodeURI(u)]); if (u.endsWith('/') && u.length > 1) { forms.add(u.slice(0, -1)); forms.add(encodeURI(u.slice(0, -1))); } return [...forms].map((f) => `${f} ${t} 301`); });
+fs.appendFileSync(path.join(OUT, '_redirects'), OLD_SITE.join('\n') + '\n');
+const FALLBACK = new Set();
+{
+  const words = (h) => { const m = h.match(/<main[\s\S]*?<\/main>/); const t = (m ? m[0] : h).replace(/<script[\s\S]*?<\/script>/g, '').replace(/<[^>]+>/g, ' '); return new Set(t.match(/[\p{L}\p{N}]{5,}/gu) || []); };
+  const fileOf = (u) => path.join(OUT, u, 'index.html');
+  const enCache = new Map();
+  for (const lang of LANGS.filter((l) => l !== 'tr' && l !== 'en')) {
+    for (const u of urls.filter((x) => x.startsWith(`/${lang}/`))) {
+      const f = fileOf(u); if (!fs.existsSync(f)) continue;
+      const h = fs.readFileSync(f, 'utf8'); const m = h.match(/hreflang="en" href="[^"]*?(\/en\/[^"]*)"/); if (!m) continue;
+      const ef = fileOf(m[1]); if (!fs.existsSync(ef)) continue;
+      if (!enCache.has(ef)) enCache.set(ef, words(fs.readFileSync(ef, 'utf8')));
+      const a = words(h); const b = enCache.get(ef); let same = 0; for (const w of a) if (b.has(w)) same++;
+      if (a.size && same / a.size > 0.72) FALLBACK.add(u);
+    }
+  }
+  const esc2 = (x) => x.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  const walk = (d) => fs.readdirSync(d, { withFileTypes: true }).flatMap((e) => (e.isDirectory() ? walk(path.join(d, e.name)) : e.name.endsWith('.html') ? [path.join(d, e.name)] : []));
+  const altRe = FALLBACK.size ? new RegExp(`<link rel="alternate" hreflang="[a-z-]+" href="${esc2(SITE.domain)}(?:${[...FALLBACK].map(esc2).join('|')})">`, 'g') : null;
+  for (const f of walk(OUT)) {
+    let h = fs.readFileSync(f, 'utf8'); const u = '/' + path.relative(OUT, path.dirname(f)).split(path.sep).join('/') + '/';
+    let h2 = altRe ? h.replace(altRe, '') : h;
+    if (FALLBACK.has(u) && !h2.includes('name="robots"')) h2 = h2.replace('<meta name="description"', '<meta name="robots" content="noindex, follow"><meta name="description"');
+    if (h2 !== h) fs.writeFileSync(f, h2);
+  }
+}
+const NOINDEX_PATHS = (u) => (!LISTINGS.length && LANGS.some((l) => u === url(l, 'list'))) || /\/(favorilerim|favourites|favoriten|izbrannoe|hazir)\//.test(u) || u.includes('/favor');
+const SITEMAP_URLS = [...new Set(urls)].filter((u) => !FALLBACK.has(u) && !NOINDEX_PATHS(u));
+write('sitemap.xml', `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">${SITEMAP_URLS.map((u) => `<url><loc>${SITE.domain}${u}</loc></url>`).join('')}</urlset>`);
 write('robots.txt', DEMO ? 'User-agent: *\nDisallow: /\n' : `User-agent: *\nAllow: /\nSitemap: ${SITE.domain}/sitemap.xml\n`);
 write('404.html', layout({ lang: 'tr', title: 'Sayfa bulunamadı | ACC HOMES', desc: '', canonical: '/404', body: `<section class="wrap sec narrow"><h1>Sayfa bulunamadı</h1><p><a class="btn" href="/">Ana sayfa</a></p></section>` }));
-console.log(`OK — ${LISTINGS.length} ilan, ${urls.length} sayfa${DEMO ? ' (önizleme verisi)' : ''}`);
+console.log(`OK — ${LISTINGS.length} ilan, ${urls.length} sayfa, sitemap ${SITEMAP_URLS.length}, çevrilmemiş (noindex) ${FALLBACK.size}${DEMO ? ' (önizleme verisi)' : ''}`);

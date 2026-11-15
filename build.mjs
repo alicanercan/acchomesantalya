@@ -1150,13 +1150,10 @@ AddType application/manifest+json .webmanifest
 AddType text/plain .txt
 <IfModule mod_rewrite.c>
 RewriteEngine On
-# HTTPS ve www
-RewriteCond %{HTTPS} !=on
+# HTTPS (alan adı yönlendirmesi sunucu tarafında yapılıyor; burada ayrıca yapılmaz)
+RewriteCond %{SERVER_PORT} ^80$
 RewriteCond %{HTTP:X-Forwarded-Proto} !https
-RewriteRule ^(.*)$ https://${host}/$1 [R=301,L,NE]
-RewriteCond %{HTTP_HOST} !^${reEsc(host)}$ [NC]
-RewriteCond %{REQUEST_URI} !^/wp-content/
-RewriteRule ^(.*)$ https://${host}/$1 [R=301,L,NE]
+RewriteRule ^(.*)$ https://%{HTTP_HOST}/$1 [R=301,L,NE]
 # Eski WordPress yönetim ve dosya adresleri
 RewriteRule ^wp-admin(/.*)?$ / [R=301,L]
 RewriteRule ^wp-login\\.php$ / [R=301,L]

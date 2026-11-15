@@ -1,0 +1,47 @@
+# Canlı site: her güncellemede siteyi derleyip Turhost'a (acchomesantalya.com) yükler.
+# Gerekli GitHub gizli ayarları (Settings > Secrets and variables > Actions):
+#   FTP_SERVER   (örn. ftp.acchomesantalya.com)
+#   FTP_USERNAME (cPanel'de yalnızca bu iş için açılan FTP hesabı)
+#   FTP_PASSWORD
+# Gizli ayarlar girilmeden iş akışı yalnızca derleme yapar, yükleme yapmaz.
+name: Turhost yayını
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+concurrency:
+  group: turhost-deploy
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      SITE_HOST: turhost
+      FTP_SERVER: ${{ secrets.FTP_SERVER }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Görsel küçültme aracı (sharp)
+        run: npm install --no-save --no-package-lock sharp@0.33
+      - name: Siteyi derle
+        run: node build.mjs
+      - name: Turhost'a yükle
+        if: env.FTP_SERVER != ''
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          protocol: ftps
+          local-dir: ./dist/
+          server-dir: ./
+          exclude: |
+            **/.git*
+            **/.git*/**
+            _redirects

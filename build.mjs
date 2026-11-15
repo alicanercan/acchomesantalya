@@ -205,7 +205,8 @@ const segOf = (lang, seg) => (PAGES[seg] ? (PAGES[seg].seg[lang] || PAGES[seg].s
 const url = (lang, seg, slug) => `${BASE[lang]}/${segOf(lang, seg)}/${slug ? slug + '/' : ''}`;
 const home = (lang) => `${BASE[lang]}/`;
 const waLink = (text) => `https://wa.me/${SITE.whatsapp}?text=${encodeURIComponent(text)}`;
-const write = (rel, html) => { const f = path.join(OUT, rel); fs.mkdirSync(path.dirname(f), { recursive: true }); fs.writeFileSync(f, html); };
+const turhostForms = (html) => html.replace(/<form([^>]*?)data-netlify="true"([^>]*?)action="([^"]*)"([^>]*)>/g, (m, a, b, act, c) => `<form${a}${b}action="/form.php"${c}><input type="hidden" name="_next" value="${act}">`);
+const write = (rel, html) => { if (HOST === 'turhost' && typeof html === 'string' && rel.endsWith('.html')) html = turhostForms(html); const f = path.join(OUT, rel); fs.mkdirSync(path.dirname(f), { recursive: true }); fs.writeFileSync(f, html); };
 const placeholder = `<div class="ph"><svg viewBox="0 0 64 64" aria-hidden="true"><path d="M8 30 32 10l24 20v24H40V38H24v16H8z" fill="none" stroke="currentColor" stroke-width="3" stroke-linejoin="round"/></svg></div>`;
 
 const AREAS_SERVED = ['Muratpaşa', 'Konyaaltı', 'Kepez', 'Aksu', 'Döşemealtı', 'Serik', 'Kemer'];
@@ -370,6 +371,13 @@ ${stickyBar(lang)}
 
 // ---------- bileşenler ----------
 // ---------- proje medyası (Google Drive → derlemede indirilir → Netlify Image CDN ile WebP) ----------
+const HOST = process.env.SITE_HOST || 'netlify'; // 'netlify' (önizleme/yedek) | 'turhost' (canlı)
+const RJOBS = new Map();
+function rimg(src, w, q = 74) {
+  if (HOST !== 'turhost') return `/.netlify/images?url=${encodeURIComponent(src)}&w=${w}&fm=webp&q=${q}`;
+  const out = `/r/${src.replace(/^\//, '').replace(/\.(webp|jpe?g|png)$/i, '').replace(/[^a-z0-9]+/gi, '-').toLowerCase()}-${w}.webp`;
+  RJOBS.set(out, { src, w, q }); return out;
+}
 const MEDIA = {};
 async function fetchDriveMedia() {
   const ids = new Set();
@@ -386,7 +394,7 @@ async function fetchDriveMedia() {
     } catch (e) { console.warn('Drive görseli indirilemedi:', id, e.message); }
   }));
 }
-const cdn = (id, w) => (MEDIA[id] ? `/.netlify/images?url=${encodeURIComponent(MEDIA[id])}&w=${w}&fm=webp&q=72` : null);
+const cdn = (id, w) => (MEDIA[id] ? rimg(MEDIA[id], w, 72) : null);
 const pimg = (id, w, alt, cls = '') => { const u = cdn(id, w); return u ? `<img class="${cls}" src="${u}" alt="${esc(alt)}" loading="lazy">` : ''; };
 
 const OFFICE = [['lobi', 'ACC Plaza lobi ve proje maketi'], ['oturma', 'ACC Plaza müşteri bekleme alanı'], ['amfi', 'ACC Plaza amfi ve etkinlik alanı'], ['sunum', 'ACC Plaza sunum ve eğitim salonu'], ['kahve', 'ACC Plaza kahve köşesi'], ['maket', 'ACC Plaza proje maketleri'], ['calisma', 'ACC Plaza ortak çalışma alanı'], ['toplanti', 'ACC Plaza toplantı masaları']];
@@ -477,7 +485,7 @@ function fill(html, lang) {
   const t = T[lang];
   const nf = new Intl.NumberFormat(LOCALE[lang]);
   const stats = `<div class="stats"><div><b>1.000 m²</b><span>ACC Plaza</span></div><div><b>~50</b><span>${s('partners', lang)}</span></div><div><b>10</b><span>${s('langsSvc', lang)}</span></div><div><b>${fmtRating(lang)} ★</b><span>${t.gReviews(nf.format(SITE.google.reviews))}</span></div></div>`;
-  const ph = (f, w) => (TEAM_LOCAL[f] ? `/.netlify/images?url=${encodeURIComponent(TEAM_LOCAL[f])}&w=${w}&fm=webp&q=75` : null);
+  const ph = (f, w) => (TEAM_LOCAL[f] ? rimg(TEAM_LOCAL[f], w, 75) : null);
   const team = `<div class="team">${TEAM.map((p) => { const u = ph(STAFF_PHOTOS[p.name], 320); return `<div class="member">${u ? `<img src="${u}" alt="${esc(p.name)}, ${esc(p.role.tr)} – ACC HOMES" loading="lazy" width="160" height="160">` : `<span class="mav">${esc(p.initials)}</span>`}<b>${p.link ? `<a href="${url(lang, p.link)}">${esc(p.name)}</a>` : esc(p.name)}</b><small>${esc(p.role[lang] || p.role.en)}</small></div>`; }).join('')}</div>`;
   const partners = `<div class="team partners">${PARTNERS.map((p) => { const u = ph(p.photo, 320); const ini = p.name.split(' ').map((x) => x[0]).slice(0, 2).join(''); return `<div class="member">${u ? `<img src="${u}" alt="${esc(p.name)}, ${PARTNER_ROLE.tr} – ACC HOMES" loading="lazy" width="160" height="160">` : `<span class="mav">${esc(ini)}</span>`}<b>${esc(p.name)}</b><small>${esc((p.sworn ? SWORN_ROLE : PARTNER_ROLE)[lang])}</small></div>`; }).join('')}</div>`;
   const langs = `<ul class="chips">${LANGS_SPOKEN[lang].map((l) => `<li>${l}</li>`).join('')}</ul>`;
@@ -500,7 +508,7 @@ async function fetchBrokerImages() {
     }
   }
   const p = BROKER_LOCAL[BROKER.portrait[1]];
-  if (p && !SITE.brokerPhoto) SITE.brokerPhoto = `/.netlify/images?url=${encodeURIComponent(p)}&w=600&fm=webp&q=78`;
+  if (p && !SITE.brokerPhoto) SITE.brokerPhoto = rimg(p, 600, 78);
 }
 const bT = (o, lang) => o[lang] || o.en;
 const brokerCreds = (lang) => `<ul class="chips bcreds">${BROKER.creds.map(([i, l]) => `<li>${i} ${esc(bT(l, lang))}</li>`).join('')}</ul>`;
@@ -508,7 +516,7 @@ const brokerStats = (lang) => `<div class="stats">${BROKER.stats.map(([n, l]) =>
 function brokerGallery(lang) {
   const L = GL(lang);
   const items = BROKER.gallery.map(([src, cap]) => {
-    const real = src.startsWith('remote:') ? BROKER_LOCAL[src.slice(7)] && `/.netlify/images?url=${encodeURIComponent(BROKER_LOCAL[src.slice(7)])}&w=800&fm=webp&q=74` : src;
+    const real = src.startsWith('remote:') ? BROKER_LOCAL[src.slice(7)] && rimg(BROKER_LOCAL[src.slice(7)], 800, 74) : src;
     return real ? `<figure><img src="${real}" alt="${esc(cap[L] || cap.en)} – Ali Caner Can" loading="lazy" width="800" height="533"><figcaption>${esc(cap[L] || cap.en)}</figcaption></figure>` : '';
   }).join('');
   return `<h2>${bT(BROKER.ui.gallery, lang)}</h2><div class="sgal">${items}</div>`;
@@ -788,7 +796,7 @@ function evImgs(ev, c, w = 1000) {
   return [
     ...ev.images.map(([src, iw, ih, wide, cap]) => ({ src, w: iw, h: ih, wide, cap })),
     ...(ev.media || []).filter((id) => MEDIA[id]).map((id) => ({ src: cdn(id, w), w, h: Math.round(w * 0.625) })),
-    ...(ev.remote || []).filter(([, n]) => SOCIAL_LOCAL[n]).map(([, n]) => ({ src: `/.netlify/images?url=${encodeURIComponent(SOCIAL_LOCAL[n])}&w=${w}&fm=webp&q=72`, w, h: Math.round(w * 0.5625) })),
+    ...(ev.remote || []).filter(([, n]) => SOCIAL_LOCAL[n]).map(([, n]) => ({ src: rimg(SOCIAL_LOCAL[n], w, 72), w, h: Math.round(w * 0.5625) })),
   ];
 }
 function evCard(ev, lang) {
@@ -1104,6 +1112,73 @@ write('_redirects', oldBlog.join('\n') + '\n' + LANGS.flatMap((l) => { const to 
 // ---- Çeviri kalite kontrolü: TR/EN dışındaki dillerde içeriği İngilizce kalan sayfalar indekslenmez ----
 const OLD_SITE = fs.readFileSync(path.join(ROOT, 'data/old-site-redirects.txt'), 'utf8').split('\n').map((l) => l.trim()).filter((l) => l && !l.startsWith('#')).flatMap((l) => { const [u, t] = l.split(/\s+/); const forms = new Set([u, encodeURI(u)]); if (u.endsWith('/') && u.length > 1) { forms.add(u.slice(0, -1)); forms.add(encodeURI(u.slice(0, -1))); } return [...forms].map((f) => `${f} ${t} 301`); });
 fs.appendFileSync(path.join(OUT, '_redirects'), OLD_SITE.join('\n') + '\n');
+
+// ---- Turhost (Apache/LiteSpeed) için .htaccess ve görsel küçültme ----
+if (HOST === 'turhost') {
+  const reEsc = (x) => x.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  const lines = fs.readFileSync(path.join(OUT, '_redirects'), 'utf8').split('\n').map((l) => l.trim().split(/\s+/)).filter((x) => x.length >= 2 && x[0].startsWith('/'));
+  const seen = new Set(); const rules = [];
+  for (const [from0, to] of lines) {
+    let from; try { from = decodeURI(from0); } catch { from = from0; }
+    const key = from.replace(/\/$/, ''); if (seen.has(key)) continue; seen.add(key);
+    if (from.endsWith('/*')) rules.push(`RewriteRule ^${reEsc(from.slice(1, -2))}(/.*)?$ ${to} [R=301,L,NE]`);
+    else rules.push(`RewriteRule ^${reEsc(from.slice(1).replace(/\/$/, ''))}/?$ ${to} [R=301,L,NE]`);
+  }
+  const host = SITE.domain.replace(/^https?:\/\//, '');
+  fs.writeFileSync(path.join(OUT, '.htaccess'), `# ACC HOMES — yeni site (otomatik üretilir, elle değiştirmeyin)
+Options -Indexes
+DirectoryIndex index.html index.php
+ErrorDocument 404 /404.html
+AddDefaultCharset utf-8
+AddType application/manifest+json .webmanifest
+AddType text/plain .txt
+<IfModule mod_rewrite.c>
+RewriteEngine On
+# HTTPS ve www
+RewriteCond %{HTTPS} !=on
+RewriteCond %{HTTP:X-Forwarded-Proto} !https
+RewriteRule ^(.*)$ https://${host}/$1 [R=301,L,NE]
+RewriteCond %{HTTP_HOST} !^${reEsc(host)}$ [NC]
+RewriteCond %{REQUEST_URI} !^/wp-content/
+RewriteRule ^(.*)$ https://${host}/$1 [R=301,L,NE]
+# Eski WordPress yönetim ve dosya adresleri
+RewriteRule ^wp-admin(/.*)?$ / [R=301,L]
+RewriteRule ^wp-login\\.php$ / [R=301,L]
+RewriteRule ^(xmlrpc|wp-cron|wp-config)\\.php$ - [F,L]
+# Var olan dosya ve klasörler yönlendirilmez
+RewriteCond %{REQUEST_FILENAME} -f [OR]
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteRule ^ - [L]
+# Eski site adresleri (301)
+${rules.join('\n')}
+</IfModule>
+<IfModule mod_headers.c>
+<FilesMatch "\\.(webp|jpg|jpeg|png|svg|woff2|css|js)$">
+Header set Cache-Control "public, max-age=2592000"
+</FilesMatch>
+<FilesMatch "\\.(html)$">
+Header set Cache-Control "public, max-age=300"
+</FilesMatch>
+Header always set X-Content-Type-Options "nosniff"
+Header always set Referrer-Policy "strict-origin-when-cross-origin"
+</IfModule>
+<IfModule mod_deflate.c>
+AddOutputFilterByType DEFLATE text/html text/css application/javascript application/json image/svg+xml text/plain application/xml
+</IfModule>
+`);
+  // form işleyici
+  fs.copyFileSync(path.join(ROOT, 'server/form.php'), path.join(OUT, 'form.php'));
+  // görselleri küçült (sharp varsa)
+  let sharp = null; try { sharp = (await import('sharp')).default; } catch { console.warn('sharp yok: görseller küçültülmeden kopyalanacak'); }
+  let ok = 0;
+  for (const [out, { src, w, q }] of RJOBS) {
+    const inF = path.join(OUT, decodeURIComponent(src)); const outF = path.join(OUT, out);
+    if (!fs.existsSync(inF)) { console.warn('Görsel bulunamadı:', src); continue; }
+    fs.mkdirSync(path.dirname(outF), { recursive: true });
+    if (sharp) { await sharp(inF).rotate().resize({ width: w, withoutEnlargement: true }).webp({ quality: q }).toFile(outF); ok++; } else fs.copyFileSync(inF, outF);
+  }
+  console.log(`Turhost: .htaccess (${rules.length} yönlendirme), ${ok}/${RJOBS.size} görsel küçültüldü`);
+}
 const FALLBACK = new Set();
 {
   const words = (h) => { const m = h.match(/<main[\s\S]*?<\/main>/); const t = (m ? m[0] : h).replace(/<script[\s\S]*?<\/script>/g, '').replace(/<[^>]+>/g, ' '); return new Set(t.match(/[\p{L}\p{N}]{5,}/gu) || []); };

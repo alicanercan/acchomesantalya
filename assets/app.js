@@ -341,3 +341,6 @@
   document.addEventListener('contextmenu', function (e) { if (e.target && e.target.tagName === 'IMG') e.preventDefault(); });
   document.addEventListener('dragstart', function (e) { if (isImg(e.target)) e.preventDefault(); });
 })();
+
+// Açılış hızı: ilk slayt dışındaki arka plan görselleri sayfa yüklendikten sonra
+addEventListener('load', function () { setTimeout(function () { document.querySelectorAll('[data-bgs]').forEach(function (el) { el.style.backgroundImage = el.getAttribute('data-bgs'); el.removeAttribute('data-bgs'); }); }, 300); });

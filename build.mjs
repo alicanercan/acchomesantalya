@@ -206,7 +206,18 @@ const url = (lang, seg, slug) => `${BASE[lang]}/${segOf(lang, seg)}/${slug ? slu
 const home = (lang) => `${BASE[lang]}/`;
 const waLink = (text) => `https://wa.me/${SITE.whatsapp}?text=${encodeURIComponent(text)}`;
 const turhostForms = (html) => html.replace(/<form([^>]*?)data-netlify="true"([^>]*?)action="([^"]*)"([^>]*)>/g, (m, a, b, act, c) => `<form${a}${b}action="/form.php"${c}><input type="hidden" name="_next" value="${act}">`);
-const write = (rel, html) => { if (typeof html === 'string' && rel.endsWith('.html')) html = html.replace(/<iframe([^>]*?) src="/g, '<iframe$1 data-csrc="'); if (HOST === 'turhost' && typeof html === 'string' && rel.endsWith('.html')) html = turhostForms(html); const f = path.join(OUT, rel); fs.mkdirSync(path.dirname(f), { recursive: true }); fs.writeFileSync(f, html); };
+function heroOpt(html) {
+  const i = html.indexOf('<div class="slides">'); if (i < 0) return html;
+  let n = 0, first = '';
+  const tail = html.slice(i).replace(/<div class="slide" style="background-image:([^"]*)"/g, (m, v) => {
+    n++; if (n === 1) { const u = v.match(/url\('([^']+)'\)/); if (u) first = u[1]; return m; }
+    return `<div class="slide" data-bgs="${v}"`;
+  });
+  html = html.slice(0, i) + tail;
+  if (first) html = html.replace('</head>', `<link rel="preload" as="image" href="${first}" fetchpriority="high"></head>`);
+  return html;
+}
+const write = (rel, html) => { if (typeof html === 'string' && rel.endsWith('.html')) html = heroOpt(html.replace(/<iframe([^>]*?) src="/g, '<iframe$1 data-csrc="')); if (HOST === 'turhost' && typeof html === 'string' && rel.endsWith('.html')) html = turhostForms(html); const f = path.join(OUT, rel); fs.mkdirSync(path.dirname(f), { recursive: true }); fs.writeFileSync(f, html); };
 const placeholder = `<div class="ph"><svg viewBox="0 0 64 64" aria-hidden="true"><path d="M8 30 32 10l24 20v24H40V38H24v16H8z" fill="none" stroke="currentColor" stroke-width="3" stroke-linejoin="round"/></svg></div>`;
 
 const AREAS_SERVED = ['Muratpaşa', 'Konyaaltı', 'Kepez', 'Aksu', 'Döşemealtı', 'Serik', 'Kemer'];
@@ -335,7 +346,7 @@ ${ALLPOSTS.map((p) => `- [${postFor(p, 'tr').title}](${a(url('tr', 'blog', p.slu
 `;
 }
 const AN = SITE.analytics || {};
-const ANALYTICS_HEAD = `<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('consent','default',{ad_storage:'denied',ad_user_data:'denied',ad_personalization:'denied',analytics_storage:'denied',wait_for_update:500});gtag('set','url_passthrough',true);gtag('set','ads_data_redaction',true);(function(){try{var c=JSON.parse(localStorage.getItem('acc_consent')||'null');if(c){gtag('consent','update',{analytics_storage:c.a?'granted':'denied',ad_storage:c.m?'granted':'denied',ad_user_data:c.m?'granted':'denied',ad_personalization:c.m?'granted':'denied'});}}catch(e){}})();window.ACC_PIXEL=${JSON.stringify(AN.metaPixel || '')};window.ACC_CLARITY=${JSON.stringify(AN.clarity || '')};</script>${AN.ga4 ? `<script async src="https://www.googletagmanager.com/gtag/js?id=${AN.ga4}"></script><script>gtag('js',new Date());gtag('config','${AN.ga4}');</script>` : ''}`;
+const ANALYTICS_HEAD = `<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('consent','default',{ad_storage:'denied',ad_user_data:'denied',ad_personalization:'denied',analytics_storage:'denied',wait_for_update:500});gtag('set','url_passthrough',true);gtag('set','ads_data_redaction',true);(function(){try{var c=JSON.parse(localStorage.getItem('acc_consent')||'null');if(c){gtag('consent','update',{analytics_storage:c.a?'granted':'denied',ad_storage:c.m?'granted':'denied',ad_user_data:c.m?'granted':'denied',ad_personalization:c.m?'granted':'denied'});}}catch(e){}})();window.ACC_PIXEL=${JSON.stringify(AN.metaPixel || '')};window.ACC_CLARITY=${JSON.stringify(AN.clarity || '')};</script>${AN.ga4 ? `<script>gtag('js',new Date());gtag('config','${AN.ga4}');addEventListener('load',function(){setTimeout(function(){var s=document.createElement('script');s.async=1;s.src='https://www.googletagmanager.com/gtag/js?id=${AN.ga4}';document.head.appendChild(s);},1200);});</script>` : ''}`;
 const CB = { tr: { t: 'Çerez tercihleriniz', p: 'Sitemizi iyileştirmek için ziyaret istatistikleri (Google Analytics, Microsoft Clarity) ve reklamlarımızın etkisini ölçmek için pazarlama çerezleri (Meta) kullanmak istiyoruz. Onayınız olmadan bu çerezler çalışmaz. Ayrıntılar için', l: 'KVKK ve Gizlilik Politikası', acc: 'Kabul et', rej: 'Reddet', set: 'Ayarlar', save: 'Seçimi kaydet', a: 'İstatistik (Google Analytics, Microsoft Clarity)', m: 'Pazarlama (Meta Pikseli, reklam ölçümü)', n: 'Zorunlu (dil, para birimi, favoriler)', reopen: 'Çerez ayarları', map: 'Haritayı göster', mapN: 'Harita Google tarafından sunulur ve çerez kullanabilir.' }, en: { t: 'Your cookie choices', p: 'We would like to use visit statistics (Google Analytics, Microsoft Clarity) to improve our site and marketing cookies (Meta) to measure our ads. These cookies only run with your consent. See our', l: 'Privacy Policy', acc: 'Accept', rej: 'Reject', set: 'Settings', save: 'Save choice', a: 'Statistics (Google Analytics, Microsoft Clarity)', m: 'Marketing (Meta Pixel, ad measurement)', n: 'Necessary (language, currency, favourites)', reopen: 'Cookie settings', map: 'Show map', mapN: 'The map is provided by Google and may use cookies.' } };
 function consentBanner(lang) {
   const c = CB[GL(lang)];
@@ -359,7 +370,7 @@ function layout({ lang, title, desc, canonical, alternates, body, schema = [], o
   return (RTL.has(lang) ? (h) => h.replaceAll('→', '←') : (h) => h)(`<!doctype html><html lang="${t.htmlLang}"${RTL.has(lang) ? ' dir="rtl"' : ''}><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>${esc(title)}</title>${noindex ? '<meta name="robots" content="noindex">' : ''}<meta name="description" content="${esc(desc)}"><link rel="canonical" href="${SITE.domain}${canonical}">${alt}
 <meta property="og:type" content="website"><meta property="og:title" content="${esc(title)}"><meta property="og:description" content="${esc(desc)}"><meta property="og:url" content="${SITE.domain}${canonical}"><meta property="og:locale" content="${t.locale}"><meta property="og:site_name" content="ACC HOMES International Real Estate"><meta property="og:image" content="${SITE.domain}${ogImage || '/img/acc-plaza-og.jpg'}">${ogImage ? '' : '<meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">'}<meta property="og:image:alt" content="${esc(title)}"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="${esc(title)}"><meta name="twitter:description" content="${esc(desc)}"><meta name="twitter:image" content="${SITE.domain}${ogImage || '/img/acc-plaza-og.jpg'}">
-${ANALYTICS_HEAD}<meta name="theme-color" content="#E02A3C"><link rel="icon" href="/favicon.svg" type="image/svg+xml"><link rel="apple-touch-icon" href="/apple-touch-icon.png">${FONTS_OK ? `<link rel="preload" href="/assets/fonts.css" as="style"><link rel="stylesheet" href="/assets/fonts.css">` : ''}<link rel="stylesheet" href="/assets/style.css?v=${VER}">
+${ANALYTICS_HEAD}<meta name="theme-color" content="#E02A3C"><link rel="icon" href="/favicon.svg" type="image/svg+xml"><link rel="apple-touch-icon" href="/apple-touch-icon.png">${FONTS_OK ? FONTS_PRELOAD + `<style>${FONTS_CSS}</style>` : ''}<link rel="stylesheet" href="/assets/style.css?v=${VER}">
 ${[agentSchema, ...(canonical === home(lang) ? [websiteSchema] : []), ...(schema.some((x) => x && x['@type'] === 'BreadcrumbList') ? [] : crumbSchema(body, title, canonical)), ...schema].filter(Boolean).map((s) => `<script type="application/ld+json">${JSON.stringify(s)}</script>`).join('')}
 </head><body>
 ${DEMO ? `<div class="demo">${t.demo}</div>` : ''}
@@ -483,7 +494,7 @@ function igBlock(lang) {
 <div class="igmeta"><div class="igname"><a href="${SITE.instagram.url}" target="_blank" rel="noopener"><b>@${esc(IG.username)}</b></a><a class="btn sm" href="${SITE.instagram.url}" target="_blank" rel="noopener">${ICON_IG} ${t.igFollowBtn}</a></div>
 <div class="igstats"><span><b>${nf.format(IG.posts)}</b> ${t.igPosts}</span><span><b>${nf.format(IG.followers)}</b> ${t.igFollowers}</span></div>
 <p class="igbio"><b>${esc(IG.name)}</b><br>${esc(IG.biography).replace(/\n/g, '<br>')}</p></div></div>
-<div class="iggrid">${items.map((m) => `<a class="igitem" href="${esc(m.permalink)}" target="_blank" rel="noopener" title="${esc(m.caption)}"><img src="${esc(m.local || m.image)}" alt="${esc(m.caption)}" width="400" height="400" loading="lazy">${m.type === 'VIDEO' ? '<span class="play" aria-hidden="true">▶</span>' : ''}<span class="igcap">${esc(m.caption)}</span></a>`).join('')}</div></section>`;
+<div class="iggrid">${items.map((m) => `<a class="igitem" href="${esc(m.permalink)}" target="_blank" rel="noopener"><img src="${esc(m.local || m.image)}" alt="${esc(m.caption)}" width="400" height="400" loading="lazy">${m.type === 'VIDEO' ? '<span class="play" aria-hidden="true">▶</span>' : ''}<span class="igcap">${esc(m.caption)}</span></a>`).join('')}</div></section>`;
 }
 function stickyBar(lang) {
   const t = T[lang];
@@ -715,7 +726,7 @@ function talkBlock(lang) {
   const t = T[lang];
   return `<section class="talk"><div class="wrap talkgrid"><form class="box form" name="danisman-gorusme" method="POST" data-netlify="true" netlify-honeypot="bot" action="${url(lang, 'contact')}?ok=1"><input type="hidden" name="form-name" value="danisman-gorusme"><input type="hidden" name="dil" value="${lang}"><p hidden><input name="bot"></p>
 <h2>${s('talkTitle', lang)}</h2><p class="sub sm">${s('talkSub', lang)}</p>
-<input name="ad" placeholder="${t.name} *" required><div class="cptel"><select name="ulke_kodu">${DIAL.map(([c, d]) => `<option value="${d}"${d === (DEF_DIAL[lang] || '+90') && c !== 'KZ' ? ' selected' : ''}>${c} ${d}</option>`).join('')}</select><input name="telefon" type="tel" placeholder="${t.phone} *" required></div><input name="eposta" type="email" placeholder="${s('email', lang)}"><input name="butce" placeholder="${s('budget', lang)}"><textarea name="mesaj" rows="3" placeholder="${t.msg}"></textarea>
+<input name="ad" placeholder="${t.name} *" required><div class="cptel"><select name="ulke_kodu" aria-label="${s('dialCode', lang)}">${DIAL.map(([c, d]) => `<option value="${d}"${d === (DEF_DIAL[lang] || '+90') && c !== 'KZ' ? ' selected' : ''}>${c} ${d}</option>`).join('')}</select><input name="telefon" type="tel" placeholder="${t.phone} *" required></div><input name="eposta" type="email" placeholder="${s('email', lang)}"><input name="butce" placeholder="${s('budget', lang)}"><textarea name="mesaj" rows="3" placeholder="${t.msg}"></textarea>
 <label class="chk"><input type="checkbox" name="kvkk_onay" value="evet" required> <span>${s('consent', lang).replace('{{LINK}}', `<a href="${url(lang, 'privacy')}" target="_blank" rel="noopener">${PAGES.privacy.nav[lang] || PAGES.privacy.nav.en}</a>`)} *</span></label><button class="btn" type="submit">${t.send}</button></form>
 <div class="talkimg">${officeGallery(4)}</div></div></section>`;
 }
@@ -1078,6 +1089,13 @@ async function fetchTeamPhotos() {
 
 // Yazı tipleri: Montserrat (logo ile uyumlu başlıklar) + Vazirmatn (Farsça). Derlemede Google Fonts'tan indirilip siteden sunulur.
 let FONTS_OK = false;
+let FONTS_CSS = '', FONTS_PRELOAD = '';
+function setFonts(out) {
+  fs.writeFileSync(path.join(OUT, 'assets', 'fonts.css'), out); FONTS_OK = true;
+  FONTS_CSS = out.replace(/\/\*[\s\S]*?\*\//g, '').replace(/\s*\n\s*/g, '').replace(/\s*([{};:,])\s*/g, '$1');
+  const pre = [...new Set([...out.matchAll(/url\((\/fonts\/[^)]*montserrat-latin-(?:700|800)-normal[^)]*\.woff2)\)/g)].map((m) => m[1]))].slice(0, 2);
+  FONTS_PRELOAD = pre.map((u) => `<link rel="preload" href="${u}" as="font" type="font/woff2" crossorigin>`).join('');
+}
 async function fetchFonts() {
   try {
     const css = await (await fetch('https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&family=Vazirmatn:wght@400;700&display=swap', { headers: { 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0 Safari/537.36' }, signal: AbortSignal.timeout(20000) })).text();
@@ -1091,7 +1109,7 @@ async function fetchFonts() {
       fs.writeFileSync(path.join(dir, name), Buffer.from(await r.arrayBuffer()));
       out = out.split(u).join(`/fonts/${name}`);
     }
-    fs.writeFileSync(path.join(OUT, 'assets', 'fonts.css'), out); FONTS_OK = true;
+    setFonts(out);
   } catch (e) {
     // Yedek: npm @fontsource paketleri (GitHub/Turhost derlemesi)
     try {
@@ -1106,7 +1124,7 @@ async function fetchFonts() {
         out += css + '\n';
       }
       if (!out) throw new Error('fontsource yok');
-      fs.writeFileSync(path.join(OUT, 'assets', 'fonts.css'), out); FONTS_OK = true; console.log('Yazı tipleri @fontsource paketinden alındı');
+      setFonts(out); console.log('Yazı tipleri @fontsource paketinden alındı');
     } catch (e2) { console.warn('Yazı tipleri indirilemedi, sistem fontu kullanılacak:', e.message, e2.message); }
   }
 }

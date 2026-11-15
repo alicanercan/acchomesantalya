@@ -286,6 +286,12 @@
     !function (f, b, e, v, n, t, s) { if (f.fbq) return; n = f.fbq = function () { n.callMethod ? n.callMethod.apply(n, arguments) : n.queue.push(arguments); }; if (!f._fbq) f._fbq = n; n.push = n; n.loaded = !0; n.version = '2.0'; n.queue = []; t = b.createElement(e); t.async = !0; t.src = v; s = b.getElementsByTagName(e)[0]; s.parentNode.insertBefore(t, s); }(window, document, 'script', 'https://connect.facebook.net/en_US/fbevents.js');
     window.fbq('init', window.ACC_PIXEL); window.fbq('track', 'PageView');
   }
+  var clarOn = false;
+  function clarity() {
+    if (clarOn || !window.ACC_CLARITY) return; clarOn = true;
+    (function (c, l, a, r, i, t, y) { c[a] = c[a] || function () { (c[a].q = c[a].q || []).push(arguments); }; t = l.createElement(r); t.async = 1; t.src = 'https://www.clarity.ms/tag/' + i; y = l.getElementsByTagName(r)[0]; y.parentNode.insertBefore(t, y); })(window, document, 'clarity', 'script', window.ACC_CLARITY);
+    window.clarity('consent');
+  }
   function maps(force) {
     document.querySelectorAll('iframe[data-csrc]').forEach(function (f) {
       if (f.src) return;
@@ -301,6 +307,7 @@
     st = c; try { localStorage.setItem(KEY, JSON.stringify(c)); } catch (e) {}
     gt('consent', 'update', { analytics_storage: c.a ? 'granted' : 'denied', ad_storage: c.m ? 'granted' : 'denied', ad_user_data: c.m ? 'granted' : 'denied', ad_personalization: c.m ? 'granted' : 'denied' });
     if (c.m) pixel();
+    if (c.a) clarity();
     box.hidden = true; maps();
   }
   box.addEventListener('click', function (e) {
@@ -312,7 +319,7 @@
   });
   var re = document.querySelector('.cbn-re');
   if (re) re.addEventListener('click', function () { if (st) { box.querySelector('[data-c=a]').checked = !!st.a; box.querySelector('[data-c=m]').checked = !!st.m; } box.hidden = false; });
-  if (!st) box.hidden = false; else if (st.m) pixel();
+  if (!st) box.hidden = false; else { if (st.m) pixel(); if (st.a) clarity(); }
   maps();
   // dönüşüm olayları
   function ev(name, params, fbName) { gt('event', name, params || {}); if (window.fbq && pixelOn && fbName) window.fbq('track', fbName); }

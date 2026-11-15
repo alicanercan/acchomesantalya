@@ -9,6 +9,7 @@ import { PRIVACY } from './privacy.mjs';
 import { PAGES2, P2X, p2Html } from './pages2.mjs';
 import { AREA_GUIDES } from './areas.mjs';
 import { EVENTS } from './events.mjs';
+import { BROKER } from './broker.mjs';
 import { GUIDES, FAQ, GUIDE_SEG, GUIDE_TITLE, GUIDE_LEAD, GUIDE_UPDATED } from './guide.mjs';
 import { T_EXTRA, S, s, SEGS, LOCALE, RTL, extend, PACKS } from './i18n.mjs';
 import { STAFF_PHOTOS, PARTNERS, PHOTO_BASE, LANG_NAMES, PARTNER_ROLE, SWORN_ROLE } from './team.mjs';
@@ -415,7 +416,36 @@ function fill(html, lang) {
     .replaceAll('{{WA_JOIN}}', waJoin).replaceAll('{{WA}}', waLink(t.waGeneral)).replaceAll('{{TEL}}', `tel:${SITE.phoneRaw}`)
     .replaceAll('{{MAPS}}', SITE.google.mapsUrl).replaceAll('{{IG}}', SITE.instagram.url).replaceAll('{{IG_CANER}}', 'https://www.instagram.com/alicanercan.therealtor/')
     .replaceAll('{{RATING}}', `${fmtRating(lang)} ★ · ${t.gReviews(nf.format(SITE.google.reviews))}`).replaceAll('{{SELLFORM}}', sellForm(lang)).replaceAll('{{REVIEWS}}', nf.format(SITE.google.reviews))
-    .replaceAll('{{BROKER_PHOTO}}', SITE.brokerPhoto ? `<img src="${SITE.brokerPhoto}" alt="Ali Caner Can">` : '<span class="mav big">AC</span>');
+    .replaceAll('{{BROKER_PHOTO}}', SITE.brokerPhoto ? `<img src="${SITE.brokerPhoto}" alt="Ali Caner Can, Broker & Owner – ACC HOMES" width="600" height="655">` : '<span class="mav big">AC</span>')
+    .replaceAll('{{BROKER_STATS}}', brokerStats(lang)).replaceAll('{{BROKER_GALLERY}}', brokerGallery(lang)).replaceAll('{{BROKER_LINKS}}', brokerLinks(lang));
+}
+// Broker Ali Caner Can (broker.mjs): portre ve görseller derlemede indirilir
+const BROKER_LOCAL = {};
+async function fetchBrokerImages() {
+  const dir = path.join(OUT, 'img', 'broker'); fs.mkdirSync(dir, { recursive: true });
+  for (const [u, name] of [BROKER.portrait, ...BROKER.remote]) {
+    for (let i = 0; i < 3 && !BROKER_LOCAL[name]; i++) {
+      try { const r = await fetch(u, { signal: AbortSignal.timeout(30000), headers: { 'User-Agent': 'Mozilla/5.0 (ACC HOMES site build)' } }); if (!r.ok) throw new Error(r.status); fs.writeFileSync(path.join(dir, name), Buffer.from(await r.arrayBuffer())); BROKER_LOCAL[name] = `/img/broker/${name}`; } catch (e) { if (i === 2) console.warn('Broker görseli indirilemedi:', name, e.message); }
+    }
+  }
+  const p = BROKER_LOCAL[BROKER.portrait[1]];
+  if (p && !SITE.brokerPhoto) SITE.brokerPhoto = `/.netlify/images?url=${encodeURIComponent(p)}&w=600&fm=webp&q=78`;
+}
+const bT = (o, lang) => o[lang] || o.en;
+const brokerStats = (lang) => `<div class="stats">${BROKER.stats.map(([n, l]) => `<div><b>${n}</b><span>${esc(bT(l, lang))}</span></div>`).join('')}</div>`;
+function brokerGallery(lang) {
+  const L = GL(lang);
+  const items = BROKER.gallery.map(([src, cap]) => {
+    const real = src.startsWith('remote:') ? BROKER_LOCAL[src.slice(7)] && `/.netlify/images?url=${encodeURIComponent(BROKER_LOCAL[src.slice(7)])}&w=800&fm=webp&q=74` : src;
+    return real ? `<figure><img src="${real}" alt="${esc(cap[L] || cap.en)} – Ali Caner Can" loading="lazy" width="800" height="533"><figcaption>${esc(cap[L] || cap.en)}</figcaption></figure>` : '';
+  }).join('');
+  return `<h2>${bT(BROKER.ui.gallery, lang)}</h2><div class="sgal">${items}</div>`;
+}
+const brokerLinks = (lang) => `<h3>${bT(BROKER.ui.links, lang)}</h3><ul class="chips blinks">${BROKER.links.map(([n, u]) => `<li><a href="${u}" target="_blank" rel="noopener">${n} ↗</a></li>`).join('')}</ul>`;
+function brokerBlock(lang) {
+  const h = BROKER.home;
+  const img = SITE.brokerPhoto ? `<img src="${SITE.brokerPhoto}" alt="Ali Caner Can, Broker & Owner – ACC HOMES" loading="lazy" width="600" height="655">` : '<span class="mav big">AC</span>';
+  return `<section class="hbroker"><div class="wrap"><div class="hbimg">${img}</div><div class="hbtext"><p class="eyebrow">${bT(h.eyebrow, lang)}</p><h2>${bT(h.title, lang)}</h2><p>${esc(bT(h.text, lang))}</p>${brokerStats(lang)}<div class="ctas"><a class="btn" href="${url(lang, 'broker')}">${bT(h.cta, lang)}</a><a class="btn ghost" href="${waLink(T[lang].waGeneral)}" target="_blank" rel="noopener">${bT(h.wa, lang)}</a></div></div></div></section>`;
 }
 function plazaBlock(lang) {
   const p = PLAZA[lang];
@@ -431,9 +461,9 @@ function pageCorporate(key, lang) {
   const P = PAGES[key]; const c = P[lang] || P.en;
   const hero = key === 'about' ? `<div class="phero"><img src="/img/acc-plaza-1200.webp" alt="ACC PLAZA" width="1200" height="470"></div>` : '';
   const body = `<section class="wrap sec narrow page">${hero}<nav class="crumbs"><a href="${home(lang)}">${T[lang].nav.home}</a> / <span>${esc(P.nav[lang] || P.nav.en)}</span></nav>
-<h1>${esc(c.title)}</h1><p class="sub">${esc(c.lead)}</p>${fill(c.html, lang)}</section>${key === 'about' ? reviewsBlock(lang) : ''}`;
-  const schema = key === 'broker' ? [{ '@context': 'https://schema.org', '@type': 'Person', name: 'Ali Caner Can', jobTitle: 'Broker', worksFor: { '@type': 'RealEstateAgent', name: SITE.brand }, alumniOf: 'Yıldız Teknik Üniversitesi', sameAs: ['https://www.instagram.com/alicanercan.therealtor/'] }] : [];
-  write(path.join(url(lang, key), 'index.html'), layout({ lang, title: `${c.title} | ACC HOMES`, desc: c.desc, canonical: url(lang, key), alternates: alts(key), body, schema, ogImage: '/img/acc-plaza-og.jpg' }));
+<h1>${esc(c.title)}</h1><p class="sub">${esc(c.lead)}</p>${fill(key === 'broker' && !c.html.includes('{{BROKER_STATS}}') ? c.html.replace('</div></div>', '</div></div>\n{{BROKER_STATS}}').replace('<div class="ctas">', '{{BROKER_GALLERY}}\n{{BROKER_LINKS}}\n<div class="ctas">') : c.html, lang)}</section>${key === 'about' ? reviewsBlock(lang) : ''}`;
+  const schema = key === 'broker' ? [{ '@context': 'https://schema.org', '@type': 'Person', name: 'Ali Caner Can', jobTitle: 'Broker & Owner', description: c.desc, url: SITE.domain + url(lang, key), image: SITE.brokerPhoto ? SITE.domain + SITE.brokerPhoto : undefined, birthPlace: 'Antalya', worksFor: { '@type': 'RealEstateAgent', name: SITE.brand, url: SITE.domain }, alumniOf: [{ '@type': 'CollegeOrUniversity', name: 'Yıldız Teknik Üniversitesi' }, { '@type': 'HighSchool', name: 'Kuleli Askeri Lisesi' }], knowsLanguage: ['tr', 'en', 'ru', 'ar', 'fa', 'de'], memberOf: [{ '@type': 'Organization', name: 'ANTİAD' }], sameAs: BROKER.links.map(([, u]) => u) }] : [];
+  write(path.join(url(lang, key), 'index.html'), layout({ lang, title: `${c.title} | ACC HOMES`, desc: c.desc, canonical: url(lang, key), alternates: alts(key), body, schema, ogImage: key === 'broker' && SITE.brokerPhoto ? SITE.brokerPhoto : '/img/acc-plaza-og.jpg' }));
 }
 const postFor = (p, lang) => p[lang] || p.en || p.tr;
 function pageBlog(lang) {
@@ -697,6 +727,7 @@ ${consultBar(lang)}
 ${trustStrip(lang)}
 <section class="wrap sec"><div class="sechead"><h2>${t.featured}</h2><a href="${url(lang, 'list')}">${t.seeAll} →</a></div>${areaTabs(lang, 'filter')}${grid(show, lang)}</section>
 <section class="wrap sec"><div class="sechead"><h2>${t.projects}</h2><a href="${url(lang, 'projects')}">${t.projectsCta} →</a></div>${projectCards(lang)}</section>
+${brokerBlock(lang)}
 ${citizenshipBand(lang)}
 ${whyBlock(lang)}
 ${reviewsBlock(lang)}
@@ -862,6 +893,7 @@ await fetchDriveMedia();
 await fetchTeamPhotos();
 await fetchFonts();
 await fetchSocialImages();
+await fetchBrokerImages();
 const urls = [];
 for (const lang of LANGS) {
   pageHome(lang); pageList(lang); pageGuide(lang); pageContact(lang); pageBlog(lang); pageProjects(lang); pageGuideHub(lang); pageReviews(lang); pageFavorites(lang); pageEvents(lang); urls.push(url(lang, 'events'), ...EVENTS.events.map((e) => evUrl(lang, e))); pageDownloads(lang); urls.push(url(lang, 'projects'), url(lang, 'buyersguide'), url(lang, 'reviews'));

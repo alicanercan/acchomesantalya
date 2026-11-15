@@ -64,10 +64,10 @@ const T = {
     askTitle: 'Bu ilan hakkında bilgi alın', name: 'Adınız', phone: 'Telefon', msg: 'Mesajınız', send: 'Gönder',
     call: 'Ara', wa: 'WhatsApp',
     waText: (l) => `Merhaba, ${l} numaralı ilan hakkında bilgi almak istiyorum.`,
-    waGeneral: 'Merhaba, Altıntaş ilanlarınız hakkında bilgi almak istiyorum.',
+    waGeneral: 'Merhaba, Antalya’da gayrimenkul hakkında bilgi almak istiyorum.',
     empty: 'Yeni portföyler hazırlanıyor. Size uygun daireyi bulmamız için bize yazın.',
     demo: 'Tasarım önizlemesi — gösterilen ilanlar örnektir, gerçek ilanlar yakında',
-    contactTitle: 'İletişim', contactSub: 'Altıntaş’ta ev arıyor veya evinizi satmak istiyorsanız bize ulaşın',
+    contactTitle: 'İletişim', contactSub: 'Antalya’da ev, yatırım veya ticari gayrimenkul arıyor ya da mülkünüzü satmak veya kiralamak istiyorsanız ACC Plaza’da sizi bekliyoruz',
     office: 'Ofis', thanks: 'Teşekkürler, en kısa sürede dönüş yapacağız',
     guideTitle: 'Altıntaş Rehberi',
     guideSub: "Antalya'nın gelişen bölgesi Altıntaş hakkında bilmeniz gerekenler",
@@ -83,7 +83,7 @@ const T = {
     igTitle: 'Instagram’da ACC HOMES', igFollowBtn: 'Takip et', igPosts: 'gönderi', igFollowers: 'takipçi',
     barCall: 'Hemen Ara', barWa: 'WhatsApp’tan Yaz',
     projects: 'Projeler', projectsLead: 'ACC HOMES’un yetkili satış ofisi olduğu projeler', projectsCta: 'Projeyi incele',
-    company: 'Kurumsal', blog: 'Blog', blogLead: 'Antalya ve Altıntaş gayrimenkul piyasası üzerine rehberler ve analizler', readMore: 'Devamını oku', menu: 'Menü',
+    company: 'Kurumsal', blog: 'Blog', blogLead: 'Antalya gayrimenkul piyasası, bölgeler ve yatırım üzerine rehberler ve analizler', readMore: 'Devamını oku', menu: 'Menü',
     gReviews: (n) => `${n} Google yorumu`, readReviews: 'Yorumları oku', igFollow: 'Instagram’da takip edin', mapTitle: 'Ofisimiz haritada', directions: 'Yol tarifi al', trustTitle: 'Müşterilerimiz bizi anlatıyor',
     metaHome: 'ACC HOMES International Real Estate: Antalya’da satılık ve kiralık daire, villa, yetkili projeler ve ticari gayrimenkul. ACC Plaza, 50 iş ortağı, 10 dilde hizmet.',
   },
@@ -109,10 +109,10 @@ const T = {
     askTitle: 'Ask about this property', name: 'Your name', phone: 'Phone', msg: 'Message', send: 'Send',
     call: 'Call', wa: 'WhatsApp',
     waText: (l) => `Hello, I would like information about listing ${l}.`,
-    waGeneral: 'Hello, I would like information about your Altintas listings.',
+    waGeneral: 'Hello, I would like information about property in Antalya.',
     empty: 'New listings are being prepared. Message us and we will find the right home for you.',
     demo: 'Design preview — listings shown are samples, real listings coming soon',
-    contactTitle: 'Contact', contactSub: 'Looking for a home in Altintas or planning to sell? Get in touch',
+    contactTitle: 'Contact', contactSub: 'Looking for a home, an investment or commercial property in Antalya, or planning to sell or let? Visit us at ACC Plaza or get in touch',
     office: 'Office', thanks: 'Thank you, we will get back to you shortly',
     guideTitle: 'Altintas Guide',
     guideSub: 'What to know about Altintas, one of Antalya’s fastest-developing districts',
@@ -128,7 +128,7 @@ const T = {
     igTitle: 'ACC HOMES on Instagram', igFollowBtn: 'Follow', igPosts: 'posts', igFollowers: 'followers',
     barCall: 'Call now', barWa: 'WhatsApp us',
     projects: 'Projects', projectsLead: 'Developments for which ACC HOMES is the authorised sales office (pages in Turkish)', projectsCta: 'View project',
-    company: 'Company', blog: 'Blog', blogLead: 'Guides and insights on the Antalya and Altintas property market', readMore: 'Read more', menu: 'Menu',
+    company: 'Company', blog: 'Blog', blogLead: 'Guides and insights on the Antalya property market, its districts and investment', readMore: 'Read more', menu: 'Menu',
     gReviews: (n) => `${n} Google reviews`, readReviews: 'Read reviews', igFollow: 'Follow us on Instagram', mapTitle: 'Find our office', directions: 'Get directions', trustTitle: 'What our clients say',
     metaHome: 'ACC HOMES International Real Estate: apartments, villas, authorised projects and commercial property for sale and rent in Antalya. Service in 10 languages.',
   },
@@ -154,10 +154,10 @@ const T = {
     askTitle: 'Узнать об этом объекте', name: 'Ваше имя', phone: 'Телефон', msg: 'Сообщение', send: 'Отправить',
     call: 'Позвонить', wa: 'WhatsApp',
     waText: (l) => `Здравствуйте, хочу узнать об объекте ${l}.`,
-    waGeneral: 'Здравствуйте, хочу узнать о ваших объектах в Алтынташе.',
+    waGeneral: 'Здравствуйте, хочу узнать о недвижимости в Анталии.',
     empty: 'Новые объекты готовятся. Напишите нам, и мы подберём подходящий вариант.',
     demo: 'Предпросмотр дизайна — показаны примеры, реальные объекты скоро',
-    contactTitle: 'Контакты', contactSub: 'Ищете жильё в Алтынташе или хотите продать? Свяжитесь с нами',
+    contactTitle: 'Контакты', contactSub: 'Ищете жильё или инвестицию в Анталии или хотите продать? Свяжитесь с нами',
     office: 'Офис', thanks: 'Спасибо, мы скоро свяжемся с вами',
     guideTitle: 'Гид по Алтынташу',
     guideSub: 'Что нужно знать об Алтынташе — одном из быстро развивающихся районов Анталии',
@@ -289,7 +289,7 @@ ${col(s('usefulLinks', lang), [[nv('services'), url(lang, 'services')], [nv('sel
 </div>
 <div class="wrap flangs">${LANGS.map((l) => `<a href="${home(l)}" lang="${l}"${l === lang ? ' aria-current="true"' : ''}>${ENDONYM[l]}</a>`).join('')}</div>
 <div class="wrap freg"><b>${s('licence', lang)}</b> · ${SITE.licence.join(' · ')}</div>
-<div class="wrap copy">© 2024–${new Date().getFullYear()} ${esc(SITE.brand)} · ${t.rights} · <a href="${url(lang, 'privacy')}">${nv('privacy')}</a></div></footer>`;
+<div class="wrap copy">© 2024–${new Date().getFullYear()} ${esc(SITE.brand)} · ${t.rights} · <a href="${url(lang, 'privacy')}">${nv('privacy')}</a> · <button type="button" class="cbn-re">${CB[GL(lang)].reopen}</button></div></footer>`;
 }
 
 // ---------- sayfa iskeleti ----------
@@ -336,12 +336,12 @@ ${ALLPOSTS.map((p) => `- [${postFor(p, 'tr').title}](${a(url('tr', 'blog', p.slu
 }
 const AN = SITE.analytics || {};
 const ANALYTICS_HEAD = `<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('consent','default',{ad_storage:'denied',ad_user_data:'denied',ad_personalization:'denied',analytics_storage:'denied',wait_for_update:500});gtag('set','url_passthrough',true);gtag('set','ads_data_redaction',true);(function(){try{var c=JSON.parse(localStorage.getItem('acc_consent')||'null');if(c){gtag('consent','update',{analytics_storage:c.a?'granted':'denied',ad_storage:c.m?'granted':'denied',ad_user_data:c.m?'granted':'denied',ad_personalization:c.m?'granted':'denied'});}}catch(e){}})();window.ACC_PIXEL=${JSON.stringify(AN.metaPixel || '')};window.ACC_CLARITY=${JSON.stringify(AN.clarity || '')};</script>${AN.ga4 ? `<script async src="https://www.googletagmanager.com/gtag/js?id=${AN.ga4}"></script><script>gtag('js',new Date());gtag('config','${AN.ga4}');</script>` : ''}`;
-const CB = { tr: { t: 'Çerez tercihleriniz', p: 'Sitemizi iyileştirmek için ziyaret istatistikleri (Google Analytics) ve reklamlarımızın etkisini ölçmek için pazarlama çerezleri (Meta) kullanmak istiyoruz. Onayınız olmadan bu çerezler çalışmaz. Ayrıntılar için', l: 'KVKK ve Gizlilik Politikası', acc: 'Kabul et', rej: 'Reddet', set: 'Ayarlar', save: 'Seçimi kaydet', a: 'İstatistik (Google Analytics)', m: 'Pazarlama (Meta Pikseli, reklam ölçümü)', n: 'Zorunlu (dil, para birimi, favoriler)', reopen: 'Çerez ayarları', map: 'Haritayı göster', mapN: 'Harita Google tarafından sunulur ve çerez kullanabilir.' }, en: { t: 'Your cookie choices', p: 'We would like to use visit statistics (Google Analytics) to improve our site and marketing cookies (Meta) to measure our ads. These cookies only run with your consent. See our', l: 'Privacy Policy', acc: 'Accept', rej: 'Reject', set: 'Settings', save: 'Save choice', a: 'Statistics (Google Analytics)', m: 'Marketing (Meta Pixel, ad measurement)', n: 'Necessary (language, currency, favourites)', reopen: 'Cookie settings', map: 'Show map', mapN: 'The map is provided by Google and may use cookies.' } };
+const CB = { tr: { t: 'Çerez tercihleriniz', p: 'Sitemizi iyileştirmek için ziyaret istatistikleri (Google Analytics, Microsoft Clarity) ve reklamlarımızın etkisini ölçmek için pazarlama çerezleri (Meta) kullanmak istiyoruz. Onayınız olmadan bu çerezler çalışmaz. Ayrıntılar için', l: 'KVKK ve Gizlilik Politikası', acc: 'Kabul et', rej: 'Reddet', set: 'Ayarlar', save: 'Seçimi kaydet', a: 'İstatistik (Google Analytics, Microsoft Clarity)', m: 'Pazarlama (Meta Pikseli, reklam ölçümü)', n: 'Zorunlu (dil, para birimi, favoriler)', reopen: 'Çerez ayarları', map: 'Haritayı göster', mapN: 'Harita Google tarafından sunulur ve çerez kullanabilir.' }, en: { t: 'Your cookie choices', p: 'We would like to use visit statistics (Google Analytics, Microsoft Clarity) to improve our site and marketing cookies (Meta) to measure our ads. These cookies only run with your consent. See our', l: 'Privacy Policy', acc: 'Accept', rej: 'Reject', set: 'Settings', save: 'Save choice', a: 'Statistics (Google Analytics, Microsoft Clarity)', m: 'Marketing (Meta Pixel, ad measurement)', n: 'Necessary (language, currency, favourites)', reopen: 'Cookie settings', map: 'Show map', mapN: 'The map is provided by Google and may use cookies.' } };
 function consentBanner(lang) {
   const c = CB[GL(lang)];
   return `<div class="cbn" id="cbn" hidden role="dialog" aria-live="polite" aria-label="${c.t}" data-mapl="${esc(c.map)}" data-mapn="${esc(c.mapN)}"><div class="cbn-in"><b>${c.t}</b><p>${c.p} <a href="${url(lang, 'privacy')}">${c.l}</a>.</p>
 <div class="cbn-set" hidden><label><input type="checkbox" checked disabled> ${c.n}</label><label><input type="checkbox" data-c="a"> ${c.a}</label><label><input type="checkbox" data-c="m"> ${c.m}</label></div>
-<div class="cbn-b"><button type="button" class="btn ghost sm" data-cb="set">${c.set}</button><button type="button" class="btn ghost sm" data-cb="rej">${c.rej}</button><button type="button" class="btn ghost sm" data-cb="save" hidden>${c.save}</button><button type="button" class="btn sm" data-cb="acc">${c.acc}</button></div></div></div><button type="button" class="cbn-re" data-cb="open">${c.reopen}</button>`;
+<div class="cbn-b"><button type="button" class="btn ghost sm" data-cb="set">${c.set}</button><button type="button" class="btn ghost sm" data-cb="rej">${c.rej}</button><button type="button" class="btn ghost sm" data-cb="save" hidden>${c.save}</button><button type="button" class="btn sm" data-cb="acc">${c.acc}</button></div></div></div>`;
 }
 function crumbSchema(body, title, canonical) {
   const m = body.match(/<nav class="crumbs[^"]*">([\s\S]*?)<\/nav>/); if (!m) return [];

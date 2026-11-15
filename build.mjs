@@ -1233,7 +1233,7 @@ AddOutputFilterByType DEFLATE text/html text/css application/javascript applicat
     const inF = path.join(OUT, decodeURIComponent(src)); const outF = path.join(OUT, out);
     if (!fs.existsSync(inF)) { console.warn('Görsel bulunamadı:', src); continue; }
     fs.mkdirSync(path.dirname(outF), { recursive: true });
-    if (sharp) { await sharp(inF).rotate().resize({ width: w, withoutEnlargement: true }).webp({ quality: q }).toFile(outF); ok++; } else fs.copyFileSync(inF, outF);
+    try { if (sharp) { await sharp(inF).rotate().resize({ width: w, withoutEnlargement: true }).webp({ quality: q }).toFile(outF); ok++; } else fs.copyFileSync(inF, outF); } catch (e) { console.warn('Görsel işlenemedi, orijinali kullanılacak:', src, e.message); try { fs.copyFileSync(inF, outF); } catch {} }
   }
   console.log(`Turhost: .htaccess (${rules.length} yönlendirme), ${ok}/${RJOBS.size} görsel küçültüldü`);
 }

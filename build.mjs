@@ -843,7 +843,7 @@ function pageContact(lang) {
 <h4>${s('directionsTitle', lang)}</h4><p>${s('directionsText', lang)}</p><p class="lic">${s('licence', lang)}: ${SITE.licence.join(' · ')}</p>
 <div class="actions"><a class="btn" href="${waLink(t.waGeneral)}" target="_blank" rel="noopener">${t.wa}</a><a class="btn ghost" href="tel:${SITE.phoneRaw}">${t.call}</a></div></div>
 <form class="box form" name="iletisim" method="POST" data-netlify="true" netlify-honeypot="bot" action="${url(lang, 'contact')}?ok=1"><input type="hidden" name="form-name" value="iletisim"><p hidden><input name="bot"></p>
-<input name="ad" placeholder="${t.name}" required><input name="telefon" placeholder="${t.phone}" required><textarea name="mesaj" rows="4" placeholder="${t.msg}"></textarea><button class="btn" type="submit">${t.send}</button></form></div></section>${trustStrip(lang)}${reviewsBlock(lang)}${mapBlock(lang)}`;
+<input name="ad" placeholder="${t.name}" required><input name="telefon" placeholder="${t.phone}" required><textarea name="mesaj" rows="4" placeholder="${t.msg}"></textarea><button class="btn" type="submit">${t.send}</button></form></div></section>${mapBlock(lang)}${trustStrip(lang)}${reviewsBlock(lang)}`;
   write(path.join(url(lang, 'contact'), 'index.html'), layout({ lang, title: `${t.contactTitle} | ACC HOMES`, desc: t.contactSub, canonical: url(lang, 'contact'), alternates: alts('contact'), body }));
 }
 

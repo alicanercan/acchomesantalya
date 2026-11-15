@@ -399,3 +399,6 @@ body.noscroll{overflow:hidden}
 .cmap small{color:#7b726d}
 @media (max-width:900px){.cbn{bottom:72px;left:8px;right:8px}.cbn-re{bottom:70px}}
 .cbn-set[hidden],.cbn-b [hidden]{display:none!important}
+
+/* görsel koruma */
+img{-webkit-user-drag:none;user-drag:none;-webkit-touch-callout:none}

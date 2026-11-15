@@ -334,3 +334,10 @@
     ev('generate_lead', { form_name: n, page: location.pathname }, 'Lead');
   }, true);
 })();
+
+// Görsel koruma: fotoğraflarda sağ tık menüsü ve sürükle-bırak kapalı (metin seçimi ve normal sağ tık açık)
+(function () {
+  function isImg(t) { return t && (t.tagName === 'IMG' || (t.closest && t.closest('picture, .gal, .hero-img'))); }
+  document.addEventListener('contextmenu', function (e) { if (e.target && e.target.tagName === 'IMG') e.preventDefault(); });
+  document.addEventListener('dragstart', function (e) { if (isImg(e.target)) e.preventDefault(); });
+})();

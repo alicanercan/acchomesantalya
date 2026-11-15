@@ -1083,7 +1083,23 @@ async function fetchFonts() {
       out = out.split(u).join(`/fonts/${name}`);
     }
     fs.writeFileSync(path.join(OUT, 'assets', 'fonts.css'), out); FONTS_OK = true;
-  } catch (e) { console.warn('Yazı tipleri indirilemedi, sistem fontu kullanılacak:', e.message); }
+  } catch (e) {
+    // Yedek: npm @fontsource paketleri (GitHub/Turhost derlemesi)
+    try {
+      const nm = path.join(ROOT, 'node_modules/@fontsource');
+      const sets = [['montserrat', ['latin', 'latin-ext'], [600, 700, 800]], ['vazirmatn', ['arabic', 'latin'], [400, 700]]];
+      const dir = path.join(OUT, 'fonts'); fs.mkdirSync(dir, { recursive: true }); let out = '';
+      for (const [fam, subs, ws] of sets) for (const sub of subs) for (const w of ws) {
+        const cssF = path.join(nm, fam, `${sub}-${w}.css`); if (!fs.existsSync(cssF)) continue;
+        let css = fs.readFileSync(cssF, 'utf8').replace(/url\([^)]*?\.woff\)\s*format\('woff'\),?/g, '').replace(/,\s*;/g, ';');
+        css = css.replace(/url\(\.\/files\/([^)]+\.woff2)\)/g, (m, f) => { fs.copyFileSync(path.join(nm, fam, 'files', f), path.join(dir, f)); return `url(/fonts/${f})`; });
+        css = css.replace(/font-family:\s*'[^']+'/g, `font-family: '${fam === 'montserrat' ? 'Montserrat' : 'Vazirmatn'}'`).replace(/font-display:\s*\w+/g, 'font-display: swap');
+        out += css + '\n';
+      }
+      if (!out) throw new Error('fontsource yok');
+      fs.writeFileSync(path.join(OUT, 'assets', 'fonts.css'), out); FONTS_OK = true; console.log('Yazı tipleri @fontsource paketinden alındı');
+    } catch (e2) { console.warn('Yazı tipleri indirilemedi, sistem fontu kullanılacak:', e.message, e2.message); }
+  }
 }
 
 // ---------- üretim ----------

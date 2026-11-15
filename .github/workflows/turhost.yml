@@ -28,7 +28,7 @@ jobs:
         with:
           node-version: 20
       - name: Görsel küçültme aracı (sharp)
-        run: npm install --no-save --no-package-lock sharp@0.33
+        run: npm install --no-save --no-package-lock sharp@0.33 @fontsource/montserrat@5 @fontsource/vazirmatn@5
       - name: Siteyi derle
         run: node build.mjs
       - name: Turhost'a yükle

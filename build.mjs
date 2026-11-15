@@ -490,7 +490,7 @@ const ALLPOSTS = [...BLOG_POSTS, ...POSTS.map((p) => ({ ...p, cat: BLOG.catOf[p.
 const dmy = (d) => d.split('-').reverse().join('.');
 function postCard(p, lang, big) {
   const c = postFor(p, lang); const cat = BLOG.cats[p.cat];
-  return `<a class="bcard${big ? ' big' : ''}" href="${url(lang, 'blog', p.slug)}" data-cat="${p.cat}"><div class="bcov bc-${p.cat}">${p.cover ? `<img src="${p.cover}" alt="${esc(c.title)}" loading="lazy">` : `<span>${p.icon || cat.icon}</span>`}${p.live ? `<em>● ${bT(BLOG.ui.live, lang)}</em>` : ''}</div><div class="bcb"><small>${cat.icon} ${esc(bT(cat.name, lang))} · ${dmy(p.updated || p.date)}</small><h3>${esc(c.title)}</h3><p>${esc(c.desc)}</p></div></a>`;
+  return `<a class="bcard${big ? ' big' : ''}" href="${url(lang, 'blog', p.slug)}" data-cat="${p.cat}"><div class="bcov bc-${p.cat}">${p.cover ? `<img src="${p.cover}" alt="${esc(c.title)}" loading="lazy">` : (p.stat ? `<div class="bstat"><b>${p.stat[GL(lang)]}</b><small>${esc(p.stat.lab[GL(lang)])}</small></div>` : `<span>${p.icon || cat.icon}</span>`)}${p.live ? `<em>● ${bT(BLOG.ui.live, lang)}</em>` : ''}</div><div class="bcb"><small>${cat.icon} ${esc(bT(cat.name, lang))} · ${dmy(p.updated || p.date)}</small><h3>${esc(c.title)}</h3><p>${esc(c.desc)}</p></div></a>`;
 }
 function pageBlog(lang) {
   const t = T[lang];

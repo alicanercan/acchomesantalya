@@ -139,12 +139,12 @@ ${T.inv}
 const lastRent = RENT[RENT.length - 1]; const lastSale = SALES[SALES.length - 1];
 export const BLOG_POSTS = [
   {
-    slug: 'kira-artis-orani', cat: 'veri', live: true, date: '2026-01-05', updated: '2026-11-03', icon: '🏷️',
+    slug: 'kira-artis-orani', cat: 'veri', live: true, stat: { tr: pct(lastRent[1], 'tr'), en: pct(lastRent[1], 'en'), lab: { tr: `${monthName(lastRent[0], 'tr')} kira artış oranı`, en: `Rent cap, ${monthName(lastRent[0], 'en')}` } }, date: '2026-01-05', updated: '2026-11-03', icon: '🏷️',
     tr: { title: `Kira Artış Oranı ${monthName(lastRent[0], 'tr')}: ${pct(lastRent[1], 'tr')}`, desc: `${monthName(lastRent[0], 'tr')} kira artış üst sınırı ${pct(lastRent[1], 'tr')}. Aylara göre güncel tablo, kira artışı hesaplama ve bilmeniz gerekenler.`, html: rentHtml('tr') },
     en: { title: `Türkiye Rent Increase Cap ${monthName(lastRent[0], 'en')}: ${pct(lastRent[1], 'en')}`, desc: `The rent increase cap for ${monthName(lastRent[0], 'en')} is ${pct(lastRent[1], 'en')}. Monthly table, calculator and what landlords and tenants need to know.`, html: rentHtml('en') },
   },
   {
-    slug: 'antalya-konut-satis-istatistikleri', cat: 'veri', live: true, date: '2026-07-18', updated: '2026-10-19', icon: '🏘️',
+    slug: 'antalya-konut-satis-istatistikleri', cat: 'veri', live: true, stat: { tr: num(lastSale[1], 'tr'), en: num(lastSale[1], 'en'), lab: { tr: `${monthName(lastSale[0], 'tr')} · Antalya’da satılan konut`, en: `${monthName(lastSale[0], 'en')} · homes sold in Antalya` } }, date: '2026-07-18', updated: '2026-10-19', icon: '🏘️',
     tr: { title: `Antalya Konut Satış İstatistikleri (${monthName(lastSale[0], 'tr')})`, desc: `TÜİK verileriyle Antalya ve Türkiye konut satışları, yabancıya satışlar ve yatırımcı yorumu. ${monthName(lastSale[0], 'tr')} itibarıyla güncel.`, html: salesHtml('tr') },
     en: { title: `Antalya Housing Sales Statistics (${monthName(lastSale[0], 'en')})`, desc: `TurkStat housing sales for Antalya and Türkiye, sales to foreigners and an investor’s reading. Updated to ${monthName(lastSale[0], 'en')}.`, html: salesHtml('en') },
   },

@@ -1,7 +1,7 @@
 // KVKK aydınlatma metni / Privacy notice — TASLAK: yayına açmadan önce avukat kontrolü önerilir.
 export const PRIVACY = {
   seg: { tr: 'kvkk-aydinlatma-metni', en: 'privacy-notice' },
-  nav: { tr: 'KVKK Aydınlatma Metni', en: 'Privacy Notice' },
+  nav: { tr: 'KVKK Aydınlatma Metni', en: 'Privacy Notice', de: 'Datenschutzhinweis', ru: 'Политика конфиденциальности', fa: 'اطلاعیه حریم خصوصی', pl: 'Informacja o prywatności', fr: 'Politique de confidentialité', es: 'Aviso de privacidad', nl: 'Privacyverklaring', sv: 'Integritetsmeddelande', ar: 'إشعار الخصوصية', zh: '隐私声明' },
   tr: {
     title: 'Kişisel Verilerin Korunması Aydınlatma Metni', desc: 'ACC HOMES International Real Estate KVKK aydınlatma metni: hangi kişisel verileri, hangi amaçla işlediğimiz ve haklarınız.',
     lead: '6698 sayılı Kişisel Verilerin Korunması Kanunu (KVKK) kapsamında bilgilendirme',

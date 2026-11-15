@@ -101,6 +101,7 @@ export default {
     dlPageLead: "Zostaw dane i od razu pobierz poradniki; nasz doradca odpowie też na pytania.",
     dlReady: "Twoje poradniki są gotowe",
     partnerPill: "Zostań partnerem",
+    areasTitle: 'Przewodniki po dzielnicach', areasLead: 'Poznaj dzielnice Antalyi: lokalizacja, styl życia, najważniejsze osiedla i dla kogo są najlepsze.', areaListings: 'Oferty: {{A}}', areaNote: 'Poproś naszego doradcę o aktualną analizę cen i czynszów w okolicy.',
     currency: 'Waluta', partnersTitle: 'Nasi partnerzy', speaks: 'Języki',
   },
   plaza: {
@@ -127,6 +128,11 @@ export default {
     'Ali Caner Can': 'Broker i założyciel', 'Esma Özdal': 'Koordynatorka generalna', 'Okan Akgün': 'Kierownik biura',
     'Melissa Enriquez Sedita': 'CRM i sprzedaż międzynarodowa', 'Adnan Konuk': 'Koordynator inwestycji', 'Bensu Taşbaş': 'Specjalistka social media',
     'Derya Plyatner': 'Graficzka', 'Zeynep Çarıkçı': 'Obsługa biura', 'Kamil Bey': 'Kot biurowy',
+  },
+  p2: {
+    sell: { title: 'Sprzedamy Twoją nieruchomość za właściwą cenę właściwemu kupującemu', desc: 'Chcesz sprzedać nieruchomość w Antalyi? Bezpłatna wycena, cena oparta na danych, profesjonalny marketing i kupujący z Turcji i zagranicy w 10 językach.', lead: 'Zacznij od bezpłatnej wyceny: realna cena na podstawie porównywalnych transakcji, profesjonalna prezentacja i przejrzysty proces aż do aktu własności.', cards: [['Bezpłatna wycena', 'Określamy realną wartość nieruchomości na podstawie aktualnych danych sprzedażowych i ofert i przekazujemy ją na piśmie.'], ['Profesjonalny marketing', 'Zdjęcia, wideo i dron; portale, Instagram i reklamy Meta; sieć kupujących w 10 językach.'], ['Z Tobą aż do aktu własności', 'Prezentacje, negocjacje, zadatek, bank i akt własności – z pisemną informacją na każdym etapie.']], formTitle: 'Poproś o bezpłatną wycenę', note: 'Wycena jest bezpłatna i nie zobowiązuje do sprzedaży.' },
+    viewing: { title: 'Oglądanie online i wizyta zapoznawcza', desc: 'Obejrzyj nieruchomości przez wideo przed przyjazdem do Antalyi, a na miejscu zobacz dzielnice i wybrane oferty w jeden dzień.', lead: 'Dwuetapowy proces dla kupujących z zagranicy lub innego miasta.', cards: [['📱', 'Oglądanie na żywo przez wideo', 'Doradca pokazuje nieruchomość przez WhatsApp lub Zoom: widok, ekspozycję, osiedle i okolicę, i od razu odpowiada na pytania.'], ['🚗', 'Wizyta zapoznawcza', 'Po przyjeździe do Antalyi planujemy objazd dzielnic i wybranych ofert oraz omawiamy proces i koszty osobiście w ACC Plaza.'], ['📝', 'Zakup na odległość', 'Po decyzji przeniesienie aktu własności może nastąpić na podstawie pełnomocnictwa, bez przyjazdu do Turcji. Szczegóły w poradniku kupującego.']], cta1: 'Umów oglądanie wideo', cta2: 'Poradnik kupującego' },
+    licences: { title: 'Licencje i dokumenty', desc: 'Numery licencji, dane biura i opinie klientów ACC HOMES International Real Estate.', lead: 'Działamy na podstawie oficjalnej licencji, z zarejestrowanego biura, w pełni przejrzyście.', l: ['Nazwa firmy', 'Licencja na obrót nieruchomościami (Turcja)', 'Siedziba', 'Ocena w Google'], note: 'Numery licencji można zweryfikować w systemie EİDS tureckiego Ministerstwa Handlu.', recTitle: 'Wyróżnienia', rec: ['2023: nasz założyciel Ali Caner Can – najlepszy doradca roku w Realty World MES Real Estate', '2026: autoryzowane biuro sprzedaży Prime Lara i Antalle Concept Houses'], cta1: 'O nas', cta2: 'Opinie klientów' },
   },
   pages: {
     about: {

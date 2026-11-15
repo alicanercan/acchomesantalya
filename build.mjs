@@ -6,7 +6,8 @@ import crypto from 'node:crypto';
 import { PAGES, POSTS, TEAM, LANGS_SPOKEN, PLAZA, TIMELINE } from './content.mjs';
 import { PROJECTS } from './projects.mjs';
 import { PRIVACY } from './privacy.mjs';
-import { PAGES2 } from './pages2.mjs';
+import { PAGES2, P2X, p2Html } from './pages2.mjs';
+import { AREA_GUIDES } from './areas.mjs';
 import { GUIDES, FAQ, GUIDE_SEG, GUIDE_TITLE, GUIDE_LEAD, GUIDE_UPDATED } from './guide.mjs';
 import { T_EXTRA, S, s, SEGS, LOCALE, RTL, extend, PACKS } from './i18n.mjs';
 import { STAFF_PHOTOS, PARTNERS, PHOTO_BASE, LANG_NAMES, PARTNER_ROLE, SWORN_ROLE } from './team.mjs';
@@ -167,6 +168,7 @@ const T = {
 Object.assign(T, T_EXTRA);
 extend({ PAGES, PLAZA, TIMELINE, LANGS_SPOKEN, TEAM, GUIDE_SEG, GUIDE_TITLE, GUIDE_LEAD, SITE, T, LANG_NAMES, PARTNER_ROLE, SWORN_ROLE });
 PAGES.privacy = PRIVACY; Object.assign(PAGES, PAGES2);
+for (const [lng, d] of [...Object.entries(P2X), ...PACKS.filter((p) => p.p2).map((p) => [p.code, p.p2])]) for (const k of ['sell', 'viewing', 'licences']) if (d[k]) PAGES[k][lng] = p2Html(k, d[k]);
 const GL = (lang) => (lang === 'tr' || lang === 'en' ? lang : 'en'); // rehber makaleleri dili
 
 // ---------- yardımcılar ----------
@@ -185,7 +187,7 @@ const fmtPrice = (l, lang) => {
 const priceAttrs = (l) => (l.fiyat ? ` data-amt="${l.fiyat}" data-ccy="${({ TL: 'TRY', USD: 'USD', EUR: 'EUR', GBP: 'GBP' })[l.para || 'TL'] || 'TRY'}"` : '');
 const tipLabel = (l, lang) => (l.tip === 'Kiralık' ? T[lang].rent : T[lang].sale);
 const statusBadge = (l, lang) => l.durum === 'Satıldı' ? `<span class="badge sold">${T[lang].sold}</span>` : l.durum === 'Opsiyonlu' ? `<span class="badge opt">${T[lang].option}</span>` : '';
-const segOf = (lang, seg) => (PAGES[seg] ? (PAGES[seg].seg[lang] || PAGES[seg].seg.en) : seg === 'blog' ? 'blog' : seg === 'projects' ? SEGS.projects[lang] : seg === 'buyersguide' ? GUIDE_SEG[lang] : seg === 'downloads' ? (SEGS.downloads[lang] || 'free-guides') : seg === 'favorites' ? (SEGS.favorites[lang] || 'favorites') : seg === 'reviews' ? SEGS.reviews[lang] : T[lang].seg[seg]);
+const segOf = (lang, seg) => (PAGES[seg] ? (PAGES[seg].seg[lang] || PAGES[seg].seg.en) : seg === 'blog' ? 'blog' : seg === 'projects' ? SEGS.projects[lang] : seg === 'buyersguide' ? GUIDE_SEG[lang] : seg === 'downloads' ? (SEGS.downloads[lang] || 'free-guides') : seg === 'areas' ? (SEGS.areas[lang] || SEGS.areas.en) : seg === 'favorites' ? (SEGS.favorites[lang] || 'favorites') : seg === 'reviews' ? SEGS.reviews[lang] : T[lang].seg[seg]);
 const url = (lang, seg, slug) => `${BASE[lang]}/${segOf(lang, seg)}/${slug ? slug + '/' : ''}`;
 const home = (lang) => `${BASE[lang]}/`;
 const waLink = (text) => `https://wa.me/${SITE.whatsapp}?text=${encodeURIComponent(text)}`;
@@ -231,10 +233,21 @@ function callPopup(lang) {
 }
 
 // ---------- alt bilgi (açık renk, Property Turkey düzeni) ----------
-const AREAS = [['Muratpaşa', '🏙️'], ['Konyaaltı', '🏖️'], ['Aksu', '✈️'], ['Döşemealtı', '🌿'], ['Kepez', '🏘️'], ['Serik', '⛳'], ['Kemer', '⛰️']];
+const AREAS = [['Muratpaşa', '🏙️'], ['Konyaaltı', '🏖️'], ['Döşemealtı', '🌿'], ['Kepez', '🏘️'], ['Aksu', '✈️'], ['Kemer', '⛰️'], ['Serik', '⛳']];
+const DISTS = AREAS.map(([a]) => a);
 const POPULAR = {
   tr: [['Antalya satılık daire', '?tip=Satılık&tur=Daire'], ['Antalya satılık villa', '?tip=Satılık&tur=Villa'], ['Lara satılık daire', '?tip=Satılık&ilce=Muratpaşa'], ['Konyaaltı satılık daire', '?tip=Satılık&ilce=Konyaaltı'], ['Altıntaş satılık daire', '?tip=Satılık&ilce=Aksu'], ['Döşemealtı satılık villa', '?tip=Satılık&tur=Villa&ilce=Döşemealtı'], ['Antalya kiralık daire', '?tip=Kiralık'], ['Vatandaşlığa uygun evler', '?etiket=vatandaslik']],
   en: [['Apartments for sale in Antalya', '?tip=Satılık&tur=Daire'], ['Villas for sale in Antalya', '?tip=Satılık&tur=Villa'], ['Property in Lara', '?ilce=Muratpaşa'], ['Property in Konyaaltı', '?ilce=Konyaaltı'], ['Property in Altıntaş', '?ilce=Aksu'], ['Villas in Döşemealtı', '?tur=Villa&ilce=Döşemealtı'], ['Antalya rentals', '?tip=Kiralık'], ['Citizenship-eligible homes', '?etiket=vatandaslik']],
+  de: [["Wohnungen zum Kauf in Antalya", "?tip=Satılık&tur=Daire"], ["Villen zum Kauf in Antalya", "?tip=Satılık&tur=Villa"], ["Immobilien in Lara", "?ilce=Muratpaşa"], ["Immobilien in Konyaaltı", "?ilce=Konyaaltı"], ["Immobilien in Altıntaş", "?ilce=Aksu"], ["Villen in Döşemealtı", "?tur=Villa&ilce=Döşemealtı"], ["Mietobjekte in Antalya", "?tip=Kiralık"], ["Für die Staatsbürgerschaft geeignet", "?etiket=vatandaslik"]],
+  ru: [["Квартиры в Анталии", "?tip=Satılık&tur=Daire"], ["Виллы в Анталии", "?tip=Satılık&tur=Villa"], ["Недвижимость в Ларе", "?ilce=Muratpaşa"], ["Недвижимость в Коньяалты", "?ilce=Konyaaltı"], ["Недвижимость в Алтынташе", "?ilce=Aksu"], ["Виллы в Дёшемеалты", "?tur=Villa&ilce=Döşemealtı"], ["Аренда в Анталии", "?tip=Kiralık"], ["Объекты под гражданство", "?etiket=vatandaslik"]],
+  fa: [["آپارتمان برای فروش در آنتالیا", "?tip=Satılık&tur=Daire"], ["ویلا برای فروش در آنتالیا", "?tip=Satılık&tur=Villa"], ["ملک در لارا", "?ilce=Muratpaşa"], ["ملک در کنیاآلتی", "?ilce=Konyaaltı"], ["ملک در آلتین‌تاش", "?ilce=Aksu"], ["ویلا در دوشمه‌آلتی", "?tur=Villa&ilce=Döşemealtı"], ["اجاره در آنتالیا", "?tip=Kiralık"], ["املاک مناسب شهروندی", "?etiket=vatandaslik"]],
+  pl: [["Mieszkania na sprzedaż w Antalyi", "?tip=Satılık&tur=Daire"], ["Wille na sprzedaż w Antalyi", "?tip=Satılık&tur=Villa"], ["Nieruchomości w Larze", "?ilce=Muratpaşa"], ["Nieruchomości w Konyaaltı", "?ilce=Konyaaltı"], ["Nieruchomości w Altıntaş", "?ilce=Aksu"], ["Wille w Döşemealtı", "?tur=Villa&ilce=Döşemealtı"], ["Wynajem w Antalyi", "?tip=Kiralık"], ["Nieruchomości pod obywatelstwo", "?etiket=vatandaslik"]],
+  fr: [["Appartements à vendre à Antalya", "?tip=Satılık&tur=Daire"], ["Villas à vendre à Antalya", "?tip=Satılık&tur=Villa"], ["Biens à Lara", "?ilce=Muratpaşa"], ["Biens à Konyaaltı", "?ilce=Konyaaltı"], ["Biens à Altıntaş", "?ilce=Aksu"], ["Villas à Döşemealtı", "?tur=Villa&ilce=Döşemealtı"], ["Locations à Antalya", "?tip=Kiralık"], ["Biens éligibles à la citoyenneté", "?etiket=vatandaslik"]],
+  es: [["Pisos en venta en Antalya", "?tip=Satılık&tur=Daire"], ["Villas en venta en Antalya", "?tip=Satılık&tur=Villa"], ["Propiedades en Lara", "?ilce=Muratpaşa"], ["Propiedades en Konyaaltı", "?ilce=Konyaaltı"], ["Propiedades en Altıntaş", "?ilce=Aksu"], ["Villas en Döşemealtı", "?tur=Villa&ilce=Döşemealtı"], ["Alquileres en Antalya", "?tip=Kiralık"], ["Propiedades aptas para ciudadanía", "?etiket=vatandaslik"]],
+  nl: [["Appartementen te koop in Antalya", "?tip=Satılık&tur=Daire"], ["Villa’s te koop in Antalya", "?tip=Satılık&tur=Villa"], ["Woningen in Lara", "?ilce=Muratpaşa"], ["Woningen in Konyaaltı", "?ilce=Konyaaltı"], ["Woningen in Altıntaş", "?ilce=Aksu"], ["Villa’s in Döşemealtı", "?tur=Villa&ilce=Döşemealtı"], ["Huurwoningen in Antalya", "?tip=Kiralık"], ["Geschikt voor staatsburgerschap", "?etiket=vatandaslik"]],
+  sv: [["Lägenheter till salu i Antalya", "?tip=Satılık&tur=Daire"], ["Villor till salu i Antalya", "?tip=Satılık&tur=Villa"], ["Bostäder i Lara", "?ilce=Muratpaşa"], ["Bostäder i Konyaaltı", "?ilce=Konyaaltı"], ["Bostäder i Altıntaş", "?ilce=Aksu"], ["Villor i Döşemealtı", "?tur=Villa&ilce=Döşemealtı"], ["Hyresbostäder i Antalya", "?tip=Kiralık"], ["Bostäder för medborgarskap", "?etiket=vatandaslik"]],
+  ar: [["شقق للبيع في أنطاليا", "?tip=Satılık&tur=Daire"], ["فلل للبيع في أنطاليا", "?tip=Satılık&tur=Villa"], ["عقارات في لارا", "?ilce=Muratpaşa"], ["عقارات في كونيالتي", "?ilce=Konyaaltı"], ["عقارات في ألتين طاش", "?ilce=Aksu"], ["فلل في دوشمه ألتي", "?tur=Villa&ilce=Döşemealtı"], ["إيجارات في أنطاليا", "?tip=Kiralık"], ["عقارات مناسبة للجنسية", "?etiket=vatandaslik"]],
+  zh: [["安塔利亚公寓出售", "?tip=Satılık&tur=Daire"], ["安塔利亚别墅出售", "?tip=Satılık&tur=Villa"], ["拉拉区房产", "?ilce=Muratpaşa"], ["孔亚尔特房产", "?ilce=Konyaaltı"], ["阿尔滕塔什房产", "?ilce=Aksu"], ["多谢梅阿尔特别墅", "?tur=Villa&ilce=Döşemealtı"], ["安塔利亚租房", "?tip=Kiralık"], ["可申请入籍房产", "?etiket=vatandaslik"]],
 };
 function footer(lang) {
   const t = T[lang]; const nv = (k) => PAGES[k].nav[lang] || PAGES[k].nav.en;
@@ -243,7 +256,7 @@ function footer(lang) {
   const col = (h, links) => `<div><h4>${h}</h4><p class="flinks">${links.map(([n, u]) => `<a href="${u}">${esc(n)}</a>`).join('')}</p></div>`;
   return `<footer class="foot"><div class="wrap fcols">
 ${col(s('popSearches', lang), pop.map(([n, q]) => [n, url(lang, 'list') + q]))}
-${col(s('popAreas', lang), AREAS.map(([a]) => [a, `${url(lang, 'list')}?ilce=${encodeURIComponent(a)}`]))}
+${col(s('popAreas', lang), [...AREA_GUIDES.map((a) => [a.ilce, aUrl(GL(lang), a)]), [s('areasTitle', lang) + ' →', url(lang, 'areas')]])}
 ${col(GUIDE_TITLE[lang], GUIDES.map((g) => [gC(g, L).title, gUrl(L, g)]))}
 ${col(t.company, [[nv('about'), url(lang, 'about')], [nv('broker'), url(lang, 'broker')], [nv('team'), url(lang, 'team')], [t.revTitle, url(lang, 'reviews')], [nv('licences'), url(lang, 'licences')], [nv('join'), url(lang, 'join')]])}
 ${col(s('usefulLinks', lang), [[nv('services'), url(lang, 'services')], [nv('sell'), url(lang, 'sell')], [nv('viewing'), url(lang, 'viewing')], [s('dlPageTitle', lang), url(lang, 'downloads')], [t.projects, url(lang, 'projects')], [t.blog, url(lang, 'blog')], [t.nav.contact, url(lang, 'contact')]])}
@@ -265,7 +278,7 @@ function layout({ lang, title, desc, canonical, alternates, body, schema = [], o
   const t = T[lang];
   const alt = alternates ? Object.entries(alternates).map(([l, u]) => `<link rel="alternate" hreflang="${l}" href="${SITE.domain}${u}">`).join('') + `<link rel="alternate" hreflang="x-default" href="${SITE.domain}${alternates.tr}">` : '';
   const langSwitch = alternates ? LANGS.map((l) => `<a href="${alternates[l] || (alternates.tr && alternates.tr.startsWith('/alici-rehberi') ? url(l, 'buyersguide') : home(l))}"${l === lang ? ' aria-current="true"' : ''}>${l.toUpperCase()}</a>`).join('') : '';
-  return `<!doctype html><html lang="${t.htmlLang}"${RTL.has(lang) ? ' dir="rtl"' : ''}><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  return (RTL.has(lang) ? (h) => h.replaceAll('→', '←') : (h) => h)(`<!doctype html><html lang="${t.htmlLang}"${RTL.has(lang) ? ' dir="rtl"' : ''}><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>${esc(title)}</title>${noindex ? '<meta name="robots" content="noindex">' : ''}<meta name="description" content="${esc(desc)}"><link rel="canonical" href="${SITE.domain}${canonical}">${alt}
 <meta property="og:type" content="website"><meta property="og:title" content="${esc(title)}"><meta property="og:description" content="${esc(desc)}"><meta property="og:url" content="${SITE.domain}${canonical}"><meta property="og:locale" content="${t.locale}">${ogImage ? `<meta property="og:image" content="${SITE.domain}${ogImage}">` : ''}
 <meta name="theme-color" content="#E02A3C"><link rel="icon" href="/favicon.svg" type="image/svg+xml"><link rel="apple-touch-icon" href="/apple-touch-icon.png">${FONTS_OK ? `<link rel="preload" href="/assets/fonts.css" as="style"><link rel="stylesheet" href="/assets/fonts.css">` : ''}<link rel="stylesheet" href="/assets/style.css?v=${VER}">
@@ -283,7 +296,7 @@ ${settingsBtn(lang)}
 ${footer(lang)}
 ${callPopup(lang)}
 ${stickyBar(lang)}
-<script src="/assets/app.js?v=${VER}" defer></script></body></html>`;
+<script src="/assets/app.js?v=${VER}" defer></script></body></html>`);
 }
 
 // ---------- bileşenler ----------
@@ -438,6 +451,25 @@ function pageBlog(lang) {
 // ---------- alıcı rehberi ----------
 const gUrl = (lang, g) => (lang === 'tr' ? `/${GUIDE_SEG.tr}/${g.slug}/` : `/en/${GUIDE_SEG.en}/${g.en}/`);
 const gC = (g, lang) => (lang === 'tr' ? g.tr : g.enc);
+// ---------- bölge rehberleri ----------
+const aUrl = (lang, a) => (lang === 'tr' ? `/${SEGS.areas.tr}/${a.slug}/` : `/en/${SEGS.areas.en}/${a.slugEn}/`);
+function areaCards(lang) {
+  const L = GL(lang);
+  return `<div class="gcards">${AREA_GUIDES.map((a) => `<a class="gcard" href="${aUrl(L, a)}"><span>${a.icon}</span><h3>${esc(a[L].title)}</h3><p>${esc(a[L].short)}</p></a>`).join('')}</div>`;
+}
+function pageAreaHub(lang) {
+  const body = `<section class="wrap sec page"><nav class="crumbs"><a href="${home(lang)}">${T[lang].nav.home}</a> / <span>${s('areasTitle', lang)}</span></nav><h1>${s('areasTitle', lang)}</h1><p class="sub">${s('areasLead', lang)}</p>${['tr', 'en'].includes(lang) ? '' : `<p class="note">${s('guideEnNote', lang)}</p>`}${areaCards(lang)}</section>`;
+  write(path.join(url(lang, 'areas'), 'index.html'), layout({ lang, title: `${s('areasTitle', lang)} | ACC HOMES`, desc: s('areasLead', lang), canonical: url(lang, 'areas'), alternates: alts('areas'), body }));
+}
+function pageAreaItem(a, lang) {
+  const c = a[lang]; const t = T[lang];
+  const others = AREA_GUIDES.filter((x) => x !== a).map((x) => `<a href="${aUrl(lang, x)}">${x.icon} ${esc(x[lang].title)}</a>`).join('');
+  const body = `<section class="wrap sec page"><nav class="crumbs"><a href="${home(lang)}">${t.nav.home}</a> / <a href="${url(lang, 'areas')}">${s('areasTitle', lang)}</a></nav><div class="glayout"><article class="prose"><h1>${a.icon} ${esc(c.title)}</h1><p class="sub">${esc(c.short)}</p>${c.html}
+<div class="ctas"><a class="btn" href="${url(lang, 'list')}?ilce=${encodeURIComponent(a.ilce)}">${s('areaListings', lang).replace('{{A}}', a.ilce)}</a><a class="btn ghost" href="${waLink(t.waGeneral)}" target="_blank" rel="noopener">${s('askConsultant', lang)}</a></div>
+<p class="note">${s('areaNote', lang)}</p></article><aside class="gside"><b>${s('areasTitle', lang)}</b>${others}</aside></div></section>`;
+  const schema = [{ '@context': 'https://schema.org', '@type': 'Article', headline: c.title, description: c.short, inLanguage: lang, publisher: { '@type': 'Organization', name: SITE.brand }, about: { '@type': 'Place', name: `${a.ilce}, Antalya` } }];
+  write(aUrl(lang, a) + 'index.html', layout({ lang, title: `${c.title} | ACC HOMES`, desc: c.short, canonical: aUrl(lang, a), alternates: { tr: aUrl('tr', a), en: aUrl('en', a) }, body, schema }));
+}
 function calcBlock(lang) {
   const tr = lang === 'tr';
   return `<div class="calc box" data-calc><h3>${s('calcTitle', lang)}</h3>
@@ -463,6 +495,7 @@ function pageGuideHub(lang) {
   const tr = lang === 'tr';
   const body = `<section class="wrap sec page"><nav class="crumbs"><a href="${home(lang)}">${T[lang].nav.home}</a> / <span>${GUIDE_TITLE[lang]}</span></nav><h1>${GUIDE_TITLE[lang]}</h1><p class="sub">${GUIDE_LEAD[lang]}</p>
 <div class="gcards">${GUIDES.map((g) => `<a class="gcard" href="${gUrl(L, g)}"><span>${g.icon}</span><h3>${esc(gC(g, L).title)}</h3><p>${esc(gC(g, L).short)}</p></a>`).join('')}</div>
+<h2>${s('areasTitle', lang)}</h2>${areaCards(lang)}
 <h2 id="sss">${s('faq', lang)}</h2>${faqHtml(L)}
 <div class="ctas"><a class="btn" href="${waLink(T[lang].waGeneral)}" target="_blank" rel="noopener">${s('askWa', lang)}</a><a class="btn ghost" href="${url(lang, 'contact')}">${T[lang].nav.contact}</a></div>
 <p class="note">${s('updated', lang)}: ${GUIDE_UPDATED}</p></section>`;
@@ -539,7 +572,7 @@ function pageDownloads(lang) {
 }
 function searchBox(lang) {
   const tr = lang === 'tr'; const f = T[lang].filters;
-  const dists = ['Muratpaşa', 'Konyaaltı', 'Aksu', 'Döşemealtı', 'Kepez', 'Serik', 'Kemer'];
+  const dists = DISTS;
   return `<form class="hsearch" action="${url(lang, 'list')}" method="get"><label>${f.tip}<select name="tip"><option value="">${f.any}</option><option value="Satılık">${f.sale}</option><option value="Kiralık">${f.rent}</option></select></label>
 <label>${s('type', lang)}<select name="tur"><option value="">${f.any}</option><option>Daire</option><option>Villa</option><option>Dubleks</option><option>Ticari</option><option>Arsa</option></select></label>
 <label>${s('district', lang)}<select name="ilce"><option value="">${f.any}</option>${dists.map((d) => `<option>${d}</option>`).join('')}</select></label>
@@ -579,7 +612,7 @@ function tagFilter(lang) {
 }
 function sellForm(lang) {
   const t = T[lang]; const F = t.fields;
-  const dists = ['Muratpaşa', 'Konyaaltı', 'Aksu', 'Döşemealtı', 'Kepez', 'Serik', 'Kemer', 'Alanya', 'Manavgat'];
+  const dists = [...DISTS, 'Alanya', 'Manavgat'];
   return `<form class="box form sellform" name="degerleme-talep" method="POST" data-netlify="true" netlify-honeypot="bot" action="${url(lang, 'contact')}?ok=1"><input type="hidden" name="form-name" value="degerleme-talep"><input type="hidden" name="dil" value="${lang}"><p hidden><input name="bot"></p>
 <div class="fgrid3"><label>${s('district', lang)}<select name="ilce" required><option value=""></option>${dists.map((d) => `<option>${d}</option>`).join('')}</select></label>
 <label>${s('neighbourhood', lang)}<input name="mahalle"></label>
@@ -784,7 +817,8 @@ await fetchFonts();
 const urls = [];
 for (const lang of LANGS) {
   pageHome(lang); pageList(lang); pageGuide(lang); pageContact(lang); pageBlog(lang); pageProjects(lang); pageGuideHub(lang); pageReviews(lang); pageFavorites(lang); pageDownloads(lang); urls.push(url(lang, 'projects'), url(lang, 'buyersguide'), url(lang, 'reviews'));
-  if (lang === 'tr' || lang === 'en') for (const g of GUIDES) { pageGuideItem(g, lang); urls.push(gUrl(lang, g)); }
+  if (lang === 'tr' || lang === 'en') { for (const g of GUIDES) { pageGuideItem(g, lang); urls.push(gUrl(lang, g)); } for (const a of AREA_GUIDES) { pageAreaItem(a, lang); urls.push(aUrl(lang, a)); } }
+  pageAreaHub(lang); urls.push(url(lang, 'areas'));
   for (const k of Object.keys(PAGES)) { pageCorporate(k, lang); urls.push(url(lang, k)); }
   urls.push(home(lang), url(lang, 'list'), url(lang, 'guide'), url(lang, 'contact'), url(lang, 'blog'), ...POSTS.map((p) => url(lang, 'blog', p.slug)));
   for (const l of LISTINGS) { pageListing(l, lang); urls.push(url(lang, 'listing', slugOf(l))); }

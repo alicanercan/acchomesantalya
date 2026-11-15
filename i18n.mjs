@@ -2,8 +2,15 @@
 // Farsça sağdan sola (RTL) yazılır; layout dir="rtl" verir.
 
 import pl from './langs/pl.mjs';
+import fr from './langs/fr.mjs';
+import es from './langs/es.mjs';
+import nl from './langs/nl.mjs';
+import sv from './langs/sv.mjs';
+import ar from './langs/ar.mjs';
+import zh from './langs/zh.mjs';
+import { corpPages } from './langs/_corp.mjs';
 // Yeni diller: langs/<kod>.mjs paketleri. Sıra = dil seçicideki sıra değil, derleme sırası.
-export const PACKS = [pl];
+export const PACKS = [pl, fr, es, nl, sv, ar, zh];
 export const LOCALE = { tr: 'tr-TR', en: 'en-GB', ru: 'ru-RU', de: 'de-DE', fa: 'fa-IR' };
 export const RTL = new Set(['fa']);
 for (const p of PACKS) { LOCALE[p.code] = p.locale; if (p.rtl) RTL.add(p.code); }
@@ -123,6 +130,10 @@ export const S = {
   dlPageLead: {"tr": "Bilgilerinizi bırakın, rehberleri hemen indirin. Sorularınız için danışmanımız da size ulaşsın.", "en": "Leave your details and download the guides right away; one of our consultants can also answer your questions.", "ru": "Оставьте контакты и сразу скачайте гиды; наш консультант ответит на вопросы.", "de": "Hinterlassen Sie Ihre Daten und laden Sie die Ratgeber sofort herunter; unser Berater beantwortet gern Ihre Fragen.", "fa": "اطلاعات خود را بگذارید و راهنماها را فوراً دانلود کنید؛ مشاور ما هم به سؤالاتتان پاسخ می‌دهد."},
   dlReady: {"tr": "Rehberleriniz hazır", "en": "Your guides are ready", "ru": "Ваши гиды готовы", "de": "Ihre Ratgeber sind bereit", "fa": "راهنماهای شما آماده است"},
   partnerPill: {"tr": "İş ortağımız olun", "en": "Be our partner", "ru": "Стать партнёром", "de": "Partner werden", "fa": "همکار ما شوید"},
+  areasTitle: { tr: 'Bölge Rehberleri', en: 'Area Guides', ru: 'Гид по районам', de: 'Regionen-Ratgeber', fa: 'راهنمای مناطق' },
+  areasLead: { tr: 'Antalya’nın ilçelerini tanıyın: konum, yaşam, öne çıkan mahalleler ve kimler için uygun olduğu.', en: 'Get to know Antalya’s districts: location, lifestyle, key neighbourhoods and who each one suits.', ru: 'Районы Анталии: расположение, образ жизни, главные микрорайоны и для кого они подходят.', de: 'Lernen Sie Antalyas Bezirke kennen: Lage, Lebensstil, wichtige Viertel und für wen sie passen.', fa: 'با مناطق آنتالیا آشنا شوید: موقعیت، سبک زندگی، محله‌های مهم و اینکه برای چه کسانی مناسب‌اند.' },
+  areaListings: { tr: '{{A}} ilanlarını gör', en: 'See properties in {{A}}', ru: 'Объекты в районе {{A}}', de: 'Immobilien in {{A}}', fa: 'املاک {{A}}' },
+  areaNote: { tr: 'Güncel fiyat ve kira verileri için danışmanımızdan bölgeye özel analiz isteyin.', en: 'Ask our consultant for an up-to-date price and rent analysis for the area.', ru: 'Запросите у консультанта актуальный анализ цен и аренды по району.', de: 'Fragen Sie unseren Berater nach einer aktuellen Preis- und Mietanalyse.', fa: 'برای تحلیل به‌روز قیمت و اجاره منطقه، از مشاور ما بپرسید.' },
   currency: { tr: 'Para birimi', en: 'Currency', ru: 'Валюта', de: 'Währung', fa: 'واحد پول' },
   partnersTitle: { tr: 'İş ortaklarımız', en: 'Our partners', ru: 'Наши партнёры', de: 'Unsere Partner', fa: 'همکاران ما' },
   speaks: { tr: 'Diller', en: 'Languages', ru: 'Языки', de: 'Sprachen', fa: 'زبان‌ها' },
@@ -133,6 +144,7 @@ export const s = (k, lang) => (S[k] ? (S[k][lang] ?? S[k].en) : k);
 export const SEGS = {
   projects: { tr: 'projeler', en: 'projects', ru: 'proekty', de: 'projekte', fa: 'projeha' },
   downloads: { tr: 'ucretsiz-rehberler', en: 'free-guides', ru: 'besplatnye-gidy', de: 'kostenlose-ratgeber', fa: 'rahnamaye-rayegan', pl: 'bezplatne-poradniki' },
+  areas: { tr: 'bolge-rehberleri', en: 'area-guides', ru: 'rayony', de: 'regionen', fa: 'manategh', pl: 'dzielnice', fr: 'quartiers', es: 'zonas', nl: 'wijken', sv: 'omraden', ar: 'manatiq', zh: 'quyu' },
   favorites: { tr: 'favorilerim', en: 'favourites', ru: 'izbrannoe', de: 'favoriten', fa: 'alaghemandiha' },
   reviews: { tr: 'musteri-yorumlari', en: 'reviews', ru: 'otzyvy', de: 'bewertungen', fa: 'nazarat' },
 };
@@ -474,7 +486,7 @@ export function extend({ PAGES, PLAZA, TIMELINE, LANGS_SPOKEN, TEAM, GUIDE_SEG, 
     GUIDE_SEG[c] = p.segs.buyersguide; GUIDE_TITLE[c] = p.guide.title; GUIDE_LEAD[c] = p.guide.lead;
     SITE.slogan[c] = p.slogan; LANG_NAMES[c] = p.langNames; PARTNER_ROLE[c] = p.partnerRole; SWORN_ROLE[c] = p.swornRole;
     for (const m of TEAM) if (p.roles[m.name]) m.role[c] = p.roles[m.name];
-    for (const [k, pg] of Object.entries(p.pages)) {
+    for (const [k, pg] of Object.entries(p.pages || corpPages(p.corp))) {
       if (!PAGES[k]) continue;
       PAGES[k].seg[c] = pg.seg; PAGES[k].nav[c] = pg.nav;
       PAGES[k][c] = { title: pg.title, desc: pg.desc, lead: pg.lead, html: pg.html };

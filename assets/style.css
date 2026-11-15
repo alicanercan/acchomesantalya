@@ -292,3 +292,9 @@ body.noscroll{overflow:hidden}
 .hsearchbar .hsearch .btn{grid-column:auto}
 @media (max-width:900px){.hsearchbar .hsearch{grid-template-columns:1fr 1fr}.hsearchbar .hsearch .btn{grid-column:1/-1}.atabs{width:auto;overflow-x:auto;flex-wrap:nowrap}}
 .tmain{margin:8px 0 14px}.tmain img{width:100%;height:auto;border-radius:var(--radius);display:block}.tmain figcaption{font-size:13px;color:var(--mute);margin-top:6px;text-align:center}
+/* sosyal sorumluluk */
+.sevent{border-top:1px solid var(--line);padding-top:28px;margin-top:28px}
+.sstats{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:14px 0 18px}.sstats div{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:16px;text-align:center}.sstats b{display:block;font:800 34px var(--serif);color:var(--red)}.sstats span{font-size:14px;color:var(--mute)}
+.sgal{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:18px}.sgal img{width:100%;height:auto;aspect-ratio:1/1;object-fit:cover;border-radius:var(--radius);display:block}
+.prose blockquote{border-inline-start:4px solid var(--red);margin:18px 0;padding:10px 18px;background:#fff;border-radius:8px;font-style:italic}.prose blockquote cite{display:block;margin-top:8px;font-style:normal;font-weight:700;color:var(--ink)}
+@media (max-width:700px){.sstats,.sgal{grid-template-columns:1fr}}

@@ -8,6 +8,7 @@ import { PROJECTS } from './projects.mjs';
 import { PRIVACY } from './privacy.mjs';
 import { PAGES2, P2X, p2Html } from './pages2.mjs';
 import { AREA_GUIDES } from './areas.mjs';
+import { SOCIAL } from './social.mjs';
 import { GUIDES, FAQ, GUIDE_SEG, GUIDE_TITLE, GUIDE_LEAD, GUIDE_UPDATED } from './guide.mjs';
 import { T_EXTRA, S, s, SEGS, LOCALE, RTL, extend, PACKS } from './i18n.mjs';
 import { STAFF_PHOTOS, PARTNERS, PHOTO_BASE, LANG_NAMES, PARTNER_ROLE, SWORN_ROLE } from './team.mjs';
@@ -187,7 +188,7 @@ const fmtPrice = (l, lang) => {
 const priceAttrs = (l) => (l.fiyat ? ` data-amt="${l.fiyat}" data-ccy="${({ TL: 'TRY', USD: 'USD', EUR: 'EUR', GBP: 'GBP' })[l.para || 'TL'] || 'TRY'}"` : '');
 const tipLabel = (l, lang) => (l.tip === 'Kiralık' ? T[lang].rent : T[lang].sale);
 const statusBadge = (l, lang) => l.durum === 'Satıldı' ? `<span class="badge sold">${T[lang].sold}</span>` : l.durum === 'Opsiyonlu' ? `<span class="badge opt">${T[lang].option}</span>` : '';
-const segOf = (lang, seg) => (PAGES[seg] ? (PAGES[seg].seg[lang] || PAGES[seg].seg.en) : seg === 'blog' ? 'blog' : seg === 'projects' ? SEGS.projects[lang] : seg === 'buyersguide' ? GUIDE_SEG[lang] : seg === 'downloads' ? (SEGS.downloads[lang] || 'free-guides') : seg === 'areas' ? (SEGS.areas[lang] || SEGS.areas.en) : seg === 'favorites' ? (SEGS.favorites[lang] || 'favorites') : seg === 'reviews' ? SEGS.reviews[lang] : T[lang].seg[seg]);
+const segOf = (lang, seg) => (PAGES[seg] ? (PAGES[seg].seg[lang] || PAGES[seg].seg.en) : seg === 'blog' ? 'blog' : seg === 'projects' ? SEGS.projects[lang] : seg === 'buyersguide' ? GUIDE_SEG[lang] : seg === 'downloads' ? (SEGS.downloads[lang] || 'free-guides') : seg === 'social' ? (SOCIAL.seg[lang] || SOCIAL.seg.en) : seg === 'areas' ? (SEGS.areas[lang] || SEGS.areas.en) : seg === 'favorites' ? (SEGS.favorites[lang] || 'favorites') : seg === 'reviews' ? SEGS.reviews[lang] : T[lang].seg[seg]);
 const url = (lang, seg, slug) => `${BASE[lang]}/${segOf(lang, seg)}/${slug ? slug + '/' : ''}`;
 const home = (lang) => `${BASE[lang]}/`;
 const waLink = (text) => `https://wa.me/${SITE.whatsapp}?text=${encodeURIComponent(text)}`;
@@ -258,7 +259,7 @@ function footer(lang) {
 ${col(s('popSearches', lang), pop.map(([n, q]) => [n, url(lang, 'list') + q]))}
 ${col(s('popAreas', lang), [...AREA_GUIDES.map((a) => [a.ilce, aUrl(GL(lang), a)]), [s('areasTitle', lang) + ' →', url(lang, 'areas')]])}
 ${col(GUIDE_TITLE[lang], GUIDES.map((g) => [gC(g, L).title, gUrl(L, g)]))}
-${col(t.company, [[nv('about'), url(lang, 'about')], [nv('broker'), url(lang, 'broker')], [nv('team'), url(lang, 'team')], [t.revTitle, url(lang, 'reviews')], [nv('licences'), url(lang, 'licences')], [nv('join'), url(lang, 'join')]])}
+${col(t.company, [[nv('about'), url(lang, 'about')], [nv('broker'), url(lang, 'broker')], [nv('team'), url(lang, 'team')], [t.revTitle, url(lang, 'reviews')], [nv('licences'), url(lang, 'licences')], [SOCIAL.nav[lang] || SOCIAL.nav.en, url(lang, 'social')], [nv('join'), url(lang, 'join')]])}
 ${col(s('usefulLinks', lang), [[nv('services'), url(lang, 'services')], [nv('sell'), url(lang, 'sell')], [nv('viewing'), url(lang, 'viewing')], [s('dlPageTitle', lang), url(lang, 'downloads')], [t.projects, url(lang, 'projects')], [t.blog, url(lang, 'blog')], [t.nav.contact, url(lang, 'contact')]])}
 </div>
 <div class="wrap fmid">
@@ -287,7 +288,7 @@ ${[agentSchema, ...schema].map((s) => `<script type="application/ld+json">${JSON
 ${DEMO ? `<div class="demo">${t.demo}</div>` : ''}
 <header class="top"><div class="tbar"><div class="wrap tbin"><span class="tloc">📍 ACC Plaza · Yeşilbahçe, Muratpaşa / Antalya</span><span class="tcon"><a class="tphone" href="tel:${SITE.phoneRaw}" aria-label="${t.call} ${SITE.phone}"><svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><path fill="currentColor" d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1A17 17 0 0 1 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1l-2.3 2.2z"/></svg><b dir="ltr">${SITE.phone}</b></a><a class="twa" href="${waLink(t.waGeneral)}" target="_blank" rel="noopener">WhatsApp</a><a class="tmail" href="mailto:${SITE.email}">${SITE.email}</a><a class="tfav" href="${url(lang, 'favorites')}">♡ <span data-fav-count>0</span></a></span></div></div><div class="wrap nav">
 <a class="logo" href="${home(lang)}"><img src="/img/logo/acc-siyah.svg" alt="ACC HOMES International Real Estate" width="154" height="45"></a>
-<nav class="menu"><a href="${url(lang, 'list')}">${t.nav.list}</a><a href="${url(lang, 'projects')}">${t.projects}</a><a href="${url(lang, 'buyersguide')}">${GUIDE_TITLE[lang]}</a><a href="${url(lang, 'services')}">${PAGES.services.nav[lang]}</a><div class="dd"><button type="button">${t.company} ▾</button><div class="ddm"><a href="${url(lang, 'about')}">${PAGES.about.nav[lang]}</a><a href="${url(lang, 'broker')}">${PAGES.broker.nav[lang]}</a><a href="${url(lang, 'team')}">${PAGES.team.nav[lang]}</a><a href="${url(lang, 'reviews')}">${t.revTitle}</a><a href="${url(lang, 'licences')}">${PAGES.licences.nav[lang] || PAGES.licences.nav.en}</a><a href="${url(lang, 'join')}">${PAGES.join.nav[lang]}</a></div></div><a href="${url(lang, 'blog')}">${t.blog}</a><a href="${url(lang, 'contact')}">${t.nav.contact}</a></nav>
+<nav class="menu"><a href="${url(lang, 'list')}">${t.nav.list}</a><a href="${url(lang, 'projects')}">${t.projects}</a><a href="${url(lang, 'buyersguide')}">${GUIDE_TITLE[lang]}</a><a href="${url(lang, 'services')}">${PAGES.services.nav[lang]}</a><div class="dd"><button type="button">${t.company} ▾</button><div class="ddm"><a href="${url(lang, 'about')}">${PAGES.about.nav[lang]}</a><a href="${url(lang, 'broker')}">${PAGES.broker.nav[lang]}</a><a href="${url(lang, 'team')}">${PAGES.team.nav[lang]}</a><a href="${url(lang, 'reviews')}">${t.revTitle}</a><a href="${url(lang, 'licences')}">${PAGES.licences.nav[lang] || PAGES.licences.nav.en}</a><a href="${url(lang, 'social')}">${SOCIAL.nav[lang] || SOCIAL.nav.en}</a><a href="${url(lang, 'join')}">${PAGES.join.nav[lang]}</a></div></div><a href="${url(lang, 'blog')}">${t.blog}</a><a href="${url(lang, 'contact')}">${t.nav.contact}</a></nav>
 <details class="mnav"><summary aria-label="${t.menu}">☰</summary><div class="mpanel"><a href="${url(lang, 'list')}">${t.nav.list}</a><a href="${url(lang, 'projects')}">${t.projects}</a><a href="${url(lang, 'buyersguide')}">${GUIDE_TITLE[lang]}</a><a href="${url(lang, 'services')}">${PAGES.services.nav[lang]}</a><a href="${url(lang, 'about')}">${PAGES.about.nav[lang]}</a><a href="${url(lang, 'broker')}">${PAGES.broker.nav[lang]}</a><a href="${url(lang, 'team')}">${PAGES.team.nav[lang]}</a><a href="${url(lang, 'sell')}">${PAGES.sell.nav[lang] || PAGES.sell.nav.en}</a><a href="${url(lang, 'join')}">${PAGES.join.nav[lang]}</a><a href="${url(lang, 'guide')}">${t.nav.guide}</a><a href="${url(lang, 'blog')}">${t.blog}</a><a href="${url(lang, 'contact')}">${t.nav.contact}</a></div></details>
 ${settingsBtn(lang)}
 <a class="btn sm" href="tel:${SITE.phoneRaw}">${t.call}</a>
@@ -624,6 +625,24 @@ function sellForm(lang) {
 <label class="chk"><input type="checkbox" name="kvkk_onay" value="evet" required> <span>${s('consent', lang).replace('{{LINK}}', `<a href="${url(lang, 'privacy')}" target="_blank" rel="noopener">${PAGES.privacy.nav[lang] || PAGES.privacy.nav.en}</a>`)} *</span></label>
 <button class="btn" type="submit">${s('sellReq', lang)}</button></form>`;
 }
+// Sosyal sorumluluk sayfası
+const SOCIAL_LOCAL = {};
+async function fetchSocialImages() {
+  const dir = path.join(OUT, 'img', 'sosyal'); fs.mkdirSync(dir, { recursive: true });
+  for (const ev of SOCIAL.events) for (const [u, name] of ev.remote || []) {
+    try { const r = await fetch(u, { signal: AbortSignal.timeout(30000), headers: { 'User-Agent': 'Mozilla/5.0 (ACC HOMES site build)' } }); if (!r.ok) throw new Error(r.status); fs.writeFileSync(path.join(dir, name), Buffer.from(await r.arrayBuffer())); SOCIAL_LOCAL[name] = `/img/sosyal/${name}`; } catch (e) { console.warn('Sosyal görsel indirilemedi:', name, e.message); }
+  }
+}
+function pageSocial(lang) {
+  const t = T[lang]; const L = GL(lang); const nav = SOCIAL.nav[lang] || SOCIAL.nav.en;
+  const evs = SOCIAL.events.map((ev) => {
+    const c = ev[L];
+    const imgs = [...ev.images.map(([src, w, h]) => `<img src="${src}" alt="${esc(c.title)}" loading="lazy" width="${w}" height="${h}">`), ...(ev.remote || []).filter(([, n]) => SOCIAL_LOCAL[n]).map(([, n]) => `<img src="/.netlify/images?url=${encodeURIComponent(SOCIAL_LOCAL[n])}&w=1000&fm=webp&q=72" alt="${esc(c.title)}" loading="lazy" width="1000" height="563">`)].join('');
+    return `<article class="sevent" id="${ev.id}"><p class="eyebrow">${esc(ev.date)} · ${esc(c.place)}</p><h2>${esc(c.title)}</h2><div class="sstats">${ev.stats[L].map(([n, x]) => `<div><b>${n}</b><span>${esc(x)}</span></div>`).join('')}</div><div class="sgal">${imgs}</div><div class="prose">${c.html}</div></article>`;
+  }).join('');
+  const body = `<section class="wrap sec page"><nav class="crumbs"><a href="${home(lang)}">${t.nav.home}</a> / <span>${esc(nav)}</span></nav><h1>${esc(nav)}</h1><p class="sub">${esc(SOCIAL.lead[lang] || SOCIAL.lead.en)}</p>${SOCIAL.intro[L]}${evs}<div class="ctas"><a class="btn" href="${waLink(t.waGeneral)}" target="_blank" rel="noopener">${s('socialCta', lang)}</a></div></section>`;
+  write(path.join(url(lang, 'social'), 'index.html'), layout({ lang, title: `${nav} | ACC HOMES`, desc: SOCIAL.lead[lang] || SOCIAL.lead.en, canonical: url(lang, 'social'), alternates: alts('social'), body, ogImage: `${SITE.domain}/img/sosyal/acc-day-2025-okul.webp` }));
+}
 function pageFavorites(lang) {
   const t = T[lang];
   const body = `<section class="wrap sec page"><h1>♡ ${s('favTitle', lang)}</h1><p class="sub">${s('favLead', lang)}</p>
@@ -814,9 +833,10 @@ await fetchIgImages();
 await fetchDriveMedia();
 await fetchTeamPhotos();
 await fetchFonts();
+await fetchSocialImages();
 const urls = [];
 for (const lang of LANGS) {
-  pageHome(lang); pageList(lang); pageGuide(lang); pageContact(lang); pageBlog(lang); pageProjects(lang); pageGuideHub(lang); pageReviews(lang); pageFavorites(lang); pageDownloads(lang); urls.push(url(lang, 'projects'), url(lang, 'buyersguide'), url(lang, 'reviews'));
+  pageHome(lang); pageList(lang); pageGuide(lang); pageContact(lang); pageBlog(lang); pageProjects(lang); pageGuideHub(lang); pageReviews(lang); pageFavorites(lang); pageSocial(lang); urls.push(url(lang, 'social')); pageDownloads(lang); urls.push(url(lang, 'projects'), url(lang, 'buyersguide'), url(lang, 'reviews'));
   if (lang === 'tr' || lang === 'en') { for (const g of GUIDES) { pageGuideItem(g, lang); urls.push(gUrl(lang, g)); } for (const a of AREA_GUIDES) { pageAreaItem(a, lang); urls.push(aUrl(lang, a)); } }
   pageAreaHub(lang); urls.push(url(lang, 'areas'));
   for (const k of Object.keys(PAGES)) { pageCorporate(k, lang); urls.push(url(lang, k)); }

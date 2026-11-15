@@ -461,7 +461,7 @@ function roadmap(lang) {
 function founderBlock(lang) {
   const img = SITE.brokerPhoto ? `<img src="${SITE.brokerPhoto}" alt="Ali Caner Can, Broker & Owner – ACC HOMES" loading="lazy" width="600" height="655">` : '<span class="mav big">AC</span>';
   const pct = lang === 'tr' ? '%99' : '99%';
-  return `<div class="founder"><div class="fimg">${img}</div><div><p class="eyebrow">${sT(FOUNDER.title, lang)}</p><h3><a href="${url(lang, 'broker')}">Ali Caner Can</a></h3><p>${esc(sT(BROKER.home.text, lang))}</p>
+  return `<div class="founder"><div class="fimg">${img}</div><div><p class="eyebrow">${sT(BROKER.home.eyebrow, lang)}</p><h3><a href="${url(lang, 'broker')}">Ali Caner Can</a></h3><p>${esc(sT(BROKER.home.text, lang))}</p>
 <div class="stats"><div><b>290+</b><span>${esc(sT(BROKER.stats[0][1], lang))}</span></div><div><b>${pct}</b><span>${esc(sT(FOUNDER.sat, lang))}</span></div><div><b>🌍</b><span>${esc(sT(FOUNDER.foreign, lang))}</span></div></div>
 <a class="more" href="${url(lang, 'broker')}">${sT(BROKER.home.cta, lang)} →</a></div></div>`;
 }

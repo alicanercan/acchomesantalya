@@ -638,7 +638,7 @@ const evT = (o, lang) => o[lang] || o.en;
 const evUrl = (lang, ev) => url(lang, 'events', ev.id);
 function evImgs(ev, c, w = 1000) {
   return [
-    ...ev.images.map(([src, iw, ih, wide]) => ({ src, w: iw, h: ih, wide })),
+    ...ev.images.map(([src, iw, ih, wide, cap]) => ({ src, w: iw, h: ih, wide, cap })),
     ...(ev.media || []).filter((id) => MEDIA[id]).map((id) => ({ src: cdn(id, w), w, h: Math.round(w * 0.625) })),
     ...(ev.remote || []).filter(([, n]) => SOCIAL_LOCAL[n]).map(([, n]) => ({ src: `/.netlify/images?url=${encodeURIComponent(SOCIAL_LOCAL[n])}&w=${w}&fm=webp&q=72`, w, h: Math.round(w * 0.5625) })),
   ];
@@ -660,7 +660,7 @@ function pageEvents(lang) {
 function pageEvent(ev, lang) {
   const t = T[lang]; const L = GL(lang); const c = ev[L]; const cat = EVENTS.cats[ev.cat]; const nav = evT(EVENTS.nav, lang);
   const ims = evImgs(ev, c);
-  const gal = ims.length ? `<div class="sgal">${ims.map((i) => `<img${i.wide ? ' class="wide"' : ''} src="${i.src}" alt="${esc(c.title)}" loading="lazy" width="${i.w}" height="${i.h}">`).join('')}</div>${(ev.media || []).length && !ev.images.length ? `<p class="gcap">${evT(EVENTS.ui.projPhotos, lang)}</p>` : ''}` : `<p class="gcap">${evT(EVENTS.ui.photosSoon, lang)}</p>`;
+  const gal = ims.length ? `<div class="sgal">${ims.map((i) => { const cap = i.cap && (i.cap[L] || i.cap.en); const img = `<img${i.wide ? ' class="wide"' : ''} src="${i.src}" alt="${esc(cap || c.title)}" loading="lazy" width="${i.w}" height="${i.h}">`; return cap ? `<figure>${img}<figcaption>${esc(cap)}</figcaption></figure>` : img; }).join('')}</div>${(ev.media || []).length && !ev.images.length ? `<p class="gcap">${evT(EVENTS.ui.projPhotos, lang)}</p>` : ''}` : `<p class="gcap">${evT(EVENTS.ui.photosSoon, lang)}</p>`;
   const ig = ev.ig ? `<a class="btn ghost" href="${ev.ig}" target="_blank" rel="noopener">${ICON_IG} ${evT(EVENTS.ui.ig, lang)}</a>` : '';
   const ctaHref = ev.cat === 'launch' && ev.project ? ev.project : waLink(t.waGeneral);
   const others = EVENTS.events.filter((e) => e !== ev);

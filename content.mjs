@@ -198,7 +198,8 @@ export const PAGES = {
 <h2>Değerleri</h2>
 <p>Şeffaflık, dürüstlük ve etik, mesleğinin merkezindedir. 2022’den bu yana her bayramda ve özel günde müşterilerinin her birine tek tek mesaj atar; ekibinden de aynısını bekler. ACC HOMES’ta her yıl bir gün ticari işler durur ve tüm ekip yalnızca topluma faydaya odaklanır: <a href="{{URL:events}}">ACC Day</a>.</p>
 <h2>Diller ve topluluk</h2>
-<ul class="chips"><li>Türkçe (anadil)</li><li>İngilizce (ileri)</li><li>Rusça</li><li>Arapça</li><li>Farsça</li><li>Almanca</li></ul>
+<ul class="chips"><li>Türkçe (anadil)</li><li>İngilizce (ileri)</li></ul>
+<p>Yabancı yatırımcılara, ekibinin konuştuğu 10 dilde hizmet verilir.</p>
 <p>ANTİAD (Antalya İş İnsanları Derneği) üyesi ve Beşiktaş JK Kongre Üyesi.</p>
 {{BROKER_GALLERY}}
 {{BROKER_LINKS}}
@@ -243,7 +244,8 @@ export const PAGES = {
 <h2>Values</h2>
 <p>Transparency, honesty and ethics are at the centre of his work. Since 2022 he has personally messaged every client on every holiday and special day, and asks his team to do the same. Once a year ACC HOMES stops all business for a day and the whole team focuses on giving back: <a href="{{URL:events}}">ACC Day</a>.</p>
 <h2>Languages and community</h2>
-<ul class="chips"><li>Turkish (native)</li><li>English (advanced)</li><li>Russian</li><li>Arabic</li><li>Persian</li><li>German</li></ul>
+<ul class="chips"><li>Turkish (native)</li><li>English (advanced)</li></ul>
+<p>Foreign investors are served in the 10 languages spoken across his team.</p>
 <p>Member of ANTİAD (Antalya Business People’s Association) and of the Beşiktaş JK Congress.</p>
 {{BROKER_GALLERY}}
 {{BROKER_LINKS}}

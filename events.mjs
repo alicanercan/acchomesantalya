@@ -56,7 +56,8 @@ export const EVENTS = {
     {
       id: 'akra-dubai-yatirimci-bulusmasi-2025', cat: 'investor', date: '19–20.12.2025',
       ig: 'https://www.instagram.com/p/DSdaOVpDknE/',
-      images: [], media: [],
+      images: [['/img/sosyal/akra-dubai-2025-ekip-sahne.webp', 1400, 933, 'wide'], ['/img/sosyal/akra-dubai-2025-akra-hotel.webp', 1000, 556], ['/img/sosyal/akra-dubai-2025-vizyon-sunumu.webp', 1000, 667], ['/img/sosyal/akra-dubai-2025-hosgeldiniz.webp', 1000, 667], ['/img/sosyal/akra-dubai-2025-dubai-projeleri.webp', 1000, 563], ['/img/sosyal/akra-dubai-2025-danube-markalari.webp', 1000, 667], ['/img/sosyal/akra-dubai-2025-konuk-konusmaci.webp', 1000, 667], ['/img/sosyal/akra-dubai-2025-salon.webp', 1000, 667], ['/img/sosyal/akra-dubai-2025-ekip-ve-is-ortaklari.webp', 1000, 667], ['/img/sosyal/akra-dubai-2025-networking.webp', 1000, 667]],
+      media: [],
       stats: {
         tr: [['100+', 'yatırımcı ve iş ortağı'], ['4', 'oturum: 2 gün, her gün 2 oturum'], ['1', 'konuk konuşmacı: Nörolog Dr. Timur Yılmaz']],
         en: [['100+', 'investors and business partners'], ['4', 'sessions: 2 days, 2 sessions a day'], ['1', 'guest speaker: neurologist Dr. Timur Yılmaz']],

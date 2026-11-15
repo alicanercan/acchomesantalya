@@ -293,7 +293,7 @@ const ROLES_X = {
   'Okan Akgün': { de: 'Büroleiter', fa: 'مدیر دفتر' },
   'Melissa Enriquez Sedita': { de: 'CRM & internationaler Vertrieb', fa: 'مسئول CRM و فروش بین‌المللی' },
   'Adnan Konuk': { de: 'Projektkoordinator', fa: 'هماهنگ‌کننده پروژه' },
-  'Bensu Taşbaş': { de: 'Social-Media-Spezialistin', fa: 'کارشناس شبکه‌های اجتماعی' },
+  'Naz Bensu Taşbaş': { de: 'Social-Media-Spezialistin', fa: 'کارشناس شبکه‌های اجتماعی' },
   'Derya Plyatner': { de: 'Grafikdesignerin', fa: 'کارشناس طراحی گرافیک' },
   'Zeynep Çarıkçı': { de: 'Büroservice', fa: 'خدمات دفتر' },
   'Kamil Bey': { de: 'Bürokater', fa: 'گربه دفتر' },

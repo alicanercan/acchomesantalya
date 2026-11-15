@@ -7,7 +7,7 @@ export const TEAM = [
   { name: 'Okan Akgün', initials: 'OA', role: { tr: 'Ofis Yöneticisi', en: 'Office Manager', ru: 'Офис-менеджер' } },
   { name: 'Melissa Enriquez Sedita', initials: 'ME', role: { tr: 'CRM ve Uluslararası Satış Yetkilisi', en: 'CRM & International Sales Manager', ru: 'Менеджер CRM и международных продаж' } },
   { name: 'Adnan Konuk', initials: 'AK', role: { tr: 'Proje Koordinatörü', en: 'Project Coordinator', ru: 'Координатор проектов' } },
-  { name: 'Bensu Taşbaş', initials: 'BT', role: { tr: 'Sosyal Medya Uzmanı', en: 'Social Media Specialist', ru: 'Специалист по соцсетям' } },
+  { name: 'Naz Bensu Taşbaş', initials: 'BT', role: { tr: 'Sosyal Medya Uzmanı', en: 'Social Media Specialist', ru: 'Специалист по соцсетям' } },
   { name: 'Derya Plyatner', initials: 'DP', role: { tr: 'Grafik Tasarım Uzmanı', en: 'Graphic Design Specialist', ru: 'Графический дизайнер' } },
   { name: 'Zeynep Çarıkçı', initials: 'ZÇ', role: { tr: 'Ofis Servis Yetkilisi', en: 'Office Services', ru: 'Офисный сервис' } },
   { name: 'Kamil Bey', initials: 'KB', role: { tr: 'Ofis Kedimiz', en: 'Office Cat', ru: 'Офисный кот' } },

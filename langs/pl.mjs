@@ -126,7 +126,7 @@ export default {
   partnerRole: 'Doradca ds. nieruchomości', swornRole: 'Doradczyni i tłumaczka przysięgła',
   roles: {
     'Ali Caner Can': 'Broker i założyciel', 'Esma Özdal': 'Koordynatorka generalna', 'Okan Akgün': 'Kierownik biura',
-    'Melissa Enriquez Sedita': 'CRM i sprzedaż międzynarodowa', 'Adnan Konuk': 'Koordynator inwestycji', 'Bensu Taşbaş': 'Specjalistka social media',
+    'Melissa Enriquez Sedita': 'CRM i sprzedaż międzynarodowa', 'Adnan Konuk': 'Koordynator inwestycji', 'Naz Bensu Taşbaş': 'Specjalistka social media',
     'Derya Plyatner': 'Graficzka', 'Zeynep Çarıkçı': 'Obsługa biura', 'Kamil Bey': 'Kot biurowy',
   },
   p2: {

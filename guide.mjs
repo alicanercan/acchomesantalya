@@ -81,7 +81,7 @@ export const GUIDES = [
 <p>Bir mülk alırken satış bedeline ek olarak şu masrafları planlamanız gerekir:</p>
 <table class="spec wide">
 <tr><th>Tapu harcı</th><td>Beyan edilen satış bedelinin <b>%2’si alıcıdan, %2’si satıcıdan</b> alınır (toplam %4). Harç, emlak vergisi değerinden düşük olmayan gerçek bedel üzerinden hesaplanır.</td></tr>
-<tr><th>Döner sermaye hizmet bedeli</th><td>Tapu müdürlüğü hizmet bedeli; yöreye göre katsayıyla değişir.</td></tr>
+<tr><th>Döner sermaye hizmet bedeli</th><td>Tapu müdürlüğü hizmet bedeli; bölgeye göre katsayıyla değişir.</td></tr>
 <tr><th>Emlak danışmanlığı hizmet bedeli</th><td>ACC HOMES’ta satış bedelinin %2’si + KDV. Fotoğraf, video, ilan, sözleşme, banka ve tapu takibi bu hizmete dahildir.</td></tr>
 <tr><th>DASK</th><td>Zorunlu deprem sigortası; tapu devrinde poliçe istenir.</td></tr>
 <tr><th>Değerleme raporu</th><td>Yabancı alıcılarda ve kredili alımlarda gerekir; ücret mülke ve kuruluşa göre değişir.</td></tr>

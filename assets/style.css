@@ -302,3 +302,4 @@ body.noscroll{overflow:hidden}
 .evchips a{color:inherit;text-decoration:none}.evchips li:hover{border-color:var(--red)}
 .evcat{margin-top:36px}.evcat .sub{margin-top:-6px}
 .evph{background:linear-gradient(135deg,#fbf3ef,#f1e4dc);color:var(--red);text-align:center;gap:6px;align-content:center}.evph span{font-size:46px}.evph b{font:700 18px var(--serif);max-width:80%}
+.sgal img.wide{grid-column:1/-1;aspect-ratio:3/2}

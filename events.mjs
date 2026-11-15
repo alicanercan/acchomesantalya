@@ -58,17 +58,17 @@ export const EVENTS = {
       ig: 'https://www.instagram.com/p/DSdaOVpDknE/',
       images: [], media: [],
       stats: {
-        tr: [['100+', 'yatırımcı ve iş ortağı'], ['2', 'gün süren buluşma'], ['1', 'konuk konuşmacı: Nörolog Dr. Timur Yılmaz']],
-        en: [['100+', 'investors and business partners'], ['2', 'days of meetings'], ['1', 'guest speaker: neurologist Dr. Timur Yılmaz']],
+        tr: [['100+', 'yatırımcı ve iş ortağı'], ['4', 'oturum: 2 gün, her gün 2 oturum'], ['1', 'konuk konuşmacı: Nörolog Dr. Timur Yılmaz']],
+        en: [['100+', 'investors and business partners'], ['4', 'sessions: 2 days, 2 sessions a day'], ['1', 'guest speaker: neurologist Dr. Timur Yılmaz']],
       },
       tr: {
         title: 'Dubai fırsatları Akra Hotel’de: ACC HOMES × Danube Properties yatırımcı buluşması',
         card: 'ACC HOMES sponsorluğunda, portföylerimizi ve global networkümüzü uluslararası Dubai projeleri için bir araya getirdik.',
         place: 'Akra Hotel, Antalya',
-        html: `<p>ACC HOMES sponsorluğunda ve Danube Properties iş birliğiyle Akra Hotel’de düzenlediğimiz buluşmada, portföylerimizi ve global networkümüzü uluslararası Dubai projeleri için bir araya getirdik. Buluşmada 100’ü aşkın yatırımcı ve iş ortağımızı ağırladık.</p>
+        html: `<p>19–20 Aralık 2025’te ACC HOMES sponsorluğunda ve Danube Properties iş birliğiyle Akra Hotel’de düzenlediğimiz iki günlük buluşmada, portföylerimizi ve global networkümüzü uluslararası Dubai projeleri için bir araya getirdik. Buluşmada 100’ü aşkın yatırımcı ve iş ortağımızı ağırladık.</p>
 <h3>Programda neler vardı</h3>
 <ul class="ticks"><li>Dubai’deki yatırım fırsatlarının Danube Properties ile birlikte sunumu</li><li>Konuk konuşmacı Uzm. Dr. Timur Yılmaz (Nörolog): “Beyin Nasıl Büyük Kararlar Alır?”</li><li>“Neden ACC HOMES?”: Antalya’nın şeffaf ve kurumsal emlak ofisi; yatırımcının kârına ve geleceğine odaklanan butik yaklaşım</li></ul>
-<p>Buluşma 20 Aralık Cumartesi günü 13:30 ve 16:00 oturumlarıyla, ücretsiz girişle devam etti.</p>
+<p>Her gün iki oturum düzenlendi; 20 Aralık Cumartesi oturumları 13:30 ve 16:00’da, ücretsiz girişle yapıldı.</p>
 <h3>Neden bu buluşmaları yapıyoruz</h3>
 <p>Yatırımcılarımızı yalnızca Antalya’daki değil, global pazarlardaki doğru fırsatlarla da buluşturmak istiyoruz. Uluslararası iş ortaklarımızla kurduğumuz ilişkiyi bu buluşmalarda yatırımcılarımızla doğrudan paylaşıyoruz.</p>`,
       },
@@ -76,10 +76,10 @@ export const EVENTS = {
         title: 'Dubai opportunities at Akra Hotel: ACC HOMES × Danube Properties investor meeting',
         card: 'Sponsored by ACC HOMES, we brought our portfolios and global network together for international Dubai projects.',
         place: 'Akra Hotel, Antalya',
-        html: `<p>At the meeting we hosted at Akra Hotel, sponsored by ACC HOMES and in collaboration with Danube Properties, we brought our portfolios and global network together for international Dubai projects. We welcomed more than 100 investors and business partners.</p>
+        html: `<p>At the two-day meeting we hosted at Akra Hotel on 19–20 December 2025, sponsored by ACC HOMES and in collaboration with Danube Properties, we brought our portfolios and global network together for international Dubai projects. We welcomed more than 100 investors and business partners.</p>
 <h3>What was on the programme</h3>
 <ul class="ticks"><li>A presentation of investment opportunities in Dubai together with Danube Properties</li><li>Guest speaker Dr. Timur Yılmaz (neurologist): “How Does the Brain Make Big Decisions?”</li><li>“Why ACC HOMES?”: Antalya’s transparent, corporate real estate office, with a boutique approach focused on the investor’s profit and future</li></ul>
-<p>The meeting continued on Saturday 20 December with sessions at 13:30 and 16:00, free of charge.</p>
+<p>Two sessions were held each day; on Saturday 20 December they took place at 13:30 and 16:00, free of charge.</p>
 <h3>Why we hold these meetings</h3>
 <p>We want to connect our investors not only with the right opportunities in Antalya, but also in global markets. These meetings are where we share our relationships with international partners directly with our investors.</p>`,
       },
@@ -88,7 +88,8 @@ export const EVENTS = {
       id: 'antalle-open-house-2025', cat: 'launch', date: '13–14.12.2025',
       ig: 'https://www.instagram.com/p/DSNhg5wCFEA/',
       project: '/projeler/antalle-concept-houses/',
-      images: [], media: ['1RPC7RzYgHHHqHODBo4koUMSgzKCo91kO', '1lqC07NTLl89dYjGG8dHC75AW4oLcyU-L', '154Mp0OUlyUhVnaUYAV1zVYNpw2cx0v-A'],
+      images: [['/img/sosyal/antalle-open-house-2025-ekip.webp', 1400, 933, 'wide'], ['/img/sosyal/antalle-open-house-2025-ekip-logo.webp', 562, 1000], ['/img/sosyal/antalle-open-house-2025-satis-ofisi.webp', 562, 1000], ['/img/sosyal/antalle-open-house-2025-karsilama.webp', 667, 1000], ['/img/sosyal/antalle-open-house-2025-lounge.webp', 1000, 667], ['/img/sosyal/antalle-open-house-2025-misafirler.webp', 562, 1000], ['/img/sosyal/antalle-open-house-2025-ikram.webp', 667, 1000]],
+      media: [],
       stats: {
         tr: [['2', 'gün açık kapı'], ['İskanlı', 'villalar, taşınmaya hazır'], ['4+1', 'dubleks villa ve 2+1 teras daire']],
         en: [['2', 'open house days'], ['Ready', 'villas with occupancy permit'], ['4+1', 'duplex villas and 2+1 terrace flats']],

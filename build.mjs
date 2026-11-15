@@ -206,7 +206,7 @@ const url = (lang, seg, slug) => `${BASE[lang]}/${segOf(lang, seg)}/${slug ? slu
 const home = (lang) => `${BASE[lang]}/`;
 const waLink = (text) => `https://wa.me/${SITE.whatsapp}?text=${encodeURIComponent(text)}`;
 const turhostForms = (html) => html.replace(/<form([^>]*?)data-netlify="true"([^>]*?)action="([^"]*)"([^>]*)>/g, (m, a, b, act, c) => `<form${a}${b}action="/form.php"${c}><input type="hidden" name="_next" value="${act}">`);
-const write = (rel, html) => { if (HOST === 'turhost' && typeof html === 'string' && rel.endsWith('.html')) html = turhostForms(html); const f = path.join(OUT, rel); fs.mkdirSync(path.dirname(f), { recursive: true }); fs.writeFileSync(f, html); };
+const write = (rel, html) => { if (typeof html === 'string' && rel.endsWith('.html')) html = html.replace(/<iframe([^>]*?) src="/g, '<iframe$1 data-csrc="'); if (HOST === 'turhost' && typeof html === 'string' && rel.endsWith('.html')) html = turhostForms(html); const f = path.join(OUT, rel); fs.mkdirSync(path.dirname(f), { recursive: true }); fs.writeFileSync(f, html); };
 const placeholder = `<div class="ph"><svg viewBox="0 0 64 64" aria-hidden="true"><path d="M8 30 32 10l24 20v24H40V38H24v16H8z" fill="none" stroke="currentColor" stroke-width="3" stroke-linejoin="round"/></svg></div>`;
 
 const AREAS_SERVED = ['Muratpaşa', 'Konyaaltı', 'Kepez', 'Aksu', 'Döşemealtı', 'Serik', 'Kemer'];
@@ -334,6 +334,15 @@ ${ALLPOSTS.map((p) => `- [${postFor(p, 'tr').title}](${a(url('tr', 'blog', p.slu
 - [Projeler](${a(url('tr', 'projects'))}) · [Projects](${a(url('en', 'projects'))})
 `;
 }
+const AN = SITE.analytics || {};
+const ANALYTICS_HEAD = `<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('consent','default',{ad_storage:'denied',ad_user_data:'denied',ad_personalization:'denied',analytics_storage:'denied',wait_for_update:500});gtag('set','url_passthrough',true);gtag('set','ads_data_redaction',true);(function(){try{var c=JSON.parse(localStorage.getItem('acc_consent')||'null');if(c){gtag('consent','update',{analytics_storage:c.a?'granted':'denied',ad_storage:c.m?'granted':'denied',ad_user_data:c.m?'granted':'denied',ad_personalization:c.m?'granted':'denied'});}}catch(e){}})();window.ACC_PIXEL=${JSON.stringify(AN.metaPixel || '')};</script>${AN.ga4 ? `<script async src="https://www.googletagmanager.com/gtag/js?id=${AN.ga4}"></script><script>gtag('js',new Date());gtag('config','${AN.ga4}');</script>` : ''}`;
+const CB = { tr: { t: 'Çerez tercihleriniz', p: 'Sitemizi iyileştirmek için ziyaret istatistikleri (Google Analytics) ve reklamlarımızın etkisini ölçmek için pazarlama çerezleri (Meta) kullanmak istiyoruz. Onayınız olmadan bu çerezler çalışmaz. Ayrıntılar için', l: 'KVKK ve Gizlilik Politikası', acc: 'Kabul et', rej: 'Reddet', set: 'Ayarlar', save: 'Seçimi kaydet', a: 'İstatistik (Google Analytics)', m: 'Pazarlama (Meta Pikseli, reklam ölçümü)', n: 'Zorunlu (dil, para birimi, favoriler)', reopen: 'Çerez ayarları', map: 'Haritayı göster', mapN: 'Harita Google tarafından sunulur ve çerez kullanabilir.' }, en: { t: 'Your cookie choices', p: 'We would like to use visit statistics (Google Analytics) to improve our site and marketing cookies (Meta) to measure our ads. These cookies only run with your consent. See our', l: 'Privacy Policy', acc: 'Accept', rej: 'Reject', set: 'Settings', save: 'Save choice', a: 'Statistics (Google Analytics)', m: 'Marketing (Meta Pixel, ad measurement)', n: 'Necessary (language, currency, favourites)', reopen: 'Cookie settings', map: 'Show map', mapN: 'The map is provided by Google and may use cookies.' } };
+function consentBanner(lang) {
+  const c = CB[GL(lang)];
+  return `<div class="cbn" id="cbn" hidden role="dialog" aria-live="polite" aria-label="${c.t}" data-mapl="${esc(c.map)}" data-mapn="${esc(c.mapN)}"><div class="cbn-in"><b>${c.t}</b><p>${c.p} <a href="${url(lang, 'privacy')}">${c.l}</a>.</p>
+<div class="cbn-set" hidden><label><input type="checkbox" checked disabled> ${c.n}</label><label><input type="checkbox" data-c="a"> ${c.a}</label><label><input type="checkbox" data-c="m"> ${c.m}</label></div>
+<div class="cbn-b"><button type="button" class="btn ghost sm" data-cb="set">${c.set}</button><button type="button" class="btn ghost sm" data-cb="rej">${c.rej}</button><button type="button" class="btn ghost sm" data-cb="save" hidden>${c.save}</button><button type="button" class="btn sm" data-cb="acc">${c.acc}</button></div></div></div><button type="button" class="cbn-re" data-cb="open">${c.reopen}</button>`;
+}
 function crumbSchema(body, title, canonical) {
   const m = body.match(/<nav class="crumbs[^"]*">([\s\S]*?)<\/nav>/); if (!m) return [];
   const items = [...m[1].matchAll(/<a href="([^"]+)">([\s\S]*?)<\/a>/g)].map(([, u, n]) => [n.replace(/<[^>]+>/g, '').trim(), u]);
@@ -350,7 +359,7 @@ function layout({ lang, title, desc, canonical, alternates, body, schema = [], o
   return (RTL.has(lang) ? (h) => h.replaceAll('→', '←') : (h) => h)(`<!doctype html><html lang="${t.htmlLang}"${RTL.has(lang) ? ' dir="rtl"' : ''}><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>${esc(title)}</title>${noindex ? '<meta name="robots" content="noindex">' : ''}<meta name="description" content="${esc(desc)}"><link rel="canonical" href="${SITE.domain}${canonical}">${alt}
 <meta property="og:type" content="website"><meta property="og:title" content="${esc(title)}"><meta property="og:description" content="${esc(desc)}"><meta property="og:url" content="${SITE.domain}${canonical}"><meta property="og:locale" content="${t.locale}"><meta property="og:site_name" content="ACC HOMES International Real Estate"><meta property="og:image" content="${SITE.domain}${ogImage || '/img/acc-plaza-og.jpg'}">${ogImage ? '' : '<meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">'}<meta property="og:image:alt" content="${esc(title)}"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="${esc(title)}"><meta name="twitter:description" content="${esc(desc)}"><meta name="twitter:image" content="${SITE.domain}${ogImage || '/img/acc-plaza-og.jpg'}">
-<meta name="theme-color" content="#E02A3C"><link rel="icon" href="/favicon.svg" type="image/svg+xml"><link rel="apple-touch-icon" href="/apple-touch-icon.png">${FONTS_OK ? `<link rel="preload" href="/assets/fonts.css" as="style"><link rel="stylesheet" href="/assets/fonts.css">` : ''}<link rel="stylesheet" href="/assets/style.css?v=${VER}">
+${ANALYTICS_HEAD}<meta name="theme-color" content="#E02A3C"><link rel="icon" href="/favicon.svg" type="image/svg+xml"><link rel="apple-touch-icon" href="/apple-touch-icon.png">${FONTS_OK ? `<link rel="preload" href="/assets/fonts.css" as="style"><link rel="stylesheet" href="/assets/fonts.css">` : ''}<link rel="stylesheet" href="/assets/style.css?v=${VER}">
 ${[agentSchema, ...(canonical === home(lang) ? [websiteSchema] : []), ...(schema.some((x) => x && x['@type'] === 'BreadcrumbList') ? [] : crumbSchema(body, title, canonical)), ...schema].filter(Boolean).map((s) => `<script type="application/ld+json">${JSON.stringify(s)}</script>`).join('')}
 </head><body>
 ${DEMO ? `<div class="demo">${t.demo}</div>` : ''}
@@ -365,7 +374,7 @@ ${settingsBtn(lang)}
 ${footer(lang)}
 ${callPopup(lang)}
 ${stickyBar(lang)}
-<script src="/assets/app.js?v=${VER}" defer></script><nav class="mbar" aria-label="Mobil">${[[home(lang), '🏠', GL(lang) === 'tr' ? 'Keşfet' : 'Explore'], [url(lang, 'list'), '🔍', GL(lang) === 'tr' ? 'İlanlar' : 'Listings'], [`tel:${SITE.phoneRaw}`, '📞', GL(lang) === 'tr' ? 'Ara' : 'Call'], [waLink(t.waGeneral), '💬', 'WhatsApp'], [url(lang, 'team'), '👥', GL(lang) === 'tr' ? 'Danışmanlar' : 'Consultants']].map(([u, i, n]) => `<a href="${u}"${u.startsWith('http') ? ' target="_blank" rel="noopener"' : ''}><span>${i}</span>${n}</a>`).join('')}</nav>
+<script src="/assets/app.js?v=${VER}" defer></script>${consentBanner(lang)}<nav class="mbar" aria-label="Mobil">${[[home(lang), '🏠', GL(lang) === 'tr' ? 'Keşfet' : 'Explore'], [url(lang, 'list'), '🔍', GL(lang) === 'tr' ? 'İlanlar' : 'Listings'], [`tel:${SITE.phoneRaw}`, '📞', GL(lang) === 'tr' ? 'Ara' : 'Call'], [waLink(t.waGeneral), '💬', 'WhatsApp'], [url(lang, 'team'), '👥', GL(lang) === 'tr' ? 'Danışmanlar' : 'Consultants']].map(([u, i, n]) => `<a href="${u}"${u.startsWith('http') ? ' target="_blank" rel="noopener"' : ''}><span>${i}</span>${n}</a>`).join('')}</nav>
 </body></html>`);
 }
 

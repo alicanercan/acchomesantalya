@@ -272,3 +272,58 @@
   window.addEventListener('accrates', apply);
   mahs(); apply();
 })();
+
+// Çerez onayı (KVKK / Consent Mode v2), Meta Pikseli, harita ve dönüşüm ölçümü
+(function () {
+  var box = document.getElementById('cbn'); if (!box) return;
+  var KEY = 'acc_consent', st = null;
+  try { st = JSON.parse(localStorage.getItem(KEY) || 'null'); } catch (e) {}
+  var setBox = box.querySelector('.cbn-set'), saveBtn = box.querySelector('[data-cb=save]');
+  function gt() { if (window.gtag) window.gtag.apply(null, arguments); }
+  var pixelOn = false;
+  function pixel() {
+    if (pixelOn || !window.ACC_PIXEL) return; pixelOn = true;
+    !function (f, b, e, v, n, t, s) { if (f.fbq) return; n = f.fbq = function () { n.callMethod ? n.callMethod.apply(n, arguments) : n.queue.push(arguments); }; if (!f._fbq) f._fbq = n; n.push = n; n.loaded = !0; n.version = '2.0'; n.queue = []; t = b.createElement(e); t.async = !0; t.src = v; s = b.getElementsByTagName(e)[0]; s.parentNode.insertBefore(t, s); }(window, document, 'script', 'https://connect.facebook.net/en_US/fbevents.js');
+    window.fbq('init', window.ACC_PIXEL); window.fbq('track', 'PageView');
+  }
+  function maps(force) {
+    document.querySelectorAll('iframe[data-csrc]').forEach(function (f) {
+      if (f.src) return;
+      if (force || (st && (st.a || st.m))) { f.src = f.getAttribute('data-csrc'); var b = f.parentNode.querySelector('.cmap'); if (b) b.remove(); return; }
+      if (f.parentNode.querySelector('.cmap')) return;
+      var d = document.createElement('div'); d.className = 'cmap';
+      d.innerHTML = '<button type="button" class="btn sm">' + box.dataset.mapl + '</button><small>' + box.dataset.mapn + '</small>';
+      d.querySelector('button').onclick = function () { f.src = f.getAttribute('data-csrc'); d.remove(); };
+      f.parentNode.insertBefore(d, f);
+    });
+  }
+  function apply(c) {
+    st = c; try { localStorage.setItem(KEY, JSON.stringify(c)); } catch (e) {}
+    gt('consent', 'update', { analytics_storage: c.a ? 'granted' : 'denied', ad_storage: c.m ? 'granted' : 'denied', ad_user_data: c.m ? 'granted' : 'denied', ad_personalization: c.m ? 'granted' : 'denied' });
+    if (c.m) pixel();
+    box.hidden = true; maps();
+  }
+  box.addEventListener('click', function (e) {
+    var a = e.target.getAttribute && e.target.getAttribute('data-cb'); if (!a) return;
+    if (a === 'acc') apply({ a: true, m: true, t: Date.now() });
+    if (a === 'rej') apply({ a: false, m: false, t: Date.now() });
+    if (a === 'set') { setBox.hidden = false; saveBtn.hidden = false; e.target.hidden = true; }
+    if (a === 'save') apply({ a: box.querySelector('[data-c=a]').checked, m: box.querySelector('[data-c=m]').checked, t: Date.now() });
+  });
+  var re = document.querySelector('.cbn-re');
+  if (re) re.addEventListener('click', function () { if (st) { box.querySelector('[data-c=a]').checked = !!st.a; box.querySelector('[data-c=m]').checked = !!st.m; } box.hidden = false; });
+  if (!st) box.hidden = false; else if (st.m) pixel();
+  maps();
+  // dönüşüm olayları
+  function ev(name, params, fbName) { gt('event', name, params || {}); if (window.fbq && pixelOn && fbName) window.fbq('track', fbName); }
+  document.addEventListener('click', function (e) {
+    var a = e.target.closest && e.target.closest('a'); if (!a) return; var h = a.getAttribute('href') || '';
+    if (h.indexOf('wa.me/') > -1) ev('whatsapp_click', { link_url: h.split('?')[0], page: location.pathname }, 'Contact');
+    else if (h.indexOf('tel:') === 0) ev('phone_click', { page: location.pathname }, 'Contact');
+    else if (h.indexOf('mailto:') === 0) ev('email_click', { page: location.pathname }, 'Contact');
+  });
+  document.addEventListener('submit', function (e) {
+    var f = e.target; var n = f.getAttribute('name') || (f.querySelector('[name=form-name]') || {}).value; if (!n || f.id === 'xf') return;
+    ev('generate_lead', { form_name: n, page: location.pathname }, 'Lead');
+  }, true);
+})();

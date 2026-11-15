@@ -82,6 +82,12 @@ export const PAGES = {
 <p>ACC HOMES International Real Estate, mühendislik ve çok uluslu şirketlerde kurumsal satış geçmişine sahip Broker <a href="{{URL:broker}}">Ali Caner Can</a> tarafından 2024 yılında Antalya’da kuruldu. Çıkış noktamız basitti: Emlak sektörüne kurumsal dünyanın disiplinini, veriye dayalı fiyatlamayı ve gerçek bir müşteri deneyimini getirmek.</p>
 <p>Bugün Muratpaşa Yeşilbahçe’deki 1.000 m²’lik genel merkezimiz ACC Plaza’da, yaklaşık 50 iş ortağımız ve 10 dilde hizmet veren ekibimizle konut, villa, yeni proje, ticari mülk ve yatırım danışmanlığında hizmet veriyoruz.</p>
 {{STATS}}
+<h2>Kurucumuz</h2>
+{{FOUNDER}}
+<h2>İnsan odaklı, kaliteli bir ekip</h2>
+<p>ACC HOMES büyürken sayıya değil insana yatırım yaptı. 60 m²’lik bir ofis katından bugün yaklaşık 50 iş ortağına ulaştık; her biri markamızı ve müşterimizi gönül rahatlığıyla emanet edebileceğimiz, referansları gerçek profesyoneller.</p>
+<p>Biz danışman değil, <b>iş ortağı</b> arıyoruz. Ekibimiz mühendislik, havacılık, askeriye, finans, satış, pazarlama, reklam, hukuk, eğitim, turizm, inşaat, yazılım, kurumsal yönetim ve insan kaynakları gibi çok farklı geçmişlerden geliyor. Bu çeşitlilik, her müşteriye kendi diliyle ve kendi ihtiyacına göre hizmet vermemizi sağlıyor.</p>
+<ul class="ticks cols2"><li>Etik, şeffaf ve güvenilir bir çalışma ortamı</li><li>Ofis içi mentorluk ve saha eğitimi</li><li>Koşulsuz bilgi ve portföy paylaşımı</li><li>Her iş ortağına profesyonel fotoğraf, drone, video ve kişisel marka desteği</li></ul>
 <h2>ACC Plaza’dan kareler</h2>
 {{OFFICE}}
 <h2>Nasıl çalışırız</h2>
@@ -111,6 +117,12 @@ export const PAGES = {
 <p>ACC HOMES International Real Estate was founded in Antalya in 2024 by broker <a href="{{URL:broker}}">Ali Caner Can</a>, an engineer with a background in corporate sales at multinational companies. The idea was simple: bring corporate discipline, data-driven pricing and a genuine client experience to real estate.</p>
 <p>Today, from ACC Plaza, our 1,000 m² headquarters in Yeşilbahçe, Muratpaşa, around 50 partners serve clients in 10 languages across residential sales and rentals, villas, new developments, commercial property and investment advisory.</p>
 {{STATS}}
+<h2>Our founder</h2>
+{{FOUNDER}}
+<h2>A people-first, quality team</h2>
+<p>As ACC HOMES has grown, we have invested in people rather than headcount. From a single 60 m² office floor we have grown to around 50 partners, each of them a genuine professional with real references, to whom we can entrust our brand and our clients with confidence.</p>
+<p>We are not looking for agents; we look for <b>partners</b>. Our team comes from engineering, aviation, the military, finance, sales, marketing, advertising, law, education, tourism, construction, software, corporate management and HR. That diversity lets us serve every client in their own language and on their own terms.</p>
+<ul class="ticks cols2"><li>An ethical, transparent and trustworthy workplace</li><li>In-office mentoring and field training</li><li>Unconditional sharing of knowledge and listings</li><li>Professional photo, drone, video and personal-branding support for every partner</li></ul>
 <h2>Inside ACC Plaza</h2>
 {{OFFICE}}
 <h2>How we work</h2>
@@ -168,7 +180,7 @@ export const PAGES = {
 <div>
 <p class="eyebrow">Broker & Owner · ACC HOMES International Real Estate</p>
 <p>Ali Caner Can, 1990’da Antalya’da doğdu. Antalya Başöğretmen Atatürk İlköğretim Okulu ve Kuleli Askeri Lisesi’nin ardından Yıldız Teknik Üniversitesi Makine Mühendisliği bölümünü onur derecesiyle bitirdi. Daha öğrenciyken global şirketlerde uzun dönem stajlar yaptı ve mezun olmadan iş hayatına başladı.</p>
-<p>Kariyerinin ilk on yılını Bosch, Reckitt Benckiser, Hasbro, Nestlé ve The Kraft Heinz Company gibi çok uluslu şirketlerde satış, pazarlama ve trade marketing alanında geçirdi; giriş seviyesinden kanal müdürlüğüne kadar yükseldi. 2021’de memleketi Antalya’ya dönerek gayrimenkule geçti, 2024’te ACC HOMES International Real Estate’i kurdu.</p>
+<p>Kariyerinin ilk on yılını Bosch, Reckitt Benckiser, Hasbro, Nestlé ve The Kraft Heinz Company gibi çok uluslu şirketlerde satış, pazarlama ve trade marketing alanında geçirdi; giriş seviyesinden kanal müdürlüğüne kadar yükseldi. 2022’de memleketi Antalya’ya dönerek gayrimenkule geçti, 2024’te ACC HOMES International Real Estate’i kurdu.</p>
 <p>Bugün 1.000 m²’lik ACC Plaza’da yaklaşık 50 iş ortağından oluşan ekibin Broker’ıdır ve kendi portföyünde 290’ı aşkın satış ve kiralama işlemi bulunur. İş dışında profesyonel bir tenisçidir; kortta da sahadaki gibi disiplinli ve rekabetçidir.</p>
 </div></div>
 {{BROKER_STATS}}
@@ -178,9 +190,9 @@ export const PAGES = {
 <li><b>2004–2008</b><p>Kuleli Askeri Lisesi. Disiplin ve sorumluluk duygusunun temeli; bugün hâlâ geniş bir Kuleli mezunları ağıyla bağlantıda.</p></li>
 <li><b>2009–2013</b><p>Yıldız Teknik Üniversitesi, Makine Mühendisliği (onur derecesi). Öğrenciyken global şirketlerde uzun dönem stajlar.</p></li>
 <li><b>2013–2021</b><p>Bosch, Reckitt Benckiser, Hasbro, Nestlé ve The Kraft Heinz Company’de satış, pazarlama ve trade marketing; ulusal zincir hesaplar ve e-ticaret kanalı yönetimi, Körfez ülkelerinden sorumlu trade marketing görevleri; giriş seviyesinden kanal müdürlüğüne.</p></li>
-<li><b>2021</b><p>Antalya’ya dönüş ve Realty World’de gayrimenkul danışmanlığı. Sektörde hiçbir bağlantısı olmadan, her işi büyük küçük ayırmadan alarak başladı.</p></li>
+<li><b>2022</b><p>Antalya’ya dönüş ve Realty World’de gayrimenkul danışmanlığı. Sektörde hiçbir bağlantısı olmadan, her işi büyük küçük ayırmadan alarak başladı.</p></li>
 <li><b>2023</b><p>Realty World MES Real Estate’in yıl boyunca en çok işlem yapan, şampiyon danışmanı.</p></li>
-<li><b>Mayıs 2024</b><p>ACC HOMES International Real Estate’i kurdu.</p></li>
+<li><b>Mayıs 2024</b><p>ACC HOMES International Real Estate’i 60 m²’lik bir ofis katında kurdu.</p></li>
 <li><b>2025</b><p>Capital İnşaat’ın 216 daireli Altıntaş projesinde satış, pazarlama ve ekip yönetimi. Aralık’ta Antalle Concept Houses Open House’u ve ACC HOMES sponsorluğunda, Danube Properties iş birliğiyle Akra Hotel’de 100’ü aşkın yatırımcının katıldığı Dubai buluşmasını düzenledi. ACC Day ile 800 öğrenciye ulaştı.</p></li>
 <li><b>2026</b><p>1.000 m²’lik ACC Plaza açıldı; ekip yaklaşık 50 iş ortağına ulaştı. ACC HOMES, Prime Lara ve Antalle Concept Houses’un yetkili satış ofisi oldu.</p></li>
 </ol>
@@ -215,7 +227,7 @@ export const PAGES = {
 <div>
 <p class="eyebrow">Broker & Owner · ACC HOMES International Real Estate</p>
 <p>Ali Caner Can was born in Antalya in 1990. After Antalya Başöğretmen Atatürk Primary School and Kuleli Military High School he graduated with honours in Mechanical Engineering from Yıldız Technical University. While still a student he completed long internships at global companies and started his professional career before graduating.</p>
-<p>He spent the first decade of his career in sales, marketing and trade marketing at multinationals including Bosch, Reckitt Benckiser, Hasbro, Nestlé and The Kraft Heinz Company, rising from entry level to channel manager. In 2021 he returned to his home city of Antalya and moved into real estate, and in 2024 he founded ACC HOMES International Real Estate.</p>
+<p>He spent the first decade of his career in sales, marketing and trade marketing at multinationals including Bosch, Reckitt Benckiser, Hasbro, Nestlé and The Kraft Heinz Company, rising from entry level to channel manager. In 2022 he returned to his home city of Antalya and moved into real estate, and in 2024 he founded ACC HOMES International Real Estate.</p>
 <p>Today he is the broker of a team of around 50 partners at the 1,000 m² ACC Plaza, and has completed more than 290 sales and rentals himself. Outside work he is a professional tennis player, bringing the same discipline and competitive drive to the court.</p>
 </div></div>
 {{BROKER_STATS}}
@@ -225,9 +237,9 @@ export const PAGES = {
 <li><b>2004–2008</b><p>Kuleli Military High School, the foundation of his discipline; he is still connected to a wide network of Kuleli alumni.</p></li>
 <li><b>2009–2013</b><p>Yıldız Technical University, Mechanical Engineering (honours), with long internships at global companies.</p></li>
 <li><b>2013–2021</b><p>Sales, marketing and trade marketing at Bosch, Reckitt Benckiser, Hasbro, Nestlé and The Kraft Heinz Company: national chain accounts, the e-commerce channel and Gulf-region trade marketing, rising from entry level to channel manager.</p></li>
-<li><b>2021</b><p>Returned to Antalya and became a real estate consultant at Realty World, starting with no industry network and taking on every job, big or small.</p></li>
+<li><b>2022</b><p>Returned to Antalya and became a real estate consultant at Realty World, starting with no industry network and taking on every job, big or small.</p></li>
 <li><b>2023</b><p>Champion consultant of the year at Realty World MES Real Estate, with the most transactions in the office.</p></li>
-<li><b>May 2024</b><p>Founded ACC HOMES International Real Estate.</p></li>
+<li><b>May 2024</b><p>Founded ACC HOMES International Real Estate on a single 60 m² office floor.</p></li>
 <li><b>2025</b><p>Sales, marketing and team management for Capital İnşaat’s 216-apartment project in Altıntaş. In December he hosted the Antalle Concept Houses Open House and, sponsored by ACC HOMES with Danube Properties, a Dubai investor meeting at Akra Hotel attended by more than 100 investors. ACC Day reached 800 students.</p></li>
 <li><b>2026</b><p>The 1,000 m² ACC Plaza opened and the team grew to around 50 partners. ACC HOMES became the authorised sales office for Prime Lara and Antalle Concept Houses.</p></li>
 </ol>

@@ -10,6 +10,7 @@ import { PAGES2, P2X, p2Html } from './pages2.mjs';
 import { AREA_GUIDES } from './areas.mjs';
 import { EVENTS } from './events.mjs';
 import { BROKER } from './broker.mjs';
+import { ROADMAP, TRUST, FOUNDER } from './story.mjs';
 import { GUIDES, FAQ, GUIDE_SEG, GUIDE_TITLE, GUIDE_LEAD, GUIDE_UPDATED } from './guide.mjs';
 import { T_EXTRA, S, s, SEGS, LOCALE, RTL, extend, PACKS } from './i18n.mjs';
 import { STAFF_PHOTOS, PARTNERS, PHOTO_BASE, LANG_NAMES, PARTNER_ROLE, SWORN_ROLE } from './team.mjs';
@@ -375,12 +376,16 @@ function trustStrip(lang) {
 </div></section>`;
 }
 
+function trustBand(lang) {
+  const shot = fs.existsSync(path.join(ROOT, 'static/img/google-isletme.webp'));
+  return `<div class="aiband"><div class="aitext"><div class="ailogos"><span>ChatGPT</span><span>Gemini</span><span>Claude</span><span>Copilot</span></div><h3>🤖 ${sT(TRUST.aiTitle, lang)}</h3><p>${esc(sT(TRUST.aiText, lang))}</p><p class="aireal">✓ ${esc(sT(TRUST.real, lang))}</p></div>${shot ? `<a class="aishot" href="${SITE.google.mapsUrl}" target="_blank" rel="noopener"><img src="/img/google-isletme.webp" alt="ACC HOMES Google İşletme Profili" loading="lazy"></a>` : ''}</div>`;
+}
 function reviewsBlock(lang) {
   const t = T[lang];
   const list = lang === 'tr' ? REVIEWS : [...REVIEWS.filter((r) => r.lang === 'en'), ...REVIEWS.filter((r) => r.lang !== 'en')];
   return `<section class="reviews"><div class="wrap">
 <div class="sechead"><div><h2>${t.revTitle}</h2><p class="sub sm">${t.revSub}</p></div><a class="gbadge" href="${SITE.google.mapsUrl}" target="_blank" rel="noopener">${ICON_G}<b>${fmtRating(lang)}</b>${stars}<span>${t.gReviews(SITE.google.reviews)}</span></a></div>
-<div class="rtrack">${list.map((r) => `<figure class="rcard"><div class="rtop">${stars}<span class="rtopic">${esc(r.topic)}</span></div>
+${trustBand(lang)}<div class="rtrack">${list.map((r) => `<figure class="rcard"><div class="rtop">${stars}<span class="rtopic">${esc(r.topic)}</span></div>
 <blockquote lang="${r.lang}">“${esc(r.text)}”</blockquote>
 <figcaption><span class="avatar">${esc(r.name.charAt(0))}</span><b>${esc(r.name)}</b>${ICON_G}</figcaption>${r.excerpt ? `<a class="rmore" href="${SITE.google.mapsUrl}" target="_blank" rel="noopener">${t.revMore} →</a>` : ''}</figure>`).join('')}</div>
 <p class="rall"><a class="btn ghost" href="${SITE.google.mapsUrl}" target="_blank" rel="noopener">${t.revAll} →</a></p></div></section>`;
@@ -412,7 +417,7 @@ function fill(html, lang) {
   const langs = `<ul class="chips">${LANGS_SPOKEN[lang].map((l) => `<li>${l}</li>`).join('')}</ul>`;
   const waJoin = waLink(s('waJoin', lang));
   return html.replace(/\{\{URL:(\w+)\}\}/g, (_, k) => (k === 'list' || k === 'contact' || k === 'guide' ? url(lang, k) : url(lang, k)))
-    .replaceAll('{{TIMELINE}}', `<ol class="timeline">${TIMELINE[lang].map(([y, x]) => `<li><b>${y}</b><p>${x}</p></li>`).join('')}</ol>`).replaceAll('{{STATS}}', stats).replaceAll('{{OFFICE}}', officeGallery(8)).replaceAll('{{TEAMPHOTOS}}', `<figure class="tmain"><img src="/img/ekip/ekip-acc-plaza-2026.webp" alt="ACC HOMES ekibi ACC Plaza önünde, Kasım 2026" width="1080" height="680"><figcaption>${s('teamCap', lang)}</figcaption></figure>` + '<div class="tphotos"><img src="/img/ekip/ekip-acc.webp" alt="ACC HOMES ekibi" loading="lazy" width="1600" height="533"><img src="/img/ekip/ekip-antalle.webp" alt="ACC HOMES ekibi Antalle Concept Houses açılışında" loading="lazy" width="1600" height="533"></div>').replaceAll('{{TEAM}}', team).replaceAll('{{PARTNERS}}', partners).replaceAll('{{LANGS}}', langs)
+    .replaceAll('{{TIMELINE}}', roadmap(lang)).replaceAll('{{FOUNDER}}', founderBlock(lang)).replaceAll('{{STATS}}', stats).replaceAll('{{OFFICE}}', officeGallery(8)).replaceAll('{{TEAMPHOTOS}}', `<figure class="tmain"><img src="/img/ekip/ekip-acc-plaza-2026.webp" alt="ACC HOMES ekibi ACC Plaza önünde, Kasım 2026" width="1080" height="680"><figcaption>${s('teamCap', lang)}</figcaption></figure>` + '<div class="tphotos"><img src="/img/ekip/ekip-acc.webp" alt="ACC HOMES ekibi" loading="lazy" width="1600" height="533"><img src="/img/ekip/ekip-antalle.webp" alt="ACC HOMES ekibi Antalle Concept Houses açılışında" loading="lazy" width="1600" height="533"></div>').replaceAll('{{TEAM}}', team).replaceAll('{{PARTNERS}}', partners).replaceAll('{{LANGS}}', langs)
     .replaceAll('{{WA_JOIN}}', waJoin).replaceAll('{{WA}}', waLink(t.waGeneral)).replaceAll('{{TEL}}', `tel:${SITE.phoneRaw}`)
     .replaceAll('{{MAPS}}', SITE.google.mapsUrl).replaceAll('{{IG}}', SITE.instagram.url).replaceAll('{{IG_CANER}}', 'https://www.instagram.com/alicanercan.therealtor/')
     .replaceAll('{{RATING}}', `${fmtRating(lang)} ★ · ${t.gReviews(nf.format(SITE.google.reviews))}`).replaceAll('{{SELLFORM}}', sellForm(lang)).replaceAll('{{REVIEWS}}', nf.format(SITE.google.reviews))
@@ -448,6 +453,18 @@ function brokerBlock(lang) {
   const img = SITE.brokerPhoto ? `<img src="${SITE.brokerPhoto}" alt="Ali Caner Can, Broker & Owner – ACC HOMES" loading="lazy" width="600" height="655">` : '<span class="mav big">AC</span>';
   return `<section class="hbroker"><div class="wrap"><div class="hbimg">${img}</div><div class="hbtext"><p class="eyebrow">${bT(h.eyebrow, lang)}</p><h2>${bT(h.title, lang)}</h2>${brokerCreds(lang)}<p>${esc(bT(h.text, lang))}</p>${brokerStats(lang)}<div class="ctas"><a class="btn" href="${url(lang, 'broker')}">${bT(h.cta, lang)}</a><a class="btn ghost" href="${waLink(T[lang].waGeneral)}" target="_blank" rel="noopener">${bT(h.wa, lang)}</a></div></div></div></section>`;
 }
+// Yol haritası ve kurucu bloğu (story.mjs)
+const sT = (o, lang) => (typeof o === 'string' ? o : o[lang] || o.en);
+function roadmap(lang) {
+  return `<ol class="roadmap">${ROADMAP.map((r, i) => `<li class="${r.next ? 'next' : ''}${r.hl ? ' hl' : ''}"><span class="rmi">${r.icon}</span><div class="rmc"><span class="rmy">${esc(sT(r.year, lang))}</span>${r.hl ? `<span class="rmh">${r.hl}</span>` : ''}<h3>${esc(sT(r.t, lang))}</h3><p>${esc(sT(r.d, lang))}</p></div></li>`).join('')}</ol>`;
+}
+function founderBlock(lang) {
+  const img = SITE.brokerPhoto ? `<img src="${SITE.brokerPhoto}" alt="Ali Caner Can, Broker & Owner – ACC HOMES" loading="lazy" width="600" height="655">` : '<span class="mav big">AC</span>';
+  const pct = lang === 'tr' ? '%99' : '99%';
+  return `<div class="founder"><div class="fimg">${img}</div><div><p class="eyebrow">${sT(FOUNDER.title, lang)}</p><h3><a href="${url(lang, 'broker')}">Ali Caner Can</a></h3><p>${esc(sT(BROKER.home.text, lang))}</p>
+<div class="stats"><div><b>290+</b><span>${esc(sT(BROKER.stats[0][1], lang))}</span></div><div><b>${pct}</b><span>${esc(sT(FOUNDER.sat, lang))}</span></div><div><b>🌍</b><span>${esc(sT(FOUNDER.foreign, lang))}</span></div></div>
+<a class="more" href="${url(lang, 'broker')}">${sT(BROKER.home.cta, lang)} →</a></div></div>`;
+}
 function plazaBlock(lang) {
   const p = PLAZA[lang];
   return `<section class="plaza"><div class="wrap">
@@ -462,7 +479,7 @@ function pageCorporate(key, lang) {
   const P = PAGES[key]; const c = P[lang] || P.en;
   const hero = key === 'about' ? `<div class="phero"><img src="/img/acc-plaza-1200.webp" alt="ACC PLAZA" width="1200" height="470"></div>` : '';
   const body = `<section class="wrap sec narrow page">${hero}<nav class="crumbs"><a href="${home(lang)}">${T[lang].nav.home}</a> / <span>${esc(P.nav[lang] || P.nav.en)}</span></nav>
-<h1>${esc(c.title)}</h1><p class="sub">${esc(c.lead)}</p>${fill(key === 'broker' && !c.html.includes('{{BROKER_STATS}}') ? c.html.replace('</div></div>', '</div></div>\n{{BROKER_STATS}}').replace('<div class="ctas">', '{{BROKER_GALLERY}}\n{{BROKER_LINKS}}\n<div class="ctas">') : c.html, lang)}</section>${key === 'about' ? reviewsBlock(lang) : ''}`;
+<h1>${esc(c.title)}</h1><p class="sub">${esc(c.lead)}</p>${fill(key === 'about' && !c.html.includes('{{FOUNDER}}') ? c.html.replace('{{STATS}}', '{{STATS}}\n{{FOUNDER}}') : key === 'broker' && !c.html.includes('{{BROKER_STATS}}') ? c.html.replace('</div></div>', '</div></div>\n{{BROKER_STATS}}').replace('<div class="ctas">', '{{BROKER_GALLERY}}\n{{BROKER_LINKS}}\n<div class="ctas">') : c.html, lang)}</section>${key === 'about' ? reviewsBlock(lang) : ''}`;
   const schema = key === 'broker' ? [{ '@context': 'https://schema.org', '@type': 'Person', name: 'Ali Caner Can', jobTitle: 'Broker & Owner', description: c.desc, url: SITE.domain + url(lang, key), image: SITE.brokerPhoto ? SITE.domain + SITE.brokerPhoto : undefined, birthPlace: 'Antalya', worksFor: { '@type': 'RealEstateAgent', name: SITE.brand, url: SITE.domain }, alumniOf: [{ '@type': 'CollegeOrUniversity', name: 'Yıldız Teknik Üniversitesi' }, { '@type': 'HighSchool', name: 'Kuleli Askeri Lisesi' }, { '@type': 'EducationalOrganization', name: 'Antalya Başöğretmen Atatürk İlköğretim Okulu' }], knowsLanguage: ['tr', 'en'], memberOf: [{ '@type': 'Organization', name: 'Antalya İş İnsanları Derneği (ANTİAD)' }], sameAs: BROKER.links.map(([, u]) => u) }] : [];
   write(path.join(url(lang, key), 'index.html'), layout({ lang, title: `${c.title} | ACC HOMES`, desc: c.desc, canonical: url(lang, key), alternates: alts(key), body, schema, ogImage: key === 'broker' && SITE.brokerPhoto ? SITE.brokerPhoto : '/img/acc-plaza-og.jpg' }));
 }

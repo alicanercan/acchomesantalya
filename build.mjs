@@ -8,7 +8,7 @@ import { PROJECTS } from './projects.mjs';
 import { PRIVACY } from './privacy.mjs';
 import { PAGES2, P2X, p2Html } from './pages2.mjs';
 import { AREA_GUIDES } from './areas.mjs';
-import { SOCIAL } from './social.mjs';
+import { EVENTS } from './events.mjs';
 import { GUIDES, FAQ, GUIDE_SEG, GUIDE_TITLE, GUIDE_LEAD, GUIDE_UPDATED } from './guide.mjs';
 import { T_EXTRA, S, s, SEGS, LOCALE, RTL, extend, PACKS } from './i18n.mjs';
 import { STAFF_PHOTOS, PARTNERS, PHOTO_BASE, LANG_NAMES, PARTNER_ROLE, SWORN_ROLE } from './team.mjs';
@@ -188,7 +188,7 @@ const fmtPrice = (l, lang) => {
 const priceAttrs = (l) => (l.fiyat ? ` data-amt="${l.fiyat}" data-ccy="${({ TL: 'TRY', USD: 'USD', EUR: 'EUR', GBP: 'GBP' })[l.para || 'TL'] || 'TRY'}"` : '');
 const tipLabel = (l, lang) => (l.tip === 'Kiralık' ? T[lang].rent : T[lang].sale);
 const statusBadge = (l, lang) => l.durum === 'Satıldı' ? `<span class="badge sold">${T[lang].sold}</span>` : l.durum === 'Opsiyonlu' ? `<span class="badge opt">${T[lang].option}</span>` : '';
-const segOf = (lang, seg) => (PAGES[seg] ? (PAGES[seg].seg[lang] || PAGES[seg].seg.en) : seg === 'blog' ? 'blog' : seg === 'projects' ? SEGS.projects[lang] : seg === 'buyersguide' ? GUIDE_SEG[lang] : seg === 'downloads' ? (SEGS.downloads[lang] || 'free-guides') : seg === 'social' ? (SOCIAL.seg[lang] || SOCIAL.seg.en) : seg === 'areas' ? (SEGS.areas[lang] || SEGS.areas.en) : seg === 'favorites' ? (SEGS.favorites[lang] || 'favorites') : seg === 'reviews' ? SEGS.reviews[lang] : T[lang].seg[seg]);
+const segOf = (lang, seg) => (PAGES[seg] ? (PAGES[seg].seg[lang] || PAGES[seg].seg.en) : seg === 'blog' ? 'blog' : seg === 'projects' ? SEGS.projects[lang] : seg === 'buyersguide' ? GUIDE_SEG[lang] : seg === 'downloads' ? (SEGS.downloads[lang] || 'free-guides') : seg === 'events' ? (EVENTS.seg[lang] || EVENTS.seg.en) : seg === 'areas' ? (SEGS.areas[lang] || SEGS.areas.en) : seg === 'favorites' ? (SEGS.favorites[lang] || 'favorites') : seg === 'reviews' ? SEGS.reviews[lang] : T[lang].seg[seg]);
 const url = (lang, seg, slug) => `${BASE[lang]}/${segOf(lang, seg)}/${slug ? slug + '/' : ''}`;
 const home = (lang) => `${BASE[lang]}/`;
 const waLink = (text) => `https://wa.me/${SITE.whatsapp}?text=${encodeURIComponent(text)}`;
@@ -259,7 +259,7 @@ function footer(lang) {
 ${col(s('popSearches', lang), pop.map(([n, q]) => [n, url(lang, 'list') + q]))}
 ${col(s('popAreas', lang), [...AREA_GUIDES.map((a) => [a.ilce, aUrl(GL(lang), a)]), [s('areasTitle', lang) + ' →', url(lang, 'areas')]])}
 ${col(GUIDE_TITLE[lang], GUIDES.map((g) => [gC(g, L).title, gUrl(L, g)]))}
-${col(t.company, [[nv('about'), url(lang, 'about')], [nv('broker'), url(lang, 'broker')], [nv('team'), url(lang, 'team')], [t.revTitle, url(lang, 'reviews')], [nv('licences'), url(lang, 'licences')], [SOCIAL.nav[lang] || SOCIAL.nav.en, url(lang, 'social')], [nv('join'), url(lang, 'join')]])}
+${col(t.company, [[nv('about'), url(lang, 'about')], [nv('broker'), url(lang, 'broker')], [nv('team'), url(lang, 'team')], [t.revTitle, url(lang, 'reviews')], [nv('licences'), url(lang, 'licences')], [EVENTS.nav[lang] || EVENTS.nav.en, url(lang, 'events')], [nv('join'), url(lang, 'join')]])}
 ${col(s('usefulLinks', lang), [[nv('services'), url(lang, 'services')], [nv('sell'), url(lang, 'sell')], [nv('viewing'), url(lang, 'viewing')], [s('dlPageTitle', lang), url(lang, 'downloads')], [t.projects, url(lang, 'projects')], [t.blog, url(lang, 'blog')], [t.nav.contact, url(lang, 'contact')]])}
 </div>
 <div class="wrap fmid">
@@ -288,7 +288,7 @@ ${[agentSchema, ...schema].map((s) => `<script type="application/ld+json">${JSON
 ${DEMO ? `<div class="demo">${t.demo}</div>` : ''}
 <header class="top"><div class="tbar"><div class="wrap tbin"><span class="tloc">📍 ACC Plaza · Yeşilbahçe, Muratpaşa / Antalya</span><span class="tcon"><a class="tphone" href="tel:${SITE.phoneRaw}" aria-label="${t.call} ${SITE.phone}"><svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><path fill="currentColor" d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1A17 17 0 0 1 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1l-2.3 2.2z"/></svg><b dir="ltr">${SITE.phone}</b></a><a class="twa" href="${waLink(t.waGeneral)}" target="_blank" rel="noopener">WhatsApp</a><a class="tmail" href="mailto:${SITE.email}">${SITE.email}</a><a class="tfav" href="${url(lang, 'favorites')}">♡ <span data-fav-count>0</span></a></span></div></div><div class="wrap nav">
 <a class="logo" href="${home(lang)}"><img src="/img/logo/acc-siyah.svg" alt="ACC HOMES International Real Estate" width="154" height="45"></a>
-<nav class="menu"><a href="${url(lang, 'list')}">${t.nav.list}</a><a href="${url(lang, 'projects')}">${t.projects}</a><a href="${url(lang, 'buyersguide')}">${GUIDE_TITLE[lang]}</a><a href="${url(lang, 'services')}">${PAGES.services.nav[lang]}</a><div class="dd"><button type="button">${t.company} ▾</button><div class="ddm"><a href="${url(lang, 'about')}">${PAGES.about.nav[lang]}</a><a href="${url(lang, 'broker')}">${PAGES.broker.nav[lang]}</a><a href="${url(lang, 'team')}">${PAGES.team.nav[lang]}</a><a href="${url(lang, 'reviews')}">${t.revTitle}</a><a href="${url(lang, 'licences')}">${PAGES.licences.nav[lang] || PAGES.licences.nav.en}</a><a href="${url(lang, 'social')}">${SOCIAL.nav[lang] || SOCIAL.nav.en}</a><a href="${url(lang, 'join')}">${PAGES.join.nav[lang]}</a></div></div><a href="${url(lang, 'blog')}">${t.blog}</a><a href="${url(lang, 'contact')}">${t.nav.contact}</a></nav>
+<nav class="menu"><a href="${url(lang, 'list')}">${t.nav.list}</a><a href="${url(lang, 'projects')}">${t.projects}</a><a href="${url(lang, 'buyersguide')}">${GUIDE_TITLE[lang]}</a><a href="${url(lang, 'services')}">${PAGES.services.nav[lang]}</a><div class="dd"><button type="button">${t.company} ▾</button><div class="ddm"><a href="${url(lang, 'about')}">${PAGES.about.nav[lang]}</a><a href="${url(lang, 'broker')}">${PAGES.broker.nav[lang]}</a><a href="${url(lang, 'team')}">${PAGES.team.nav[lang]}</a><a href="${url(lang, 'reviews')}">${t.revTitle}</a><a href="${url(lang, 'licences')}">${PAGES.licences.nav[lang] || PAGES.licences.nav.en}</a><a href="${url(lang, 'events')}">${EVENTS.nav[lang] || EVENTS.nav.en}</a><a href="${url(lang, 'join')}">${PAGES.join.nav[lang]}</a></div></div><a href="${url(lang, 'blog')}">${t.blog}</a><a href="${url(lang, 'contact')}">${t.nav.contact}</a></nav>
 <details class="mnav"><summary aria-label="${t.menu}">☰</summary><div class="mpanel"><a href="${url(lang, 'list')}">${t.nav.list}</a><a href="${url(lang, 'projects')}">${t.projects}</a><a href="${url(lang, 'buyersguide')}">${GUIDE_TITLE[lang]}</a><a href="${url(lang, 'services')}">${PAGES.services.nav[lang]}</a><a href="${url(lang, 'about')}">${PAGES.about.nav[lang]}</a><a href="${url(lang, 'broker')}">${PAGES.broker.nav[lang]}</a><a href="${url(lang, 'team')}">${PAGES.team.nav[lang]}</a><a href="${url(lang, 'sell')}">${PAGES.sell.nav[lang] || PAGES.sell.nav.en}</a><a href="${url(lang, 'join')}">${PAGES.join.nav[lang]}</a><a href="${url(lang, 'guide')}">${t.nav.guide}</a><a href="${url(lang, 'blog')}">${t.blog}</a><a href="${url(lang, 'contact')}">${t.nav.contact}</a></div></details>
 ${settingsBtn(lang)}
 <a class="btn sm" href="tel:${SITE.phoneRaw}">${t.call}</a>
@@ -625,23 +625,51 @@ function sellForm(lang) {
 <label class="chk"><input type="checkbox" name="kvkk_onay" value="evet" required> <span>${s('consent', lang).replace('{{LINK}}', `<a href="${url(lang, 'privacy')}" target="_blank" rel="noopener">${PAGES.privacy.nav[lang] || PAGES.privacy.nav.en}</a>`)} *</span></label>
 <button class="btn" type="submit">${s('sellReq', lang)}</button></form>`;
 }
-// Sosyal sorumluluk sayfası
+// Etkinlikler (events.mjs): merkez sayfa + her etkinliğe ayrı sayfa
+const OLD_SOCIAL = { tr: 'sosyal-sorumluluk', en: 'social-responsibility', de: 'soziale-verantwortung', ru: 'sotsialnaya-otvetstvennost', fa: 'masooliat-ejtemai', pl: 'odpowiedzialnosc-spoleczna', fr: 'responsabilite-sociale', es: 'responsabilidad-social', nl: 'maatschappelijke-verantwoordelijkheid', sv: 'samhallsansvar', ar: 'almasuliya-alijtimaiya', zh: 'shehui-zeren' };
 const SOCIAL_LOCAL = {};
 async function fetchSocialImages() {
   const dir = path.join(OUT, 'img', 'sosyal'); fs.mkdirSync(dir, { recursive: true });
-  for (const ev of SOCIAL.events) for (const [u, name] of ev.remote || []) {
-    try { const r = await fetch(u, { signal: AbortSignal.timeout(30000), headers: { 'User-Agent': 'Mozilla/5.0 (ACC HOMES site build)' } }); if (!r.ok) throw new Error(r.status); fs.writeFileSync(path.join(dir, name), Buffer.from(await r.arrayBuffer())); SOCIAL_LOCAL[name] = `/img/sosyal/${name}`; } catch (e) { console.warn('Sosyal görsel indirilemedi:', name, e.message); }
+  for (const ev of EVENTS.events) for (const [u, name] of ev.remote || []) {
+    try { const r = await fetch(u, { signal: AbortSignal.timeout(30000), headers: { 'User-Agent': 'Mozilla/5.0 (ACC HOMES site build)' } }); if (!r.ok) throw new Error(r.status); fs.writeFileSync(path.join(dir, name), Buffer.from(await r.arrayBuffer())); SOCIAL_LOCAL[name] = `/img/sosyal/${name}`; } catch (e) { console.warn('Etkinlik görseli indirilemedi:', name, e.message); }
   }
 }
-function pageSocial(lang) {
-  const t = T[lang]; const L = GL(lang); const nav = SOCIAL.nav[lang] || SOCIAL.nav.en;
-  const evs = SOCIAL.events.map((ev) => {
-    const c = ev[L];
-    const imgs = [...ev.images.map(([src, w, h]) => `<img src="${src}" alt="${esc(c.title)}" loading="lazy" width="${w}" height="${h}">`), ...(ev.remote || []).filter(([, n]) => SOCIAL_LOCAL[n]).map(([, n]) => `<img src="/.netlify/images?url=${encodeURIComponent(SOCIAL_LOCAL[n])}&w=1000&fm=webp&q=72" alt="${esc(c.title)}" loading="lazy" width="1000" height="563">`)].join('');
-    return `<article class="sevent" id="${ev.id}"><p class="eyebrow">${esc(ev.date)} · ${esc(c.place)}</p><h2>${esc(c.title)}</h2><div class="sstats">${ev.stats[L].map(([n, x]) => `<div><b>${n}</b><span>${esc(x)}</span></div>`).join('')}</div><div class="sgal">${imgs}</div><div class="prose">${c.html}</div></article>`;
-  }).join('');
-  const body = `<section class="wrap sec page"><nav class="crumbs"><a href="${home(lang)}">${t.nav.home}</a> / <span>${esc(nav)}</span></nav><h1>${esc(nav)}</h1><p class="sub">${esc(SOCIAL.lead[lang] || SOCIAL.lead.en)}</p>${SOCIAL.intro[L]}${evs}<div class="ctas"><a class="btn" href="${waLink(t.waGeneral)}" target="_blank" rel="noopener">${s('socialCta', lang)}</a></div></section>`;
-  write(path.join(url(lang, 'social'), 'index.html'), layout({ lang, title: `${nav} | ACC HOMES`, desc: SOCIAL.lead[lang] || SOCIAL.lead.en, canonical: url(lang, 'social'), alternates: alts('social'), body, ogImage: `${SITE.domain}/img/sosyal/acc-day-2025-okul.webp` }));
+const evT = (o, lang) => o[lang] || o.en;
+const evUrl = (lang, ev) => url(lang, 'events', ev.id);
+function evImgs(ev, c, w = 1000) {
+  return [
+    ...ev.images.map(([src, iw, ih]) => ({ src, w: iw, h: ih })),
+    ...(ev.media || []).filter((id) => MEDIA[id]).map((id) => ({ src: cdn(id, w), w, h: Math.round(w * 0.625) })),
+    ...(ev.remote || []).filter(([, n]) => SOCIAL_LOCAL[n]).map(([, n]) => ({ src: `/.netlify/images?url=${encodeURIComponent(SOCIAL_LOCAL[n])}&w=${w}&fm=webp&q=72`, w, h: Math.round(w * 0.5625) })),
+  ];
+}
+function evCard(ev, lang) {
+  const L = GL(lang); const c = ev[L]; const cat = EVENTS.cats[ev.cat]; const im = evImgs(ev, c, 800)[0];
+  return `<a class="pcard" href="${evUrl(lang, ev)}"><div class="pcimg">${im ? `<img src="${im.src}" alt="${esc(c.title)}" loading="lazy">` : `<div class="ph evph"><span>${cat.icon}</span><b>${esc(evT(cat.name, lang))}</b></div>`}</div><div class="pcbody"><small>${esc(ev.date)} · ${esc(evT(cat.name, lang))}</small><h3>${esc(c.title)}</h3><p>${esc(c.card)}</p><span class="more">${evT(EVENTS.ui.read, lang)} →</span></div></a>`;
+}
+function pageEvents(lang) {
+  const t = T[lang]; const L = GL(lang); const nav = evT(EVENTS.nav, lang);
+  const cats = Object.keys(EVENTS.cats).filter((k) => EVENTS.events.some((e) => e.cat === k));
+  const chips = `<ul class="chips evchips">${cats.map((k) => `<li><a href="#${k}">${EVENTS.cats[k].icon} ${esc(evT(EVENTS.cats[k].name, lang))}</a></li>`).join('')}</ul>`;
+  const secs = cats.map((k) => { const cat = EVENTS.cats[k]; return `<section class="evcat" id="${k}"><h2>${cat.icon} ${esc(evT(cat.name, lang))}</h2><p class="sub">${esc(evT(cat.desc, lang))}</p><div class="pcards">${EVENTS.events.filter((e) => e.cat === k).map((e) => evCard(e, lang)).join('')}</div></section>`; }).join('');
+  const body = `<section class="wrap sec page"><nav class="crumbs"><a href="${home(lang)}">${t.nav.home}</a> / <span>${esc(nav)}</span></nav><h1>${esc(nav)}</h1><p class="sub">${esc(evT(EVENTS.lead, lang))}</p>${EVENTS.intro[L]}${chips}${secs}</section>`;
+  const og = evImgs(EVENTS.events.find((e) => evImgs(e, e[L]).length) || EVENTS.events[0], {})[0];
+  write(path.join(url(lang, 'events'), 'index.html'), layout({ lang, title: `${nav} | ACC HOMES`, desc: evT(EVENTS.lead, lang), canonical: url(lang, 'events'), alternates: alts('events'), body, ogImage: og ? og.src : undefined }));
+  for (const ev of EVENTS.events) pageEvent(ev, lang);
+}
+function pageEvent(ev, lang) {
+  const t = T[lang]; const L = GL(lang); const c = ev[L]; const cat = EVENTS.cats[ev.cat]; const nav = evT(EVENTS.nav, lang);
+  const ims = evImgs(ev, c);
+  const gal = ims.length ? `<div class="sgal">${ims.map((i) => `<img src="${i.src}" alt="${esc(c.title)}" loading="lazy" width="${i.w}" height="${i.h}">`).join('')}</div>${(ev.media || []).length && !ev.images.length ? `<p class="gcap">${evT(EVENTS.ui.projPhotos, lang)}</p>` : ''}` : `<p class="gcap">${evT(EVENTS.ui.photosSoon, lang)}</p>`;
+  const ig = ev.ig ? `<a class="btn ghost" href="${ev.ig}" target="_blank" rel="noopener">${ICON_IG} ${evT(EVENTS.ui.ig, lang)}</a>` : '';
+  const ctaHref = ev.cat === 'launch' && ev.project ? ev.project : waLink(t.waGeneral);
+  const others = EVENTS.events.filter((e) => e !== ev);
+  const ld = { '@context': 'https://schema.org', '@type': 'Event', name: c.title, location: { '@type': 'Place', name: c.place }, organizer: { '@type': 'Organization', name: 'ACC HOMES International Real Estate', url: SITE.domain }, eventStatus: 'https://schema.org/EventScheduled', eventAttendanceMode: 'https://schema.org/OfflineEventAttendanceMode', startDate: ev.date.replace(/^(\d+)(?:–\d+)?\.(\d+)\.(\d+)$/, '$3-$2-$1') };
+  const body = `<section class="wrap sec page narrow"><nav class="crumbs"><a href="${home(lang)}">${t.nav.home}</a> / <a href="${url(lang, 'events')}">${esc(nav)}</a> / <a href="${url(lang, 'events')}#${ev.cat}">${esc(evT(cat.name, lang))}</a></nav>
+<article class="sevent first"><p class="eyebrow">${cat.icon} ${esc(ev.date)} · ${esc(c.place)}</p><h1>${esc(c.title)}</h1><div class="sstats">${ev.stats[L].map(([n, x]) => `<div><b>${esc(n)}</b><span>${esc(x)}</span></div>`).join('')}</div>${gal}<div class="prose">${c.html}</div></article>
+<div class="ctas"><a class="btn" href="${ctaHref}"${ctaHref.startsWith('http') ? ' target="_blank" rel="noopener"' : ''}>${evT(cat.cta, lang)}</a>${ig}</div></section>
+${others.length ? `<section class="wrap sec"><h2>${evT(EVENTS.ui.others, lang)}</h2><div class="pcards">${others.map((e) => evCard(e, lang)).join('')}</div></section>` : ''}`;
+  write(path.join(evUrl(lang, ev), 'index.html'), layout({ lang, title: `${c.title} | ACC HOMES`, desc: c.card, canonical: evUrl(lang, ev), alternates: alts('events', () => ev.id), body, schema: [ld], ogImage: ims[0] ? ims[0].src : undefined }));
 }
 function pageFavorites(lang) {
   const t = T[lang];
@@ -836,7 +864,7 @@ await fetchFonts();
 await fetchSocialImages();
 const urls = [];
 for (const lang of LANGS) {
-  pageHome(lang); pageList(lang); pageGuide(lang); pageContact(lang); pageBlog(lang); pageProjects(lang); pageGuideHub(lang); pageReviews(lang); pageFavorites(lang); pageSocial(lang); urls.push(url(lang, 'social')); pageDownloads(lang); urls.push(url(lang, 'projects'), url(lang, 'buyersguide'), url(lang, 'reviews'));
+  pageHome(lang); pageList(lang); pageGuide(lang); pageContact(lang); pageBlog(lang); pageProjects(lang); pageGuideHub(lang); pageReviews(lang); pageFavorites(lang); pageEvents(lang); urls.push(url(lang, 'events'), ...EVENTS.events.map((e) => evUrl(lang, e))); pageDownloads(lang); urls.push(url(lang, 'projects'), url(lang, 'buyersguide'), url(lang, 'reviews'));
   if (lang === 'tr' || lang === 'en') { for (const g of GUIDES) { pageGuideItem(g, lang); urls.push(gUrl(lang, g)); } for (const a of AREA_GUIDES) { pageAreaItem(a, lang); urls.push(aUrl(lang, a)); } }
   pageAreaHub(lang); urls.push(url(lang, 'areas'));
   for (const k of Object.keys(PAGES)) { pageCorporate(k, lang); urls.push(url(lang, k)); }
@@ -844,6 +872,7 @@ for (const lang of LANGS) {
   for (const l of LISTINGS) { pageListing(l, lang); urls.push(url(lang, 'listing', slugOf(l))); }
 }
 for (const p of PROJECTS) { pageProject(p); urls.push(`/projeler/${p.slug}/`); }
+write('_redirects', LANGS.flatMap((l) => { const to = evUrl(l, EVENTS.events.find((e) => e.id === 'acc-day-2025')); const from = `${BASE[l]}/${OLD_SOCIAL[l] || OLD_SOCIAL.en}`; return [`${from} ${to} 301`, `${from}/* ${to} 301`]; }).join('\n') + '\n');
 write('sitemap.xml', `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">${urls.map((u) => `<url><loc>${SITE.domain}${u}</loc></url>`).join('')}</urlset>`);
 write('robots.txt', DEMO ? 'User-agent: *\nDisallow: /\n' : `User-agent: *\nAllow: /\nSitemap: ${SITE.domain}/sitemap.xml\n`);
 write('404.html', layout({ lang: 'tr', title: 'Sayfa bulunamadı | ACC HOMES', desc: '', canonical: '/404', body: `<section class="wrap sec narrow"><h1>Sayfa bulunamadı</h1><p><a class="btn" href="/">Ana sayfa</a></p></section>` }));

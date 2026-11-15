@@ -1167,6 +1167,15 @@ RewriteRule ^(.*)$ https://%{HTTP_HOST}/$1 [R=301,L,NE]
 RewriteRule ^wp-admin(/.*)?$ / [R=301,L]
 RewriteRule ^wp-login\\.php$ / [R=301,L]
 RewriteRule ^(xmlrpc|wp-cron|wp-config)\\.php$ - [F,L]
+# Güvenlik: form.php dışında hiçbir PHP dosyası çalıştırılamaz (eski WordPress eklenti açıklarına karşı)
+RewriteCond %{REQUEST_URI} !^/form\\.php$
+RewriteRule \\.(php[0-9]?|phtml|phar)$ - [F,L,NC]
+# Eski WordPress eklenti/tema klasörleri ve sürüm bilgisi veren dosyalar kapalı (wp-content/uploads açık kalır)
+RewriteRule ^wp-content/(plugins|themes|upgrade|cache|mu-plugins)/ - [F,L,NC]
+RewriteRule ^wp-includes/ - [F,L,NC]
+RewriteRule ^(readme\\.html|license\\.txt|wp-config-sample\\.php)$ - [F,L,NC]
+# Gizli dosyalar (.git, .env vb.)
+RewriteRule (^|/)\\.(?!well-known/) - [F,L]
 # Var olan dosya ve klasörler yönlendirilmez
 RewriteCond %{REQUEST_FILENAME} -f [OR]
 RewriteCond %{REQUEST_FILENAME} -d
@@ -1183,6 +1192,10 @@ Header set Cache-Control "public, max-age=300"
 </FilesMatch>
 Header always set X-Content-Type-Options "nosniff"
 Header always set Referrer-Policy "strict-origin-when-cross-origin"
+Header always set Strict-Transport-Security "max-age=31536000"
+Header always set X-Frame-Options "SAMEORIGIN"
+Header always set Permissions-Policy "camera=(), microphone=(), geolocation=(), payment=()"
+Header always unset X-Powered-By
 </IfModule>
 <IfModule mod_deflate.c>
 AddOutputFilterByType DEFLATE text/html text/css application/javascript application/json image/svg+xml text/plain application/xml

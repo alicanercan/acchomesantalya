@@ -9,6 +9,7 @@ import { PRIVACY } from './privacy.mjs';
 import { PAGES2, P2X, p2Html } from './pages2.mjs';
 import { AREA_GUIDES } from './areas.mjs';
 import { MAHALLELER } from './mahalleler.mjs';
+import { EMLAK_TIPLERI, KATEGORILER, ALT_EN, TUR_TO_TIP, ILCELER, ODALAR, BINA_YASI, SECMELI, TX } from './taxonomy.mjs';
 import { EVENTS } from './events.mjs';
 import { BROKER } from './broker.mjs';
 import { ROADMAP, TRUST, FOUNDER } from './story.mjs';
@@ -28,6 +29,13 @@ const IG = read('data/instagram.json');
 let LISTINGS = read('data/portfoy.json');
 const DEMO = LISTINGS.length === 0 && !SITE.live;
 if (DEMO) LISTINGS = read('data/demo.json');
+const KAT_OF = { 'Satılık': 'satilik', 'Kiralık': 'kiralik', 'Devren': 'devren' };
+for (const l of LISTINGS) {
+  l.emlakTipi = l.emlakTipi || TUR_TO_TIP[l.tur] || 'konut';
+  l.kategori = l.kategori || KAT_OF[l.tip] || 'satilik';
+  const et = EMLAK_TIPLERI.find((e) => e.k === l.emlakTipi);
+  l.altTip = l.altTip || (et && et.alt.includes(l.tur) ? l.tur : (l.emlakTipi === 'konut' ? 'Daire' : ''));
+}
 LISTINGS = LISTINGS.filter((l) => ['Yayında', 'Opsiyonlu', 'Satıldı'].includes(l.durum));
 
 const VER = crypto.createHash('md5').update(fs.readFileSync(path.join(ROOT, 'assets/style.css')) + fs.readFileSync(path.join(ROOT, 'assets/app.js'))).digest('hex').slice(0, 8);
@@ -304,10 +312,10 @@ function layout({ lang, title, desc, canonical, alternates, body, schema = [], o
 ${[agentSchema, ...(canonical === home(lang) ? [websiteSchema] : []), ...(schema.some((x) => x && x['@type'] === 'BreadcrumbList') ? [] : crumbSchema(body, title, canonical)), ...schema].filter(Boolean).map((s) => `<script type="application/ld+json">${JSON.stringify(s)}</script>`).join('')}
 </head><body>
 ${DEMO ? `<div class="demo">${t.demo}</div>` : ''}
-<header class="top"><div class="tbar"><div class="wrap tbin"><span class="tloc">📍 ACC Plaza · Yeşilbahçe, Muratpaşa / Antalya</span><span class="tcon"><a class="tphone" href="tel:${SITE.phoneRaw}" aria-label="${t.call} ${SITE.phone}"><svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><path fill="currentColor" d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1A17 17 0 0 1 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1l-2.3 2.2z"/></svg><b dir="ltr">${SITE.phone}</b></a><a class="twa" href="${waLink(t.waGeneral)}" target="_blank" rel="noopener">WhatsApp</a><a class="tmail" href="mailto:${SITE.email}">${SITE.email}</a><a class="tfav" href="${url(lang, 'favorites')}">♡ <span data-fav-count>0</span></a></span></div></div><div class="wrap nav">
+<header class="top"><div class="tbar"><div class="wrap tbin"><span class="tloc">📍 ACC Plaza · Yeşilbahçe, Muratpaşa / Antalya</span><span class="tcon"><a class="tphone" href="tel:${SITE.phoneRaw}" aria-label="${t.call} ${SITE.phone}"><svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><path fill="currentColor" d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1A17 17 0 0 1 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1l-2.3 2.2z"/></svg><b dir="ltr">${SITE.phone}</b></a><a class="twa" href="${waLink(t.waGeneral)}" target="_blank" rel="noopener">WhatsApp</a><a class="tmail" href="mailto:${SITE.email}">${SITE.email}</a><a class="tcrm" href="${SITE.crmUrl}" target="_blank" rel="noopener">👤 ${GL(lang) === 'tr' ? 'Danışman Girişi' : 'Consultant Login'}</a><a class="tfav" href="${url(lang, 'favorites')}">♡ <span data-fav-count>0</span></a></span></div></div><div class="wrap nav">
 <a class="logo" href="${home(lang)}"><img src="/img/logo/acc-siyah.svg" alt="ACC HOMES International Real Estate" width="154" height="45"></a>
 <nav class="menu"><a href="${url(lang, 'list')}">${t.nav.list}</a><a href="${url(lang, 'projects')}">${t.projects}</a><a href="${url(lang, 'buyersguide')}">${GUIDE_TITLE[lang]}</a><a href="${url(lang, 'services')}">${PAGES.services.nav[lang]}</a><div class="dd"><button type="button">${t.company} ▾</button><div class="ddm"><a href="${url(lang, 'about')}">${PAGES.about.nav[lang]}</a><a href="${url(lang, 'broker')}">${PAGES.broker.nav[lang]}</a><a href="${url(lang, 'team')}">${PAGES.team.nav[lang]}</a><a href="${url(lang, 'reviews')}">${t.revTitle}</a><a href="${url(lang, 'licences')}">${PAGES.licences.nav[lang] || PAGES.licences.nav.en}</a><a href="${url(lang, 'events')}">${EVENTS.nav[lang] || EVENTS.nav.en}</a><a href="${url(lang, 'join')}">${PAGES.join.nav[lang]}</a></div></div><a href="${url(lang, 'blog')}">${t.blog}</a><a href="${url(lang, 'contact')}">${t.nav.contact}</a></nav>
-<details class="mnav"><summary aria-label="${t.menu}">☰</summary><div class="mpanel"><a href="${url(lang, 'list')}">${t.nav.list}</a><a href="${url(lang, 'projects')}">${t.projects}</a><a href="${url(lang, 'buyersguide')}">${GUIDE_TITLE[lang]}</a><a href="${url(lang, 'services')}">${PAGES.services.nav[lang]}</a><a href="${url(lang, 'about')}">${PAGES.about.nav[lang]}</a><a href="${url(lang, 'broker')}">${PAGES.broker.nav[lang]}</a><a href="${url(lang, 'team')}">${PAGES.team.nav[lang]}</a><a href="${url(lang, 'sell')}">${PAGES.sell.nav[lang] || PAGES.sell.nav.en}</a><a href="${url(lang, 'join')}">${PAGES.join.nav[lang]}</a><a href="${url(lang, 'guide')}">${t.nav.guide}</a><a href="${url(lang, 'blog')}">${t.blog}</a><a href="${url(lang, 'contact')}">${t.nav.contact}</a></div></details>
+<details class="mnav"><summary aria-label="${t.menu}">☰</summary><div class="mpanel"><a href="${url(lang, 'list')}">${t.nav.list}</a><a href="${url(lang, 'projects')}">${t.projects}</a><a href="${url(lang, 'buyersguide')}">${GUIDE_TITLE[lang]}</a><a href="${url(lang, 'services')}">${PAGES.services.nav[lang]}</a><a href="${url(lang, 'about')}">${PAGES.about.nav[lang]}</a><a href="${url(lang, 'broker')}">${PAGES.broker.nav[lang]}</a><a href="${url(lang, 'team')}">${PAGES.team.nav[lang]}</a><a href="${url(lang, 'sell')}">${PAGES.sell.nav[lang] || PAGES.sell.nav.en}</a><a href="${url(lang, 'join')}">${PAGES.join.nav[lang]}</a><a href="${url(lang, 'guide')}">${t.nav.guide}</a><a href="${url(lang, 'blog')}">${t.blog}</a><a href="${url(lang, 'contact')}">${t.nav.contact}</a><a class="mcrm" href="${SITE.crmUrl}" target="_blank" rel="noopener">👤 ${GL(lang) === 'tr' ? 'Danışman Girişi' : 'Consultant Login'}</a></div></details>
 ${settingsBtn(lang)}
 <a class="btn sm" href="tel:${SITE.phoneRaw}">${t.call}</a>
 </div>${settingsPanel(lang, alternates)}</header>
@@ -315,7 +323,8 @@ ${settingsBtn(lang)}
 ${footer(lang)}
 ${callPopup(lang)}
 ${stickyBar(lang)}
-<script src="/assets/app.js?v=${VER}" defer></script></body></html>`);
+<script src="/assets/app.js?v=${VER}" defer></script><nav class="mbar" aria-label="Mobil">${[[home(lang), '🏠', GL(lang) === 'tr' ? 'Keşfet' : 'Explore'], [url(lang, 'list'), '🔍', GL(lang) === 'tr' ? 'İlanlar' : 'Listings'], [`tel:${SITE.phoneRaw}`, '📞', GL(lang) === 'tr' ? 'Ara' : 'Call'], [waLink(t.waGeneral), '💬', 'WhatsApp'], [url(lang, 'team'), '👥', GL(lang) === 'tr' ? 'Danışmanlar' : 'Consultants']].map(([u, i, n]) => `<a href="${u}"${u.startsWith('http') ? ' target="_blank" rel="noopener"' : ''}><span>${i}</span>${n}</a>`).join('')}</nav>
+</body></html>`);
 }
 
 // ---------- bileşenler ----------
@@ -669,12 +678,11 @@ function pageDownloads(lang) {
   write(path.join(url(lang, 'downloads'), 'hazir', 'index.html'), layout({ lang, title: `${s('dlReady', lang)} | ACC HOMES`, desc: '', canonical: url(lang, 'downloads') + 'hazir/', alternates: null, body: ready, noindex: true }));
 }
 function searchBox(lang) {
-  const tr = lang === 'tr'; const f = T[lang].filters;
-  const dists = DISTS;
-  return `<form class="hsearch" action="${url(lang, 'list')}" method="get"><label>${f.tip}<select name="tip"><option value="">${f.any}</option><option value="Satılık">${f.sale}</option><option value="Kiralık">${f.rent}</option></select></label>
-<label>${s('type', lang)}<select name="tur"><option value="">${f.any}</option><option>Daire</option><option>Villa</option><option>Dubleks</option><option>Ticari</option><option>Arsa</option></select></label>
-<label>${s('district', lang)}<select name="ilce"><option value="">${f.any}</option>${dists.map((d) => `<option>${d}</option>`).join('')}</select></label>
-<label>${f.rooms}<select name="oda"><option value="">${f.any}</option><option>1+1</option><option>2+1</option><option>3+1</option><option>4+1</option><option>5+1</option></select></label>
+  const x = TXL(lang); const f = T[lang].filters;
+  return `<form class="hsearch" action="${url(lang, 'list')}" method="get"><label>${x.kat}<select name="kat"><option value="">${x.any}</option>${Object.entries(KATEGORILER).map(([k, v]) => `<option value="${k}">${lab(v, lang)}</option>`).join('')}</select></label>
+<label>${x.tip}<select name="emlak"><option value="">${x.any}</option>${EMLAK_TIPLERI.map((e) => `<option value="${e.k}">${lab(e, lang)}</option>`).join('')}</select></label>
+<label>${x.ilce}<select name="ilce"><option value="">${x.any}</option>${ILCELER.map((d) => `<option>${d}</option>`).join('')}</select></label>
+<label>${x.rooms}<select name="oda"><option value="">${x.any}</option>${ODALAR.slice(0, 15).map((o) => `<option>${o}</option>`).join('')}</select></label>
 <button class="btn" type="submit">${s('search', lang)}</button></form>`;
 }
 function blogStrip(lang) {
@@ -691,7 +699,9 @@ function card(l, lang) {
   const t = T[lang];
   const cover = l.foto && l.foto[0];
   const tags = (l.etiketler || []).filter((k) => TAGS[k]);
-  return `<article class="card" data-id="${esc(l.id)}" data-tags="${tags.join(' ')}" data-tip="${esc(l.tip)}" data-tur="${esc(l.tur)}" data-ilce="${esc(l.ilce)}" data-oda="${esc(l.oda)}" data-fiyat="${l.fiyat || 0}" data-tarih="${esc(l.tarih || '')}">
+  const fx = SECMELI.map((x) => (l[x.f] !== undefined && l[x.f] !== '' ? ` data-f-${x.f}="${esc(String(l[x.f]))}"` : '')).join('');
+  const q = [l.id, l.mahalle, l.ilce, l.proje, pick(l.baslik, 'tr'), pick(l.baslik, 'en')].filter(Boolean).join(' ').toLocaleLowerCase('tr');
+  return `<article class="card" data-id="${esc(l.id)}" data-tags="${tags.join(' ')}" data-tip="${esc(l.tip)}" data-tur="${esc(l.tur)}" data-et="${esc(l.emlakTipi)}" data-kat="${esc(l.kategori)}" data-alt="${esc(l.altTip || '')}" data-ilce="${esc(l.ilce)}" data-mah="${esc(l.mahalle || '')}" data-oda="${esc(l.oda)}" data-fiyat="${l.fiyat || 0}" data-para="${esc(({ TL: 'TRY' })[l.para || 'TL'] || l.para)}" data-brut="${+l.brut || 0}" data-net="${+l.net || 0}" data-yas="${l.yas === undefined || l.yas === '' ? '' : +String(l.yas).replace(/[^0-9]/g, '') || 0}" data-tarih="${esc(l.tarih || '')}" data-q="${esc(q)}"${fx}>
 ${cardTools(l, lang)}
 <a href="${url(lang, 'listing', slugOf(l))}">
 <div class="img">${cover ? `<img src="${esc(cover)}" alt="${esc([l.mahalle, l.ilce, l.oda, l.tur].join(' '))}" width="800" height="600" loading="lazy">` : placeholder}<span class="tag">${tipLabel(l, lang)}</span>${statusBadge(l, lang)}</div>
@@ -802,20 +812,95 @@ ${whyBlock(lang)}
 ${reviewsBlock(lang)}
 ${talkBlock(lang)}
 ${plazaBlock(lang)}
+<section class="wrap sec">${joinBlock(lang)}</section>
 ${blogStrip(lang)}
 ${igBlock(lang)}`;
   write(path.join(BASE[lang], 'index.html'), layout({ lang, title: `${t.heroTitle} | ACC HOMES`, desc: t.metaHome, canonical: home(lang), alternates: alts('home'), body }));
 }
 
+// ---------- İlan arama: Sahibinden uyumlu kategori sayfaları ve detaylı filtre ----------
+const TXL = (lang) => TX[GL(lang)];
+const lab = (o, lang) => (GL(lang) === 'tr' ? o.tr : o.en);
+const altLab = (a, lang) => (GL(lang) === 'tr' ? a : ALT_EN[a] || a);
+const etSlug = (e, lang) => (lang === 'tr' ? e.k : e.enSlug);
+const katSlug = (k, lang) => (lang === 'tr' ? k : KATEGORILER[k].enSlug);
+const altSlug = (a, lang) => slugify(lang === 'tr' ? a : ALT_EN[a] || a);
+const CAT_LANGS = ['tr', 'en'];
+function catUrl(lang, et, kat, alt) {
+  const base = url(lang, 'list');
+  if (!et || !CAT_LANGS.includes(lang)) { const qs = [et && `emlak=${et.k}`, kat && `kat=${kat}`, alt && `alt=${encodeURIComponent(alt)}`].filter(Boolean).join('&'); return base + (qs ? '?' + qs : ''); }
+  return base + [etSlug(et, lang), kat && katSlug(kat, lang), alt && altSlug(alt, lang)].filter(Boolean).join('/') + '/';
+}
+function filterPanel(lang, ctx) {
+  const x = TXL(lang); const L = GL(lang); const { et, kat, alt } = ctx;
+  const tipOpts = EMLAK_TIPLERI.map((e) => `<option value="${e.k}" data-href="${catUrl(lang, e)}"${et === e ? ' selected' : ''}>${e.icon} ${lab(e, lang)}</option>`).join('');
+  const kats = (et ? et.kategoriler : Object.keys(KATEGORILER));
+  const katOpts = kats.map((k) => `<option value="${k}" data-href="${et ? catUrl(lang, et, k) : ''}"${kat === k ? ' selected' : ''}>${lab(KATEGORILER[k], lang)}</option>`).join('');
+  const alts = et ? et.alt : [];
+  const mahs = [...new Set(LISTINGS.map((l) => `${l.ilce}|${l.mahalle || ''}`).filter((v) => !v.endsWith('|')))].sort((a, b) => a.localeCompare(b, 'tr'));
+  const sec = SECMELI.filter((f) => !et || f.tipler.includes(et.k));
+  const rng = (name, lbl) => `<fieldset class="fs"><legend>${lbl}</legend><div class="rng"><input type="number" inputmode="numeric" min="0" name="${name}Min" placeholder="${x.min}"><input type="number" inputmode="numeric" min="0" name="${name}Max" placeholder="${x.max}"></div></fieldset>`;
+  const chk = (name, list) => `<div class="chks">${list.map(([v, t]) => `<label><input type="checkbox" name="${name}" value="${esc(v)}"> ${esc(t)}</label>`).join('')}</div>`;
+  const showRooms = !et || ['konut', 'konut-projeleri', 'devre-mulk'].includes(et.k);
+  return `<aside class="fpanel" id="fpanel"><form id="xf" class="xf" onsubmit="return false">
+<div class="fphead"><b>${x.filters}</b><button type="button" class="fclose" data-fclose aria-label="×">×</button></div>
+<label class="fs">${x.search}<input type="search" name="q" placeholder="${x.searchPh}"></label>
+<label class="fs">${x.tip}<select name="emlak" data-nav>${`<option value="" data-href="${url(lang, 'list')}">${x.any}</option>`}${tipOpts}</select></label>
+<label class="fs">${x.kat}<select name="kat" data-nav><option value="" data-href="${et ? catUrl(lang, et) : ''}">${x.any}</option>${katOpts}</select></label>
+${alts.length ? `<fieldset class="fs"><legend>${x.alt}</legend>${chk('alt', alts.map((a) => [a, altLab(a, lang)]))}</fieldset>` : ''}
+<label class="fs">${x.ilce}<select name="ilce"><option value="">${x.any}</option>${ILCELER.map((d) => `<option>${d}</option>`).join('')}</select></label>
+<label class="fs">${x.mahalle}<select name="mah"><option value="">${x.any}</option>${mahs.map((m) => { const [i, mh] = m.split('|'); return `<option value="${esc(mh)}" data-ilce="${esc(i)}">${esc(mh)}</option>`; }).join('')}</select></label>
+${rng('fiyat', x.price + ' (₺)')}${rng('brut', x.m2b)}${rng('net', x.m2n)}
+${showRooms ? `<fieldset class="fs"><legend>${x.rooms}</legend>${chk('oda', ODALAR.map((o) => [o, o]))}</fieldset>` : ''}
+${et && et.k === 'arsa' ? '' : `<fieldset class="fs"><legend>${x.age}</legend>${chk('yas', BINA_YASI.map(([v, t]) => [v, t[L] || t.en]))}</fieldset>`}
+<details class="fs more"><summary>${x.more}</summary>${sec.map((f) => `<fieldset class="fs"><legend>${lab(f, lang)}</legend>${chk('f-' + f.f, f.ops.map(([v, e]) => [v, L === 'tr' ? v : e]))}</fieldset>`).join('')}</details>
+${Object.keys(TAGS).length ? `<fieldset class="fs"><legend>${x.tags}</legend>${chk('tag', Object.keys(TAGS).map((k) => [k, tagLabel(k, lang)]))}</fieldset>` : ''}
+<div class="fbtns"><button type="button" class="btn" data-fapply>${x.apply}</button><button type="reset" class="btn ghost">${x.clear}</button></div>
+</form></aside>`;
+}
+function catNav(lang, ctx) {
+  const { et, kat } = ctx; const x = TXL(lang);
+  if (!et) return `<nav class="catnav" aria-label="${x.cats}">${EMLAK_TIPLERI.map((e) => { const n = LISTINGS.filter((l) => l.emlakTipi === e.k).length; return `<a href="${catUrl(lang, e)}">${e.icon} ${lab(e, lang)}${n ? ` <small>${n}</small>` : ''}</a>`; }).join('')}</nav>`;
+  const subs = kat ? et.alt.map((a) => [altLab(a, lang), catUrl(lang, et, kat, a), LISTINGS.filter((l) => l.emlakTipi === et.k && l.kategori === kat && l.altTip === a).length]) : et.kategoriler.map((k) => [lab(KATEGORILER[k], lang), catUrl(lang, et, k), LISTINGS.filter((l) => l.emlakTipi === et.k && l.kategori === k).length]);
+  return subs.length ? `<nav class="catnav" aria-label="${x.cats}">${subs.map(([n, u, c]) => `<a href="${u}">${esc(n)}${c ? ` <small>${c}</small>` : ''}</a>`).join('')}</nav>` : '';
+}
+function listPage(lang, ctx) {
+  const t = T[lang]; const x = TXL(lang); const { et, kat, alt } = ctx;
+  const list = LISTINGS.filter((l) => (!et || l.emlakTipi === et.k) && (!kat || l.kategori === kat) && (!alt || l.altTip === alt));
+  const loc = GL(lang) === 'tr' ? 'Antalya' : 'Antalya';
+  const h1 = !et ? (GL(lang) === 'tr' ? `${loc} Satılık ve Kiralık Emlak İlanları` : `Property for Sale and Rent in ${loc}`)
+    : GL(lang) === 'tr' ? `${loc} ${[kat && KATEGORILER[kat].tr, alt || et.tr].filter(Boolean).join(' ')} İlanları`
+    : `${alt ? altLab(alt, lang) : et.en}${kat ? ' ' + KATEGORILER[kat].en.toLowerCase() : ''} in ${loc}`;
+  const canon = et ? catUrl(lang, et, kat, alt) : url(lang, 'list');
+  const crumbs = [`<a href="${home(lang)}">${t.nav.home}</a>`, et ? `<a href="${url(lang, 'list')}">${t.nav.list}</a>` : `<span>${t.nav.list}</span>`];
+  if (et) crumbs.push(kat ? `<a href="${catUrl(lang, et)}">${lab(et, lang)}</a>` : `<span>${lab(et, lang)}</span>`);
+  if (et && kat) crumbs.push(alt ? `<a href="${catUrl(lang, et, kat)}">${lab(KATEGORILER[kat], lang)}</a>` : `<span>${lab(KATEGORILER[kat], lang)}</span>`);
+  if (alt) crumbs.push(`<span>${esc(altLab(alt, lang))}</span>`);
+  const body = `<section class="wrap sec lpage" data-ctx-et="${et ? et.k : ''}" data-ctx-kat="${kat || ''}" data-ctx-alt="${esc(alt || '')}"><nav class="crumbs">${crumbs.join(' / ')}</nav>
+<div class="lhead"><h1>${esc(h1)}</h1><span class="rcount" data-rcount>${x.results(list.length)}</span></div>${catNav(lang, ctx)}
+<div class="ltoolbar"><button type="button" class="btn ghost fopen" data-fopen>☰ ${x.filters}</button><label>${x.sort}<select name="sort" form="xf" data-sort><option value="new">${x.newest}</option><option value="asc">${x.priceAsc}</option><option value="desc">${x.priceDesc}</option><option value="m2">${x.m2Asc}</option></select></label></div>
+<div class="lsplit">${filterPanel(lang, ctx)}<div class="lres">${grid(list, lang)}<p class="none" data-none hidden>${x.none} <a href="${waLink(t.waGeneral)}" target="_blank" rel="noopener">WhatsApp →</a></p></div></div>${joinBlock(lang)}</section>`;
+  const desc = GL(lang) === 'tr' ? `${h1}: ACC HOMES portföyünde fotoğraflı ve detaylı filtreli ilanlar. Fiyat, m², oda, bina yaşı ve konuma göre arayın; danışmanımıza hemen ulaşın.` : `${h1}: listings from ACC HOMES with photos and detailed filters by price, m², rooms, building age and location. Contact our consultants directly.`;
+  const alternates = et ? { tr: catUrl('tr', et, kat, alt), en: catUrl('en', et, kat, alt) } : alts('list');
+  write(path.join(canon.split('?')[0], 'index.html'), layout({ lang, title: `${h1} | ACC HOMES`, desc: desc.slice(0, 158), canonical: canon, alternates, body, noindex: !list.length }));
+  return { url: canon, n: list.length };
+}
 function pageList(lang) {
-  const t = T[lang]; const f = t.filters;
-  const rooms = [...new Set(LISTINGS.map((l) => l.oda).filter(Boolean))].sort();
-  const body = `<section class="wrap sec"><h1>${t.all}</h1>
-<form class="filters" id="filters"><label>${f.tip}<select name="tip"><option value="">${f.any}</option><option value="Satılık">${f.sale}</option><option value="Kiralık">${f.rent}</option></select></label>
-<label>${f.rooms}<select name="oda"><option value="">${f.any}</option>${rooms.map((r) => `<option>${esc(r)}</option>`).join('')}</select></label>
-<label>${f.sort}<select name="sort"><option value="new">${f.newest}</option><option value="asc">${f.priceAsc}</option><option value="desc">${f.priceDesc}</option></select></label></form>${tagFilter(lang)}
-${grid(LISTINGS, lang)}</section>`;
-  write(path.join(url(lang, 'list'), 'index.html'), layout({ lang, title: `${t.all} — ${t.heroTitle} | ACC HOMES`, desc: t.metaHome, canonical: url(lang, 'list'), alternates: alts('list'), body, noindex: !LISTINGS.length }));
+  const out = [listPage(lang, {})];
+  if (CAT_LANGS.includes(lang)) for (const et of EMLAK_TIPLERI) {
+    out.push(listPage(lang, { et }));
+    for (const k of et.kategoriler) {
+      out.push(listPage(lang, { et, kat: k }));
+      for (const a of et.alt) if (LISTINGS.some((l) => l.emlakTipi === et.k && l.kategori === k && l.altTip === a) || (et.k === 'konut' && ['Daire', 'Villa', 'Müstakil Ev', 'Rezidans'].includes(a)) || (et.k === 'is-yeri' && ['Dükkan & Mağaza', 'Ofis'].includes(a))) out.push(listPage(lang, { et, kat: k, alt: a }));
+    }
+  }
+  for (const o of out) if (o.n) LIST_URLS.push(o.url);
+}
+const LIST_URLS = [];
+function joinBlock(lang) {
+  const L = GL(lang);
+  const c = L === 'tr' ? ['Danışman olmak ister misiniz?', 'ACC Plaza’da yaklaşık 50 iş ortağıyla çalışıyoruz. Kurumsal portföy erişimi, eğitim, pazarlama ve uçtan uca operasyon desteğiyle kariyerinizi büyütün.', 'İş ortağımız olun', 'Danışman girişi'] : ['Want to become a consultant?', 'Around 50 partners work with us at ACC Plaza. Grow your career with access to our portfolio, training, marketing and end-to-end operational support.', 'Join us', 'Consultant login'];
+  return `<div class="joinblk"><div><h2>${c[0]}</h2><p>${c[1]}</p></div><div class="jbtns"><a class="btn" href="${url(lang, 'join')}">${c[2]} →</a><a class="btn ghost" href="${SITE.crmUrl}" target="_blank" rel="noopener">${c[3]}</a></div></div>`;
 }
 
 function similar(l, lang) {
@@ -828,8 +913,8 @@ function pageListing(l, lang) {
   const title = pick(l.baslik, lang);
   const desc = (lang === 'tr' && l.meta) ? l.meta : pick(l.aciklama, lang).slice(0, 155);
   const rows = [
-    [F.no, l.id], [F.type, l.tur], [F.rooms, l.oda], [F.gross, l.brut ? { m2: l.brut } : ''], [F.net, l.net ? { m2: l.net } : ''], [F.age, l.yas], [F.floor, l.kat], [F.floors, l.katSayisi],
-    [F.heat, l.isitma], [F.inSite, l.site], [F.credit, l.kredi], [F.deed, l.tapu], [F.project, l.proje], [F.location, [l.mahalle, l.ilce, 'Antalya'].filter(Boolean).join(', ')],
+    [F.no, l.id], [TXL(lang).listedIn, l.tarih], [TXL(lang).emlakTipi, [lab(EMLAK_TIPLERI.find((e) => e.k === l.emlakTipi) || { tr: '', en: '' }, lang), lab(KATEGORILER[l.kategori] || { tr: '', en: '' }, lang), altLab(l.altTip || '', lang)].filter(Boolean).join(' · ')], [F.rooms, l.oda], [F.gross, l.brut ? { m2: l.brut } : ''], [F.net, l.net ? { m2: l.net } : ''], [F.age, l.yas], [F.floor, l.kat], [F.floors, l.katSayisi],
+    [F.heat, l.isitma], [lab(SECMELI.find((x) => x.f === 'banyo'), lang), l.banyo], [lab(SECMELI.find((x) => x.f === 'balkon'), lang), l.balkon], [lab(SECMELI.find((x) => x.f === 'asansor'), lang), l.asansor], [lab(SECMELI.find((x) => x.f === 'otopark'), lang), l.otopark], [lab(SECMELI.find((x) => x.f === 'esya'), lang), l.esya], [lab(SECMELI.find((x) => x.f === 'kullanim'), lang), l.kullanim], [F.inSite, l.site], [GL(lang) === 'tr' ? 'Aidat' : 'Service charge', l.aidat ? `${l.aidat} TL` : ''], [lab(SECMELI.find((x) => x.f === 'imar'), lang), l.imar], [lab(SECMELI.find((x) => x.f === 'takas'), lang), l.takas], [F.credit, l.kredi], [F.deed, l.tapu], [F.project, l.proje], [F.location, [l.mahalle, l.ilce, 'Antalya'].filter(Boolean).join(', ')],
   ].filter(([, v]) => v !== undefined && v !== null && v !== '');
   const photos = (l.foto || []);
   const gallery = photos.length ? `<div class="gallery"><img class="main" src="${esc(photos[0])}" alt="${esc(title)}">${photos.length > 1 ? `<div class="thumbs">${photos.map((p, i) => `<img src="${esc(p)}" alt="${esc(title)} ${i + 1}" loading="lazy">`).join('')}</div>` : ''}</div>` : `<div class="gallery">${placeholder}</div>`;
@@ -867,7 +952,7 @@ ${l.tip !== 'Kiralık' ? `<h2>${L('costs')}</h2>${calcBlock(lang).replace('data-
 <form class="box form" name="ilan-talep" method="POST" data-netlify="true" netlify-honeypot="bot" action="${url(lang, 'contact')}?ok=1"><h3>${t.askTitle}</h3>
 <input type="hidden" name="form-name" value="ilan-talep"><input type="hidden" name="ilan" value="${esc(l.id)}"><p hidden><input name="bot"></p>
 <input name="ad" placeholder="${t.name}" required><input name="telefon" placeholder="${t.phone}" required><textarea name="mesaj" rows="3" placeholder="${t.msg}"></textarea><button class="btn" type="submit">${t.send}</button></form>
-</aside></div></section>${similar(l, lang)}`;
+</aside></div></section>${similar(l, lang)}<section class="wrap sec">${joinBlock(lang)}</section>`;
   const offer = l.fiyat ? { '@type': 'Offer', price: l.fiyat, priceCurrency: l.para === 'TL' ? 'TRY' : l.para, availability: l.durum === 'Satıldı' ? 'https://schema.org/SoldOut' : 'https://schema.org/InStock' } : undefined;
   const schema = [
     { '@context': 'https://schema.org', '@type': 'RealEstateListing', name: title, description: pick(l.aciklama, lang), url: SITE.domain + url(lang, 'listing', slug), datePosted: l.tarih || undefined, image: photos.length ? photos.map((p) => SITE.domain + p) : undefined, offers: offer,
@@ -1004,6 +1089,7 @@ const FALLBACK = new Set();
   }
 }
 const NOINDEX_PATHS = (u) => (!LISTINGS.length && LANGS.some((l) => u === url(l, 'list'))) || /\/(favorilerim|favourites|favoriten|izbrannoe|hazir)\//.test(u) || u.includes('/favor');
+urls.push(...LIST_URLS);
 const SITEMAP_URLS = [...new Set(urls)].filter((u) => !FALLBACK.has(u) && !NOINDEX_PATHS(u));
 write('sitemap.xml', `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">${SITEMAP_URLS.map((u) => `<url><loc>${SITE.domain}${u}</loc></url>`).join('')}</urlset>`);
 write('robots.txt', DEMO ? 'User-agent: *\nDisallow: /\n' : `User-agent: *\nAllow: /\nSitemap: ${SITE.domain}/sitemap.xml\n`);

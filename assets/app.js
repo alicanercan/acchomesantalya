@@ -91,6 +91,7 @@
   var sym = { TRY: '₺', USD: '$', EUR: '€', GBP: '£', RUB: '₽', BTC: '₿', AED: 'AED ', CNY: '¥', PLN: 'zł ', SEK: 'kr ', SAR: 'SAR ', CAD: 'C$' }, rates = null;
   var nf = function (n, c) { return new Intl.NumberFormat(loc, c === 'BTC' ? { maximumFractionDigits: n < 1 ? 4 : 2 } : { maximumFractionDigits: 0 }).format(n); };
   function conv(amt, from, to) { return amt / rates[from] * rates[to]; }
+  window.accToTRY = function (amt, from) { return rates && rates[from] ? amt / rates[from] : null; };
   window.accConv = function (amt, from) { if (!rates || !rates[cur] || cur === from) return ''; return ' (≈ ' + sym[cur] + nf(conv(amt, from, cur), cur) + ')'; };
   function applyCur() {
     document.querySelectorAll('[data-cur-label]').forEach(function (e) { e.textContent = cur; });
@@ -119,7 +120,7 @@
     fetch('https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=try').then(function (r) { return r.json(); }).catch(function () { return null; })
   ]).then(function (res) {
     if (!res[0] || !res[0].rates) return;
-    rates = res[0].rates; rates.TRY = 1;
+    rates = res[0].rates; rates.TRY = 1; setTimeout(function () { window.dispatchEvent(new Event('accrates')); }, 0);
     if (res[1] && res[1].bitcoin && res[1].bitcoin.try) rates.BTC = 1 / res[1].bitcoin.try;
     applyCur();
   });
@@ -204,4 +205,70 @@
     if (!pop) return; pop.querySelector('[data-cpop-ilan]').value = b.dataset.enq; pop.querySelector('[data-cpop-page]').value = location.pathname;
     pop.hidden = false; document.body.classList.add('noscroll'); var f = pop.querySelector('input[name=ad]'); f && f.focus();
   }); });
+})();
+
+// Detaylı ilan arama (Sahibinden uyumlu filtreler)
+(function () {
+  var form = document.getElementById('xf'); if (!form) return;
+  var page = document.querySelector('.lpage'), grid = document.querySelector('.lres .grid'), none = document.querySelector('[data-none]'), cnt = document.querySelector('[data-rcount]');
+  var cards = grid ? [].slice.call(grid.querySelectorAll('.card')) : [];
+  var qp = {}; location.search.replace(/^\?/, '').split('&').forEach(function (kv) { if (!kv) return; var p = kv.split('='); var k = decodeURIComponent(p[0]), v = decodeURIComponent((p[1] || '').replace(/\+/g, ' ')); (qp[k] = qp[k] || []).push(v); });
+  // URL parametrelerinden formu doldur
+  Object.keys(qp).forEach(function (k) {
+    var name = k === 'tur' ? 'alt' : (k === 'etiket' ? 'tag' : k);
+    qp[k].forEach(function (v) {
+      var els = form.querySelectorAll('[name="' + name + '"]');
+      [].forEach.call(els, function (el) { if (el.type === 'checkbox') { if (el.value === v) el.checked = true; } else if (el.tagName === 'SELECT' || el.type !== 'checkbox') { el.value = v; } });
+    });
+  });
+  var lab = cnt ? cnt.textContent.replace(/^[0-9.,]+\s*/, '') : '';
+  function vals(n) { return [].map.call(form.querySelectorAll('[name="' + n + '"]:checked'), function (i) { return i.value; }); }
+  function num(n) { var e = form.elements[n]; return e && e.value !== '' ? +e.value : null; }
+  function toTRY(a, c) { if (!c || c === 'TRY') return a; return window.accToTRY ? window.accToTRY(a, c) : null; }
+  function yasOk(y, sel) { if (!sel.length) return true; if (y === '') return false; y = +y; return sel.some(function (r) { if (r === '0') return y === 0; if (r === '31+') return y >= 31; var p = r.split('-'); return y >= +p[0] && y <= +p[1]; }); }
+  var secs = [].map.call(form.querySelectorAll('[name^="f-"]'), function (i) { return i.name; }).filter(function (v, i, a) { return a.indexOf(v) === i; });
+  function apply() {
+    var q = (form.q.value || '').toLocaleLowerCase('tr').trim(), et = form.emlak.value || page.dataset.ctxEt, kat = form.kat.value || page.dataset.ctxKat, alts = vals('alt'), ilce = form.ilce.value, mah = form.mah.value, odas = vals('oda'), yas = vals('yas'), tags = vals('tag');
+    if (page.dataset.ctxAlt) alts = alts.length ? alts : [page.dataset.ctxAlt];
+    var fmin = num('fiyatMin'), fmax = num('fiyatMax'), bmin = num('brutMin'), bmax = num('brutMax'), nmin = num('netMin'), nmax = num('netMax');
+    var sel = {}; secs.forEach(function (n) { var v = vals(n); if (v.length) sel[n] = v; });
+    var shown = 0;
+    cards.forEach(function (c) {
+      var d = c.dataset, ok = true;
+      if (q && d.q.indexOf(q) < 0) ok = false;
+      if (ok && et && d.et !== et) ok = false;
+      if (ok && kat && d.kat !== kat) ok = false;
+      if (ok && alts.length && alts.indexOf(d.alt) < 0) ok = false;
+      if (ok && ilce && d.ilce !== ilce) ok = false;
+      if (ok && mah && d.mah !== mah) ok = false;
+      if (ok && odas.length && odas.indexOf(d.oda) < 0) ok = false;
+      if (ok && (fmin !== null || fmax !== null)) { var tr = toTRY(+d.fiyat, d.para); if (tr === null || !+d.fiyat || (fmin !== null && tr < fmin) || (fmax !== null && tr > fmax)) ok = false; }
+      if (ok && ((bmin !== null && +d.brut < bmin) || (bmax !== null && (+d.brut > bmax || !+d.brut)))) ok = false;
+      if (ok && ((nmin !== null && +d.net < nmin) || (nmax !== null && (+d.net > nmax || !+d.net)))) ok = false;
+      if (ok && !yasOk(d.yas, yas)) ok = false;
+      if (ok) for (var n in sel) { var v = c.getAttribute('data-' + n); if (sel[n].indexOf(v) < 0) { ok = false; break; } }
+      if (ok && tags.length) { var t = (d.tags || '').split(' '); if (!tags.every(function (x) { return t.indexOf(x) > -1; })) ok = false; }
+      c.style.display = ok ? '' : 'none'; if (ok) shown++;
+    });
+    var srt = document.querySelector('[data-sort]'), so = srt ? srt.value : 'new';
+    cards.slice().sort(function (a, b) {
+      if (so === 'asc' || so === 'desc') { var x = toTRY(+a.dataset.fiyat, a.dataset.para) || 9e15, y = toTRY(+b.dataset.fiyat, b.dataset.para) || 9e15; return so === 'asc' ? x - y : y - x; }
+      if (so === 'm2') return (+a.dataset.net || 9e9) - (+b.dataset.net || 9e9);
+      return (b.dataset.tarih || '').localeCompare(a.dataset.tarih || '');
+    }).forEach(function (c) { grid.appendChild(c); });
+    if (cnt) cnt.textContent = shown + ' ' + lab;
+    if (none) none.hidden = !cards.length || shown > 0;
+  }
+  // mahalle listesini ilçeye göre daralt
+  function mahs() { var i = form.ilce.value; [].forEach.call(form.mah.options, function (o) { if (o.value) o.hidden = !!i && o.dataset.ilce !== i; }); if (form.mah.selectedOptions[0] && form.mah.selectedOptions[0].hidden) form.mah.value = ''; }
+  // emlak tipi / kategori seçimi: kategori sayfasına git
+  [].forEach.call(form.querySelectorAll('[data-nav]'), function (s) { s.addEventListener('change', function () { var o = s.selectedOptions[0], h = o && o.dataset.href; if (h && h.indexOf('?') < 0 && h !== location.pathname) location.href = h; else apply(); }); });
+  form.addEventListener('input', function (e) { if (e.target.name === 'ilce') mahs(); if (!e.target.hasAttribute('data-nav')) apply(); });
+  form.addEventListener('reset', function () { setTimeout(function () { mahs(); apply(); }, 0); });
+  var srt = document.querySelector('[data-sort]'); if (srt) srt.addEventListener('change', apply);
+  var panel = document.getElementById('fpanel');
+  document.querySelectorAll('[data-fopen]').forEach(function (b) { b.addEventListener('click', function () { panel.classList.add('open'); document.body.classList.add('noscroll'); }); });
+  document.querySelectorAll('[data-fclose],[data-fapply]').forEach(function (b) { b.addEventListener('click', function () { apply(); panel.classList.remove('open'); document.body.classList.remove('noscroll'); }); });
+  window.addEventListener('accrates', apply);
+  mahs(); apply();
 })();

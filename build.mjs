@@ -741,10 +741,10 @@ function pageHome(lang) {
   const show = feat.length ? feat : LISTINGS.slice(0, 6);
   const body = `${heroSlider(lang)}
 <section class="hsearchbar"><div class="wrap">${areaTabs(lang, 'link')}${searchBox(lang)}</div></section>
-${consultBar(lang)}
-${trustStrip(lang)}
 <section class="wrap sec"><div class="sechead"><h2>${t.featured}</h2><a href="${url(lang, 'list')}">${t.seeAll} →</a></div>${areaTabs(lang, 'filter')}${grid(show, lang)}</section>
 <section class="wrap sec"><div class="sechead"><h2>${t.projects}</h2><a href="${url(lang, 'projects')}">${t.projectsCta} →</a></div>${projectCards(lang)}</section>
+${consultBar(lang)}
+${trustStrip(lang)}
 ${brokerBlock(lang)}
 ${citizenshipBand(lang)}
 ${whyBlock(lang)}

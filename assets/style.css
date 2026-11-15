@@ -291,3 +291,4 @@ body.noscroll{overflow:hidden}
 .hsearchbar .hsearch{display:grid;grid-template-columns:repeat(4,1fr) auto;gap:10px;background:#fff;border:1px solid var(--line);padding:14px;box-shadow:0 14px 36px rgba(0,0,0,.08)}
 .hsearchbar .hsearch .btn{grid-column:auto}
 @media (max-width:900px){.hsearchbar .hsearch{grid-template-columns:1fr 1fr}.hsearchbar .hsearch .btn{grid-column:1/-1}.atabs{width:auto;overflow-x:auto;flex-wrap:nowrap}}
+.tmain{margin:8px 0 14px}.tmain img{width:100%;height:auto;border-radius:var(--radius);display:block}.tmain figcaption{font-size:13px;color:var(--mute);margin-top:6px;text-align:center}

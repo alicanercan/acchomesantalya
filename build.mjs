@@ -11,6 +11,7 @@ import { AREA_GUIDES } from './areas.mjs';
 import { EVENTS } from './events.mjs';
 import { BROKER } from './broker.mjs';
 import { ROADMAP, TRUST, FOUNDER } from './story.mjs';
+import { BLOG, BLOG_POSTS } from './blog.mjs';
 import { GUIDES, FAQ, GUIDE_SEG, GUIDE_TITLE, GUIDE_LEAD, GUIDE_UPDATED } from './guide.mjs';
 import { T_EXTRA, S, s, SEGS, LOCALE, RTL, extend, PACKS } from './i18n.mjs';
 import { STAFF_PHOTOS, PARTNERS, PHOTO_BASE, LANG_NAMES, PARTNER_ROLE, SWORN_ROLE } from './team.mjs';
@@ -484,15 +485,29 @@ function pageCorporate(key, lang) {
   write(path.join(url(lang, key), 'index.html'), layout({ lang, title: `${c.title} | ACC HOMES`, desc: c.desc, canonical: url(lang, key), alternates: alts(key), body, schema, ogImage: key === 'broker' && SITE.brokerPhoto ? SITE.brokerPhoto : '/img/acc-plaza-og.jpg' }));
 }
 const postFor = (p, lang) => p[lang] || p.en || p.tr;
+const ALLPOSTS = [...BLOG_POSTS, ...POSTS.map((p) => ({ ...p, cat: BLOG.catOf[p.slug] || 'rehber' }))]
+  .sort((x, y) => (y.live ? 1 : 0) - (x.live ? 1 : 0) || (y.updated || y.date).localeCompare(x.updated || x.date));
+const dmy = (d) => d.split('-').reverse().join('.');
+function postCard(p, lang, big) {
+  const c = postFor(p, lang); const cat = BLOG.cats[p.cat];
+  return `<a class="bcard${big ? ' big' : ''}" href="${url(lang, 'blog', p.slug)}" data-cat="${p.cat}"><div class="bcov bc-${p.cat}">${p.cover ? `<img src="${p.cover}" alt="${esc(c.title)}" loading="lazy">` : `<span>${p.icon || cat.icon}</span>`}${p.live ? `<em>● ${bT(BLOG.ui.live, lang)}</em>` : ''}</div><div class="bcb"><small>${cat.icon} ${esc(bT(cat.name, lang))} · ${dmy(p.updated || p.date)}</small><h3>${esc(c.title)}</h3><p>${esc(c.desc)}</p></div></a>`;
+}
 function pageBlog(lang) {
   const t = T[lang];
-  const body = `<section class="wrap sec narrow page"><h1>${t.blog}</h1><p class="sub">${t.blogLead}</p>
-<div class="posts">${POSTS.map((p) => { const c = postFor(p, lang); return `<article class="post"><time>${p.date}</time><h2><a href="${url(lang, 'blog', p.slug)}">${esc(c.title)}</a></h2><p>${esc(c.desc)}</p><a class="more" href="${url(lang, 'blog', p.slug)}">${t.readMore} →</a></article>`; }).join('')}</div></section>`;
-  write(path.join(url(lang, 'blog'), 'index.html'), layout({ lang, title: `${t.blog} | ACC HOMES`, desc: t.blogLead, canonical: url(lang, 'blog'), alternates: alts('blog'), body }));
-  for (const p of POSTS) {
-    const c = postFor(p, lang);
-    const pb = `<article class="wrap sec narrow page"><nav class="crumbs"><a href="${home(lang)}">${t.nav.home}</a> / <a href="${url(lang, 'blog')}">${t.blog}</a></nav><time>${p.date}</time><h1>${esc(c.title)}</h1><div class="prose">${fill(c.html, lang)}</div></article>`;
-    const schema = [{ '@context': 'https://schema.org', '@type': 'BlogPosting', headline: c.title, description: c.desc, datePublished: p.date, author: { '@type': 'Person', name: 'Ali Caner Can' }, publisher: { '@type': 'Organization', name: SITE.brand } }];
+  const used = Object.keys(BLOG.cats).filter((k) => ALLPOSTS.some((p) => p.cat === k));
+  const chips = `<div class="bchips" data-bfilter><button type="button" class="on" data-c="">${bT(BLOG.ui.all, lang)}</button>${used.map((k) => `<button type="button" data-c="${k}">${BLOG.cats[k].icon} ${esc(bT(BLOG.cats[k].name, lang))}</button>`).join('')}</div>`;
+  const [first, ...rest] = ALLPOSTS;
+  const js = `<script>(function(){var f=document.querySelector('[data-bfilter]');if(!f)return;f.addEventListener('click',function(e){var b=e.target.closest('button');if(!b)return;[].forEach.call(f.children,function(x){x.classList.toggle('on',x===b)});var c=b.dataset.c;document.querySelectorAll('.bgrid .bcard').forEach(function(a){a.hidden=c&&a.dataset.cat!==c;});});})();</script>`;
+  const body = `<section class="wrap sec page"><nav class="crumbs"><a href="${home(lang)}">${t.nav.home}</a> / <span>${t.blog}</span></nav><h1>${t.blog}</h1><p class="sub">${esc(bT(BLOG.lead, lang))}</p>${chips}<div class="bgrid">${postCard(first, lang, true)}${rest.map((p) => postCard(p, lang)).join('')}</div>${js}</section>`;
+  write(path.join(url(lang, 'blog'), 'index.html'), layout({ lang, title: `${t.blog} | ACC HOMES`, desc: bT(BLOG.lead, lang), canonical: url(lang, 'blog'), alternates: alts('blog'), body }));
+  for (const p of ALLPOSTS) {
+    const c = postFor(p, lang); const cat = BLOG.cats[p.cat];
+    const meta = `<p class="pmeta">${cat.icon} ${esc(bT(cat.name, lang))} · ${dmy(p.date)}${p.updated ? ` · ${bT(BLOG.ui.updated, lang)}: ${dmy(p.updated)}` : ''}${p.live ? ` · <b class="live">● ${bT(BLOG.ui.live, lang)}</b>` : ''}</p>`;
+    const author = `<div class="pauthor">${SITE.brokerPhoto ? `<img src="${SITE.brokerPhoto}" alt="Ali Caner Can" width="56" height="56" loading="lazy">` : ''}<div><b><a href="${url(lang, 'broker')}">Ali Caner Can</a></b><small>Broker & Owner · ACC HOMES International Real Estate</small></div></div>`;
+    const rel = ALLPOSTS.filter((x) => x !== p && x.cat === p.cat).concat(ALLPOSTS.filter((x) => x !== p && x.cat !== p.cat)).slice(0, 3);
+    const pb = `<article class="wrap sec narrow page"><nav class="crumbs"><a href="${home(lang)}">${t.nav.home}</a> / <a href="${url(lang, 'blog')}">${t.blog}</a> / <span>${esc(bT(cat.name, lang))}</span></nav><h1>${esc(c.title)}</h1>${meta}${author}<div class="prose">${fill(c.html, lang)}</div><div class="ctas"><a class="btn" href="${waLink(t.waGeneral)}" target="_blank" rel="noopener">${s('quickEnq', lang)}</a><a class="btn ghost" href="${url(lang, 'blog')}">${t.blog} →</a></div></article>
+<section class="wrap sec"><div class="bgrid">${rel.map((x) => postCard(x, lang)).join('')}</div></section>`;
+    const schema = [{ '@context': 'https://schema.org', '@type': 'BlogPosting', headline: c.title, description: c.desc, datePublished: p.date, dateModified: p.updated || p.date, author: { '@type': 'Person', name: 'Ali Caner Can', url: SITE.domain + url(lang, 'broker') }, publisher: { '@type': 'Organization', name: SITE.brand, logo: { '@type': 'ImageObject', url: `${SITE.domain}/img/logo/acc-homes-logo.png` } }, mainEntityOfPage: SITE.domain + url(lang, 'blog', p.slug) }];
     write(path.join(url(lang, 'blog', p.slug), 'index.html'), layout({ lang, title: `${c.title} | ACC HOMES`, desc: c.desc, canonical: url(lang, 'blog', p.slug), alternates: alts('blog', () => p.slug), body: pb, schema }));
   }
 }
@@ -630,7 +645,7 @@ function searchBox(lang) {
 }
 function blogStrip(lang) {
   const t = T[lang];
-  return `<section class="wrap sec"><div class="sechead"><h2>${t.blog}</h2><a href="${url(lang, 'blog')}">${t.readMore} →</a></div><div class="bstrip">${POSTS.slice(0, 3).map((p) => { const c = postFor(p, lang); return `<a class="post" href="${url(lang, 'blog', p.slug)}"><time>${p.date}</time><h3>${esc(c.title)}</h3><p>${esc(c.desc)}</p></a>`; }).join('')}<a class="post gpost" href="${url(lang, 'buyersguide')}"><span>🧭</span><h3>${GUIDE_TITLE[lang]}</h3><p>${GUIDE_LEAD[lang]}</p></a></div></section>`;
+  return `<section class="wrap sec"><div class="sechead"><div><h2>${t.blog}</h2><p class="sub sm">${esc(bT(BLOG.lead, lang))}</p></div><a href="${url(lang, 'blog')}">${t.readMore} →</a></div><div class="bgrid three">${ALLPOSTS.slice(0, 3).map((p) => postCard(p, lang)).join('')}</div></section>`;
 }
 function mapBlock(lang) {
   const t = T[lang];
@@ -917,11 +932,13 @@ for (const lang of LANGS) {
   if (lang === 'tr' || lang === 'en') { for (const g of GUIDES) { pageGuideItem(g, lang); urls.push(gUrl(lang, g)); } for (const a of AREA_GUIDES) { pageAreaItem(a, lang); urls.push(aUrl(lang, a)); } }
   pageAreaHub(lang); urls.push(url(lang, 'areas'));
   for (const k of Object.keys(PAGES)) { pageCorporate(k, lang); urls.push(url(lang, k)); }
-  urls.push(home(lang), url(lang, 'list'), url(lang, 'guide'), url(lang, 'contact'), url(lang, 'blog'), ...POSTS.map((p) => url(lang, 'blog', p.slug)));
+  urls.push(home(lang), url(lang, 'list'), url(lang, 'guide'), url(lang, 'contact'), url(lang, 'blog'), ...ALLPOSTS.map((p) => url(lang, 'blog', p.slug)));
   for (const l of LISTINGS) { pageListing(l, lang); urls.push(url(lang, 'listing', slugOf(l))); }
 }
 for (const p of PROJECTS) { pageProject(p); urls.push(`/projeler/${p.slug}/`); }
-write('_redirects', LANGS.flatMap((l) => { const to = evUrl(l, EVENTS.events.find((e) => e.id === 'acc-day-2025')); const from = `${BASE[l]}/${OLD_SOCIAL[l] || OLD_SOCIAL.en}`; return [`${from} ${to} 301`, `${from}/* ${to} 301`]; }).join('\n') + '\n');
+const OLD_BLOG_TO = { kira: url('tr', 'blog', 'kira-artis-orani'), tuik: url('tr', 'blog', 'antalya-konut-satis-istatistikleri'), about: url('tr', 'about'), accday: url('tr', 'events', 'acc-day-2025'), blog: url('tr', 'blog') };
+const oldBlog = fs.readFileSync(path.join(ROOT, 'data/old-blog-urls.txt'), 'utf8').trim().split('\n').map((l) => l.trim().split(/\s+/)).filter(([u, k]) => OLD_BLOG_TO[k] || k.startsWith('/')).map(([u, k]) => `${u.replace(/\/$/, '')} ${OLD_BLOG_TO[k] || k} 301\n${u} ${OLD_BLOG_TO[k] || k} 301`);
+write('_redirects', oldBlog.join('\n') + '\n' + LANGS.flatMap((l) => { const to = evUrl(l, EVENTS.events.find((e) => e.id === 'acc-day-2025')); const from = `${BASE[l]}/${OLD_SOCIAL[l] || OLD_SOCIAL.en}`; return [`${from} ${to} 301`, `${from}/* ${to} 301`]; }).join('\n') + '\n');
 write('sitemap.xml', `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">${urls.map((u) => `<url><loc>${SITE.domain}${u}</loc></url>`).join('')}</urlset>`);
 write('robots.txt', DEMO ? 'User-agent: *\nDisallow: /\n' : `User-agent: *\nAllow: /\nSitemap: ${SITE.domain}/sitemap.xml\n`);
 write('404.html', layout({ lang: 'tr', title: 'Sayfa bulunamadı | ACC HOMES', desc: '', canonical: '/404', body: `<section class="wrap sec narrow"><h1>Sayfa bulunamadı</h1><p><a class="btn" href="/">Ana sayfa</a></p></section>` }));

@@ -149,3 +149,133 @@ export const BLOG_POSTS = [
     en: { title: `Antalya Housing Sales Statistics (${monthName(lastSale[0], 'en')})`, desc: `TurkStat housing sales for Antalya and Türkiye, sales to foreigners and an investor’s reading. Updated to ${monthName(lastSale[0], 'en')}.`, html: salesHtml('en') },
   },
 ];
+
+// ---- Yazılar ----
+BLOG_POSTS.push(
+  {
+    slug: 'gayrimenkul-ile-turk-vatandasligi-ve-ikamet-2026', cat: 'vatandaslik', date: '2026-11-15', cover: '/img/vatandaslik-antalya-600.webp',
+    tr: {
+      title: 'Gayrimenkul ile Türk Vatandaşlığı ve İkamet: 2026 Sonu Güncel Durum',
+      desc: '400.000 USD vatandaşlık eşiği, 200.000 USD ikamet şartı, Ağustos 2026’daki 6.134 iptal kararı ve değerleme denetimleri: Antalya’da yatırım yapacak yabancılar için güncel tablo.',
+      html: `
+<p>Yatırım yoluyla Türk vatandaşlığı 2026’da da Antalya’ya gelen yabancı yatırımcıların en çok sorduğu konu. Bu yıl tutar değişmedi; değişen, sürecin ne kadar sıkı denetlendiği. Aşağıda yatırımcının bilmesi gereken güncel tabloyu özetliyoruz.</p>
+<h2>Kısaca</h2>
+<ul class="ticks">
+<li><b>Vatandaşlık eşiği:</b> En az 400.000 USD değerinde gayrimenkul alımı ve tapuya 3 yıl satmama şerhi.</li>
+<li><b>İkamet:</b> Gayrimenkule dayalı kısa dönem ikamet izni için 2026 itibarıyla aranan değer 200.000 USD.</li>
+<li><b>Denetim:</b> İçişleri Bakanlığı, Ağustos 2026’da sahte değerleme ve muvazaalı satışlar nedeniyle 6.134 kişinin vatandaşlık kararını iptal ettiğini veya geri aldığını açıkladı.</li>
+</ul>
+<h2>Vatandaşlık şartları değişti mi?</h2>
+<p>Hayır. Yatırım yoluyla vatandaşlıkta gayrimenkul eşiği 400.000 USD olarak devam ediyor; tutar 2022’de 250.000 USD’den bu seviyeye çıkmıştı. Değişen, değerin nasıl doğrulandığı: değerleme raporları, ödemelerin banka kayıtları ve satış bedelinin gerçek piyasa değeriyle uyumu artık çok daha dikkatli inceleniyor.</p>
+<p>400.000 USD’lik bir alım tek başına vatandaşlığı garanti etmez. Mülkün değeri, ödeme yöntemi, değerleme raporu, tapudaki şerh ve belgelerin tutarlılığı birlikte değerlendirilir. Başvurunun güvenlik incelemesi ve nihai onayı ise ayrı kurumlarca yapılır.</p>
+<h2>Ağustos 2026: 6.134 iptal ne anlatıyor?</h2>
+<p>İçişleri Bakanlığı, 16 ilde düzenlenen ve 72 şüphelinin yakalandığı operasyonun ardından yaptığı açıklamada, sahte ekspertiz raporları ve usulsüz işlemlerle elde edilen vatandaşlıkları iptal ettiğini duyurdu. Toplamda 1.413 yatırımcı ve aileleri olmak üzere 6.134 kişinin vatandaşlık kararı 5901 sayılı Türk Vatandaşlığı Kanunu kapsamında iptal edildi veya geri alındı.</p>
+<p>Sonuç net: Değeri kâğıt üzerinde şişirilmiş mülkler, “parasının bir kısmı iade edilir” pazarlıkları ya da “200.000 dolara vatandaşlık” vaatleri yatırımcıyı vatandaşlığını, parasını ve mülkünü kaybetme riskine sokuyor.</p>
+<h2>Gayrimenkul ile ikamet izni</h2>
+<p>Vatandaşlık şartını karşılamayan ama Türkiye’de yaşamak isteyen yabancılar için gayrimenkule dayalı kısa dönem ikamet izni seçeneği var. 2026 itibarıyla mülkün değeri en az 200.000 USD olmalı ve yabancıların ikamet kaydına açık bir mahallede bulunmalı. İzin genellikle 1 veya 2 yıllık verilir ve mülk sahipliği devam ettikçe yenilenebilir. İkamet izni vatandaşlık vermez ve çalışma izni yerine geçmez.</p>
+<h2>Antalya’da güvenli bir vatandaşlık alımı için kontrol listesi</h2>
+<ul class="ticks">
+<li>Mülkün değerini bölgedeki gerçekleşmiş satışlarla karşılaştırın; emsalin çok üzerinde fiyat bir uyarı işaretidir.</li>
+<li>Satıcıdan bağımsız bir avukatla çalışın.</li>
+<li>Ödemeleri yalnızca dosyada adı geçen banka kanallarıyla, izlenebilir şekilde yapın.</li>
+<li>Nakit iade, gizli indirim veya yan sözleşme tekliflerini reddedin.</li>
+<li>Değerleme raporu, dekont ve sözleşmelerin tamamını saklayın.</li>
+<li>Mülkün yabancıya satışa ve ikamet kaydına uygun bir bölgede olduğunu önceden teyit edin.</li>
+</ul>
+<h2>ACC HOMES nasıl yardımcı olur?</h2>
+<p>Vatandaşlığa uygun portföyü değerleme gerçekleriyle birlikte sunuyor, emsal analizini paylaşıyor ve süreci tapu, banka ve avukatınızla koordineli yürütüyoruz. Antalya’da vatandaşlığa uygun portföyleri <a href="{{URL:list}}?etiket=vatandaslik">ilanlarımızda</a> görebilir, adım adım süreç için <a href="{{URL:buyersguide}}">alıcı rehberimize</a> göz atabilirsiniz.</p>
+<p class="srcs"><b>Kaynaklar:</b> T.C. İçişleri Bakanlığı açıklaması (4 Ağustos 2026) ve buna dayanan haberler; 5901 sayılı Türk Vatandaşlığı Kanunu ve Uygulama Yönetmeliği; Göç İdaresi ikamet uygulamaları. Bu yazı genel bilgilendirme amaçlıdır, hukuki danışmanlık yerine geçmez.</p>`,
+    },
+    en: {
+      title: 'Turkish Citizenship and Residency Through Property: Where Things Stand in Late 2026',
+      desc: 'The USD 400,000 citizenship threshold, the USD 200,000 residency rule, August 2026’s 6,134 revocations and tighter valuation checks: what foreign investors in Antalya need to know.',
+      html: `
+<p>Citizenship by investment remains the question foreign investors in Antalya ask most. The amount has not changed in 2026; what has changed is how closely the process is checked.</p>
+<h2>In brief</h2>
+<ul class="ticks">
+<li><b>Citizenship threshold:</b> property worth at least USD 400,000, with a three-year no-sale annotation on the title deed.</li>
+<li><b>Residency:</b> property-based short-term residence now requires a property value of USD 200,000.</li>
+<li><b>Enforcement:</b> in August 2026 the Ministry of Interior announced that citizenship decisions for 6,134 people had been cancelled or withdrawn over fake valuations and sham sales.</li>
+</ul>
+<h2>Have the citizenship rules changed?</h2>
+<p>No. The real estate threshold remains USD 400,000; it rose from USD 250,000 in 2022. What has changed is verification: valuation reports, bank records of payments and whether the price matches real market value are now examined much more closely.</p>
+<p>A USD 400,000 purchase does not by itself guarantee citizenship. The property’s value, payment method, valuation report, title deed annotation and consistency of documents are assessed together, and security checks and final approval are handled by separate authorities.</p>
+<h2>August 2026: what the 6,134 revocations tell us</h2>
+<p>Following an operation across 16 provinces in which 72 suspects were detained, the Ministry of Interior said citizenship obtained through fake appraisal reports and irregular transactions had been revoked. In total, decisions for 6,134 people, 1,413 investors and their families, were cancelled or withdrawn under Turkish Citizenship Law No. 5901.</p>
+<p>The lesson is clear: inflated paper valuations, “part of your money will be refunded” deals and promises of “citizenship for USD 200,000” put investors at risk of losing their citizenship, their money and their property.</p>
+<h2>Residency through property</h2>
+<p>For foreigners who want to live in Türkiye without meeting the citizenship threshold, there is a property-based short-term residence permit. As of 2026 the property must be worth at least USD 200,000 and be in a neighbourhood open to residence registration for foreigners. Permits are usually issued for one or two years and can be renewed while you own the property. Residency does not lead automatically to citizenship and is not a work permit.</p>
+<h2>Checklist for a safe citizenship purchase in Antalya</h2>
+<ul class="ticks">
+<li>Compare the price with completed sales nearby; a price far above comparables is a warning sign.</li>
+<li>Use a lawyer independent of the seller.</li>
+<li>Pay only through traceable bank channels named in the file.</li>
+<li>Refuse cash refunds, hidden discounts or side agreements.</li>
+<li>Keep every valuation report, receipt and contract.</li>
+<li>Confirm in advance that the property is in an area open to foreign buyers and residence registration.</li>
+</ul>
+<h2>How ACC HOMES helps</h2>
+<p>We present citizenship-eligible properties with honest valuations and comparables, and coordinate the process with the land registry, the bank and your lawyer. See <a href="{{URL:list}}?etiket=vatandaslik">eligible listings</a> or our step-by-step <a href="{{URL:buyersguide}}">buyer’s guide</a>.</p>
+<p class="srcs"><b>Sources:</b> Ministry of Interior statement (4 August 2026) and news coverage of it; Turkish Citizenship Law No. 5901 and its implementing regulation; immigration authority residence practice. This article is general information, not legal advice.</p>`,
+    },
+  },
+  {
+    slug: 'muteahhitler-icin-proje-satis-ve-pazarlama-yonetimi', cat: 'muteahhit', date: '2026-11-15', cover: '/img/ekip/ekip-maket-2026.webp',
+    tr: {
+      title: 'Müteahhitler İçin Proje Satış ve Pazarlama Yönetimi: Neden Profesyonel Bir Satış Ofisi?',
+      desc: 'Bir projenin başarısı inşaat kalitesi kadar satış hızına bağlı. Fiyatlama, satış ofisi, 360° pazarlama ve ekip yönetimini tek elden yürüten yapı müteahhide ne kazandırır?',
+      html: `
+<p>İyi bir proje kendini satmaz. Arsa ve inşaat maliyetleri yükseldikçe müteahhit için en kritik değişken satış hızı ve nakit akışı oluyor. Projeyi doğru fiyatla, doğru zamanda ve doğru alıcıya ulaştırmak ayrı bir uzmanlık ister.</p>
+<h2>Müteahhitlerin en sık yaşadığı sorunlar</h2>
+<ul class="ticks">
+<li>Lansman fiyatının piyasa verisi yerine tahmine göre belirlenmesi.</li>
+<li>Birden fazla emlak ofisine dağınık yetki verilmesi; fiyat ve bilgi tutarsızlığı.</li>
+<li>Talep toplayan ama takip etmeyen satış süreçleri; kaybolan müşteri adayları.</li>
+<li>Yabancı alıcıya ulaşamayan, tek dilde kalan pazarlama.</li>
+<li>Satış ofisinin müteahhidin kendi ekibine yük olması.</li>
+</ul>
+<h2>ACC HOMES’un proje satış modeli</h2>
+<div class="cards3">
+<div><h3>Veriye dayalı fiyatlama</h3><p>Bölgedeki emsal satışlar, rakip projeler ve talep verisiyle etap ve daire bazında fiyat listesi; lansman ve kampanya planı.</p></div>
+<div><h3>Satış ofisi yönetimi</h3><p>Proje sahasında veya ACC Plaza’da satış ofisi kurulumu, proje koordinatörü, gösterim ve sözleşme süreçlerinin yönetimi.</p></div>
+<div><h3>360° pazarlama</h3><p>Profesyonel fotoğraf, drone ve video; Meta ve Google reklamları; ilan portalları; çok dilli tanıtım ve yurt dışı yatırımcı ağı.</p></div>
+<div><h3>Talep takibi ve CRM</h3><p>Her müşteri adayının kaydı, geri dönüş süreleri ve dönüşüm oranları; müteahhide düzenli satış raporu.</p></div>
+<div><h3>Geniş satış gücü</h3><p>ACC Plaza’daki yaklaşık 50 iş ortağı ve yatırımcı veritabanı ile projeye ilk günden ulaşan alıcı kitlesi.</p></div>
+<div><h3>Etkinlik ve lansman</h3><p>Open House günleri, yatırımcı buluşmaları ve iş ortağı sunumlarıyla projeyi doğru kitleye yerinde göstermek.</p></div>
+</div>
+<h2>Sahadan örnekler</h2>
+<p>ACC HOMES; Capital İnşaat’ın Altıntaş’taki 216 daireli projesinde satış, pazarlama ve ekip yönetimini üstlendi. Döşemealtı Altınkale’deki <a href="/projeler/antalle-concept-houses/">Antalle Concept Houses</a> ve Altıntaş’taki Prime Lara projelerinin yetkili satış ofisidir. Aralık 2025’te Antalle için düzenlediğimiz <a href="{{URL:events}}antalle-open-house-2025/">Open House</a>, bu modelin sahadaki karşılığıdır.</p>
+<h2>Kimler için uygun?</h2>
+<p>Antalya’da konut, villa veya karma proje geliştiren, satışını hızlandırmak ya da yurt dışı alıcıya açılmak isteyen yapı firmaları ve arsa sahipleri. Kat karşılığı projelerde arsa sahibi ile müteahhidi doğru şartlarla buluşturuyoruz.</p>
+<p>Projenizi birlikte değerlendirmek için Broker <a href="{{URL:broker}}">Ali Caner Can</a> ile görüşme planlayın: <a href="{{WA}}" target="_blank" rel="noopener">WhatsApp’tan yazın →</a></p>`,
+    },
+    en: {
+      title: 'Project Sales and Marketing for Developers: Why a Professional Sales Office Pays Off',
+      desc: 'A project’s success depends on sales velocity as much as build quality. What a single partner for pricing, sales office, 360° marketing and team management brings a developer.',
+      html: `
+<p>A good project does not sell itself. As land and construction costs rise, sales velocity and cash flow become a developer’s most critical variables. Getting the right price, timing and buyer is a discipline of its own.</p>
+<h2>Common problems developers face</h2>
+<ul class="ticks">
+<li>Launch prices set by guesswork rather than market data.</li>
+<li>Mandates scattered across several agencies, with inconsistent prices and information.</li>
+<li>Enquiries collected but not followed up; lost leads.</li>
+<li>Single-language marketing that never reaches foreign buyers.</li>
+<li>A sales office that burdens the developer’s own team.</li>
+</ul>
+<h2>The ACC HOMES project sales model</h2>
+<div class="cards3">
+<div><h3>Data-driven pricing</h3><p>Phase- and unit-level price lists built on local comparables, competing projects and demand data, with a launch and campaign plan.</p></div>
+<div><h3>Sales office management</h3><p>A sales office on site or at ACC Plaza, a project coordinator, and management of viewings and contracts.</p></div>
+<div><h3>360° marketing</h3><p>Professional photo, drone and video; Meta and Google ads; listing portals; multilingual promotion and an international investor network.</p></div>
+<div><h3>Lead tracking and CRM</h3><p>Every lead logged, response times and conversion tracked, with regular sales reporting to the developer.</p></div>
+<div><h3>Sales reach</h3><p>Around 50 partners at ACC Plaza and an investor database that reach buyers from day one.</p></div>
+<div><h3>Events and launches</h3><p>Open House days, investor meetings and partner presentations that show the project to the right audience on site.</p></div>
+</div>
+<h2>Examples</h2>
+<p>ACC HOMES handled sales, marketing and team management for Capital İnşaat’s 216-apartment project in Altıntaş, and is the authorised sales office for <a href="/projeler/antalle-concept-houses/">Antalle Concept Houses</a> in Döşemealtı and Prime Lara in Altıntaş. The Antalle <a href="{{URL:events}}antalle-open-house-2025/">Open House</a> in December 2025 is this model in action.</p>
+<h2>Who it is for</h2>
+<p>Developers and landowners in Antalya building homes, villas or mixed-use projects who want faster sales or access to foreign buyers. On land-for-flats deals we bring landowners and developers together on fair terms.</p>
+<p>To discuss your project, book a meeting with broker <a href="{{URL:broker}}">Ali Caner Can</a>: <a href="{{WA}}" target="_blank" rel="noopener">message us on WhatsApp →</a></p>`,
+    },
+  },
+);

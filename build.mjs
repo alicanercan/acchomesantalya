@@ -292,6 +292,46 @@ ${col(s('usefulLinks', lang), [[nv('services'), url(lang, 'services')], [nv('sel
 }
 
 // ---------- sayfa iskeleti ----------
+function LLMS() {
+  const D = SITE.domain; const a = (u) => D + u;
+  return `# ACC HOMES International Real Estate
+
+> Antalya merkezli kurumsal gayrimenkul ofisi. 2024'te kuruldu; Broker & Owner Ali Caner Can. Genel merkez ACC Plaza (Yeşilbahçe, Muratpaşa, Antalya), yaklaşık 50 iş ortağı. Yerli ve yabancı alıcılara satılık/kiralık konut, villa, ticari gayrimenkul ve yeni projelerde danışmanlık; müteahhitlere proje satış ve pazarlama yönetimi. Hizmet dilleri Türkçe ve İngilizce.
+
+> Antalya-based real estate agency founded in 2024 by broker Ali Caner Can, headquartered at ACC Plaza (Yeşilbahçe, Muratpaşa, Antalya) with around 50 partner consultants. Helps local and international buyers buy, sell and rent apartments, villas and commercial property in Antalya, including citizenship- and residency-eligible homes, and runs project sales for developers.
+
+## Temel bilgiler / Key facts
+- Ad / Name: ACC HOMES International Real Estate
+- Adres / Address: ${SITE.address.street}, ${SITE.address.district}, ${SITE.address.city}, Türkiye
+- Telefon / WhatsApp: ${SITE.phone}
+- E-posta / Email: ${SITE.email}
+- Google puanı / Google rating: ${String(SITE.google.rating).replace('.', ',')} / 5 (${SITE.google.reviews}+ yorum, ${SITE.google.asOf})
+- Lisanslar / Licences: Taşınmaz Ticareti Yetki Belgesi ${SITE.licence.join(', ')}
+- Hizmet bölgeleri / Areas: Muratpaşa (Lara, Fener, Şirinyalı), Konyaaltı, Aksu (Altıntaş, Kundu), Döşemealtı, Kepez, Serik (Belek, Kadriye), Kemer
+- Yetkili satış ofisi olduğu projeler / Authorised sales office: Prime Lara (Altıntaş), Antalle Concept Houses (Döşemealtı)
+
+## Kurumsal / Company
+- [Hakkımızda](${a(url('tr', 'about'))}) · [About](${a(url('en', 'about'))})
+- [Ali Caner Can, Broker & Kurucu](${a(url('tr', 'broker'))}) · [Ali Caner Can, Broker & Founder](${a(url('en', 'broker'))})
+- [Hizmetlerimiz](${a(url('tr', 'services'))}) · [Services](${a(url('en', 'services'))})
+- [Müşteri yorumları](${a(url('tr', 'reviews'))}) · [Lisanslar](${a(url('tr', 'licences'))}) · [İletişim](${a(url('tr', 'contact'))})
+
+## Alıcı rehberi / Buyer's guide
+${GUIDES.map((g) => `- [${g.tr.title}](${a(gUrl('tr', g))}) · [${g.enc.title}](${a(gUrl('en', g))})`).join('\n')}
+
+## Bölge ve mahalle rehberleri / Area guides
+${AREA_GUIDES.map((x) => `- [${x.tr.title}](${a(aUrl('tr', x))}) · [${x.en.title}](${a(aUrl('en', x))})`).join('\n')}
+${MAHALLELER.map((m) => `- [${m.tr.title}](${a(mUrl('tr', m))}) · [${m.en.title}](${a(mUrl('en', m))})`).join('\n')}
+- [Altıntaş Rehberi](${a(url('tr', 'guide'))}) · [Altıntaş Guide](${a(url('en', 'guide'))})
+
+## Veri ve analiz / Data and insights
+${ALLPOSTS.map((p) => `- [${postFor(p, 'tr').title}](${a(url('tr', 'blog', p.slug))})`).join('\n')}
+
+## İlanlar / Listings
+- [Tüm ilanlar](${a(url('tr', 'list'))}) · [All listings](${a(url('en', 'list'))})
+- [Projeler](${a(url('tr', 'projects'))}) · [Projects](${a(url('en', 'projects'))})
+`;
+}
 function crumbSchema(body, title, canonical) {
   const m = body.match(/<nav class="crumbs[^"]*">([\s\S]*?)<\/nav>/); if (!m) return [];
   const items = [...m[1].matchAll(/<a href="([^"]+)">([\s\S]*?)<\/a>/g)].map(([, u, n]) => [n.replace(/<[^>]+>/g, '').trim(), u]);
@@ -307,7 +347,7 @@ function layout({ lang, title, desc, canonical, alternates, body, schema = [], o
   const langSwitch = alternates ? LANGS.map((l) => `<a href="${alternates[l] || (alternates.tr && alternates.tr.startsWith('/alici-rehberi') ? url(l, 'buyersguide') : home(l))}"${l === lang ? ' aria-current="true"' : ''}>${l.toUpperCase()}</a>`).join('') : '';
   return (RTL.has(lang) ? (h) => h.replaceAll('→', '←') : (h) => h)(`<!doctype html><html lang="${t.htmlLang}"${RTL.has(lang) ? ' dir="rtl"' : ''}><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>${esc(title)}</title>${noindex ? '<meta name="robots" content="noindex">' : ''}<meta name="description" content="${esc(desc)}"><link rel="canonical" href="${SITE.domain}${canonical}">${alt}
-<meta property="og:type" content="website"><meta property="og:title" content="${esc(title)}"><meta property="og:description" content="${esc(desc)}"><meta property="og:url" content="${SITE.domain}${canonical}"><meta property="og:locale" content="${t.locale}">${ogImage ? `<meta property="og:image" content="${SITE.domain}${ogImage}">` : ''}
+<meta property="og:type" content="website"><meta property="og:title" content="${esc(title)}"><meta property="og:description" content="${esc(desc)}"><meta property="og:url" content="${SITE.domain}${canonical}"><meta property="og:locale" content="${t.locale}"><meta property="og:site_name" content="ACC HOMES International Real Estate"><meta property="og:image" content="${SITE.domain}${ogImage || '/img/acc-plaza-og.jpg'}">${ogImage ? '' : '<meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">'}<meta property="og:image:alt" content="${esc(title)}"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="${esc(title)}"><meta name="twitter:description" content="${esc(desc)}"><meta name="twitter:image" content="${SITE.domain}${ogImage || '/img/acc-plaza-og.jpg'}">
 <meta name="theme-color" content="#E02A3C"><link rel="icon" href="/favicon.svg" type="image/svg+xml"><link rel="apple-touch-icon" href="/apple-touch-icon.png">${FONTS_OK ? `<link rel="preload" href="/assets/fonts.css" as="style"><link rel="stylesheet" href="/assets/fonts.css">` : ''}<link rel="stylesheet" href="/assets/style.css?v=${VER}">
 ${[agentSchema, ...(canonical === home(lang) ? [websiteSchema] : []), ...(schema.some((x) => x && x['@type'] === 'BreadcrumbList') ? [] : crumbSchema(body, title, canonical)), ...schema].filter(Boolean).map((s) => `<script type="application/ld+json">${JSON.stringify(s)}</script>`).join('')}
 </head><body>
@@ -1092,6 +1132,7 @@ const NOINDEX_PATHS = (u) => (!LISTINGS.length && LANGS.some((l) => u === url(l,
 urls.push(...LIST_URLS);
 const SITEMAP_URLS = [...new Set(urls)].filter((u) => !FALLBACK.has(u) && !NOINDEX_PATHS(u));
 write('sitemap.xml', `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">${SITEMAP_URLS.map((u) => `<url><loc>${SITE.domain}${u}</loc></url>`).join('')}</urlset>`);
-write('robots.txt', DEMO ? 'User-agent: *\nDisallow: /\n' : `User-agent: *\nAllow: /\nSitemap: ${SITE.domain}/sitemap.xml\n`);
+write('robots.txt', DEMO ? 'User-agent: *\nDisallow: /\n' : `User-agent: *\nAllow: /\nDisallow: /favorilerim/\n\n# Yapay zekâ arama ve asistan botları: açıkça izinli\n${['GPTBot', 'OAI-SearchBot', 'ChatGPT-User', 'ClaudeBot', 'Claude-SearchBot', 'Claude-User', 'PerplexityBot', 'Perplexity-User', 'Google-Extended', 'Applebot-Extended', 'Bingbot', 'YandexBot'].map((b) => `User-agent: ${b}\nAllow: /\n`).join('\n')}\nSitemap: ${SITE.domain}/sitemap.xml\n`);
+write('llms.txt', LLMS());
 write('404.html', layout({ lang: 'tr', title: 'Sayfa bulunamadı | ACC HOMES', desc: '', canonical: '/404', body: `<section class="wrap sec narrow"><h1>Sayfa bulunamadı</h1><p><a class="btn" href="/">Ana sayfa</a></p></section>` }));
 console.log(`OK — ${LISTINGS.length} ilan, ${urls.length} sayfa, sitemap ${SITEMAP_URLS.length}, çevrilmemiş (noindex) ${FALLBACK.size}${DEMO ? ' (önizleme verisi)' : ''}`);

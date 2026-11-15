@@ -216,7 +216,7 @@ const agentSchema = {
   areaServed: [...AREAS_SERVED.map((n) => ({ '@type': 'AdministrativeArea', name: `${n}, Antalya` })), { '@type': 'City', name: 'Antalya' }],
   founder: { '@type': 'Person', name: 'Ali Caner Can' },
   hasMap: SITE.google.mapsUrl,
-  sameAs: [SITE.instagram.url, SITE.google.mapsUrl],
+  sameAs: [SITE.instagram.url, SITE.google.mapsUrl, SITE.social.facebook, SITE.social.facebook2, SITE.social.linkedin, 'https://www.linkedin.com/in/alicanercantherealtor/'],
 };
 const websiteSchema = { '@context': 'https://schema.org', '@type': 'WebSite', '@id': `${SITE.domain}/#website`, url: `${SITE.domain}/`, name: SITE.shortBrand, publisher: { '@id': `${SITE.domain}/#org` }, inLanguage: ['tr', 'en'] };
 
@@ -283,7 +283,7 @@ ${col(s('usefulLinks', lang), [[nv('services'), url(lang, 'services')], [nv('sel
 <div class="fbrand"><img src="/img/logo/acc-siyah.svg" alt="ACC HOMES International Real Estate" width="171" height="50" loading="lazy"><p class="slogan">${esc(SITE.slogan[lang])}</p><p>${esc(t.footerAbout)}</p></div>
 <div class="fcontact"><p><b>${t.office}</b><br>${esc(SITE.address.street)}<br>${esc(SITE.address.district)} / ${esc(SITE.address.city)}</p><p><a href="tel:${SITE.phoneRaw}"><b dir="ltr">${SITE.phone}</b></a><br><a href="mailto:${SITE.email}">${SITE.email}</a></p></div>
 <div class="fcenter"><div class="fpills"><a href="${url(lang, 'join')}">🤝 ${s('partnerPill', lang)}</a><a href="${url(lang, 'viewing')}">📱 ${nv('viewing')}</a></div>
-<div class="social"><a href="${SITE.instagram.url}" target="_blank" rel="noopener" aria-label="Instagram">${ICON_IG}</a><a href="${waLink(t.waGeneral)}" target="_blank" rel="noopener" aria-label="WhatsApp">${ICON_WA}</a><a href="${SITE.google.mapsUrl}" target="_blank" rel="noopener" aria-label="Google">${ICON_G}</a></div>
+<div class="social"><a href="${SITE.instagram.url}" target="_blank" rel="noopener" aria-label="Instagram">${ICON_IG}</a><a href="${SITE.social.facebook}" target="_blank" rel="noopener" aria-label="Facebook"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path fill="currentColor" d="M13.5 22v-8h2.7l.4-3.2h-3.1V8.8c0-.9.3-1.5 1.6-1.5h1.7V4.4c-.3 0-1.3-.1-2.4-.1-2.4 0-4 1.5-4 4.1v2.4H7.6V14h2.8v8h3.1z"/></svg></a><a href="${SITE.social.linkedin}" target="_blank" rel="noopener" aria-label="LinkedIn"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path fill="currentColor" d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9.75h4V21H3zM9.5 9.75h3.8v1.6h.05c.53-1 1.83-2.05 3.77-2.05 4.03 0 4.78 2.65 4.78 6.1V21h-4v-5c0-1.2 0-2.75-1.67-2.75-1.68 0-1.94 1.3-1.94 2.65V21h-4z"/></svg></a><a href="${waLink(t.waGeneral)}" target="_blank" rel="noopener" aria-label="WhatsApp">${ICON_WA}</a><a href="${SITE.google.mapsUrl}" target="_blank" rel="noopener" aria-label="Google">${ICON_G}</a></div>
 <a class="frating" href="${SITE.google.mapsUrl}" target="_blank" rel="noopener">${ICON_G}<b>${fmtRating(lang)}</b>${stars}<span>${t.gReviews(SITE.google.reviews)}</span></a></div>
 </div>
 <div class="wrap flangs">${LANGS.map((l) => `<a href="${home(l)}" lang="${l}"${l === lang ? ' aria-current="true"' : ''}>${ENDONYM[l]}</a>`).join('')}</div>
@@ -306,6 +306,7 @@ function LLMS() {
 - Telefon / WhatsApp: ${SITE.phone}
 - E-posta / Email: ${SITE.email}
 - Google puanı / Google rating: ${String(SITE.google.rating).replace('.', ',')} / 5 (${SITE.google.reviews}+ yorum, ${SITE.google.asOf})
+- Sosyal / Social: Instagram ${SITE.instagram.url} · Facebook ${SITE.social.facebook} · LinkedIn ${SITE.social.linkedin}
 - Lisanslar / Licences: Taşınmaz Ticareti Yetki Belgesi ${SITE.licence.join(', ')}
 - Hizmet bölgeleri / Areas: Muratpaşa (Lara, Fener, Şirinyalı), Konyaaltı, Aksu (Altıntaş, Kundu), Döşemealtı, Kepez, Serik (Belek, Kadriye), Kemer
 - Yetkili satış ofisi olduğu projeler / Authorised sales office: Prime Lara (Altıntaş), Antalle Concept Houses (Döşemealtı)

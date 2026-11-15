@@ -38,5 +38,10 @@
   "directions": {
     "tr": "Sampi Kavşağı’ndan Portakal Çiçeği Caddesi’ne döndüğünüzde Süleyman Erol Yüzme Havuzu’nu geçtikten 200-250 metre sonra sağda."
   },
-  "crmUrl": "https://acc-homes-crm.netlify.app/"
+  "crmUrl": "https://acc-homes-crm.netlify.app/",
+  "social": {
+    "facebook": "https://www.facebook.com/ACCHOMESANTALYAREALESTATE",
+    "facebook2": "https://www.facebook.com/profile.php?id=61569753075105",
+    "linkedin": "https://www.linkedin.com/company/80229227/"
+  }
 }

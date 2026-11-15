@@ -752,8 +752,7 @@ ${reviewsBlock(lang)}
 ${talkBlock(lang)}
 ${plazaBlock(lang)}
 ${blogStrip(lang)}
-${igBlock(lang)}
-${mapBlock(lang)}`;
+${igBlock(lang)}`;
   write(path.join(BASE[lang], 'index.html'), layout({ lang, title: `${t.heroTitle} | ACC HOMES`, desc: t.metaHome, canonical: home(lang), alternates: alts('home'), body }));
 }
 

@@ -336,3 +336,6 @@ body.noscroll{overflow:hidden}
 .ailogos{display:flex;flex-wrap:wrap;gap:6px}.ailogos span{font-size:12px;font-weight:700;letter-spacing:.03em;padding:3px 10px;border-radius:999px;background:#f4efea;color:var(--ink)}
 .aishot img{max-width:320px;width:100%;height:auto;border-radius:10px;border:1px solid var(--line);display:block}
 @media (max-width:760px){.aiband{grid-template-columns:1fr}}
+.pimgs{display:grid;gap:18px}
+.tpair{display:grid;grid-template-columns:0.8fr 1.4fr;gap:14px;margin:14px 0;align-items:stretch}.tpair img{width:100%;height:100%;object-fit:cover;border-radius:var(--radius);display:block}
+@media (max-width:760px){.tpair{grid-template-columns:1fr}.tpair img{height:auto}}

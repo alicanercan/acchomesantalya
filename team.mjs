@@ -9,7 +9,7 @@ export const STAFF_PHOTOS = {
   'Ali Caner Can': '2026/09/ali-caner-can-gayrimenkul-danismani-acc-homes-780x780.webp',
   'Esma Özdal': '2026/09/esma-ozdal-can-gayrimenkul-danismani-acc-homes-780x780.webp',
   'Okan Akgün': '2026/10/acc-homes-ofis-yoneticisi-okan-akgun-780x780.webp',
-  'Melissa Enriquez Sedita': '2026/09/melissa-enriquez-sedita-gayrimenkul-danismani-acc-homes-780x780.webp',
+  // Şimdilik gizli: 'Melissa Enriquez Sedita': '2026/09/melissa-enriquez-sedita-gayrimenkul-danismani-acc-homes-780x780.webp',
   'Naz Bensu Taşbaş': '2026/09/bensu-tasbas-sosyal-medya-uzmani-acc-homes-780x780.webp',
   'Derya Plyatner': '2026/09/derya-plyatner-grafik-tasarim-uzmani-acc-homes-780x780.webp',
   'Zeynep Çarıkçı': 'local/zeynep-carikci-ofis-servis-acc-homes-780x780.webp',

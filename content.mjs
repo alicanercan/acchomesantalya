@@ -5,7 +5,7 @@ export const TEAM = [
   { name: 'Ali Caner Can', initials: 'AC', role: { tr: 'Broker ve Kurucu', en: 'Broker & Founder', ru: 'Брокер и основатель' }, link: 'broker' },
   { name: 'Esma Özdal', initials: 'EÖ', role: { tr: 'Genel Koordinatör', en: 'General Coordinator', ru: 'Генеральный координатор' } },
   { name: 'Okan Akgün', initials: 'OA', role: { tr: 'Ofis Yöneticisi', en: 'Office Manager', ru: 'Офис-менеджер' } },
-  { name: 'Melissa Enriquez Sedita', initials: 'ME', role: { tr: 'Uluslararası Satış Yöneticisi', en: 'International Sales Manager', ru: 'Руководитель международных продаж' } },
+  // Şimdilik gizli (Caner, 16.11.2026): { name: 'Melissa Enriquez Sedita', initials: 'ME', role: { tr: 'Uluslararası Satış Yöneticisi', en: 'International Sales Manager', ru: 'Руководитель международных продаж' } },
   { name: 'Naz Bensu Taşbaş', initials: 'BT', role: { tr: 'Sosyal Medya Uzmanı', en: 'Social Media Specialist', ru: 'Специалист по соцсетям' } },
   { name: 'Derya Plyatner', initials: 'DP', role: { tr: 'Grafik Tasarım Uzmanı', en: 'Graphic Design Specialist', ru: 'Графический дизайнер' } },
   { name: 'Zeynep Çarıkçı', initials: 'ZÇ', role: { tr: 'Ofis Servis Yetkilisi', en: 'Office Services', ru: 'Офисный сервис' } },

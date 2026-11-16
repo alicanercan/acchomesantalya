@@ -343,4 +343,6 @@
 })();
 
 // Açılış hızı: ilk slayt dışındaki arka plan görselleri sayfa yüklendikten sonra
-addEventListener('load', function () { setTimeout(function () { document.querySelectorAll('[data-bgs]').forEach(function (el) { el.style.backgroundImage = el.getAttribute('data-bgs'); el.removeAttribute('data-bgs'); }); }, 300); });
+(function () { function bgs() { document.querySelectorAll('[data-bgs]').forEach(function (el) { el.style.backgroundImage = el.getAttribute('data-bgs'); el.removeAttribute('data-bgs'); }); }
+  addEventListener('load', function () { setTimeout(bgs, 100); }); setTimeout(bgs, 1500);
+  var sl = document.querySelector('.slides'); if (sl) ['scroll', 'pointerdown', 'touchstart'].forEach(function (e) { sl.addEventListener(e, bgs, { once: true, passive: true }); }); })();

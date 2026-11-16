@@ -1,7 +1,7 @@
 // Ekip ve iş ortakları — kaynak: Ekip Bakiye Takip (Kasım 2026) + Caner'in notları.
 // Fotoğraflar eski WordPress sitesinden derleme sırasında indirilir (dist/ekip/), sonra repoya alınacak.
 // Kaynak: Caner'in 16.11.2026 tam ekip listesi (47 kişi + Kamil).
-// [EKSİK] fotoğraf: Burak Özek, Evren Solmaz, Serkan Akdağ. (local/… fotoğraflar static/img/ekip/kisi/ klasöründe)
+// [EKSİK] fotoğraf: Burak Özek, Evren Solmaz. (local/… fotoğraflar static/img/ekip/kisi/ klasöründe)
 export const PHOTO_BASE = 'https://acchomesantalya.com/wp-content/uploads/';
 
 // Yönetim ve destek ekibi fotoğrafları (content.mjs TEAM sırasıyla eşleşir, isimle)
@@ -56,7 +56,6 @@ export const PARTNERS = [
   { name: 'Mohammad Homayon Eivazi', photo: '2026/09/mohammad-eivazi-gayrimenkul-danismani-acc-homes-780x780.webp', langs: ['fa', 'tr'] },
   { name: 'Priskilla İğne', photo: 'local/priskilla-igne-gayrimenkul-danismani-acc-homes-780x780.webp', langs: [] },
   { name: 'Safiye Tezcan', photo: '2026/09/safiye-tezcan-gayrimenkul-danismani-acc-homes-780x780.webp', langs: [] },
-  { name: 'Serkan Akdağ', photo: null, langs: [] },
 ];
 PARTNERS.sort((a, b) => a.name.localeCompare(b.name, 'tr'));
 

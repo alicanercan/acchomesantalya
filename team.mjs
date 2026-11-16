@@ -1,7 +1,7 @@
 // Ekip ve iş ortakları — kaynak: Ekip Bakiye Takip (Kasım 2026) + Caner'in notları.
 // Fotoğraflar eski WordPress sitesinden derleme sırasında indirilir (dist/ekip/), sonra repoya alınacak.
 // Kaynak: Caner'in 16.11.2026 tam ekip listesi (47 kişi + Kamil).
-// [EKSİK] fotoğraf: Burak Özek, Evren Solmaz, Gizem Ölmez, Serkan Akdağ. (local/… fotoğraflar static/img/ekip/kisi/ klasöründe)
+// [EKSİK] fotoğraf: Burak Özek, Evren Solmaz, Serkan Akdağ. (local/… fotoğraflar static/img/ekip/kisi/ klasöründe)
 export const PHOTO_BASE = 'https://acchomesantalya.com/wp-content/uploads/';
 
 // Yönetim ve destek ekibi fotoğrafları (content.mjs TEAM sırasıyla eşleşir, isimle)
@@ -50,7 +50,6 @@ export const PARTNERS = [
   { name: 'Cüneyt Tartıcı', photo: '2026/09/cuneyt-tartici-gayrimenkul-danismani-acc-homes-780x780.webp', langs: ['tr', 'en'] },
   { name: 'Esra Zerdali', photo: '2026/09/esra-zerdali-gayrimenkul-danismani-acc-homes-780x780.webp', langs: [] },
   { name: 'Evren Solmaz', photo: null, langs: [] },
-  { name: 'Gizem Ölmez', photo: null, langs: [] },
   { name: 'Gonca Altıntaş', photo: 'local/gonca-altintas-gayrimenkul-danismani-acc-homes-780x780.webp', langs: [] },
   { name: 'Hülya Kızışar', photo: 'local/hulya-kizisar-gayrimenkul-danismani-acc-homes-780x780.webp', langs: [] },
   { name: 'Koray Solmaz', photo: 'local/koray-solmaz-gayrimenkul-danismani-acc-homes-780x780.webp', langs: [] },

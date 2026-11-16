@@ -79,7 +79,7 @@ export const ANTALLE = {
     ],
     phasesTitle: 'Satıştaki Etaplar ve Ödeme',
     phases: [
-      { tag: 'HEMEN TESLİM', name: '1. Etap', status: 'Anahtar teslim, tapular hazır', items: ['4+1 bahçe dubleksi + 2+1 teras daire, tek satışta çift tapu', 'İster iki ayrı konut, ister 6+2, 3 katlı komple bina', 'Peşin satış, KDV dahil tam fatura'], price: `Toplam ${P.p1}`, hot: true },
+      { tag: 'HEMEN TESLİM', name: '1. Etap', status: 'Anahtar teslim, tapular hazır', items: ['4+1 bahçe dubleksi + 2+1 teras daire, tek satışta çift tapu', 'İster iki ayrı konut, ister 6+2, 3 katlı komple bina', 'Peşin satış, KDV dahil tam fatura'], price: `KDV dahil toplam ${P.p1}`, hot: true },
       { tag: 'İNŞAAT DEVAM EDİYOR', name: '2. Etap', status: '3 müstakil villa satışta', items: [`Müstakil villa: ${P.villa}`, 'Kapalı otoparklı 4+1 dubleks ve 2+1 teras daire yalnızca birlikte satılır; şu an satışta değildir, talep için bize yazın', 'Kapalı otopark'], price: `Müstakil villa ${P.villa}` },
       { tag: 'LANSMAN FIRSATI', name: '3. Etap', status: 'Dubleks ve teras daire ayrı ayrı satın alınabilir', items: [`2+1 teras daire: ${P.p3t}`, `4+1 bahçe dubleksi: ${P.p3d}`, '%50 peşin, kalanı teslime kadar 18 ay vade farksız', 'İkisini birlikte alana %15 indirim'], price: '%50 peşin + 18 ay vade farksız' },
     ],
@@ -131,7 +131,7 @@ export const ANTALLE = {
     ],
     phasesTitle: 'Phases on Sale and Payment',
     phases: [
-      { tag: 'READY TO MOVE IN', name: 'Phase 1', status: 'Turnkey, title deeds ready', items: ['4+1 garden duplex + 2+1 terrace apartment, two title deeds in one sale', 'Two separate homes or a whole 3-storey 6+2 building', 'Cash sale, full VAT invoice'], price: `Total ${P.p1}`, hot: true },
+      { tag: 'READY TO MOVE IN', name: 'Phase 1', status: 'Turnkey, title deeds ready', items: ['4+1 garden duplex + 2+1 terrace apartment, two title deeds in one sale', 'Two separate homes or a whole 3-storey 6+2 building', 'Cash sale, full VAT invoice'], price: `Total ${P.p1}, VAT included`, hot: true },
       { tag: 'UNDER CONSTRUCTION', name: 'Phase 2', status: '3 detached villas on sale', items: [`Detached villa: ${P.villa}`, 'The 4+1 duplex and 2+1 terrace apartment with covered parking are sold only together and are not on sale at the moment; write to us if interested', 'Covered parking'], price: `Detached villa ${P.villa}` },
       { tag: 'LAUNCH OFFER', name: 'Phase 3', status: 'Duplex and terrace apartment can be bought separately', items: [`2+1 terrace apartment: ${P.p3t}`, `4+1 garden duplex: ${P.p3d}`, '50% down, balance in 18 months interest-free until handover', '15% discount when buying both'], price: '50% down + 18 months interest-free' },
     ],
@@ -183,7 +183,7 @@ export const ANTALLE = {
     ],
     phasesTitle: 'Очереди в продаже и оплата',
     phases: [
-      { tag: 'ГОТОВО К ЗАСЕЛЕНИЮ', name: '1-я очередь', status: 'Под ключ, тапу готовы', items: ['Дуплекс 4+1 с садом + апартаменты 2+1 с террасой, два тапу в одной сделке', 'Два отдельных жилья или целый трёхэтажный дом 6+2', 'Полная оплата, счёт с НДС'], price: `Итого ${P.p1}`, hot: true },
+      { tag: 'ГОТОВО К ЗАСЕЛЕНИЮ', name: '1-я очередь', status: 'Под ключ, тапу готовы', items: ['Дуплекс 4+1 с садом + апартаменты 2+1 с террасой, два тапу в одной сделке', 'Два отдельных жилья или целый трёхэтажный дом 6+2', 'Полная оплата, счёт с НДС'], price: `Итого ${P.p1} с НДС`, hot: true },
       { tag: 'ИДЁТ СТРОИТЕЛЬСТВО', name: '2-я очередь', status: 'В продаже 3 отдельные виллы', items: [`Отдельная вилла: ${P.villa}`, 'Дуплекс 4+1 и апартаменты 2+1 с крытой парковкой продаются только вместе и сейчас не в продаже; напишите нам, если интересно', 'Крытая парковка'], price: `Отдельная вилла ${P.villa}` },
       { tag: 'СТАРТ ПРОДАЖ', name: '3-я очередь', status: 'Дуплекс и апартаменты можно купить отдельно', items: [`Апартаменты 2+1 с террасой: ${P.p3t}`, `Дуплекс 4+1 с садом: ${P.p3d}`, '50% сразу, остаток за 18 месяцев до сдачи без переплаты', 'Скидка 15% при покупке обоих объектов'], price: '50% сразу + 18 месяцев без переплаты' },
     ],

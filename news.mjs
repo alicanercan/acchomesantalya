@@ -13,7 +13,7 @@ export const NEWS = [
   "h1": "ACC NEWS — Haftalık Emlak Gündemi",
   "dl": "16 Kasım 2026 · Hazırlayan: Ali Caner Can, Broker",
   "intro": "İş ortaklarımız için haftanın öne çıkan emlak gelişmelerini kısa, kaynaklı ve yorumlu olarak derledik.",
-  "view": "Politika faizi Eylül'den bu yana 4 puan düştü, konut kredisi faizi ise yalnızca 0,63 puan geriledi. Kredi faizi politika faizini gecikmeli izliyor. Alıcılar için fiyat ve faiz birlikte değerlendirilmeli; satıcılar için peşin ve yabancı alıcı segmenti hâlâ belirleyici. Antalya'da askıdaki imar değişiklikleri, ilgili bölgelerde portföy ve değerleme çalışmalarında takip edilmeli.",
+  "view": "Politika faizi Eylül'den bu yana 4 puan düştü, konut kredisi faizi ise yalnızca 0,63 puan geriledi. Kredi faizi politika faizini gecikmeli izliyor. Alıcılar için fiyat ve faiz birlikte değerlendirilmeli; satıcılar için peşin ve yabancı alıcı segmenti hâlâ belirleyici. Antalya'da askıdaki imar değişiklikleri, ilgili bölgelerde portföy ve değerleme çalışmalarında takip edilmeli. Yabancı müşterilerimizin mülklerini satışa veya kiraya çıkarırken yabancı kimlik numarası ve e-Devlet erişimi olup olmadığını en başta kontrol ediyor, yetkilendirmeyi birlikte tamamlıyoruz.",
   "note": "Bu sayfa bilgilendirme amaçlıdır, yatırım tavsiyesi değildir. Haberler kaynaklarından özetlenmiştir.",
   "sections": [
    {
@@ -45,6 +45,7 @@ export const NEWS = [
      }
     ]
    },
+{"title": "Son dakika: yabancı malik ilanları", "items": [{"h": "Güncelleme: EİDS'de yabancı malik doğrulaması", "p": "Sektör temsilcilerinin aktardığına göre 15–16 Kasım 2026 itibarıyla ilan portallarında \"Yabancıdan\", \"Yurt dışı tapulu\" gibi seçeneklerle girilen ilanlarda taşınmaz sahibinin gerçekten yabancı uyruklu olup olmadığı EİDS üzerinden kontrol ediliyor. Emlak işletmesi ilan girişinde tapudaki taşınmaz numarasını yazıyor, platform maliki bu numara üzerinden sorguluyor; doğrulanamayan ilan bu seçenekle yayımlanamıyor. Böylece yabancı malik istisnası, yetki doğrulamasını atlamak için kullanılamayacak. Yabancı kimlik numarası olan malikler e-Devlet üzerinden emlak işletmesini yetkilendirebiliyor. Bakanlığın konuya ilişkin ayrıntılı duyurusu yayımlandığında bu maddeyi güncelleyeceğiz.", "src": ["Emlak Haberleri", "https://www.emlakhaberi.com/yabancidan-ilanlarinda-eids-dogrulamasi-zorunlu-hale-geliyor"]}]},
    {
     "title": "Antalya ve bölge",
     "items": [
@@ -101,7 +102,7 @@ export const NEWS = [
   ],
   "viewTitle": "ACC yorumu",
   "srcTitle": "Kaynaklar",
-  "sources": [
+  "sources": [["Emlak Haberleri", "https://www.emlakhaberi.com/yabancidan-ilanlarinda-eids-dogrulamasi-zorunlu-hale-geliyor"],["Manisa Manşet / TEDB", "https://www.manisamansetgazetesi.com/manisa-haberleri/emlak-ilanlarinda-yeni-donem-yabanci-tapulu-tasinmazlara-eids-duzenlemesi/623716"],
    [
     "Emlak Haber Ajansı",
     "https://www.emlakhaberajansi.com/konut-kredisi-faizi-yuzde-4133e-geriledi-stok-855-milyar-tl.html"
@@ -142,7 +143,7 @@ export const NEWS = [
   "h1": "ACC NEWS — Weekly Real Estate Brief",
   "dl": "16 November 2026 · By Ali Caner Can, Broker",
   "intro": "A short, sourced weekly brief on Turkish and Antalya real estate for our partners, with our take on what it means.",
-  "view": "The policy rate has fallen 4 points since September, yet mortgage rates are down only 0.63 points: lending rates lag policy. Buyers should weigh price and financing together; for sellers, cash and foreign buyers remain the decisive segment. The zoning amendments on display in Antalya are worth tracking for listings and valuations in the affected areas.",
+  "view": "The policy rate has fallen 4 points since September, yet mortgage rates are down only 0.63 points: lending rates lag policy. Buyers should weigh price and financing together; for sellers, cash and foreign buyers remain the decisive segment. The zoning amendments on display in Antalya are worth tracking for listings and valuations in the affected areas. When listing our foreign clients' properties, we first check whether they hold a Turkish foreigner ID and e-Devlet access, and complete the authorisation together with them.",
   "note": "For information only; not investment advice. News items are summarised from the sources listed.",
   "sections": [
    {
@@ -174,6 +175,7 @@ export const NEWS = [
      }
     ]
    },
+{"title": "Breaking: foreign-owner listings", "items": [{"h": "Update: EİDS now checks foreign-owner listings", "p": "According to industry representatives, from 15–16 November 2026 listings entered on portals under options such as \"from a foreign owner\" or \"title held abroad\" are checked through EİDS to confirm that the owner really is a foreign national. The agency enters the property number from the title deed and the platform verifies the owner; listings that cannot be verified can no longer be published under that option. This closes a gap where the foreign-owner exception was used to bypass authorisation checks. Foreign owners with a Turkish foreigner ID number can authorise their agency through e-Devlet. We will update this item when the Ministry publishes detailed guidance.", "src": ["Emlak Haberleri", "https://www.emlakhaberi.com/yabancidan-ilanlarinda-eids-dogrulamasi-zorunlu-hale-geliyor"]}]},
    {
     "title": "Antalya and the region",
     "items": [
@@ -230,7 +232,7 @@ export const NEWS = [
   ],
   "viewTitle": "ACC view",
   "srcTitle": "Sources",
-  "sources": [
+  "sources": [["Emlak Haberleri", "https://www.emlakhaberi.com/yabancidan-ilanlarinda-eids-dogrulamasi-zorunlu-hale-geliyor"],["Manisa Manşet / TEDB", "https://www.manisamansetgazetesi.com/manisa-haberleri/emlak-ilanlarinda-yeni-donem-yabanci-tapulu-tasinmazlara-eids-duzenlemesi/623716"],
    [
     "Emlak Haber Ajansı",
     "https://www.emlakhaberajansi.com/konut-kredisi-faizi-yuzde-4133e-geriledi-stok-855-milyar-tl.html"
@@ -271,7 +273,7 @@ export const NEWS = [
   "h1": "ACC NEWS — Еженедельный обзор недвижимости",
   "dl": "16 ноября 2026 · Автор: Али Джанер Джан, брокер",
   "intro": "Краткий еженедельный обзор рынка недвижимости Турции и Анталии для наших партнёров — с источниками и нашим комментарием.",
-  "view": "С сентября ключевая ставка снизилась на 4 пункта, а ипотечная — лишь на 0,63 пункта: кредитные ставки отстают от политики ЦБ. Покупателям стоит оценивать цену и условия финансирования вместе; для продавцов решающими остаются покупатели за наличные и иностранцы. Изменения планов застройки в Анталии важно учитывать при оценке объектов в затронутых районах.",
+  "view": "С сентября ключевая ставка снизилась на 4 пункта, а ипотечная — лишь на 0,63 пункта: кредитные ставки отстают от политики ЦБ. Покупателям стоит оценивать цену и условия финансирования вместе; для продавцов решающими остаются покупатели за наличные и иностранцы. Изменения планов застройки в Анталии важно учитывать при оценке объектов в затронутых районах. Размещая объекты наших иностранных клиентов, мы сначала проверяем наличие турецкого ВНЖ-номера и доступа к e-Devlet и оформляем полномочия вместе с владельцем.",
   "note": "Материал носит информационный характер и не является инвестиционной рекомендацией. Новости кратко изложены по указанным источникам.",
   "sections": [
    {
@@ -303,6 +305,7 @@ export const NEWS = [
      }
     ]
    },
+{"title": "Срочно: объявления иностранных владельцев", "items": [{"h": "Обновление: EİDS проверяет объявления иностранных владельцев", "p": "По данным представителей отрасли, с 15–16 ноября 2026 года объявления, размещаемые на порталах с пометкой «от иностранца» или «тапу за рубежом», проверяются через систему EİDS: подтверждается, что владелец действительно иностранный гражданин. Агентство указывает номер объекта из тапу, а платформа проверяет владельца; непроверенное объявление с такой пометкой опубликовать нельзя. Так закрывается лазейка, через которую исключение для иностранцев использовали, чтобы обойти проверку полномочий. Владельцы-иностранцы с турецким номером ВНЖ (YKN) могут уполномочить агентство через e-Devlet. Мы обновим этот пункт после публикации подробных разъяснений Министерства.", "src": ["Emlak Haberleri", "https://www.emlakhaberi.com/yabancidan-ilanlarinda-eids-dogrulamasi-zorunlu-hale-geliyor"]}]},
    {
     "title": "Анталия и регион",
     "items": [
@@ -359,7 +362,7 @@ export const NEWS = [
   ],
   "viewTitle": "Мнение ACC",
   "srcTitle": "Источники",
-  "sources": [
+  "sources": [["Emlak Haberleri", "https://www.emlakhaberi.com/yabancidan-ilanlarinda-eids-dogrulamasi-zorunlu-hale-geliyor"],["Manisa Manşet / TEDB", "https://www.manisamansetgazetesi.com/manisa-haberleri/emlak-ilanlarinda-yeni-donem-yabanci-tapulu-tasinmazlara-eids-duzenlemesi/623716"],
    [
     "Emlak Haber Ajansı",
     "https://www.emlakhaberajansi.com/konut-kredisi-faizi-yuzde-4133e-geriledi-stok-855-milyar-tl.html"

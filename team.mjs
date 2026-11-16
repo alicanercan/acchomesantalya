@@ -10,7 +10,6 @@ export const STAFF_PHOTOS = {
   'Esma Özdal': '2026/09/esma-ozdal-can-gayrimenkul-danismani-acc-homes-780x780.webp',
   'Okan Akgün': '2026/10/acc-homes-ofis-yoneticisi-okan-akgun-780x780.webp',
   'Melissa Enriquez Sedita': '2026/09/melissa-enriquez-sedita-gayrimenkul-danismani-acc-homes-780x780.webp',
-  'Adnan Konuk': '2026/09/adnan-konuk-gayrimenkul-danismani-acc-homes-780x780.webp',
   'Naz Bensu Taşbaş': '2026/09/bensu-tasbas-sosyal-medya-uzmani-acc-homes-780x780.webp',
   'Derya Plyatner': '2026/09/derya-plyatner-grafik-tasarim-uzmani-acc-homes-780x780.webp',
   'Zeynep Çarıkçı': 'local/zeynep-carikci-ofis-servis-acc-homes-780x780.webp',
@@ -19,6 +18,7 @@ export const STAFF_PHOTOS = {
 
 // İş ortakları (alfabetik). langs: konuştuğu diller (eski profilinden; boşsa gösterilmez)
 export const PARTNERS = [
+  { name: 'Adnan Konuk', photo: '2026/09/adnan-konuk-gayrimenkul-danismani-acc-homes-780x780.webp', langs: [] },
   { name: 'Alev Aydın', photo: '2026/09/alev-aydin-gayrimenkul-danismani-acc-homes-780x780.webp', langs: ['tr', 'en'] },
   { name: 'Alp Akıdan', photo: '2026/09/alp-akidan-gayrimenkul-danismani-acc-homes-780x780.webp', langs: ['en', 'tr'] },
   { name: 'Arya Balcı', photo: '2026/09/arya-balci-gayrimenkul-danismani-acc-homes-780x780.webp', langs: ['tr', 'en'] },

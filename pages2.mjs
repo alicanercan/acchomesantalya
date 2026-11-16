@@ -39,7 +39,7 @@ export const PAGES2 = {
       lead: 'Yurt dışından ya da başka şehirden ev arayanlar için iki adımlı süreç.',
       html: `
 <div class="cards3">
-<div><span>📱</span><h3>Online görüntülü gösterim</h3><p>Danışmanımız evi WhatsApp veya Zoom üzerinden canlı gezdirir; manzarayı, cepheyi, siteyi ve çevreyi gösterir, sorularınızı anında yanıtlar.</p></div>
+<div><span>📱</span><h3>Online görüntülü gösterim</h3><p>Profesyonelimiz evi WhatsApp veya Zoom üzerinden canlı gezdirir; manzarayı, cepheyi, siteyi ve çevreyi gösterir, sorularınızı anında yanıtlar.</p></div>
 <div><span>🚗</span><h3>Tanışma turu</h3><p>Antalya’ya geldiğinizde bölgeleri ve kısa listeye aldığınız evleri tek bir planda gezdiririz; ACC Plaza’da süreci ve masrafları yüz yüze anlatırız.</p></div>
 <div><span>📝</span><h3>Uzaktan alım</h3><p>Karar verdiğinizde vekâletname ile Türkiye’ye gelmeden de tapu işlemi yapılabilir. Detaylar Alıcı Rehberi’nde.</p></div>
 </div>
@@ -50,7 +50,7 @@ export const PAGES2 = {
       lead: 'A two-step process for buyers searching from abroad or another city.',
       html: `
 <div class="cards3">
-<div><span>📱</span><h3>Live video viewing</h3><p>Our consultant walks you through the home on WhatsApp or Zoom, showing the view, orientation, complex and surroundings, and answers your questions on the spot.</p></div>
+<div><span>📱</span><h3>Live video viewing</h3><p>Our professional walks you through the home on WhatsApp or Zoom, showing the view, orientation, complex and surroundings, and answers your questions on the spot.</p></div>
 <div><span>🚗</span><h3>Inspection trip</h3><p>When you arrive in Antalya we plan a tour of the areas and your shortlisted homes, and explain the process and costs face to face at ACC Plaza.</p></div>
 <div><span>📝</span><h3>Buying remotely</h3><p>Once you decide, the title deed transfer can be completed by power of attorney without travelling to Türkiye. See our Buyer’s Guide.</p></div>
 </div>

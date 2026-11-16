@@ -195,7 +195,7 @@ export const GUIDES = [
       html: `
 <p>Yurt dışındaysanız Türkiye’ye gelmeden de mülk alabilirsiniz. ACC HOMES’ta uzaktan alım şöyle ilerler:</p>
 <ol class="steps compact">
-<li><b>Canlı görüntülü gösterim</b><p>Danışmanımız mülkü, binayı, manzarayı ve çevreyi canlı yayında gösterir; sorularınızı anında yanıtlar. Görüşmeyi kaydedip size gönderebiliriz.</p></li>
+<li><b>Canlı görüntülü gösterim</b><p>Profesyonelimiz mülkü, binayı, manzarayı ve çevreyi canlı yayında gösterir; sorularınızı anında yanıtlar. Görüşmeyi kaydedip size gönderebiliriz.</p></li>
 <li><b>Belgelerin dijital paylaşımı</b><p>Tapu kaydı, iskan, aidat ve değerleme bilgileri size yazılı olarak iletilir.</p></li>
 <li><b>Vekaletname</b><p>Bulunduğunuz ülkedeki Türk konsolosluğundan ya da Türkiye’deki bir noterden, işlemleri yürütecek kişiye özel vekaletname verebilirsiniz. Vekaletnamenin kapsamını işlemden önce birlikte belirleriz.</p></li>
 <li><b>Tapu ve teslim</b><p>Tapu devri vekiliniz tarafından yapılır; tapu ve anahtar size ulaştırılır, abonelikler açılır.</p></li>

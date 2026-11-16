@@ -32,7 +32,7 @@ export const PRIVACY = {
 <p>Verileriniz KVKK m.5/2-c (bir sözleşmenin kurulması veya ifasıyla doğrudan ilgili olması), m.5/2-ç (hukuki yükümlülüğümüzü yerine getirmek) ve m.5/2-f (temel hak ve özgürlüklerinize zarar vermemek kaydıyla meşru menfaatimiz) kapsamında işlenir. Pazarlama amaçlı ticari elektronik iletiler yalnızca açık rızanızla ve 6563 sayılı Kanun çerçevesinde gönderilir; bu izni her zaman geri alabilirsiniz.</p>
 <h2>6. Kimlerle paylaşıyoruz</h2>
 <ul class="ticks">
-<li><b>ACC HOMES danışmanları ve iş ortakları:</b> Talebinizle ilgilenecek danışmanımızla.</li>
+<li><b>ACC HOMES ekibi ve iş ortakları:</b> Talebinizle ilgilenecek profesyonelimizle.</li>
 <li><b>İşlem tarafları:</b> Alım-satım veya kiralama sürecinde, sizin bilginiz dahilinde ve gerekli olduğu ölçüde mal sahibi, alıcı, banka, değerleme kuruluşu, tercüman ve noter gibi taraflarla.</li>
 <li><b>Yetkili kurumlar:</b> Kanunen zorunlu olduğunda tapu müdürlüğü, vergi dairesi, mahkemeler ve diğer kamu kurumlarıyla.</li>
 <li><b>Hizmet sağlayıcılar:</b> Web sitesi barındırma ve form altyapısı (Netlify, ABD) gibi teknik hizmet sağlayıcılarla. Bu sağlayıcılar yurt dışında bulunduğundan aktarım KVKK m.9’a uygun şekilde ve yalnızca talebinize dönüş yapabilmek için gerekli olduğu ölçüde yapılır.</li>

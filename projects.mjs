@@ -27,7 +27,7 @@ export const PROJECTS = [
       ['📜', 'Kat Mülkiyetli ve İskanlı', '1. etap için hemen teslim'],
       ['💼', 'Şirket Alımlarına Uygun', 'KDV dahil fatura avantajı'],
     ],
-    badgeNote: '*Türk vatandaşlığı başvurusunda yasal asgari yatırım tutarı ve diğer şartlar aranır; uygun birimler için danışmanınıza sorun.',
+    badgeNote: '*Türk vatandaşlığı başvurusunda yasal asgari yatırım tutarı ve diğer şartlar aranır; uygun birimler için profesyonelinize sorun.',
     featuresTitle: 'Proje Donanımları',
     features: [
       ['🌡️', 'Yerden ısıtma ve takılı kombiler'], ['📱', 'Akıllı ev otomasyonu ve elektrikli panjurlar'], ['❄️', 'Tüm odalarda Mitsubishi Electric klimalar'],

@@ -21,10 +21,29 @@
     };
     f.addEventListener('change', apply); apply();
   }
-  var main = document.querySelector('.gallery .main');
-  document.querySelectorAll('.thumbs img').forEach(function (t) {
-    t.addEventListener('click', function () { main.src = t.src; });
-  });
+  (function () {
+    var g = document.querySelector('[data-gal]'); if (!g) return;
+    var main = g.querySelector('.main'), th = [].slice.call(g.querySelectorAll('.thumbs img')), cnt = g.querySelector('.gcount b');
+    var src = th.length ? th.map(function (t) { return t.getAttribute('data-full'); }) : [main.src], i = 0;
+    function show(n) { i = (n + src.length) % src.length; main.src = src[i]; if (cnt) cnt.textContent = i + 1; th.forEach(function (t, k) { t.classList.toggle('on', k === i); }); if (th[i]) th[i].scrollIntoView({ block: 'nearest', inline: 'center', behavior: 'smooth' }); if (box && !box.hidden) bimg.src = src[i]; }
+    th.forEach(function (t, k) { t.addEventListener('click', function () { show(k); }); });
+    var pv = g.querySelector('.prev'), nx = g.querySelector('.next');
+    if (pv) pv.addEventListener('click', function () { show(i - 1); });
+    if (nx) nx.addEventListener('click', function () { show(i + 1); });
+    var box = document.createElement('div'); box.className = 'lbox'; box.hidden = true;
+    box.innerHTML = '<button type="button" class="lx" aria-label="×">×</button><button type="button" class="gnav prev">‹</button><img alt=""><button type="button" class="gnav next">›</button>';
+    document.body.appendChild(box); var bimg = box.querySelector('img');
+    function open() { bimg.src = src[i]; box.hidden = false; document.documentElement.style.overflow = 'hidden'; }
+    function close() { box.hidden = true; document.documentElement.style.overflow = ''; }
+    main.addEventListener('click', open); var fb = g.querySelector('.gfull'); if (fb) fb.addEventListener('click', open);
+    box.querySelector('.lx').addEventListener('click', close);
+    box.querySelector('.prev').addEventListener('click', function () { show(i - 1); });
+    box.querySelector('.next').addEventListener('click', function () { show(i + 1); });
+    box.addEventListener('click', function (e) { if (e.target === box) close(); });
+    document.addEventListener('keydown', function (e) { if (box.hidden && !g.matches(':hover')) return; if (e.key === 'ArrowLeft') show(i - 1); else if (e.key === 'ArrowRight') show(i + 1); else if (e.key === 'Escape') close(); });
+    [main, bimg].forEach(function (el) { var x0 = null; el.addEventListener('touchstart', function (e) { x0 = e.touches[0].clientX; }, { passive: true }); el.addEventListener('touchend', function (e) { if (x0 === null) return; var dx = e.changedTouches[0].clientX - x0; if (Math.abs(dx) > 40) show(i + (dx < 0 ? 1 : -1)); x0 = null; }, { passive: true }); });
+    if (src.length > 1) { var pre = new Image(); pre.src = src[1]; }
+  })();
   document.querySelectorAll('.tabs [data-tab]').forEach(function (b) {
     b.addEventListener('click', function () {
       document.querySelectorAll('.tabs [data-tab]').forEach(function (x) { x.setAttribute('aria-selected', x === b ? 'true' : 'false'); });

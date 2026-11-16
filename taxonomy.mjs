@@ -56,7 +56,7 @@ export const SECMELI = [
   { f: 'otopark', tr: 'Otopark', en: 'Parking', tipler: ['konut', 'konut-projeleri', 'is-yeri'], ops: [['Kapalı Otopark', 'Indoor'], ['Açık Otopark', 'Outdoor'], ['Açık & Kapalı Otopark', 'Indoor & outdoor'], ['Yok', 'None']] },
   { f: 'balkon', tr: 'Balkon', en: 'Balcony', tipler: ['konut', 'konut-projeleri'], ops: [['Var', 'Yes'], ['Yok', 'No']] },
   { f: 'kredi', tr: 'Krediye uygun', en: 'Mortgage eligible', tipler: ['konut', 'konut-projeleri', 'is-yeri', 'arsa', 'bina'], ops: [['Evet', 'Yes'], ['Hayır', 'No']] },
-  { f: 'tapu', tr: 'Tapu durumu', en: 'Title deed', tipler: ['konut', 'konut-projeleri', 'is-yeri', 'arsa', 'bina', 'turistik-tesis'], ops: [['Kat Mülkiyetli', 'Condominium'], ['Kat İrtifaklı', 'Construction servitude'], ['Hisseli Tapu', 'Shared title'], ['Müstakil Tapulu', 'Detached title'], ['Arsa Tapulu', 'Land title'], ['Kooperatif Hisseli Tapu', 'Cooperative share']] },
+  { f: 'tapu', tr: 'Tapu durumu', en: 'Title deed', tipler: ['konut', 'konut-projeleri', 'is-yeri', 'arsa', 'bina', 'turistik-tesis'], ops: [['Kat Mülkiyetli', 'Condominium'], ['Kat İrtifaklı', 'Kat irtifakı (construction servitude)'], ['Hisseli Tapu', 'Shared title'], ['Müstakil Tapulu', 'Detached title'], ['Arsa Tapulu', 'Land title'], ['Kooperatif Hisseli Tapu', 'Cooperative share']] },
   { f: 'takas', tr: 'Takas', en: 'Swap', tipler: ['konut', 'is-yeri', 'arsa', 'bina'], ops: [['Evet', 'Yes'], ['Hayır', 'No']] },
   { f: 'imar', tr: 'İmar durumu', en: 'Zoning', tipler: ['arsa'], ops: [['Konut', 'Residential'], ['Ticari', 'Commercial'], ['Ticari + Konut', 'Mixed use'], ['Turizm', 'Tourism'], ['Sanayi', 'Industrial'], ['Tarla', 'Field'], ['Villa', 'Villa'], ['Muhtelif', 'Other']] },
 ];

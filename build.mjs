@@ -38,6 +38,7 @@ for (const l of LISTINGS) {
   const et = EMLAK_TIPLERI.find((e) => e.k === l.emlakTipi);
   l.altTip = l.altTip || (et && et.alt.includes(l.tur) ? l.tur : (l.emlakTipi === 'konut' ? 'Daire' : ''));
 }
+const PREVIEW = LISTINGS.filter((l) => l.durum === 'Onay Bekliyor').map((l) => ({ ...l, _preview: true })); // onay için gizli önizleme: listelerde ve site haritasında yok, noindex
 LISTINGS = LISTINGS.filter((l) => ['Yayında', 'Opsiyonlu', 'Satıldı'].includes(l.durum));
 
 const VER = crypto.createHash('md5').update(fs.readFileSync(path.join(ROOT, 'assets/style.css')) + fs.readFileSync(path.join(ROOT, 'assets/app.js'))).digest('hex').slice(0, 8);
@@ -192,6 +193,10 @@ const esc = (s) => String(s ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '
 const trMap = { ç: 'c', ğ: 'g', ı: 'i', i: 'i', ö: 'o', ş: 's', ü: 'u', Ç: 'c', Ğ: 'g', İ: 'i', I: 'i', Ö: 'o', Ş: 's', Ü: 'u' };
 const slugify = (s) => String(s).split('').map((c) => trMap[c] ?? c).join('').toLowerCase()
   .replace(/\+/g, '-').replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
+const loc = (v, lang) => (v && typeof v === 'object' && !Array.isArray(v) ? (v[lang] || v[GL(lang)] || v.en || v.tr || '') : (v || ''));
+const locList = (v, lang) => (Array.isArray(v) ? v : (v && (v[lang] || v[GL(lang)] || v.en || v.tr)) || []);
+const RU_V = { 'Evet': 'Да', 'Hayır': 'Нет', 'Yerden Isıtma': 'Тёплый пол', 'Kapalı Otopark': 'Крытая парковка', 'Açık Otopark': 'Открытая парковка', 'Eşyalı': 'С мебелью', 'Eşyasız': 'Без мебели', 'Boş': 'Свободна', 'Kiracılı': 'С арендатором', 'Kat Mülkiyetli': 'Kat mülkiyeti (полная собственность)', 'Kat İrtifaklı': 'Kat irtifakı (до оформления кат мюлькиети)', 'Kombi (Doğalgaz)': 'Газовый котёл', 'Klima': 'Кондиционер' };
+const optV = (f, v, lang) => { if (!v || lang === 'tr') return v; if (lang === 'ru' && RU_V[v]) return RU_V[v]; const o = (SECMELI.find((x) => x.f === f) || { ops: [] }).ops.find((p) => p[0] === v); return o ? o[1] : v; };
 const slugOf = (l) => l.slug ? slugify(l.slug.replace(/^\//, '')) : slugify([l.tip, l.ilce, l.mahalle, l.oda, l.tur, l.id].filter(Boolean).join(' '));
 const pick = (obj, lang) => (obj && (obj[lang] || obj.tr)) || '';
 const fmtPrice = (l, lang) => {
@@ -960,9 +965,10 @@ ${igBlock(lang)}`;
 }
 
 // ---------- İlan arama: Sahibinden uyumlu kategori sayfaları ve detaylı filtre ----------
-const TXL = (lang) => TX[GL(lang)];
-const lab = (o, lang) => (GL(lang) === 'tr' ? o.tr : o.en);
-const altLab = (a, lang) => (GL(lang) === 'tr' ? a : ALT_EN[a] || a);
+const RU_LAB = { banyo: 'Санузлы', otopark: 'Парковка', esya: 'Мебель', kullanim: 'Статус', takas: 'Обмен', asansor: 'Лифт', balkon: 'Балкон', isitma: 'Отопление', kredi: 'Ипотека', tapu: 'Тапу', imar: 'Зонирование', Konut: 'Жилая', 'Satılık': 'Продажа', 'Kiralık': 'Аренда', Villa: 'Вилла', Daire: 'Квартира', 'Müstakil Ev': 'Дом' };
+const TXL = (lang) => (lang === 'ru' ? { ...TX.en, listedIn: 'Дата публикации', emlakTipi: 'Тип недвижимости' } : TX[GL(lang)]);
+const lab = (o, lang) => (lang === 'ru' && o && RU_LAB[o.f || o.tr] ? RU_LAB[o.f || o.tr] : GL(lang) === 'tr' ? o.tr : o.en);
+const altLab = (a, lang) => (GL(lang) === 'tr' ? a : (lang === 'ru' && RU_LAB[a]) || ALT_EN[a] || a);
 const etSlug = (e, lang) => (lang === 'tr' ? e.k : e.enSlug);
 const katSlug = (k, lang) => (lang === 'tr' ? k : KATEGORILER[k].enSlug);
 const altSlug = (a, lang) => slugify(lang === 'tr' ? a : ALT_EN[a] || a);
@@ -1055,16 +1061,19 @@ function pageListing(l, lang) {
   const desc = (lang === 'tr' && l.meta) ? l.meta : pick(l.aciklama, lang).slice(0, 155);
   const rows = [
     [F.no, l.id], [TXL(lang).listedIn, l.tarih], [TXL(lang).emlakTipi, [lab(EMLAK_TIPLERI.find((e) => e.k === l.emlakTipi) || { tr: '', en: '' }, lang), lab(KATEGORILER[l.kategori] || { tr: '', en: '' }, lang), altLab(l.altTip || '', lang)].filter(Boolean).join(' · ')], [F.rooms, l.oda], [F.gross, l.brut ? { m2: l.brut } : ''], [F.net, l.net ? { m2: l.net } : ''], [F.age, l.yas], [F.floor, l.kat], [F.floors, l.katSayisi],
-    [F.heat, l.isitma], [lab(SECMELI.find((x) => x.f === 'banyo'), lang), l.banyo], [lab(SECMELI.find((x) => x.f === 'balkon'), lang), l.balkon], [lab(SECMELI.find((x) => x.f === 'asansor'), lang), l.asansor], [lab(SECMELI.find((x) => x.f === 'otopark'), lang), l.otopark], [lab(SECMELI.find((x) => x.f === 'esya'), lang), l.esya], [lab(SECMELI.find((x) => x.f === 'kullanim'), lang), l.kullanim], [F.inSite, l.site], [GL(lang) === 'tr' ? 'Aidat' : 'Service charge', l.aidat ? `${l.aidat} TL` : ''], [lab(SECMELI.find((x) => x.f === 'imar'), lang), l.imar], [lab(SECMELI.find((x) => x.f === 'takas'), lang), l.takas], [F.credit, l.kredi], [F.deed, l.tapu], [F.project, l.proje], [F.location, [l.mahalle, l.ilce, 'Antalya'].filter(Boolean).join(', ')],
+    [F.heat, optV('isitma', l.isitma, lang)], [lab(SECMELI.find((x) => x.f === 'banyo'), lang), l.banyo], [lab(SECMELI.find((x) => x.f === 'balkon'), lang), optV('balkon', l.balkon, lang)], [lab(SECMELI.find((x) => x.f === 'asansor'), lang), optV('asansor', l.asansor, lang)], [lab(SECMELI.find((x) => x.f === 'otopark'), lang), optV('otopark', l.otopark, lang)], [lab(SECMELI.find((x) => x.f === 'esya'), lang), optV('esya', l.esya, lang)], [lab(SECMELI.find((x) => x.f === 'kullanim'), lang), optV('kullanim', l.kullanim, lang)], [F.inSite, optV('kredi', l.site, lang)], [GL(lang) === 'tr' ? 'Aidat' : 'Service charge', l.aidat ? `${l.aidat} TL` : ''], [lab(SECMELI.find((x) => x.f === 'imar'), lang), optV('imar', l.imar, lang)], [lab(SECMELI.find((x) => x.f === 'takas'), lang), optV('takas', l.takas, lang)], [F.credit, optV('kredi', l.kredi, lang)], [F.deed, optV('tapu', l.tapu, lang)], [s('plotArea', lang), l.arsa ? { m2: l.arsa } : ''], [s('gardenArea', lang), l.bahce ? { m2: l.bahce } : ''], [s('buildArea', lang), l.insaat ? { m2: l.insaat } : ''], [s('facing', lang), loc(l.cephe, lang)], [F.project, l.proje], [F.location, [l.mahalle, l.ilce, 'Antalya'].filter(Boolean).join(', ')],
   ].filter(([, v]) => v !== undefined && v !== null && v !== '');
   const photos = (l.foto || []);
-  const gallery = photos.length ? `<div class="gallery"><img class="main" src="${esc(photos[0])}" alt="${esc(title)}">${photos.length > 1 ? `<div class="thumbs">${photos.map((p, i) => `<img src="${esc(p)}" alt="${esc(title)} ${i + 1}" loading="lazy">`).join('')}</div>` : ''}</div>` : `<div class="gallery">${placeholder}</div>`;
+  const th = (p) => (l.thumbs ? p.replace(/\.webp$/, '-t.webp') : p);
+  const gallery = photos.length ? `<div class="gallery" data-gal><div class="gmain"><img class="main" src="${esc(photos[0])}" alt="${esc(title)}" width="1600" height="1067" fetchpriority="high">${photos.length > 1 ? `<button type="button" class="gnav prev" aria-label="‹">‹</button><button type="button" class="gnav next" aria-label="›">›</button>` : ''}<span class="gcount"><b>1</b> / ${photos.length}</span><button type="button" class="gfull" aria-label="⤢">⤢</button></div>${photos.length > 1 ? `<div class="thumbs">${photos.map((p, i) => `<img src="${esc(th(p))}" data-full="${esc(p)}" alt="${esc(title)} ${i + 1}" loading="lazy" width="480" height="320"${i === 0 ? ' class="on"' : ''}>`).join('')}</div>` : ''}</div>` : `<div class="gallery">${placeholder}</div>`;
   const wa = waLink(t.waText(l.id));
   const tr = lang === 'tr';
   const L = (k) => s(k, lang);
   const ag = l.danisman || { ad: 'Ali Caner Can', unvan: L('broker'), tel: SITE.phoneRaw, telText: SITE.phone, foto: SITE.brokerPhoto };
   const agWa = `https://wa.me/${String(ag.tel).replace('+', '')}?text=${encodeURIComponent(t.waText(l.id))}`;
-  const reasons = (l.nedenler || []).slice(0, 3);
+  const reasons = locList(l.nedenler, lang).slice(0, 4);
+  const feats = locList(l.ozellikler, lang);
+  const plan = l.plan ? (l.plan[lang] || l.plan[GL(lang)] || l.plan.en || l.plan.tr) : null;
   const dist = l.mesafeler ? [[L('beach'), l.mesafeler.plaj], [L('airport'), l.mesafeler.havalimani], [L('centre'), l.mesafeler.merkez]].filter(([, v]) => v) : [];
   const pageUrl = SITE.domain + url(lang, 'listing', slug);
   const try_ = l.fiyat && (l.para === 'TL' || !l.para) ? l.fiyat : 0;
@@ -1075,11 +1084,12 @@ function pageListing(l, lang) {
 <h1>${esc(title)}</h1><p class="loc">${esc([l.proje, l.mahalle, l.ilce].filter(Boolean).join(' · '))}</p>${(l.etiketler || []).filter((k) => TAGS[k]).length ? `<div class="ltags big">${l.etiketler.filter((k) => TAGS[k]).map((k) => `<span class="lt-${k}">${tagLabel(k, lang)}</span>`).join('')}</div>` : ''}
 ${reasons.length ? `<div class="reasons">${reasons.map((r) => `<span>✓ ${esc(r)}</span>`).join('')}</div>` : ''}
 <h2>${F.desc}</h2><div class="desc">${esc(pick(l.aciklama, lang)).split(/\n+/).map((p) => `<p>${p}</p>`).join('')}</div>
-${l.ozellikler && l.ozellikler.length ? `<h2>${F.features}</h2><ul class="chips">${l.ozellikler.map((o) => `<li>${esc(o)}</li>`).join('')}</ul>` : ''}
+${plan ? `<h2>${L('floorPlan')}</h2><div class="fplan">${plan.map(([h, items]) => `<div><h3>${esc(h)}</h3><ul>${items.map((x) => `<li>${esc(x)}</li>`).join('')}</ul></div>`).join('')}</div>` : ''}
+${feats.length ? `<h2>${l.plan ? L('highlights') : F.features}</h2><ul class="chips">${feats.map((o) => `<li>${esc(o)}</li>`).join('')}</ul>` : ''}
 ${dist.length ? `<h2>${L('distances')}</h2><ul class="chips">${dist.map(([k, v]) => `<li>${k}: <b>${esc(v)}</b></li>`).join('')}</ul>` : ''}
 ${l.video ? `<p><a class="btn ghost" href="${esc(l.video)}" target="_blank" rel="noopener">Video →</a></p>` : ''}
 ${l.tip !== 'Kiralık' ? `<h2>${L('costs')}</h2>${calcBlock(lang).replace('data-calc>', `data-calc data-price="${try_ || ''}">`)}<p><a href="${lang === 'tr' ? '/alici-rehberi/alim-masraflari/' : '/en/buyers-guide/purchase-costs/'}">${L('costsMore')}</a></p>` : ''}
-</div><aside class="side"><div class="box"><span class="tag static">${tipLabel(l, lang)}</span>${statusBadge(l, lang)}<div class="price big"${priceAttrs(l)}>${fmtPrice(l, lang)}</div>${l.fiyatKontrol ? `<p class="pcheck">✓ ${s('priceChecked', lang)}<small>${s('lastCheck', lang)}: ${esc(l.fiyatKontrol)}</small></p>` : ''}<details class="whydiff"><summary>${s('whyDiff', lang)}</summary><p>${s('whyDiffText', lang)}</p></details><div class="ltools2" data-id="${esc(l.id)}">${cardTools(l, lang)}</div>
+</div><aside class="side"><div class="box"><span class="tag static">${tipLabel(l, lang)}</span>${statusBadge(l, lang)}<div class="price big"${priceAttrs(l)}>${fmtPrice(l, lang)}</div>${l.fiyatKontrol ? `<p class="pcheck">✓ ${s('priceChecked', lang)}<small>${s('lastCheck', lang)}: ${esc(l.fiyatKontrol)}</small></p>` : ''}${l.eids ? `<p class="eids">✓ ${s('eidsOk', lang)}<small>${esc(l.eids)}</small></p>` : ''}${l.tekYetki ? `<p class="sole">★ ${s('soleAgency', lang)}</p>` : ''}<details class="whydiff"><summary>${s('whyDiff', lang)}</summary><p>${s('whyDiffText', lang)}</p></details><div class="ltools2" data-id="${esc(l.id)}">${cardTools(l, lang)}</div>
 <table class="spec">${rows.map(([k, v]) => `<tr><th>${k}</th><td>${v && v.m2 ? `<span data-m2="${+v.m2}">${+v.m2} m²</span>` : esc(v)}</td></tr>`).join('')}</table>
 <div class="actions"><a class="btn" href="${wa}" target="_blank" rel="noopener">${t.wa}</a><a class="btn ghost" href="tel:${SITE.phoneRaw}">${t.call}</a></div>
 <a class="gline" href="${SITE.google.mapsUrl}" target="_blank" rel="noopener">${ICON_G}<b>${fmtRating(lang)}</b>${stars}<span>${t.gReviews(SITE.google.reviews)}</span></a></div>
@@ -1100,7 +1110,7 @@ ${l.tip !== 'Kiralık' ? `<h2>${L('costs')}</h2>${calcBlock(lang).replace('data-
       about: { '@type': l.tur === 'Villa' ? 'House' : 'Apartment', numberOfRooms: l.oda, floorSize: l.net ? { '@type': 'QuantitativeValue', value: l.net, unitCode: 'MTK' } : undefined, address: { '@type': 'PostalAddress', addressLocality: l.mahalle, addressRegion: 'Antalya', addressCountry: 'TR' } } },
     { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [[t.nav.home, home(lang)], [t.nav.list, url(lang, 'list')], [title, url(lang, 'listing', slug)]].map(([n, u], i) => ({ '@type': 'ListItem', position: i + 1, name: n, item: SITE.domain + u })) },
   ];
-  write(path.join(url(lang, 'listing', slug), 'index.html'), layout({ lang, title: `${title} | ACC HOMES`, desc, canonical: url(lang, 'listing', slug), alternates: alts('listing', () => slug), body, schema, ogImage: photos[0] }));
+  write(path.join(url(lang, 'listing', slug), 'index.html'), layout({ lang, title: `${title} | ACC HOMES`, desc, canonical: url(lang, 'listing', slug), alternates: alts('listing', () => slug), body: l._preview ? `<div class="demo">ÖNİZLEME — bu ilan henüz yayında değil (onay bekliyor)</div>${body}` : body, schema, ogImage: photos[0], noindex: !!l._preview }));
 }
 
 function pageGuide(lang) {
@@ -1219,6 +1229,7 @@ for (const lang of LANGS) {
   for (const k of Object.keys(PAGES)) { pageCorporate(k, lang); urls.push(url(lang, k)); }
   urls.push(home(lang), url(lang, 'list'), url(lang, 'guide'), url(lang, 'contact'), url(lang, 'blog'), ...ALLPOSTS.map((p) => url(lang, 'blog', p.slug)));
   for (const l of LISTINGS) { pageListing(l, lang); urls.push(url(lang, 'listing', slugOf(l))); }
+  for (const l of PREVIEW) pageListing(l, lang);
 }
 for (const p of PROJECTS) { if (p.i18n) { for (const lang of LANGS.filter((l) => ANTALLE[l])) { pageProjectI18n(p, lang); urls.push(url(lang, 'projects', p.slug)); } } else { pageProject(p); urls.push(`/projeler/${p.slug}/`); } }
 const OLD_BLOG_TO = { kira: url('tr', 'blog', 'kira-artis-orani'), tuik: url('tr', 'blog', 'antalya-konut-satis-istatistikleri'), about: url('tr', 'about'), accday: url('tr', 'events', 'acc-day-2025'), blog: url('tr', 'blog') };

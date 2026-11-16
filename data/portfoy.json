@@ -1,1 +1,315 @@
-[]
+[
+ {
+  "id": "ACC-0001",
+  "durum": "Onay Bekliyor",
+  "tip": "Satılık",
+  "tur": "Villa",
+  "emlakTipi": "konut",
+  "altTip": "Villa",
+  "ilce": "Döşemealtı",
+  "mahalle": "Altınkale",
+  "fiyat": 65000000,
+  "para": "TL",
+  "oda": "6+1",
+  "brut": 478,
+  "net": 400,
+  "arsa": 504,
+  "bahce": 229,
+  "insaat": 536,
+  "yas": 0,
+  "katSayisi": 4,
+  "isitma": "Yerden Isıtma",
+  "banyo": "5",
+  "otopark": "Kapalı Otopark",
+  "esya": "Eşyasız",
+  "kullanim": "Boş",
+  "site": "Hayır",
+  "kredi": "Evet",
+  "tapu": "Kat İrtifaklı",
+  "takas": "Evet",
+  "cephe": {
+   "tr": "Doğu, Batı, Güney",
+   "en": "East, West, South",
+   "ru": "Восток, запад, юг"
+  },
+  "tarih": "16.11.2026",
+  "fiyatKontrol": "16.11.2026",
+  "oneCikan": "Evet",
+  "tekYetki": true,
+  "eids": "ACC HOMES · Yetki Belge No 0703112",
+  "etiketler": [
+   "yeni"
+  ],
+  "foto": [
+   "/img/ACC-0001/01.webp",
+   "/img/ACC-0001/02.webp",
+   "/img/ACC-0001/03.webp",
+   "/img/ACC-0001/04.webp",
+   "/img/ACC-0001/05.webp",
+   "/img/ACC-0001/06.webp",
+   "/img/ACC-0001/07.webp",
+   "/img/ACC-0001/08.webp",
+   "/img/ACC-0001/09.webp",
+   "/img/ACC-0001/10.webp",
+   "/img/ACC-0001/11.webp",
+   "/img/ACC-0001/12.webp",
+   "/img/ACC-0001/13.webp",
+   "/img/ACC-0001/14.webp",
+   "/img/ACC-0001/15.webp",
+   "/img/ACC-0001/16.webp",
+   "/img/ACC-0001/17.webp",
+   "/img/ACC-0001/18.webp",
+   "/img/ACC-0001/19.webp",
+   "/img/ACC-0001/20.webp",
+   "/img/ACC-0001/21.webp",
+   "/img/ACC-0001/22.webp"
+  ],
+  "thumbs": true,
+  "sahibinden": "1305273440",
+  "baslik": {
+   "tr": "Döşemealtı Altınkale’de Isıtmalı Havuzlu Akıllı 6+1 Lüks Villa",
+   "en": "Smart 6+1 Luxury Villa with Heated Pool in Altınkale, Döşemealtı",
+   "ru": "Умная люкс-вилла 6+1 с подогреваемым бассейном, Алтынкале"
+  },
+  "meta": "Döşemealtı Altınkale’de 504 m² arsada 478 m² akıllı villa: ısıtmalı havuz, hamam, sauna, asansör, ısı pompası. ACC HOMES tek yetkili.",
+  "aciklama": {
+   "tr": "Döşemealtı’nın gelişen villa bölgesi Altınkale’de, 504 m² arsa üzerinde yükselen bu müstakil villa; 478 m² brüt kullanım alanı, ısıtmalı havuzu ve tam akıllı ev altyapısıyla yeni nesil bir yaşam sunuyor. Villa oturuma hazır, boş ve krediye uygun.\nDört katlı yapının bodrum katında sinema/hobi odası, misafir yatak odası ve banyosu ile 3 araçlık kapalı otopark bulunuyor. Zemin katta geniş mutfak, yemek ve oturma salonları ile hamam ve sauna yer alıyor; yaşam alanları büyük sürgülü camlarla havuza ve bahçeye açılıyor. Birinci katta her biri kendi banyosu ve giyinme odası olan iki yatak odası ile çalışma odası, en üst katta ise banyolu, giyinme odalı, teraslı ve dış jakuzili ebeveyn süiti var.\nVillanın en güçlü yanı teknik donanımı: güneş enerjisi destekli ısı pompası ve yerden ısıtma, fan-coil ile merkezi iklimlendirme, 33 kVA jeneratör, yüz tanımalı giriş ve 14 kameralı IP güvenlik sistemi, UV destekli su arıtma ve yağmur suyu depolama, panoramik asansör ve elektrikli araç şarj ünitesi. Mutfakta Gaggenau ankastre set kullanılmış.\n229 m² bahçede ısıtmalı havuz, taş fırınlı ve mangallı dış mutfak ile oturma alanı bulunuyor. Villa, ACC HOMES’un tek yetkili olduğu bir portföy; özel sunum ve yerinde gösterim için randevu alabilirsiniz.",
+   "en": "Set on a 504 m² plot in Altınkale, the growing villa district of Döşemealtı, this detached villa offers 478 m² of gross living space, a heated swimming pool and full smart-home technology. It is brand new, vacant, ready to move into and eligible for a mortgage.\nThe four-level house has a cinema/hobby room, a guest bedroom with bathroom and a garage for three cars in the basement. The ground floor holds a large kitchen, dining and living rooms, a hammam and a sauna, with floor-to-ceiling sliding glass opening onto the pool and garden. The first floor has two bedrooms, each with its own bathroom and dressing room, plus a home office; the top floor is a master suite with bathroom, walk-in closet, terrace and outdoor jacuzzi.\nThe technical specification is what sets it apart: a solar-assisted heat pump with underfloor heating, fan-coil heating and cooling, a 33 kVA generator, facial-recognition entry and a 14-camera IP security system, UV water purification and rainwater storage, a panoramic lift and an electric-vehicle charger. The kitchen is fitted with Gaggenau appliances.\nThe 229 m² garden has the heated pool, an outdoor kitchen with stone oven and barbecue, and a lounge area. ACC HOMES is the sole agent for this property; private presentations and viewings are by appointment.",
+   "ru": "Отдельная вилла на участке 504 м² в Алтынкале — развивающемся районе вилл Дёшемеалты: 478 м² общей площади, подогреваемый бассейн и полноценная система «умный дом». Новый дом, свободен, готов к заселению и подходит под ипотеку.\nНа цокольном этаже — кинозал/комната для хобби, гостевая спальня с санузлом и крытый гараж на 3 машины. На первом этаже — просторная кухня, столовая и гостиная, хамам и сауна; панорамные раздвижные окна выходят к бассейну и саду. На втором этаже две спальни, каждая со своим санузлом и гардеробной, и кабинет; на верхнем этаже — мастер-спальня с ванной, гардеробной, террасой и уличным джакузи.\nГлавное преимущество — техническое оснащение: тепловой насос с поддержкой солнечной энергии и тёплый пол, фанкойлы для отопления и охлаждения, генератор 33 кВА, вход с распознаванием лица и IP-видеонаблюдение на 14 камер, УФ-очистка воды и сбор дождевой воды, панорамный лифт и зарядка для электромобиля. Кухня оснащена техникой Gaggenau.\nВ саду 229 м² — подогреваемый бассейн, летняя кухня с каменной печью и барбекю, зона отдыха. ACC HOMES — эксклюзивный агент по этому объекту; показы и презентации по предварительной записи."
+  },
+  "nedenler": {
+   "tr": [
+    "Isıtmalı havuz ve 2 dış jakuzi",
+    "Tam akıllı ev, panoramik asansör",
+    "Hamam, sauna ve sinema odası",
+    "Güneş destekli ısı pompası"
+   ],
+   "en": [
+    "Heated pool and 2 outdoor jacuzzis",
+    "Full smart home, panoramic lift",
+    "Hammam, sauna and cinema room",
+    "Solar-assisted heat pump"
+   ],
+   "ru": [
+    "Подогреваемый бассейн и 2 джакузи",
+    "Умный дом и панорамный лифт",
+    "Хамам, сауна и кинозал",
+    "Тепловой насос на солнечной энергии"
+   ]
+  },
+  "plan": {
+   "tr": [
+    [
+     "Bodrum kat",
+     [
+      "Sinema / hobi odası",
+      "Yatak odası ve banyo",
+      "3 araçlık kapalı otopark",
+      "Teknik ve elektrik odaları",
+      "Depo"
+     ]
+    ],
+    [
+     "Zemin kat",
+     [
+      "Geniş mutfak",
+      "Yemek ve oturma salonları",
+      "Banyo",
+      "Hamam ve sauna",
+      "Dış jakuzi"
+     ]
+    ],
+    [
+     "1. kat",
+     [
+      "2 yatak odası (her biri banyolu ve giyinme odalı)",
+      "Çalışma odası",
+      "Çamaşır odası"
+     ]
+    ],
+    [
+     "2. kat",
+     [
+      "Ebeveyn süiti: banyo, giyinme odası",
+      "Teras ve dış jakuzi",
+      "Çamaşır odası"
+     ]
+    ],
+    [
+     "Bahçe (229 m²)",
+     [
+      "Isıtmalı yüzme havuzu",
+      "Taş fırınlı, mangallı dış mutfak",
+      "Ön ve arka çim bahçe",
+      "Oturma alanı",
+      "Yaya ve araç girişi"
+     ]
+    ]
+   ],
+   "en": [
+    [
+     "Basement",
+     [
+      "Cinema / hobby room",
+      "Bedroom and bathroom",
+      "Garage for 3 cars",
+      "Technical and electrical rooms",
+      "Storage"
+     ]
+    ],
+    [
+     "Ground floor",
+     [
+      "Large kitchen",
+      "Dining and living rooms",
+      "Bathroom",
+      "Hammam and sauna",
+      "Outdoor jacuzzi"
+     ]
+    ],
+    [
+     "First floor",
+     [
+      "2 bedrooms, each with bathroom and dressing room",
+      "Home office",
+      "Laundry room"
+     ]
+    ],
+    [
+     "Second floor",
+     [
+      "Master suite with bathroom and walk-in closet",
+      "Terrace and outdoor jacuzzi",
+      "Laundry room"
+     ]
+    ],
+    [
+     "Garden (229 m²)",
+     [
+      "Heated swimming pool",
+      "Outdoor kitchen with stone oven and BBQ",
+      "Front and back lawns",
+      "Lounge area",
+      "Pedestrian and vehicle entrances"
+     ]
+    ]
+   ],
+   "ru": [
+    [
+     "Цокольный этаж",
+     [
+      "Кинозал / комната для хобби",
+      "Спальня и санузел",
+      "Гараж на 3 машины",
+      "Технические помещения",
+      "Кладовая"
+     ]
+    ],
+    [
+     "Первый этаж",
+     [
+      "Просторная кухня",
+      "Столовая и гостиная",
+      "Санузел",
+      "Хамам и сауна",
+      "Уличное джакузи"
+     ]
+    ],
+    [
+     "Второй этаж",
+     [
+      "2 спальни с санузлами и гардеробными",
+      "Кабинет",
+      "Прачечная"
+     ]
+    ],
+    [
+     "Третий этаж",
+     [
+      "Мастер-спальня с ванной и гардеробной",
+      "Терраса и уличное джакузи",
+      "Прачечная"
+     ]
+    ],
+    [
+     "Сад (229 м²)",
+     [
+      "Подогреваемый бассейн",
+      "Летняя кухня с каменной печью и барбекю",
+      "Газоны перед домом и за ним",
+      "Зона отдыха",
+      "Пешеходный и автомобильный въезд"
+     ]
+    ]
+   ]
+  },
+  "ozellikler": {
+   "tr": [
+    "Gaggenau ankastre set",
+    "Tam akıllı ev",
+    "Panoramik asansör",
+    "Merkezi süpürge",
+    "Fan-coil iklimlendirme",
+    "Yerden ısıtma",
+    "Güneş destekli ısı pompası",
+    "33 kVA jeneratör",
+    "Yüz tanımalı giriş",
+    "14 kameralı IP güvenlik",
+    "UV su arıtma",
+    "Yağmur suyu deposu",
+    "Otomatik bahçe sulama",
+    "Isıtmalı havuz",
+    "Hamam ve sauna",
+    "Şömine",
+    "Elektrikli araç şarjı",
+    "Isı ve ses yalıtımı",
+    "Fiber internet",
+    "Velux çatı pencereleri"
+   ],
+   "en": [
+    "Gaggenau appliances",
+    "Full smart home",
+    "Panoramic lift",
+    "Central vacuum",
+    "Fan-coil climate control",
+    "Underfloor heating",
+    "Solar-assisted heat pump",
+    "33 kVA generator",
+    "Facial-recognition entry",
+    "14-camera IP security",
+    "UV water purification",
+    "Rainwater tank",
+    "Automatic irrigation",
+    "Heated pool",
+    "Hammam and sauna",
+    "Fireplace",
+    "EV charger",
+    "Thermal and sound insulation",
+    "Fibre internet",
+    "Velux skylights"
+   ],
+   "ru": [
+    "Техника Gaggenau",
+    "Умный дом",
+    "Панорамный лифт",
+    "Центральный пылесос",
+    "Фанкойлы",
+    "Тёплый пол",
+    "Тепловой насос с солнечной поддержкой",
+    "Генератор 33 кВА",
+    "Вход по распознаванию лица",
+    "IP-видеонаблюдение, 14 камер",
+    "УФ-очистка воды",
+    "Резервуар дождевой воды",
+    "Автополив сада",
+    "Подогреваемый бассейн",
+    "Хамам и сауна",
+    "Камин",
+    "Зарядка для электромобиля",
+    "Тепло- и звукоизоляция",
+    "Оптоволоконный интернет",
+    "Мансардные окна Velux"
+   ]
+  }
+ }
+]

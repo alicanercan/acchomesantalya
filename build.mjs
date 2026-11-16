@@ -945,14 +945,40 @@ function grid(list, lang) {
 
 const alts = (seg, slugByLang) => Object.fromEntries(LANGS.map((l) => [l, seg === 'home' ? home(l) : url(l, seg, slugByLang ? slugByLang(l) : '')]));
 
+
+// ---------- Ana sayfa: ilan kategorileri ve öne çıkan lokasyonlar (Neo tarzı) ----------
+const HC = {
+  tr: { cats: 'İlan kategorileri', locs: 'Öne çıkan lokasyonlar', n: (k) => `${k} ilan`, see: 'İlanları gör', guide: 'Bölge rehberi', all: 'Antalya geneli', mah: 'Popüler mahalleler', sale: 'Satılık', rent: 'Kiralık' },
+  en: { cats: 'Listing categories', locs: 'Popular locations', n: (k) => `${k} listings`, see: 'View listings', guide: 'Area guide', all: 'All of Antalya', mah: 'Popular neighbourhoods', sale: 'For sale', rent: 'For rent' },
+  ru: { cats: 'Категории объектов', locs: 'Популярные районы', n: (k) => `${k} объектов`, see: 'Смотреть объекты', guide: 'Гид по району', all: 'Вся Анталия', mah: 'Популярные кварталы', sale: 'Продажа', rent: 'Аренда' },
+};
+const HCX = (lang) => HC[lang] || HC.en;
+function homeCats(lang) {
+  const x = HCX(lang); const base = url(lang, 'list'); const n = (f) => LISTINGS.filter(f).length;
+  const et = (k) => EMLAK_TIPLERI.find((e) => e.k === k);
+  const items = [
+    ['🔑', x.sale, base + '?tip=Satılık', n((l) => l.tip === 'Satılık')],
+    ['🗝️', x.rent, base + '?tip=Kiralık', n((l) => l.tip === 'Kiralık')],
+    ...['konut', 'is-yeri', 'arsa', 'turistik-tesis'].map((k) => { const e = et(k); return [e.icon, lab(e, lang), catUrl(lang, e), n((l) => l.emlakTipi === k)]; }),
+  ];
+  return `<section class="wrap sec"><div class="sechead"><h2>${x.cats}</h2></div><div class="hcats">${items.map(([i, t, u, c]) => `<a href="${u}"><span>${i}</span><b>${esc(t)}</b><small>${c ? x.n(c) : x.see}</small></a>`).join('')}</div></section>`;
+}
+function homeLocs(lang) {
+  const x = HCX(lang); const L = GL(lang); const base = url(lang, 'list');
+  const cards = [[ '🌅', x.all, base, LISTINGS.length, '' ], ...AREA_GUIDES.map((a) => { const c = LISTINGS.filter((l) => l.ilce === a.ilce).length; return [a.icon, a[L].title.replace(/ Bölge Rehberi| Area Guide/, ''), c ? `${base}?ilce=${encodeURIComponent(a.ilce)}` : aUrl(L, a), c, c ? '' : x.guide]; })];
+  const mah = MAHALLELER.map((m) => `<a href="${mUrl(L, m)}">${m.icon} ${esc(m[L].name)}</a>`).join('');
+  return `<section class="wrap sec"><div class="sechead"><h2>${x.locs}</h2><a href="${L === 'tr' ? `/${SEGS.areas.tr}/` : `/en/${SEGS.areas.en}/`}">${x.guide} →</a></div><div class="hlocs">${cards.map(([i, t, u, c, g]) => `<a href="${u}"><span>${i}</span><b>${esc(t)}</b><small>${c ? x.n(c) : g || x.see}</small></a>`).join('')}</div><p class="hmah"><b>${x.mah}:</b> ${mah}</p></section>`;
+}
 // ---------- sayfalar ----------
 function pageHome(lang) {
   const t = T[lang];
-  const feat = LISTINGS.filter((l) => l.oneCikan === 'Evet' && l.durum !== 'Satıldı').slice(0, 6);
-  const show = feat.length ? feat : LISTINGS.slice(0, 6);
+  const avail = LISTINGS.filter((l) => l.durum !== 'Satıldı');
+  const show = [...avail.filter((l) => l.oneCikan === 'Evet'), ...avail.filter((l) => l.oneCikan !== 'Evet')].slice(0, 12);
   const body = `${heroSlider(lang)}
 <section class="hsearchbar"><div class="wrap">${areaTabs(lang, 'link')}${searchBox(lang)}</div></section>
-${show.length ? `<section class="wrap sec"><div class="sechead"><h2>${t.featured}</h2><a href="${url(lang, 'list')}">${t.seeAll} →</a></div>${areaTabs(lang, 'filter')}${grid(show, lang)}</section>` : ''}
+${show.length ? `<section class="wrap sec"><div class="sechead"><h2>${t.featured}</h2><a href="${url(lang, 'list')}">${t.seeAll} →</a></div>${areaTabs(lang, 'filter')}${grid(show, lang).replace('<div class="grid">', '<div class="grid g4">')}</section>` : ''}
+${homeCats(lang)}
+${homeLocs(lang)}
 <section class="wrap sec"><div class="sechead"><h2>${t.projects}</h2><a href="${url(lang, 'projects')}">${t.projectsCta} →</a></div>${projectCards(lang)}</section>
 ${consultBar(lang)}
 ${trustStrip(lang)}

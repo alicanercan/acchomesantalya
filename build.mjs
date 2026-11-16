@@ -14,6 +14,7 @@ import { EVENTS } from './events.mjs';
 import { BROKER } from './broker.mjs';
 import { ROADMAP, TRUST, FOUNDER } from './story.mjs';
 import { BLOG, BLOG_POSTS } from './blog.mjs';
+import { NEWS, NEWS_UI } from './news.mjs';
 import { GUIDES, FAQ, GUIDE_SEG, GUIDE_TITLE, GUIDE_LEAD, GUIDE_UPDATED } from './guide.mjs';
 import { SEO_META } from './seo-meta.mjs';
 import { T_EXTRA, S, s, SEGS, LOCALE, RTL, extend, PACKS } from './i18n.mjs';
@@ -289,7 +290,7 @@ ${col(s('popSearches', lang), pop.map(([n, q]) => [n, url(lang, 'list') + q]))}
 ${col(s('popAreas', lang), [...AREA_GUIDES.map((a) => [a.ilce, aUrl(GL(lang), a)]), [s('areasTitle', lang) + ' →', url(lang, 'areas')]])}
 ${col(GUIDE_TITLE[lang], GUIDES.map((g) => [gC(g, L).title, gUrl(L, g)]))}
 ${col(t.company, [[nv('about'), url(lang, 'about')], [nv('broker'), url(lang, 'broker')], [nv('team'), url(lang, 'team')], [t.revTitle, url(lang, 'reviews')], [nv('licences'), url(lang, 'licences')], [EVENTS.nav[lang] || EVENTS.nav.en, url(lang, 'events')], [nv('join'), url(lang, 'join')]])}
-${col(s('usefulLinks', lang), [[nv('services'), url(lang, 'services')], [nv('sell'), url(lang, 'sell')], [nv('viewing'), url(lang, 'viewing')], [s('dlPageTitle', lang), url(lang, 'downloads')], [t.projects, url(lang, 'projects')], [t.blog, url(lang, 'blog')], [t.nav.contact, url(lang, 'contact')]])}
+${col(s('usefulLinks', lang), [...(NEWS_LANGS.includes(lang) && NEWS.length ? [['ACC NEWS', newsUrl(lang)]] : []), [nv('services'), url(lang, 'services')], [nv('sell'), url(lang, 'sell')], [nv('viewing'), url(lang, 'viewing')], [s('dlPageTitle', lang), url(lang, 'downloads')], [t.projects, url(lang, 'projects')], [t.blog, url(lang, 'blog')], [t.nav.contact, url(lang, 'contact')]])}
 </div>
 <div class="wrap fmid">
 <div class="fbrand"><img src="/img/logo/acc-siyah.svg" alt="ACC HOMES International Real Estate" width="171" height="50" loading="lazy"><p class="slogan">${esc(SITE.slogan[lang])}</p><p>${esc(t.footerAbout)}</p></div>
@@ -329,6 +330,9 @@ function LLMS() {
 - [Hizmetlerimiz](${a(url('tr', 'services'))}) · [Services](${a(url('en', 'services'))})
 - [Müşteri yorumları](${a(url('tr', 'reviews'))}) · [Lisanslar](${a(url('tr', 'licences'))}) · [İletişim](${a(url('tr', 'contact'))})
 
+## ACC NEWS (haftalık emlak bülteni / weekly real estate brief)
+${NEWS.map((n) => `- [${n.tr.h1} · ${n.date}](${a(newsUrl('tr', n.date))}) · [EN](${a(newsUrl('en', n.date))}) · [RU](${a(newsUrl('ru', n.date))})`).join('\n')}
+
 ## Alıcı rehberi / Buyer's guide
 ${GUIDES.map((g) => `- [${g.tr.title}](${a(gUrl('tr', g))}) · [${g.enc.title}](${a(gUrl('en', g))})`).join('\n')}
 
@@ -362,14 +366,14 @@ function crumbSchema(body, title, canonical) {
   const clean = (x) => x.replace(/&amp;/g, '&').replace(/&#39;/g, "'").replace(/&quot;/g, '"');
   return [{ '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: items.map(([n, u], i) => ({ '@type': 'ListItem', position: i + 1, name: clean(n), item: SITE.domain + u })) }];
 }
-function layout({ lang, title, desc, canonical, alternates, body, schema = [], ogImage, noindex }) {
+function layout({ lang, title, desc, canonical, alternates, body, schema = [], ogImage, noindex, ogType, published }) {
   if (SEO_META[canonical]) [title, desc] = SEO_META[canonical];
   const t = T[lang];
   const alt = alternates ? Object.entries(alternates).map(([l, u]) => `<link rel="alternate" hreflang="${l}" href="${SITE.domain}${u}">`).join('') + `<link rel="alternate" hreflang="x-default" href="${SITE.domain}${alternates.tr}">` : '';
   const langSwitch = alternates ? LANGS.map((l) => `<a href="${alternates[l] || (alternates.tr && alternates.tr.startsWith('/alici-rehberi') ? url(l, 'buyersguide') : home(l))}"${l === lang ? ' aria-current="true"' : ''}>${l.toUpperCase()}</a>`).join('') : '';
   return (RTL.has(lang) ? (h) => h.replaceAll('→', '←') : (h) => h)(`<!doctype html><html lang="${t.htmlLang}"${RTL.has(lang) ? ' dir="rtl"' : ''}><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>${esc(title)}</title>${noindex ? '<meta name="robots" content="noindex">' : ''}<meta name="description" content="${esc(desc)}"><link rel="canonical" href="${SITE.domain}${canonical}">${alt}
-<meta property="og:type" content="website"><meta property="og:title" content="${esc(title)}"><meta property="og:description" content="${esc(desc)}"><meta property="og:url" content="${SITE.domain}${canonical}"><meta property="og:locale" content="${t.locale}"><meta property="og:site_name" content="ACC HOMES International Real Estate"><meta property="og:image" content="${SITE.domain}${ogImage || '/img/acc-plaza-og.jpg'}">${ogImage ? '' : '<meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">'}<meta property="og:image:alt" content="${esc(title)}"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="${esc(title)}"><meta name="twitter:description" content="${esc(desc)}"><meta name="twitter:image" content="${SITE.domain}${ogImage || '/img/acc-plaza-og.jpg'}">
+<meta property="og:type" content="${ogType || 'website'}">${published ? `<meta property="article:published_time" content="${published}T09:00:00+03:00"><meta property="article:author" content="Ali Caner Can">` : ''}<meta property="og:title" content="${esc(title)}"><meta property="og:description" content="${esc(desc)}"><meta property="og:url" content="${SITE.domain}${canonical}"><meta property="og:locale" content="${t.locale}"><meta property="og:site_name" content="ACC HOMES International Real Estate"><meta property="og:image" content="${SITE.domain}${ogImage || '/img/acc-plaza-og.jpg'}">${ogImage ? '' : '<meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">'}<meta property="og:image:alt" content="${esc(title)}"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="${esc(title)}"><meta name="twitter:description" content="${esc(desc)}"><meta name="twitter:image" content="${SITE.domain}${ogImage || '/img/acc-plaza-og.jpg'}">
 ${ANALYTICS_HEAD}<meta name="theme-color" content="#E02A3C"><link rel="icon" href="/favicon.svg" type="image/svg+xml"><link rel="apple-touch-icon" href="/apple-touch-icon.png">${FONTS_OK ? FONTS_PRELOAD + `<style>${FONTS_CSS}</style>` : ''}<link rel="stylesheet" href="/assets/style.css?v=${VER}">
 ${[agentSchema, ...(canonical === home(lang) ? [websiteSchema] : []), ...(schema.some((x) => x && x['@type'] === 'BreadcrumbList') ? [] : crumbSchema(body, title, canonical)), ...schema].filter(Boolean).map((s) => `<script type="application/ld+json">${JSON.stringify(s)}</script>`).join('')}
 </head><body>
@@ -591,7 +595,7 @@ function pageBlog(lang) {
   const chips = `<div class="bchips" data-bfilter><button type="button" class="on" data-c="">${bT(BLOG.ui.all, lang)}</button>${used.map((k) => `<button type="button" data-c="${k}">${BLOG.cats[k].icon} ${esc(bT(BLOG.cats[k].name, lang))}</button>`).join('')}</div>`;
   const [first, ...rest] = ALLPOSTS;
   const js = `<script>(function(){var f=document.querySelector('[data-bfilter]');if(!f)return;f.addEventListener('click',function(e){var b=e.target.closest('button');if(!b)return;[].forEach.call(f.children,function(x){x.classList.toggle('on',x===b)});var c=b.dataset.c;document.querySelectorAll('.bgrid .bcard').forEach(function(a){a.hidden=c&&a.dataset.cat!==c;});});})();</script>`;
-  const body = `<section class="wrap sec page"><nav class="crumbs"><a href="${home(lang)}">${t.nav.home}</a> / <span>${t.blog}</span></nav><h1>${t.blog}</h1><p class="sub">${esc(bT(BLOG.lead, lang))}</p>${chips}<div class="bgrid">${postCard(first, lang, true)}${rest.map((p) => postCard(p, lang)).join('')}</div>${js}</section>`;
+  const body = `<section class="wrap sec page"><nav class="crumbs"><a href="${home(lang)}">${t.nav.home}</a> / <span>${t.blog}</span></nav><h1>${t.blog}</h1><p class="sub">${esc(bT(BLOG.lead, lang))}</p>${NEWS_LANGS.includes(lang) && NEWS.length ? `<a class="nbanner" href="${newsUrl(lang, NEWS[0].date)}"><b>ACC NEWS</b><span>${esc(NEWS[0][lang].h1)} · ${NEWS_DATE[lang](NEWS[0].date)}</span><em>${NEWS_UI[lang].read} →</em></a>` : ''}${chips}<div class="bgrid">${postCard(first, lang, true)}${rest.map((p) => postCard(p, lang)).join('')}</div>${js}</section>`;
   write(path.join(url(lang, 'blog'), 'index.html'), layout({ lang, title: `${t.blog} | ACC HOMES`, desc: bT(BLOG.lead, lang), canonical: url(lang, 'blog'), alternates: alts('blog'), body }));
   for (const p of ALLPOSTS) {
     const c = postFor(p, lang); const cat = BLOG.cats[p.cat];
@@ -603,6 +607,43 @@ function pageBlog(lang) {
     const schema = [{ '@context': 'https://schema.org', '@type': 'BlogPosting', headline: c.title, description: c.desc, datePublished: p.date, dateModified: p.updated || p.date, author: { '@type': 'Person', name: 'Ali Caner Can', url: SITE.domain + url(lang, 'broker') }, publisher: { '@type': 'Organization', name: SITE.brand, logo: { '@type': 'ImageObject', url: `${SITE.domain}/img/logo/acc-homes-logo.png` } }, mainEntityOfPage: SITE.domain + url(lang, 'blog', p.slug) }];
     write(path.join(url(lang, 'blog', p.slug), 'index.html'), layout({ lang, title: `${c.title} | ACC HOMES`, desc: c.desc, canonical: url(lang, 'blog', p.slug), alternates: alts('blog', () => p.slug), body: pb, schema }));
   }
+}
+
+// ---------- ACC NEWS (haftalık emlak bülteni; TR / EN / RU) ----------
+const NEWS_LANGS = ['tr', 'en', 'ru'];
+const newsUrl = (lang, date) => `${lang === 'tr' ? '' : '/' + lang}/acc-news/${date ? date + '/' : ''}`;
+const newsAlts = (date) => Object.fromEntries(NEWS_LANGS.map((l) => [l, newsUrl(l, date)]));
+const NEWS_DATE = { tr: (d) => new Date(d).toLocaleDateString('tr-TR', { day: 'numeric', month: 'long', year: 'numeric' }), en: (d) => new Date(d).toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' }), ru: (d) => new Date(d).toLocaleDateString('ru-RU', { day: 'numeric', month: 'long', year: 'numeric' }) };
+function newsCard(n, lang) {
+  const c = n[lang]; const top = c.sections[0] ? c.sections[0].items.filter((i) => i.h).map((i) => i.h) : [];
+  return `<a class="ncard" href="${newsUrl(lang, n.date)}"><span class="ndate">${NEWS_DATE[lang](n.date)}</span><h3>${esc(c.h1)}</h3><ul>${top.map((h) => `<li>${esc(h)}</li>`).join('')}</ul><span class="nmore">${NEWS_UI[lang].read} →</span></a>`;
+}
+function pageNews(lang) {
+  if (!NEWS_LANGS.includes(lang) || !NEWS.length) return;
+  const U = NEWS_UI[lang]; const t = T[lang];
+  const idx = `<section class="wrap sec page"><nav class="crumbs"><a href="${home(lang)}">${t.nav.home}</a> / <span>${U.name}</span></nav><h1>${esc(U.title)}</h1><p class="sub">${esc(U.lead)}</p>
+<div class="ngrid">${NEWS.map((n) => newsCard(n, lang)).join('')}</div><p class="nrss"><a href="${newsUrl(lang)}feed.xml">${U.rss}</a></p></section>`;
+  const idxSchema = [{ '@context': 'https://schema.org', '@type': 'CollectionPage', name: U.title, description: U.lead, url: SITE.domain + newsUrl(lang), inLanguage: lang, isPartOf: { '@id': SITE.domain + '/#website' }, publisher: { '@id': SITE.domain + '/#org' }, mainEntity: { '@type': 'ItemList', itemListElement: NEWS.map((n, i) => ({ '@type': 'ListItem', position: i + 1, url: SITE.domain + newsUrl(lang, n.date), name: n[lang].h1 })) } }];
+  write(path.join(newsUrl(lang), 'index.html'), layout({ lang, title: U.metaTitle, desc: U.lead, canonical: newsUrl(lang), alternates: newsAlts(), body: idx, schema: idxSchema }));
+  urls.push(newsUrl(lang));
+  // RSS
+  const rss = `<?xml version="1.0" encoding="UTF-8"?>\n<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>${esc(U.title)}</title><link>${SITE.domain}${newsUrl(lang)}</link><description>${esc(U.lead)}</description><language>${lang}</language><atom:link href="${SITE.domain}${newsUrl(lang)}feed.xml" rel="self" type="application/rss+xml"/>${NEWS.map((n) => `<item><title>${esc(n[lang].h1)} · ${NEWS_DATE[lang](n.date)}</title><link>${SITE.domain}${newsUrl(lang, n.date)}</link><guid>${SITE.domain}${newsUrl(lang, n.date)}</guid><pubDate>${new Date(n.date + 'T09:00:00+03:00').toUTCString()}</pubDate><description>${esc(n[lang].desc)}</description></item>`).join('')}</channel></rss>`;
+  write(path.join(newsUrl(lang), 'feed.xml'), rss);
+  NEWS.forEach((n, i) => {
+    const c = n[lang]; const prev = NEWS[i + 1], next = NEWS[i - 1];
+    const secs = c.sections.map((sec, si) => `<h2>${esc(sec.title)}</h2>${sec.items.map((it, ii) => `<div class="ncardb">${it.h ? `<h3>${si === 0 ? `${ii + 1}. ` : ''}${esc(it.h)}</h3>` : ''}<p>${esc(it.p)}</p>${it.src ? `<p class="nsrc">→ <a href="${esc(it.src[1])}" target="_blank" rel="noopener nofollow">${esc(it.src[0])}</a></p>` : ''}</div>`).join('')}`).join('');
+    const cal = `<h2>${esc(c.calTitle)}</h2><ul class="ncal">${c.cal.map(([d, e]) => `<li><b>${esc(d)}</b><span>${esc(e)}</span></li>`).join('')}</ul>`;
+    const view = `<h2>${esc(c.viewTitle)}</h2><div class="nview">${esc(c.view)}</div>`;
+    const author = `<div class="pauthor">${SITE.brokerPhoto ? `<img src="${SITE.brokerPhoto}" alt="Ali Caner Can" width="56" height="56" loading="lazy">` : ''}<div><b><a href="${url(lang, 'broker')}">Ali Caner Can</a></b><small>Broker & Owner · ACC HOMES International Real Estate</small></div></div>`;
+    const srcs = `<h2>${esc(c.srcTitle)}</h2><ol class="nsources">${c.sources.map(([nm, u]) => `<li><a href="${esc(u)}" target="_blank" rel="noopener nofollow">${esc(nm)}</a></li>`).join('')}</ol>`;
+    const pn = `<nav class="npn">${prev ? `<a href="${newsUrl(lang, prev.date)}">← ${NEWS_DATE[lang](prev.date)}</a>` : '<span></span>'}<a href="${newsUrl(lang)}">${NEWS_UI[lang].all}</a>${next ? `<a href="${newsUrl(lang, next.date)}">${NEWS_DATE[lang](next.date)} →</a>` : '<span></span>'}</nav>`;
+    const body = `<article class="wrap sec narrow page news"><nav class="crumbs"><a href="${home(lang)}">${t.nav.home}</a> / <a href="${newsUrl(lang)}">${U.name}</a> / <span>${NEWS_DATE[lang](n.date)}</span></nav>
+<p class="eyebrow">ACC NEWS</p><h1>${esc(c.h1)}</h1><p class="pmeta"><time datetime="${n.date}">${NEWS_DATE[lang](n.date)}</time></p>${author}<p class="nintro">${esc(c.intro)}</p>${secs}${cal}${view}
+<p class="ctas"><a class="btn" href="${url(lang, 'join')}">${U.cta} →</a><a class="btn ghost" href="${waLink(T[lang].waGeneral)}" target="_blank" rel="noopener">WhatsApp</a></p>${srcs}<p class="nnote">${esc(c.note)}</p>${pn}</article>`;
+    const schema = [{ '@context': 'https://schema.org', '@type': 'NewsArticle', headline: c.h1, alternativeHeadline: c.metaTitle, description: c.desc, inLanguage: lang, datePublished: n.date + 'T09:00:00+03:00', dateModified: (n.updated || n.date) + 'T09:00:00+03:00', image: [SITE.domain + '/img/acc-plaza-og.jpg'], author: { '@type': 'Person', name: 'Ali Caner Can', jobTitle: 'Broker', url: SITE.domain + url(lang, 'broker') }, publisher: { '@id': SITE.domain + '/#org' }, mainEntityOfPage: SITE.domain + newsUrl(lang, n.date), isPartOf: { '@type': 'CollectionPage', url: SITE.domain + newsUrl(lang), name: U.title }, about: [{ '@type': 'Place', name: 'Antalya' }, { '@type': 'Country', name: 'Türkiye' }], citation: c.sources.map(([, u]) => u), articleSection: 'ACC NEWS' }];
+    write(path.join(newsUrl(lang, n.date), 'index.html'), layout({ lang, title: c.metaTitle, desc: c.desc, canonical: newsUrl(lang, n.date), alternates: newsAlts(n.date), body, schema, ogType: 'article', published: n.date }));
+    urls.push(newsUrl(lang, n.date));
+  });
 }
 
 // ---------- alıcı rehberi ----------
@@ -1141,7 +1182,7 @@ await fetchSocialImages();
 await fetchBrokerImages();
 const urls = [];
 for (const lang of LANGS) {
-  pageHome(lang); pageList(lang); pageGuide(lang); pageContact(lang); pageBlog(lang); pageProjects(lang); pageGuideHub(lang); pageReviews(lang); pageFavorites(lang); pageEvents(lang); urls.push(url(lang, 'events'), ...EVENTS.events.map((e) => evUrl(lang, e))); pageDownloads(lang); urls.push(url(lang, 'projects'), url(lang, 'buyersguide'), url(lang, 'reviews'));
+  pageHome(lang); pageList(lang); pageGuide(lang); pageContact(lang); pageBlog(lang); pageProjects(lang); pageGuideHub(lang); pageReviews(lang); pageFavorites(lang); pageEvents(lang); pageNews(lang); urls.push(url(lang, 'events'), ...EVENTS.events.map((e) => evUrl(lang, e))); pageDownloads(lang); urls.push(url(lang, 'projects'), url(lang, 'buyersguide'), url(lang, 'reviews'));
   if (lang === 'tr' || lang === 'en') { for (const g of GUIDES) { pageGuideItem(g, lang); urls.push(gUrl(lang, g)); } for (const a of AREA_GUIDES) { pageAreaItem(a, lang); urls.push(aUrl(lang, a)); } for (const m of MAHALLELER) { pageMahalle(m, lang); urls.push(mUrl(lang, m)); } }
   pageAreaHub(lang); urls.push(url(lang, 'areas'));
   for (const k of Object.keys(PAGES)) { pageCorporate(k, lang); urls.push(url(lang, k)); }

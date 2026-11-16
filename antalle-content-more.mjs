@@ -25,7 +25,7 @@ export const MORE = (P) => ({
     archTitle: 'Architektur, die den Wind gestaltet',
     archText: 'Die Architektur von Antalle ist aus dem Klima Antalyas entstanden. Geschlossene und offene Volumen, Innenhöfe und Beschattungen erzeugen einen Temperaturunterschied zwischen sonnigen und schattigen Bereichen. Erwärmt sich die offene Fläche, steigt die Luft auf und kühle Luft aus dem Schatten strömt nach. So zieht den ganzen Tag eine natürliche Brise durch Höfe und Wohnungen.',
     featuresTitle: 'Ausstattung',
-    features: [['🌡️', 'Fußbodenheizung und installierte Kombithermen'], ['📱', 'Smart-Home-Steuerung und elektrische Rollläden'], ['❄️', 'Mitsubishi-Electric-Klimaanlagen in allen Räumen'], ['🍽️', 'Franke-Einbaugeräte: Kochfeld, Backofen, Mikrowelle, Dunstabzug, Geschirrspüler, Kühlschrank'], ['🍳', 'Moderne Inselküche'], ['🛁', 'Eigenes Bad und Ankleide an jedem Zimmer'], ['🧥', 'Design-Garderobe'], ['🛡️', 'Wärme-, Feuchtigkeits- und Schalldämmung der gesamten Hülle'], ['🌐', 'Glasfaser-Internet und Erdgas']],
+    features: [['🌡️', 'Fußbodenheizung und installierte Kombithermen'], ['📱', 'Smart-Home-Steuerung und elektrische Rollläden'], ['❄️', 'Mitsubishi-Electric-Klimaanlagen in allen Räumen'], ['🍽️', 'Franke-Einbauset (6-teilig): Kochfeld, Backofen, Mikrowelle, Dunstabzug, Geschirrspüler, Kühlschrank'], ['🍳', 'Moderne Inselküche'], ['🛁', 'Eigenes Bad und Ankleide an jedem Zimmer'], ['🧥', 'Design-Garderobe'], ['🛡️', 'Wärme-, Feuchtigkeits- und Schalldämmung der gesamten Hülle'], ['🌐', 'Glasfaser-Internet und Erdgas']],
     planTitle: '5 Abschnitte, 4 Hektar, ein Viertel',
     planText: 'Antalle besteht aus 5 Bauabschnitten auf getrennten Grundstücken in Altınkale, verbunden durch Parks und Alleen.',
     plan: [
@@ -37,7 +37,7 @@ export const MORE = (P) => ({
     ],
     phasesTitle: 'Abschnitte im Verkauf und Zahlung',
     phases: [
-      { tag: 'BEZUGSFERTIG', name: 'Abschnitt 1', status: 'Schlüsselfertig, Grundbücher bereit', items: ['4+1-Gartenmaisonette + 2+1-Terrassenwohnung, zwei Grundbücher in einem Kauf', 'Zwei getrennte Wohnungen oder ein ganzes dreigeschossiges 6+2-Haus', 'Barkauf, volle Rechnung inkl. MwSt.'], price: `Gesamt ${P.p1}`, hot: true },
+      { tag: 'BEZUGSFERTIG', name: 'Abschnitt 1', status: 'Schlüsselfertig, Grundbücher bereit', items: ['4+1-Gartenmaisonette + 2+1-Terrassenwohnung, zwei Grundbücher in einem Kauf', 'Zwei getrennte Wohnungen oder ein ganzes dreigeschossiges 6+2-Haus', 'Barkauf, volle Rechnung inkl. MwSt.'], price: `Gesamt ${P.p1} inkl. MwSt.`, hot: true },
       { tag: 'IM BAU', name: 'Abschnitt 2', status: '3 freistehende Villen im Verkauf', items: [`Freistehende Villa: ${P.villa}`, 'Maisonette und Terrassenwohnung mit überdachtem Parkplatz werden nur zusammen verkauft und sind derzeit nicht im Verkauf; schreiben Sie uns bei Interesse', 'Überdachte Parkplätze'], price: `Freistehende Villa ${P.villa}` },
       { tag: 'VERKAUFSSTART', name: 'Abschnitt 3', status: 'Maisonette und Terrassenwohnung einzeln erhältlich', items: [`2+1-Terrassenwohnung: ${P.p3t}`, `4+1-Gartenmaisonette: ${P.p3d}`, '50 % Anzahlung, Rest in 18 Monaten zinsfrei bis zur Übergabe', '15 % Rabatt beim Kauf beider Einheiten'], price: '50 % Anzahlung + 18 Monate zinsfrei' },
     ],
@@ -77,7 +77,7 @@ export const MORE = (P) => ({
     archTitle: 'معماری‌ای که نسیم را طراحی می‌کند',
     archText: 'معماری آنتاله از اقلیم آنتالیا زاده شده است. حجم‌های پر و خالی، حیاط‌های داخلی و سایبان‌ها میان فضاهای آفتابی و سایه‌دار اختلاف دما ایجاد می‌کنند. با گرم شدن فضای باز، هوا بالا می‌رود و هوای خنک سایه جای آن را می‌گیرد؛ بنابراین در تمام روز نسیمی طبیعی در حیاط‌ها و خانه‌ها جریان دارد.',
     featuresTitle: 'مشخصات',
-    features: [['🌡️', 'گرمایش از کف و پکیج نصب‌شده'], ['📱', 'هوشمندسازی خانه و کرکره برقی'], ['❄️', 'کولر Mitsubishi Electric در همه اتاق‌ها'], ['🍽️', 'لوازم توکار Franke: اجاق، فر، مایکروویو، هود، ماشین ظرفشویی، یخچال'], ['🍳', 'آشپزخانه جزیره‌ای مدرن'], ['🛁', 'حمام اختصاصی و کمد لباس در هر اتاق'], ['🧥', 'جاکفشی و رخت‌آویز طراحی‌شده'], ['🛡️', 'عایق حرارتی، رطوبتی و صوتی کامل'], ['🌐', 'اینترنت فیبر و گاز شهری']],
+    features: [['🌡️', 'گرمایش از کف و پکیج نصب‌شده'], ['📱', 'هوشمندسازی خانه و کرکره برقی'], ['❄️', 'کولر Mitsubishi Electric در همه اتاق‌ها'], ['🍽️', 'ست ۶ تکه توکار Franke: اجاق، فر، مایکروویو، هود، ماشین ظرفشویی، یخچال'], ['🍳', 'آشپزخانه جزیره‌ای مدرن'], ['🛁', 'حمام اختصاصی و کمد لباس در هر اتاق'], ['🧥', 'جاکفشی و رخت‌آویز طراحی‌شده'], ['🛡️', 'عایق حرارتی، رطوبتی و صوتی کامل'], ['🌐', 'اینترنت فیبر و گاز شهری']],
     planTitle: '۵ فاز، ۴ هکتار، یک محله',
     planText: 'آنتاله از ۵ فاز روی قطعه‌زمین‌های جداگانه در آلتین‌کاله تشکیل شده که با پارک‌ها و مسیرهای درختکاری‌شده به هم متصل‌اند.',
     plan: [
@@ -89,7 +89,7 @@ export const MORE = (P) => ({
     ],
     phasesTitle: 'فازهای در حال فروش و پرداخت',
     phases: [
-      { tag: 'آماده سکونت', name: 'فاز ۱', status: 'کلید در دست، سند آماده', items: ['دوبلکس باغ‌دار ۴+۱ + آپارتمان تراس‌دار ۲+۱، دو سند در یک خرید', 'دو واحد جدا یا یک ساختمان کامل سه‌طبقه ۶+۲', 'فروش نقدی، فاکتور کامل با مالیات'], price: `مجموع ${P.p1}`, hot: true },
+      { tag: 'آماده سکونت', name: 'فاز ۱', status: 'کلید در دست، سند آماده', items: ['دوبلکس باغ‌دار ۴+۱ + آپارتمان تراس‌دار ۲+۱، دو سند در یک خرید', 'دو واحد جدا یا یک ساختمان کامل سه‌طبقه ۶+۲', 'فروش نقدی، فاکتور کامل با مالیات'], price: `مجموع ${P.p1} با مالیات`, hot: true },
       { tag: 'در حال ساخت', name: 'فاز ۲', status: '۳ ویلای مستقل در حال فروش', items: [`ویلای مستقل: ${P.villa}`, 'دوبلکس و آپارتمان تراس‌دار با پارکینگ سرپوشیده فقط با هم فروخته می‌شوند و فعلاً در فروش نیستند؛ در صورت تمایل به ما پیام دهید', 'پارکینگ سرپوشیده'], price: `ویلای مستقل ${P.villa}` },
       { tag: 'آغاز فروش', name: 'فاز ۳', status: 'دوبلکس و آپارتمان تراس‌دار جداگانه قابل خرید', items: [`آپارتمان تراس‌دار ۲+۱: ${P.p3t}`, `دوبلکس باغ‌دار ۴+۱: ${P.p3d}`, '۵۰٪ پیش‌پرداخت، باقی‌مانده تا تحویل در ۱۸ ماه بدون سود', '۱۵٪ تخفیف در خرید هر دو واحد'], price: '۵۰٪ پیش‌پرداخت + ۱۸ ماه بدون سود' },
     ],
@@ -129,7 +129,7 @@ export const MORE = (P) => ({
     archTitle: 'Architektura, która projektuje wiatr',
     archText: 'Architektura Antalle wyrosła z klimatu Antalyi. Pełne i puste bryły, wewnętrzne dziedzińce i zadaszenia tworzą różnicę temperatur między nasłonecznionymi a zacienionymi przestrzeniami. Gdy otwarta przestrzeń się nagrzewa, powietrze unosi się, a chłodne powietrze z cienia zajmuje jego miejsce. Dzięki temu przez cały dzień po dziedzińcach i domach krąży naturalny przewiew.',
     featuresTitle: 'Wyposażenie',
-    features: [['🌡️', 'Ogrzewanie podłogowe i zamontowane kotły gazowe'], ['📱', 'Inteligentny dom i elektryczne rolety'], ['❄️', 'Klimatyzatory Mitsubishi Electric we wszystkich pokojach'], ['🍽️', 'Sprzęt Franke do zabudowy: płyta, piekarnik, mikrofalówka, okap, zmywarka, lodówka'], ['🍳', 'Nowoczesna kuchnia z wyspą'], ['🛁', 'Łazienka i garderoba przy każdej sypialni'], ['🧥', 'Designerska szafa w przedpokoju'], ['🛡️', 'Izolacja termiczna, przeciwwilgociowa i akustyczna całego budynku'], ['🌐', 'Światłowód i gaz ziemny']],
+    features: [['🌡️', 'Ogrzewanie podłogowe i zamontowane kotły gazowe'], ['📱', 'Inteligentny dom i elektryczne rolety'], ['❄️', 'Klimatyzatory Mitsubishi Electric we wszystkich pokojach'], ['🍽️', '6-elementowy zestaw Franke do zabudowy: płyta, piekarnik, mikrofalówka, okap, zmywarka, lodówka'], ['🍳', 'Nowoczesna kuchnia z wyspą'], ['🛁', 'Łazienka i garderoba przy każdej sypialni'], ['🧥', 'Designerska szafa w przedpokoju'], ['🛡️', 'Izolacja termiczna, przeciwwilgociowa i akustyczna całego budynku'], ['🌐', 'Światłowód i gaz ziemny']],
     planTitle: '5 etapów, 4 hektary, jedna dzielnica',
     planText: 'Antalle składa się z 5 etapów na osobnych działkach w Altınkale, połączonych parkami i alejami.',
     plan: [
@@ -141,7 +141,7 @@ export const MORE = (P) => ({
     ],
     phasesTitle: 'Etapy w sprzedaży i płatność',
     phases: [
-      { tag: 'GOTOWE DO ZAMIESZKANIA', name: 'Etap 1', status: 'Pod klucz, akty gotowe', items: ['Dupleks 4+1 z ogrodem + apartament 2+1 z tarasem, dwa akty w jednym zakupie', 'Dwa osobne mieszkania lub cały trzykondygnacyjny budynek 6+2', 'Płatność gotówką, pełna faktura z VAT'], price: `Razem ${P.p1}`, hot: true },
+      { tag: 'GOTOWE DO ZAMIESZKANIA', name: 'Etap 1', status: 'Pod klucz, akty gotowe', items: ['Dupleks 4+1 z ogrodem + apartament 2+1 z tarasem, dwa akty w jednym zakupie', 'Dwa osobne mieszkania lub cały trzykondygnacyjny budynek 6+2', 'Płatność gotówką, pełna faktura z VAT'], price: `Razem ${P.p1} z VAT`, hot: true },
       { tag: 'W BUDOWIE', name: 'Etap 2', status: 'W sprzedaży 3 wolnostojące wille', items: [`Wolnostojąca willa: ${P.villa}`, 'Dupleks i apartament z zadaszonym parkingiem sprzedawane są wyłącznie razem i obecnie nie są w sprzedaży; napisz do nas, jeśli jesteś zainteresowany', 'Zadaszony parking'], price: `Wolnostojąca willa ${P.villa}` },
       { tag: 'START SPRZEDAŻY', name: 'Etap 3', status: 'Dupleks i apartament można kupić osobno', items: [`Apartament 2+1 z tarasem: ${P.p3t}`, `Dupleks 4+1 z ogrodem: ${P.p3d}`, '50% wpłaty, reszta w 18 miesiącach bez odsetek do odbioru', '15% rabatu przy zakupie obu lokali'], price: '50% wpłaty + 18 miesięcy bez odsetek' },
     ],
@@ -181,7 +181,7 @@ export const MORE = (P) => ({
     archTitle: 'Une architecture qui dessine la brise',
     archText: 'L’architecture d’Antalle est née du climat d’Antalya. Pleins et vides, cours intérieures et ombrières créent une différence de température entre les espaces ensoleillés et ombragés. Quand l’espace ouvert se réchauffe, l’air s’élève et l’air frais de l’ombre prend sa place. Ainsi, une brise naturelle circule toute la journée dans les cours et les logements.',
     featuresTitle: 'Prestations',
-    features: [['🌡️', 'Chauffage au sol et chaudières installées'], ['📱', 'Domotique et volets électriques'], ['❄️', 'Climatisation Mitsubishi Electric dans toutes les pièces'], ['🍽️', 'Électroménager encastré Franke : plaque, four, micro-ondes, hotte, lave-vaisselle, réfrigérateur'], ['🍳', 'Cuisine moderne à îlot'], ['🛁', 'Salle de bains et dressing pour chaque chambre'], ['🧥', 'Vestiaire d’entrée design'], ['🛡️', 'Isolation thermique, hydrique et acoustique de toute l’enveloppe'], ['🌐', 'Fibre optique et gaz naturel']],
+    features: [['🌡️', 'Chauffage au sol et chaudières installées'], ['📱', 'Domotique et volets électriques'], ['❄️', 'Climatisation Mitsubishi Electric dans toutes les pièces'], ['🍽️', 'Ensemble encastré Franke 6 pièces : plaque, four, micro-ondes, hotte, lave-vaisselle, réfrigérateur'], ['🍳', 'Cuisine moderne à îlot'], ['🛁', 'Salle de bains et dressing pour chaque chambre'], ['🧥', 'Vestiaire d’entrée design'], ['🛡️', 'Isolation thermique, hydrique et acoustique de toute l’enveloppe'], ['🌐', 'Fibre optique et gaz naturel']],
     planTitle: '5 tranches, 4 hectares, un seul quartier',
     planText: 'Antalle comprend 5 tranches sur des parcelles distinctes à Altınkale, reliées par des parcs et des allées arborées.',
     plan: [
@@ -193,7 +193,7 @@ export const MORE = (P) => ({
     ],
     phasesTitle: 'Tranches en vente et paiement',
     phases: [
-      { tag: 'PRÊT À HABITER', name: 'Tranche 1', status: 'Clés en main, titres prêts', items: ['Duplex 4+1 avec jardin + appartement 2+1 avec terrasse, deux titres pour un achat', 'Deux logements séparés ou un immeuble entier 6+2 sur trois niveaux', 'Paiement comptant, facture complète TVA incluse'], price: `Total ${P.p1}`, hot: true },
+      { tag: 'PRÊT À HABITER', name: 'Tranche 1', status: 'Clés en main, titres prêts', items: ['Duplex 4+1 avec jardin + appartement 2+1 avec terrasse, deux titres pour un achat', 'Deux logements séparés ou un immeuble entier 6+2 sur trois niveaux', 'Paiement comptant, facture complète TVA incluse'], price: `Total ${P.p1} TTC`, hot: true },
       { tag: 'EN CONSTRUCTION', name: 'Tranche 2', status: '3 villas indépendantes en vente', items: [`Villa indépendante : ${P.villa}`, 'Le duplex et l’appartement avec parking couvert sont vendus uniquement ensemble et ne sont pas en vente actuellement ; écrivez-nous si cela vous intéresse', 'Parking couvert'], price: `Villa indépendante ${P.villa}` },
       { tag: 'OFFRE DE LANCEMENT', name: 'Tranche 3', status: 'Duplex et appartement disponibles séparément', items: [`Appartement 2+1 avec terrasse : ${P.p3t}`, `Duplex 4+1 avec jardin : ${P.p3d}`, '50 % à la signature, solde en 18 mois sans intérêts jusqu’à la livraison', '15 % de remise pour l’achat des deux'], price: '50 % + 18 mois sans intérêts' },
     ],
@@ -233,7 +233,7 @@ export const MORE = (P) => ({
     archTitle: 'Una arquitectura que diseña la brisa',
     archText: 'La arquitectura de Antalle nace del clima de Antalya. Volúmenes llenos y vacíos, patios interiores y pérgolas crean una diferencia de temperatura entre las zonas soleadas y las sombreadas. Cuando el espacio abierto se calienta, el aire sube y el aire fresco de la sombra ocupa su lugar. Así, una brisa natural recorre los patios y las viviendas durante todo el día.',
     featuresTitle: 'Equipamiento',
-    features: [['🌡️', 'Suelo radiante y calderas instaladas'], ['📱', 'Domótica y persianas eléctricas'], ['❄️', 'Aire acondicionado Mitsubishi Electric en todas las estancias'], ['🍽️', 'Electrodomésticos integrados Franke: placa, horno, microondas, campana, lavavajillas, frigorífico'], ['🍳', 'Cocina moderna con isla'], ['🛁', 'Baño y vestidor en cada dormitorio'], ['🧥', 'Armario de entrada de diseño'], ['🛡️', 'Aislamiento térmico, impermeabilización y aislamiento acústico de toda la envolvente'], ['🌐', 'Fibra óptica y gas natural']],
+    features: [['🌡️', 'Suelo radiante y calderas instaladas'], ['📱', 'Domótica y persianas eléctricas'], ['❄️', 'Aire acondicionado Mitsubishi Electric en todas las estancias'], ['🍽️', 'Conjunto integrado Franke de 6 piezas: placa, horno, microondas, campana, lavavajillas, frigorífico'], ['🍳', 'Cocina moderna con isla'], ['🛁', 'Baño y vestidor en cada dormitorio'], ['🧥', 'Armario de entrada de diseño'], ['🛡️', 'Aislamiento térmico, impermeabilización y aislamiento acústico de toda la envolvente'], ['🌐', 'Fibra óptica y gas natural']],
     planTitle: '5 fases, 4 hectáreas, un solo barrio',
     planText: 'Antalle se compone de 5 fases en parcelas distintas de Altınkale, unidas por parques y paseos arbolados.',
     plan: [
@@ -245,7 +245,7 @@ export const MORE = (P) => ({
     ],
     phasesTitle: 'Fases en venta y pago',
     phases: [
-      { tag: 'LISTO PARA VIVIR', name: 'Fase 1', status: 'Llave en mano, escrituras listas', items: ['Dúplex 4+1 con jardín + apartamento 2+1 con terraza, dos escrituras en una compra', 'Dos viviendas independientes o un edificio 6+2 completo de tres plantas', 'Pago al contado, factura completa con IVA'], price: `Total ${P.p1}`, hot: true },
+      { tag: 'LISTO PARA VIVIR', name: 'Fase 1', status: 'Llave en mano, escrituras listas', items: ['Dúplex 4+1 con jardín + apartamento 2+1 con terraza, dos escrituras en una compra', 'Dos viviendas independientes o un edificio 6+2 completo de tres plantas', 'Pago al contado, factura completa con IVA'], price: `Total ${P.p1} IVA incluido`, hot: true },
       { tag: 'EN CONSTRUCCIÓN', name: 'Fase 2', status: '3 villas independientes a la venta', items: [`Villa independiente: ${P.villa}`, 'El dúplex y el apartamento con aparcamiento cubierto solo se venden juntos y ahora no están a la venta; escríbanos si le interesa', 'Aparcamiento cubierto'], price: `Villa independiente ${P.villa}` },
       { tag: 'OFERTA DE LANZAMIENTO', name: 'Fase 3', status: 'Dúplex y apartamento se pueden comprar por separado', items: [`Apartamento 2+1 con terraza: ${P.p3t}`, `Dúplex 4+1 con jardín: ${P.p3d}`, '50 % de entrada, el resto en 18 meses sin intereses hasta la entrega', '15 % de descuento al comprar ambos'], price: '50 % de entrada + 18 meses sin intereses' },
     ],
@@ -285,7 +285,7 @@ export const MORE = (P) => ({
     archTitle: 'Architectuur die de wind ontwerpt',
     archText: 'De architectuur van Antalle is geboren uit het klimaat van Antalya. Gesloten en open volumes, binnenhoven en schaduwdaken zorgen voor een temperatuurverschil tussen zonnige en schaduwrijke ruimtes. Als de open ruimte opwarmt, stijgt de lucht op en neemt koele lucht uit de schaduw haar plaats in. Zo stroomt er de hele dag een natuurlijke bries door de hoven en woningen.',
     featuresTitle: 'Afwerking',
-    features: [['🌡️', 'Vloerverwarming en geïnstalleerde combiketels'], ['📱', 'Domotica en elektrische rolluiken'], ['❄️', 'Mitsubishi Electric-airco in alle kamers'], ['🍽️', 'Franke-inbouwapparatuur: kookplaat, oven, magnetron, afzuigkap, vaatwasser, koelkast'], ['🍳', 'Moderne keuken met kookeiland'], ['🛁', 'Eigen badkamer en kledingkast bij elke kamer'], ['🧥', 'Design garderobe'], ['🛡️', 'Warmte-, vocht- en geluidsisolatie van de hele schil'], ['🌐', 'Glasvezel en aardgas']],
+    features: [['🌡️', 'Vloerverwarming en geïnstalleerde combiketels'], ['📱', 'Domotica en elektrische rolluiken'], ['❄️', 'Mitsubishi Electric-airco in alle kamers'], ['🍽️', '6-delige Franke-inbouwset: kookplaat, oven, magnetron, afzuigkap, vaatwasser, koelkast'], ['🍳', 'Moderne keuken met kookeiland'], ['🛁', 'Eigen badkamer en kledingkast bij elke kamer'], ['🧥', 'Design garderobe'], ['🛡️', 'Warmte-, vocht- en geluidsisolatie van de hele schil'], ['🌐', 'Glasvezel en aardgas']],
     planTitle: '5 fasen, 4 hectare, één wijk',
     planText: 'Antalle bestaat uit 5 fasen op afzonderlijke percelen in Altınkale, verbonden door parken en lanen met bomen.',
     plan: [
@@ -297,7 +297,7 @@ export const MORE = (P) => ({
     ],
     phasesTitle: 'Fasen in verkoop en betaling',
     phases: [
-      { tag: 'DIRECT TE BETREKKEN', name: 'Fase 1', status: 'Sleutelklaar, akten klaar', items: ['4+1 tuinduplex + 2+1 terrasappartement, twee akten in één aankoop', 'Twee aparte woningen of een heel 6+2-gebouw met drie verdiepingen', 'Contante betaling, volledige factuur incl. btw'], price: `Totaal ${P.p1}`, hot: true },
+      { tag: 'DIRECT TE BETREKKEN', name: 'Fase 1', status: 'Sleutelklaar, akten klaar', items: ['4+1 tuinduplex + 2+1 terrasappartement, twee akten in één aankoop', 'Twee aparte woningen of een heel 6+2-gebouw met drie verdiepingen', 'Contante betaling, volledige factuur incl. btw'], price: `Totaal ${P.p1} incl. btw`, hot: true },
       { tag: 'IN AANBOUW', name: 'Fase 2', status: '3 vrijstaande villa’s te koop', items: [`Vrijstaande villa: ${P.villa}`, 'De duplex en het terrasappartement met overdekte parkeerplaats worden alleen samen verkocht en zijn nu niet te koop; schrijf ons bij interesse', 'Overdekt parkeren'], price: `Vrijstaande villa ${P.villa}` },
       { tag: 'LANCERINGSAANBOD', name: 'Fase 3', status: 'Duplex en terrasappartement apart te koop', items: [`2+1 terrasappartement: ${P.p3t}`, `4+1 tuinduplex: ${P.p3d}`, '50% aanbetaling, rest in 18 maanden renteloos tot oplevering', '15% korting bij aankoop van beide'], price: '50% aanbetaling + 18 maanden renteloos' },
     ],
@@ -337,7 +337,7 @@ export const MORE = (P) => ({
     archTitle: 'Arkitektur som formger vinden',
     archText: 'Antalles arkitektur är född ur Antalyas klimat. Fyllda och tomma volymer, innergårdar och skärmtak skapar en temperaturskillnad mellan soliga och skuggiga ytor. När den öppna ytan värms upp stiger luften, och sval luft från skuggan tar dess plats. Därför rör sig en naturlig bris genom gårdar och hem hela dagen.',
     featuresTitle: 'Utrustning',
-    features: [['🌡️', 'Golvvärme och installerade gaspannor'], ['📱', 'Smart hem och elektriska rulljalusier'], ['❄️', 'Mitsubishi Electric-luftkonditionering i alla rum'], ['🍽️', 'Franke-integrerade vitvaror: häll, ugn, mikrovågsugn, fläkt, diskmaskin, kylskåp'], ['🍳', 'Modernt kök med köksö'], ['🛁', 'Eget badrum och garderob till varje sovrum'], ['🧥', 'Designad hallgarderob'], ['🛡️', 'Värme-, fukt- och ljudisolering av hela klimatskalet'], ['🌐', 'Fiber och naturgas']],
+    features: [['🌡️', 'Golvvärme och installerade gaspannor'], ['📱', 'Smart hem och elektriska rulljalusier'], ['❄️', 'Mitsubishi Electric-luftkonditionering i alla rum'], ['🍽️', 'Franke integrerat 6-delat set: häll, ugn, mikrovågsugn, fläkt, diskmaskin, kylskåp'], ['🍳', 'Modernt kök med köksö'], ['🛁', 'Eget badrum och garderob till varje sovrum'], ['🧥', 'Designad hallgarderob'], ['🛡️', 'Värme-, fukt- och ljudisolering av hela klimatskalet'], ['🌐', 'Fiber och naturgas']],
     planTitle: '5 etapper, 4 hektar, ett område',
     planText: 'Antalle består av 5 etapper på separata tomter i Altınkale, sammanbundna av parker och alléer.',
     plan: [
@@ -349,7 +349,7 @@ export const MORE = (P) => ({
     ],
     phasesTitle: 'Etapper till salu och betalning',
     phases: [
-      { tag: 'INFLYTTNINGSKLAR', name: 'Etapp 1', status: 'Nyckelfärdigt, lagfarter klara', items: ['4+1 trädgårdsduplex + 2+1 terrasslägenhet, två lagfarter i ett köp', 'Två separata bostäder eller ett helt trevåningshus 6+2', 'Kontant betalning, fullständig faktura inkl. moms'], price: `Totalt ${P.p1}`, hot: true },
+      { tag: 'INFLYTTNINGSKLAR', name: 'Etapp 1', status: 'Nyckelfärdigt, lagfarter klara', items: ['4+1 trädgårdsduplex + 2+1 terrasslägenhet, två lagfarter i ett köp', 'Två separata bostäder eller ett helt trevåningshus 6+2', 'Kontant betalning, fullständig faktura inkl. moms'], price: `Totalt ${P.p1} inkl. moms`, hot: true },
       { tag: 'UNDER BYGGNATION', name: 'Etapp 2', status: '3 fristående villor till salu', items: [`Fristående villa: ${P.villa}`, 'Duplexen och terrasslägenheten med täckt parkering säljs endast tillsammans och är inte till salu just nu; skriv till oss om du är intresserad', 'Täckt parkering'], price: `Fristående villa ${P.villa}` },
       { tag: 'SÄLJSTART', name: 'Etapp 3', status: 'Duplex och terrasslägenhet kan köpas separat', items: [`2+1 terrasslägenhet: ${P.p3t}`, `4+1 trädgårdsduplex: ${P.p3d}`, '50 % handpenning, resten på 18 månader räntefritt fram till tillträde', '15 % rabatt vid köp av båda'], price: '50 % handpenning + 18 månader räntefritt' },
     ],
@@ -389,7 +389,7 @@ export const MORE = (P) => ({
     archTitle: 'عمارة تصمّم النسيم',
     archText: 'وُلدت عمارة أنتالي من مناخ أنطاليا. الكتل الممتلئة والفارغة والأفنية الداخلية والمظلات تصنع فرقاً في الحرارة بين المساحات المشمسة والمظللة. عندما يسخن الفضاء المفتوح يرتفع الهواء، ويحل محله الهواء البارد من الظل، فيتحرك نسيم طبيعي في الأفنية والمنازل طوال اليوم.',
     featuresTitle: 'المواصفات',
-    features: [['🌡️', 'تدفئة أرضية وغلايات مركّبة'], ['📱', 'نظام منزل ذكي ومصاريع كهربائية'], ['❄️', 'مكيفات Mitsubishi Electric في جميع الغرف'], ['🍽️', 'أجهزة Franke المدمجة: موقد، فرن، ميكروويف، شفاط، غسالة صحون، ثلاجة'], ['🍳', 'مطبخ حديث بجزيرة'], ['🛁', 'حمّام خاص وخزانة ملابس لكل غرفة'], ['🧥', 'خزانة مدخل بتصميم أنيق'], ['🛡️', 'عزل حراري ومائي وصوتي للمبنى بالكامل'], ['🌐', 'إنترنت فايبر وغاز طبيعي']],
+    features: [['🌡️', 'تدفئة أرضية وغلايات مركّبة'], ['📱', 'نظام منزل ذكي ومصاريع كهربائية'], ['❄️', 'مكيفات Mitsubishi Electric في جميع الغرف'], ['🍽️', 'طقم Franke المدمج من 6 قطع: موقد، فرن، ميكروويف، شفاط، غسالة صحون، ثلاجة'], ['🍳', 'مطبخ حديث بجزيرة'], ['🛁', 'حمّام خاص وخزانة ملابس لكل غرفة'], ['🧥', 'خزانة مدخل بتصميم أنيق'], ['🛡️', 'عزل حراري ومائي وصوتي للمبنى بالكامل'], ['🌐', 'إنترنت فايبر وغاز طبيعي']],
     planTitle: '5 مراحل، 4 هكتارات، حيّ واحد',
     planText: 'يتكوّن أنتالي من 5 مراحل على قطع أراضٍ منفصلة في ألتينكاله، تربطها حدائق وممرات مشجّرة.',
     plan: [
@@ -401,7 +401,7 @@ export const MORE = (P) => ({
     ],
     phasesTitle: 'المراحل المعروضة للبيع والدفع',
     phases: [
-      { tag: 'جاهز للسكن', name: 'المرحلة 1', status: 'تسليم مفتاح، السندات جاهزة', items: ['دوبلكس 4+1 بحديقة + شقة 2+1 بتراس، سندان بعملية شراء واحدة', 'منزلان منفصلان أو مبنى كامل 6+2 من ثلاثة طوابق', 'دفع نقدي، فاتورة كاملة شاملة الضريبة'], price: `الإجمالي ${P.p1}`, hot: true },
+      { tag: 'جاهز للسكن', name: 'المرحلة 1', status: 'تسليم مفتاح، السندات جاهزة', items: ['دوبلكس 4+1 بحديقة + شقة 2+1 بتراس، سندان بعملية شراء واحدة', 'منزلان منفصلان أو مبنى كامل 6+2 من ثلاثة طوابق', 'دفع نقدي، فاتورة كاملة شاملة الضريبة'], price: `الإجمالي ${P.p1} شاملاً الضريبة`, hot: true },
       { tag: 'قيد الإنشاء', name: 'المرحلة 2', status: '3 فلل مستقلة معروضة للبيع', items: [`فيلا مستقلة: ${P.villa}`, 'الدوبلكس وشقة التراس مع الموقف المغطى يُباعان معاً فقط وغير معروضين حالياً؛ راسلنا إن كنت مهتماً', 'مواقف مغطاة'], price: `فيلا مستقلة ${P.villa}` },
       { tag: 'عرض الإطلاق', name: 'المرحلة 3', status: 'يمكن شراء الدوبلكس والشقة بشكل منفصل', items: [`شقة 2+1 بتراس: ${P.p3t}`, `دوبلكس 4+1 بحديقة: ${P.p3d}`, 'دفعة أولى 50% والباقي على 18 شهراً بدون فوائد حتى التسليم', 'خصم 15% عند شراء الوحدتين'], price: '50% دفعة أولى + 18 شهراً بدون فوائد' },
     ],
@@ -441,7 +441,7 @@ export const MORE = (P) => ({
     archTitle: '设计微风的建筑',
     archText: 'Antalle的建筑源于安塔利亚的气候。虚实相间的体量、内庭院和遮阳棚，使阳光区与阴影区之间形成温差。开放空间受热后空气上升，阴影中的凉爽空气随之补充，因此庭院和室内全天都有自然微风流动。',
     featuresTitle: '配置',
-    features: [['🌡️', '地暖及已安装的燃气壁挂炉'], ['📱', '智能家居系统及电动卷帘'], ['❄️', '所有房间配Mitsubishi Electric空调'], ['🍽️', 'Franke嵌入式电器：灶台、烤箱、微波炉、油烟机、洗碗机、冰箱'], ['🍳', '现代岛台厨房'], ['🛁', '每间卧室配独立卫浴和衣柜'], ['🧥', '设计感玄关柜'], ['🛡️', '整体保温、防水及隔音'], ['🌐', '光纤网络及天然气']],
+    features: [['🌡️', '地暖及已安装的燃气壁挂炉'], ['📱', '智能家居系统及电动卷帘'], ['❄️', '所有房间配Mitsubishi Electric空调'], ['🍽️', 'Franke六件套嵌入式电器：灶台、烤箱、微波炉、油烟机、洗碗机、冰箱'], ['🍳', '现代岛台厨房'], ['🛁', '每间卧室配独立卫浴和衣柜'], ['🧥', '设计感玄关柜'], ['🛡️', '整体保温、防水及隔音'], ['🌐', '光纤网络及天然气']],
     planTitle: '5期、4公顷、一个社区',
     planText: 'Antalle由阿尔滕卡莱不同地块上的5期组成，各期之间以公园和林荫步道相连。',
     plan: [
@@ -453,7 +453,7 @@ export const MORE = (P) => ({
     ],
     phasesTitle: '在售分期与付款',
     phases: [
-      { tag: '现房即住', name: '一期', status: '精装交付，地契齐备', items: ['4+1花园复式 + 2+1露台公寓，一次购买两本地契', '两套独立住宅或整栋三层6+2楼', '全款购买，含增值税全额发票'], price: `总价 ${P.p1}`, hot: true },
+      { tag: '现房即住', name: '一期', status: '精装交付，地契齐备', items: ['4+1花园复式 + 2+1露台公寓，一次购买两本地契', '两套独立住宅或整栋三层6+2楼', '全款购买，含增值税全额发票'], price: `总价 ${P.p1}（含增值税）`, hot: true },
       { tag: '在建', name: '二期', status: '3栋独栋别墅在售', items: [`独栋别墅：${P.villa}`, '带有顶停车位的复式与露台公寓仅整套出售，目前暂不销售；如有兴趣请联系我们', '有顶停车场'], price: `独栋别墅 ${P.villa}` },
       { tag: '开盘优惠', name: '三期', status: '复式与露台公寓可分别购买', items: [`2+1露台公寓：${P.p3t}`, `4+1花园复式：${P.p3d}`, '首付50%，余款至交房前18个月免息分期', '两套同时购买享85折优惠'], price: '首付50% + 18个月免息' },
     ],

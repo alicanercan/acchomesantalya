@@ -67,7 +67,7 @@ export const ANTALLE = {
     archTitle: 'Rüzgârı Tasarlayan Mimari',
     archText: 'Antalle’nin mimarisi Antalya ikliminden doğdu. Binalardaki dolu ve boş hacimler, iç avlular ve gölgelikler, güneş alan açık alanlarla gölgede kalan alanlar arasında sıcaklık farkı yaratır. Açık alan ısındıkça hava yükselir, gölgedeki serin hava onun yerini alır. Böylece avlularda ve evlerin içinde gün boyu doğal bir esinti dolaşır.',
     featuresTitle: 'Proje Donanımları',
-    features: [['🌡️', 'Yerden ısıtma ve takılı kombiler'], ['📱', 'Akıllı ev otomasyonu ve elektrikli panjurlar'], ['❄️', 'Tüm odalarda Mitsubishi Electric klimalar'], ['🍽️', 'Franke ankastre set: ocak, fırın, mikrodalga, davlumbaz, bulaşık makinesi, buzdolabı'], ['🍳', 'Modern ada mutfak'], ['🛁', 'Tüm odalarda ebeveyn banyosu ve giyinme dolabı'], ['🧥', 'Tasarım vestiyer'], ['🛡️', 'Isı, su ve ses yalıtımı; bohçalama yalıtım'], ['🌐', 'Fiber internet ve doğalgaz bağlantısı']],
+    features: [['🌡️', 'Yerden ısıtma ve takılı kombiler'], ['📱', 'Akıllı ev otomasyonu ve elektrikli panjurlar'], ['❄️', 'Tüm odalarda Mitsubishi Electric klimalar'], ['🍽️', 'Franke 6’lı ankastre set: ocak, fırın, mikrodalga, davlumbaz, bulaşık makinesi, buzdolabı'], ['🍳', 'Modern ada mutfak'], ['🛁', 'Tüm odalarda ebeveyn banyosu ve giyinme dolabı'], ['🧥', 'Tasarım vestiyer'], ['🛡️', 'Isı, su ve ses yalıtımı; bohçalama yalıtım'], ['🌐', 'Fiber internet ve doğalgaz bağlantısı']],
     planTitle: '5 Etap, 40 Dönüm, Tek Mahalle',
     planText: 'Antalle, Altınkale’de farklı ada ve parsellerde yükselen 5 etaptan oluşur. Etaplar parklar ve ağaçlı yürüyüş yollarıyla birbirine bağlanır.',
     plan: [
@@ -119,7 +119,7 @@ export const ANTALLE = {
     archTitle: 'Architecture That Designs the Breeze',
     archText: 'Antalle’s architecture was born from Antalya’s climate. Solid and open volumes, inner courtyards and shades create a temperature difference between sunlit open spaces and shaded ones. As the open space warms, the air rises and cool air from the shade takes its place, so a natural breeze moves through the courtyards and homes all day.',
     featuresTitle: 'Specifications',
-    features: [['🌡️', 'Underfloor heating and installed combi boilers'], ['📱', 'Smart home automation and electric shutters'], ['❄️', 'Mitsubishi Electric air conditioning in every room'], ['🍽️', 'Franke built-in appliances: hob, oven, microwave, hood, dishwasher, fridge'], ['🍳', 'Modern island kitchen'], ['🛁', 'En-suite bathroom and wardrobe in every room'], ['🧥', 'Designer entrance wardrobe'], ['🛡️', 'Heat, water and sound insulation; full envelope insulation'], ['🌐', 'Fibre internet and natural gas']],
+    features: [['🌡️', 'Underfloor heating and installed combi boilers'], ['📱', 'Smart home automation and electric shutters'], ['❄️', 'Mitsubishi Electric air conditioning in every room'], ['🍽️', 'Franke 6-piece built-in set: hob, oven, microwave, hood, dishwasher, fridge'], ['🍳', 'Modern island kitchen'], ['🛁', 'En-suite bathroom and wardrobe in every room'], ['🧥', 'Designer entrance wardrobe'], ['🛡️', 'Heat, water and sound insulation; full envelope insulation'], ['🌐', 'Fibre internet and natural gas']],
     planTitle: '5 Phases, 40 Dönüm, One Neighbourhood',
     planText: 'Antalle consists of 5 phases on separate plots in Altınkale, connected by parks and tree-lined walkways.',
     plan: [
@@ -171,7 +171,7 @@ export const ANTALLE = {
     archTitle: 'Архитектура, которая создаёт ветер',
     archText: 'Архитектура Antalle родилась из климата Антальи. Чередование заполненных и пустых объёмов, внутренние дворы и навесы создают разницу температур между солнечными и затенёнными зонами. Когда открытое пространство нагревается, воздух поднимается, а прохладный воздух из тени занимает его место. Поэтому во дворах и в домах весь день движется естественный ветерок.',
     featuresTitle: 'Оснащение',
-    features: [['🌡️', 'Тёплый пол и установленные газовые котлы'], ['📱', 'Система «умный дом» и электрические рольставни'], ['❄️', 'Кондиционеры Mitsubishi Electric во всех комнатах'], ['🍽️', 'Встроенная техника Franke: варочная панель, духовой шкаф, микроволновая печь, вытяжка, посудомоечная машина, холодильник'], ['🍳', 'Современная кухня-остров'], ['🛁', 'Отдельная ванная и гардероб при каждой спальне'], ['🧥', 'Дизайнерская прихожая'], ['🛡️', 'Тепло-, гидро- и звукоизоляция всего здания'], ['🌐', 'Оптоволоконный интернет и газ']],
+    features: [['🌡️', 'Тёплый пол и установленные газовые котлы'], ['📱', 'Система «умный дом» и электрические рольставни'], ['❄️', 'Кондиционеры Mitsubishi Electric во всех комнатах'], ['🍽️', 'Встроенный комплект Franke из 6 приборов: варочная панель, духовой шкаф, микроволновая печь, вытяжка, посудомоечная машина, холодильник'], ['🍳', 'Современная кухня-остров'], ['🛁', 'Отдельная ванная и гардероб при каждой спальне'], ['🧥', 'Дизайнерская прихожая'], ['🛡️', 'Тепло-, гидро- и звукоизоляция всего здания'], ['🌐', 'Оптоволоконный интернет и газ']],
     planTitle: '5 очередей, 4 гектара, один квартал',
     planText: 'Antalle состоит из 5 очередей на отдельных участках в Алтынкале, которые соединены парками и аллеями.',
     plan: [

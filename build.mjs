@@ -201,10 +201,11 @@ const optV = (f, v, lang) => { if (!v || lang === 'tr') return v; if (lang === '
 const slugOf = (l) => l.slug ? slugify(l.slug.replace(/^\//, '')) : slugify([l.tip, l.ilce, l.mahalle, l.oda, l.tur, l.id].filter(Boolean).join(' '));
 const pick = (obj, lang) => (obj && (obj[lang] || obj.tr)) || '';
 const fmtPrice = (l, lang) => {
-  if (!l.fiyat) return T[lang].priceOnReq;
+  if (!l.fiyat) return l.teklif ? ({ tr: 'Teklif verin', en: 'Make an offer', ru: 'Предложите цену' })[lang] || 'Make an offer' : T[lang].priceOnReq;
   const n = new Intl.NumberFormat(LOCALE[lang]).format(l.fiyat);
   const sym = { TL: '₺', USD: '$', EUR: '€' }[l.para] || l.para || '';
-  return lang === 'tr' ? `${n} ${sym}` : `${sym}${n}`;
+  const per = l.tip === 'Kiralık' ? ({ tr: ' / ay', en: ' / month', ru: ' / мес.' })[lang] || ' / month' : '';
+  return (lang === 'tr' ? `${n} ${sym}` : `${sym}${n}`) + per;
 };
 const priceAttrs = (l) => (l.fiyat ? ` data-amt="${l.fiyat}" data-ccy="${({ TL: 'TRY', USD: 'USD', EUR: 'EUR', GBP: 'GBP' })[l.para || 'TL'] || 'TRY'}"` : '');
 const tipLabel = (l, lang) => (l.tip === 'Kiralık' ? T[lang].rent : T[lang].sale);
@@ -1091,7 +1092,7 @@ function pageListing(l, lang) {
   const desc = (lang === 'tr' && l.meta) ? l.meta : pick(l.aciklama, lang).slice(0, 155);
   const rows = [
     [F.no, l.id], [TXL(lang).listedIn, l.tarih], [TXL(lang).emlakTipi, [lab(EMLAK_TIPLERI.find((e) => e.k === l.emlakTipi) || { tr: '', en: '' }, lang), lab(KATEGORILER[l.kategori] || { tr: '', en: '' }, lang), altLab(l.altTip || '', lang)].filter(Boolean).join(' · ')], [F.rooms, l.oda], [F.gross, l.brut ? { m2: l.brut } : ''], [F.net, l.net ? { m2: l.net } : ''], [F.age, l.yas], [F.floor, l.kat], [F.floors, l.katSayisi],
-    [F.heat, optV('isitma', l.isitma, lang)], [lab(SECMELI.find((x) => x.f === 'banyo'), lang), l.banyo], [lab(SECMELI.find((x) => x.f === 'balkon'), lang), optV('balkon', l.balkon, lang)], [lab(SECMELI.find((x) => x.f === 'asansor'), lang), optV('asansor', l.asansor, lang)], [lab(SECMELI.find((x) => x.f === 'otopark'), lang), optV('otopark', l.otopark, lang)], [lab(SECMELI.find((x) => x.f === 'esya'), lang), optV('esya', l.esya, lang)], [lab(SECMELI.find((x) => x.f === 'kullanim'), lang), optV('kullanim', l.kullanim, lang)], [F.inSite, optV('kredi', l.site, lang)], [GL(lang) === 'tr' ? 'Aidat' : 'Service charge', l.aidat ? `${l.aidat} TL` : ''], [lab(SECMELI.find((x) => x.f === 'imar'), lang), optV('imar', l.imar, lang)], [lab(SECMELI.find((x) => x.f === 'takas'), lang), optV('takas', l.takas, lang)], [F.credit, optV('kredi', l.kredi, lang)], [F.deed, optV('tapu', l.tapu, lang)], [s('iskanOk', lang), l.iskan ? s('iskanVar', lang) : ''], [s('plotArea', lang), l.arsa ? { m2: l.arsa } : ''], [s('gardenArea', lang), l.bahce ? { m2: l.bahce } : ''], [s('buildArea', lang), l.insaat ? { m2: l.insaat } : ''], [s('facing', lang), loc(l.cephe, lang)], [F.project, l.proje], [F.location, [l.mahalle, l.ilce, 'Antalya'].filter(Boolean).join(', ')],
+    [F.heat, optV('isitma', l.isitma, lang)], [lab(SECMELI.find((x) => x.f === 'banyo'), lang), l.banyo], [lab(SECMELI.find((x) => x.f === 'balkon'), lang), optV('balkon', l.balkon, lang)], [lab(SECMELI.find((x) => x.f === 'asansor'), lang), optV('asansor', l.asansor, lang)], [lab(SECMELI.find((x) => x.f === 'otopark'), lang), optV('otopark', l.otopark, lang)], [lab(SECMELI.find((x) => x.f === 'esya'), lang), optV('esya', l.esya, lang)], [lab(SECMELI.find((x) => x.f === 'kullanim'), lang), optV('kullanim', l.kullanim, lang)], [F.inSite, optV('kredi', l.site, lang)], [GL(lang) === 'tr' ? 'Aidat' : 'Service charge', l.aidat ? `${l.aidat} TL` : ''], [({ tr: 'Depozito', ru: 'Депозит' })[lang] || 'Deposit', l.depozito ? `${l.depozito} TL` : ''], [lab(SECMELI.find((x) => x.f === 'imar'), lang), optV('imar', l.imar, lang)], [lab(SECMELI.find((x) => x.f === 'takas'), lang), optV('takas', l.takas, lang)], [F.credit, optV('kredi', l.kredi, lang)], [F.deed, optV('tapu', l.tapu, lang)], [s('iskanOk', lang), l.iskan ? s('iskanVar', lang) : ''], [s('plotArea', lang), l.arsa ? { m2: l.arsa } : ''], [s('gardenArea', lang), l.bahce ? { m2: l.bahce } : ''], [s('buildArea', lang), l.insaat ? { m2: l.insaat } : ''], [s('facing', lang), loc(l.cephe, lang)], [F.project, l.proje], [F.location, [l.mahalle, l.ilce, 'Antalya'].filter(Boolean).join(', ')],
   ].filter(([, v]) => v !== undefined && v !== null && v !== '');
   const photos = (l.foto || []);
   const th = (p) => (l.thumbs ? p.replace(/\.webp$/, '-t.webp') : p);

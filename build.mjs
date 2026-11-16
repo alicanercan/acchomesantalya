@@ -211,7 +211,7 @@ function heroOpt(html) {
   const i = html.indexOf('<div class="slides">'); if (i < 0) return html;
   let n = 0, first = '';
   const tail = html.slice(i).replace(/<div class="slide" style="background-image:([^"]*)"/g, (m, v) => {
-    n++; if (n === 1) { const u = v.match(/url\('([^']+)'\)/); if (u) first = u[1]; return m; }
+    n++; if (n === 1) { const u = v.match(/url\('([^']+)'\)/); if (!u) return m; first = u[1]; const grad = v.replace(/,?\s*url\('[^']+'\)/, ''); return `<div class="slide s1"><img class="sbg" src="${first}" alt="" fetchpriority="high" decoding="async" width="1200" height="600"><span class="sov" style="background-image:${grad}"></span`; }
     return `<div class="slide" data-bgs="${v}"`;
   });
   html = html.slice(0, i) + tail;

@@ -437,3 +437,4 @@ img{-webkit-user-drag:none;user-drag:none;-webkit-touch-callout:none}
 .fplan h3{margin:0 0 8px;font-size:15px;color:var(--redt)}.fplan ul{margin:0;padding-left:18px;font-size:14px;line-height:1.6}
 .eids,.sole{margin:8px 0 0;font-size:13px;font-weight:600}.eids{color:#1d6b37}.eids small{display:block;font-weight:400;color:var(--mute)}.sole{color:var(--redt)}
 @media(max-width:700px){.gnav{width:36px;height:36px;font-size:22px;line-height:32px}.thumbs img{width:84px;height:58px}}
+.lgrid>*{min-width:0}.gallery .main{height:auto}

@@ -5,6 +5,7 @@ import path from 'node:path';
 import crypto from 'node:crypto';
 import { PAGES, POSTS, TEAM, LANGS_SPOKEN, PLAZA, TIMELINE } from './content.mjs';
 import { PROJECTS } from './projects.mjs';
+import { ANTALLE, ANTALLE_SHARED } from './antalle-content.mjs';
 import { PRIVACY } from './privacy.mjs';
 import { PAGES2, P2X, p2Html } from './pages2.mjs';
 import { AREA_GUIDES } from './areas.mjs';
@@ -426,7 +427,7 @@ const officeGallery = (n = 8) => `<div class="ogal">${OFFICE.slice(0, n).map(([f
 
 function projectCards(lang) {
   const t = T[lang];
-  return `<div class="pcards">${PROJECTS.map((p) => { const c = p.cover && cdn(p.cover, 800); return `<a class="pcard" href="/projeler/${p.slug}/"><div class="pcimg">${c ? `<img src="${c}" alt="${esc(p.name)}" width="800" height="500" loading="lazy">` : `<div class="ph pname"><span>${esc(p.name)}</span></div>`}</div><div class="pcbody"><small>${esc(p.area)} · ${esc(p.developer)}</small><h3>${esc(p.name)}</h3><p>${esc(p.card)}</p><span class="more">${t.projectsCta} →</span></div></a>`; }).join('')}</div>`;
+  return `<div class="pcards">${PROJECTS.map((p) => { const I = p.i18n && ANTALLE[lang]; const c = p.i18n ? rimg(ANTALLE_SHARED.hero, 800) : p.cover && cdn(p.cover, 800); return `<a class="pcard" href="${p.i18n ? url(lang, 'projects', p.slug) : `/projeler/${p.slug}/`}"><div class="pcimg">${c ? `<img src="${c}" alt="${esc(p.name)}" width="800" height="500" loading="lazy">` : `<div class="ph pname"><span>${esc(p.name)}</span></div>`}</div><div class="pcbody"><small>${esc(p.area)} · ${esc(p.developer)}</small><h3>${esc(p.name)}</h3><p>${esc(I ? I.card : p.card)}</p><span class="more">${t.projectsCta} →</span></div></a>`; }).join('')}</div>`;
 }
 function pageProjects(lang) {
   const t = T[lang];
@@ -458,6 +459,34 @@ ${p.badges ? `<div class="lbadges">${p.badges.map(([i, h, d]) => `<div><span>${i
   const schema = [{ '@context': 'https://schema.org', '@type': 'Residence', name: p.name, description: p.desc, address: { '@type': 'PostalAddress', addressLocality: p.area, addressRegion: 'Antalya', addressCountry: 'TR' } }];
   const og = p.media.hero && MEDIA[p.media.hero] ? MEDIA[p.media.hero] : '/img/acc-plaza-og.jpg';
   write(path.join('/projeler', p.slug, 'index.html'), layout({ lang, title: `${p.name} | ${p.area} | ACC HOMES`, desc: p.desc, canonical: `/projeler/${p.slug}/`, alternates: null, body: S.join('\n'), schema, ogImage: og }));
+}
+
+function pageProjectI18n(p, lang) {
+  const t = T[lang]; const C = ANTALLE[lang]; const u = C.ui; const SH = ANTALLE_SHARED;
+  const here = url(lang, 'projects', p.slug);
+  const wa = (num) => `https://wa.me/${num.replace('+', '')}?text=${encodeURIComponent(u.wa)}`;
+  const contacts = SH.contacts.map(([k, num, txt]) => [u[k], num, txt]);
+  const pic = (f, w, alt, lazy = true) => `<img src="${rimg(`/img/antalle/${f}.webp`, w)}" alt="${esc(alt)}"${lazy ? ' loading="lazy" decoding="async"' : ''}>`;
+  const cap = (x) => (GL(lang) === 'tr' ? x[1] : x[2]);
+  const S = [];
+  S.push(`<section class="lhero" style="background-image:linear-gradient(180deg,rgba(0,0,0,.25),rgba(0,0,0,.62)),url('${rimg(SH.hero, 1920)}')"><div class="wrap"><nav class="crumbs light"><a href="${home(lang)}">${t.nav.home}</a> / <a href="${url(lang, 'projects')}">${t.projects}</a></nav><p class="eyebrow">${esc(p.area)} · ${esc(p.developer)}</p><h1>${esc(C.title)}</h1><p class="lsub">${esc(C.sub)}</p>
+<div class="lbadges">${C.badges.map(([i, h, d]) => `<div><span>${i}</span><b>${esc(h)}</b><small>${esc(d)}</small></div>`).join('')}</div>
+<div class="ctas"><a class="btn" href="#form">${esc(u.req)}</a><a class="btn ghost light" href="tel:${contacts[0][1]}">${esc(u.call)}</a><a class="btn ghost light" href="${SH.telegram}" target="_blank" rel="noopener">✈️ ${esc(u.tg)}</a></div></div></section>`);
+  S.push(`<p class="wrap lnote">${esc(C.badgeNote)}</p>`);
+  S.push(`<section class="wrap sec"><h2>${esc(C.whyTitle)}</h2><div class="cards3 awhy">${C.why.map(([i, h, d]) => `<div><h3><span>${i}</span> ${esc(h)}</h3><p>${esc(d)}</p></div>`).join('')}</div></section>`);
+  S.push(`<section class="wrap sec"><h2>${esc(C.unitsTitle)}</h2><div class="plans units">${C.units.map(([n, a, d]) => `<div class="plan"><h3>${esc(n)}</h3><b class="parea">${esc(a)}</b><p>${esc(d)}</p></div>`).join('')}</div></section>`);
+  S.push(`<section class="larch"><div class="wrap larchg"><div><p class="eyebrow">Antalle</p><h2>${esc(C.archTitle)}</h2><p>${esc(C.archText)}</p></div><div class="larchimg">${pic('aksam-ic-avlu', 1200, cap(SH.photos[1]))}</div></div></section>`);
+  S.push(`<section class="lfeat"><div class="wrap"><h2>${esc(C.featuresTitle)}</h2><div class="fgrid2">${C.features.map(([i, x]) => `<div><span>${i}</span><p>${esc(x)}</p></div>`).join('')}</div></div></section>`);
+  S.push(`<section class="wrap sec"><h2>${esc(C.planTitle)}</h2><p>${esc(C.planText)}</p><ol class="mplan">${C.plan.map(([n, st, d], i) => `<li${i === 0 ? ' class="done"' : ''}><b>${esc(n)}</b><span class="mst">${esc(st)}</span><p>${esc(d)}</p></li>`).join('')}</ol></section>`);
+  S.push(`<section class="wrap sec"><h2>${esc(C.phasesTitle)}</h2><div class="phases">${C.phases.map((x) => `<div class="phase${x.hot ? ' hot' : ''}"><span class="ptag">${esc(x.tag)}</span><h3>${esc(x.name)}</h3><p class="pstat">${esc(x.status)}</p><ul class="ticks">${x.items.map((i) => `<li>${esc(i)}</li>`).join('')}</ul><div class="pprice">${esc(x.price)}</div><a class="btn ${x.hot ? '' : 'ghost'}" href="#form">${esc(u.offer)}</a></div>`).join('')}</div></section>`);
+  S.push(`<section class="wrap sec"><h2>${esc(u.gallery)}</h2><div class="lgal">${SH.photos.map((x) => `<a href="${rimg(`/img/antalle/${x[0]}.webp`, 1800)}" target="_blank" rel="noopener">${pic(x[0], 900, `${p.name} – ${cap(x)}`)}</a>`).join('')}</div></section>`);
+  S.push(`<section class="ldev"><div class="wrap"><h2>${esc(C.devTitle)}</h2><p>${esc(C.devText)}</p></div></section>`);
+  S.push(`<section class="wrap sec"><h2>${esc(C.locTitle)}</h2><p>${esc(C.locText)}</p><div class="dist"><div><h3>🚗 ${esc(u.drive)}</h3><ul>${C.drive.map(([i, n, d]) => `<li><span>${i} ${esc(n)}</span><b>${esc(d)}</b></li>`).join('')}</ul></div><div><h3>🎓 ${esc(C.schoolsTitle)}</h3><ul>${C.schools.map((n) => `<li><span>${esc(n)}</span></li>`).join('')}</ul></div></div><div class="map"><iframe src="https://www.google.com/maps?q=${encodeURIComponent(p.mapQuery)}&output=embed" loading="lazy" title="${esc(p.name)} ${esc(u.mapT)}"></iframe></div></section>`);
+  S.push(`<section class="lcta" id="form"><div class="wrap lctagrid"><div><h2>${esc(u.infoTitle)}</h2><p>${esc(C.cta)}</p><div class="cbtns">${contacts.map(([n, num, txt]) => `<a class="wabtn" href="${wa(num)}" target="_blank" rel="noopener"><b>${esc(n)}</b><span>WhatsApp · ${esc(txt)}</span></a>`).join('')}<a class="wabtn tgbtn" href="${SH.telegram}" target="_blank" rel="noopener"><b>${esc(u.caner)}</b><span>Telegram · @alicanertherealtor</span></a></div>${p.instagram ? `<p><a href="${p.instagram}" target="_blank" rel="noopener">${esc(u.ig)} →</a></p>` : ''}</div>
+<form class="box form" name="proje-talep" method="POST" data-netlify="true" netlify-honeypot="bot" action="${url(lang, 'contact')}?ok=1"><input type="hidden" name="form-name" value="proje-talep"><input type="hidden" name="proje" value="${esc(p.name)} (${lang.toUpperCase()})"><p hidden><input name="bot"></p><h3>${esc(u.form)}</h3><input name="ad" placeholder="${esc(u.name)}" required><input name="telefon" placeholder="${esc(u.phone)}" required><input name="eposta" type="email" placeholder="${esc(u.email)}"><button class="btn" type="submit">${esc(u.send)}</button><small>${esc(u.privacy)}</small></form></div></section>`);
+  const schema = [{ '@context': 'https://schema.org', '@type': 'Residence', name: p.name, description: C.desc, image: SITE.domain + SH.hero, address: { '@type': 'PostalAddress', addressLocality: 'Döşemealtı', addressRegion: 'Antalya', addressCountry: 'TR' } }];
+  const alternates = Object.fromEntries(LANGS.filter((l) => ANTALLE[l]).map((l) => [l, url(l, 'projects', p.slug)]));
+  write(path.join(here, 'index.html'), layout({ lang, title: `${p.name} | ${p.area} | ACC HOMES`, desc: C.desc, canonical: here, alternates, body: S.join('\n'), schema, ogImage: SH.hero }));
 }
 
 const ICON_IG = `<svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path fill="currentColor" d="M12 2.2c3.2 0 3.6 0 4.8.1 1.2.1 1.8.2 2.2.4.6.2 1 .5 1.4.9.4.4.7.8.9 1.4.2.4.4 1 .4 2.2.1 1.3.1 1.6.1 4.8s0 3.6-.1 4.8c-.1 1.2-.2 1.8-.4 2.2-.2.6-.5 1-.9 1.4-.4.4-.8.7-1.4.9-.4.2-1 .4-2.2.4-1.3.1-1.6.1-4.8.1s-3.6 0-4.8-.1c-1.2-.1-1.8-.2-2.2-.4-.6-.2-1-.5-1.4-.9-.4-.4-.7-.8-.9-1.4-.2-.4-.4-1-.4-2.2C2.2 15.6 2.2 15.2 2.2 12s0-3.6.1-4.8c.1-1.2.2-1.8.4-2.2.2-.6.5-1 .9-1.4.4-.4.8-.7 1.4-.9.4-.2 1-.4 2.2-.4C8.4 2.2 8.8 2.2 12 2.2zm0 2c-3.1 0-3.5 0-4.7.1-1 0-1.6.2-2 .3-.5.2-.8.4-1.1.7-.3.3-.6.7-.7 1.1-.1.4-.3.9-.3 2-.1 1.2-.1 1.6-.1 4.7s0 3.5.1 4.7c0 1 .2 1.6.3 2 .2.5.4.8.7 1.1.3.3.7.6 1.1.7.4.1.9.3 2 .3 1.2.1 1.6.1 4.7.1s3.5 0 4.7-.1c1 0 1.6-.2 2-.3.5-.2.8-.4 1.1-.7.3-.3.6-.7.7-1.1.1-.4.3-.9.3-2 .1-1.2.1-1.6.1-4.7s0-3.5-.1-4.7c0-1-.2-1.6-.3-2-.2-.5-.4-.8-.7-1.1-.3-.3-.7-.6-1.1-.7-.4-.1-.9-.3-2-.3-1.2-.1-1.6-.1-4.7-.1zm0 3.4a4.4 4.4 0 1 1 0 8.8 4.4 4.4 0 0 1 0-8.8zm0 2a2.4 2.4 0 1 0 0 4.8 2.4 2.4 0 0 0 0-4.8zm5.6-2.2a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"/></svg>`;
@@ -739,7 +768,7 @@ function heroSlider(lang) {
   const t = T[lang]; const nv = (k) => PAGES[k].nav[lang] || PAGES[k].nav.en;
   const slides = [
     { img: '/img/acc-plaza-1200.webp', eyebrow: SITE.slogan[lang], title: t.heroTitle, sub: t.heroSub, href: url(lang, 'list'), cta: t.heroCta, h1: true },
-    ...PROJECTS.filter((p) => p.media.hero && MEDIA[p.media.hero]).map((p) => ({ img: cdn(p.media.hero, 1600), eyebrow: `${p.area} · ${p.developer}`, title: p.title, sub: p.sub, href: `/projeler/${p.slug}/`, cta: t.projectsCta })),
+    ...PROJECTS.filter((p) => p.i18n || (p.media.hero && MEDIA[p.media.hero])).map((p) => (p.i18n ? { img: rimg(ANTALLE_SHARED.hero, 1600), eyebrow: `${p.area} · ${p.developer}`, title: (ANTALLE[lang] || ANTALLE.en).title, sub: (ANTALLE[lang] || ANTALLE.en).sub, href: url(lang, 'projects', p.slug), cta: t.projectsCta } : { img: cdn(p.media.hero, 1600), eyebrow: `${p.area} · ${p.developer}`, title: p.title, sub: p.sub, href: `/projeler/${p.slug}/`, cta: t.projectsCta })),
     { img: '/img/ofis/sunum.webp', eyebrow: s('dlPageTitle', lang), title: s('dlCostTitle', lang), sub: s('dlCostSub', lang), href: url(lang, 'downloads'), cta: s('dlCta', lang), red: true },
     { img: '/img/ofis/toplanti.webp', eyebrow: s('dlPageTitle', lang), title: s('dlCitTitle', lang), sub: s('dlCitSub', lang), href: url(lang, 'downloads'), cta: s('dlCta', lang), red: true },
     { img: '/img/ofis/oturma.webp', eyebrow: nv('sell'), title: PAGES.sell[lang] ? PAGES.sell[lang].title : PAGES.sell.en.title, sub: '', href: url(lang, 'sell'), cta: s('sellCta', lang), red: true },
@@ -1191,7 +1220,7 @@ for (const lang of LANGS) {
   urls.push(home(lang), url(lang, 'list'), url(lang, 'guide'), url(lang, 'contact'), url(lang, 'blog'), ...ALLPOSTS.map((p) => url(lang, 'blog', p.slug)));
   for (const l of LISTINGS) { pageListing(l, lang); urls.push(url(lang, 'listing', slugOf(l))); }
 }
-for (const p of PROJECTS) { pageProject(p); urls.push(`/projeler/${p.slug}/`); }
+for (const p of PROJECTS) { if (p.i18n) { for (const lang of LANGS.filter((l) => ANTALLE[l])) { pageProjectI18n(p, lang); urls.push(url(lang, 'projects', p.slug)); } } else { pageProject(p); urls.push(`/projeler/${p.slug}/`); } }
 const OLD_BLOG_TO = { kira: url('tr', 'blog', 'kira-artis-orani'), tuik: url('tr', 'blog', 'antalya-konut-satis-istatistikleri'), about: url('tr', 'about'), accday: url('tr', 'events', 'acc-day-2025'), blog: url('tr', 'blog') };
 const oldBlog = fs.readFileSync(path.join(ROOT, 'data/old-blog-urls.txt'), 'utf8').trim().split('\n').map((l) => l.trim().split(/\s+/)).filter(([u, k]) => OLD_BLOG_TO[k] || k.startsWith('/')).map(([u, k]) => `${u.replace(/\/$/, '')} ${OLD_BLOG_TO[k] || k} 301\n${u} ${OLD_BLOG_TO[k] || k} 301`);
 write('_redirects', oldBlog.join('\n') + '\n' + LANGS.flatMap((l) => { const to = evUrl(l, EVENTS.events.find((e) => e.id === 'acc-day-2025')); const from = `${BASE[l]}/${OLD_SOCIAL[l] || OLD_SOCIAL.en}`; return [`${from} ${to} 301`, `${from}/* ${to} 301`]; }).join('\n') + '\n');

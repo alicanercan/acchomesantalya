@@ -418,3 +418,7 @@ img{-webkit-user-drag:none;user-drag:none;-webkit-touch-callout:none}
 .news .ctas .btn.ghost{color:var(--redt);background:transparent}
 .slide.s1{position:relative;isolation:isolate}.slide.s1 .sbg,.slide.s1 .sov{position:absolute;inset:0;width:100%;height:100%;z-index:-1}.slide.s1 .sbg{object-fit:cover;object-position:center}
 .prose .nsrc{font-size:13px;color:#6b6b70;margin-top:18px}
+
+.awhy h3 span{font-size:22px}.units .plan h3{margin-top:0}.larch{background:#1d1416;color:#fff;padding:60px 0}.larch h2{color:#fff;margin-top:6px}.larch p{opacity:.92;font-size:17px}.larch .eyebrow{color:#ffd9d9}.larchg{display:grid;grid-template-columns:1fr 1fr;gap:36px;align-items:center}.larchimg img{width:100%;border-radius:var(--radius);display:block}
+.mplan{list-style:none;padding:0;margin:16px 0 0;display:grid;grid-template-columns:repeat(5,1fr);gap:12px;counter-reset:m}.mplan li{background:#fff;border:1px solid var(--line);border-top:4px solid var(--line);border-radius:12px;padding:16px}.mplan li.done{border-top-color:var(--red)}.mplan b{display:block;font-size:17px}.mplan .mst{display:block;color:var(--redt);font-weight:600;font-size:14px;margin:4px 0 6px}.mplan p{margin:0;color:var(--mute);font-size:14px}.tgbtn{background:#229ed9}.tgbtn:hover{background:#1c8cc1}
+@media (max-width:900px){.larchg,.mplan{grid-template-columns:1fr}}

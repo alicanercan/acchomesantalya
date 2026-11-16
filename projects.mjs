@@ -3,7 +3,7 @@
 
 export const PROJECTS = [
   {
-    key: 'antalle',
+    key: 'antalle', i18n: true,
     slug: 'antalle-concept-houses',
     name: 'Antalle Concept Houses',
     area: 'Döşemealtı · Altınkale',

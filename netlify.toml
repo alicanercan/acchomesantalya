@@ -14,3 +14,7 @@
   for = "/img/*"
   [headers.values]
     Cache-Control = "public, max-age=2592000"
+
+# Panelden gelen ilan fotoğrafları (Sahibinden aktarımı ve panel depolaması) Netlify görüntü servisiyle WebP'ye çevrilip küçültülür
+[images]
+  remote_images = ["https://i0\\.shbdn\\.com/.*", "https://vqsocwdfmvpgdpxkcubz\\.supabase\\.co/storage/.*"]

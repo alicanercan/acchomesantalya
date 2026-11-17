@@ -30,6 +30,40 @@ const SITE = read('data/site.json');
 const REVIEWS = read('data/reviews.json');
 const IG = read('data/instagram.json');
 let LISTINGS = read('data/portfoy.json');
+// ---- Panel senkronu: ACC HOMES Panel'de broker onaylı ve "sitede yayınla" denmiş ilanlar (Supabase site_ilanlari).
+// Panel ulaşılamazsa yalnız data/portfoy.json kullanılır; site hiçbir zaman boş kalmaz.
+const PANEL = { url: 'https://vqsocwdfmvpgdpxkcubz.supabase.co', key: 'sb_publishable_Fv0kalSrYIRLNjCoER1y2Q_31N9fJ_z' };
+const telYaz = (t) => { const d = String(t || '').replace(/\D/g, '').replace(/^90/, ''); return d.length === 10 ? `0${d.slice(0, 3)} ${d.slice(3, 6)} ${d.slice(6, 8)} ${d.slice(8)}` : String(t || ''); };
+const panelFoto = (u) => (!u ? '' : u.startsWith('/site-ekip/') ? u.replace('/site-ekip/', '/ekip/') : u.startsWith('/site-img/') ? u.replace('/site-img/', '/img/') : u);
+const ilanFoto = (u) => (/^https?:\/\//.test(u) && (process.env.SITE_HOST || 'netlify') !== 'turhost' ? `/.netlify/images?url=${encodeURIComponent(u)}&w=1600&fm=webp&q=78` : u);
+const trTarih = (d) => { const t = new Date(d); return isNaN(t) ? '' : `${String(t.getDate()).padStart(2, '0')}.${String(t.getMonth() + 1).padStart(2, '0')}.${t.getFullYear()}`; };
+function panelDanisman(v) {
+  if (!v.danisman) return null;
+  const tel = String(v.danisman_tel || '').replace(/[^\d+]/g, '');
+  return { ad: v.danisman, unvan: v.danisman_unvan || 'Gayrimenkul Profesyoneli', tel: tel ? (tel.startsWith('+') ? tel : '+90' + tel.replace(/^0/, '')) : SITE.phoneRaw, telText: tel ? telYaz(tel) : SITE.phone, foto: panelFoto(v.danisman_foto) };
+}
+function panelIlan(v) {
+  const e = v.ekstra || {}; const ac = v.aciklama || {}; const bas = v.baslik || {};
+  const ilkCumle = String(ac.tr || '').replace(/\s+/g, ' ').trim().slice(0, 150);
+  return { ...Object.fromEntries(Object.entries(e).filter(([k]) => !/^sahibinden_|^magaza$|^konum$|^ozellik_gruplari$|^ilan_tarihi$|^il$/.test(k))),
+    id: v.id, durum: v.satis_durumu === 'Kaporalı' ? 'Opsiyonlu' : 'Yayında', tip: v.tip, tur: v.altTip || '', emlakTipi: v.emlakTipi, altTip: v.altTip || '',
+    ilce: v.ilce, mahalle: v.mahalle, proje: v.proje || undefined, fiyat: Number(v.fiyat) || 0, para: v.para || 'TL', oda: v.oda || undefined,
+    brut: v.brut ?? undefined, net: v.net ?? undefined, arsa: v.arsa ?? undefined, yas: v.yas ?? undefined, kat: v.kat || undefined, katSayisi: v.katSayisi ?? undefined,
+    isitma: v.isitma || undefined, banyo: v.banyo || undefined, balkon: v.balkon || undefined, asansor: v.asansor || undefined, otopark: v.otopark || undefined,
+    esya: v.esya || undefined, kullanim: v.kullanim || undefined, site: v.site || undefined, aidat: v.aidat ?? undefined, kredi: v.kredi || undefined, tapu: v.tapu || undefined,
+    takas: v.takas || undefined, imar: v.imar || undefined, etiketler: (v.etiketler || []).filter((k) => k !== 'antalya-disi'), ozellikler: v.ozellikler || [],
+    foto: (v.foto || []).map(ilanFoto), thumbs: false, baslik: bas, aciklama: ac, meta: e.meta || (bas.tr ? `${bas.tr}. ${ilkCumle}`.slice(0, 155) : undefined),
+    tarih: trTarih(v.created_at), tekYetki: !!v.yetkili, eids: v.eids || undefined, sahibinden: v.sahibinden || undefined, danisman: panelDanisman(v), _panel: true };
+}
+try {
+  const r = await fetch(`${PANEL.url}/rest/v1/site_ilanlari?select=*`, { headers: { apikey: PANEL.key }, signal: AbortSignal.timeout(20000) });
+  if (!r.ok) throw new Error('HTTP ' + r.status);
+  const rows = await r.json(); const byId = new Map(rows.map((v) => [v.id, v]));
+  for (const l of LISTINGS) { const v = byId.get(l.id); if (v) { const d = panelDanisman(v); if (d) l.danisman = d; byId.delete(l.id); } }
+  const yeni = [...byId.values()].map(panelIlan).filter((l) => l.ilce && l.foto.length);
+  LISTINGS.push(...yeni);
+  console.log(`Panel senkronu: ${rows.length} ilan okundu, ${yeni.length} yeni ilan eklendi`);
+} catch (e) { console.warn('Panel senkronu atlandı, portfoy.json kullanılıyor:', e.message); }
 const DEMO = LISTINGS.length === 0 && !SITE.live;
 if (DEMO) LISTINGS = read('data/demo.json');
 const KAT_OF = { 'Satılık': 'satilik', 'Kiralık': 'kiralik', 'Devren': 'devren' };
@@ -41,6 +75,7 @@ for (const l of LISTINGS) {
 }
 const PREVIEW = LISTINGS.filter((l) => l.durum === 'Onay Bekliyor').map((l) => ({ ...l, _preview: true })); // onay için gizli önizleme: listelerde ve site haritasında yok, noindex
 LISTINGS = LISTINGS.filter((l) => ['Yayında', 'Opsiyonlu', 'Satıldı'].includes(l.durum));
+const AGENT_ILAN = new Map(); for (const l of LISTINGS) { const a = l.danisman?.ad || 'Ali Caner Can'; if (!AGENT_ILAN.has(a)) AGENT_ILAN.set(a, []); AGENT_ILAN.get(a).push(l); }
 
 const VER = crypto.createHash('md5').update(fs.readFileSync(path.join(ROOT, 'assets/style.css')) + fs.readFileSync(path.join(ROOT, 'assets/app.js'))).digest('hex').slice(0, 8);
 const LANGS = ['tr', 'en', 'de', 'ru', 'fa', ...PACKS.map((p) => p.code)];
@@ -549,8 +584,9 @@ function fill(html, lang) {
   const nf = new Intl.NumberFormat(LOCALE[lang]);
   const stats = `<div class="stats"><div><b>1.000 m²</b><span>ACC Plaza</span></div><div><b>~50</b><span>${s('partners', lang)}</span></div><div><b>10</b><span>${s('langsSvc', lang)}</span></div><div><b>${fmtRating(lang)} ★</b><span>${t.gReviews(nf.format(SITE.google.reviews))}</span></div></div>`;
   const ph = (f, w) => (TEAM_LOCAL[f] ? rimg(TEAM_LOCAL[f], w, 75) : null);
-  const team = `<div class="team">${TEAM.map((p) => { const u = ph(STAFF_PHOTOS[p.name], 320); return `<div class="member">${u ? `<img src="${u}" alt="${esc(p.name)}, ${esc(p.role.tr)} – ACC HOMES" loading="lazy" width="160" height="160">` : `<span class="mav">${esc(p.initials)}</span>`}<b>${p.link ? `<a href="${url(lang, p.link)}">${esc(p.name)}</a>` : esc(p.name)}</b><small>${esc(p.role[lang] || p.role.en)}</small></div>`; }).join('')}</div>`;
-  const partners = `<div class="team partners">${PARTNERS.map((p) => { const u = ph(p.photo, 320); const ini = p.name.split(' ').map((x) => x[0]).slice(0, 2).join(''); return `<div class="member">${u ? `<img src="${u}" alt="${esc(p.name)}, ${PARTNER_ROLE.tr} – ACC HOMES" loading="lazy" width="160" height="160">` : `<span class="mav">${esc(ini)}</span>`}<b>${esc(p.name)}</b><small>${esc((p.sworn ? SWORN_ROLE : PARTNER_ROLE)[lang])}</small></div>`; }).join('')}</div>`;
+  const ilanLink = (ad) => { const n = (AGENT_ILAN.get(ad) || []).length; return n ? `<a class="milan" href="${url(lang, 'team', slugify(ad))}">${n} ${GL(lang) === 'tr' ? 'ilan' : 'listings'} →</a>` : ''; };
+  const team = `<div class="team">${TEAM.map((p) => { const u = ph(STAFF_PHOTOS[p.name], 320); return `<div class="member">${u ? `<img src="${u}" alt="${esc(p.name)}, ${esc(p.role.tr)} – ACC HOMES" loading="lazy" width="160" height="160">` : `<span class="mav">${esc(p.initials)}</span>`}<b>${p.link ? `<a href="${url(lang, p.link)}">${esc(p.name)}</a>` : esc(p.name)}</b><small>${esc(p.role[lang] || p.role.en)}</small>${ilanLink(p.name)}</div>`; }).join('')}</div>`;
+  const partners = `<div class="team partners">${PARTNERS.map((p) => { const u = ph(p.photo, 320); const ini = p.name.split(' ').map((x) => x[0]).slice(0, 2).join(''); return `<div class="member">${u ? `<img src="${u}" alt="${esc(p.name)}, ${PARTNER_ROLE.tr} – ACC HOMES" loading="lazy" width="160" height="160">` : `<span class="mav">${esc(ini)}</span>`}<b>${esc(p.name)}</b><small>${esc((p.sworn ? SWORN_ROLE : PARTNER_ROLE)[lang])}</small>${ilanLink(p.name)}</div>`; }).join('')}</div>`;
   const langs = `<ul class="chips">${LANGS_SPOKEN[lang].map((l) => `<li>${l}</li>`).join('')}</ul>`;
   const waJoin = waLink(s('waJoin', lang));
   return html.replace(/\{\{URL:(\w+)\}\}/g, (_, k) => (k === 'list' || k === 'contact' || k === 'guide' ? url(lang, k) : url(lang, k)))
@@ -1042,6 +1078,18 @@ function catNav(lang, ctx) {
   const subs = kat ? et.alt.map((a) => [altLab(a, lang), catUrl(lang, et, kat, a), LISTINGS.filter((l) => l.emlakTipi === et.k && l.kategori === kat && l.altTip === a).length]) : et.kategoriler.map((k) => [lab(KATEGORILER[k], lang), catUrl(lang, et, k), LISTINGS.filter((l) => l.emlakTipi === et.k && l.kategori === k).length]);
   return subs.length ? `<nav class="catnav" aria-label="${x.cats}">${subs.map(([n, u, c]) => `<a href="${u}">${esc(n)}${c ? ` <small>${c}</small>` : ''}</a>`).join('')}</nav>` : '';
 }
+// İş ortağı sayfası: ekibimiz/<ad>/ — o iş ortağının yayındaki tüm portföyleri ve iletişim bilgisi
+function pageAgent(ad, list, lang) {
+  const t = T[lang]; const tr = GL(lang) === 'tr'; const d = list.find((l) => l.danisman)?.danisman || { ad, unvan: s('broker', lang), tel: SITE.phoneRaw, telText: SITE.phone, foto: SITE.brokerPhoto };
+  const title = tr ? `${ad} – Antalya Satılık ve Kiralık Portföyleri` : `${ad} – Property Listings in Antalya`;
+  const desc = tr ? `${ad}, ACC HOMES International Real Estate iş ortağı. ${list.length} güncel satılık ve kiralık portföy; fiyat, konum ve fotoğraflarıyla. Hemen iletişime geçin.` : `${ad}, partner at ACC HOMES International Real Estate. ${list.length} current listings in Antalya with photos and prices.`;
+  const wa = `https://wa.me/${String(d.tel).replace('+', '')}`;
+  const body = `<section class="wrap sec"><nav class="crumbs"><a href="${home(lang)}">${t.nav.home}</a> / <a href="${url(lang, 'team')}">${PAGES.team.nav[lang] || PAGES.team.nav.en}</a> / <span>${esc(ad)}</span></nav>
+<div class="box agent agentpage">${d.foto ? `<img src="${d.foto}" alt="${esc(ad)}">` : `<span class="mav">${esc(ad.split(' ').map((x) => x[0]).slice(0, 2).join(''))}</span>`}<div><h1>${esc(ad)}</h1><small>${esc(d.unvan || '')} · ACC HOMES International Real Estate</small><a href="tel:${d.tel}">${esc(d.telText || d.tel)}</a></div><a class="wabtn sm" href="${wa}" target="_blank" rel="noopener">WhatsApp</a></div>
+<h2>${tr ? `${list.length} portföy` : `${list.length} listings`}</h2><div class="grid">${list.map((l) => card(l, lang)).join('')}</div></section>`;
+  write(path.join(url(lang, 'team', slugify(ad)), 'index.html'), layout({ lang, title: `${title} | ACC HOMES`, desc, canonical: url(lang, 'team', slugify(ad)), alternates: null, body,
+    schema: [{ '@context': 'https://schema.org', '@type': 'RealEstateAgent', name: ad, worksFor: { '@type': 'RealEstateAgent', name: 'ACC HOMES International Real Estate' }, telephone: d.tel, url: SITE.domain + url(lang, 'team', slugify(ad)) }] }));
+}
 function listPage(lang, ctx) {
   const t = T[lang]; const x = TXL(lang); const { et, kat, alt } = ctx;
   const list = LISTINGS.filter((l) => (!et || l.emlakTipi === et.k) && (!kat || l.kategori === kat) && (!alt || l.altTip === alt));
@@ -1261,6 +1309,7 @@ for (const lang of LANGS) {
   urls.push(home(lang), url(lang, 'list'), url(lang, 'guide'), url(lang, 'contact'), url(lang, 'blog'), ...ALLPOSTS.map((p) => url(lang, 'blog', p.slug)));
   for (const l of LISTINGS) { pageListing(l, lang); urls.push(url(lang, 'listing', slugOf(l))); }
   for (const l of PREVIEW) pageListing(l, lang);
+  for (const [ad, list] of AGENT_ILAN) { pageAgent(ad, list, lang); urls.push(url(lang, 'team', slugify(ad))); }
 }
 for (const p of PROJECTS) { if (p.i18n) { for (const lang of LANGS.filter((l) => ANTALLE[l])) { pageProjectI18n(p, lang); urls.push(url(lang, 'projects', p.slug)); } } else { pageProject(p); urls.push(`/projeler/${p.slug}/`); } }
 const OLD_BLOG_TO = { kira: url('tr', 'blog', 'kira-artis-orani'), tuik: url('tr', 'blog', 'antalya-konut-satis-istatistikleri'), about: url('tr', 'about'), accday: url('tr', 'events', 'acc-day-2025'), blog: url('tr', 'blog') };

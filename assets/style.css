@@ -451,3 +451,6 @@ img{-webkit-user-drag:none;user-drag:none;-webkit-touch-callout:none}
 .hmah{margin-top:16px;line-height:2.1;font-size:14px}.hmah b{margin-right:6px}.hmah a{display:inline-block;margin:0 6px 6px 0;padding:4px 12px;border:1px solid var(--line);border-radius:999px;background:#fff;color:inherit;text-decoration:none}.hmah a:hover{border-color:var(--red)}
 @media(max-width:900px){.hcats{grid-template-columns:repeat(3,minmax(0,1fr))}.hlocs{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:480px){.hcats{grid-template-columns:repeat(2,minmax(0,1fr))}}
+/* iş ortağı portföy bağlantısı ve sayfası */
+.member .milan{display:inline-block;margin-top:4px;font-size:13px;font-weight:600;color:var(--red,#E02A3C)}
+.agentpage{max-width:640px;margin:10px 0 24px}.agentpage h1{font-size:24px;margin:0}

@@ -18,7 +18,7 @@ concurrency:
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+    timeout-minutes: 90
     env:
       SITE_HOST: turhost
       FTP_SERVER: ${{ secrets.FTP_SERVER }}

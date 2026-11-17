@@ -1,5 +1,6 @@
 import { POSTS3 } from './posts3.mjs';
 import { POSTS4 } from './posts4.mjs';
+import { POSTS5 } from './posts5.mjs';
 // ACC HOMES Blog: yatırımcı, müteahhit ve Antalya odaklı yayın.
 // Kategoriler 12 dilde; yazı içerikleri TR/EN (diğer diller EN'e düşer).
 // AYLIK GÜNCELLEME: RENT dizisine yeni ayı, SALES dizisine yeni ayı ekleyin. Sayfa başlıkları ve tablolar kendiliğinden güncellenir.
@@ -25,6 +26,7 @@ export const BLOG = {
     vatandaslik: { icon: '🛂', name: L12('Vatandaşlık ve İkamet', 'Citizenship & Residency', 'Staatsbürgerschaft & Aufenthalt', 'Гражданство и ВНЖ', 'تابعیت و اقامت', 'Obywatelstwo i pobyt', 'Citoyenneté et résidence', 'Ciudadanía y residencia', 'Staatsburgerschap & verblijf', 'Medborgarskap & uppehåll', 'الجنسية والإقامة', '入籍与居留') },
     bolge: { icon: '📍', name: L12('Bölgeler', 'Areas', 'Regionen', 'Районы', 'مناطق', 'Dzielnice', 'Quartiers', 'Zonas', 'Gebieden', 'Områden', 'المناطق', '区域') },
     muteahhit: { icon: '🏗️', name: L12('Müteahhitler ve Projeler', 'Developers & Projects', 'Bauträger & Projekte', 'Застройщики и проекты', 'سازندگان و پروژه‌ها', 'Deweloperzy i projekty', 'Promoteurs et projets', 'Promotores y proyectos', 'Ontwikkelaars & projecten', 'Byggherrar & projekt', 'المطورون والمشاريع', '开发商与项目') },
+    donusum: { icon: '🏗️', name: L12('Kentsel Dönüşüm', 'Urban Renewal', 'Stadterneuerung', 'Реновация и снос', 'نوسازی شهری', 'Rewitalizacja miejska', 'Rénovation urbaine', 'Renovación urbana', 'Stadsvernieuwing', 'Stadsförnyelse', 'التحول الحضري', '城市更新') },
     rehber: { icon: '🧭', name: L12('Alıcı ve Satıcı Rehberi', 'Buyer & Seller Guides', 'Ratgeber für Käufer & Verkäufer', 'Гид для покупателей и продавцов', 'راهنمای خریدار و فروشنده', 'Poradnik kupującego i sprzedającego', 'Guides acheteur et vendeur', 'Guías para compradores y vendedores', 'Gidsen voor kopers en verkopers', 'Guider för köpare och säljare', 'أدلة المشترين والبائعين', '买卖指南') },
   },
   ui: {
@@ -281,4 +283,4 @@ BLOG_POSTS.push(
     },
   },
 );
-BLOG_POSTS.push(...POSTS3, ...POSTS4);
+BLOG_POSTS.push(...POSTS3, ...POSTS4, ...POSTS5);

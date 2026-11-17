@@ -1077,7 +1077,19 @@
    "/img/ACC-0006/15.webp",
    "/img/ACC-0006/16.webp",
    "/img/ACC-0006/17.webp",
-   "/img/ACC-0006/18.webp"
+   "/img/ACC-0006/18.webp",
+   "/img/ACC-0006/19.webp",
+   "/img/ACC-0006/20.webp",
+   "/img/ACC-0006/21.webp",
+   "/img/ACC-0006/22.webp",
+   "/img/ACC-0006/23.webp",
+   "/img/ACC-0006/24.webp",
+   "/img/ACC-0006/25.webp",
+   "/img/ACC-0006/26.webp",
+   "/img/ACC-0006/27.webp",
+   "/img/ACC-0006/28.webp",
+   "/img/ACC-0006/29.webp",
+   "/img/ACC-0006/30.webp"
   ],
   "sahibinden": "1343000427",
   "slug": "kiralik-dosemealti-altinkale-decus-villalari-5-1-villa-acc-0006",
@@ -1250,7 +1262,19 @@
    "/img/ACC-0007/15.webp",
    "/img/ACC-0007/16.webp",
    "/img/ACC-0007/17.webp",
-   "/img/ACC-0007/18.webp"
+   "/img/ACC-0007/18.webp",
+   "/img/ACC-0007/19.webp",
+   "/img/ACC-0007/20.webp",
+   "/img/ACC-0007/21.webp",
+   "/img/ACC-0007/22.webp",
+   "/img/ACC-0007/23.webp",
+   "/img/ACC-0007/24.webp",
+   "/img/ACC-0007/25.webp",
+   "/img/ACC-0007/26.webp",
+   "/img/ACC-0007/27.webp",
+   "/img/ACC-0007/28.webp",
+   "/img/ACC-0007/29.webp",
+   "/img/ACC-0007/30.webp"
   ],
   "slug": "satilik-dosemealti-altinkale-decus-villalari-5-1-villa-acc-0007",
   "baslik": {
@@ -1399,7 +1423,32 @@
    "vatandaslik",
    "oturum"
   ],
-  "foto": [],
+  "foto": [
+   "/img/ACC-0008/01.webp",
+   "/img/ACC-0008/02.webp",
+   "/img/ACC-0008/03.webp",
+   "/img/ACC-0008/04.webp",
+   "/img/ACC-0008/05.webp",
+   "/img/ACC-0008/06.webp",
+   "/img/ACC-0008/07.webp",
+   "/img/ACC-0008/08.webp",
+   "/img/ACC-0008/09.webp",
+   "/img/ACC-0008/10.webp",
+   "/img/ACC-0008/11.webp",
+   "/img/ACC-0008/12.webp",
+   "/img/ACC-0008/13.webp",
+   "/img/ACC-0008/14.webp",
+   "/img/ACC-0008/15.webp",
+   "/img/ACC-0008/16.webp",
+   "/img/ACC-0008/17.webp",
+   "/img/ACC-0008/18.webp",
+   "/img/ACC-0008/19.webp",
+   "/img/ACC-0008/20.webp",
+   "/img/ACC-0008/21.webp",
+   "/img/ACC-0008/22.webp",
+   "/img/ACC-0008/23.webp",
+   "/img/ACC-0008/24.webp"
+  ],
   "sahibinden": "1310176533",
   "slug": "satilik-muratpasa-fener-muhsin-adiyaman-sitesi-deniz-manzarali-3-1-daire-acc-0008",
   "baslik": {
@@ -1476,7 +1525,8 @@
     "Консьерж",
     "Открытая парковка"
    ]
-  }
+  },
+  "thumbs": true
  },
  {
   "tip": "Satılık",
@@ -1518,7 +1568,32 @@
    "vatandaslik",
    "oturum"
   ],
-  "foto": [],
+  "foto": [
+   "/img/ACC-0009/03.webp",
+   "/img/ACC-0009/01.webp",
+   "/img/ACC-0009/02.webp",
+   "/img/ACC-0009/04.webp",
+   "/img/ACC-0009/05.webp",
+   "/img/ACC-0009/06.webp",
+   "/img/ACC-0009/07.webp",
+   "/img/ACC-0009/08.webp",
+   "/img/ACC-0009/09.webp",
+   "/img/ACC-0009/10.webp",
+   "/img/ACC-0009/11.webp",
+   "/img/ACC-0009/12.webp",
+   "/img/ACC-0009/13.webp",
+   "/img/ACC-0009/14.webp",
+   "/img/ACC-0009/15.webp",
+   "/img/ACC-0009/16.webp",
+   "/img/ACC-0009/17.webp",
+   "/img/ACC-0009/18.webp",
+   "/img/ACC-0009/19.webp",
+   "/img/ACC-0009/20.webp",
+   "/img/ACC-0009/21.webp",
+   "/img/ACC-0009/22.webp",
+   "/img/ACC-0009/23.webp",
+   "/img/ACC-0009/24.webp"
+  ],
   "sahibinden": "1341902622",
   "slug": "satilik-muratpasa-fener-muhsin-adiyaman-sitesi-deniz-manzarali-3-1-daire-acc-0009",
   "baslik": {
@@ -1595,7 +1670,8 @@
     "Консьерж",
     "Открытая парковка"
    ]
-  }
+  },
+  "thumbs": true
  },
  {
   "tip": "Satılık",
@@ -1645,7 +1721,21 @@
    "/img/ACC-0010/07.webp",
    "/img/ACC-0010/08.webp",
    "/img/ACC-0010/09.webp",
-   "/img/ACC-0010/10.webp"
+   "/img/ACC-0010/10.webp",
+   "/img/ACC-0010/11.webp",
+   "/img/ACC-0010/12.webp",
+   "/img/ACC-0010/13.webp",
+   "/img/ACC-0010/14.webp",
+   "/img/ACC-0010/15.webp",
+   "/img/ACC-0010/16.webp",
+   "/img/ACC-0010/17.webp",
+   "/img/ACC-0010/18.webp",
+   "/img/ACC-0010/19.webp",
+   "/img/ACC-0010/20.webp",
+   "/img/ACC-0010/21.webp",
+   "/img/ACC-0010/22.webp",
+   "/img/ACC-0010/23.webp",
+   "/img/ACC-0010/24.webp"
   ],
   "thumbs": true,
   "sahibinden": "1339511801",
@@ -1759,7 +1849,34 @@
    "vatandaslik",
    "oturum"
   ],
-  "foto": [],
+  "foto": [
+   "/img/ACC-0011/01.webp",
+   "/img/ACC-0011/02.webp",
+   "/img/ACC-0011/03.webp",
+   "/img/ACC-0011/04.webp",
+   "/img/ACC-0011/05.webp",
+   "/img/ACC-0011/06.webp",
+   "/img/ACC-0011/07.webp",
+   "/img/ACC-0011/08.webp",
+   "/img/ACC-0011/09.webp",
+   "/img/ACC-0011/10.webp",
+   "/img/ACC-0011/11.webp",
+   "/img/ACC-0011/12.webp",
+   "/img/ACC-0011/13.webp",
+   "/img/ACC-0011/14.webp",
+   "/img/ACC-0011/15.webp",
+   "/img/ACC-0011/16.webp",
+   "/img/ACC-0011/17.webp",
+   "/img/ACC-0011/18.webp",
+   "/img/ACC-0011/19.webp",
+   "/img/ACC-0011/20.webp",
+   "/img/ACC-0011/21.webp",
+   "/img/ACC-0011/22.webp",
+   "/img/ACC-0011/23.webp",
+   "/img/ACC-0011/24.webp",
+   "/img/ACC-0011/25.webp",
+   "/img/ACC-0011/26.webp"
+  ],
   "sahibinden": "1303415429",
   "slug": "satilik-muratpasa-caglayan-asansorlu-5-1-dubleks-daire-acc-0011",
   "baslik": {
@@ -1824,7 +1941,8 @@
     "Газ",
     "Ипотека"
    ]
-  }
+  },
+  "thumbs": true
  },
  {
   "id": "ACC-0012",
@@ -1862,7 +1980,18 @@
   "etiketler": [
    "oturum"
   ],
-  "foto": [],
+  "foto": [
+   "/img/ACC-0012/01.webp",
+   "/img/ACC-0012/02.webp",
+   "/img/ACC-0012/03.webp",
+   "/img/ACC-0012/04.webp",
+   "/img/ACC-0012/05.webp",
+   "/img/ACC-0012/06.webp",
+   "/img/ACC-0012/07.webp",
+   "/img/ACC-0012/08.webp",
+   "/img/ACC-0012/09.webp",
+   "/img/ACC-0012/10.webp"
+  ],
   "sahibinden": "1339550353",
   "slug": "satilik-muratpasa-yesilbahce-park-manzarali-5-1-dubleks-daire-acc-0012",
   "baslik": {
@@ -1930,7 +2059,8 @@
     "Открытая парковка",
     "Отдельный дом"
    ]
-  }
+  },
+  "thumbs": true
  },
  {
   "id": "ACC-0013",
@@ -1967,7 +2097,34 @@
   "etiketler": [
    "oturum"
   ],
-  "foto": [],
+  "foto": [
+   "/img/ACC-0013/01.webp",
+   "/img/ACC-0013/02.webp",
+   "/img/ACC-0013/03.webp",
+   "/img/ACC-0013/04.webp",
+   "/img/ACC-0013/05.webp",
+   "/img/ACC-0013/06.webp",
+   "/img/ACC-0013/07.webp",
+   "/img/ACC-0013/08.webp",
+   "/img/ACC-0013/09.webp",
+   "/img/ACC-0013/10.webp",
+   "/img/ACC-0013/11.webp",
+   "/img/ACC-0013/12.webp",
+   "/img/ACC-0013/13.webp",
+   "/img/ACC-0013/14.webp",
+   "/img/ACC-0013/15.webp",
+   "/img/ACC-0013/16.webp",
+   "/img/ACC-0013/17.webp",
+   "/img/ACC-0013/18.webp",
+   "/img/ACC-0013/19.webp",
+   "/img/ACC-0013/20.webp",
+   "/img/ACC-0013/21.webp",
+   "/img/ACC-0013/22.webp",
+   "/img/ACC-0013/23.webp",
+   "/img/ACC-0013/24.webp",
+   "/img/ACC-0013/25.webp",
+   "/img/ACC-0013/26.webp"
+  ],
   "sahibinden": "1314244394",
   "slug": "satilik-muratpasa-sirinyali-keser-sitesi-3-1-daire-acc-0013",
   "cephe": {
@@ -2043,6 +2200,7 @@
     "Парковка",
     "Энергокласс C"
    ]
-  }
+  },
+  "thumbs": true
  }
 ]

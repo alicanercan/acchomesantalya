@@ -31,6 +31,15 @@ jobs:
         run: npm install --no-save --no-package-lock sharp@0.33 @fontsource/montserrat@5 @fontsource/vazirmatn@5
       - name: Siteyi derle
         run: node build.mjs
+      - name: Panel anlık görüntüsü (ilan SEO görevleri için)
+        if: always()
+        continue-on-error: true
+        uses: actions/upload-artifact@v4
+        with:
+          name: panel-snapshot
+          path: .panel-snapshot.json
+          retention-days: 7
+          if-no-files-found: ignore
       - name: Turhost'a yükle
         if: env.FTP_SERVER != ''
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5

@@ -1,5 +1,6 @@
 // ACC HOMES — altintassatilikdaire.com statik site üreticisi
 // Bağımlılık yok: Netlify'da "node build.mjs" ile çalışır, çıktı dist/ klasörüne yazılır.
+import { enrich as ilanSeo, temizle as ilanTemizle } from './ilan-seo.mjs';
 import fs from 'node:fs';
 import path from 'node:path';
 import crypto from 'node:crypto';
@@ -63,7 +64,17 @@ try {
   const yeni = [...byId.values()].map(panelIlan).filter((l) => l.ilce && l.foto.length);
   LISTINGS.push(...yeni);
   console.log(`Panel senkronu: ${rows.length} ilan okundu, ${yeni.length} yeni ilan eklendi`);
-} catch (e) { console.warn('Panel senkronu atlandı, portfoy.json kullanılıyor:', e.message); }
+  // İlan SEO görevleri için anlık görüntü (repo herkese açık: telefon, e-posta ve konum çıkarılır)
+  try { fs.writeFileSync(path.join(ROOT, '.panel-snapshot.json'), JSON.stringify(rows.map(({ danisman_tel, yaklasik_konum, danisman_foto, ...v }) => ({ ...v, aciklama: Object.fromEntries(Object.entries(v.aciklama || {}).map(([k, t]) => [k, ilanTemizle(t)])) })))); } catch {}
+} catch (e) {
+  // Ağ yoksa (yerel/zamanlanmış oturum) son anlık görüntü kullanılabilir: PANEL_SNAPSHOT=/yol/panel.json
+  if (process.env.PANEL_SNAPSHOT && fs.existsSync(process.env.PANEL_SNAPSHOT)) {
+    const rows = JSON.parse(fs.readFileSync(process.env.PANEL_SNAPSHOT, 'utf8')); const byId = new Map(rows.map((v) => [v.id, v]));
+    for (const l of LISTINGS) byId.delete(l.id);
+    const yeni = [...byId.values()].map(panelIlan).filter((l) => l.ilce && l.foto.length); LISTINGS.push(...yeni);
+    console.warn(`Panel senkronu: ağ yok, anlık görüntüden ${yeni.length} ilan (${e.message})`);
+  } else console.warn('Panel senkronu atlandı, portfoy.json kullanılıyor:', e.message);
+}
 const DEMO = LISTINGS.length === 0 && !SITE.live;
 if (DEMO) LISTINGS = read('data/demo.json');
 const KAT_OF = { 'Satılık': 'satilik', 'Kiralık': 'kiralik', 'Devren': 'devren' };
@@ -234,6 +245,10 @@ const locList = (v, lang) => (Array.isArray(v) ? v : (v && (v[lang] || v[GL(lang
 const RU_V = { 'Evet': 'Да', 'Hayır': 'Нет', 'Yerden Isıtma': 'Тёплый пол', 'Kapalı Otopark': 'Крытая парковка', 'Açık Otopark': 'Открытая парковка', 'Eşyalı': 'С мебелью', 'Eşyasız': 'Без мебели', 'Boş': 'Свободна', 'Kiracılı': 'С арендатором', 'Kat Mülkiyetli': 'Kat mülkiyeti (полная собственность)', 'Kat İrtifaklı': 'Kat irtifakı (до оформления кат мюлькиети)', 'Kombi (Doğalgaz)': 'Газовый котёл', 'Klima': 'Кондиционер' };
 const optV = (f, v, lang) => { if (!v || lang === 'tr') return v; if (lang === 'ru' && RU_V[v]) return RU_V[v]; const o = (SECMELI.find((x) => x.f === f) || { ops: [] }).ops.find((p) => p[0] === v); return o ? o[1] : v; };
 const slugOf = (l) => l.slug ? slugify(l.slug.replace(/^\//, '')) : slugify([l.tip, l.ilce, l.mahalle, l.oda, l.tur, l.id].filter(Boolean).join(' '));
+// İlan SEO katmanı: panel ilanlarını site standardına getirir (ilan-seo.mjs)
+const SEO_REDIR = [];
+for (const l of LISTINGS) if (l._panel) { const eski = ilanSeo(l, slugify); if (eski) SEO_REDIR.push([eski, l]); }
+console.log(`İlan SEO: ${LISTINGS.filter((l) => l._seo === 'ozgun').length} özgün, ${LISTINGS.filter((l) => l._seo === 'otomatik').length} otomatik`);
 const pick = (obj, lang) => (obj && (obj[lang] || obj.tr)) || '';
 const fmtPrice = (l, lang) => {
   if (!l.fiyat) return l.teklif ? ({ tr: 'Teklif verin', en: 'Make an offer', ru: 'Предложите цену' })[lang] || 'Make an offer' : T[lang].priceOnReq;
@@ -1145,7 +1160,7 @@ function similar(l, lang) {
 function pageListing(l, lang) {
   const t = T[lang]; const F = t.fields; const slug = slugOf(l);
   const title = pick(l.baslik, lang);
-  const desc = (lang === 'tr' && l.meta) ? l.meta : pick(l.aciklama, lang).slice(0, 155);
+  const desc = (l.metaI18n && l.metaI18n[lang]) || ((lang === 'tr' && l.meta) ? l.meta : pick(l.aciklama, lang).slice(0, 155));
   const rows = [
     [F.no, l.id], [TXL(lang).listedIn, l.tarih], [TXL(lang).emlakTipi, [lab(EMLAK_TIPLERI.find((e) => e.k === l.emlakTipi) || { tr: '', en: '' }, lang), lab(KATEGORILER[l.kategori] || { tr: '', en: '' }, lang), altLab(l.altTip || '', lang)].filter(Boolean).join(' · ')], [F.rooms, l.oda], [F.gross, l.brut ? { m2: l.brut } : ''], [F.net, l.net ? { m2: l.net } : ''], [F.age, l.yas], [F.floor, l.kat], [F.floors, l.katSayisi],
     [F.heat, optV('isitma', l.isitma, lang)], [lab(SECMELI.find((x) => x.f === 'banyo'), lang), l.banyo], [lab(SECMELI.find((x) => x.f === 'balkon'), lang), optV('balkon', l.balkon, lang)], [lab(SECMELI.find((x) => x.f === 'asansor'), lang), optV('asansor', l.asansor, lang)], [lab(SECMELI.find((x) => x.f === 'otopark'), lang), optV('otopark', l.otopark, lang)], [lab(SECMELI.find((x) => x.f === 'esya'), lang), optV('esya', l.esya, lang)], [lab(SECMELI.find((x) => x.f === 'kullanim'), lang), optV('kullanim', l.kullanim, lang)], [F.inSite, optV('kredi', l.site, lang)], [GL(lang) === 'tr' ? 'Aidat' : 'Service charge', l.aidat ? `${l.aidat} TL` : ''], [({ tr: 'Depozito', ru: 'Депозит' })[lang] || 'Deposit', l.depozito ? `${l.depozito} TL` : ''], [lab(SECMELI.find((x) => x.f === 'imar'), lang), optV('imar', l.imar, lang)], [lab(SECMELI.find((x) => x.f === 'takas'), lang), optV('takas', l.takas, lang)], [F.credit, optV('kredi', l.kredi, lang)], [F.deed, optV('tapu', l.tapu, lang)], [s('iskanOk', lang), l.iskan ? s('iskanVar', lang) : ''], [s('plotArea', lang), l.arsa ? { m2: l.arsa } : ''], [s('gardenArea', lang), l.bahce ? { m2: l.bahce } : ''], [s('buildArea', lang), l.insaat ? { m2: l.insaat } : ''], [s('facing', lang), loc(l.cephe, lang)], [F.project, l.proje], [F.location, [l.mahalle, l.ilce, 'Antalya'].filter(Boolean).join(', ')],
@@ -1327,6 +1342,7 @@ write('_redirects', oldBlog.join('\n') + '\n' + LANGS.flatMap((l) => { const to 
 // ---- Çeviri kalite kontrolü: TR/EN dışındaki dillerde içeriği İngilizce kalan sayfalar indekslenmez ----
 const OLD_SITE = fs.readFileSync(path.join(ROOT, 'data/old-site-redirects.txt'), 'utf8').split('\n').map((l) => l.trim()).filter((l) => l && !l.startsWith('#')).flatMap((l) => { const [u, t] = l.split(/\s+/); const forms = new Set([u, encodeURI(u)]); if (u.endsWith('/') && u.length > 1) { forms.add(u.slice(0, -1)); forms.add(encodeURI(u.slice(0, -1))); } return [...forms].map((f) => `${f} ${t} 301`); });
 fs.appendFileSync(path.join(OUT, '_redirects'), OLD_SITE.join('\n') + '\n');
+fs.appendFileSync(path.join(OUT, '_redirects'), SEO_REDIR.flatMap(([eski, l]) => LANGS.map((lg) => `${url(lg, 'listing', eski)} ${url(lg, 'listing', slugOf(l))} 301`)).join('\n') + '\n');
 
 // ---- Turhost (Apache/LiteSpeed) için .htaccess ve görsel küçültme ----
 if (HOST === 'turhost') {

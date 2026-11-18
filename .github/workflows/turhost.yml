@@ -50,6 +50,7 @@ jobs:
           protocol: ftps
           local-dir: ./dist/
           server-dir: ./
+          timeout: 600000
           exclude: |
             **/.git*
             **/.git*/**

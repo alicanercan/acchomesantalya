@@ -6,6 +6,318 @@ export const NEWS_UI = {
   ru: { name: 'ACC NEWS', title: 'ACC NEWS: еженедельный обзор недвижимости', lead: 'Еженедельный обзор рынка недвижимости Анталии и Турции: ставки, ипотека, статистика продаж, градостроительство и торги — с источниками и комментарием ACC HOMES.', metaTitle: 'ACC NEWS: еженедельный обзор недвижимости Анталии и Турции | ACC HOMES', issues: 'Выпуски', read: 'Читать выпуск', cta: 'Станьте партнёром ACC HOMES', all: 'Все выпуски', rss: 'RSS' },
 };
 export const NEWS = [
+  { date: '2026-11-18', ...{
+ "tr": {
+  "metaTitle": "ACC NEWS 18 Kasım 2026: İkamet Kararı ve Ekim Satışları",
+  "desc": "Yabancı yatırımcıya 150 bin $ ile 3 yıl, 200 bin $ ile 5 yıl ikamet izni yürürlükte. Ekim'de konut satışları %23,3 düştü, Antalya'da yabancıya satış arttı.",
+  "h1": "ACC NEWS — Günün Haberi",
+  "dl": "18 Kasım 2026 · Hazırlayan: Ali Caner Can, Broker",
+  "intro": "İş ortaklarımız ve müşterilerimiz için bugünün iki önemli gelişmesini kısa, kaynaklı ve yorumlu olarak derledik.",
+  "sections": [
+   {
+    "title": "Günün 2 kritik gelişmesi",
+    "items": [
+     {
+      "h": "Yabancı yatırımcıya 150 bin dolara 3 yıl, 200 bin dolara 5 yıl ikamet izni",
+      "p": "18 Kasım 2026 tarihli Resmi Gazete'de yayımlanan Cumhurbaşkanı Kararı aynı gün yürürlüğe girdi. Banka mevduatı, devlet borçlanma araçları, gayrimenkul yatırım fonu ve girişim sermayesi fonu payları ile bireysel emekliliğe en az 150 bin dolar yatıran yabancıya 3 yıla, 200 bin dolar yatırana 5 yıla kadar ikamet izni verilebilecek; yatırımın izin süresinin en az yarısı boyunca tutulması gerekiyor. Haberlere göre doğrudan konut alımı bu yeni yolun kapsamında değil. Gayrimenkulle vatandaşlık eşiği 400 bin dolar olarak aynı kaldı. Başvuru usulleri İçişleri Bakanlığı tarafından belirlenecek.",
+      "src": [
+       "Memurlar.net",
+       "https://www.memurlar.net/haber/1184464/yabanci-yatirimciya-150-bin-dolara-3-yil-ikamet-izni.html"
+      ]
+     },
+     {
+      "h": "Ekim'de 131 bin konut satıldı, yıllık düşüş %23,3",
+      "p": "TÜİK verilerine göre Ekim'de 131.072 konut satıldı; satışlar yıllık %23,3, aylık %7,9 azaldı. İkinci el satışlar %28,5, ilk el satışlar %13,1 geriledi. İpotekli satışlar %5,7 düşüşle 23.286'da kaldı ve toplamın %17,8'ini oluşturdu. Yabancıya satış ise %0,9 artışla 2.259 oldu.",
+      "src": [
+       "Foreks / Bizim Menkul",
+       "https://www.foreks.com/haber/detay/6afc5db3d7f1e62e226b552a/FRKS/tr/analiz-ekim-2026-konut-satis-istatistikleri-degerlendirmesi-bizim-menkul-17-11-26/"
+      ]
+     }
+    ]
+   },
+   {
+    "title": "Antalya ve bölge",
+    "items": [
+     {
+      "h": null,
+      "p": "Antalya'da Ekim'de yabancıya 752 konut satıldı, geçen yılın aynı ayına göre %1,6 artış. İstanbul (898) ve Antalya birlikte yabancıya satışın %73'ünü aldı; Mersin 153 satışla üçüncü. Ocak–Ekim döneminde Antalya'da yabancıya satış 5.445 adetle %5,5 geride. En çok alan milliyetler Rusya, İran, Irak, Ukrayna ve Almanya.",
+      "src": [
+       "Yeni Alanya / DHA",
+       "https://www.yenialanya.com/yabanciya-konut-satisinin-yuzde-73u-istanbul-ve-antalyada"
+      ]
+     }
+    ]
+   },
+   {
+    "title": "Kısa kısa",
+    "items": [
+     {
+      "h": null,
+      "p": "Kasım ayında yenilenen konut ve iş yeri kira sözleşmelerinde artış tavanı %31,23 (12 aylık TÜFE ortalaması). Ekim'de %31,49'du.",
+      "src": [
+       "Bigpara",
+       "https://bigpara.hurriyet.com.tr/haberler/konut-haberleri/son-dakika-kasim-ayi-kira-artis-orani-belli-oldu_ID102281157/"
+      ]
+     },
+     {
+      "h": null,
+      "p": "İlk kez konut alacak vatandaşı tapu harcından muaf tutmayı öneren kanun teklifi Meclis'e sunuldu. Teklif henüz yasalaşmadı.",
+      "src": [
+       "Malatya Güncel / İLKHA",
+       "https://www.malatyaguncel.com/tedb-genel-baskani-hakan-akcam-ilk-kez-ev-alacak-3120281h.htm"
+      ]
+     }
+    ]
+   }
+  ],
+  "calTitle": "Takvim",
+  "cal": [
+   [
+    "3 Aralık",
+    "Kasım enflasyonu ve Aralık kira artış tavanı"
+   ],
+   [
+    "10 Aralık",
+    "TCMB PPK faiz kararı"
+   ],
+   [
+    "17 Aralık",
+    "PPK toplantı özeti"
+   ]
+  ],
+  "viewTitle": "İş ortağı notu",
+  "view": "Yeni ikamet kararı, konut alımıyla ikamet ve vatandaşlık yolunu kaldırmıyor; mevduat ve fon yatırımı için ek bir kapı açıyor. Müşterinin hedefi yalnızca oturumsa bu yol bir alternatif; mülk sahibi olmak, kira geliri ve değer artışı isteniyorsa konut yatırımı öne çıkıyor. 400 bin dolar üzeri alımlarda vatandaşlık seçeneği de açık. Satış tarafında yerli talep zayıfladı ve pazarlık gücü alıcıya geçti; doğru ilk fiyat ve emsal analizi her zamankinden önemli. Antalya'da yabancı talebinin Ekim'de yeniden artması, Rusça, İngilizce ve Almanca pazarlamanın sürdürülmesi gerektiğini gösteriyor.",
+  "srcTitle": "Kaynaklar",
+  "sources": [
+   [
+    "Memurlar.net",
+    "https://www.memurlar.net/haber/1184464/yabanci-yatirimciya-150-bin-dolara-3-yil-ikamet-izni.html"
+   ],
+   [
+    "Milli Gazete",
+    "https://www.milligazete.com.tr/cumhurbaskani-erdogan-imzaladi-yururluge-girdi-yabanci-yatirimcilara-150-bin-dolar-karsiliginda-3-yil-200-bin-dolar-karsiliginda-5-yil-ikamet-izni-getirildi"
+   ],
+   [
+    "Foreks / Bizim Menkul",
+    "https://www.foreks.com/haber/detay/6afc5db3d7f1e62e226b552a/FRKS/tr/analiz-ekim-2026-konut-satis-istatistikleri-degerlendirmesi-bizim-menkul-17-11-26/"
+   ],
+   [
+    "Forbes Türkiye",
+    "https://www.forbes.com.tr/ekonomi/turkiye-genelinde-ekim-ayinda-konut-satislari-dustu"
+   ],
+   [
+    "Yeni Alanya / DHA",
+    "https://www.yenialanya.com/yabanciya-konut-satisinin-yuzde-73u-istanbul-ve-antalyada"
+   ],
+   [
+    "Bigpara",
+    "https://bigpara.hurriyet.com.tr/haberler/konut-haberleri/son-dakika-kasim-ayi-kira-artis-orani-belli-oldu_ID102281157/"
+   ],
+   [
+    "Malatya Güncel / İLKHA",
+    "https://www.malatyaguncel.com/tedb-genel-baskani-hakan-akcam-ilk-kez-ev-alacak-3120281h.htm"
+   ]
+  ],
+  "note": "Bu sayfa bilgilendirme amaçlıdır, yatırım ve hukuki tavsiye değildir. Haberler kaynaklarından özetlenmiştir."
+ },
+ "en": {
+  "metaTitle": "ACC NEWS · 18 Nov 2026 | New Residence Rule, October Sales",
+  "desc": "Foreign investors can now get a 3-year permit for USD 150,000 or up to 5 years for USD 200,000. October home sales fell 23.3%; Antalya foreign sales rose.",
+  "h1": "ACC NEWS — News of the Day",
+  "dl": "18 November 2026 · By Ali Caner Can, Broker",
+  "intro": "Two developments that matter today for our partners and clients, summarised with sources and our view.",
+  "sections": [
+   {
+    "title": "Two key developments",
+    "items": [
+     {
+      "h": "Residence permit for foreign investors: USD 150,000 for 3 years, USD 200,000 for up to 5 years",
+      "p": "A Presidential Decree published in the Official Gazette on 18 November 2026 took effect the same day. Foreign investors who place at least USD 150,000 in bank deposits, government debt instruments, real estate investment fund or venture capital fund units, or private pension plans can obtain a residence permit of up to 3 years; USD 200,000 allows up to 5 years. The investment must be held for at least half of the permit period. According to press reports, a direct property purchase is not part of this new route. The citizenship threshold through real estate remains USD 400,000. Application procedures will be set by the Ministry of Interior.",
+      "src": [
+       "Memurlar.net",
+       "https://www.memurlar.net/haber/1184464/yabanci-yatirimciya-150-bin-dolara-3-yil-ikamet-izni.html"
+      ]
+     },
+     {
+      "h": "October home sales: 131,000 units, down 23.3% year on year",
+      "p": "According to TurkStat, 131,072 homes were sold in October, down 23.3% year on year and 7.9% month on month. Resales fell 28.5% and new-build sales 13.1%. Mortgaged sales eased 5.7% to 23,286, or 17.8% of the total. Sales to foreigners rose 0.9% to 2,259.",
+      "src": [
+       "Foreks / Bizim Menkul",
+       "https://www.foreks.com/haber/detay/6afc5db3d7f1e62e226b552a/FRKS/tr/analiz-ekim-2026-konut-satis-istatistikleri-degerlendirmesi-bizim-menkul-17-11-26/"
+      ]
+     }
+    ]
+   },
+   {
+    "title": "Antalya and the region",
+    "items": [
+     {
+      "h": null,
+      "p": "Antalya sold 752 homes to foreign buyers in October, up 1.6% on a year earlier. Istanbul (898) and Antalya together took 73% of foreign sales, with Mersin third at 153. From January to October, Antalya's foreign sales stand at 5,445, 5.5% behind last year. Top buyer nationalities: Russia, Iran, Iraq, Ukraine and Germany.",
+      "src": [
+       "Yeni Alanya / DHA",
+       "https://www.yenialanya.com/yabanciya-konut-satisinin-yuzde-73u-istanbul-ve-antalyada"
+      ]
+     }
+    ]
+   },
+   {
+    "title": "In brief",
+    "items": [
+     {
+      "h": null,
+      "p": "The cap on rent increases for leases renewed in November is 31.23% (12-month average CPI), down from 31.49% in October.",
+      "src": [
+       "Bigpara",
+       "https://bigpara.hurriyet.com.tr/haberler/konut-haberleri/son-dakika-kasim-ayi-kira-artis-orani-belli-oldu_ID102281157/"
+      ]
+     }
+    ]
+   }
+  ],
+  "calTitle": "Calendar",
+  "cal": [
+   [
+    "3 Dec",
+    "November inflation and December rent cap"
+   ],
+   [
+    "10 Dec",
+    "Central Bank rate decision"
+   ],
+   [
+    "17 Dec",
+    "Rate meeting summary"
+   ]
+  ],
+  "viewTitle": "Partner note",
+  "view": "The new rule does not replace residence or citizenship through property; it adds a separate route via deposits and funds. If a client only needs residence, this is an alternative. If they want ownership, rental income and capital growth, property remains the stronger choice, and purchases above USD 400,000 still open the citizenship route. Domestic demand has softened and buyers have more negotiating room, so accurate pricing backed by comparables matters more than ever. Renewed foreign demand in Antalya in October supports continued marketing in Russian, English and German.",
+  "srcTitle": "Sources",
+  "sources": [
+   [
+    "Memurlar.net",
+    "https://www.memurlar.net/haber/1184464/yabanci-yatirimciya-150-bin-dolara-3-yil-ikamet-izni.html"
+   ],
+   [
+    "Milli Gazete",
+    "https://www.milligazete.com.tr/cumhurbaskani-erdogan-imzaladi-yururluge-girdi-yabanci-yatirimcilara-150-bin-dolar-karsiliginda-3-yil-200-bin-dolar-karsiliginda-5-yil-ikamet-izni-getirildi"
+   ],
+   [
+    "Foreks / Bizim Menkul",
+    "https://www.foreks.com/haber/detay/6afc5db3d7f1e62e226b552a/FRKS/tr/analiz-ekim-2026-konut-satis-istatistikleri-degerlendirmesi-bizim-menkul-17-11-26/"
+   ],
+   [
+    "Forbes Türkiye",
+    "https://www.forbes.com.tr/ekonomi/turkiye-genelinde-ekim-ayinda-konut-satislari-dustu"
+   ],
+   [
+    "Yeni Alanya / DHA",
+    "https://www.yenialanya.com/yabanciya-konut-satisinin-yuzde-73u-istanbul-ve-antalyada"
+   ],
+   [
+    "Bigpara",
+    "https://bigpara.hurriyet.com.tr/haberler/konut-haberleri/son-dakika-kasim-ayi-kira-artis-orani-belli-oldu_ID102281157/"
+   ],
+   [
+    "Malatya Güncel / İLKHA",
+    "https://www.malatyaguncel.com/tedb-genel-baskani-hakan-akcam-ilk-kez-ev-alacak-3120281h.htm"
+   ]
+  ],
+  "note": "This page is for information only and is not investment or legal advice. News items are summarised from their sources."
+ },
+ "ru": {
+  "metaTitle": "ACC NEWS · 18.11.2026 | Новое ВНЖ и продажи за октябрь",
+  "desc": "ВНЖ до 3 лет за 150 000 $ и до 5 лет за 200 000 $ для иностранных инвесторов. Продажи жилья в октябре −23,3%, продажи иностранцам в Анталии выросли.",
+  "h1": "ACC NEWS — новость дня",
+  "dl": "18 ноября 2026 · Автор: Али Джанер Джан, брокер",
+  "intro": "Два важных события дня для наших партнёров и клиентов — кратко, с источниками и нашим комментарием.",
+  "sections": [
+   {
+    "title": "Два ключевых события",
+    "items": [
+     {
+      "h": "ВНЖ для иностранных инвесторов: 150 000 $ — до 3 лет, 200 000 $ — до 5 лет",
+      "p": "Указ Президента, опубликованный в Официальной газете 18 ноября 2026 года, вступил в силу в тот же день. Иностранец, вложивший не менее 150 000 $ в банковский депозит, государственные долговые бумаги, паи фондов недвижимости или венчурных фондов либо в частную пенсионную программу, может получить ВНЖ до 3 лет; при 200 000 $ — до 5 лет. Вложения нужно сохранять не менее половины срока разрешения. По данным прессы, прямая покупка недвижимости в этот новый механизм не входит. Порог гражданства через недвижимость остаётся 400 000 $. Порядок подачи заявлений определит МВД.",
+      "src": [
+       "Memurlar.net",
+       "https://www.memurlar.net/haber/1184464/yabanci-yatirimciya-150-bin-dolara-3-yil-ikamet-izni.html"
+      ]
+     },
+     {
+      "h": "В октябре продано 131 тыс. квартир, на 23,3% меньше, чем год назад",
+      "p": "По данным TÜİK, в октябре продано 131 072 единицы жилья: минус 23,3% за год и минус 7,9% за месяц. Вторичный рынок снизился на 28,5%, первичный — на 13,1%. Ипотечные сделки сократились на 5,7%, до 23 286 (17,8% всех продаж). Продажи иностранцам выросли на 0,9%, до 2 259.",
+      "src": [
+       "Foreks / Bizim Menkul",
+       "https://www.foreks.com/haber/detay/6afc5db3d7f1e62e226b552a/FRKS/tr/analiz-ekim-2026-konut-satis-istatistikleri-degerlendirmesi-bizim-menkul-17-11-26/"
+      ]
+     }
+    ]
+   },
+   {
+    "title": "Анталия и регион",
+    "items": [
+     {
+      "h": null,
+      "p": "В октябре иностранцы купили в Анталии 752 объекта — на 1,6% больше, чем годом ранее. На Стамбул (898) и Анталию пришлось 73% всех продаж иностранцам, Мерсин — третий со 153 сделками. За январь–октябрь продажи иностранцам в Анталии составили 5 445, что на 5,5% ниже прошлого года. Больше всего покупали граждане России, Ирана, Ирака, Украины и Германии.",
+      "src": [
+       "Yeni Alanya / DHA",
+       "https://www.yenialanya.com/yabanciya-konut-satisinin-yuzde-73u-istanbul-ve-antalyada"
+      ]
+     }
+    ]
+   }
+  ],
+  "calTitle": "Календарь",
+  "cal": [
+   [
+    "3 дек.",
+    "Инфляция за ноябрь и лимит роста аренды на декабрь"
+   ],
+   [
+    "10 дек.",
+    "Решение ЦБ по ставке"
+   ],
+   [
+    "17 дек.",
+    "Резюме заседания ЦБ"
+   ]
+  ],
+  "viewTitle": "Комментарий для партнёров",
+  "view": "Новое правило не отменяет ВНЖ и гражданство через покупку недвижимости, а добавляет отдельный путь через депозиты и фонды. Если клиенту нужен только ВНЖ, это альтернатива. Если важны собственность, арендный доход и рост стоимости, недвижимость остаётся более сильным выбором, а покупка от 400 000 $ по-прежнему открывает путь к гражданству. Внутренний спрос ослаб, у покупателей больше возможностей для торга, поэтому точная цена на основе сравнимых объектов особенно важна. Рост интереса иностранцев к Анталии в октябре подтверждает, что маркетинг на русском, английском и немецком нужно продолжать.",
+  "srcTitle": "Источники",
+  "sources": [
+   [
+    "Memurlar.net",
+    "https://www.memurlar.net/haber/1184464/yabanci-yatirimciya-150-bin-dolara-3-yil-ikamet-izni.html"
+   ],
+   [
+    "Milli Gazete",
+    "https://www.milligazete.com.tr/cumhurbaskani-erdogan-imzaladi-yururluge-girdi-yabanci-yatirimcilara-150-bin-dolar-karsiliginda-3-yil-200-bin-dolar-karsiliginda-5-yil-ikamet-izni-getirildi"
+   ],
+   [
+    "Foreks / Bizim Menkul",
+    "https://www.foreks.com/haber/detay/6afc5db3d7f1e62e226b552a/FRKS/tr/analiz-ekim-2026-konut-satis-istatistikleri-degerlendirmesi-bizim-menkul-17-11-26/"
+   ],
+   [
+    "Forbes Türkiye",
+    "https://www.forbes.com.tr/ekonomi/turkiye-genelinde-ekim-ayinda-konut-satislari-dustu"
+   ],
+   [
+    "Yeni Alanya / DHA",
+    "https://www.yenialanya.com/yabanciya-konut-satisinin-yuzde-73u-istanbul-ve-antalyada"
+   ],
+   [
+    "Bigpara",
+    "https://bigpara.hurriyet.com.tr/haberler/konut-haberleri/son-dakika-kasim-ayi-kira-artis-orani-belli-oldu_ID102281157/"
+   ],
+   [
+    "Malatya Güncel / İLKHA",
+    "https://www.malatyaguncel.com/tedb-genel-baskani-hakan-akcam-ilk-kez-ev-alacak-3120281h.htm"
+   ]
+  ],
+  "note": "Материал носит информационный характер и не является инвестиционной или юридической консультацией. Новости кратко изложены по источникам."
+ }
+} },
   { date: '2026-11-16', ...{
  "tr": {
   "metaTitle": "ACC NEWS · 16 Kasım 2026 | Antalya ve Türkiye Emlak Gündemi",

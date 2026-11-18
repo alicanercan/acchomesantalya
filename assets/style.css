@@ -454,3 +454,8 @@ img{-webkit-user-drag:none;user-drag:none;-webkit-touch-callout:none}
 /* iş ortağı portföy bağlantısı ve sayfası */
 .member .milan{display:inline-block;margin-top:4px;font-size:13px;font-weight:600;color:var(--red,#E02A3C)}
 .agentpage{max-width:640px;margin:10px 0 24px}.agentpage h1{font-size:24px;margin:0}
+/* ilan sayfası: yaklaşık konum haritası */
+.lmap{position:relative;border-radius:12px;overflow:hidden;aspect-ratio:16/9;background:#eee;margin:8px 0 6px}
+.lmap iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.lmap-area{position:absolute;left:50%;top:50%;width:42%;aspect-ratio:1;transform:translate(-50%,-50%);border-radius:50%;background:rgba(224,42,60,.14);border:2px solid rgba(224,42,60,.65);pointer-events:none}
+.lmap-note{font-size:13px;color:var(--mute)}

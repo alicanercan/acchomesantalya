@@ -53,7 +53,7 @@ function panelIlan(v) {
     esya: v.esya || undefined, kullanim: v.kullanim || undefined, site: v.site || undefined, aidat: v.aidat ?? undefined, kredi: v.kredi || undefined, tapu: v.tapu || undefined,
     takas: v.takas || undefined, imar: v.imar || undefined, etiketler: (v.etiketler || []).filter((k) => k !== 'antalya-disi'), ozellikler: v.ozellikler || [],
     foto: (v.foto || []).map(ilanFoto), thumbs: false, baslik: bas, aciklama: ac, meta: e.meta || (bas.tr ? `${bas.tr}. ${ilkCumle}`.slice(0, 155) : undefined),
-    tarih: trTarih(v.created_at), tekYetki: !!v.yetkili, eids: v.eids || undefined, sahibinden: v.sahibinden || undefined, danisman: panelDanisman(v), _panel: true };
+    harita: v.yaklasik_konum || undefined, tarih: trTarih(v.created_at), tekYetki: !!v.yetkili, eids: v.eids || undefined, sahibinden: v.sahibinden || undefined, danisman: panelDanisman(v), _panel: true };
 }
 try {
   const r = await fetch(`${PANEL.url}/rest/v1/site_ilanlari?select=*`, { headers: { apikey: PANEL.key }, signal: AbortSignal.timeout(20000) });
@@ -900,6 +900,14 @@ const TAGS = { vatandaslik: '🛂', oturum: '🪪', deniz: '🌊', ilkSira: '�
 const tagLabel = (k, lang) => `${TAGS[k]} ${s('tag_' + k, lang)}`;
 const cardTools = (l, lang) => `<div class="ctools"><button type="button" class="favbtn" data-fav="${esc(l.id)}" aria-pressed="false" aria-label="${s('favAdd', lang)}" title="${s('favAdd', lang)}"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M12 21s-7.5-4.6-9.6-9.2C.9 8.4 3 4.5 6.7 4.5c2.1 0 3.6 1.2 4.3 2.4.7-1.2 2.2-2.4 4.3-2.4 3.7 0 5.8 3.9 4.3 7.3C19.5 16.4 12 21 12 21z" fill="currentColor"/></svg></button><button type="button" class="cmpbtn" data-cmp="${esc(l.id)}" aria-pressed="false" title="${s('compareAdd', lang)}">⇄ <span>${s('compare', lang)}</span></button></div>`;
 const enqBtn = (l, lang) => `<button type="button" class="enqbtn" data-enq="${esc(l.id)}">${s('quickEnq', lang)}</button>`;
+// Yaklaşık konum: panel görünümü koordinatı ~1 km'ye yuvarlıyor; işaret yok, bölge çemberi var
+function haritaBlok(l, lang) {
+  const h = l.harita; if (!h || !Number(h.lat) || !Number(h.lon)) return '';
+  const lat = Number(h.lat), lon = Number(h.lon), d = 0.012;
+  const bbox = [lon - d * 1.25, lat - d, lon + d * 1.25, lat + d].map((x) => x.toFixed(4)).join('%2C');
+  return `<h2>${s('mapTitle', lang)}</h2><div class="lmap"><iframe title="${esc(s('mapTitle', lang))}" loading="lazy" referrerpolicy="no-referrer" src="https://www.openstreetmap.org/export/embed.html?bbox=${bbox}&amp;layer=mapnik"></iframe><span class="lmap-area" aria-hidden="true"></span></div>
+<p class="lmap-note">${s('mapNote', lang)} <a href="https://www.google.com/maps/@${lat},${lon},14z" target="_blank" rel="noopener">${s('openMap', lang)} →</a></p>`;
+}
 const cmpData = (list, lang) => `<script type="application/json" id="cmpdata">${JSON.stringify(list.map((l) => ({ id: l.id, u: url(lang, 'listing', slugOf(l)), t: pick(l.baslik, lang), p: fmtPrice(l, lang), a: l.fiyat || 0, c: ({ TL: 'TRY' })[l.para || 'TL'] || l.para, img: (l.foto || [])[0] || '', r: [[T[lang].fields.type, l.tur], [T[lang].fields.rooms, l.oda], [T[lang].fields.net, l.net ? l.net + ' m²' : ''], [T[lang].fields.gross, l.brut ? l.brut + ' m²' : ''], [T[lang].fields.floor, l.kat], [T[lang].fields.age, l.yas], [T[lang].fields.location, [l.mahalle, l.ilce].filter(Boolean).join(', ')], [s('tags', lang), (l.etiketler || []).filter((k) => TAGS[k]).map((k) => tagLabel(k, lang)).join(', ')]] }))).replace(/</g, '\\u003c')}</script>`;
 function tagFilter(lang) {
   const used = Object.keys(TAGS).filter((k) => LISTINGS.some((l) => (l.etiketler || []).includes(k)));
@@ -1166,6 +1174,7 @@ ${reasons.length ? `<div class="reasons">${reasons.map((r) => `<span>✓ ${esc(r
 ${plan ? `<h2>${L('floorPlan')}</h2><div class="fplan">${plan.map(([h, items]) => `<div><h3>${esc(h)}</h3><ul>${items.map((x) => `<li>${esc(x)}</li>`).join('')}</ul></div>`).join('')}</div>` : ''}
 ${feats.length ? `<h2>${l.plan ? L('highlights') : F.features}</h2><ul class="chips">${feats.map((o) => `<li>${esc(o)}</li>`).join('')}</ul>` : ''}
 ${dist.length ? `<h2>${L('distances')}</h2><ul class="chips">${dist.map(([k, v]) => `<li>${k}: <b>${esc(v)}</b></li>`).join('')}</ul>` : ''}
+${haritaBlok(l, lang)}
 ${l.video ? `<p><a class="btn ghost" href="${esc(l.video)}" target="_blank" rel="noopener">Video →</a></p>` : ''}
 ${l.tip !== 'Kiralık' ? `<h2>${L('costs')}</h2>${calcBlock(lang).replace('data-calc>', `data-calc data-price="${try_ || ''}">`)}<p><a href="${lang === 'tr' ? '/alici-rehberi/alim-masraflari/' : '/en/buyers-guide/purchase-costs/'}">${L('costsMore')}</a></p>` : ''}
 </div><aside class="side"><div class="box"><span class="tag static">${tipLabel(l, lang)}</span>${statusBadge(l, lang)}<div class="price big"${priceAttrs(l)}>${fmtPrice(l, lang)}</div>${l.fiyatKontrol ? `<p class="pcheck">✓ ${s('priceChecked', lang)}<small>${s('lastCheck', lang)}: ${esc(l.fiyatKontrol)}</small></p>` : ''}${l.eids ? `<p class="eids">✓ ${s('eidsOk', lang)}<small>${esc(l.eids)}</small></p>` : ''}${l.tekYetki ? `<p class="sole">★ ${s('soleAgency', lang)}</p>` : ''}<details class="whydiff"><summary>${s('whyDiff', lang)}</summary><p>${s('whyDiffText', lang)}</p></details><div class="ltools2" data-id="${esc(l.id)}">${cardTools(l, lang)}</div>

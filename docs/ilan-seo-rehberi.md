@@ -12,14 +12,17 @@ Hedef: her ilanın `data/ilan-seo.json` içinde özgün kaydı olması.
 Ağ kısıtlı oturumlarda panel verisi son yayının GitHub Actions çıktısından alınır:
 
 ```
-gh run download -R alicanercan/acchomesantalya -n panel-snapshot -D /tmp/panel
-# /tmp/panel/.panel-snapshot.json  → site_ilanlari satırları (telefon/e-posta ayıklanmış)
+# en son panel anlık görüntüsü (her Turhost yayınında yüklenir, 7 gün saklanır)
+mkdir -p /tmp/panel && cd /tmp/panel
+URL=$(gh api "repos/alicanercan/acchomesantalya/actions/artifacts?name=panel-snapshot&per_page=1" -q '.artifacts[0].archive_download_url')
+gh api "$URL" > a.zip && unzip -o a.zip && cd -
+# /tmp/panel/panel-snapshot.json → site_ilanlari satırları (telefon/e-posta ayıklanmış)
 ```
 
 Hangi ilanların özgün kaydı yok:
 
 ```
-node -e "const p=require('/tmp/panel/.panel-snapshot.json');const c=require('./data/ilan-seo.json');const m=new Set(require('./data/portfoy.json').map(x=>x.id));console.log(p.filter(v=>!m.has(v.id)&&!c[v.id]).map(v=>v.id+' '+v.ilce).join('\n'))"
+node -e "const p=require('/tmp/panel/panel-snapshot.json');const c=require('./data/ilan-seo.json');const m=new Set(require('./data/portfoy.json').map(x=>x.id));console.log(p.filter(v=>!m.has(v.id)&&!c[v.id]).map(v=>v.id+' '+v.ilce).join('\n'))"
 ```
 
 Panelde güncellenen ilan (`updated_at` kayıttaki `kaynak`tan yeni) ve metinde etkisi olan alan değiştiyse (oda, m², kat, kullanım vb.) kayıt yeniden yazılır. Yalnız fiyat değiştiyse gerek yok: build eski fiyatı yenisiyle değiştirir.
@@ -63,7 +66,7 @@ Panelde güncellenen ilan (`updated_at` kayıttaki `kaynak`tan yeni) ve metinde 
 ## Yayın
 
 ```
-SITE_HOST=turhost node build.mjs     # derleme kontrolü (ağ yoksa PANEL_SNAPSHOT=/tmp/panel/.panel-snapshot.json)
+SITE_HOST=turhost node build.mjs     # derleme kontrolü (ağ yoksa PANEL_SNAPSHOT=/tmp/panel/panel-snapshot.json)
 git add data/ilan-seo.json && git commit -m "İlan SEO: <n> ilana özgün TR/EN/RU metin" && git pull --rebase && git push
 ```
 

@@ -37,7 +37,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: panel-snapshot
-          path: .panel-snapshot.json
+          path: panel-snapshot.json
           retention-days: 7
           if-no-files-found: ignore
       - name: Turhost'a yükle

@@ -65,7 +65,7 @@ try {
   LISTINGS.push(...yeni);
   console.log(`Panel senkronu: ${rows.length} ilan okundu, ${yeni.length} yeni ilan eklendi`);
   // İlan SEO görevleri için anlık görüntü (repo herkese açık: telefon, e-posta ve konum çıkarılır)
-  try { fs.writeFileSync(path.join(ROOT, '.panel-snapshot.json'), JSON.stringify(rows.map(({ danisman_tel, yaklasik_konum, danisman_foto, ...v }) => ({ ...v, aciklama: Object.fromEntries(Object.entries(v.aciklama || {}).map(([k, t]) => [k, ilanTemizle(t)])) })))); } catch {}
+  try { fs.writeFileSync(path.join(ROOT, 'panel-snapshot.json'), JSON.stringify(rows.map(({ danisman_tel, yaklasik_konum, danisman_foto, ...v }) => ({ ...v, aciklama: Object.fromEntries(Object.entries(v.aciklama || {}).map(([k, t]) => [k, ilanTemizle(t)])) })))); } catch {}
 } catch (e) {
   // Ağ yoksa (yerel/zamanlanmış oturum) son anlık görüntü kullanılabilir: PANEL_SNAPSHOT=/yol/panel.json
   if (process.env.PANEL_SNAPSHOT && fs.existsSync(process.env.PANEL_SNAPSHOT)) {

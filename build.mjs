@@ -249,7 +249,7 @@ const slugOf = (l) => l.slug ? slugify(l.slug.replace(/^\//, '')) : slugify([l.t
 const SEO_REDIR = [];
 for (const l of LISTINGS) if (l._panel) { const eski = ilanSeo(l, slugify); if (eski) SEO_REDIR.push([eski, l]); }
 console.log(`İlan SEO: ${LISTINGS.filter((l) => l._seo === 'ozgun').length} özgün, ${LISTINGS.filter((l) => l._seo === 'otomatik').length} otomatik`);
-const pick = (obj, lang) => (obj && (obj[lang] || obj.tr)) || '';
+const pick = (obj, lang) => (obj && (obj[lang] || (lang !== 'tr' && obj.en) || obj.tr)) || '';
 const fmtPrice = (l, lang) => {
   if (!l.fiyat) return l.teklif ? ({ tr: 'Teklif verin', en: 'Make an offer', ru: 'Предложите цену' })[lang] || 'Make an offer' : T[lang].priceOnReq;
   const n = new Intl.NumberFormat(LOCALE[lang]).format(l.fiyat);
@@ -1164,7 +1164,7 @@ function similar(l, lang) {
 function pageListing(l, lang) {
   const t = T[lang]; const F = t.fields; const slug = slugOf(l);
   const title = pick(l.baslik, lang);
-  const desc = (l.metaI18n && l.metaI18n[lang]) || ((lang === 'tr' && l.meta) ? l.meta : pick(l.aciklama, lang).slice(0, 155));
+  const desc = (l.metaI18n && (l.metaI18n[lang] || (lang !== 'tr' && l.metaI18n.en))) || ((lang === 'tr' && l.meta) ? l.meta : pick(l.aciklama, lang).slice(0, 155));
   const rows = [
     [F.no, l.id], [TXL(lang).listedIn, l.tarih], [TXL(lang).emlakTipi, [lab(EMLAK_TIPLERI.find((e) => e.k === l.emlakTipi) || { tr: '', en: '' }, lang), lab(KATEGORILER[l.kategori] || { tr: '', en: '' }, lang), altLab(l.altTip || '', lang)].filter(Boolean).join(' · ')], [F.rooms, l.oda], [F.gross, l.brut ? { m2: l.brut } : ''], [F.net, l.net ? { m2: l.net } : ''], [F.age, l.yas], [F.floor, l.kat], [F.floors, l.katSayisi],
     [ktLab(lang), (l.konutTipi || []).map((k) => ktDeger(k, lang)).join(', ')],

@@ -251,6 +251,7 @@
     if (page.dataset.ctxAlt) alts = alts.length ? alts : [page.dataset.ctxAlt];
     var fmin = num('fiyatMin'), fmax = num('fiyatMax'), bmin = num('brutMin'), bmax = num('brutMax'), nmin = num('netMin'), nmax = num('netMax');
     var sel = {}; secs.forEach(function (n) { var v = vals(n); if (v.length) sel[n] = v; });
+    var kts = vals('kt');
     var shown = 0;
     cards.forEach(function (c) {
       var d = c.dataset, ok = true;
@@ -261,6 +262,7 @@
       if (ok && ilce && d.ilce !== ilce) ok = false;
       if (ok && mah && d.mah !== mah) ok = false;
       if (ok && odas.length && odas.indexOf(d.oda) < 0) ok = false;
+      if (ok && kts.length) { var kt = (d.kt || '').split('|'); if (!kts.some(function (x) { return kt.indexOf(x) > -1; })) ok = false; }
       if (ok && (fmin !== null || fmax !== null)) { var tr = toTRY(+d.fiyat, d.para); if (tr === null || !+d.fiyat || (fmin !== null && tr < fmin) || (fmax !== null && tr > fmax)) ok = false; }
       if (ok && ((bmin !== null && +d.brut < bmin) || (bmax !== null && (+d.brut > bmax || !+d.brut)))) ok = false;
       if (ok && ((nmin !== null && +d.net < nmin) || (nmax !== null && (+d.net > nmax || !+d.net)))) ok = false;

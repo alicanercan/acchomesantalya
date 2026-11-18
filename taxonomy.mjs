@@ -3,13 +3,13 @@
 
 export const EMLAK_TIPLERI = [
   { k: 'konut', tr: 'Konut', en: 'Residential', enSlug: 'residential', icon: '🏠', kategoriler: ['satilik', 'kiralik'],
-    alt: ['Daire', 'Dubleks', 'Rezidans', 'Müstakil Ev', 'Villa', 'Çiftlik Evi', 'Köşk & Konak', 'Yalı', 'Yalı Dairesi', 'Yazlık', 'Kooperatif'] },
+    alt: ['Daire', 'Rezidans', 'Müstakil Ev', 'Villa', 'Çiftlik Evi', 'Köşk & Konak', 'Yalı', 'Yalı Dairesi', 'Yazlık', 'Kooperatif'] },
   { k: 'is-yeri', tr: 'İş Yeri', en: 'Commercial', enSlug: 'commercial', icon: '🏢', kategoriler: ['satilik', 'kiralik', 'devren'],
     alt: ['Dükkan & Mağaza', 'Ofis', 'Büro', 'Plaza Katı', 'Depo & Antrepo', 'Atölye', 'İmalathane', 'Fabrika & Üretim Tesisi', 'Kafe & Bar', 'Restoran & Lokanta', 'Sağlık Merkezi', 'Eğitim Kurumu', 'Spor Tesisi', 'Akaryakıt İstasyonu', 'Otopark & Garaj', 'Komple Bina'] },
   { k: 'arsa', tr: 'Arsa', en: 'Land', enSlug: 'land', icon: '🌳', kategoriler: ['satilik', 'kiralik'],
     alt: ['Konut İmarlı', 'Ticari İmarlı', 'Ticari + Konut İmarlı', 'Turizm İmarlı', 'Sanayi İmarlı', 'Villa İmarlı', 'Tarla', 'Bağ & Bahçe', 'Zeytinlik', 'Kat Karşılığı'] },
   { k: 'konut-projeleri', tr: 'Konut Projeleri', en: 'New Projects', enSlug: 'new-projects', icon: '🏗️', kategoriler: ['satilik'],
-    alt: ['Daire', 'Dubleks', 'Rezidans', 'Villa', 'Müstakil Ev'] },
+    alt: ['Daire', 'Rezidans', 'Villa', 'Müstakil Ev'] },
   { k: 'bina', tr: 'Bina', en: 'Whole Building', enSlug: 'building', icon: '🏬', kategoriler: ['satilik', 'kiralik'], alt: [] },
   { k: 'turistik-tesis', tr: 'Turistik Tesis', en: 'Hospitality', enSlug: 'hospitality', icon: '🏨', kategoriler: ['satilik', 'kiralik', 'devren'],
     alt: ['Otel', 'Butik Otel', 'Apart Otel', 'Pansiyon', 'Tatil Köyü', 'Kamp Yeri'] },
@@ -46,7 +46,7 @@ export const BINA_YASI = [['0', { tr: '0 (Yeni)', en: '0 (New)' }, 0, 0], ['1-5'
 
 // Seçmeli (çoklu) filtreler: alan adı, etiket, seçenekler [TR değer, EN etiket], hangi emlak tiplerinde
 export const SECMELI = [
-  { f: 'kat', tr: 'Bulunduğu kat', en: 'Floor', tipler: ['konut', 'konut-projeleri', 'is-yeri'], ops: [['Bodrum Kat', 'Basement'], ['Bahçe Katı', 'Garden floor'], ['Giriş Katı', 'Ground floor'], ['Yüksek Giriş', 'Raised ground'], ['1', 'Floor 1'], ['2', 'Floor 2'], ['3', 'Floor 3'], ['4', 'Floor 4'], ['5', 'Floor 5'], ['6', 'Floor 6'], ['7', 'Floor 7'], ['8', 'Floor 8'], ['9', 'Floor 9'], ['10', 'Floor 10'], ['11', 'Floor 11'], ['12', 'Floor 12'], ['13', 'Floor 13'], ['14', 'Floor 14'], ['15', 'Floor 15'], ['16', 'Floor 16'], ['17', 'Floor 17'], ['18', 'Floor 18'], ['19', 'Floor 19'], ['20', 'Floor 20'], ['21 ve üzeri', 'Floor 21+'], ['Ara Kat', 'Middle floor'], ['En Üst Kat', 'Top floor'], ['Çatı Katı', 'Penthouse / roof'], ['Villa Tipi', 'Villa type']] },
+  { f: 'kat', tr: 'Bulunduğu kat', en: 'Floor', tipler: ['konut', 'konut-projeleri', 'is-yeri'], ops: [['Bodrum Kat', 'Basement'], ['Bahçe Katı', 'Garden floor'], ['Giriş Katı', 'Ground floor'], ['Yüksek Giriş', 'Raised ground'], ['1', 'Floor 1'], ['2', 'Floor 2'], ['3', 'Floor 3'], ['4', 'Floor 4'], ['5', 'Floor 5'], ['6', 'Floor 6'], ['7', 'Floor 7'], ['8', 'Floor 8'], ['9', 'Floor 9'], ['10', 'Floor 10'], ['11', 'Floor 11'], ['12', 'Floor 12'], ['13', 'Floor 13'], ['Çatı Katı', 'Penthouse / roof'], ['Villa Tipi', 'Villa type']] },
   { f: 'isitma', tr: 'Isıtma', en: 'Heating', tipler: ['konut', 'konut-projeleri', 'is-yeri', 'bina'], ops: [['Kombi (Doğalgaz)', 'Combi boiler (gas)'], ['Klima', 'Air conditioning'], ['Yerden Isıtma', 'Underfloor heating'], ['Merkezi', 'Central'], ['Merkezi (Pay Ölçer)', 'Central (metered)'], ['Isı Pompası', 'Heat pump'], ['VRV', 'VRV'], ['Güneş Enerjisi', 'Solar'], ['Soba', 'Stove'], ['Yok', 'None']] },
   { f: 'banyo', tr: 'Banyo sayısı', en: 'Bathrooms', tipler: ['konut', 'konut-projeleri'], ops: [['1', '1'], ['2', '2'], ['3', '3'], ['4+', '4+']] },
   { f: 'esya', tr: 'Eşya durumu', en: 'Furnishing', tipler: ['konut', 'konut-projeleri'], ops: [['Eşyalı', 'Furnished'], ['Eşyasız', 'Unfurnished']] },
@@ -66,3 +66,7 @@ export const TX = {
   tr: { search: 'İlan ara', searchPh: 'İlan no, mahalle veya proje', tip: 'Emlak tipi', kat: 'Kategori', alt: 'Alt tip', ilce: 'İlçe', mahalle: 'Mahalle', price: 'Fiyat', m2b: 'm² (Brüt)', m2n: 'm² (Net)', rooms: 'Oda sayısı', age: 'Bina yaşı', min: 'Min', max: 'Max', any: 'Tümü', apply: 'Sonuçları göster', clear: 'Temizle', filters: 'Filtrele', more: 'Diğer özellikler', tags: 'Öne çıkanlar', results: (n) => `${n} ilan`, all: 'Tüm İlanlar', sort: 'Sıralama', newest: 'En yeni', priceAsc: 'Fiyat (artan)', priceDesc: 'Fiyat (azalan)', m2Asc: 'm² (artan)', none: 'Aradığınız kriterlerde ilan bulunamadı. Talebinizi bize iletin, portföyümüzden ve iş ortaklarımızdan size uygun seçenekleri bulalım.', cats: 'Kategoriler', inArea: (a) => `${a} İlanları`, listedIn: 'İlan tarihi', emlakTipi: 'Emlak tipi' },
   en: { search: 'Search listings', searchPh: 'Listing no, neighbourhood or project', tip: 'Property type', kat: 'Category', alt: 'Sub-type', ilce: 'District', mahalle: 'Neighbourhood', price: 'Price', m2b: 'm² (Gross)', m2n: 'm² (Net)', rooms: 'Rooms', age: 'Building age', min: 'Min', max: 'Max', any: 'Any', apply: 'Show results', clear: 'Clear', filters: 'Filters', more: 'More features', tags: 'Highlights', results: (n) => `${n} listings`, all: 'All Listings', sort: 'Sort', newest: 'Newest', priceAsc: 'Price (low to high)', priceDesc: 'Price (high to low)', m2Asc: 'm² (small to large)', none: 'No listings match these criteria. Send us your request and we will find suitable options from our portfolio and partners.', cats: 'Categories', inArea: (a) => `${a} Listings`, listedIn: 'Listed on', emlakTipi: 'Property type' },
 };
+
+// Sahibinden "Konut Tipi" (çoklu seçim). Sadeleştirildi: çatı/bahçe/ters dubleks ayrımı yok, hepsi "Dubleks".
+export const KONUT_TIPI = [['Ara Kat', 'Middle floor', 'Средний этаж'], ['En Üst Kat', 'Top floor', 'Верхний этаж'], ['Dubleks', 'Duplex', 'Дуплекс'], ['Tripleks', 'Triplex', 'Триплекс']];
+export const KONUT_TIPI_TIPLER = ['konut', 'konut-projeleri'];

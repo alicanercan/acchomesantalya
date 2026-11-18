@@ -12,7 +12,7 @@ import { PRIVACY } from './privacy.mjs';
 import { PAGES2, P2X, p2Html } from './pages2.mjs';
 import { AREA_GUIDES } from './areas.mjs';
 import { MAHALLELER } from './mahalleler.mjs';
-import { EMLAK_TIPLERI, KATEGORILER, ALT_EN, TUR_TO_TIP, ILCELER, ODALAR, BINA_YASI, SECMELI, TX } from './taxonomy.mjs';
+import { EMLAK_TIPLERI, KATEGORILER, ALT_EN, TUR_TO_TIP, ILCELER, ODALAR, BINA_YASI, SECMELI, TX, KONUT_TIPI } from './taxonomy.mjs';
 import { EVENTS } from './events.mjs';
 import { BROKER } from './broker.mjs';
 import { ROADMAP, TRUST, FOUNDER } from './story.mjs';
@@ -54,7 +54,7 @@ function panelIlan(v) {
     esya: v.esya || undefined, kullanim: v.kullanim || undefined, site: v.site || undefined, aidat: v.aidat ?? undefined, kredi: v.kredi || undefined, tapu: v.tapu || undefined,
     takas: v.takas || undefined, imar: v.imar || undefined, etiketler: (v.etiketler || []).filter((k) => k !== 'antalya-disi'), ozellikler: v.ozellikler || [],
     foto: (v.foto || []).map(ilanFoto), thumbs: false, baslik: bas, aciklama: ac, meta: e.meta || (bas.tr ? `${bas.tr}. ${ilkCumle}`.slice(0, 155) : undefined),
-    harita: v.yaklasik_konum || undefined, tarih: trTarih(v.created_at), tekYetki: !!v.yetkili, eids: v.eids || undefined, sahibinden: v.sahibinden || undefined, danisman: panelDanisman(v), _panel: true };
+    harita: v.yaklasik_konum || undefined, konutTipi: (v.konut_tipi || []).length ? v.konut_tipi : undefined, tarih: trTarih(v.created_at), tekYetki: !!v.yetkili, eids: v.eids || undefined, sahibinden: v.sahibinden || undefined, danisman: panelDanisman(v), _panel: true };
 }
 try {
   const r = await fetch(`${PANEL.url}/rest/v1/site_ilanlari?select=*`, { headers: { apikey: PANEL.key }, signal: AbortSignal.timeout(20000) });
@@ -901,7 +901,7 @@ function card(l, lang) {
   const t = T[lang];
   const cover = l.foto && l.foto[0];
   const tags = (l.etiketler || []).filter((k) => TAGS[k]);
-  const fx = SECMELI.map((x) => (l[x.f] !== undefined && l[x.f] !== '' ? ` data-f-${x.f}="${esc(String(l[x.f]))}"` : '')).join('');
+  const fx = SECMELI.map((x) => (l[x.f] !== undefined && l[x.f] !== '' ? ` data-f-${x.f}="${esc(String(l[x.f]))}"` : '')).join('') + (l.konutTipi ? ` data-kt="${esc(l.konutTipi.join('|'))}"` : '');
   const q = [l.id, l.mahalle, l.ilce, l.proje, pick(l.baslik, 'tr'), pick(l.baslik, 'en')].filter(Boolean).join(' ').toLocaleLowerCase('tr');
   return `<article class="card" data-id="${esc(l.id)}" data-tags="${tags.join(' ')}" data-tip="${esc(l.tip)}" data-tur="${esc(l.tur)}" data-et="${esc(l.emlakTipi)}" data-kat="${esc(l.kategori)}" data-alt="${esc(l.altTip || '')}" data-ilce="${esc(l.ilce)}" data-mah="${esc(l.mahalle || '')}" data-oda="${esc(l.oda)}" data-fiyat="${l.fiyat || 0}" data-para="${esc(({ TL: 'TRY' })[l.para || 'TL'] || l.para)}" data-brut="${+l.brut || 0}" data-net="${+l.net || 0}" data-yas="${l.yas === undefined || l.yas === '' ? '' : +String(l.yas).replace(/[^0-9]/g, '') || 0}" data-tarih="${esc(l.tarih || '')}" data-q="${esc(q)}"${fx}>
 ${cardTools(l, lang)}
@@ -916,6 +916,9 @@ const tagLabel = (k, lang) => `${TAGS[k]} ${s('tag_' + k, lang)}`;
 const cardTools = (l, lang) => `<div class="ctools"><button type="button" class="favbtn" data-fav="${esc(l.id)}" aria-pressed="false" aria-label="${s('favAdd', lang)}" title="${s('favAdd', lang)}"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M12 21s-7.5-4.6-9.6-9.2C.9 8.4 3 4.5 6.7 4.5c2.1 0 3.6 1.2 4.3 2.4.7-1.2 2.2-2.4 4.3-2.4 3.7 0 5.8 3.9 4.3 7.3C19.5 16.4 12 21 12 21z" fill="currentColor"/></svg></button><button type="button" class="cmpbtn" data-cmp="${esc(l.id)}" aria-pressed="false" title="${s('compareAdd', lang)}">⇄ <span>${s('compare', lang)}</span></button></div>`;
 const enqBtn = (l, lang) => `<button type="button" class="enqbtn" data-enq="${esc(l.id)}">${s('quickEnq', lang)}</button>`;
 // Yaklaşık konum: panel görünümü koordinatı ~1 km'ye yuvarlıyor; işaret yok, bölge çemberi var
+// Konut tipi (Sahibinden "Konut Tipi"): Ara Kat, En Üst Kat, Dubleks, Tripleks
+const ktLab = (lang) => ({ tr: 'Konut tipi', ru: 'Тип жилья' })[lang] || 'Layout';
+const ktDeger = (v, lang) => { const k = KONUT_TIPI.find((x) => x[0] === v); return !k || lang === 'tr' ? v : lang === 'ru' ? k[2] : k[1]; };
 function haritaBlok(l, lang) {
   const h = l.harita; if (!h || !Number(h.lat) || !Number(h.lon)) return '';
   const lat = Number(h.lat), lon = Number(h.lon), d = 0.012;
@@ -1089,6 +1092,7 @@ ${alts.length ? `<fieldset class="fs"><legend>${x.alt}</legend>${chk('alt', alts
 <label class="fs">${x.mahalle}<select name="mah"><option value="">${x.any}</option>${mahs.map((m) => { const [i, mh] = m.split('|'); return `<option value="${esc(mh)}" data-ilce="${esc(i)}">${esc(mh)}</option>`; }).join('')}</select></label>
 ${rng('fiyat', x.price + ' (₺)')}${rng('brut', x.m2b)}${rng('net', x.m2n)}
 ${showRooms ? `<fieldset class="fs"><legend>${x.rooms}</legend>${chk('oda', ODALAR.map((o) => [o, o]))}</fieldset>` : ''}
+${showRooms ? `<fieldset class="fs"><legend>${ktLab(lang)}</legend>${chk('kt', KONUT_TIPI.map((k) => [k[0], ktDeger(k[0], lang)]))}</fieldset>` : ''}
 ${et && et.k === 'arsa' ? '' : `<fieldset class="fs"><legend>${x.age}</legend>${chk('yas', BINA_YASI.map(([v, t]) => [v, t[L] || t.en]))}</fieldset>`}
 <details class="fs more"><summary>${x.more}</summary>${sec.map((f) => `<fieldset class="fs"><legend>${lab(f, lang)}</legend>${chk('f-' + f.f, f.ops.filter(([v]) => f.f !== 'kat' || !/^\d+$/.test(v)).map(([v, e]) => [v, L === 'tr' ? v : e]))}</fieldset>`).join('')}</details>
 ${Object.keys(TAGS).length ? `<fieldset class="fs"><legend>${x.tags}</legend>${chk('tag', Object.keys(TAGS).map((k) => [k, tagLabel(k, lang)]))}</fieldset>` : ''}
@@ -1163,6 +1167,7 @@ function pageListing(l, lang) {
   const desc = (l.metaI18n && l.metaI18n[lang]) || ((lang === 'tr' && l.meta) ? l.meta : pick(l.aciklama, lang).slice(0, 155));
   const rows = [
     [F.no, l.id], [TXL(lang).listedIn, l.tarih], [TXL(lang).emlakTipi, [lab(EMLAK_TIPLERI.find((e) => e.k === l.emlakTipi) || { tr: '', en: '' }, lang), lab(KATEGORILER[l.kategori] || { tr: '', en: '' }, lang), altLab(l.altTip || '', lang)].filter(Boolean).join(' · ')], [F.rooms, l.oda], [F.gross, l.brut ? { m2: l.brut } : ''], [F.net, l.net ? { m2: l.net } : ''], [F.age, l.yas], [F.floor, l.kat], [F.floors, l.katSayisi],
+    [ktLab(lang), (l.konutTipi || []).map((k) => ktDeger(k, lang)).join(', ')],
     [F.heat, optV('isitma', l.isitma, lang)], [lab(SECMELI.find((x) => x.f === 'banyo'), lang), l.banyo], [lab(SECMELI.find((x) => x.f === 'balkon'), lang), optV('balkon', l.balkon, lang)], [lab(SECMELI.find((x) => x.f === 'asansor'), lang), optV('asansor', l.asansor, lang)], [lab(SECMELI.find((x) => x.f === 'otopark'), lang), optV('otopark', l.otopark, lang)], [lab(SECMELI.find((x) => x.f === 'esya'), lang), optV('esya', l.esya, lang)], [lab(SECMELI.find((x) => x.f === 'kullanim'), lang), optV('kullanim', l.kullanim, lang)], [F.inSite, optV('kredi', l.site, lang)], [GL(lang) === 'tr' ? 'Aidat' : 'Service charge', l.aidat ? `${l.aidat} TL` : ''], [({ tr: 'Depozito', ru: 'Депозит' })[lang] || 'Deposit', l.depozito ? `${l.depozito} TL` : ''], [lab(SECMELI.find((x) => x.f === 'imar'), lang), optV('imar', l.imar, lang)], [lab(SECMELI.find((x) => x.f === 'takas'), lang), optV('takas', l.takas, lang)], [F.credit, optV('kredi', l.kredi, lang)], [F.deed, optV('tapu', l.tapu, lang)], [s('iskanOk', lang), l.iskan ? s('iskanVar', lang) : ''], [s('plotArea', lang), l.arsa ? { m2: l.arsa } : ''], [s('gardenArea', lang), l.bahce ? { m2: l.bahce } : ''], [s('buildArea', lang), l.insaat ? { m2: l.insaat } : ''], [s('facing', lang), loc(l.cephe, lang)], [F.project, l.proje], [F.location, [l.mahalle, l.ilce, 'Antalya'].filter(Boolean).join(', ')],
   ].filter(([, v]) => v !== undefined && v !== null && v !== '');
   const photos = (l.foto || []);

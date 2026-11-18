@@ -1090,7 +1090,7 @@ ${alts.length ? `<fieldset class="fs"><legend>${x.alt}</legend>${chk('alt', alts
 ${rng('fiyat', x.price + ' (₺)')}${rng('brut', x.m2b)}${rng('net', x.m2n)}
 ${showRooms ? `<fieldset class="fs"><legend>${x.rooms}</legend>${chk('oda', ODALAR.map((o) => [o, o]))}</fieldset>` : ''}
 ${et && et.k === 'arsa' ? '' : `<fieldset class="fs"><legend>${x.age}</legend>${chk('yas', BINA_YASI.map(([v, t]) => [v, t[L] || t.en]))}</fieldset>`}
-<details class="fs more"><summary>${x.more}</summary>${sec.map((f) => `<fieldset class="fs"><legend>${lab(f, lang)}</legend>${chk('f-' + f.f, f.ops.map(([v, e]) => [v, L === 'tr' ? v : e]))}</fieldset>`).join('')}</details>
+<details class="fs more"><summary>${x.more}</summary>${sec.map((f) => `<fieldset class="fs"><legend>${lab(f, lang)}</legend>${chk('f-' + f.f, f.ops.filter(([v]) => f.f !== 'kat' || !/^\d+$/.test(v)).map(([v, e]) => [v, L === 'tr' ? v : e]))}</fieldset>`).join('')}</details>
 ${Object.keys(TAGS).length ? `<fieldset class="fs"><legend>${x.tags}</legend>${chk('tag', Object.keys(TAGS).map((k) => [k, tagLabel(k, lang)]))}</fieldset>` : ''}
 <div class="fbtns"><button type="button" class="btn" data-fapply>${x.apply}</button><button type="reset" class="btn ghost">${x.clear}</button></div>
 </form></aside>`;

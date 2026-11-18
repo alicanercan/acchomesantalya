@@ -199,3 +199,6 @@
 /ru/acc-homes-подарила-радость-800-школьникам-в-рамк/ /ru/meropriyatiya/acc-day-2025/
 /ru/значимый-визит-ассоциации-предприни/ /ru/ali-caner-can/
 /ru/как-получить-гражданство-турции-купи/ /ru/blog/gayrimenkul-ile-turk-vatandasligi-ve-ikamet-2026/
+/property/* /ilanlar/
+/en/property/* /en/listings/
+/ru/property/* /ru/obekty/

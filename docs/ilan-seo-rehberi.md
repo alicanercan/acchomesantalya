@@ -51,7 +51,7 @@ Panelde güncellenen ilan (`updated_at` kayıttaki `kaynak`tan yeni) ve metinde 
   1. Ne, nerede, ne büyüklükte.
   2. Plan ve donanım.
   3. Mahalle ve konum avantajı (genel ve doğru bilgi).
-  4. Tapu, kredi, kullanım durumu, aidat ve fiyat.
+  4. Tapu, kredi, kullanım durumu, aidat ve fiyat. Kredi yalnızca panelde "Evet" ise "krediye uygun" yazılır; "Hayır" ya da boşsa kredi hiç anılmaz. Asla "krediye uygun değil" yazılmaz (Caner talimatı, 18.11.2026).
   5. "Gösterim için ACC HOMES iş ortağımız <ad> ile iletişime geçebilirsiniz. İlan no: <id>." İlan Ali Caner Can'ınsa "broker’ı" yazılır.
 - **Kaynak metin:** Sahibinden/panel metni **kopyalanmaz**; bilgiler alınır, metin baştan yazılır. Metin ile alanlar çelişirse alan esas alınır, emin olunmayan bilgi yazılmaz.
 - **Yazılmayacaklar:**

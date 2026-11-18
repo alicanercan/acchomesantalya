@@ -1040,7 +1040,7 @@ ${igBlock(lang)}`;
 }
 
 // ---------- İlan arama: Sahibinden uyumlu kategori sayfaları ve detaylı filtre ----------
-const RU_LAB = { banyo: 'Санузлы', otopark: 'Парковка', esya: 'Мебель', kullanim: 'Статус', takas: 'Обмен', asansor: 'Лифт', balkon: 'Балкон', isitma: 'Отопление', kredi: 'Ипотека', tapu: 'Тапу', imar: 'Зонирование', Konut: 'Жилая', 'Satılık': 'Продажа', 'Kiralık': 'Аренда', Villa: 'Вилла', Daire: 'Квартира', 'Müstakil Ev': 'Дом' };
+const RU_LAB = { banyo: 'Санузлы', otopark: 'Парковка', esya: 'Мебель', kullanim: 'Статус', takas: 'Обмен', asansor: 'Лифт', balkon: 'Балкон', isitma: 'Отопление', kredi: 'Ипотека', tapu: 'Тапу', imar: 'Зонирование', Konut: 'Жилая', 'Satılık': 'Продажа', 'Kiralık': 'Аренда', Villa: 'Вилла', Daire: 'Квартира', Dubleks: 'Дуплекс', 'Müstakil Ev': 'Дом' };
 const TXL = (lang) => (lang === 'ru' ? { ...TX.en, listedIn: 'Дата публикации', emlakTipi: 'Тип недвижимости' } : TX[GL(lang)]);
 const lab = (o, lang) => (lang === 'ru' && o && RU_LAB[o.f || o.tr] ? RU_LAB[o.f || o.tr] : GL(lang) === 'tr' ? o.tr : o.en);
 const altLab = (a, lang) => (GL(lang) === 'tr' ? a : (lang === 'ru' && RU_LAB[a]) || ALT_EN[a] || a);

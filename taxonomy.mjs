@@ -3,13 +3,13 @@
 
 export const EMLAK_TIPLERI = [
   { k: 'konut', tr: 'Konut', en: 'Residential', enSlug: 'residential', icon: '🏠', kategoriler: ['satilik', 'kiralik'],
-    alt: ['Daire', 'Rezidans', 'Müstakil Ev', 'Villa', 'Çiftlik Evi', 'Köşk & Konak', 'Yalı', 'Yalı Dairesi', 'Yazlık', 'Kooperatif'] },
+    alt: ['Daire', 'Dubleks', 'Rezidans', 'Müstakil Ev', 'Villa', 'Çiftlik Evi', 'Köşk & Konak', 'Yalı', 'Yalı Dairesi', 'Yazlık', 'Kooperatif'] },
   { k: 'is-yeri', tr: 'İş Yeri', en: 'Commercial', enSlug: 'commercial', icon: '🏢', kategoriler: ['satilik', 'kiralik', 'devren'],
     alt: ['Dükkan & Mağaza', 'Ofis', 'Büro', 'Plaza Katı', 'Depo & Antrepo', 'Atölye', 'İmalathane', 'Fabrika & Üretim Tesisi', 'Kafe & Bar', 'Restoran & Lokanta', 'Sağlık Merkezi', 'Eğitim Kurumu', 'Spor Tesisi', 'Akaryakıt İstasyonu', 'Otopark & Garaj', 'Komple Bina'] },
   { k: 'arsa', tr: 'Arsa', en: 'Land', enSlug: 'land', icon: '🌳', kategoriler: ['satilik', 'kiralik'],
     alt: ['Konut İmarlı', 'Ticari İmarlı', 'Ticari + Konut İmarlı', 'Turizm İmarlı', 'Sanayi İmarlı', 'Villa İmarlı', 'Tarla', 'Bağ & Bahçe', 'Zeytinlik', 'Kat Karşılığı'] },
   { k: 'konut-projeleri', tr: 'Konut Projeleri', en: 'New Projects', enSlug: 'new-projects', icon: '🏗️', kategoriler: ['satilik'],
-    alt: ['Daire', 'Rezidans', 'Villa', 'Müstakil Ev'] },
+    alt: ['Daire', 'Dubleks', 'Rezidans', 'Villa', 'Müstakil Ev'] },
   { k: 'bina', tr: 'Bina', en: 'Whole Building', enSlug: 'building', icon: '🏬', kategoriler: ['satilik', 'kiralik'], alt: [] },
   { k: 'turistik-tesis', tr: 'Turistik Tesis', en: 'Hospitality', enSlug: 'hospitality', icon: '🏨', kategoriler: ['satilik', 'kiralik', 'devren'],
     alt: ['Otel', 'Butik Otel', 'Apart Otel', 'Pansiyon', 'Tatil Köyü', 'Kamp Yeri'] },
@@ -24,7 +24,7 @@ export const KATEGORILER = {
 
 // Alt tip İngilizce karşılıkları (ilan verisindeki TR değer → EN)
 export const ALT_EN = {
-  'Daire': 'Apartment', 'Rezidans': 'Residence', 'Müstakil Ev': 'Detached House', 'Villa': 'Villa', 'Çiftlik Evi': 'Farmhouse', 'Köşk & Konak': 'Mansion', 'Yalı': 'Waterfront Mansion', 'Yalı Dairesi': 'Waterfront Apartment', 'Yazlık': 'Holiday Home', 'Kooperatif': 'Cooperative',
+  'Daire': 'Apartment', 'Dubleks': 'Duplex', 'Rezidans': 'Residence', 'Müstakil Ev': 'Detached House', 'Villa': 'Villa', 'Çiftlik Evi': 'Farmhouse', 'Köşk & Konak': 'Mansion', 'Yalı': 'Waterfront Mansion', 'Yalı Dairesi': 'Waterfront Apartment', 'Yazlık': 'Holiday Home', 'Kooperatif': 'Cooperative',
   'Dükkan & Mağaza': 'Shop & Store', 'Ofis': 'Office', 'Büro': 'Bureau', 'Plaza Katı': 'Office Floor', 'Depo & Antrepo': 'Warehouse', 'Atölye': 'Workshop', 'İmalathane': 'Small Factory', 'Fabrika & Üretim Tesisi': 'Factory', 'Kafe & Bar': 'Café & Bar', 'Restoran & Lokanta': 'Restaurant', 'Sağlık Merkezi': 'Health Centre', 'Eğitim Kurumu': 'Education Facility', 'Spor Tesisi': 'Sports Facility', 'Akaryakıt İstasyonu': 'Petrol Station', 'Otopark & Garaj': 'Car Park & Garage', 'Komple Bina': 'Whole Building',
   'Konut İmarlı': 'Residential Zoning', 'Ticari İmarlı': 'Commercial Zoning', 'Ticari + Konut İmarlı': 'Mixed-Use Zoning', 'Turizm İmarlı': 'Tourism Zoning', 'Sanayi İmarlı': 'Industrial Zoning', 'Villa İmarlı': 'Villa Zoning', 'Tarla': 'Field', 'Bağ & Bahçe': 'Orchard', 'Zeytinlik': 'Olive Grove', 'Kat Karşılığı': 'Land for Flats',
   'Otel': 'Hotel', 'Butik Otel': 'Boutique Hotel', 'Apart Otel': 'Apart Hotel', 'Pansiyon': 'Guesthouse', 'Tatil Köyü': 'Holiday Village', 'Kamp Yeri': 'Campsite',

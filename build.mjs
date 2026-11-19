@@ -265,15 +265,18 @@ const url = (lang, seg, slug) => `${BASE[lang]}/${segOf(lang, seg)}/${slug ? slu
 const home = (lang) => `${BASE[lang]}/`;
 const waLink = (text) => `https://wa.me/${SITE.whatsapp}?text=${encodeURIComponent(text)}`;
 const turhostForms = (html) => html.replace(/<form([^>]*?)data-netlify="true"([^>]*?)action="([^"]*)"([^>]*)>/g, (m, a, b, act, c) => `<form${a}${b}action="/form.php"${c}><input type="hidden" name="_next" value="${act}">`);
+const INLINE_CSS = (() => { try { return fs.readFileSync(path.join(path.dirname(new URL(import.meta.url).pathname), 'assets/style.css'), 'utf8').replace(/\/\*[\s\S]*?\*\//g, '').replace(/\s*\n\s*/g, '').replace(/<\/style/gi, '<\\/style'); } catch { return ''; } })();
 function heroOpt(html) {
   const i = html.indexOf('<div class="slides">'); if (i < 0) return html;
   let n = 0, first = '';
   const tail = html.slice(i).replace(/<div class="slide" style="background-image:([^"]*)"/g, (m, v) => {
-    n++; if (n === 1) { const u = v.match(/url\('([^']+)'\)/); if (!u) return m; first = u[1]; const grad = v.replace(/,?\s*url\('[^']+'\)/, ''); const ss = /^\/img\//.test(first) ? ` srcset="${rimg(first, 640)} 640w, ${first} 1200w" sizes="100vw"` : ''; return `<div class="slide s1"><img class="sbg" src="${first}"${ss} alt="" fetchpriority="high" decoding="async" width="1200" height="600"><span class="sov" style="background-image:${grad}"></span`; }
+    n++; if (n === 1) { const u = v.match(/url\('([^']+)'\)/); if (!u) return m; first = u[1]; const grad = v.replace(/,?\s*url\('[^']+'\)/, ''); const ss = /^\/img\//.test(first) ? ` srcset="${rimg(first, 640)} 640w, ${rimg(first, 960)} 960w, ${first} 1200w" sizes="100vw"` : ''; return `<div class="slide s1"><img class="sbg" src="${first}"${ss} alt="" fetchpriority="high" decoding="async" width="1200" height="600"><span class="sov" style="background-image:${grad}"></span`; }
     return `<div class="slide" data-bgs="${v}"`;
   });
   html = html.slice(0, i) + tail;
-  if (first) html = html.replace('</head>', `<link rel="preload" as="image" href="${first}"${/^\/img\//.test(first) ? ` imagesrcset="${rimg(first, 640)} 640w, ${first} 1200w" imagesizes="100vw"` : ''} fetchpriority="high"></head>`);
+  // banner'lı sayfalarda (ana sayfalar) stil dosyası sayfaya gömülür: telefon ayrı CSS dosyasını beklemeden banner'ı çizer
+  if (first && INLINE_CSS) html = html.replace(/<link rel="stylesheet" href="\/assets\/style\.css\?v=[^"]*">/, `<style>${INLINE_CSS}</style>`);
+  if (first) html = html.replace('</head>', `<link rel="preload" as="image" href="${first}"${/^\/img\//.test(first) ? ` imagesrcset="${rimg(first, 640)} 640w, ${rimg(first, 960)} 960w, ${first} 1200w" imagesizes="100vw"` : ''} fetchpriority="high"></head>`);
   return html;
 }
 const write = (rel, html) => { if (typeof html === 'string' && rel.endsWith('.html')) html = heroOpt(html.replace(/<iframe([^>]*?) src="/g, '<iframe$1 data-csrc="')); if (HOST === 'turhost' && typeof html === 'string' && rel.endsWith('.html')) html = turhostForms(html); const f = path.join(OUT, rel); fs.mkdirSync(path.dirname(f), { recursive: true }); fs.writeFileSync(f, html); };

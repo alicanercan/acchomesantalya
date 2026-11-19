@@ -461,3 +461,11 @@ img{-webkit-user-drag:none;user-drag:none;-webkit-touch-callout:none}
 .lmap-note{font-size:13px;color:var(--mute)}
 
 .bfig{margin:18px 0 22px}.bfig img{width:100%;height:auto;border-radius:14px;display:block}
+
+/* Mobil ilan: fiyat ilk ekranda */
+.mprice{display:none}
+@media (max-width:900px){.sec.listing{padding-top:14px}.listing .crumbs{margin-bottom:10px}.mprice{display:block;background:#fff;border:1px solid #eee3df;border-radius:16px;padding:14px 16px;margin:14px 0 6px;box-shadow:0 6px 18px rgba(0,0,0,.06)}
+.mp-top{display:flex;align-items:center;gap:8px}.mp-top .badge{position:static}.mp-ref{margin-left:auto;color:#6b625d;font-size:13px;font-weight:600}
+.mprice .price.big{font-size:32px;line-height:1.1;margin:8px 0 4px}
+.mp-spec{color:#3d3532;font-weight:600;font-size:15px}.mp-spec i{font-style:normal;color:#b8aea9;margin:0 7px}
+.mp-act{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px}.mp-act .btn{text-align:center;justify-content:center;padding:11px 8px}}

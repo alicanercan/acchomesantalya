@@ -38,7 +38,7 @@ export const POSTS6 = [
 <h2>8. Agora Antalya ve IKEA (Kepez)</h2>
 <p>Agora Antalya, IKEA ile birlikte ve Mall of Antalya’ya yürüme mesafesinde. Ev kuranlar için mobilya, dekorasyon ve market alışverişini tek noktada toplayan bir adres.</p>
 <h2>9. Fenix Center (Konyaaltı, Liman)</h2>
-<p>Liman Mahallesi’ndeki Fenix Center; alışveriş, otel ve rezidansı bir araya getiren karma bir proje. Google’da son dönemde en hızlı yükselen AVM araması, mağazalara ve açılışa olan merakı gösteriyor. Bölge için ${A('liman-sarisu', 'Liman ve Sarısu rehberimize')} bakabilirsiniz.</p>
+<p>Liman Mahallesi’ndeki Fenix Center; alışveriş merkezi, Swissôtel ve rezidansları bir araya getiren, Antalya’nın ilk karma projelerinden biri. Google’da son dönemde en hızlı yükselen AVM araması, mağazalara ve açılışa olan merakı gösteriyor. Bölge için ${A('liman-sarisu', 'Liman ve Sarısu rehberimize')} bakabilirsiniz.</p>
 <h2>10. The Land of Legends Shopping Avenue (Serik, Kadriye)</h2>
 <p>Belek turizm bölgesinde, Kadriye’deki The Land of Legends; tema park, su parkı ve otelle birlikte mağaza, restoran ve kafelerden oluşan bir alışveriş caddesi sunuyor. Belek’in golf sahalarına ve golf otellerine yakın, havalimanına kısa mesafede.</p>
 <p><b>Bu bölgede ev arayanlar için:</b> golf ve tatil yaşamı, kiralama potansiyeli ve havalimanına hızlı erişim. Ayrıntılar: ${A('belek', 'Belek')} ve ${A('kadriye', 'Kadriye')} rehberleri.</p>

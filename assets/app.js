@@ -364,6 +364,6 @@
 })();
 
 // Açılış hızı: ilk slayt dışındaki arka plan görselleri sayfa yüklendikten sonra
-(function () { function bgs() { document.querySelectorAll('[data-bgs]').forEach(function (el) { el.style.backgroundImage = el.getAttribute('data-bgs'); el.removeAttribute('data-bgs'); }); }
+(function () { function bgs() { document.querySelectorAll('[data-bgs]').forEach(function (el) { var m = el.getAttribute('data-bgsm'); el.style.backgroundImage = (m && matchMedia('(max-width:700px)').matches) ? m : el.getAttribute('data-bgs'); el.removeAttribute('data-bgsm'); el.removeAttribute('data-bgs'); }); }
   addEventListener('load', function () { setTimeout(bgs, 100); }); setTimeout(bgs, 1500);
   var sl = document.querySelector('.slides'); if (sl) ['scroll', 'pointerdown', 'touchstart'].forEach(function (e) { sl.addEventListener(e, bgs, { once: true, passive: true }); }); })();

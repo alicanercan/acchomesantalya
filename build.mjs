@@ -266,16 +266,20 @@ const home = (lang) => `${BASE[lang]}/`;
 const waLink = (text) => `https://wa.me/${SITE.whatsapp}?text=${encodeURIComponent(text)}`;
 const turhostForms = (html) => html.replace(/<form([^>]*?)data-netlify="true"([^>]*?)action="([^"]*)"([^>]*)>/g, (m, a, b, act, c) => `<form${a}${b}action="/form.php"${c}><input type="hidden" name="_next" value="${act}">`);
 const INLINE_CSS = (() => { try { return fs.readFileSync(path.join(path.dirname(new URL(import.meta.url).pathname), 'assets/style.css'), 'utf8').replace(/\/\*[\s\S]*?\*\//g, '').replace(/\s*\n\s*/g, '').replace(/<\/style/gi, '<\\/style'); } catch { return ''; } })();
+let FIRSTBN = '';
 function heroOpt(html) {
   const i = html.indexOf('<div class="slides">'); if (i < 0) return html;
   let n = 0, first = '';
-  const tail = html.slice(i).replace(/<div class="slide" style="background-image:([^"]*)"/g, (m, v) => {
-    n++; if (n === 1) { const u = v.match(/url\('([^']+)'\)/); if (!u) return m; first = u[1]; const grad = v.replace(/,?\s*url\('[^']+'\)/, ''); const ss = /^\/img\//.test(first) ? ` srcset="${rimg(first, 640)} 640w, ${rimg(first, 960)} 960w, ${first} 1200w" sizes="100vw"` : ''; return `<div class="slide s1"><img class="sbg" src="${first}"${ss} alt="" fetchpriority="high" decoding="async" width="1200" height="600"><span class="sov" style="background-image:${grad}"></span`; }
+  const tail = html.slice(i).replace(/<div class="slide" style="background-image:([^"]*)"(?: data-bn="([^"]*)")?/g, (m, v, bn) => {
+    n++; if (n === 1 && bn) { first = `${bn}-d-1920.webp`; FIRSTBN = bn; const grad = v.replace(/,?\s*url\('[^']+'\)/, ''); return `<div class="slide s1"><picture><source media="(max-width:700px)" srcset="${bn}-m-720.webp 720w, ${bn}-m-1080.webp 1080w" sizes="100vw"><img class="sbg" src="${bn}-d-1920.webp" srcset="${bn}-d-1280.webp 1280w, ${bn}-d-1920.webp 1920w" sizes="100vw" alt="" fetchpriority="high" decoding="async" width="1920" height="825"></picture><span class="sov" style="background-image:${grad}"></span`; }
+    if (bn) return `<div class="slide" data-bgs="${v}" data-bgsm="${v.replace(/-d-1920\.webp/, '-m-1080.webp')}"`;
+    if (n === 1) { const u = v.match(/url\('([^']+)'\)/); if (!u) return m; first = u[1]; const grad = v.replace(/,?\s*url\('[^']+'\)/, ''); const ss = /^\/img\//.test(first) ? ` srcset="${rimg(first, 640)} 640w, ${rimg(first, 960)} 960w, ${first} 1200w" sizes="100vw"` : ''; return `<div class="slide s1"><img class="sbg" src="${first}"${ss} alt="" fetchpriority="high" decoding="async" width="1200" height="600"><span class="sov" style="background-image:${grad}"></span`; }
     return `<div class="slide" data-bgs="${v}"`;
   });
   html = html.slice(0, i) + tail;
   // banner'lı sayfalarda (ana sayfalar) stil dosyası sayfaya gömülür: telefon ayrı CSS dosyasını beklemeden banner'ı çizer
   if (first && INLINE_CSS) html = html.replace(/<link rel="stylesheet" href="\/assets\/style\.css\?v=[^"]*">/, `<style>${INLINE_CSS}</style>`);
+  if (first && FIRSTBN) { const bn = FIRSTBN; FIRSTBN = ''; html = html.replace('</head>', `<link rel="preload" as="image" media="(max-width:700px)" imagesrcset="${bn}-m-720.webp 720w, ${bn}-m-1080.webp 1080w" imagesizes="100vw" fetchpriority="high"><link rel="preload" as="image" media="(min-width:701px)" imagesrcset="${bn}-d-1280.webp 1280w, ${bn}-d-1920.webp 1920w" imagesizes="100vw" fetchpriority="high"></head>`); return html; }
   if (first) html = html.replace('</head>', `<link rel="preload" as="image" href="${first}"${/^\/img\//.test(first) ? ` imagesrcset="${rimg(first, 640)} 640w, ${rimg(first, 960)} 960w, ${first} 1200w" imagesizes="100vw"` : ''} fetchpriority="high"></head>`);
   return html;
 }
@@ -846,14 +850,14 @@ function pageReviews(lang) {
 function heroSlider(lang) {
   const t = T[lang]; const nv = (k) => PAGES[k].nav[lang] || PAGES[k].nav.en;
   const slides = [
-    { img: '/img/acc-plaza-1200.webp', eyebrow: SITE.slogan[lang], title: t.heroTitle, sub: t.heroSub, href: url(lang, 'list'), cta: t.heroCta, h1: true },
+    { img: '/img/banner/kaleici', bn: 1, eyebrow: SITE.slogan[lang], title: t.heroTitle, sub: t.heroSub, href: url(lang, 'list'), cta: t.heroCta, h1: true },
     ...PROJECTS.filter((p) => p.i18n || (p.media.hero && MEDIA[p.media.hero])).map((p) => (p.i18n ? { img: rimg(ANTALLE_SHARED.hero, 1600), eyebrow: `${p.area} · ${p.developer}`, title: (ANTALLE[lang] || ANTALLE.en).title, sub: (ANTALLE[lang] || ANTALLE.en).sub, href: url(lang, 'projects', p.slug), cta: t.projectsCta } : { img: cdn(p.media.hero, 1600), eyebrow: `${p.area} · ${p.developer}`, title: p.title, sub: p.sub, href: `/projeler/${p.slug}/`, cta: t.projectsCta })),
-    { img: '/img/ofis/sunum.webp', eyebrow: s('dlPageTitle', lang), title: s('dlCostTitle', lang), sub: s('dlCostSub', lang), href: url(lang, 'downloads'), cta: s('dlCta', lang), red: true },
+    { img: '/img/banner/liman', bn: 1, eyebrow: s('dlPageTitle', lang), title: s('dlCostTitle', lang), sub: s('dlCostSub', lang), href: url(lang, 'downloads'), cta: s('dlCta', lang) },
     { img: '/img/ofis/toplanti.webp', eyebrow: s('dlPageTitle', lang), title: s('dlCitTitle', lang), sub: s('dlCitSub', lang), href: url(lang, 'downloads'), cta: s('dlCta', lang), red: true },
-    { img: '/img/ofis/oturma.webp', eyebrow: nv('sell'), title: PAGES.sell[lang] ? PAGES.sell[lang].title : PAGES.sell.en.title, sub: '', href: url(lang, 'sell'), cta: s('sellCta', lang), red: true },
+    { img: '/img/banner/villa', bn: 1, eyebrow: nv('sell'), title: PAGES.sell[lang] ? PAGES.sell[lang].title : PAGES.sell.en.title, sub: '', href: url(lang, 'sell'), cta: s('sellCta', lang) },
   ];
   const ov = (r) => (r ? 'linear-gradient(90deg,rgba(150,18,32,.92),rgba(224,42,60,.55))' : 'linear-gradient(90deg,rgba(20,4,6,.78),rgba(20,4,6,.2))');
-  return `<section class="slider hero2" aria-roledescription="carousel"><div class="slides">${slides.map((x) => `<div class="slide" style="background-image:${ov(x.red)},url('${/^\/img\/ofis\//.test(x.img) ? rimg(x.img, 1200) : x.img}')"><div class="wrap"><p class="eyebrow">${esc(x.eyebrow)}</p>${x.h1 ? `<h1>${esc(x.title)}</h1>` : `<h2>${esc(x.title)}</h2>`}${x.sub ? `<p class="ssub">${esc(x.sub)}</p>` : ''}<a class="btn" href="${x.href}">${esc(x.cta)} →</a></div></div>`).join('')}</div><button class="sarrow prev" type="button" data-sprev aria-label="‹">‹</button><button class="sarrow next" type="button" data-snext aria-label="›">›</button><div class="dots">${slides.map((_, i) => `<button aria-label="${i + 1}"${i ? '' : ' aria-current="true"'}></button>`).join('')}</div></section>`;
+  return `<section class="slider hero2" aria-roledescription="carousel"><div class="slides">${slides.map((x) => `<div class="slide" style="background-image:${ov(x.red)},url('${x.bn ? `${x.img}-d-1920.webp` : /^\/img\/ofis\//.test(x.img) ? rimg(x.img, 1200) : x.img}')"${x.bn ? ` data-bn="${x.img}"` : ''}><div class="wrap"><p class="eyebrow">${esc(x.eyebrow)}</p>${x.h1 ? `<h1>${esc(x.title)}</h1>` : `<h2>${esc(x.title)}</h2>`}${x.sub ? `<p class="ssub">${esc(x.sub)}</p>` : ''}<a class="btn" href="${x.href}">${esc(x.cta)} →</a></div></div>`).join('')}</div><button class="sarrow prev" type="button" data-sprev aria-label="‹">‹</button><button class="sarrow next" type="button" data-snext aria-label="›">›</button><div class="dots">${slides.map((_, i) => `<button aria-label="${i + 1}"${i ? '' : ' aria-current="true"'}></button>`).join('')}</div></section>`;
 }
 function areaTabs(lang, mode) {
   const used = AREAS.filter(([a]) => mode !== 'filter' || LISTINGS.some((l) => l.ilce === a));

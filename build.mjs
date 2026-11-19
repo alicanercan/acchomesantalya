@@ -269,11 +269,11 @@ function heroOpt(html) {
   const i = html.indexOf('<div class="slides">'); if (i < 0) return html;
   let n = 0, first = '';
   const tail = html.slice(i).replace(/<div class="slide" style="background-image:([^"]*)"/g, (m, v) => {
-    n++; if (n === 1) { const u = v.match(/url\('([^']+)'\)/); if (!u) return m; first = u[1]; const grad = v.replace(/,?\s*url\('[^']+'\)/, ''); return `<div class="slide s1"><img class="sbg" src="${first}" alt="" fetchpriority="high" decoding="async" width="1200" height="600"><span class="sov" style="background-image:${grad}"></span`; }
+    n++; if (n === 1) { const u = v.match(/url\('([^']+)'\)/); if (!u) return m; first = u[1]; const grad = v.replace(/,?\s*url\('[^']+'\)/, ''); const ss = /^\/img\//.test(first) ? ` srcset="${rimg(first, 640)} 640w, ${first} 1200w" sizes="100vw"` : ''; return `<div class="slide s1"><img class="sbg" src="${first}"${ss} alt="" fetchpriority="high" decoding="async" width="1200" height="600"><span class="sov" style="background-image:${grad}"></span`; }
     return `<div class="slide" data-bgs="${v}"`;
   });
   html = html.slice(0, i) + tail;
-  if (first) html = html.replace('</head>', `<link rel="preload" as="image" href="${first}" fetchpriority="high"></head>`);
+  if (first) html = html.replace('</head>', `<link rel="preload" as="image" href="${first}"${/^\/img\//.test(first) ? ` imagesrcset="${rimg(first, 640)} 640w, ${first} 1200w" imagesizes="100vw"` : ''} fetchpriority="high"></head>`);
   return html;
 }
 const write = (rel, html) => { if (typeof html === 'string' && rel.endsWith('.html')) html = heroOpt(html.replace(/<iframe([^>]*?) src="/g, '<iframe$1 data-csrc="')); if (HOST === 'turhost' && typeof html === 'string' && rel.endsWith('.html')) html = turhostForms(html); const f = path.join(OUT, rel); fs.mkdirSync(path.dirname(f), { recursive: true }); fs.writeFileSync(f, html); };
@@ -587,7 +587,7 @@ function igBlock(lang) {
 <div class="igmeta"><div class="igname"><a href="${SITE.instagram.url}" target="_blank" rel="noopener"><b>@${esc(IG.username)}</b></a><a class="btn sm" href="${SITE.instagram.url}" target="_blank" rel="noopener">${ICON_IG} ${t.igFollowBtn}</a></div>
 <div class="igstats"><span><b>${nf.format(IG.posts)}</b> ${t.igPosts}</span><span><b>${nf.format(IG.followers)}</b> ${t.igFollowers}</span></div>
 <p class="igbio"><b>${esc(IG.name)}</b><br>${esc(IG.biography).replace(/\n/g, '<br>')}</p></div></div>
-<div class="iggrid">${items.map((m) => `<a class="igitem" href="${esc(m.permalink)}" target="_blank" rel="noopener"><img src="${esc(m.local || m.image)}" alt="${esc(m.caption)}" width="400" height="400" loading="lazy">${m.type === 'VIDEO' ? '<span class="play" aria-hidden="true">▶</span>' : ''}<span class="igcap">${esc(m.caption)}</span></a>`).join('')}</div></section>`;
+<div class="iggrid">${items.map((m) => `<a class="igitem" href="${esc(m.permalink)}" target="_blank" rel="noopener"><img src="${esc(m.local ? rimg(m.local, 400) : m.image)}" alt="${esc(m.caption)}" width="400" height="400" loading="lazy">${m.type === 'VIDEO' ? '<span class="play" aria-hidden="true">▶</span>' : ''}<span class="igcap">${esc(m.caption)}</span></a>`).join('')}</div></section>`;
 }
 function stickyBar(lang) {
   const t = T[lang];
@@ -835,7 +835,7 @@ function heroSlider(lang) {
     { img: '/img/ofis/oturma.webp', eyebrow: nv('sell'), title: PAGES.sell[lang] ? PAGES.sell[lang].title : PAGES.sell.en.title, sub: '', href: url(lang, 'sell'), cta: s('sellCta', lang), red: true },
   ];
   const ov = (r) => (r ? 'linear-gradient(90deg,rgba(150,18,32,.92),rgba(224,42,60,.55))' : 'linear-gradient(90deg,rgba(20,4,6,.78),rgba(20,4,6,.2))');
-  return `<section class="slider hero2" aria-roledescription="carousel"><div class="slides">${slides.map((x) => `<div class="slide" style="background-image:${ov(x.red)},url('${x.img}')"><div class="wrap"><p class="eyebrow">${esc(x.eyebrow)}</p>${x.h1 ? `<h1>${esc(x.title)}</h1>` : `<h2>${esc(x.title)}</h2>`}${x.sub ? `<p class="ssub">${esc(x.sub)}</p>` : ''}<a class="btn" href="${x.href}">${esc(x.cta)} →</a></div></div>`).join('')}</div><button class="sarrow prev" type="button" data-sprev aria-label="‹">‹</button><button class="sarrow next" type="button" data-snext aria-label="›">›</button><div class="dots">${slides.map((_, i) => `<button aria-label="${i + 1}"${i ? '' : ' aria-current="true"'}></button>`).join('')}</div></section>`;
+  return `<section class="slider hero2" aria-roledescription="carousel"><div class="slides">${slides.map((x) => `<div class="slide" style="background-image:${ov(x.red)},url('${/^\/img\/ofis\//.test(x.img) ? rimg(x.img, 1200) : x.img}')"><div class="wrap"><p class="eyebrow">${esc(x.eyebrow)}</p>${x.h1 ? `<h1>${esc(x.title)}</h1>` : `<h2>${esc(x.title)}</h2>`}${x.sub ? `<p class="ssub">${esc(x.sub)}</p>` : ''}<a class="btn" href="${x.href}">${esc(x.cta)} →</a></div></div>`).join('')}</div><button class="sarrow prev" type="button" data-sprev aria-label="‹">‹</button><button class="sarrow next" type="button" data-snext aria-label="›">›</button><div class="dots">${slides.map((_, i) => `<button aria-label="${i + 1}"${i ? '' : ' aria-current="true"'}></button>`).join('')}</div></section>`;
 }
 function areaTabs(lang, mode) {
   const used = AREAS.filter(([a]) => mode !== 'filter' || LISTINGS.some((l) => l.ilce === a));
@@ -906,7 +906,7 @@ function card(l, lang) {
   return `<article class="card" data-id="${esc(l.id)}" data-tags="${tags.join(' ')}" data-tip="${esc(l.tip)}" data-tur="${esc(l.tur)}" data-et="${esc(l.emlakTipi)}" data-kat="${esc(l.kategori)}" data-alt="${esc(l.altTip || '')}" data-ilce="${esc(l.ilce)}" data-mah="${esc(l.mahalle || '')}" data-oda="${esc(l.oda)}" data-fiyat="${l.fiyat || 0}" data-para="${esc(({ TL: 'TRY' })[l.para || 'TL'] || l.para)}" data-brut="${+l.brut || 0}" data-net="${+l.net || 0}" data-yas="${l.yas === undefined || l.yas === '' ? '' : +String(l.yas).replace(/[^0-9]/g, '') || 0}" data-tarih="${esc(l.tarih || '')}" data-q="${esc(q)}"${fx}>
 ${cardTools(l, lang)}
 <a href="${url(lang, 'listing', slugOf(l))}">
-<div class="img">${cover ? `<img src="${esc(cover)}" alt="${esc([l.mahalle, l.ilce, l.oda, l.tur].join(' '))}" width="800" height="600" loading="lazy">` : placeholder}<span class="tag">${tipLabel(l, lang)}</span>${statusBadge(l, lang)}</div>
+<div class="img">${cover ? `<img src="${esc(/^\/img\//.test(cover) ? rimg(cover, 640) : cover)}"${/^\/img\//.test(cover) ? ` srcset="${rimg(cover, 400)} 400w, ${rimg(cover, 640)} 640w" sizes="(max-width:640px) 92vw, 320px"` : ''} alt="${esc([l.mahalle, l.ilce, l.oda, l.tur].join(' '))}" width="800" height="600" loading="lazy">` : placeholder}<span class="tag">${tipLabel(l, lang)}</span>${statusBadge(l, lang)}</div>
 <div class="body"><div class="price"${priceAttrs(l)}>${fmtPrice(l, lang)}</div><h3>${esc(pick(l.baslik, lang))}</h3>${tags.length ? `<div class="ltags">${tags.slice(0, 3).map((k) => `<span class="lt-${k}">${tagLabel(k, lang)}</span>`).join('')}</div>` : ''}
 <div class="meta"><span>${esc(l.oda || '')}</span>${l.net ? `<span data-m2="${+l.net}">${+l.net} m²</span>` : ''}<span>${esc([l.mahalle, l.ilce].filter(Boolean).join(', '))}</span></div></div></a>${enqBtn(l, lang)}</article>`;
 }

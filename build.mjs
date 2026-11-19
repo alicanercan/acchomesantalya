@@ -1470,6 +1470,14 @@ const FALLBACK = new Set();
       if (a.size && same / a.size > 0.72) FALLBACK.add(u);
     }
   }
+  // EN sayfası henüz çevrilmemişse (TR metne düşmüşse) o da noindex ve site haritası dışı
+  for (const u of urls.filter((x) => x.startsWith('/en/'))) {
+    const f = fileOf(u); if (!fs.existsSync(f)) continue;
+    const h = fs.readFileSync(f, 'utf8'); const m = h.match(/hreflang="tr" href="[^"]*?acchomesantalya\.com(\/[^"]*)"/); if (!m || m[1].startsWith('/en/')) continue;
+    const tf = fileOf(m[1]); if (!fs.existsSync(tf)) continue;
+    const a = words(h); const b = words(fs.readFileSync(tf, 'utf8')); let same = 0; for (const w of a) if (b.has(w)) same++;
+    if (a.size && same / a.size > 0.72) FALLBACK.add(u);
+  }
   const esc2 = (x) => x.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
   const walk = (d) => fs.readdirSync(d, { withFileTypes: true }).flatMap((e) => (e.isDirectory() ? walk(path.join(d, e.name)) : e.name.endsWith('.html') ? [path.join(d, e.name)] : []));
   const altRe = FALLBACK.size ? new RegExp(`<link rel="alternate" hreflang="[a-z-]+" href="${esc2(SITE.domain)}(?:${[...FALLBACK].map(esc2).join('|')})">`, 'g') : null;

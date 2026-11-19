@@ -176,7 +176,7 @@ export const PROJECTS = [
     slug: 'nox-apt-dosemealti',
     name: 'Nox Apt',
     area: 'Yeniköy · Döşemealtı',
-    developer: 'Butik apartman projesi',
+    developer: 'Del Light İnşaat',
     card: 'Döşemealtı Yeniköy’de havuzlu, asansörlü, iskânlı 12 dairelik butik apartman: 1+1 ve 3+1 daireler.',
     cover: '1JHI8LuaQ_I6WGX3ZgOCdtvBgxhDv5c32',
     media: {
@@ -197,7 +197,7 @@ export const PROJECTS = [
       { tag: '1+1', name: '1+1 Daireler', status: 'Bahçe katı ve ara katlar', items: ['Giriş katta 4 adet bahçe katı 1+1', '1. katta 4 adet 1+1', '2. katta 2 adet 1+1'], price: '4.200.000 TL' },
       { tag: '3+1', name: '3+1 Daireler', status: '2. kat', items: ['Projede yalnızca 2 adet', 'Aileler için geniş yaşam alanı'], price: '9.000.000 TL' },
     ],
-    devTitle: 'Nox Apt × ACC HOMES',
+    devTitle: 'Del Light İnşaat × ACC HOMES',
     devText: 'Nox Apt, ACC HOMES International Real Estate’in tek yetkili ve sözleşmeli portföyüdür. Proje koordinatörlüğünü Genel Koordinatörümüz Esma Özdal yürütmektedir; daire seçimi, yerinde gösterim ve kredi süreci için doğrudan ulaşabilirsiniz.',
     cta: 'Nox Apt’ta müsait daireler, kat ve cephe seçenekleri için proje koordinatörümüz Esma Özdal ile iletişime geçin.',
     contacts: [['Esma Özdal · Proje Koordinatörü', '+905070304419', '+90 507 030 44 19']],

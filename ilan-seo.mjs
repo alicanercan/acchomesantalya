@@ -22,6 +22,14 @@ export function loc(w) {
   const back = 'aıou'.includes(v); const hard = 'fstkçşhp'.includes(low.slice(-1));
   return `${s}’${hard ? 't' : 'd'}${back ? 'a' : 'e'}`;
 }
+// Site/proje adı için bulunma eki: "Olive Garden Konutları’nda", "Güneş Sitesi’nde", "Falez Manzara’da"
+export function locAd(w) {
+  const s = String(w || '').trim(); if (!s) return s;
+  const son = trLower(s.split(/\s+/).pop());
+  if (!/(si|sı|su|sü|ları|leri)$/.test(son)) return loc(s);
+  const v = [...son].reverse().find((c) => 'aeıioöuü'.includes(c)) || 'a';
+  return `${s}’nd${'aıou'.includes(v) ? 'a' : 'e'}`;
+}
 
 const ALT = {
   'Daire': ['daire', 'Apartment', 'квартира'], 'Villa': ['villa', 'Villa', 'вилла'], 'Müstakil Ev': ['müstakil ev', 'Detached House', 'частный дом'],
@@ -83,7 +91,7 @@ function basliklar(l) {
   const yerTR = `${l.ilce} ${loc(l.mahalle || l.ilce)}`.replace(`${l.ilce} ${loc(l.ilce)}`, loc(l.ilce));
   let tr = l.baslik && l.baslik.tr ? String(l.baslik.tr).replace(/\s+/g, ' ').trim() : '';
   if (!tr || tr.length > 70 || tr === trUpper1(tr) && tr === tr.toLocaleUpperCase('tr-TR')) {
-    tr = `${yerTR} ${sa ? `${sa}’nde ` : l.site === 'Evet' ? 'Site İçinde ' : ''}${trUpper1(t[0])} ${odaTR}${trUpper1(a[0])}${m2 ? `, ${nf(m2)} m²` : ''}`;
+    tr = `${yerTR} ${sa ? `${locAd(sa)} ` : l.site === 'Evet' ? 'Site İçinde ' : ''}${trUpper1(t[0])} ${odaTR}${trUpper1(a[0])}${m2 ? `, ${nf(m2)} m²` : ''}`;
     if (tr.length > 70) tr = `${yerTR} ${trUpper1(t[0])} ${odaTR}${trUpper1(a[0])}${m2 ? `, ${nf(m2)} m²` : ''}`;
   }
   const odaEN = l.oda && konut(l) ? `${l.oda} ` : '';

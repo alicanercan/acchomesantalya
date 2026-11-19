@@ -62,9 +62,21 @@ if ($reply && filter_var($reply, FILTER_VALIDATE_EMAIL)) $headers[] = 'Reply-To:
 
 $sent = @mail(TO, $subject, $body, implode("\r\n", $headers), '-f' . FROM);
 
+// ACC HOMES Panel'e kayıt (Yönetim → Site formları). Anahtar herkese açık publishable anahtardır; yalnız ekleme yapabilir.
+$tel = trim(($rows['ulke_kodu'] ?? '') . ' ' . ($rows['telefon'] ?? ''));
+$panelVeri = $rows + ['form' => $form, 'sayfa' => $page, 'telefon' => $tel];
+$panelOk = false;
+$ch = @curl_init('https://vqsocwdfmvpgdpxkcubz.supabase.co/rest/v1/rpc/site_form_ekle');
+if ($ch) {
+  curl_setopt_array($ch, [CURLOPT_POST => true, CURLOPT_RETURNTRANSFER => true, CURLOPT_TIMEOUT => 8,
+    CURLOPT_HTTPHEADER => ['apikey: sb_publishable_Fv0kalSrYIRLNjCoER1y2Q_31N9fJ_z', 'Content-Type: application/json'],
+    CURLOPT_POSTFIELDS => json_encode(['p' => $panelVeri], JSON_UNESCAPED_UNICODE)]);
+  $res = curl_exec($ch); $panelOk = curl_getinfo($ch, CURLINFO_HTTP_CODE) === 200 && trim((string)$res) === 'true'; curl_close($ch);
+}
+
 // yedek kayıt (web kökü dışında; tarayıcıdan erişilemez)
 if (!is_dir(LOG_DIR)) @mkdir(LOG_DIR, 0700, true);
 $fh = @fopen(LOG_DIR . '/' . date('Y-m') . '.csv', 'a');
-if ($fh) { fputcsv($fh, [date('c'), $form, $sent ? 'mail-ok' : 'mail-HATA', json_encode($rows, JSON_UNESCAPED_UNICODE), $page]); fclose($fh); }
+if ($fh) { fputcsv($fh, [date('c'), $form, $sent ? 'mail-ok' : 'mail-HATA', $panelOk ? 'panel-ok' : 'panel-HATA', json_encode($rows, JSON_UNESCAPED_UNICODE), $page]); fclose($fh); }
 
 back($next);

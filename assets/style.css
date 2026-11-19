@@ -459,3 +459,5 @@ img{-webkit-user-drag:none;user-drag:none;-webkit-touch-callout:none}
 .lmap iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
 .lmap-area{position:absolute;left:50%;top:50%;width:42%;aspect-ratio:1;transform:translate(-50%,-50%);border-radius:50%;background:rgba(224,42,60,.14);border:2px solid rgba(224,42,60,.65);pointer-events:none}
 .lmap-note{font-size:13px;color:var(--mute)}
+
+.bfig{margin:18px 0 22px}.bfig img{width:100%;height:auto;border-radius:14px;display:block}

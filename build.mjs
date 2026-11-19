@@ -672,7 +672,18 @@ function pageCorporate(key, lang) {
   write(path.join(url(lang, key), 'index.html'), layout({ lang, title: `${c.title} | ACC HOMES`, desc: c.desc, canonical: url(lang, key), alternates: alts(key), body, schema, ogImage: key === 'broker' && SITE.brokerPhoto ? SITE.brokerPhoto : '/img/acc-plaza-og.jpg' }));
 }
 const postFor = (p, lang) => p[lang] || p.en || p.tr;
-const ALLPOSTS = [...BLOG_POSTS, ...POSTS.map((p) => ({ ...p, cat: BLOG.catOf[p.slug] || 'rehber' }))]
+// Blog kapakları (Derya, 19.11.2026; ACC filigranlı, static/img/blog: 1200 ve -600)
+const BLOG_COVERS = {
+  'antalya-kentsel-donusum-rehberi-muratpasa-konyaalti': 'antalya-kentsel-donusum-rehberi',
+  'cop31-antalya-iklim-zirvesi-gayrimenkul-etkisi': 'cop31-antalya-iklim-zirvesi',
+  'topraktan-ve-lansman-fiyatiyla-daire-almak': 'topraktan-daire-almak',
+  'antalyada-gayrimenkul-yatirimi-bolgeler-ve-stratejiler': 'antalya-gayrimenkul-yatirimi-bolgeler',
+  'evimi-satarken-dogru-fiyat-nasil-belirlenir': 'evimi-satarken-dogru-fiyat',
+  'altintas-ev-alirken-dikkat-edilmesi-gerekenler': 'altintas-ev-alirken',
+  'antalyada-nereden-ev-alinir-konyaalti-lara-altintas': 'antalyada-nereden-ev-alinir',
+};
+const withCover = (p) => (p.cover || !BLOG_COVERS[p.slug] ? p : { ...p, cover: `/img/blog/${BLOG_COVERS[p.slug]}-600.webp`, coverL: `/img/blog/${BLOG_COVERS[p.slug]}.webp` });
+const ALLPOSTS = [...BLOG_POSTS, ...POSTS.map((p) => ({ ...p, cat: BLOG.catOf[p.slug] || 'rehber' }))].map(withCover)
   .sort((x, y) => (y.live ? 1 : 0) - (x.live ? 1 : 0) || (y.updated || y.date).localeCompare(x.updated || x.date));
 const dmy = (d) => d.split('-').reverse().join('.');
 function postCard(p, lang, big) {
@@ -692,12 +703,12 @@ function pageBlog(lang) {
     const meta = `<p class="pmeta">${cat.icon} ${esc(bT(cat.name, lang))} · ${dmy(p.date)}${p.updated ? ` · ${bT(BLOG.ui.updated, lang)}: ${dmy(p.updated)}` : ''}${p.live ? ` · <b class="live">● ${bT(BLOG.ui.live, lang)}</b>` : ''}</p>`;
     const author = `<div class="pauthor">${SITE.brokerPhoto ? `<img src="${SITE.brokerPhoto}" alt="Ali Caner Can" width="56" height="56" loading="lazy">` : ''}<div><b><a href="${url(lang, 'broker')}">Ali Caner Can</a></b><small>Broker & Owner · ACC HOMES International Real Estate</small></div></div>`;
     const rel = ALLPOSTS.filter((x) => x !== p && x.cat === p.cat).concat(ALLPOSTS.filter((x) => x !== p && x.cat !== p.cat)).slice(0, 3);
-    const pb = `<article class="wrap sec narrow page"><nav class="crumbs"><a href="${home(lang)}">${t.nav.home}</a> / <a href="${url(lang, 'blog')}">${t.blog}</a> / <span>${esc(bT(cat.name, lang))}</span></nav><h1>${esc(c.title)}</h1>${meta}${author}<div class="prose">${fill(c.html, lang)}</div>${c.faq ? `<h2 id="sss">${s('faq', lang)}</h2><div class="faq">${c.faq.map(([q, a]) => `<details><summary>${esc(q)}</summary><p>${esc(a)}</p></details>`).join('')}</div>` : ''}<div class="ctas"><a class="btn" href="${waLink(t.waGeneral)}" target="_blank" rel="noopener">${s('quickEnq', lang)}</a><a class="btn ghost" href="${url(lang, 'blog')}">${t.blog} →</a></div></article>
+    const pb = `<article class="wrap sec narrow page"><nav class="crumbs"><a href="${home(lang)}">${t.nav.home}</a> / <a href="${url(lang, 'blog')}">${t.blog}</a> / <span>${esc(bT(cat.name, lang))}</span></nav><h1>${esc(c.title)}</h1>${meta}${author}${p.coverL ? `<figure class="bfig"><img src="${p.coverL}" srcset="${p.cover} 600w, ${p.coverL} 1200w" sizes="(max-width:760px) 92vw, 760px" alt="${esc(c.title)}" width="1200" height="675" fetchpriority="high"></figure>` : ''}<div class="prose">${fill(c.html, lang)}</div>${c.faq ? `<h2 id="sss">${s('faq', lang)}</h2><div class="faq">${c.faq.map(([q, a]) => `<details><summary>${esc(q)}</summary><p>${esc(a)}</p></details>`).join('')}</div>` : ''}<div class="ctas"><a class="btn" href="${waLink(t.waGeneral)}" target="_blank" rel="noopener">${s('quickEnq', lang)}</a><a class="btn ghost" href="${url(lang, 'blog')}">${t.blog} →</a></div></article>
 <section class="wrap sec"><div class="bgrid">${rel.map((x) => postCard(x, lang)).join('')}</div></section>`;
     const schema = [{ '@context': 'https://schema.org', '@type': 'BlogPosting', headline: c.title, description: c.desc, datePublished: p.date, dateModified: p.updated || p.date, author: { '@type': 'Person', name: 'Ali Caner Can', url: SITE.domain + url(lang, 'broker') }, publisher: { '@type': 'Organization', name: SITE.brand, logo: { '@type': 'ImageObject', url: `${SITE.domain}/img/logo/acc-homes-logo.png` } }, mainEntityOfPage: SITE.domain + url(lang, 'blog', p.slug) }];
     if (c.faq) schema.push({ '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: c.faq.map(([q, a]) => ({ '@type': 'Question', name: q, acceptedAnswer: { '@type': 'Answer', text: a } })) });
-    if (p.cover) schema[0].image = SITE.domain + p.cover;
-    write(path.join(url(lang, 'blog', p.slug), 'index.html'), layout({ lang, title: `${c.seo || c.title} | ACC HOMES`, desc: c.desc, canonical: url(lang, 'blog', p.slug), alternates: alts('blog', () => p.slug), body: pb, schema }));
+    if (p.cover) schema[0].image = SITE.domain + (p.coverL || p.cover);
+    write(path.join(url(lang, 'blog', p.slug), 'index.html'), layout({ lang, title: `${c.seo || c.title} | ACC HOMES`, desc: c.desc, canonical: url(lang, 'blog', p.slug), alternates: alts('blog', () => p.slug), body: pb, schema, ogImage: p.coverL }));
   }
 }
 

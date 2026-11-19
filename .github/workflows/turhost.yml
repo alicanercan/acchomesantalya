@@ -11,6 +11,9 @@ on:
     branches: [main]
   workflow_dispatch:
 
+permissions:
+  contents: write
+
 concurrency:
   group: turhost-deploy
   cancel-in-progress: false
@@ -40,6 +43,18 @@ jobs:
           path: panel-snapshot.json
           retention-days: 7
           if-no-files-found: ignore
+      - name: Panel anlık görüntüsünü panel-snapshot dalına yaz (artifact indirilemeyen oturumlar için)
+        if: always()
+        continue-on-error: true
+        run: |
+          [ -f panel-snapshot.json ] || exit 0
+          tmp=$(mktemp -d) && cp panel-snapshot.json "$tmp/" && cd "$tmp"
+          git init -q -b panel-snapshot
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add panel-snapshot.json
+          git commit -qm "Panel anlık görüntüsü $(date -u +%Y-%m-%dT%H:%MZ)"
+          git push -qf "https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}.git" panel-snapshot:panel-snapshot
       - name: Turhost'a yükle
         if: env.FTP_SERVER != ''
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5

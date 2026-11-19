@@ -9,14 +9,20 @@ Hedef: her ilanın `data/ilan-seo.json` içinde özgün kaydı olması.
 
 ## Veri nereden alınır
 
-Ağ kısıtlı oturumlarda panel verisi son yayının GitHub Actions çıktısından alınır:
+Ağ kısıtlı oturumlarda panel verisi her Turhost yayınında `panel-snapshot` dalına yazılan dosyadan alınır (artifact zip'i Azure blob adresinden indiği için bulut oturumlarında engellenebiliyor; dal yöntemi yalnız api.github.com kullanır):
 
 ```
-# en son panel anlık görüntüsü (her Turhost yayınında yüklenir, 7 gün saklanır)
-mkdir -p /tmp/panel && cd /tmp/panel
-URL=$(gh api "repos/alicanercan/acchomesantalya/actions/artifacts?name=panel-snapshot&per_page=1" -q '.artifacts[0].archive_download_url')
-gh api "$URL" > a.zip && unzip -o a.zip && cd -
+mkdir -p /tmp/panel
+gh api -H "Accept: application/vnd.github.raw" \
+  "repos/alicanercan/acchomesantalya/contents/panel-snapshot.json?ref=panel-snapshot" > /tmp/panel/panel-snapshot.json
 # /tmp/panel/panel-snapshot.json → site_ilanlari satırları (telefon/e-posta ayıklanmış)
+```
+
+Dal yoksa yedek yöntem (artifact, 7 gün saklanır):
+
+```
+URL=$(gh api "repos/alicanercan/acchomesantalya/actions/artifacts?name=panel-snapshot&per_page=1" -q '.artifacts[0].archive_download_url')
+gh api "$URL" > /tmp/panel/a.zip && (cd /tmp/panel && unzip -o a.zip)
 ```
 
 Hangi ilanların özgün kaydı yok:

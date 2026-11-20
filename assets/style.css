@@ -469,3 +469,4 @@ img{-webkit-user-drag:none;user-drag:none;-webkit-touch-callout:none}
 .mprice .price.big{font-size:32px;line-height:1.1;margin:8px 0 4px}
 .mp-spec{color:#3d3532;font-weight:600;font-size:15px}.mp-spec i{font-style:normal;color:#b8aea9;margin:0 7px}
 .mp-act{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px}.mp-act .btn{text-align:center;justify-content:center;padding:11px 8px}}
+.bcov{overflow:hidden}.bcov img{position:absolute;inset:0}@media (min-width:901px){.bcard.big .bcov{align-self:center;min-height:0;aspect-ratio:16/9}}

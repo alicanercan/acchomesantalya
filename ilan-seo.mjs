@@ -39,6 +39,7 @@ const ALT = {
   'Ticari İmarlı': ['ticari imarlı arsa', 'Commercial Plot', 'участок под коммерческую застройку'], 'Spor Tesisi': ['spor tesisi', 'Sports Facility', 'спортивный объект'],
   'Residence': ['residence daire', 'Residence Apartment', 'апартаменты в резиденции'], 'Yazlık': ['yazlık', 'Holiday Home', 'летний дом'],
   'Bina': ['bina', 'Building', 'здание'], 'Ofis': ['ofis', 'Office', 'офис'], 'Depo': ['depo', 'Warehouse', 'склад'], 'Depo & Antrepo': ['depo', 'Warehouse', 'склад'], 'Arsa': ['arsa', 'Plot', 'участок'],
+  'Kafe': ['kafe', 'Café', 'кафе'], 'Villa İmarlı': ['villa imarlı arsa', 'Villa Plot', 'участок под виллу'],
 };
 const altOf = (l) => ALT[l.altTip] || ALT[l.tur] || (l.emlakTipi === 'arsa' ? ALT.Arsa : l.emlakTipi === 'is-yeri' ? ALT['İş Yeri'] : ['gayrimenkul', 'Property', 'объект']);
 const TIP = { 'Satılık': ['satılık', 'for Sale', 'Продажа'], 'Kiralık': ['kiralık', 'for Rent', 'Аренда'], 'Devren': ['devren kiralık', 'for Transfer', 'Передача бизнеса'] };

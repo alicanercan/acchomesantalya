@@ -7642,5 +7642,44 @@
   },
   "kaynak": "2026-11-20T06:18:38.61189+00:00",
   "fiyat": 280000
+ },
+ "ACC-1231": {
+  "baslik": {
+   "tr": "Aksu Karaçallı’da Satılık Konut İmarlı Arsa, 1.251 m²",
+   "en": "1,251 m² Residential-Zoned Plot for Sale in Karaçallı, Aksu",
+   "ru": "Продажа: участок 1 251 м² под жильё, Карачаллы, Аксу"
+  },
+  "meta": {
+   "tr": "Aksu Karaçallı’da satılık 1.251 m² konut imarlı arsa; KAKS 0,60, yolu açık, elektrik, su ve kanalizasyon altyapısı hazır. 25.000.000 TL.",
+   "en": "1,251 m² residential-zoned plot for sale in Karaçallı, Aksu; FAR 0.60, road access, electricity, water and sewerage in place. TRY 25,000,000.",
+   "ru": "Участок 1 251 м² под жилую застройку в Карачаллы, Аксу; КАКС 0,60, подъездная дорога, электричество, вода, канализация. 25 000 000 TRY."
+  },
+  "aciklama": {
+   "tr": "Aksu’nun Karaçallı Mahallesi’nde satılık konut imarlı arsa. Parsel 1.251 m² büyüklüğünde ve imar durumu konut olarak tanımlı.\nEmsal (KAKS) 0,60; bu oran, parsel üzerinde yaklaşık 750 m² inşaat alanına imkân veriyor. Arsanın yolu açılmış; elektrik, su, telefon ve kanalizasyon altyapısı mevcut, zemin etüdü yapılmış. Bu büyüklük, müstakil bir konut ya da birkaç bağımsız bölümlü küçük bir proje için esnek bir planlama alanı sunuyor; kesin yapılaşma koşulları belediyeden alınacak imar durum belgesiyle netleşir.\nKaraçallı, Aksu’nun gelişmekte olan mahallelerinden biri. Ana yola ve toplu ulaşıma yakın konumu, havalimanına ve denize kısa mesafesiyle hem konut yapmak isteyenler hem de orta vadeli yatırım düşünenler için değerlendirilebilir.\nTapu durumu hisseli tapu; satın almadan önce hisse yapısı ve imar durumunun ACC HOMES ile birlikte incelenmesini öneriyoruz. Fiyat 25.000.000 TL (m² başına yaklaşık 20.000 TL).\nGösterim için ACC HOMES iş ortağımız Leyli Rezaıy ile iletişime geçebilirsiniz. İlan no: ACC-1231.",
+   "en": "A residential-zoned plot for sale in the Karaçallı neighbourhood of Aksu. The plot measures 1,251 m² and is zoned for housing.\nThe floor area ratio (KAKS) is 0.60, allowing roughly 750 m² of construction on the plot. The road is open; electricity, water, telephone and sewerage connections are in place, and a soil survey has been carried out. The plot size leaves flexible room for a detached home or a small project with several units; exact building conditions are confirmed by the zoning certificate issued by the municipality.\nKaraçallı is one of Aksu’s developing neighbourhoods. Close to the main road and public transport, and a short distance from the airport and the sea, it suits buyers planning to build a home as well as medium-term investors.\nThe plot is held under a shared (hisseli) title; we recommend reviewing the share structure and zoning together with ACC HOMES before purchase. Price: TRY 25,000,000 (about TRY 20,000 per m²).\nContact our ACC HOMES partner Leyli Rezaıy for a viewing. Listing no: ACC-1231.",
+   "ru": "Участок под жилую застройку на продажу в районе Карачаллы, Аксу. Площадь участка 1 251 м², назначение — жильё.\nКоэффициент застройки (КАКС) 0,60 позволяет построить около 750 м². К участку проложена дорога; подведены электричество, вода, телефон и канализация, проведено геологическое исследование грунта. Такая площадь даёт гибкость для отдельного дома или небольшого проекта на несколько квартир; точные условия застройки подтверждаются справкой о зонировании из муниципалитета.\nКарачаллы — один из развивающихся районов Аксу. Рядом основная дорога и общественный транспорт, недалеко аэропорт и море; участок подойдёт как для строительства собственного дома, так и для среднесрочных инвестиций.\nТапу долевое (хиссели); перед покупкой рекомендуем вместе с ACC HOMES проверить структуру долей и зонирование. Цена: 25 000 000 TRY (около 20 000 TRY за м²).\nДля просмотра свяжитесь с партнёром ACC HOMES Leyli Rezaıy. Номер объявления: ACC-1231."
+  },
+  "nedenler": {
+   "tr": [
+    "1.251 m² konut imarlı parsel",
+    "KAKS 0,60",
+    "Altyapısı hazır, yolu açık",
+    "Havalimanına ve denize yakın"
+   ],
+   "en": [
+    "1,251 m² residential plot",
+    "FAR 0.60",
+    "Utilities ready, road open",
+    "Near the airport and the sea"
+   ],
+   "ru": [
+    "Участок 1 251 м² под жильё",
+    "КАКС 0,60",
+    "Коммуникации и дорога",
+    "Рядом аэропорт и море"
+   ]
+  },
+  "kaynak": "2026-11-20T06:16:40.274875+00:00",
+  "fiyat": 25000000
  }
 }

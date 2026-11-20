@@ -124,3 +124,7 @@ export const POSTS6 = [
     },
   },
 ];
+
+// EN ve RU sürümleri ayrı dosyada (20.11.2026)
+import { POSTS6_I18N } from './posts6-i18n.mjs';
+for (const p of POSTS6) Object.assign(p, POSTS6_I18N[p.slug] || {});

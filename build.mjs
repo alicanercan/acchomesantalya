@@ -55,7 +55,7 @@ function panelIlan(v) {
     esya: v.esya || undefined, kullanim: v.kullanim || undefined, site: v.site || undefined, aidat: v.aidat ?? undefined, kredi: v.kredi || undefined, tapu: v.tapu || undefined,
     takas: v.takas || undefined, imar: v.imar || undefined, etiketler: (v.etiketler || []).filter((k) => k !== 'antalya-disi'), ozellikler: v.ozellikler || [],
     foto: (v.foto || []).map(ilanFoto), thumbs: false, baslik: bas, aciklama: ac, meta: e.meta || (bas.tr ? `${bas.tr}. ${ilkCumle}`.slice(0, 155) : undefined),
-    harita: v.yaklasik_konum || undefined, konutTipi: (v.konut_tipi || []).length ? v.konut_tipi : undefined, tarih: trTarih(v.created_at), tekYetki: !!v.yetkili, eids: v.eids || undefined, sahibinden: v.sahibinden || undefined, danisman: panelDanisman(v), _panel: true };
+    teklifAl: !!e.fiyat_gizli || undefined, harita: v.yaklasik_konum || undefined, konutTipi: (v.konut_tipi || []).length ? v.konut_tipi : undefined, tarih: trTarih(v.created_at), tekYetki: !!v.yetkili, eids: v.eids || undefined, sahibinden: v.sahibinden || undefined, danisman: panelDanisman(v), _panel: true };
 }
 try {
   const r = await fetch(`${PANEL.url}/rest/v1/site_ilanlari?select=*`, { headers: { apikey: PANEL.key }, signal: AbortSignal.timeout(20000) });
@@ -252,6 +252,7 @@ for (const l of LISTINGS) if (l._panel) { const eski = ilanSeo(l, slugify); if (
 console.log(`İlan SEO: ${LISTINGS.filter((l) => l._seo === 'ozgun').length} özgün, ${LISTINGS.filter((l) => l._seo === 'otomatik').length} otomatik`);
 const pick = (obj, lang) => (obj && (obj[lang] || (lang !== 'tr' && obj.en) || obj.tr)) || '';
 const fmtPrice = (l, lang) => {
+  if (!l.fiyat && l.teklifAl) return ({ tr: 'Teklif alınız', en: 'Price on request', ru: 'Цена по запросу', de: 'Preis auf Anfrage' })[lang] || T[lang].priceOnReq;
   if (!l.fiyat) return l.teklif ? ({ tr: 'Teklif verin', en: 'Make an offer', ru: 'Предложите цену' })[lang] || 'Make an offer' : T[lang].priceOnReq;
   const n = new Intl.NumberFormat(LOCALE[lang]).format(l.fiyat);
   const sym = { TL: '₺', USD: '$', EUR: '€' }[l.para] || l.para || '';

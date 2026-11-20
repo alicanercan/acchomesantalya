@@ -8,6 +8,7 @@ import { PAGES, POSTS, TEAM, LANGS_SPOKEN, PLAZA, TIMELINE } from './content.mjs
 import { PROJECTS } from './projects.mjs';
 import { ANTALLE, ANTALLE_SHARED } from './antalle-content.mjs';
 import { ANTALLE_SEO } from './antalle-seo.mjs';
+import { DAVET_AKTIF, davetSection, davetTx } from './antalle-davet.mjs';
 import { PRIVACY } from './privacy.mjs';
 import { PAGES2, P2X, p2Html } from './pages2.mjs';
 import { AREA_GUIDES } from './areas.mjs';
@@ -529,6 +530,8 @@ ${p.badges ? `<div class="lbadges">${p.badges.map(([i, h, d]) => `<div><span>${i
   write(path.join('/projeler', p.slug, 'index.html'), layout({ lang, title: `${p.name} | ${p.area} | ACC HOMES`, desc: p.desc, canonical: `/projeler/${p.slug}/`, alternates: null, body: S.join('\n'), schema, ogImage: og }));
 }
 
+// Antalle sayfasında fiyat gösterilmez (Kasım 2026 kararı): USD/TL tutar içeren satırlar atlanır
+const FIYAT_RE = /USD|\$|₺|\bTL\b/;
 function pageProjectI18n(p, lang) {
   const t = T[lang]; const C = ANTALLE[lang]; const u = C.ui; const SH = ANTALLE_SHARED;
   const here = url(lang, 'projects', p.slug);
@@ -539,14 +542,15 @@ function pageProjectI18n(p, lang) {
   const S = [];
   S.push(`<section class="lhero" style="background-image:linear-gradient(180deg,rgba(0,0,0,.25),rgba(0,0,0,.62)),url('${rimg(SH.hero, 1920)}')"><div class="wrap"><nav class="crumbs light"><a href="${home(lang)}">${t.nav.home}</a> / <a href="${url(lang, 'projects')}">${t.projects}</a></nav><p class="eyebrow">${esc(p.area)} · ${esc(p.developer)}</p><h1>${esc(C.title)}</h1><p class="lsub">${esc(C.sub)}</p>
 <div class="lbadges">${C.badges.map(([i, h, d]) => `<div><span>${i}</span><b>${esc(h)}</b><small>${esc(d)}</small></div>`).join('')}</div>
-<div class="ctas"><a class="btn" href="#form">${esc(u.req)}</a><a class="btn ghost light" href="tel:${contacts[0][1]}">${esc(u.call)}</a><a class="btn ghost light" href="${SH.telegram}" target="_blank" rel="noopener">✈️ ${esc(u.tg)}</a></div></div></section>`);
+<div class="ctas">${DAVET_AKTIF ? `<a class="btn" href="#davet" style="background:#1E6339;border-color:#1E6339">🥂 ${esc(davetTx(lang).cta)} · ${esc(davetTx(lang).when.split(' · ')[0])}</a>` : ''}<a class="btn${DAVET_AKTIF ? ' ghost light' : ''}" href="#form">${esc(u.req)}</a><a class="btn ghost light" href="tel:${contacts[0][1]}">${esc(u.call)}</a><a class="btn ghost light" href="${SH.telegram}" target="_blank" rel="noopener">✈️ ${esc(u.tg)}</a></div></div></section>`);
+  if (DAVET_AKTIF) S.push(davetSection(lang, { esc, telIn, privacyUrl: url(lang, 'privacy'), mapUrl: `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(p.mapQuery)}`, waNum: contacts[0][1].replace('+', '') }));
   S.push(`<p class="wrap lnote" id="citizenship">${esc(C.badgeNote)}</p>`);
   S.push(`<section class="wrap sec" id="why"><h2>${esc(C.whyTitle)}</h2><div class="cards3 awhy">${C.why.map(([i, h, d]) => `<div><h3><span>${i}</span> ${esc(h)}</h3><p>${esc(d)}</p></div>`).join('')}</div></section>`);
   S.push(`<section class="wrap sec" id="units"><h2>${esc(C.unitsTitle)}</h2><div class="plans units">${C.units.map(([n, a, d]) => `<div class="plan"><h3>${esc(n)}</h3><b class="parea">${esc(a)}</b><p>${esc(d)}</p></div>`).join('')}</div></section>`);
   S.push(`<section class="larch"><div class="wrap larchg"><div><p class="eyebrow">Antalle</p><h2>${esc(C.archTitle)}</h2><p>${esc(C.archText)}</p></div><div class="larchimg">${pic('aksam-ic-avlu', 1200, cap(SH.photos[1]))}</div></div></section>`);
   S.push(`<section class="lfeat"><div class="wrap"><h2>${esc(C.featuresTitle)}</h2><div class="fgrid2">${C.features.map(([i, x]) => `<div><span>${i}</span><p>${esc(x)}</p></div>`).join('')}</div></div></section>`);
   S.push(`<section class="wrap sec" id="plan"><h2>${esc(C.planTitle)}</h2><p>${esc(C.planText)}</p><ol class="mplan">${C.plan.map(([n, st, d], i) => `<li${i === 0 ? ' class="done"' : ''}><b>${esc(n)}</b><span class="mst">${esc(st)}</span><p>${esc(d)}</p></li>`).join('')}</ol></section>`);
-  S.push(`<section class="wrap sec" id="prices"><h2>${esc(C.phasesTitle)}</h2><div class="phases">${C.phases.map((x) => `<div class="phase${x.hot ? ' hot' : ''}"><span class="ptag">${esc(x.tag)}</span><h3>${esc(x.name)}</h3><p class="pstat">${esc(x.status)}</p><ul class="ticks">${x.items.map((i) => `<li>${esc(i)}</li>`).join('')}</ul><div class="pprice">${esc(x.price)}</div><a class="btn ${x.hot ? '' : 'ghost'}" href="#form">${esc(u.offer)}</a></div>`).join('')}</div></section>`);
+  S.push(`<section class="wrap sec" id="prices"><h2>${esc(C.phasesTitle)}</h2><div class="phases">${C.phases.map((x) => `<div class="phase${x.hot ? ' hot' : ''}"><span class="ptag">${esc(x.tag)}</span><h3>${esc(x.name)}</h3><p class="pstat">${esc(x.status)}</p><ul class="ticks">${x.items.filter((i) => !FIYAT_RE.test(i)).map((i) => `<li>${esc(i)}</li>`).join('')}</ul>${FIYAT_RE.test(x.price) ? '' : `<div class="pprice">${esc(x.price)}</div>`}<a class="btn ${x.hot ? '' : 'ghost'}" href="#form">${esc(u.offer)}</a></div>`).join('')}</div></section>`);
   S.push(`<section class="wrap sec" id="gallery"><h2>${esc(u.gallery)}</h2><div class="lgal">${SH.photos.map((x) => `<a href="${rimg(`/img/antalle/${x[0]}.webp`, 1800)}" target="_blank" rel="noopener">${pic(x[0], 900, `${p.name} – ${cap(x)}`)}</a>`).join('')}</div></section>`);
   S.push(`<section class="ldev"><div class="wrap"><h2>${esc(C.devTitle)}</h2><p>${esc(C.devText)}</p></div></section>`);
   const SEO = ANTALLE_SEO[lang] || {};
@@ -1368,6 +1372,14 @@ for (const lang of LANGS) {
   for (const l of LISTINGS) { pageListing(l, lang); urls.push(url(lang, 'listing', slugOf(l))); }
   for (const l of PREVIEW) pageListing(l, lang);
   for (const [ad, list] of AGENT_ILAN) { pageAgent(ad, list, lang); urls.push(url(lang, 'team', slugify(ad))); }
+}
+// Antalle Özel Davet kısa linki: /antalle-davet/?d=<iş ortağı kodu> → proje sayfasındaki davet bölümü (WhatsApp önizlemesi için OG etiketli)
+if (DAVET_AKTIF) {
+  const hedef = url('tr', 'projects', 'antalle-concept-houses');
+  write('/antalle-davet/index.html', `<!doctype html><html lang="tr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex">
+<title>Antalle Özel Davet · 28–29 Kasım · Yerinizi ayırın</title><meta name="description" content="ENNE Mobilya ile döşenmiş örnek villa ve daire, özel kokteyl ve canlı akustik trio. 28–29 Kasım, Altınkale / Döşemealtı.">
+<meta property="og:type" content="website"><meta property="og:title" content="Antalle Özel Davet · 28–29 Kasım"><meta property="og:description" content="Yerinizi ayırın · Gün boyu 10:00–18:00 · Özel kokteyl 14:00–17:00 · Altınkale, Döşemealtı"><meta property="og:image" content="${SITE.domain}/img/antalle/antalle-ozel-davet.jpg"><meta property="og:url" content="${SITE.domain}/antalle-davet/">
+<link rel="canonical" href="${SITE.domain}${hedef}"><meta http-equiv="refresh" content="0;url=${hedef}#davet"></head><body><script>location.replace(${JSON.stringify(hedef)}+location.search+'#davet')</script><p><a href="${hedef}#davet">Antalle Özel Davet</a></p></body></html>`);
 }
 for (const p of PROJECTS) { if (p.i18n) { for (const lang of LANGS.filter((l) => ANTALLE[l])) { pageProjectI18n(p, lang); urls.push(url(lang, 'projects', p.slug)); } } else { pageProject(p); urls.push(`/projeler/${p.slug}/`); } }
 const OLD_BLOG_TO = { kira: url('tr', 'blog', 'kira-artis-orani'), tuik: url('tr', 'blog', 'antalya-konut-satis-istatistikleri'), about: url('tr', 'about'), accday: url('tr', 'events', 'acc-day-2025'), blog: url('tr', 'blog') };

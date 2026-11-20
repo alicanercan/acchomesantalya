@@ -694,6 +694,8 @@ const BLOG_COVERS = {
   'antalyada-nereden-ev-alinir-konyaalti-lara-altintas': 'antalyada-nereden-ev-alinir',
   'antalya-konut-satis-istatistikleri': 'antalya-konut-satis-istatistikleri',
   'kira-artis-orani': 'kira-artis-orani',
+  'antalya-avm-rehberi': 'antalya-avm-rehberi',
+  'antalya-tarihi-antik-kentler': 'antalya-tarihi-antik-kentler',
 };
 const withCover = (p) => (p.cover || !BLOG_COVERS[p.slug] ? p : { ...p, cover: `/img/blog/${BLOG_COVERS[p.slug]}-600.webp`, coverL: `/img/blog/${BLOG_COVERS[p.slug]}.webp`, coverH: p.slug === 'kira-artis-orani' ? 640 : 675 });
 const ALLPOSTS = [...BLOG_POSTS, ...POSTS.map((p) => ({ ...p, cat: BLOG.catOf[p.slug] || 'rehber' }))].map(withCover)

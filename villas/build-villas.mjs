@@ -23,9 +23,9 @@ const nf = new Intl.NumberFormat('tr-TR');
 // CEO portresi: dosya villas/static/ceo.webp olarak eklenince otomatik kullanılır; yoksa monogram görünür.
 const CEO = { name: 'Ali Caner Can', role: { tr: 'Kurucu & CEO', en: 'Founder & CEO', ru: 'Основатель и CEO' } };
 const SEG = {
-  tr: { list: 'satilik-villalar', rent: 'kiralik-villalar', villa: 'villa', sell: 'villami-sat', value: 'villa-degerleme', projects: 'villa-projeleri', regions: 'bolgeler' },
-  en: { list: 'villas-for-sale', rent: 'villas-for-rent', villa: 'villa', sell: 'sell-your-villa', value: 'villa-valuation', projects: 'villa-projects', regions: 'areas' },
-  ru: { list: 'villy-na-prodazhu', rent: 'arenda-vill', villa: 'villa', sell: 'prodat-villu', value: 'otsenka-villy', projects: 'proekty-vill', regions: 'rajony' },
+  tr: { list: 'satilik-villalar', rent: 'kiralik-villalar', villa: 'villa', sell: 'villami-sat', value: 'villa-degerleme', projects: 'villa-projeleri', regions: 'bolgeler', living: 'villa-yasami' },
+  en: { list: 'villas-for-sale', rent: 'villas-for-rent', villa: 'villa', sell: 'sell-your-villa', value: 'villa-valuation', projects: 'villa-projects', regions: 'areas', living: 'villa-living' },
+  ru: { list: 'villy-na-prodazhu', rent: 'arenda-vill', villa: 'villa', sell: 'prodat-villu', value: 'otsenka-villy', projects: 'proekty-vill', regions: 'rajony', living: 'zhizn-v-ville' },
 };
 // Bölgeler: ilçe + mahalle eşleşmesi
 const LARA = /Lara|Kundu|Güzeloba|Çalkaya|Kemerağzı/i;
@@ -59,7 +59,11 @@ const COL = [
 ];
 const T = {
   tr: {
-    tag: 'Antalya’nın Villa Uzmanı', nav: { list: 'Satılık', rent: 'Kiralık', projects: 'Projeler', regions: 'Bölgeler', sell: 'Villanızı Satın' },
+    tag: 'Antalya’nın Villa Uzmanı',
+    nav2: 'Villa Yaşamı', livT: 'Villa Yaşamı', livP: 'Bir villa, anahtar teslimiyle tamamlanmaz. Mobilyadan iç mimariye, akıllı ev sistemlerinden peyzaja kadar villanızı sizin hayatınıza göre hazırlayan seçkin çözüm ortaklarımızla çalışıyoruz. Tek muhatabınız biziz.',
+    livCats: ['Mobilya ve tasarım', 'Mimarlık ve iç mimari', 'Akıllı ev ve elektronik', 'Peyzaj ve havuz', 'Güvenlik', 'Sanat ve dekor'], livAsk: 'Villanız için teklif isteyin',
+    enneT: 'Mobilya ve tasarım çözüm ortağımız', enneP: 'ENNE, 1999’dan bu yana çağdaş tasarım üzerine çalışan, iF Design ödüllü ve Salone del Mobile Milano’da yer alan bir Türk mobilya markasıdır. Özellikle özel villa projelerinde öne çıkan ENNE’nin Antalya’daki temsilcisi ENNE Antalya, ACC VILLAS’ın mobilya ve tasarım çözüm ortağıdır.',
+    livTitle: 'Villa Yaşamı: Mobilya, İç Mimari ve VIP Hizmetler | ACC VILLAS', livDesc: 'Antalya’da villanız için mobilya, iç mimari, akıllı ev, peyzaj ve güvenlik çözümleri. Mobilya ve tasarım çözüm ortağımız ENNE Antalya.', nav: { list: 'Satılık', rent: 'Kiralık', projects: 'Projeler', regions: 'Bölgeler', sell: 'Villanızı Satın' },
     homeTitle: 'Antalya Satılık Villa | ACC VILLAS · Antalya’nın Villa Uzmanı',
     homeDesc: 'Antalya’da satılık ve kiralık villalar, villa projeleri ve ücretsiz değerleme. Konyaaltı, Döşemealtı, Lara, Belek, Kaş ve Alanya’da seçkin villalar; alımdan tapuya VIP hizmet.',
     h1: 'Antalya’nın seçkin villaları', sub: 'Satılık ve kiralık villalar, villa projeleri ve alımdan tapuya kadar uçtan uca VIP hizmet. Siz karar verin, gerisini biz halledelim.',
@@ -86,7 +90,11 @@ const T = {
     regPage: { title: 'Antalya Villa Bölgeleri | ACC VILLAS', desc: 'Konyaaltı, Döşemealtı, Lara–Kundu, Altıntaş, Kepez–Duacı, Belek, Kemer, Kaş–Kalkan ve Alanya’da villa yaşamı ve satılık villalar.' },
   },
   en: {
-    tag: 'Antalya’s Villa Specialists', nav: { list: 'For sale', rent: 'For rent', projects: 'Projects', regions: 'Areas', sell: 'Sell your villa' },
+    tag: 'Antalya’s Villa Specialists',
+    nav2: 'Villa Living', livT: 'Villa Living', livP: 'A villa is not finished when the keys are handed over. From furniture and interior architecture to smart-home systems and landscaping, we work with carefully chosen partners who prepare your villa around your life. We remain your single point of contact.',
+    livCats: ['Furniture and design', 'Architecture and interiors', 'Smart home and electronics', 'Landscaping and pools', 'Security', 'Art and décor'], livAsk: 'Request a proposal for your villa',
+    enneT: 'Our furniture and design partner', enneP: 'ENNE is a Turkish furniture brand working in contemporary design since 1999, with iF Design awards and a presence at Salone del Mobile Milano, and is known in particular for private villa projects. ENNE Antalya, the brand’s representative in Antalya, is the furniture and design partner of ACC VILLAS.',
+    livTitle: 'Villa Living: Furniture, Interiors and VIP Services | ACC VILLAS', livDesc: 'Furniture, interior design, smart home, landscaping and security for your villa in Antalya. Our furniture and design partner: ENNE Antalya.', nav: { list: 'For sale', rent: 'For rent', projects: 'Projects', regions: 'Areas', sell: 'Sell your villa' },
     homeTitle: 'Luxury Villas for Sale in Antalya | ACC VILLAS',
     homeDesc: 'Villas for sale and rent in Antalya, villa developments and free valuation. Konyaaltı, Döşemealtı, Lara, Belek, Kaş and Alanya, with VIP service from viewing to title deed.',
     h1: 'Antalya’s finest villas', sub: 'Villas for sale and rent, new villa developments and end-to-end VIP service through to the title deed. You decide; we take care of everything else.',
@@ -113,7 +121,11 @@ const T = {
     regPage: { title: 'Antalya Villa Areas | ACC VILLAS', desc: 'Villa living and villas for sale in Konyaaltı, Döşemealtı, Lara–Kundu, Altıntaş, Kepez–Duacı, Belek, Kemer, Kaş–Kalkan and Alanya.' },
   },
   ru: {
-    tag: 'Эксперты по виллам в Анталии', nav: { list: 'Продажа', rent: 'Аренда', projects: 'Проекты', regions: 'Районы', sell: 'Продать виллу' },
+    tag: 'Эксперты по виллам в Анталии',
+    nav2: 'Жизнь в вилле', livT: 'Жизнь в вилле', livP: 'Вилла не заканчивается передачей ключей. От мебели и интерьера до систем «умный дом» и ландшафта — мы работаем с тщательно отобранными партнёрами, которые подготовят виллу под вашу жизнь. Вашим единственным контактом остаёмся мы.',
+    livCats: ['Мебель и дизайн', 'Архитектура и интерьер', 'Умный дом и электроника', 'Ландшафт и бассейны', 'Безопасность', 'Искусство и декор'], livAsk: 'Запросить предложение для вашей виллы',
+    enneT: 'Наш партнёр по мебели и дизайну', enneP: 'ENNE — турецкий мебельный бренд, работающий в современном дизайне с 1999 года, лауреат iF Design и участник Salone del Mobile в Милане, особенно известный проектами частных вилл. ENNE Antalya, представитель бренда в Анталии, — партнёр ACC VILLAS по мебели и дизайну.',
+    livTitle: 'Жизнь в вилле: мебель, интерьер и VIP-услуги | ACC VILLAS', livDesc: 'Мебель, дизайн интерьера, умный дом, ландшафт и безопасность для вашей виллы в Анталии. Наш партнёр по мебели и дизайну — ENNE Antalya.', nav: { list: 'Продажа', rent: 'Аренда', projects: 'Проекты', regions: 'Районы', sell: 'Продать виллу' },
     homeTitle: 'Виллы в Анталии на продажу | ACC VILLAS',
     homeDesc: 'Виллы на продажу и в аренду в Анталии, проекты вилл и бесплатная оценка. Коньяалты, Дёшемеалты, Лара, Белек, Каш и Аланья — VIP-сопровождение до получения тапу.',
     h1: 'Лучшие виллы Анталии', sub: 'Виллы на продажу и в аренду, новые проекты и VIP-сопровождение до получения тапу. Вы принимаете решение — всё остальное мы берём на себя.',
@@ -203,7 +215,7 @@ const emptyBox = (lang, next) => `<div class="empty"><p>${T[lang].empty}</p>${fo
 
 const ORG = { '@context': 'https://schema.org', '@type': 'RealEstateAgent', name: 'ACC VILLAS', url: DOMAIN, telephone: PHONE.raw, founder: { '@type': 'Person', name: CEO.name, jobTitle: 'Founder & CEO' }, parentOrganization: { '@type': 'RealEstateAgent', name: 'ACC HOMES International Real Estate', url: MAIN }, address: { '@type': 'PostalAddress', streetAddress: 'Portakal Çiçeği Bulvarı No:36/B, Yeşilbahçe', addressLocality: 'Muratpaşa', addressRegion: 'Antalya', addressCountry: 'TR' }, areaServed: 'Antalya' };
 
-const NAVK = ['list', 'rent', 'projects', 'regions', 'sell'];
+const NAVK = ['list', 'rent', 'projects', 'regions', 'living', 'sell'];
 function layout({ lang, title, desc, canon, alts, body, ld = [], image }) {
   const t = T[lang];
   const altLinks = alts ? LANGS.map((l) => `<link rel="alternate" hreflang="${l}" href="${DOMAIN}${alts[l]}">`).join('') + `<link rel="alternate" hreflang="x-default" href="${DOMAIN}${alts.en}">` : '';
@@ -212,7 +224,7 @@ function layout({ lang, title, desc, canon, alts, body, ld = [], image }) {
 <meta property="og:title" content="${esc(title)}"><meta property="og:description" content="${esc(desc)}"><meta property="og:url" content="${DOMAIN}${canon}"><meta property="og:type" content="website">${image ? `<meta property="og:image" content="${esc(image)}">` : ''}
 <link rel="icon" href="${MAIN}/favicon.ico"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet"><link rel="stylesheet" href="/style.css?v=${VER}">
 ${[ORG, ...ld].map((o) => `<script type="application/ld+json">${JSON.stringify(o)}</script>`).join('')}</head><body>
-<header class="top"><div class="wrap hb"><a class="logo" href="${url(lang)}"><span><b>ACC</b> VILLAS</span><small>${t.tag}</small></a><nav>${NAVK.map((k) => `<a href="${url(lang, k)}">${t.nav[k]}</a>`).join('')}</nav><div class="lsw">${langSw}</div></div></header>
+<header class="top"><div class="wrap hb"><a class="logo" href="${url(lang)}"><span><b>ACC</b> VILLAS</span><small>${t.tag}</small></a><nav>${NAVK.map((k) => `<a href="${url(lang, k)}">${k === 'living' ? t.nav2 : t.nav[k]}</a>`).join('')}</nav><div class="lsw">${langSw}</div></div></header>
 <p class="okmsg" hidden>${t.ok}</p>
 <main>${body}</main>
 <footer><div class="wrap fg"><div><p class="logo"><span><b>ACC</b> VILLAS</span></p><p>${t.by}</p><p><a href="${MAIN}${BASE[lang] || ''}/">acchomesantalya.com</a></p></div><div><p class="fh">${t.nav.regions}</p><p class="flinks">${REG.map((r) => `<a href="${url(lang, 'regions', r.k)}">${r.n[lang]}</a>`).join('')}</p></div><div><p>${t.office}</p><p><a href="tel:${PHONE.raw}">${PHONE.text}</a> · <a href="https://wa.me/${PHONE.wa}">WhatsApp</a></p></div></div><p class="wrap cp">© ${new Date().getFullYear()} ACC HOMES International Real Estate</p></footer>
@@ -253,6 +265,7 @@ for (const lang of LANGS) {
 <section class="wrap sec"><div class="sh"><h2>${t.featured}</h2><a href="${url(lang, 'list')}">${t.all} →</a></div><div class="grid">${active.slice(0, 6).map((v) => card(v, lang)).join('')}</div></section>
 <section class="wrap sec"><div class="sh"><h2>${t.regionsT}</h2><a href="${url(lang, 'regions')}">${t.nav.regions} →</a></div><p class="lead">${t.regionsP}</p><div class="regs">${REG.map((r) => { const c = regCover(r); const n = regCount(r); return `<a class="reg${c ? '' : ' noimg'}" href="${url(lang, 'regions', r.k)}">${c ? `<img src="${esc(c)}" alt="${r.n[lang]}" loading="lazy">` : ''}<span><b>${r.n[lang]}</b>${n ? `<small>${n} ${t.villas}</small>` : ''}</span></a>`; }).join('')}</div></section>
 <section class="band"><div class="wrap"><h2>${t.colT}</h2><div class="cols">${COL.map((c) => `<a href="${url(lang, 'list')}?c=${c.k}">${c.n[lang]}</a>`).join('')}<a href="${url(lang, 'projects')}">${t.projT}</a><a href="${url(lang, 'rent')}">${t.nav.rent}</a></div></div></section>
+<section class="wrap sec"><div class="sh"><h2>${t.livT}</h2><a href="${url(lang, 'living')}">${t.livT} →</a></div><div class="two liv"><p class="lead">${t.livP}</p><a class="partner" href="${url(lang, 'living')}"><img src="/enne-antalya.webp" alt="ENNE Antalya" width="300" height="104"><span>${t.enneT}</span></a></div></section>
 <section class="wrap sec"><h2>${t.svcT}</h2><div class="svc">${t.svc.map(([a, b]) => `<div><b>${a}</b><span>${b}</span></div>`).join('')}</div></section>
 <section class="band"><div class="wrap two"><div class="off"><p class="eyebrow dark">Private</p><h2>${t.offT}</h2><p>${t.offP}</p><a class="btn" href="https://wa.me/${PHONE.wa}?text=${encodeURIComponent(t.offT)}">${t.offBtn}</a></div><div class="ceo">${ceoPic('big')}<blockquote>“${t.ceoQ}”</blockquote><p class="bn">${CEO.name}</p><p class="br">${CEO.role[lang]}, ACC VILLAS</p><p class="acts"><a class="btn ghost dark" href="https://wa.me/${PHONE.wa}">${t.meet}</a></p></div></div></section>
 <section class="wrap sec two"><div><h2>${t.sellT}</h2><p class="lead">${t.sellP}</p><p class="acts"><a class="btn" href="${url(lang, 'value')}">${t.valueT}</a><a class="btn ghost dark" href="${url(lang, 'sell')}">${t.nav.sell}</a></p></div></section>` }));
@@ -303,6 +316,14 @@ ${similar.length ? `<section class="wrap sec"><h2>${regName(v.reg, lang)}</h2><d
 <section class="wrap sec two"><div><h1>${vp.h1}</h1><p class="lead">${t.valueP}</p><ol class="steps">${sp.steps.slice(1).map(([a, b]) => `<li><b>${a}</b><span>${b}</span></li>`).join('')}</ol></div><aside class="box">${broker(lang)}<h2>${t.valueT}</h2>${form(lang, 'villa-degerleme', url(lang, 'value'), `<input name="konum" placeholder="${t.form.addr} *" required><input name="metrekare" placeholder="${t.form.size}">`)}</aside></section>` }));
   sitemap.push(url(lang, 'value'));
 
+  // villa yaşamı
+  write(BASE[lang] + '/' + SEG[lang].living, layout({ lang, title: t.livTitle, desc: t.livDesc, canon: url(lang, 'living'), alts: allAlts('living'), body: `
+<section class="wrap sec"><h1>${t.livT}</h1><p class="lead">${t.livP}</p>
+<div class="enne"><img src="/enne-antalya.webp" alt="ENNE Antalya" width="420" height="145"><div><p class="eyebrow dark">${t.enneT}</p><h2>ENNE Antalya</h2><p>${t.enneP}</p></div></div>
+<div class="svc">${t.livCats.map((c, i) => `<div><b>${c}</b>${i === 0 ? '<span>ENNE Antalya</span>' : ''}</div>`).join('')}</div></section>
+<section class="wrap sec two"><div>${broker(lang)}</div><aside class="box"><h2>${t.livAsk}</h2>${form(lang, 'villa-talep', url(lang, 'living'), `<input type="hidden" name="konu" value="villa-yasami">`)}</aside></section>` }));
+  sitemap.push(url(lang, 'living'));
+
   // projeler
   const pp = t.projPage;
   write(BASE[lang] + '/' + SEG[lang].projects, layout({ lang, title: pp.title, desc: pp.desc, canon: url(lang, 'projects'), alts: allAlts('projects'), body: `
@@ -312,7 +333,7 @@ ${similar.length ? `<section class="wrap sec"><h2>${regName(v.reg, lang)}</h2><d
 
 // statik dosyalar
 fs.copyFileSync(path.join(HERE, 'style.css'), path.join(OUT, 'style.css'));
-if (CEO_IMG) fs.copyFileSync(path.join(HERE, 'static/ceo.webp'), path.join(OUT, 'ceo.webp'));
+for (const f of fs.existsSync(path.join(HERE, 'static')) ? fs.readdirSync(path.join(HERE, 'static')) : []) fs.copyFileSync(path.join(HERE, 'static', f), path.join(OUT, f));
 const php = fs.readFileSync(path.join(ROOT, 'server/form.php'), 'utf8')
   .replace("'rehber-indir'];", "'rehber-indir', 'villa-talep', 'villa-sat', 'villa-degerleme'];")
   .replace("'From: ACC HOMES Web <'", "'From: ACC VILLAS Web <'")

@@ -1,0 +1,46 @@
+# ACC VILLAS (accvillas.com): villa sitesini derleyip Turhost'taki accvillas.com klasörüne yükler.
+# Gerekli GitHub gizli ayarları: VILLA_FTP_SERVER, VILLA_FTP_USERNAME, VILLA_FTP_PASSWORD
+# Gizli ayarlar yoksa yalnızca derleme yapar.
+name: ACC VILLAS yayını
+
+on:
+  push:
+    branches: [main]
+    paths: ['villas/**', 'data/ilan-seo.json', '.github/workflows/villas.yml']
+  workflow_run:
+    workflows: ['Turhost yayını']
+    types: [completed]
+  schedule:
+    - cron: '17 3 * * *'
+  workflow_dispatch:
+
+concurrency:
+  group: villas-deploy
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      FTP_SERVER: ${{ secrets.VILLA_FTP_SERVER }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Villa sitesini derle
+        run: node villas/build-villas.mjs
+      - name: accvillas.com'a yükle
+        if: env.FTP_SERVER != ''
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.VILLA_FTP_SERVER }}
+          username: ${{ secrets.VILLA_FTP_USERNAME }}
+          password: ${{ secrets.VILLA_FTP_PASSWORD }}
+          protocol: ftps
+          local-dir: ./villas/dist/
+          server-dir: ./
+          exclude: |
+            **/.git*
+            **/.git*/**

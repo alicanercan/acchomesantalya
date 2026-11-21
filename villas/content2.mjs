@@ -34,7 +34,7 @@ export const REVIEWS = R;
 
 export const X = {
   tr: {
-    cur: 'Para birimi', approx: 'güncel kurla yaklaşık',
+    cur: 'Para birimi', catT: 'Ne arıyorsunuz?', cats: ['Satılık villalar', 'Kiralık villalar', 'Villa projeleri', 'Villa Yaşamı', 'Open House'], catImg: [AI('on-cephe-dag-manzarasi'), AI('teras-dag-manzarasi'), AI('gece-havadan-1-etap'), AI('galeri-bosluklu-salon'), `${MAIN}/img/sosyal/antalle-open-house-2025-lounge.webp`], approx: 'güncel kurla yaklaşık',
     slides: [
       { img: `${MAIN}/img/banner/villa-d-1920.webp`, imgM: `${MAIN}/img/banner/villa-m-1080.webp`, eyebrow: 'ACC VILLAS · Yalnızca villa', h: 'Antalya’nın seçkin villaları', p: 'Satın alırken, satarken, yaşarken. Siz yalnızca karar verin; gerisini biz halledelim.', btn: ['Villaları keşfedin', 'list'] },
       { img: AI('gece-havadan-villa-havuz'), eyebrow: 'Özel proje', h: 'Antalle Concept Houses', p: 'Altınkale’de, 40 dönüm üzerinde, havuzlu bahçe dubleksi ve teras daireden oluşan bir villa yaşamı.', btn: ['Projeyi inceleyin', 'antalle'] },
@@ -71,7 +71,7 @@ export const X = {
     kv: { title: 'KVKK Aydınlatma Metni | ACC VILLAS', h1: 'KVKK Aydınlatma Metni' },
   },
   en: {
-    cur: 'Currency', approx: 'approx. at today’s rate',
+    cur: 'Currency', catT: 'What are you looking for?', cats: ['Villas for sale', 'Villas for rent', 'Villa developments', 'Villa Living', 'Open House'], catImg: [AI('on-cephe-dag-manzarasi'), AI('teras-dag-manzarasi'), AI('gece-havadan-1-etap'), AI('galeri-bosluklu-salon'), `${MAIN}/img/sosyal/antalle-open-house-2025-lounge.webp`], approx: 'approx. at today’s rate',
     slides: [
       { img: `${MAIN}/img/banner/villa-d-1920.webp`, imgM: `${MAIN}/img/banner/villa-m-1080.webp`, eyebrow: 'ACC VILLAS · Villas only', h: 'Antalya’s finest villas', p: 'Buying, selling, living. You make the decision; we take care of everything else.', btn: ['Explore villas', 'list'] },
       { img: AI('gece-havadan-villa-havuz'), eyebrow: 'Featured project', h: 'Antalle Concept Houses', p: 'Villa living in Altınkale on 40 dönüm (about 4 hectares): garden duplexes with private pools and terrace apartments.', btn: ['View the project', 'antalle'] },
@@ -108,7 +108,7 @@ export const X = {
     kv: { title: 'Privacy Notice | ACC VILLAS', h1: 'Privacy Notice' },
   },
   ru: {
-    cur: 'Валюта', approx: 'примерно по текущему курсу',
+    cur: 'Валюта', catT: 'Что вы ищете?', cats: ['Виллы на продажу', 'Аренда вилл', 'Проекты вилл', 'Жизнь в вилле', 'Дни открытых дверей'], catImg: [AI('on-cephe-dag-manzarasi'), AI('teras-dag-manzarasi'), AI('gece-havadan-1-etap'), AI('galeri-bosluklu-salon'), `${MAIN}/img/sosyal/antalle-open-house-2025-lounge.webp`], approx: 'примерно по текущему курсу',
     slides: [
       { img: `${MAIN}/img/banner/villa-d-1920.webp`, imgM: `${MAIN}/img/banner/villa-m-1080.webp`, eyebrow: 'ACC VILLAS · Только виллы', h: 'Лучшие виллы Анталии', p: 'Покупка, продажа, жизнь. Вы принимаете решение — всё остальное мы берём на себя.', btn: ['Смотреть виллы', 'list'] },
       { img: AI('gece-havadan-villa-havuz'), eyebrow: 'Избранный проект', h: 'Antalle Concept Houses', p: 'Жизнь в вилле в Алтынкале на 40 дёнюмах (около 4 га): садовые дуплексы с собственным бассейном и квартиры с террасой.', btn: ['О проекте', 'antalle'] },

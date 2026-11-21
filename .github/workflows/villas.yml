@@ -1,6 +1,6 @@
 # ACC VILLAS (accvillas.com): villa sitesini derleyip Turhost'taki accvillas.com klasörüne yükler.
 # Gerekli GitHub gizli ayarları: VILLA_FTP_SERVER, VILLA_FTP_USERNAME, VILLA_FTP_PASSWORD
-# Gizli ayarlar yoksa yalnızca derleme yapar.
+# Gizli ayarlar yoksa yalnızca derleme yapar. (VILLA_FTP_* girildi: 21.11.2026)
 name: ACC VILLAS yayını
 
 on:

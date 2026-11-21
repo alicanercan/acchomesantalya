@@ -2,7 +2,7 @@
 export const MAIN = 'https://acchomesantalya.com';
 const AI = (f) => `${MAIN}/img/antalle/${f}.webp`;
 export const GOOGLE = { url: 'https://www.google.com/maps/place/ACC+HOMES+International+Real+Estate/@36.8734979,30.7269696,17z/data=!4m8!3m7!1s0x14c39b1d1d43dc8b:0xeaeb38a9ba6ce9ca!8m2!3d36.8734979!4d30.7269696!9m1!1b1!16s%2Fg%2F11t5_zrbgj', rating: '4.9', count: '475' };
-export const IG = { handle: '@accvillas', url: 'https://www.instagram.com/accvillas/' };
+export const IG = { handle: '@acc.villas', url: 'https://www.instagram.com/acc.villas/' };
 
 export const SEG2 = {
   tr: { openhouse: 'open-house', antalle: 'antalle-concept-houses', founder: 'kurucu-ali-caner-can', privacy: 'kvkk-aydinlatma-metni' },

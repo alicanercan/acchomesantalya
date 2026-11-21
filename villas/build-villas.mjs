@@ -6,6 +6,9 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 import { SEG2, X, REVIEWS, REV_PROJECT, GOOGLE, IG, ANTALLE_GAL, OH_GAL, FOUNDER_LINKS, KVKK_HTML } from './content2.mjs';
+import { ANTALLE, ANTALLE_SHARED } from '../antalle-content.mjs';
+import { ANTALLE_SEO } from '../antalle-seo.mjs';
+import { DAVET_AKTIF, davetTx } from '../antalle-davet.mjs';
 import { SEG3, NAV3, STATS, REG_EXTRA, MANAVGAT, REG_FAQ, SVC, POSTS, JOURNAL } from './content3.mjs';
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.join(HERE, '..');
@@ -162,34 +165,74 @@ const KVKK = { tr: '/kvkk-aydinlatma-metni/', en: '/en/privacy-notice/', ru: '/r
 const SEO = JSON.parse(fs.readFileSync(path.join(ROOT, 'data/ilan-seo.json'), 'utf8'));
 let rows;
 try {
-  const r = await fetch(`${PANEL.url}/rest/v1/site_ilanlari?select=*`, { headers: { apikey: PANEL.key }, signal: AbortSignal.timeout(20000) });
+  // ACC VILLAS'ın kendi yayın listesi (panelde "ACC VILLAS'ta yayınla"); görünüm yoksa eski site listesine düşer
+  let r = await fetch(`${PANEL.url}/rest/v1/villa_ilanlari?select=*`, { headers: { apikey: PANEL.key }, signal: AbortSignal.timeout(20000) });
+  if (r.ok) { rows = (await r.json()).map((x) => ({ ...x, _villa: true })); } else {
+  r = await fetch(`${PANEL.url}/rest/v1/site_ilanlari?select=*`, { headers: { apikey: PANEL.key }, signal: AbortSignal.timeout(20000) });
   if (!r.ok) throw new Error('HTTP ' + r.status);
-  rows = await r.json();
+  rows = await r.json(); }
 } catch (e) {
   const snap = process.env.PANEL_SNAPSHOT;
   if (!snap || !fs.existsSync(snap)) throw new Error('Panel verisi alınamadı: ' + e.message);
   rows = JSON.parse(fs.readFileSync(snap, 'utf8'));
   console.warn('Panel: ağ yok, anlık görüntü kullanıldı');
 }
-// Sahibinden fotoğrafları (filigranlı) kullanılmaz
-for (const v of rows) v.foto = (v.foto || []).filter((f) => !/shbdn\.com|sahibinden/i.test(f));
+// Kendi fotoğrafı olmayan ilanlarda Sahibinden görselleri kullanılır (Caner kararı, 22.11.2026); kendi fotoğraf varsa önce onlar
+for (const v of rows) { const f = v.foto || []; const own = f.filter((x) => !/shbdn\.com|sahibinden/i.test(x)); v.foto = own.length ? own : f; }
 const stripTeam = (txt, name) => {
   const pats = ['iş ortağ', 'danışman', 'partner', 'партн', 'консультант', ...(name ? [name, name.split(' ').slice(-1)[0]] : [])].map((x) => x.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'));
   const re = new RegExp(`[^.!?\\n]*(${pats.join('|')})[^.!?\\n]*[.!?]?[ \\t]*`, 'giu');
   return txt.replace(re, '').replace(/\n{3,}/g, '\n\n').trim();
 };
+// accvillas.com'a özgü başlık ve metin (acchomesantalya ilan metniyle çakışmasın diye veriden üretilir)
+const hasPool = (v) => (v.ozellikler || []).some((o) => /havuz/i.test(o)) || /havuz/i.test(JSON.stringify(v.ekstra?.ozellik_gruplari || {}));
+const kindOf = (v, lang) => (v.altTip === 'Müstakil Ev' ? { tr: 'Müstakil Ev', en: 'Detached House', ru: 'Частный дом' } : { tr: 'Villa', en: 'Villa', ru: 'Вилла' })[lang];
+const loc = (v) => [v.mahalle, v.ilce].filter(Boolean).join(', ');
+const genTitle = (v, lang) => {
+  const p = hasPool(v); const k = kindOf(v, lang); const m2 = v.brut ? ` · ${v.brut} m²` : '';
+  if (lang === 'tr') return `${loc(v)} ${v.kiralik ? 'Kiralık' : 'Satılık'} ${v.oda || ''} ${p ? 'Havuzlu ' : ''}${k}${m2}`.replace(/\s+/g, ' ');
+  if (lang === 'en') return `${v.oda || ''} ${p ? (k === 'Villa' ? 'Villa with Private Pool' : k + ' with Pool') : k} for ${v.kiralik ? 'Rent' : 'Sale'} in ${loc(v)}${m2}`.replace(/\s+/g, ' ').trim();
+  return `${k} ${v.oda || ''}${p ? ' с бассейном' : ''} ${v.kiralik ? 'в аренду' : 'на продажу'}: ${loc(v)}${m2}`.replace(/\s+/g, ' ');
+};
+const VIEW = { 'Deniz': ['deniz', 'sea', 'море'], 'Doğa': ['doğa', 'nature', 'природу'], 'Dağ': ['dağ', 'mountain', 'горы'], 'Şehir': ['şehir', 'city', 'город'], 'Park & Yeşil Alan': ['yeşil alan', 'greenery', 'зелень'], 'Göl': ['göl', 'lake', 'озеро'] };
+const genText = (v, lang) => {
+  const og = v.ekstra?.ozellik_gruplari || {}; const li = ['tr', 'en', 'ru'].indexOf(lang);
+  const views = (og.Manzara || []).map((x) => VIEW[x]?.[li]).filter(Boolean);
+  const pool = hasPool(v); const k = kindOf(v, lang).toLowerCase(); const ex = REG_EXTRA[v.reg]?.[lang] || '';
+  const P = [];
+  if (lang === 'tr') {
+    P.push(`${loc(v)} bölgesinde, ${v.arsa ? `${v.arsa} m² arsa üzerinde ` : ''}${v.brut ? `${v.brut} m² brüt kullanım alanına sahip ` : ''}${v.oda || ''} ${k}.${v.site === 'Evet' ? ' Site içinde, güvenlikli bir yaşam sunuyor.' : ' Müstakil yapısıyla mahremiyet ve sakin bir yaşam sunuyor.'}`);
+    const h = [pool && 'özel havuz', v.banyo && `${v.banyo} banyo`, v.katSayisi && `${v.katSayisi} katlı plan`, views.length && `${views.join(' ve ')} manzarası`, v.esya === 'Evet' && 'eşyalı teslim'].filter(Boolean);
+    if (h.length) P.push(`Öne çıkanlar: ${h.join(', ')}.`);
+    if (ex) P.push(ex);
+    P.push('ACC VILLAS olarak bu mülkü yerinde ya da online gösterimle tanıtıyor; hukuki ön kontrol, emsal analizi ve tapu sürecinde yanınızda oluyoruz.');
+  } else if (lang === 'en') {
+    P.push(`A ${v.oda || ''} ${k} in ${loc(v)}${v.brut ? ` with ${v.brut} m² of gross living space` : ''}${v.arsa ? ` on a ${v.arsa} m² plot` : ''}.${v.site === 'Evet' ? ' Set in a secure gated complex.' : ' Fully detached, offering privacy and a quiet way of life.'}`.replace(/\s+/g, ' '));
+    const h = [pool && 'private pool', v.banyo && `${v.banyo} bathrooms`, v.katSayisi && `${v.katSayisi} floors`, views.length && `${views.join(' and ')} views`, v.esya === 'Evet' && 'furnished'].filter(Boolean);
+    if (h.length) P.push(`Highlights: ${h.join(', ')}.`);
+    if (ex) P.push(ex);
+    P.push('ACC VILLAS presents this villa in person or by online viewing, and supports you with legal checks, comparable-sales analysis and the title deed process.');
+  } else {
+    P.push(`${kindOf(v, 'ru')} ${v.oda || ''} в районе ${loc(v)}${v.brut ? `, общая площадь ${v.brut} м²` : ''}${v.arsa ? `, участок ${v.arsa} м²` : ''}.${v.site === 'Evet' ? ' Расположена в охраняемом комплексе.' : ' Отдельностоящий дом: приватность и спокойная жизнь.'}`);
+    const h = [pool && 'частный бассейн', v.banyo && `санузлов: ${v.banyo}`, v.katSayisi && `этажей: ${v.katSayisi}`, views.length && `вид на ${views.join(' и ')}`, v.esya === 'Evet' && 'с мебелью'].filter(Boolean);
+    if (h.length) P.push(`Особенности: ${h.join(', ')}.`);
+    if (ex) P.push(ex);
+    P.push('ACC VILLAS проводит личные и онлайн-показы, юридическую проверку, анализ цен и сопровождает сделку до получения тапу.');
+  }
+  return P.join('\n');
+};
 const isVilla = (v) => ['Villa', 'Müstakil Ev'].includes(v.altTip) || v.ekstra?.tur === 'Villa';
-const VILLAS = rows.filter((v) => isVilla(v) && (v.foto || []).length && v.satis_durumu !== 'Pasif')
+const VILLAS = rows.filter((v) => (v._villa || isVilla(v)) && (v.foto || []).length && v.satis_durumu !== 'Pasif')
   .map((v) => {
     const s = SEO[v.id] || {};
     const pick = (o, lang) => (o && (o[lang] || (lang !== 'tr' && o.en) || o.tr)) || '';
     const tel = String(v.danisman_tel || '').replace(/[^\d+]/g, '');
     return {
       ...v, slug: v.id.toLowerCase(), kiralik: v.tip === 'Kiralık', satildi: v.satis_durumu === 'Satıldı', fiyatGizli: !!v.ekstra?.fiyat_gizli || !v.fiyat,
-      title: (lang) => pick(s.baslik, lang) || pick(v.baslik, lang) || `${v.ilce} ${v.mahalle} ${v.oda || ''} Villa`,
-      meta: (lang) => pick(s.meta, lang) || pick(v.ekstra?.meta && { tr: v.ekstra.meta }, lang) || '',
+      title: (lang) => genTitle(v, lang),
+      meta: (lang) => genText(v, lang).replace(/\n/g, ' ').slice(0, 155),
       // ekip adı geçen cümleler çıkarılır (sitede yalnızca Caner görünür)
-      text: (lang) => stripTeam(pick(s.aciklama, lang) || pick(v.aciklama, lang) || '', v.danisman),
+      text: (lang) => genText(v, lang),
       // sitede ekip gösterilmez: tüm villalarda iletişim Ali Caner Can (Broker)
       agent: { ad: 'Ali Caner Can · Broker', tel: PHONE.raw },
     };
@@ -209,6 +252,7 @@ const beds = (v) => Number(String(v.oda || '').split('+')[0]) || 0;
 
 // ---------- yardımcılar ----------
 for (const v of VILLAS) { v.reg = regionOf(v); v.cols = COL.filter((c) => c.m(v)).map((c) => c.k); }
+for (const v of VILLAS) { v.title = (l) => genTitle(v, l); v.text = (l) => genText(v, l); v.meta = (l) => genText(v, l).replace(/\n/g, ' ').slice(0, 155); }
 const url = (lang, key, id) => `${BASE[lang]}/${key ? SEG[lang][key] + '/' : ''}${id ? id + '/' : ''}`;
 const price = (v, lang) => (v.fiyatGizli ? T[lang].call : `${nf.format(Number(v.fiyat))} ${v.para === 'TL' ? '₺' : v.para}${v.kiralik ? (lang === 'tr' ? ' / ay' : lang === 'ru' ? ' / мес.' : ' / month') : ''}`);
 const priceH = (v, lang) => (v.fiyatGizli ? esc(T[lang].call) : `<span class="pz" data-p="${Number(v.fiyat)}" data-c="${v.para === 'TL' ? 'TRY' : v.para}">${esc(price(v, lang))}</span>`);
@@ -398,15 +442,34 @@ ${similar.length ? `<section class="wrap sec"><div class="sh"><h2>${DL.sim}</h2>
 <section class="wrap sec two"><div><h2>${o.ownT}</h2><p class="lead">${o.ownP}</p>${broker(lang)}</div><aside class="box"><h2>${o.formT}</h2>${form(lang, 'etkinlik-talep', url(lang, 'openhouse'))}</aside></section>` }));
   sitemap.push(url(lang, 'openhouse')); }
 
-  // antalle
-  { const a = X[lang].an; const av = VILLAS.filter((v) => /antalle/i.test(`${v.proje || ''} ${v.title('tr')}`));
-  write(BASE[lang] + '/' + SEG[lang].antalle, layout({ lang, title: a.title, desc: a.desc, canon: url(lang, 'antalle'), alts: allAlts('antalle'), image: ANTALLE_GAL[0], ld: [{ '@context': 'https://schema.org', '@type': 'Residence', name: 'Antalle Concept Houses', address: { '@type': 'PostalAddress', addressLocality: 'Altınkale, Döşemealtı', addressRegion: 'Antalya', addressCountry: 'TR' }, image: ANTALLE_GAL.slice(0, 4) }], body: `
-<section class="hero slim"><img src="${ANTALLE_GAL[0]}" alt="Antalle Concept Houses" fetchpriority="high"><div class="wrap hc"><p class="eyebrow">Altınkale · Döşemealtı</p><h1>${a.h1}</h1><p>${a.lead}</p><p><a class="btn light" href="#form">${a.formT}</a></p></div></section>
+  // antalle (acchomesantalya proje sayfasının düzeni; fiyat ve vatandaşlık ifadeleri yok)
+  { const a = X[lang].an; const C = ANTALLE[lang]; const SH = ANTALLE_SHARED; const SE = ANTALLE_SEO[lang] || {}; const u = C.ui;
+  const av = VILLAS.filter((v) => /antalle/i.test(`${v.proje || ''} ${v.baslik?.tr || ''}`));
+  const NOCIT = /vatanda|citizen|гражданств|FIYAT|USD|\$|₺|\bTL\b/i; const ok = (x) => !NOCIT.test(Array.isArray(x) ? x.join(' ') : String(x));
+  const AI = (f) => `${MAIN}/img/antalle/${f}.webp`; const cap = (x) => (lang === 'tr' ? x[1] : x[2]);
+  const DV = DAVET_AKTIF ? davetTx(lang) : null;
+  const faq = (SE.faq || []).filter(ok);
+  const ld = [{ '@context': 'https://schema.org', '@type': 'Residence', name: 'Antalle Concept Houses', description: a.desc, image: [AI(SH.photos[0][0]), AI(SH.photos[3][0])], address: { '@type': 'PostalAddress', addressLocality: 'Altınkale, Döşemealtı', addressRegion: 'Antalya', addressCountry: 'TR' } }];
+  if (faq.length) ld.push({ '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map(([q, x]) => ({ '@type': 'Question', name: q, acceptedAnswer: { '@type': 'Answer', text: x } })) });
+  const ohX = DV ? `<input type="hidden" name="konu" value="antalle-ozel-davet"><select name="gun" required><option value="">${DV.gun} *</option>${DV.gunler.map(([k, l]) => `<option value="${k}">${l}</option>`).join('')}</select><input name="kisi" type="number" min="1" max="20" placeholder="${DV.kisi}">` : '';
+  write(BASE[lang] + '/' + SEG[lang].antalle, layout({ lang, title: a.title, desc: a.desc, canon: url(lang, 'antalle'), alts: allAlts('antalle'), image: AI(SH.hero.split('/').pop().replace('.webp', '')), ld, body: `
+<section class="hero slim ahero"><img src="${MAIN}${SH.hero}" alt="Antalle Concept Houses" fetchpriority="high"><div class="wrap hc"><p class="eyebrow">Altınkale · Döşemealtı · Lejant Proje</p><h1>${esc(C.title)}</h1><p>${esc(C.sub)}</p>
+<div class="abadges">${C.badges.filter(ok).map(([i, h, d]) => `<div><b>${esc(h)}</b><small>${esc(d)}</small></div>`).join('')}</div>
+<p class="acts">${DV ? `<a class="btn light" href="#davet">${esc(DV.cta)} · ${esc(DV.when.split(' · ')[0])}</a>` : ''}<a class="btn${DV ? ' ghost' : ' light'}" href="#form">${esc(u.req.replace(/ ve fiyat listesi| and price list| и прайс-лист/i, ''))}</a><a class="btn ghost" href="tel:${PHONE.raw}">${esc(u.call)}</a></p></div></section>
+${DV ? `<section class="band davet" id="davet"><div class="wrap two"><div><p class="eyebrow dark">${esc(DV.eyebrow)}</p><h2>${esc(DV.title)}</h2><p class="lead">${esc(DV.lead)}</p><p><b>${esc(DV.when)}</b><br>${esc(DV.hours)}<br>${esc(DV.cocktail)}</p><ul class="ticks">${DV.what.map(([, x]) => `<li>${esc(x)}</li>`).join('')}</ul><p class="small">${esc(DV.partner)}</p></div><aside class="box"><h3>${esc(DV.formT)}</h3><p class="small">${esc(DV.formS)}</p>${form(lang, 'etkinlik-talep', url(lang, 'antalle'), ohX, DV.send)}</aside></div></section>` : ''}
 <section class="wrap sec"><div class="facts">${a.facts.map(([n, l]) => `<div><b>${n}</b><span>${l}</span></div>`).join('')}</div></section>
-<section class="wrap sec two"><div><h2>${a.bodyT}</h2><p class="lead">${a.body}</p></div><div><h2>${a.teamT}</h2><ul class="team">${a.team.map(([n, r]) => `<li><b>${n}</b><span>${r}</span></li>`).join('')}</ul></div></section>
-<section class="wrap sec"><h2>${a.galT}</h2><div class="agal">${ANTALLE_GAL.map((g, i) => `<img src="${g}" alt="Antalle Concept Houses ${i + 1}" loading="lazy">`).join('')}</div></section>
+<section class="wrap sec"><p class="eyebrow dark">Antalle</p><h2>${esc(C.whyTitle)}</h2><div class="awhy">${C.why.filter(ok).map(([, h, d]) => `<div><h3>${esc(h)}</h3><p>${esc(d)}</p></div>`).join('')}</div></section>
+<section class="wrap sec"><h2>${esc(C.unitsTitle)}</h2><div class="units">${C.units.map(([n, ar, d], i) => `<div class="unit"><img src="${AI(i ? 'teras-daire-salon' : 'dubleks-cephe-havuz')}" alt="${esc(n)}" loading="lazy"><div><h3>${esc(n)}</h3><b>${esc(ar)}</b><p>${esc(d)}</p></div></div>`).join('')}</div></section>
+<section class="band"><div class="wrap two"><div><p class="eyebrow dark">Antalle</p><h2>${esc(C.archTitle)}</h2><p class="lead">${esc(C.archText)}</p></div><img class="rimg" src="${AI('aksam-ic-avlu')}" alt="${esc(cap(SH.photos[1]))}" loading="lazy"></div></section>
+<section class="wrap sec"><h2>${esc(C.featuresTitle)}</h2><ul class="chips big">${C.features.map(([, x]) => `<li>${esc(x)}</li>`).join('')}</ul></section>
+<section class="wrap sec"><h2>${esc(C.planTitle)}</h2><p class="lead">${esc(C.planText)}</p><ol class="mplan">${C.plan.map(([n, st, d], i) => `<li${i === 0 ? ' class="done"' : ''}><b>${esc(n)}</b><span>${esc(st)}</span><p>${esc(d)}</p></li>`).join('')}</ol></section>
+<section class="wrap sec"><h2>${esc(C.phasesTitle)}</h2><div class="phases">${C.phases.map((x) => `<div class="phase${x.hot ? ' hot' : ''}"><span class="ptag">${esc(x.tag)}</span><h3>${esc(x.name)}</h3><p class="small">${esc(x.status)}</p><ul class="ticks">${x.items.filter(ok).map((i) => `<li>${esc(i)}</li>`).join('')}</ul><a class="btn${x.hot ? '' : ' ghost dark'}" href="#form">${esc(u.offer)}</a></div>`).join('')}</div></section>
+<section class="wrap sec"><h2>${esc(u.gallery)}</h2><div class="agal">${SH.photos.map((x) => `<img src="${AI(x[0])}" alt="Antalle Concept Houses – ${esc(cap(x))}" loading="lazy">`).join('')}</div></section>
+<section class="wrap sec two"><div><h2>${esc(C.devTitle)}</h2><p class="lead">${esc(C.devText)}</p></div><div><h2>${a.teamT}</h2><ul class="team">${a.team.map(([n, r]) => `<li><b>${n}</b><span>${r}</span></li>`).join('')}</ul></div></section>
 ${av.length ? `<section class="wrap sec"><h2>${a.villasT}</h2><div class="grid">${av.map((v) => card(v, lang)).join('')}</div></section>` : ''}
-<section class="wrap sec two" id="form"><div>${broker(lang, 'Antalle Concept Houses')}</div><aside class="box"><h2>${a.formT}</h2>${form(lang, 'antalle-talep', url(lang, 'antalle'))}</aside></section>` }));
+<section class="wrap sec"><h2>${esc(C.locTitle)}</h2><p class="lead">${esc(C.locText)}</p><div class="dist"><div><h3>${esc(u.drive)}</h3><ul>${C.drive.map(([, n, d]) => `<li><span>${esc(n)}</span><b>${esc(d)}</b></li>`).join('')}</ul></div><div><h3>${esc(C.schoolsTitle)}</h3><ul>${C.schools.map((n) => `<li><span>${esc(n)}</span></li>`).join('')}</ul></div></div><div class="vmap"><iframe src="https://maps.google.com/maps?q=${encodeURIComponent('Antalle Concept Houses, Altınkale, Döşemealtı, Antalya')}&z=14&output=embed" loading="lazy" title="Antalle"></iframe></div></section>
+${faq.length ? `<section class="band"><div class="wrap"><h2>${esc(SE.h || 'SSS')}</h2><div class="faq">${faq.map(([q, x]) => `<details><summary>${esc(q)}</summary><p>${esc(x)}</p></details>`).join('')}</div></div></section>` : ''}
+<section class="wrap sec two" id="form"><div><h2>${esc(u.infoTitle.replace(/ ve Fiyat Listesi| and Price List| и прайс-лист/i, ''))}</h2><p class="lead">${esc(C.cta.replace(/[^.]*fiyat[^.]*\.|[^.]*price[^.]*\.|[^.]*прайс[^.]*\./gi, '').trim())}</p>${broker(lang, 'Antalle Concept Houses')}<p><a href="https://www.instagram.com/antalleconcepthouses/" target="_blank" rel="noopener">${esc(u.ig)} →</a></p></div><aside class="box"><h2>${esc(u.form)}</h2>${form(lang, 'antalle-talep', url(lang, 'antalle'))}</aside></section>` }));
   sitemap.push(url(lang, 'antalle')); }
 
   // kurucu

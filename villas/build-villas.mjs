@@ -32,7 +32,7 @@ const T = {
     homeDesc: 'Antalya’da satılık villalar, villa projeleri ve ücretsiz villa değerlemesi. ACC HOMES güvencesiyle Döşemealtı, Konyaaltı, Lara ve Belek’te seçkin villalar.',
     h1: 'Antalya’da villa almak ve satmak için tek adres', sub: 'ACC HOMES güvencesiyle seçkin satılık villalar, villa projeleri, ücretsiz değerleme. Türkçe, İngilizce, Rusça ve 10 dilde hizmet.',
     ctaList: 'Villaları incele', ctaSell: 'Villamı satmak istiyorum', featured: 'Öne çıkan villalar', all: 'Tüm villalar',
-    whyT: 'Neden ACC VILLAS', why: [['Sadece villa', 'Portföyümüzü özenle seçiyoruz; her villayı yerinde görüyor, fotoğraflıyor ve doğru fiyatlıyoruz.'], ['ACC HOMES güvencesi', 'ACC Plaza’da yaklaşık 50 iş ortağı, 10 dilde hizmet, alımdan tapuya kadar uçtan uca süreç.'], ['Yabancı alıcıya hazır', 'Online görüntülü gösterim, vekâletle işlem, vatandaşlık ve oturum süreçlerinde rehberlik.'], ['Satıcıya güçlü pazarlama', 'Profesyonel çekim, drone, yurt içi ve yurt dışı portallar, hedefli reklam.']],
+    whyT: 'Neden ACC VILLAS', why: [['Sadece villa', 'Portföyümüzü özenle seçiyoruz; her villayı yerinde görüyor, fotoğraflıyor ve doğru fiyatlıyoruz.'], ['ACC HOMES güvencesi', 'Sadece villa ile ilgilenen özel bir ekip; arkasında ACC HOMES International Real Estate. 10 dilde hizmet, alımdan tapuya uçtan uca süreç.'], ['Yabancı alıcıya hazır', 'Online görüntülü gösterim, vekâletle işlem, vatandaşlık ve oturum süreçlerinde rehberlik.'], ['Satıcıya güçlü pazarlama', 'Profesyonel çekim, drone, yurt içi ve yurt dışı portallar, hedefli reklam.']],
     sellT: 'Villanızı satmak mı istiyorsunuz?', sellP: 'Villanızı doğru fiyatla, doğru alıcıya ulaştıralım. Ücretsiz değerleme ile başlayın.',
     valueT: 'Ücretsiz villa değerlemesi', valueP: 'Bölgedeki gerçek satışlar ve güncel ilanlarla karşılaştırarak villanız için gerçekçi bir fiyat aralığı çıkarıyoruz. Ücretsiz ve bağlayıcı değil.',
     projT: 'Villa projeleri', projP: 'ACC HOMES’un yetkili olduğu ve portföyünde bulunan villa projeleri.',
@@ -51,7 +51,7 @@ const T = {
     homeDesc: 'Hand-picked villas for sale in Antalya, villa projects and free villa valuation. Backed by ACC HOMES: Döşemealtı, Konyaaltı, Lara and Belek.',
     h1: 'Buy or sell a villa in Antalya with specialists', sub: 'Hand-picked villas for sale, villa projects and free valuation, backed by ACC HOMES. Service in English, Russian and 10 languages.',
     ctaList: 'Browse villas', ctaSell: 'Sell your villa', featured: 'Featured villas', all: 'All villas',
-    whyT: 'Why ACC VILLAS', why: [['Villas only', 'A carefully selected portfolio: every villa visited, photographed and priced correctly.'], ['Backed by ACC HOMES', 'Around 50 partners at ACC Plaza, 10 languages, end-to-end support to the title deed.'], ['Ready for international buyers', 'Online video viewings, purchase by power of attorney, guidance on citizenship and residence.'], ['Strong marketing for sellers', 'Professional photo, video and drone, local and international portals, targeted ads.']],
+    whyT: 'Why ACC VILLAS', why: [['Villas only', 'A carefully selected portfolio: every villa visited, photographed and priced correctly.'], ['Backed by ACC HOMES', 'A dedicated villa team backed by ACC HOMES International Real Estate. 10 languages, end-to-end support to the title deed.'], ['Ready for international buyers', 'Online video viewings, purchase by power of attorney, guidance on citizenship and residence.'], ['Strong marketing for sellers', 'Professional photo, video and drone, local and international portals, targeted ads.']],
     sellT: 'Thinking of selling your villa?', sellP: 'We bring your villa to the right buyer at the right price. Start with a free valuation.',
     valueT: 'Free villa valuation', valueP: 'We compare real sales and current listings in your area to give a realistic price range for your villa. Free and non-binding.',
     projT: 'Villa projects', projP: 'Villa developments in ACC HOMES’ portfolio, including authorised projects.',
@@ -70,7 +70,7 @@ const T = {
     homeDesc: 'Отобранные виллы на продажу в Анталии, проекты вилл и бесплатная оценка. С гарантией ACC HOMES: Дёшемеалты, Коньяалты, Лара, Белек.',
     h1: 'Купить или продать виллу в Анталии — с экспертами', sub: 'Отобранные виллы на продажу, проекты вилл и бесплатная оценка с гарантией ACC HOMES. Обслуживание на русском и ещё 9 языках.',
     ctaList: 'Смотреть виллы', ctaSell: 'Продать виллу', featured: 'Избранные виллы', all: 'Все виллы',
-    whyT: 'Почему ACC VILLAS', why: [['Только виллы', 'Тщательно отобранный портфель: каждую виллу мы осматриваем, фотографируем и правильно оцениваем.'], ['Гарантия ACC HOMES', 'Около 50 партнёров в ACC Plaza, 10 языков, сопровождение до получения тапу.'], ['Для иностранных покупателей', 'Онлайн-показ по видео, сделка по доверенности, помощь с гражданством и ВНЖ.'], ['Сильный маркетинг для продавцов', 'Профессиональная съёмка, дрон, турецкие и зарубежные порталы, таргетированная реклама.']],
+    whyT: 'Почему ACC VILLAS', why: [['Только виллы', 'Тщательно отобранный портфель: каждую виллу мы осматриваем, фотографируем и правильно оцениваем.'], ['Гарантия ACC HOMES', 'Отдельная команда, работающая только с виллами, при поддержке ACC HOMES International Real Estate. 10 языков, сопровождение до получения тапу.'], ['Для иностранных покупателей', 'Онлайн-показ по видео, сделка по доверенности, помощь с гражданством и ВНЖ.'], ['Сильный маркетинг для продавцов', 'Профессиональная съёмка, дрон, турецкие и зарубежные порталы, таргетированная реклама.']],
     sellT: 'Хотите продать виллу?', sellP: 'Мы найдём правильного покупателя по правильной цене. Начните с бесплатной оценки.',
     valueT: 'Бесплатная оценка виллы', valueP: 'Сравниваем реальные сделки и актуальные объявления в вашем районе и даём реалистичный ценовой диапазон. Бесплатно и ни к чему не обязывает.',
     projT: 'Проекты вилл', projP: 'Проекты вилл в портфеле ACC HOMES.',
@@ -103,6 +103,11 @@ try {
 }
 // Sahibinden fotoğrafları (filigranlı) kullanılmaz
 for (const v of rows) v.foto = (v.foto || []).filter((f) => !/shbdn\.com|sahibinden/i.test(f));
+const stripTeam = (txt, name) => {
+  const pats = ['iş ortağ', 'danışman', 'partner', 'партн', 'консультант', ...(name ? [name, name.split(' ').slice(-1)[0]] : [])].map((x) => x.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'));
+  const re = new RegExp(`[^.!?\\n]*(${pats.join('|')})[^.!?\\n]*[.!?]?[ \\t]*`, 'giu');
+  return txt.replace(re, '').replace(/\n{3,}/g, '\n\n').trim();
+};
 const isVilla = (v) => ['Villa', 'Müstakil Ev'].includes(v.altTip) || v.ekstra?.tur === 'Villa';
 const VILLAS = rows.filter((v) => isVilla(v) && (v.foto || []).length && v.satis_durumu !== 'Pasif')
   .map((v) => {
@@ -113,8 +118,10 @@ const VILLAS = rows.filter((v) => isVilla(v) && (v.foto || []).length && v.satis
       ...v, slug: v.id.toLowerCase(), kiralik: v.tip === 'Kiralık', satildi: v.satis_durumu === 'Satıldı', fiyatGizli: !!v.ekstra?.fiyat_gizli || !v.fiyat,
       title: (lang) => pick(s.baslik, lang) || pick(v.baslik, lang) || `${v.ilce} ${v.mahalle} ${v.oda || ''} Villa`,
       meta: (lang) => pick(s.meta, lang) || pick(v.ekstra?.meta && { tr: v.ekstra.meta }, lang) || '',
-      text: (lang) => pick(s.aciklama, lang) || pick(v.aciklama, lang) || '',
-      agent: { ad: v.danisman || 'Ali Caner Can', tel: tel ? (tel.startsWith('+') ? tel : '+90' + tel.replace(/^0/, '')) : PHONE.raw },
+      // ekip adı geçen cümleler çıkarılır (sitede yalnızca Caner görünür)
+      text: (lang) => stripTeam(pick(s.aciklama, lang) || pick(v.aciklama, lang) || '', v.danisman),
+      // sitede ekip gösterilmez: tüm villalarda iletişim Ali Caner Can (Broker)
+      agent: { ad: 'Ali Caner Can · Broker', tel: PHONE.raw },
     };
   })
   .sort((a, b) => (a.satildi - b.satildi) || (b.created_at || '').localeCompare(a.created_at || ''));

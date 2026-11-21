@@ -226,3 +226,41 @@ h1{font-size:clamp(34px,4.4vw,58px);line-height:1.05}h2{font-size:clamp(26px,2.6
 footer{background:var(--g3)!important;color:rgba(255,255,255,.72)!important}footer .fh{color:#fff!important;font-weight:900}footer a:hover{color:#fff!important}
 footer .flogo{background:#fff;color:var(--g2)!important;margin-bottom:28px}footer .flogo small{color:rgba(255,255,255,.75)!important}footer .flogo .lg-b,footer .flogo .lg-s{color:var(--g2)}footer .cp{border-color:rgba(255,255,255,.12)!important}
 @media (max-width:860px){.hb{align-items:center}.top nav,.top .tools{margin-top:0}.logo{padding:8px 14px 10px}.logo .lg-s{font-size:26px}.logo .lg-b{font-size:19px}.top.open nav{padding-bottom:14px}}
+
+/* ===== 5. tur: ACC HOMES renkleri (yazı tipleri aynı), ACC logosu, yeni bölümler ===== */
+:root{--g:#E02A3C;--g2:#1d1d1f;--g3:#B81F2F;--gp:#faf8f5;--gl:#e7e2dc;--ink:#1d1d1f;--mut:#5f6368;--line:#e7e2dc;--bg2:#faf8f5;--red:#E02A3C;--redt:#C21E2E}
+h1,h2,h3,.bn,.facts b,.reg b,.svc b,.cb h3,.stats b,.post h2,.post h3,.unit h3,.phase h3{color:var(--ink)!important}
+.eyebrow,.eyebrow.dark{color:var(--redt)!important}
+.logo{background:none!important;padding:8px 0 14px!important;align-items:center!important;gap:10px!important}
+.logo img{height:40px;width:auto;display:block}.logo .lg-s{font:400 34px/1 "Great Vibes",cursive!important;color:var(--ink)!important;order:0!important;margin-top:4px}
+.logo small{left:0!important;bottom:0!important;font-size:8.5px!important;letter-spacing:.16em!important;color:var(--mut)!important;white-space:nowrap}
+.top nav,.top .tools{margin-top:20px!important}
+.top nav a[href*="antalle"]{color:var(--redt)!important}.top nav a::after{background:var(--red)!important}.top nav a:hover{color:var(--redt)!important}
+.top .cur,.top .igl{color:var(--ink)!important;border-color:var(--line)!important}.top .lsw a.on{color:var(--ink)!important;border-color:var(--red)!important}.burger i{background:var(--ink)!important}
+.btn{background:var(--red)!important;border-color:var(--red)!important;border-radius:999px!important}.btn:hover{background:var(--g3)!important;border-color:var(--g3)!important}
+.btn.ghost.dark{background:transparent!important;color:var(--redt)!important;border-color:var(--red)!important}.btn.ghost.dark:hover{background:var(--red)!important;color:#fff!important}
+.btn.light{background:#fff!important;color:var(--redt)!important;border-color:#fff!important}
+.tabrow button{color:var(--ink)!important}.tabrow button.on{background:var(--red)!important;color:#fff!important}
+.hbottom h1{color:var(--ink)!important}.hbottom .dots button{background:rgba(0,0,0,.2)!important}.hbottom .dots button.on{background:var(--red)!important}.scroll{color:var(--ink)!important}.scroll::before{border-color:var(--ink)!important}
+.chip{background:var(--red)!important}.loc{color:var(--redt)!important}.pr{color:var(--ink)!important}.badge{background:var(--red)!important}
+.stats div,.facts div{background:#fff!important;border-top:3px solid var(--red)!important}.svc div,.awhy div{border-top:3px solid var(--red)!important}
+.chips li,.mh span{background:#fff!important;color:var(--ink)!important}.stars,.ticks li::before,.ptag,.mplan span,.sg .no,.more,.byl,.vtools .grate{color:var(--redt)!important}
+.d-call{background:var(--ink)!important}.d-off{background:var(--red)!important}.filters button.on,.vgal .thumbs button.on{background:var(--red)!important;border-color:var(--red)!important}
+.why h2::before,.cats h2::before{color:var(--red)!important}
+footer{background:#1d1d1f!important}footer .flogo{background:none!important}footer .flogo .lg-s{color:#fff!important}footer .flogo small{color:rgba(255,255,255,.6)!important}footer a:hover{color:#fff!important}
+.davet{background:#1d1d1f!important}.phase.hot{border-color:var(--red)!important;box-shadow:0 16px 40px rgba(224,42,60,.12)!important}.mplan li.done{border-color:var(--red)!important}
+/* felsefe, plaza, uluslararası */
+.philo{padding:84px 0;background:#fff;text-align:center}.philo .lead{margin:0 auto}.philo h2{max-width:820px;margin:.2em auto .4em}
+.pgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:10px;overflow:hidden;margin-top:34px;text-align:left}.pgrid>div{background:#fff;padding:26px 26px 22px}.pgrid h3{font-size:20px;margin:0 0 8px}.pgrid p{color:var(--mut);margin:0;font-size:15.5px}
+.pend{font-size:34px;color:var(--redt);margin-top:30px}
+.plaza{background:#1d1d1f;color:#fff;padding:84px 0}.plaza h2{color:#fff!important}.plaza .lead{color:rgba(255,255,255,.72)}.plaza .eyebrow{color:#ff8a96!important}.plaza .pgrid{background:rgba(255,255,255,.1);border-color:rgba(255,255,255,.1)}.plaza .pgrid>div{background:#232326}.plaza .pgrid h3{color:#fff!important}.plaza .pgrid p{color:rgba(255,255,255,.7)}.plaza .pgrid{grid-template-columns:repeat(4,1fr)}
+.intl .pgrid{grid-template-columns:repeat(4,1fr)}
+.mhome{display:grid;grid-template-columns:1.1fr 1fr;gap:48px;align-items:center}.mhome img{width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:12px}
+.mblocks{display:grid;grid-template-columns:1fr 1fr;gap:0 48px;padding-top:0}.mb{border-top:1px solid var(--line);padding:28px 0}.mb .no{font:900 14px Nunito,sans-serif;color:var(--redt);letter-spacing:.1em}.mb h2{font-size:24px;margin:.3em 0}.mb p{color:var(--mut)}
+/* editoryal */
+.edhero{min-height:78vh}.edsub{font-size:42px;margin:0}.editorial{max-width:1100px}
+.dropcap{font-size:21px;line-height:1.7;color:var(--ink);max-width:820px;margin:0 auto 40px}.dropcap::first-letter{float:left;font:400 92px/.8 "Great Vibes",cursive;color:var(--red);padding:10px 12px 0 0}
+.eds{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center;margin:56px 0}.eds.rev>div{order:2}.eds img{width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:12px}.eds p{font-size:17.5px;line-height:1.8;color:#3a3a3c}.edn{font:900 13px Nunito,sans-serif;color:var(--redt);letter-spacing:.2em}
+.pull{font:400 54px/1.2 "Great Vibes",cursive!important;color:var(--redt);text-align:center;margin:70px auto;max-width:900px}
+.tline{list-style:none;padding:0;margin:0;border-left:2px solid var(--red)}.tline li{padding:0 0 18px 20px;position:relative}.tline li::before{content:"";position:absolute;left:-7px;top:6px;width:12px;height:12px;border-radius:50%;background:var(--red)}.tline b{display:block}.tline span{color:var(--mut)}
+@media (max-width:860px){.pgrid,.plaza .pgrid,.intl .pgrid,.mhome,.mblocks,.eds{grid-template-columns:1fr}.eds.rev>div{order:0}.pull{font-size:38px}.logo img{height:32px}.logo .lg-s{font-size:28px!important}.logo small{display:none}}

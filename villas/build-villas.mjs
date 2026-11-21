@@ -9,6 +9,7 @@ import { SEG2, X, REVIEWS, REV_PROJECT, GOOGLE, IG, ANTALLE_GAL, OH_GAL, FOUNDER
 import { ANTALLE, ANTALLE_SHARED } from '../antalle-content.mjs';
 import { ANTALLE_SEO } from '../antalle-seo.mjs';
 import { DAVET_AKTIF, davetTx } from '../antalle-davet.mjs';
+import { SEG4, PHILO, PLAZA, MKT, LIV, FD2, INTL } from './content4.mjs';
 import { SEG3, NAV3, STATS, REG_EXTRA, MANAVGAT, REG_FAQ, SVC, POSTS, JOURNAL } from './content3.mjs';
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.join(HERE, '..');
@@ -158,7 +159,7 @@ const T = {
     regPage: { title: 'Районы вилл Анталии | ACC VILLAS', desc: 'Жизнь в вилле и виллы на продажу: Коньяалты, Дёшемеалты, Лара–Кунду, Алтынташ, Кепез–Дуаджи, Белек, Кемер, Каш–Калкан и Аланья.' },
   },
 };
-for (const l of ['tr', 'en', 'ru']) Object.assign(SEG[l], SEG2[l], SEG3[l]);
+for (const l of ['tr', 'en', 'ru']) Object.assign(SEG[l], SEG2[l], SEG3[l], SEG4[l]);
 const KVKK = { tr: '/kvkk-aydinlatma-metni/', en: '/en/privacy-notice/', ru: '/ru/politika-konfidencialnosti/' };
 
 // ---------- veri ----------
@@ -281,8 +282,8 @@ const ORG = { '@context': 'https://schema.org', '@type': 'RealEstateAgent', name
 
 const NAVK = ['list', 'rent', 'antalle', 'regions', 'living', 'services'];
 const NAVM0 = ['projects'];
-const NAVM = ['projects', 'founder', 'openhouse', 'journal', 'sell', 'value'];
-const navL = (lang, k) => ({ living: T[lang].nav2, openhouse: X[lang].oh.nav, services: NAV3[lang].services, journal: NAV3[lang].journal, founder: NAV3[lang].founder, value: T[lang].valueT, antalle: 'Antalle Concept Houses' }[k] || T[lang].nav[k]);
+const NAVM = ['marketing', 'projects', 'founder', 'openhouse', 'journal', 'sell', 'value'];
+const navL = (lang, k) => ({ living: T[lang].nav2, openhouse: X[lang].oh.nav, services: NAV3[lang].services, journal: NAV3[lang].journal, founder: NAV3[lang].founder, value: T[lang].valueT, antalle: 'Antalle Concept Houses', marketing: MKT[lang].nav }[k] || T[lang].nav[k]);
 function layout({ lang, title, desc, canon, alts, body, ld = [], image, offer = false }) {
   const t = T[lang]; const x = X[lang];
   const altLinks = alts ? LANGS.map((l) => `<link rel="alternate" hreflang="${l}" href="${DOMAIN}${alts[l]}">`).join('') + `<link rel="alternate" hreflang="x-default" href="${DOMAIN}${alts.en}">` : '';
@@ -291,10 +292,10 @@ function layout({ lang, title, desc, canon, alts, body, ld = [], image, offer = 
 <meta property="og:title" content="${esc(title)}"><meta property="og:description" content="${esc(desc)}"><meta property="og:url" content="${DOMAIN}${canon}"><meta property="og:type" content="website">${image ? `<meta property="og:image" content="${esc(image)}">` : ''}
 <link rel="icon" href="${MAIN}/favicon.ico"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Great+Vibes&display=swap" rel="stylesheet"><link rel="stylesheet" href="/style.css?v=${VER}">
 ${[ORG, ...ld].map((o) => `<script type="application/ld+json">${JSON.stringify(o)}</script>`).join('')}</head><body>
-<header class="top"><div class="wrap hb"><a class="logo" href="${url(lang)}" aria-label="ACC VILLAS"><span class="lg-s">Villas</span><span class="lg-b">ACC</span><small>by ACC HOMES</small></a><button class="burger" type="button" aria-label="Menu"><i></i><i></i><i></i></button><nav>${NAVK.map((k) => `<a href="${url(lang, k)}">${navL(lang, k)}</a>`).join('')}<div class="dd"><button type="button">${NAV3[lang].more} ▾</button><div class="ddm">${NAVM.map((k) => `<a href="${url(lang, k)}">${navL(lang, k)}</a>`).join('')}</div></div></nav><div class="tools"><select class="cur" aria-label="${x.cur}"><option value="TRY">₺ TRY</option><option value="USD">$ USD</option><option value="EUR">€ EUR</option></select><a class="igl" href="${IG.url}" target="_blank" rel="noopener" aria-label="Instagram">IG</a><div class="lsw">${langSw}</div></div></div></header>
+<header class="top"><div class="wrap hb"><a class="logo" href="${url(lang)}" aria-label="ACC VILLAS"><img src="/acc-kirmizi.svg" alt="ACC" width="64" height="45"><span class="lg-s">Villas</span><small>by ACC HOMES International Real Estate</small></a><button class="burger" type="button" aria-label="Menu"><i></i><i></i><i></i></button><nav>${NAVK.map((k) => `<a href="${url(lang, k)}">${navL(lang, k)}</a>`).join('')}<div class="dd"><button type="button">${NAV3[lang].more} ▾</button><div class="ddm">${NAVM.map((k) => `<a href="${url(lang, k)}">${navL(lang, k)}</a>`).join('')}</div></div></nav><div class="tools"><select class="cur" aria-label="${x.cur}"><option value="TRY">₺ TRY</option><option value="USD">$ USD</option><option value="EUR">€ EUR</option></select><a class="igl" href="${IG.url}" target="_blank" rel="noopener" aria-label="Instagram">IG</a><div class="lsw">${langSw}</div></div></div></header>
 <p class="okmsg" hidden>${t.ok}</p>
 <main>${body}</main>
-<footer><div class="wrap fg"><div><p class="logo flogo"><span class="lg-s">Villas</span><span class="lg-b">ACC</span><small>by ACC HOMES</small></p><p>${t.by}</p><p class="flinks"><a href="${url(lang, 'founder')}">${CEO.name} · ${CEO.role[lang]}</a><a href="${url(lang, 'services')}">${NAV3[lang].services}</a><a href="${url(lang, 'journal')}">${NAV3[lang].journal}</a><a href="${url(lang, 'value')}">${t.valueT}</a><a href="${url(lang, 'sell')}">${t.nav.sell}</a><a href="${url(lang, 'openhouse')}">${x.oh.nav}</a><a href="${IG.url}" target="_blank" rel="noopener">Instagram ${IG.handle}</a><a href="${MAIN}${BASE[lang] || ''}/">acchomesantalya.com</a></p></div><div><p class="fh">${t.nav.regions}</p><p class="flinks">${REG.map((r) => `<a href="${url(lang, 'regions', r.k)}">${r.n[lang]}</a>`).join('')}</p></div><div><p>${t.office}</p><p><a href="tel:${PHONE.raw}">${PHONE.text}</a> · <a href="https://wa.me/${PHONE.wa}">WhatsApp</a></p><p><a href="${KVKK[lang]}">${t.form.kvkk}</a></p></div></div><p class="wrap cp">© ${new Date().getFullYear()} ACC VILLAS by ACC HOMES International Real Estate</p></footer>
+<footer><div class="wrap fg"><div><p class="logo flogo"><img src="/acc-beyaz.svg" alt="ACC" width="80" height="56"><span class="lg-s">Villas</span><small>by ACC HOMES International Real Estate</small></p><p>${t.by}</p><p class="flinks"><a href="${url(lang, 'founder')}">${CEO.name} · ${CEO.role[lang]}</a><a href="${url(lang, 'services')}">${NAV3[lang].services}</a><a href="${url(lang, 'marketing')}">${MKT[lang].nav}</a><a href="${url(lang, 'journal')}">${NAV3[lang].journal}</a><a href="${url(lang, 'value')}">${t.valueT}</a><a href="${url(lang, 'sell')}">${t.nav.sell}</a><a href="${url(lang, 'openhouse')}">${x.oh.nav}</a><a href="${IG.url}" target="_blank" rel="noopener">Instagram ${IG.handle}</a><a href="${MAIN}${BASE[lang] || ''}/">acchomesantalya.com</a></p></div><div><p class="fh">${t.nav.regions}</p><p class="flinks">${REG.map((r) => `<a href="${url(lang, 'regions', r.k)}">${r.n[lang]}</a>`).join('')}</p></div><div><p>${t.office}</p><p><a href="tel:${PHONE.raw}">${PHONE.text}</a> · <a href="https://wa.me/${PHONE.wa}">WhatsApp</a></p><p><a href="${KVKK[lang]}">${t.form.kvkk}</a></p></div></div><p class="wrap cp">© ${new Date().getFullYear()} ACC VILLAS by ACC HOMES International Real Estate</p></footer>
 <div class="dock"><a class="d-call" href="tel:${PHONE.raw}">${x.call}</a><a class="d-wa" href="https://wa.me/${PHONE.wa}">WhatsApp</a>${offer ? `<button class="d-off" type="button" data-offer>${x.offer.btn}</button>` : ''}</div>
 <script>
 if(/[?&]ok=1/.test(location.search))document.querySelector('.okmsg').hidden=false;
@@ -341,6 +342,7 @@ for (const lang of LANGS) {
 <div class="hbottom"><h1>${X[lang].slides[0].h}</h1><div class="dots">${X[lang].slides.map((_, i) => `<button type="button" aria-label="${i + 1}"${i ? '' : ' class="on"'}></button>`).join('')}</div></div><a class="scroll" href="#cats">Scroll</a></section>
 <section class="wrap sec cats" id="cats"><h2>${X[lang].catT}</h2><div class="catg">${[['list', '/_c/1'], ['rent', '/_c/2'], ['antalle', '/_c/3'], ['living', '/_c/4'], ['openhouse', '/_c/5']].map(([k], i) => `<a class="cat" href="${url(lang, k)}"><img src="${X[lang].catImg[i]}" alt="" loading="lazy"><span>${X[lang].cats[i]}</span></a>`).join('')}</div></section>
 <section class="wrap sec why"><p class="eyebrow dark">ACC VILLAS</p><h2>${X[lang].whyT}</h2><p class="lead">${X[lang].whyP}</p><div class="stats">${STATS[lang].map(([n, l]) => `<div><b>${n}</b><span>${l}</span></div>`).join('')}</div></section>
+<section class="philo"><div class="wrap"><p class="eyebrow dark">${PHILO[lang].eyebrow}</p><h2>${PHILO[lang].h}</h2><p class="lead">${PHILO[lang].p}</p><div class="pgrid">${PHILO[lang].items.map(([a, b]) => `<div><h3>${a}</h3><p>${b}</p></div>`).join('')}</div><p class="sc pend">${PHILO[lang].end}</p></div></section>
 <section class="wrap sec"><div class="sh"><h2>${t.featured}</h2><a href="${url(lang, 'list')}">${t.all} →</a></div><div class="grid">${active.slice(0, 8).map((v) => card(v, lang)).join('')}</div></section>
 <section class="wrap sec"><div class="sh"><h2>${t.regionsT}</h2><a href="${url(lang, 'regions')}">${t.nav.regions} →</a></div><p class="lead">${t.regionsP}</p><div class="regs">${REG.filter((r) => regCount(r)).map((r) => { const c = regCover(r); const n = regCount(r); return `<a class="reg${c ? '' : ' noimg'}" href="${url(lang, 'regions', r.k)}">${c ? `<img src="${esc(c)}" alt="${r.n[lang]}" loading="lazy">` : ''}<span><b>${r.n[lang]}</b>${n ? `<small>${n} ${t.villas}</small>` : ''}</span></a>`; }).join('')}</div></section>
 <section class="band"><div class="wrap"><h2>${t.colT}</h2><div class="cols">${COL.map((c) => `<a href="${url(lang, 'list')}?c=${c.k}">${c.n[lang]}</a>`).join('')}<a href="${url(lang, 'projects')}">${t.projT}</a><a href="${url(lang, 'rent')}">${t.nav.rent}</a></div></div></section>
@@ -348,6 +350,9 @@ for (const lang of LANGS) {
 <section class="wrap sec"><div class="sh"><h2>${t.svcT}</h2><a href="${url(lang, 'services')}">${NAV3[lang].services} →</a></div><div class="svc">${t.svc.map(([a, b]) => `<div><b>${a}</b><span>${b}</span></div>`).join('')}</div></section>
 <section class="band"><div class="wrap two"><div class="off"><p class="eyebrow dark">Private</p><h2>${t.offT}</h2><p>${t.offP}</p><a class="btn" href="https://wa.me/${PHONE.wa}?text=${encodeURIComponent(t.offT)}">${t.offBtn}</a></div><div class="ceo">${ceoPic('big')}<blockquote>“${t.ceoQ}”</blockquote><p class="bn">${CEO.name}</p><p class="br">${CEO.role[lang]}, ACC VILLAS</p><p class="acts"><a class="btn ghost dark" href="https://wa.me/${PHONE.wa}">${t.meet}</a></p></div></div></section>
 <section class="wrap sec two"><div><h2>${t.sellT}</h2><p class="lead">${t.sellP}</p><p class="acts"><a class="btn" href="${url(lang, 'value')}">${t.valueT}</a><a class="btn ghost dark" href="${url(lang, 'sell')}">${t.nav.sell}</a></p></div></section>
+<section class="wrap sec mhome"><div><p class="eyebrow dark">${MKT[lang].home.eyebrow}</p><h2>${MKT[lang].home.h}</h2><p class="lead">${MKT[lang].home.p}</p><ul class="chips">${MKT[lang].blocks.slice(0, 5).map(([h]) => `<li>${h}</li>`).join('')}</ul><p class="acts"><a class="btn" href="${url(lang, 'marketing')}">${MKT[lang].home.btn}</a></p></div><img src="${MAIN}/img/antalle/galeri-bosluklu-salon.webp" alt="${esc(MKT[lang].blocks[0][0])}" loading="lazy"></section>
+<section class="plaza"><div class="wrap"><p class="eyebrow">${PLAZA[lang].eyebrow}</p><h2>${PLAZA[lang].h}</h2><p class="lead">${PLAZA[lang].p}</p><div class="pgrid">${PLAZA[lang].items.map(([a, b]) => `<div><h3>${a}</h3><p>${b}</p></div>`).join('')}</div></div></section>
+<section class="wrap sec intl"><p class="eyebrow dark">${INTL[lang].eyebrow}</p><h2>${INTL[lang].h}</h2><p class="lead">${INTL[lang].p}</p><div class="pgrid">${INTL[lang].items.map(([a, b]) => `<div><h3>${a}</h3><p>${b}</p></div>`).join('')}</div><p class="acts"><a class="btn ghost dark" href="${url(lang, 'founder')}">${CEO.name}</a><a class="btn ghost dark" href="${url(lang, 'services')}">${NAV3[lang].services}</a></p></section>
 <section class="band"><div class="wrap"><div class="sh"><h2>${X[lang].revT}</h2><a href="${GOOGLE.url}" target="_blank" rel="noopener">${X[lang].revBadge} →</a></div><div class="revs">${REVIEWS.map((r) => `<figure class="rev"><p class="stars">★★★★★</p><blockquote>${esc(r[lang])}</blockquote><figcaption>${r.n} · Google · ${r.when[lang]}</figcaption></figure>`).join('')}</div><p class="small">${X[lang].revNote}</p></div></section>
 <section class="wrap sec ig"><div><p class="eyebrow dark">${IG.handle}</p><h2>${X[lang].igT}</h2><p class="lead">${X[lang].igP}</p><a class="btn" href="${IG.url}" target="_blank" rel="noopener">${X[lang].igBtn}</a></div><div class="iggrid">${ANTALLE_GAL.slice(0, 6).map((g) => `<a href="${IG.url}" target="_blank" rel="noopener"><img src="${g}" alt="" loading="lazy"></a>`).join('')}</div></section>
 <section class="wrap sec"><div class="sh"><h2>${JOURNAL[lang].h1}</h2><a href="${url(lang, 'journal')}">${JOURNAL[lang].read} →</a></div><div class="posts">${POSTS.map((p) => `<a class="post" href="${url(lang, 'journal', lang === 'tr' ? p.slug : lang === 'en' ? p.slugEn : p.slugRu)}"><h3>${p[lang].t}</h3><p>${p[lang].d}</p><span class="more">${JOURNAL[lang].read} →</span></a>`).join('')}</div></section>
@@ -427,13 +432,32 @@ ${similar.length ? `<section class="wrap sec"><div class="sh"><h2>${DL.sim}</h2>
 <section class="wrap sec two"><div><h1>${vp.h1}</h1><p class="lead">${t.valueP}</p><ol class="steps">${sp.steps.slice(1).map(([a, b]) => `<li><b>${a}</b><span>${b}</span></li>`).join('')}</ol></div><aside class="box">${broker(lang)}<h2>${t.valueT}</h2>${form(lang, 'villa-degerleme', url(lang, 'value'), `<input name="konum" placeholder="${t.form.addr} *" required><input name="metrekare" placeholder="${t.form.size}">`)}</aside></section>` }));
   sitemap.push(url(lang, 'value'));
 
-  // villa yaşamı
-  write(BASE[lang] + '/' + SEG[lang].living, layout({ lang, title: t.livTitle, desc: t.livDesc, canon: url(lang, 'living'), alts: allAlts('living'), body: `
-<section class="wrap sec"><h1>${t.livT}</h1><p class="lead">${t.livP}</p>
-<div class="enne"><img src="/enne-antalya.webp" alt="ENNE Antalya" width="420" height="145"><div><p class="eyebrow dark">${t.enneT}</p><h2>ENNE Antalya</h2><p>${t.enneP}</p></div></div>
-<div class="svc">${t.livCats.map((c, i) => `<div><b>${c}</b>${i === 0 ? '<span>ENNE Antalya</span>' : ''}</div>`).join('')}</div></section>
+  // villa yaşamı: editoryal
+  { const L = LIV[lang]; const img = (i) => ANTALLE_SHARED.photos[i] ? `${MAIN}/img/antalle/${ANTALLE_SHARED.photos[i][0]}.webp` : '';
+  const pics = [3, 5, 4, 6, 9, 17, 8, 19, 1, 0];
+  write(BASE[lang] + '/' + SEG[lang].living, layout({ lang, title: L.title, desc: L.desc, canon: url(lang, 'living'), alts: allAlts('living'), image: img(3), ld: [{ '@context': 'https://schema.org', '@type': 'Article', headline: L.h1 + ': ' + L.sub, description: L.desc, image: img(3), author: { '@type': 'Person', name: CEO.name }, publisher: { '@type': 'Organization', name: 'ACC VILLAS', url: DOMAIN }, inLanguage: lang }], body: `
+<section class="hero slim edhero"><img src="${img(3)}" alt="${esc(L.sub)}" fetchpriority="high"><div class="wrap hc"><p class="eyebrow">${L.eyebrow}</p><h1>${L.h1}</h1><p class="sc edsub">${L.sub}</p></div></section>
+<article class="wrap sec editorial"><p class="dropcap">${L.intro}</p>
+${L.secs.map(([h, p], i) => `<section class="eds${i % 2 ? ' rev' : ''}"><div><span class="edn">${String(i + 1).padStart(2, '0')}</span><h2>${h}</h2><p>${p}</p></div><img src="${img(pics[i] ?? 0)}" alt="${esc(h)}" loading="lazy"></section>${i === 4 ? `<blockquote class="pull">“${L.quote}”</blockquote>` : ''}`).join('')}
+</article>
+<section class="band"><div class="wrap"><h2>${L.partnersT}</h2><p class="lead">${L.partnersP}</p>
+<div class="enne"><img src="/enne-antalya.webp" alt="ENNE Antalya" width="420" height="145"><div><p class="eyebrow dark">${t.enneT}</p><h3>ENNE Antalya</h3><p>${t.enneP}</p></div></div>
+<div class="svc">${L.cats.map(([a, b]) => `<div><b>${a}</b><span>${b}</span></div>`).join('')}</div></div></section>
 <section class="wrap sec two"><div>${broker(lang)}</div><aside class="box"><h2>${t.livAsk}</h2>${form(lang, 'villa-talep', url(lang, 'living'), `<input type="hidden" name="konu" value="villa-yasami">`)}</aside></section>` }));
-  sitemap.push(url(lang, 'living'));
+  sitemap.push(url(lang, 'living')); }
+
+  // pazarlama ve tasarım (yapay zekâ, sanal tur, modelleme)
+  { const M = MKT[lang]; const P = PLAZA[lang]; const I = INTL[lang];
+  const ld = [{ '@context': 'https://schema.org', '@type': 'Service', name: M.h1, serviceType: ['Virtual staging', 'AI video', '360 virtual tour', '3D modelling', 'Real estate marketing'], areaServed: 'Antalya', provider: { '@type': 'RealEstateAgent', name: 'ACC VILLAS', url: DOMAIN } },
+    { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: M.faq.map(([q, a]) => ({ '@type': 'Question', name: q, acceptedAnswer: { '@type': 'Answer', text: a } })) }];
+  write(BASE[lang] + '/' + SEG[lang].marketing, layout({ lang, title: M.title, desc: M.desc, canon: url(lang, 'marketing'), alts: allAlts('marketing'), ld, body: `
+<section class="wrap sec"><p class="eyebrow dark">${M.home.eyebrow}</p><h1>${M.h1}</h1><p class="lead">${M.lead}</p></section>
+<section class="wrap sec mblocks">${M.blocks.map(([h, p], i) => `<div class="mb"><span class="no">0${i + 1}</span><h2>${h}</h2><p>${p}</p></div>`).join('')}</section>
+<section class="band"><div class="wrap"><h2>${M.stepsT}</h2><ol class="steps four">${M.steps.map(([a, b]) => `<li><b>${a}</b><span>${b}</span></li>`).join('')}</ol></div></section>
+<section class="wrap sec two"><div><p class="eyebrow dark">${P.eyebrow}</p><h2>${P.h}</h2><p class="lead">${P.p}</p></div><div><p class="eyebrow dark">${I.eyebrow}</p><h2>${I.h}</h2><p class="lead">${I.p}</p></div></section>
+<section class="band"><div class="wrap"><h2>${M.faqT}</h2><div class="faq">${M.faq.map(([q, a]) => `<details><summary>${esc(q)}</summary><p>${esc(a)}</p></details>`).join('')}</div></div></section>
+<section class="wrap sec two"><div><h2>${M.cta}</h2>${broker(lang)}</div><aside class="box">${form(lang, 'villa-sat', url(lang, 'marketing'), '<input type="hidden" name="konu" value="pazarlama">')}</aside></section>` }));
+  sitemap.push(url(lang, 'marketing')); }
 
   // open house
   { const o = X[lang].oh;
@@ -473,13 +497,16 @@ ${faq.length ? `<section class="band"><div class="wrap"><h2>${esc(SE.h || 'SSS')
 <section class="wrap sec two" id="form"><div><h2>${esc(u.infoTitle.replace(/ ve Fiyat Listesi| and Price List| и прайс-лист/i, ''))}</h2><p class="lead">${esc(C.cta.replace(/[^.]*fiyat[^.]*\.|[^.]*price[^.]*\.|[^.]*прайс[^.]*\./gi, '').trim())}</p>${broker(lang, 'Antalle Concept Houses')}<p><a href="https://www.instagram.com/antalleconcepthouses/" target="_blank" rel="noopener">${esc(u.ig)} →</a></p></div><aside class="box"><h2>${esc(u.form)}</h2>${form(lang, 'antalle-talep', url(lang, 'antalle'))}</aside></section>` }));
   sitemap.push(url(lang, 'antalle')); }
 
-  // kurucu
-  { const fd = X[lang].fd;
-  write(BASE[lang] + '/' + SEG[lang].founder, layout({ lang, title: fd.title, desc: fd.desc, canon: url(lang, 'founder'), alts: allAlts('founder'), image: CEO_IMG ? DOMAIN + CEO_IMG : undefined, ld: [{ '@context': 'https://schema.org', '@type': 'Person', name: CEO.name, jobTitle: 'Founder & CEO', worksFor: { '@type': 'RealEstateAgent', name: 'ACC VILLAS', url: DOMAIN }, alumniOf: ['Yıldız Technical University', 'Kuleli Military High School'], knowsLanguage: ['tr', 'en'], sameAs: FOUNDER_LINKS.map((l) => l[1]), image: CEO_IMG ? DOMAIN + CEO_IMG : undefined }], body: `
-<section class="wrap sec founder"><div class="fhead">${ceoPic('xl')}<div><p class="eyebrow dark">ACC VILLAS</p><h1>${fd.h1}</h1><p class="br">${fd.role}</p><p class="lead">${fd.intro}</p><p class="acts"><a class="btn" href="https://wa.me/${PHONE.wa}">${fd.meet}</a><a class="btn ghost dark" href="tel:${PHONE.raw}">${PHONE.text}</a></p></div></div>
-<div class="fsecs">${fd.secs.map(([h, p]) => `<div><h2>${h}</h2><p>${p}</p></div>`).join('')}</div></section>
+  // kurucu: tam içerik
+  { const F = FD2[lang];
+  write(BASE[lang] + '/' + SEG[lang].founder, layout({ lang, title: F.title, desc: F.desc, canon: url(lang, 'founder'), alts: allAlts('founder'), image: CEO_IMG ? DOMAIN + CEO_IMG : undefined, ld: [{ '@context': 'https://schema.org', '@type': 'Person', name: CEO.name, jobTitle: 'Founder & CEO, ACC VILLAS; Broker, ACC HOMES International Real Estate', worksFor: { '@type': 'RealEstateAgent', name: 'ACC VILLAS', url: DOMAIN }, alumniOf: ['Yıldız Technical University', 'Kuleli Military High School'], knowsLanguage: ['tr', 'en'], memberOf: 'ANTİAD', sameAs: FOUNDER_LINKS.map((l) => l[1]), image: CEO_IMG ? DOMAIN + CEO_IMG : undefined }], body: `
+<section class="wrap sec founder"><div class="fhead">${ceoPic('xl')}<div><p class="eyebrow dark">${F.eyebrow}</p><h1>${F.h1}</h1><p class="br">${F.role}</p><p class="lead">${F.intro}</p><p class="acts"><a class="btn" href="https://wa.me/${PHONE.wa}">${F.meet}</a><a class="btn ghost dark" href="tel:${PHONE.raw}">${PHONE.text}</a></p></div></div>
+<div class="stats">${F.stats.map(([n, l]) => `<div><b>${n}</b><span>${l}</span></div>`).join('')}</div></section>
+<section class="wrap sec two"><div><h2>${F.storyT}</h2>${F.story.map((p) => `<p>${p}</p>`).join('')}</div><div><h2>${F.timeT}</h2><ol class="tline">${F.time.map(([y, d]) => `<li><b>${y}</b><span>${d}</span></li>`).join('')}</ol></div></section>
+<section class="band"><div class="wrap"><h2>${F.expT}</h2><div class="svc">${F.exp.map(([a, b]) => `<div><b>${a}</b><span>${b}</span></div>`).join('')}</div></div></section>
+<section class="wrap sec two"><div><p class="eyebrow dark">${INTL[lang].eyebrow}</p><h2>${INTL[lang].h}</h2><p class="lead">${INTL[lang].p}</p></div><div><h2>${F.valT}</h2><p>${F.val}</p><h2>${F.comT}</h2><ul class="chips">${F.com.map((c) => `<li>${c}</li>`).join('')}</ul></div></section>
 <section class="band"><div class="wrap"><h2>${X[lang].revT}</h2><div class="revs">${[REVIEWS[2], { ...REV_PROJECT, when: { tr: '2025', en: '2025', ru: '2025' } }].map((r) => `<figure class="rev"><p class="stars">★★★★★</p><blockquote>${esc(r[lang])}</blockquote><figcaption>${r.n} · Google · ${r.when[lang]}</figcaption></figure>`).join('')}</div></div></section>
-<section class="wrap sec"><h2>${fd.linksT}</h2><p class="flinks big">${FOUNDER_LINKS.map(([n, h]) => `<a href="${h}" target="_blank" rel="noopener">${n}</a>`).join('')}<a href="${url(lang, 'antalle')}">Antalle Concept Houses</a></p></section>` }));
+<section class="wrap sec"><h2>${F.linksT}</h2><p class="flinks big">${FOUNDER_LINKS.map(([n, h]) => `<a href="${h}" target="_blank" rel="noopener">${n}</a>`).join('')}<a href="${url(lang, 'antalle')}">Antalle Concept Houses</a><a href="${url(lang, 'marketing')}">${MKT[lang].nav}</a></p></section>` }));
   sitemap.push(url(lang, 'founder')); }
 
   // kvkk
@@ -490,6 +517,8 @@ ${faq.length ? `<section class="band"><div class="wrap"><h2>${esc(SE.h || 'SSS')
   write(BASE[lang] + '/' + SEG[lang].services, layout({ lang, title: sv.title, desc: sv.desc, canon: url(lang, 'services'), alts: allAlts('services'), ld: [{ '@context': 'https://schema.org', '@type': 'Service', provider: { '@type': 'RealEstateAgent', name: 'ACC VILLAS', url: DOMAIN }, areaServed: 'Antalya', serviceType: sv.groups.map((g) => g[0]) }], body: `
 <section class="wrap sec"><p class="eyebrow dark">ACC VILLAS</p><h1>${sv.h1}</h1><p class="lead">${sv.lead}</p></section>
 <section class="wrap sec svcp">${sv.groups.map(([h, items], i) => `<div class="sg"><span class="no">0${i + 1}</span><div><h2>${h}</h2><ul>${items.map((x) => `<li>${x}</li>`).join('')}</ul></div></div>`).join('')}</section>
+<section class="plaza"><div class="wrap"><p class="eyebrow">${PLAZA[lang].eyebrow}</p><h2>${PLAZA[lang].h}</h2><p class="lead">${PLAZA[lang].p}</p><div class="pgrid">${PLAZA[lang].items.map(([a, b]) => `<div><h3>${a}</h3><p>${b}</p></div>`).join('')}</div><p class="acts"><a class="btn light" href="${url(lang, 'marketing')}">${PLAZA[lang].cta}</a></p></div></section>
+<section class="wrap sec intl"><p class="eyebrow dark">${INTL[lang].eyebrow}</p><h2>${INTL[lang].h}</h2><p class="lead">${INTL[lang].p}</p><div class="pgrid">${INTL[lang].items.map(([a, b]) => `<div><h3>${a}</h3><p>${b}</p></div>`).join('')}</div></section>
 <section class="band"><div class="wrap two"><div><h2>${sv.cta}</h2>${broker(lang)}<p class="acts"><a class="btn ghost dark" href="${url(lang, 'value')}">${t.valueT}</a><a class="btn ghost dark" href="${url(lang, 'living')}">${t.livT}</a></p></div><aside class="box">${form(lang, 'villa-talep', url(lang, 'services'), '<input type="hidden" name="konu" value="hizmet">')}</aside></div></section>` }));
   sitemap.push(url(lang, 'services')); }
 

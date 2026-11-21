@@ -215,7 +215,9 @@ ${projects.length ? `<section class="wrap sec"><div class="sh"><h2>${t.projT}</h
 fs.copyFileSync(path.join(HERE, 'style.css'), path.join(OUT, 'style.css'));
 const php = fs.readFileSync(path.join(ROOT, 'server/form.php'), 'utf8')
   .replace("'rehber-indir'];", "'rehber-indir', 'villa-talep', 'villa-sat', 'villa-degerleme'];")
-  .replace("'From: ACC HOMES Web <'", "'From: ACC VILLAS Web <'");
+  .replace("'From: ACC HOMES Web <'", "'From: ACC VILLAS Web <'")
+  // addon alan adı eski PHP sürümüyle çalışabilir: PHP 8 fonksiyonları için yedek
+  .replace('declare(strict_types=1);', "declare(strict_types=1);\nif (!function_exists('str_starts_with')) { function str_starts_with($h, $n) { return strncmp((string)$h, (string)$n, strlen((string)$n)) === 0; } }\nif (!function_exists('str_contains')) { function str_contains($h, $n) { return $n === '' || strpos((string)$h, (string)$n) !== false; } }");
 fs.writeFileSync(path.join(OUT, 'form.php'), php);
 fs.writeFileSync(path.join(OUT, 'robots.txt'), `User-agent: *\nAllow: /\nSitemap: ${DOMAIN}/sitemap.xml\n`);
 fs.writeFileSync(path.join(OUT, 'sitemap.xml'), `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">${sitemap.map((u) => `<url><loc>${DOMAIN}${u}</loc></url>`).join('')}</urlset>\n`);

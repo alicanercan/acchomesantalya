@@ -31,6 +31,8 @@ jobs:
           node-version: 20
       - name: Villa sitesini derle
         run: node villas/build-villas.mjs
+        env:
+          FORCE_HTTPS: "1"
       - name: accvillas.com'a yükle
         if: env.FTP_SERVER != ''
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5

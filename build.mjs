@@ -136,7 +136,8 @@ const T = {
     projects: 'Projeler', projectsLead: 'ACC HOMES’un yetkili satış ofisi olduğu projeler', projectsCta: 'Projeyi incele',
     company: 'Kurumsal', blog: 'Blog', blogLead: 'Antalya gayrimenkul piyasası, bölgeler ve yatırım üzerine rehberler ve analizler', readMore: 'Devamını oku', menu: 'Menü',
     gReviews: (n) => `${n} Google yorumu`, readReviews: 'Yorumları oku', igFollow: 'Instagram’da takip edin', mapTitle: 'Ofisimiz haritada', directions: 'Yol tarifi al', trustTitle: 'Müşterilerimiz bizi anlatıyor',
-    metaHome: 'ACC HOMES International Real Estate: Antalya’da satılık ve kiralık daire, villa, yetkili projeler ve ticari gayrimenkul. ACC Plaza, 50 iş ortağı, 10 dilde hizmet.',
+    homeTitle: 'Antalya Emlak Ofisi: Satılık ve Kiralık Daire, Villa | ACC HOMES',
+    metaHome: 'Antalya emlak ofisi ACC HOMES: ACC Plaza’da 50 iş ortağı, 10 dilde hizmet. Satılık ve kiralık daire, villa ve yetkili projeler; ücretsiz değerleme.',
   },
   en: {
     htmlLang: 'en', locale: 'en_GB',

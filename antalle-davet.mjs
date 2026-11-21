@@ -58,6 +58,7 @@ const TX = {
 };
 export const davetTx = (lang) => TX[lang] || TX.en;
 
+const LOGOS = [['/img/antalle/logo-antalle.webp', 'Antalle Concept Houses', 150], ['/img/antalle/logo-lejant.webp', 'Lejant Proje', 160], ['/img/antalle/logo-enne-antalya.webp', 'ENNE Antalya', 150], ['/img/logo/acc-siyah.svg', 'ACC HOMES International Real Estate', 150]];
 const opt = (o) => (Array.isArray(o) ? o : [o, o]);
 const sel = (name, label, ops, ph) => `<label class="advf"><span>${label} *</span><select name="${name}" required><option value="">${ph}</option>${ops.map((o) => { const [v, l] = opt(o); return `<option value="${v}">${l}</option>`; }).join('')}</select></label>`;
 
@@ -71,7 +72,7 @@ export function davetSection(lang, { esc, telIn, privacyUrl, mapUrl, waNum }) {
 .adv .lead{font-size:18px;line-height:1.5;margin:0 0 18px}.adv .chips{display:grid;gap:8px;margin:0 0 22px}.adv .chips div{background:#fff;border:1px solid #CFE0CF;border-left:5px solid #1E6339;border-radius:8px;padding:10px 14px;font-weight:700}
 .adv h3{color:#1E6339;margin:18px 0 8px}.adv ul.what{list-style:none;padding:0;margin:0;display:grid;gap:8px}.adv ul.what li{display:flex;gap:10px;font-size:16px}
 .adv .enne{background:#fff;border:1px solid #CFE0CF;border-radius:10px;padding:16px 18px;margin-top:22px}.adv .enne b{color:#1E6339}
-.adv .sign{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin-top:20px;text-align:center}.adv .sign div{background:#fff;border-radius:8px;padding:10px 6px}.adv .sign b{display:block;font-size:13px;color:#2E2E2E}.adv .sign small{color:#4F4F4F;font-size:11px}
+.adv .sign{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin-top:20px;text-align:center}.adv .sign div{background:#fff;border-radius:8px;padding:10px 6px}.adv .sign div{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px}.adv .sign img{max-width:100%;height:40px;width:auto;object-fit:contain}.adv .sign small{color:#4F4F4F;font-size:11px}.adv .gal{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:0 0 22px}.adv .gal img{width:100%;height:auto;border-radius:8px;box-shadow:0 6px 18px rgba(0,0,0,.12);display:block}
 .adv form{background:#fff;border-radius:12px;box-shadow:0 10px 30px rgba(30,99,57,.12);padding:24px;display:grid;gap:12px}.adv form h3{margin:0;font-size:26px}.adv form p.s{margin:0;color:#4F4F4F}
 .adv .advf{display:grid;gap:4px;font-size:14px;font-weight:700;color:#2E2E2E}.adv .advf span{font-weight:700}.adv .two{display:grid;grid-template-columns:1fr 1fr;gap:10px}
 .adv form .btn{background:#1E6339;border-color:#1E6339;font-size:17px;padding:14px}.adv .okbox{background:#fff;border-radius:12px;padding:28px;border:2px solid #1E6339}.adv .okbox h3{margin-top:0}
@@ -80,9 +81,10 @@ export function davetSection(lang, { esc, telIn, privacyUrl, mapUrl, waNum }) {
 </style><div class="wrap"><div>
 <p class="ey">${esc(t.eyebrow)}</p><h2>${esc(t.title)}</h2><p class="lead">${esc(t.lead)}</p>
 <div class="chips"><div>📅 ${esc(t.when)}</div><div>🕙 ${esc(t.hours)}</div><div>🥂 ${esc(t.cocktail)}</div><div>📍 Antalle Concept Houses · ${esc(t.loc)}</div></div>
+<div class="gal">${[['antalle-davetlisiniz', t.title], ['antalle-program', 'Program']].map(([f, alt]) => `<a href="/img/antalle/${f}.jpg" target="_blank" rel="noopener"><img src="/img/antalle/${f}-600.webp" srcset="/img/antalle/${f}-600.webp 600w, /img/antalle/${f}.webp 1080w" sizes="(max-width:860px) 46vw, 260px" alt="${esc(alt)}" width="600" height="750" loading="lazy" decoding="async"></a>`).join('')}</div>
 <h3>${esc(t.whatT)}</h3><ul class="what">${t.what.map(([i, x]) => `<li><span>${i}</span><span>${esc(x)}</span></li>`).join('')}</ul>
 <div class="enne"><b>🛋 ${esc(t.partnerT)}</b><p style="margin:6px 0 0">${esc(t.partner)}</p></div>
-<div class="sign">${t.sign.map((n, i) => `<div><b>${esc(n)}</b><small>${esc(t.signRole[i])}</small></div>`).join('')}</div>
+<div class="sign">${LOGOS.map(([src, alt, w], i) => `<div><img src="${src}" alt="${esc(alt)}" width="${w}" height="56" loading="lazy" decoding="async"><small>${esc(t.signRole[i])}</small></div>`).join('')}</div></div>
 </div><div>
 <form id="advForm" class="form" novalidate><input type="hidden" name="kod"><input type="hidden" name="dil" value="${dil}"><p hidden><input name="bot" tabindex="-1" autocomplete="off"></p>
 <h3>${esc(t.formT)}</h3><p class="s">${esc(t.formS)}</p>

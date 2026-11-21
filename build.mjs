@@ -181,7 +181,8 @@ const T = {
     projects: 'Projects', projectsLead: 'Developments for which ACC HOMES is the authorised sales office (pages in Turkish)', projectsCta: 'View project',
     company: 'Company', blog: 'Blog', blogLead: 'Guides and insights on the Antalya property market, its districts and investment', readMore: 'Read more', menu: 'Menu',
     gReviews: (n) => `${n} Google reviews`, readReviews: 'Read reviews', igFollow: 'Follow us on Instagram', mapTitle: 'Find our office', directions: 'Get directions', trustTitle: 'What our clients say',
-    metaHome: 'ACC HOMES International Real Estate: apartments, villas, authorised projects and commercial property for sale and rent in Antalya. Service in 10 languages.',
+    homeTitle: 'Antalya Real Estate Agency: Homes & Villas for Sale | ACC HOMES',
+    metaHome: 'Antalya real estate agents at ACC Plaza: 50 partners, 10 languages. Apartments, villas and new projects for sale and rent, with free online viewings.',
   },
   ru: {
     htmlLang: 'ru', locale: 'ru_RU',
@@ -226,7 +227,8 @@ const T = {
     projects: 'Проекты', projectsLead: 'Проекты, официальным офисом продаж которых является ACC HOMES (на турецком)', projectsCta: 'Подробнее',
     company: 'О компании', blog: 'Блог', blogLead: 'Гиды и аналитика по рынку недвижимости Анталии (на английском)', readMore: 'Читать', menu: 'Меню',
     gReviews: (n) => `${n} отзывов в Google`, readReviews: 'Читать отзывы', igFollow: 'Мы в Instagram', mapTitle: 'Наш офис на карте', directions: 'Проложить маршрут', trustTitle: 'Отзывы наших клиентов',
-    metaHome: 'Квартиры на продажу и в аренду в Алтынташе, Анталия. Проверенные объекты и экспертные консультации ACC HOMES.',
+    homeTitle: 'Агентство недвижимости в Анталии: квартиры и виллы | ACC HOMES',
+    metaHome: 'ACC HOMES — агентство недвижимости в Анталии: квартиры, виллы и новостройки на продажу и в аренду. 50 партнёров, 10 языков, онлайн-показ.',
   },
 };
 
@@ -1091,7 +1093,7 @@ ${plazaBlock(lang)}
 <section class="wrap sec">${joinBlock(lang)}</section>
 ${blogStrip(lang)}
 ${igBlock(lang)}`;
-  write(path.join(BASE[lang], 'index.html'), layout({ lang, title: `${t.heroTitle} | ACC HOMES`, desc: t.metaHome, canonical: home(lang), alternates: alts('home'), body }));
+  write(path.join(BASE[lang], 'index.html'), layout({ lang, title: t.homeTitle || `${t.heroTitle} | ACC HOMES`, desc: t.metaHome, canonical: home(lang), alternates: alts('home'), body }));
 }
 
 // ---------- İlan arama: Sahibinden uyumlu kategori sayfaları ve detaylı filtre ----------

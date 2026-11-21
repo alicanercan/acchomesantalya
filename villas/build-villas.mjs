@@ -5,6 +5,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
+import { SEG2, X, REVIEWS, REV_PROJECT, GOOGLE, IG, ANTALLE_GAL, OH_GAL, FOUNDER_LINKS, KVKK_HTML } from './content2.mjs';
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.join(HERE, '..');
 const OUT = path.join(HERE, 'dist');
@@ -64,13 +65,13 @@ const T = {
     livCats: ['Mobilya ve tasarım', 'Mimarlık ve iç mimari', 'Akıllı ev ve elektronik', 'Peyzaj ve havuz', 'Güvenlik', 'Sanat ve dekor'], livAsk: 'Villanız için teklif isteyin',
     enneT: 'Mobilya ve tasarım çözüm ortağımız', enneP: 'ENNE, 1999’dan bu yana çağdaş tasarım üzerine çalışan, iF Design ödüllü ve Salone del Mobile Milano’da yer alan bir Türk mobilya markasıdır. Özellikle özel villa projelerinde öne çıkan ENNE’nin Antalya’daki temsilcisi ENNE Antalya, ACC VILLAS’ın mobilya ve tasarım çözüm ortağıdır.',
     livTitle: 'Villa Yaşamı: Mobilya, İç Mimari ve VIP Hizmetler | ACC VILLAS', livDesc: 'Antalya’da villanız için mobilya, iç mimari, akıllı ev, peyzaj ve güvenlik çözümleri. Mobilya ve tasarım çözüm ortağımız ENNE Antalya.', nav: { list: 'Satılık', rent: 'Kiralık', projects: 'Projeler', regions: 'Bölgeler', sell: 'Villanızı Satın' },
-    homeTitle: 'Antalya Satılık Villa | ACC VILLAS · Antalya’nın Villa Uzmanı',
-    homeDesc: 'Antalya’da satılık ve kiralık villalar, villa projeleri ve ücretsiz değerleme. Konyaaltı, Döşemealtı, Lara, Belek, Kaş ve Alanya’da seçkin villalar; alımdan tapuya VIP hizmet.',
+    homeTitle: 'Antalya Satılık Villa | Yalnızca Villa · ACC VILLAS',
+    homeDesc: 'Antalya’da yalnızca villa ile çalışan uzman ekip: satılık ve kiralık villalar, villa projeleri ve ücretsiz değerleme. Konyaaltı, Döşemealtı, Lara, Belek, Kaş ve Alanya’da seçkin villalar; alımdan tapuya VIP hizmet.',
     h1: 'Antalya’nın seçkin villaları', sub: 'Satılık ve kiralık villalar, villa projeleri ve alımdan tapuya kadar uçtan uca VIP hizmet. Siz karar verin, gerisini biz halledelim.',
     s: { region: 'Bölge', any: 'Tüm bölgeler', type: 'İşlem', sale: 'Satılık', rent: 'Kiralık', go: 'Villaları göster' },
     featured: 'Öne çıkan villalar', all: 'Tüm villalar', regionsT: 'Bölgelere göre villalar', regionsP: 'Antalya’nın her bölgesinin kendine has bir hayatı var. Size uygun olanı birlikte bulalım.',
     colT: 'Koleksiyonlar', offT: 'Gizli satış (off-market)', offP: 'Bazı villalar ilan olarak yayınlanmaz. Sahibinin isteğiyle yalnızca doğrulanmış alıcılara gösterilir. Aradığınızı söyleyin, size özel portföyümüzü açalım.', offBtn: 'Özel portföyü sor',
-    svcT: 'A’dan Z’ye hizmet', svc: [['Online gösterim', 'Görüntülü görüşmeyle villayı bulunduğunuz yerden gezin.'], ['Hukuki ön kontrol', 'Tapu, iskân, imar ve borç durumu satıştan önce kontrol edilir.'], ['Vekâletle alım', 'Türkiye’ye gelmeden, vekâletle tüm süreç tamamlanır.'], ['Tapu ve resmi işlemler', 'Vergi numarası, banka hesabı, tercüman ve tapu günü organizasyonu.'], ['Teslim sonrası', 'Abonelikler, sigorta, eşyalama, bakım ve kiraya verme yönetimi.'], ['Vatandaşlık ve ikamet', 'Yatırım yoluyla vatandaşlık ve ikamet süreçlerinde rehberlik.']],
+    svcT: 'A’dan Z’ye hizmet', svc: [['Online gösterim', 'Görüntülü görüşmeyle villayı bulunduğunuz yerden gezin.'], ['Hukuki ön kontrol', 'Tapu, iskân, imar ve borç durumu satıştan önce kontrol edilir.'], ['Vekâletle alım', 'Türkiye’ye gelmeden, vekâletle tüm süreç tamamlanır.'], ['Tapu ve resmi işlemler', 'Vergi numarası, banka hesabı, tercüman ve tapu günü organizasyonu.'], ['Teslim sonrası', 'Abonelikler, sigorta, eşyalama, bakım ve kiraya verme yönetimi.'], ['Vatandaşlık ve ikamet', 'Yatırım yoluyla vatandaşlık ve ikamet süreçlerinde rehberlik.'], ['Open House ve özel davetler', 'Villayı kalabalık olmadan, özenle ağırlandığınız özel gösterim günlerinde yerinde görün.'], ['Villa Yaşamı', 'Mobilya, iç mimari, akıllı ev ve peyzajda seçkin çözüm ortaklarımızla tek muhatap.']],
     ceoT: 'Kurucudan', ceoQ: 'Villa almak ya da satmak, hayatın en önemli kararlarından biridir. ACC VILLAS’ta her villayı yerinde görür, her müşterimizle bizzat ilgileniriz. Siz yalnızca karar verin; gerisini biz halledelim.',
     meet: 'Görüşme planla', sellT: 'Villanızı satmak mı istiyorsunuz?', sellP: 'Doğru fiyat, doğru alıcı, tam gizlilik. Ücretsiz değerlemeyle başlayın.', valueT: 'Ücretsiz değerleme',
     valueP: 'Bölgedeki gerçek satışlar ve güncel ilanlarla karşılaştırarak villanız için gerçekçi bir fiyat aralığı çıkarıyoruz. Ücretsiz ve bağlayıcı değil.',
@@ -95,13 +96,13 @@ const T = {
     livCats: ['Furniture and design', 'Architecture and interiors', 'Smart home and electronics', 'Landscaping and pools', 'Security', 'Art and décor'], livAsk: 'Request a proposal for your villa',
     enneT: 'Our furniture and design partner', enneP: 'ENNE is a Turkish furniture brand working in contemporary design since 1999, with iF Design awards and a presence at Salone del Mobile Milano, and is known in particular for private villa projects. ENNE Antalya, the brand’s representative in Antalya, is the furniture and design partner of ACC VILLAS.',
     livTitle: 'Villa Living: Furniture, Interiors and VIP Services | ACC VILLAS', livDesc: 'Furniture, interior design, smart home, landscaping and security for your villa in Antalya. Our furniture and design partner: ENNE Antalya.', nav: { list: 'For sale', rent: 'For rent', projects: 'Projects', regions: 'Areas', sell: 'Sell your villa' },
-    homeTitle: 'Luxury Villas for Sale in Antalya | ACC VILLAS',
-    homeDesc: 'Villas for sale and rent in Antalya, villa developments and free valuation. Konyaaltı, Döşemealtı, Lara, Belek, Kaş and Alanya, with VIP service from viewing to title deed.',
+    homeTitle: 'Villas for Sale in Antalya | Villa-Only Specialists · ACC VILLAS',
+    homeDesc: 'Antalya’s villa-only real estate specialists: villas for sale and rent, villa developments and free valuation. Konyaaltı, Döşemealtı, Lara, Belek, Kaş and Alanya, with VIP service from viewing to title deed.',
     h1: 'Antalya’s finest villas', sub: 'Villas for sale and rent, new villa developments and end-to-end VIP service through to the title deed. You decide; we take care of everything else.',
     s: { region: 'Area', any: 'All areas', type: 'Looking to', sale: 'Buy', rent: 'Rent', go: 'Show villas' },
     featured: 'Featured villas', all: 'All villas', regionsT: 'Villas by area', regionsP: 'Every part of Antalya has its own way of life. Let us help you find yours.',
     colT: 'Collections', offT: 'Off-market villas', offP: 'Some villas are never listed publicly. At the owner’s request, they are shown only to verified buyers. Tell us what you are looking for and we will open our private portfolio to you.', offBtn: 'Ask about private listings',
-    svcT: 'Service from A to Z', svc: [['Online viewings', 'Tour the villa by video call, wherever you are.'], ['Legal due diligence', 'Title deed, occupancy permit, zoning and debts checked before you buy.'], ['Buy by power of attorney', 'Complete the whole purchase without travelling to Türkiye.'], ['Title deed and paperwork', 'Tax number, bank account, sworn translator and title deed day arranged.'], ['After handover', 'Utilities, insurance, furnishing, maintenance and rental management.'], ['Citizenship and residence', 'Guidance on citizenship by investment and residence permits.']],
+    svcT: 'Service from A to Z', svc: [['Online viewings', 'Tour the villa by video call, wherever you are.'], ['Legal due diligence', 'Title deed, occupancy permit, zoning and debts checked before you buy.'], ['Buy by power of attorney', 'Complete the whole purchase without travelling to Türkiye.'], ['Title deed and paperwork', 'Tax number, bank account, sworn translator and title deed day arranged.'], ['After handover', 'Utilities, insurance, furnishing, maintenance and rental management.'], ['Citizenship and residence', 'Guidance on citizenship by investment and residence permits.'], ['Open House and private events', 'See the villa in person on carefully hosted private viewing days.'], ['Villa Living', 'Furniture, interiors, smart home and landscaping with chosen partners, one point of contact.']],
     ceoT: 'From the founder', ceoQ: 'Buying or selling a villa is one of life’s biggest decisions. At ACC VILLAS we see every villa in person and look after every client ourselves. You make the decision; we take care of the rest.',
     meet: 'Book a call', sellT: 'Thinking of selling your villa?', sellP: 'The right price, the right buyer, full discretion. Start with a free valuation.', valueT: 'Free valuation',
     valueP: 'We compare real sales and current listings in your area to give a realistic price range for your villa. Free and non-binding.',
@@ -126,13 +127,13 @@ const T = {
     livCats: ['Мебель и дизайн', 'Архитектура и интерьер', 'Умный дом и электроника', 'Ландшафт и бассейны', 'Безопасность', 'Искусство и декор'], livAsk: 'Запросить предложение для вашей виллы',
     enneT: 'Наш партнёр по мебели и дизайну', enneP: 'ENNE — турецкий мебельный бренд, работающий в современном дизайне с 1999 года, лауреат iF Design и участник Salone del Mobile в Милане, особенно известный проектами частных вилл. ENNE Antalya, представитель бренда в Анталии, — партнёр ACC VILLAS по мебели и дизайну.',
     livTitle: 'Жизнь в вилле: мебель, интерьер и VIP-услуги | ACC VILLAS', livDesc: 'Мебель, дизайн интерьера, умный дом, ландшафт и безопасность для вашей виллы в Анталии. Наш партнёр по мебели и дизайну — ENNE Antalya.', nav: { list: 'Продажа', rent: 'Аренда', projects: 'Проекты', regions: 'Районы', sell: 'Продать виллу' },
-    homeTitle: 'Виллы в Анталии на продажу | ACC VILLAS',
-    homeDesc: 'Виллы на продажу и в аренду в Анталии, проекты вилл и бесплатная оценка. Коньяалты, Дёшемеалты, Лара, Белек, Каш и Аланья — VIP-сопровождение до получения тапу.',
+    homeTitle: 'Виллы в Анталии | Агентство только по виллам · ACC VILLAS',
+    homeDesc: 'Агентство в Анталии, работающее только с виллами: виллы на продажу и в аренду, проекты вилл и бесплатная оценка. Коньяалты, Дёшемеалты, Лара, Белек, Каш и Аланья — VIP-сопровождение до получения тапу.',
     h1: 'Лучшие виллы Анталии', sub: 'Виллы на продажу и в аренду, новые проекты и VIP-сопровождение до получения тапу. Вы принимаете решение — всё остальное мы берём на себя.',
     s: { region: 'Район', any: 'Все районы', type: 'Цель', sale: 'Купить', rent: 'Арендовать', go: 'Показать виллы' },
     featured: 'Избранные виллы', all: 'Все виллы', regionsT: 'Виллы по районам', regionsP: 'У каждого района Анталии свой образ жизни. Поможем найти ваш.',
     colT: 'Подборки', offT: 'Закрытые продажи (off-market)', offP: 'Некоторые виллы не публикуются. По желанию владельца их показывают только проверенным покупателям. Расскажите, что вы ищете, и мы откроем для вас закрытый портфель.', offBtn: 'Узнать о закрытых объектах',
-    svcT: 'Сопровождение от А до Я', svc: [['Онлайн-показ', 'Осмотр виллы по видеосвязи, где бы вы ни были.'], ['Юридическая проверка', 'Тапу, разрешение на заселение, зонирование и долги проверяются до покупки.'], ['Покупка по доверенности', 'Вся сделка без поездки в Турцию.'], ['Тапу и документы', 'Налоговый номер, банковский счёт, переводчик и день оформления тапу.'], ['После передачи', 'Коммунальные услуги, страхование, меблировка, обслуживание и управление арендой.'], ['Гражданство и ВНЖ', 'Сопровождение по гражданству за инвестиции и виду на жительство.']],
+    svcT: 'Сопровождение от А до Я', svc: [['Онлайн-показ', 'Осмотр виллы по видеосвязи, где бы вы ни были.'], ['Юридическая проверка', 'Тапу, разрешение на заселение, зонирование и долги проверяются до покупки.'], ['Покупка по доверенности', 'Вся сделка без поездки в Турцию.'], ['Тапу и документы', 'Налоговый номер, банковский счёт, переводчик и день оформления тапу.'], ['После передачи', 'Коммунальные услуги, страхование, меблировка, обслуживание и управление арендой.'], ['Гражданство и ВНЖ', 'Сопровождение по гражданству за инвестиции и виду на жительство.'], ['Дни открытых дверей', 'Осмотр виллы на спокойных частных показах.'], ['Жизнь в вилле', 'Мебель, интерьер, умный дом и ландшафт с отобранными партнёрами, один контакт.']],
     ceoT: 'Слово основателя', ceoQ: 'Покупка или продажа виллы — одно из самых важных решений в жизни. В ACC VILLAS мы лично осматриваем каждую виллу и сами ведём каждого клиента. Вы принимаете решение — остальное мы берём на себя.',
     meet: 'Назначить звонок', sellT: 'Хотите продать виллу?', sellP: 'Правильная цена, правильный покупатель, полная конфиденциальность. Начните с бесплатной оценки.', valueT: 'Бесплатная оценка',
     valueP: 'Сравниваем реальные сделки и актуальные объявления в вашем районе и даём реалистичный ценовой диапазон. Бесплатно и ни к чему не обязывает.',
@@ -152,7 +153,8 @@ const T = {
     regPage: { title: 'Районы вилл Анталии | ACC VILLAS', desc: 'Жизнь в вилле и виллы на продажу: Коньяалты, Дёшемеалты, Лара–Кунду, Алтынташ, Кепез–Дуаджи, Белек, Кемер, Каш–Калкан и Аланья.' },
   },
 };
-const KVKK = { tr: `${MAIN}/kvkk-aydinlatma-metni/`, en: `${MAIN}/en/privacy-notice/`, ru: `${MAIN}/en/privacy-notice/` };
+for (const l of ['tr', 'en', 'ru']) Object.assign(SEG[l], SEG2[l]);
+const KVKK = { tr: '/kvkk-aydinlatma-metni/', en: '/en/privacy-notice/', ru: '/ru/politika-konfidencialnosti/' };
 
 // ---------- veri ----------
 const SEO = JSON.parse(fs.readFileSync(path.join(ROOT, 'data/ilan-seo.json'), 'utf8'));
@@ -193,10 +195,21 @@ const VILLAS = rows.filter((v) => isVilla(v) && (v.foto || []).length && v.satis
   .sort((a, b) => (a.satildi - b.satildi) || (b.created_at || '').localeCompare(a.created_at || ''));
 console.log(`ACC VILLAS: ${rows.length} panel ilanından ${VILLAS.length} villa`);
 
+// ---------- döviz (TCMB, her derlemede) ----------
+let RATES = { USD: 0, EUR: 0, date: '' };
+try {
+  const xml = await (await fetch('https://www.tcmb.gov.tr/kurlar/today.xml', { signal: AbortSignal.timeout(15000) })).text();
+  const g = (c) => Number((xml.match(new RegExp(`CurrencyCode="${c}"[\\s\\S]*?<ForexSelling>([\\d.]+)<`)) || [])[1] || 0);
+  RATES = { USD: g('USD'), EUR: g('EUR'), date: (xml.match(/Tarih="([^"]+)"/) || [])[1] || '' };
+} catch (e) { console.warn('TCMB kuru alınamadı:', e.message); }
+const DEF_CUR = { tr: 'TRY', en: 'USD', ru: 'USD' };
+const beds = (v) => Number(String(v.oda || '').split('+')[0]) || 0;
+
 // ---------- yardımcılar ----------
 for (const v of VILLAS) { v.reg = regionOf(v); v.cols = COL.filter((c) => c.m(v)).map((c) => c.k); }
 const url = (lang, key, id) => `${BASE[lang]}/${key ? SEG[lang][key] + '/' : ''}${id ? id + '/' : ''}`;
 const price = (v, lang) => (v.fiyatGizli ? T[lang].call : `${nf.format(Number(v.fiyat))} ${v.para === 'TL' ? '₺' : v.para}${v.kiralik ? (lang === 'tr' ? ' / ay' : lang === 'ru' ? ' / мес.' : ' / month') : ''}`);
+const priceH = (v, lang) => (v.fiyatGizli ? esc(T[lang].call) : `<span class="pz" data-p="${Number(v.fiyat)}" data-c="${v.para === 'TL' ? 'TRY' : v.para}">${esc(price(v, lang))}</span>`);
 const regName = (k, lang) => REG.find((r) => r.k === k)?.n[lang] || '';
 const area = (v, lang) => { const r = v.reg ? regName(v.reg, lang) : v.ilce; return v.mahalle && !r.includes(v.mahalle) ? `${v.mahalle}, ${r}` : r; };
 const telIn = (lang, req = true) => `<div class="tel"><select name="ulke_kodu" aria-label="${T[lang].form.cc}">${DIAL.map(([c, d]) => `<option value="${d}"${d === DEF_DIAL[lang] && c !== 'KZ' ? ' selected' : ''}>${c} ${d}</option>`).join('')}</select><input name="telefon" type="tel" placeholder="${T[lang].form.phone}${req ? ' *' : ''}"${req ? ' required' : ''} autocomplete="tel-national"></div>`;
@@ -206,34 +219,44 @@ function form(lang, name, next, extra = '', btn) {
   return `<form class="form" method="POST" action="/form.php"><input type="hidden" name="form-name" value="${name}"><input type="hidden" name="_next" value="${next}"><input type="hidden" name="dil" value="${lang}"><input type="hidden" name="site" value="accvillas.com"><p class="hp"><input name="bot" tabindex="-1" autocomplete="off"></p>
 <input name="ad" placeholder="${f.name} *" required autocomplete="name">${telIn(lang)}<input name="eposta" type="email" placeholder="${f.email}" autocomplete="email">${extra}<textarea name="mesaj" rows="3" placeholder="${f.msg}"></textarea>${consent(lang)}<button class="btn" type="submit">${btn || f.send}</button></form>`;
 }
-const card = (v, lang) => `<a class="card" href="${url(lang, 'villa', v.slug)}" data-r="${v.reg}" data-c="${v.cols.join(' ')}"><div class="ph"><img src="${esc(v.foto[0])}" alt="${esc(v.title(lang))}" loading="lazy" width="640" height="427">${v.satildi ? `<span class="badge">${T[lang].sold}</span>` : v.kiralik ? `<span class="badge g">${T[lang].rentB}</span>` : ''}</div><div class="cb"><p class="loc">${esc(area(v, lang))}</p><h3>${esc(v.title(lang))}</h3><p class="specs">${[v.oda, v.brut && v.brut + ' m²', v.arsa && `${T[lang].land} ${v.arsa} m²`].filter(Boolean).join(' · ')}</p><p class="pr">${esc(price(v, lang))}</p></div></a>`;
+const card = (v, lang) => `<a class="card" href="${url(lang, 'villa', v.slug)}" data-r="${v.reg}" data-c="${v.cols.join(' ')}" data-b="${beds(v)}"><div class="ph"><img src="${esc(v.foto[0])}" alt="${esc(v.title(lang))}" loading="lazy" width="640" height="427">${v.satildi ? `<span class="badge">${T[lang].sold}</span>` : v.kiralik ? `<span class="badge g">${T[lang].rentB}</span>` : ''}</div><div class="cb"><p class="loc">${esc(area(v, lang))}</p><h3>${esc(v.title(lang))}</h3><p class="specs">${[v.oda, v.brut && v.brut + ' m²', v.arsa && `${T[lang].land} ${v.arsa} m²`].filter(Boolean).join(' · ')}</p><p class="pr">${priceH(v, lang)}</p></div></a>`;
 const CEO_IMG = fs.existsSync(path.join(HERE, 'static/ceo.webp')) ? '/ceo.webp' : '';
 const ceoPic = (cls = '') => (CEO_IMG ? `<img class="ceopic ${cls}" src="${CEO_IMG}" alt="${CEO.name}" width="160" height="160">` : `<span class="ceopic mono ${cls}" aria-hidden="true">AC</span>`);
 const broker = (lang, ctx = '') => { const t = T[lang]; const wa = `https://wa.me/${PHONE.wa}${ctx ? '?text=' + encodeURIComponent(ctx) : ''}`;
-  return `<div class="broker">${ceoPic()}<div><p class="bn">${CEO.name}</p><p class="br">${CEO.role[lang]} · ACC VILLAS</p></div></div><p class="acts"><a class="btn" href="${wa}">${t.wa}</a><a class="btn ghost dark" href="tel:${PHONE.raw}">${t.callBtn}</a></p>`; };
+  return `<div class="broker">${ceoPic()}<div><p class="bn"><a href="${url(lang, 'founder')}">${CEO.name}</a></p><p class="br">${CEO.role[lang]} · ACC VILLAS</p></div></div><p class="acts"><a class="btn" href="${wa}">${t.wa}</a><a class="btn ghost dark" href="tel:${PHONE.raw}">${t.callBtn}</a></p>`; };
+const offerDlg = (lang, v, title) => { const o = X[lang].offer; const f = T[lang].form;
+  return `<dialog class="offer"><form method="POST" action="/form.php" class="form"><button type="button" class="x" data-close aria-label="${o.close}">×</button><h2>${o.title}</h2><p class="small">${esc(title)} · ${v.id}</p><p class="small">${o.note}</p><input type="hidden" name="form-name" value="villa-teklif"><input type="hidden" name="_next" value="${url(lang, 'villa', v.slug)}"><input type="hidden" name="dil" value="${lang}"><input type="hidden" name="site" value="accvillas.com"><input type="hidden" name="ilan" value="${v.id}"><p class="hp"><input name="bot" tabindex="-1" autocomplete="off"></p>
+<div class="tel"><select name="teklif_para">${['TRY', 'USD', 'EUR'].map((c) => `<option${c === DEF_CUR[lang] ? ' selected' : ''}>${c}</option>`).join('')}</select><input name="teklif_tutari" type="number" min="1" step="1" placeholder="${o.amount} *" required></div>
+<select name="odeme_sekli" required><option value="">${o.pay} *</option>${o.payO.map((x) => `<option>${x}</option>`).join('')}</select><select name="zamanlama" required><option value="">${o.when} *</option>${o.whenO.map((x) => `<option>${x}</option>`).join('')}</select>
+<input name="ad" placeholder="${f.name} *" required autocomplete="name">${telIn(lang)}<input name="eposta" type="email" placeholder="${f.email} *" required autocomplete="email">${consent(lang)}<button class="btn" type="submit">${o.send}</button></form></dialog>`; };
 const emptyBox = (lang, next) => `<div class="empty"><p>${T[lang].empty}</p>${form(lang, 'villa-talep', next)}</div>`;
 
-const ORG = { '@context': 'https://schema.org', '@type': 'RealEstateAgent', name: 'ACC VILLAS', url: DOMAIN, telephone: PHONE.raw, founder: { '@type': 'Person', name: CEO.name, jobTitle: 'Founder & CEO' }, parentOrganization: { '@type': 'RealEstateAgent', name: 'ACC HOMES International Real Estate', url: MAIN }, address: { '@type': 'PostalAddress', streetAddress: 'Portakal Çiçeği Bulvarı No:36/B, Yeşilbahçe', addressLocality: 'Muratpaşa', addressRegion: 'Antalya', addressCountry: 'TR' }, areaServed: 'Antalya' };
+const ORG = { '@context': 'https://schema.org', '@type': 'RealEstateAgent', name: 'ACC VILLAS', url: DOMAIN, telephone: PHONE.raw, founder: { '@type': 'Person', name: CEO.name, jobTitle: 'Founder & CEO' }, parentOrganization: { '@type': 'RealEstateAgent', name: 'ACC HOMES International Real Estate', url: MAIN }, address: { '@type': 'PostalAddress', streetAddress: 'Portakal Çiçeği Bulvarı No:36/B, Yeşilbahçe', addressLocality: 'Muratpaşa', addressRegion: 'Antalya', addressCountry: 'TR' }, areaServed: 'Antalya', description: 'Villa-only real estate specialists in Antalya: villas and large detached homes for sale and rent, villa developments, valuation.', sameAs: [IG.url] };
 
-const NAVK = ['list', 'rent', 'projects', 'regions', 'living', 'sell'];
-function layout({ lang, title, desc, canon, alts, body, ld = [], image }) {
-  const t = T[lang];
+const NAVK = ['list', 'rent', 'projects', 'regions', 'living', 'openhouse', 'sell'];
+function layout({ lang, title, desc, canon, alts, body, ld = [], image, offer = false }) {
+  const t = T[lang]; const x = X[lang];
   const altLinks = alts ? LANGS.map((l) => `<link rel="alternate" hreflang="${l}" href="${DOMAIN}${alts[l]}">`).join('') + `<link rel="alternate" hreflang="x-default" href="${DOMAIN}${alts.en}">` : '';
   const langSw = alts ? LANGS.map((l) => `<a href="${alts[l]}"${l === lang ? ' class="on"' : ''}>${l.toUpperCase()}</a>`).join('') : '';
   return `<!DOCTYPE html><html lang="${lang}"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>${esc(title)}</title><meta name="description" content="${esc(desc)}"><link rel="canonical" href="${DOMAIN}${canon}">${altLinks}
 <meta property="og:title" content="${esc(title)}"><meta property="og:description" content="${esc(desc)}"><meta property="og:url" content="${DOMAIN}${canon}"><meta property="og:type" content="website">${image ? `<meta property="og:image" content="${esc(image)}">` : ''}
 <link rel="icon" href="${MAIN}/favicon.ico"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet"><link rel="stylesheet" href="/style.css?v=${VER}">
 ${[ORG, ...ld].map((o) => `<script type="application/ld+json">${JSON.stringify(o)}</script>`).join('')}</head><body>
-<header class="top"><div class="wrap hb"><a class="logo" href="${url(lang)}"><span><b>ACC</b> VILLAS</span><small>${t.tag}</small></a><nav>${NAVK.map((k) => `<a href="${url(lang, k)}">${k === 'living' ? t.nav2 : t.nav[k]}</a>`).join('')}</nav><div class="lsw">${langSw}</div></div></header>
+<header class="top"><div class="wrap hb"><a class="logo" href="${url(lang)}"><span><b>ACC</b> VILLAS</span><small>${t.tag}</small></a><nav>${NAVK.map((k) => `<a href="${url(lang, k)}">${k === 'living' ? t.nav2 : k === 'openhouse' ? X[lang].oh.nav : t.nav[k]}</a>`).join('')}</nav><div class="tools"><select class="cur" aria-label="${x.cur}"><option value="TRY">₺ TRY</option><option value="USD">$ USD</option><option value="EUR">€ EUR</option></select><a class="igl" href="${IG.url}" target="_blank" rel="noopener" aria-label="Instagram">IG</a><div class="lsw">${langSw}</div></div></div></header>
 <p class="okmsg" hidden>${t.ok}</p>
 <main>${body}</main>
-<footer><div class="wrap fg"><div><p class="logo"><span><b>ACC</b> VILLAS</span></p><p>${t.by}</p><p><a href="${MAIN}${BASE[lang] || ''}/">acchomesantalya.com</a></p></div><div><p class="fh">${t.nav.regions}</p><p class="flinks">${REG.map((r) => `<a href="${url(lang, 'regions', r.k)}">${r.n[lang]}</a>`).join('')}</p></div><div><p>${t.office}</p><p><a href="tel:${PHONE.raw}">${PHONE.text}</a> · <a href="https://wa.me/${PHONE.wa}">WhatsApp</a></p></div></div><p class="wrap cp">© ${new Date().getFullYear()} ACC HOMES International Real Estate</p></footer>
-<a class="wafab" href="https://wa.me/${PHONE.wa}" aria-label="WhatsApp">WhatsApp</a>
+<footer><div class="wrap fg"><div><p class="logo"><span><b>ACC</b> VILLAS</span></p><p>${t.by}</p><p class="flinks"><a href="${url(lang, 'founder')}">${CEO.name} · ${CEO.role[lang]}</a><a href="${url(lang, 'openhouse')}">${x.oh.nav}</a><a href="${IG.url}" target="_blank" rel="noopener">Instagram ${IG.handle}</a><a href="${MAIN}${BASE[lang] || ''}/">acchomesantalya.com</a></p></div><div><p class="fh">${t.nav.regions}</p><p class="flinks">${REG.map((r) => `<a href="${url(lang, 'regions', r.k)}">${r.n[lang]}</a>`).join('')}</p></div><div><p>${t.office}</p><p><a href="tel:${PHONE.raw}">${PHONE.text}</a> · <a href="https://wa.me/${PHONE.wa}">WhatsApp</a></p><p><a href="${KVKK[lang]}">${t.form.kvkk}</a></p></div></div><p class="wrap cp">© ${new Date().getFullYear()} ACC VILLAS by ACC HOMES International Real Estate</p></footer>
+<div class="dock"><a class="d-call" href="tel:${PHONE.raw}">${x.call}</a><a class="d-wa" href="https://wa.me/${PHONE.wa}">WhatsApp</a>${offer ? `<button class="d-off" type="button" data-offer>${x.offer.btn}</button>` : ''}</div>
 <script>
 if(/[?&]ok=1/.test(location.search))document.querySelector('.okmsg').hidden=false;
-(function(){var g=document.querySelector('.grid[data-filter]');if(!g)return;var q=new URLSearchParams(location.search),st={r:q.get('r')||'',c:q.get('c')||''};
-function ap(){var n=0;g.querySelectorAll('.card').forEach(function(c){var ok=(!st.r||c.dataset.r===st.r)&&(!st.c||(' '+c.dataset.c+' ').indexOf(' '+st.c+' ')>-1);c.hidden=!ok;if(ok)n++;});document.querySelectorAll('[data-fr]').forEach(function(b){b.classList.toggle('on',b.dataset.fr===st.r);});document.querySelectorAll('[data-fc]').forEach(function(b){b.classList.toggle('on',b.dataset.fc===st.c);});var e=document.querySelector('.empty');if(e)e.hidden=n>0;}
-document.querySelectorAll('[data-fr]').forEach(function(b){b.onclick=function(){st.r=b.dataset.fr;ap();};});document.querySelectorAll('[data-fc]').forEach(function(b){b.onclick=function(){st.c=st.c===b.dataset.fc?'':b.dataset.fc;ap();};});ap();})();
+(function(){var g=document.querySelector('.grid[data-filter]');if(!g)return;var q=new URLSearchParams(location.search),st={r:q.get('r')||'',c:q.get('c')||'',b:0};
+function ap(){var n=0;g.querySelectorAll('.card').forEach(function(c){var ok=(!st.r||c.dataset.r===st.r)&&(!st.c||(' '+c.dataset.c+' ').indexOf(' '+st.c+' ')>-1)&&(!st.b||(+c.dataset.b)>=st.b);c.hidden=!ok;if(ok)n++;});document.querySelectorAll('[data-fr]').forEach(function(b){b.classList.toggle('on',b.dataset.fr===st.r);});document.querySelectorAll('[data-fc]').forEach(function(b){b.classList.toggle('on',b.dataset.fc===st.c);});document.querySelectorAll('[data-fb]').forEach(function(b){b.classList.toggle('on',+b.dataset.fb===st.b);});var e=document.querySelector('.empty');if(e)e.hidden=n>0;}
+document.querySelectorAll('[data-fr]').forEach(function(b){b.onclick=function(){st.r=b.dataset.fr;ap();};});document.querySelectorAll('[data-fc]').forEach(function(b){b.onclick=function(){st.c=st.c===b.dataset.fc?'':b.dataset.fc;ap();};});document.querySelectorAll('[data-fb]').forEach(function(b){b.onclick=function(){st.b=st.b===+b.dataset.fb?0:+b.dataset.fb;ap();};});ap();})();
+(function(){var R=${JSON.stringify({ TRY: 1, USD: RATES.USD, EUR: RATES.EUR })},S={TRY:'₺',USD:'$',EUR:'€'},sel=document.querySelector('.cur'),cur='${DEF_CUR[lang]}';try{cur=localStorage.getItem('cur')||cur}catch(e){}if(!R.USD)return sel&&(sel.style.display='none');sel.value=cur;function f(n){return new Intl.NumberFormat('${lang === 'tr' ? 'tr-TR' : lang === 'ru' ? 'ru-RU' : 'en-US'}',{maximumFractionDigits:0}).format(n)}
+function go(){document.querySelectorAll('.pz').forEach(function(e){if(!e.dataset.o)e.dataset.o=e.textContent;var p=+e.dataset.p,c=e.dataset.c;if(!R[c]||c===cur){e.textContent=e.dataset.o;e.title='';return}var v=p*R[c]/R[cur];v=v>1e5?Math.round(v/1000)*1000:Math.round(v);e.textContent='≈ '+S[cur]+' '+f(v);e.title='${X[lang].approx}';})}
+sel.onchange=function(){cur=sel.value;try{localStorage.setItem('cur',cur)}catch(e){}go()};go();})();
+(function(){var sl=document.querySelectorAll('.slide');if(sl.length<2)return;var i=0,d=document.querySelectorAll('.dots button');function show(n){sl[i].classList.remove('on');d[i]&&d[i].classList.remove('on');i=(n+sl.length)%sl.length;sl[i].classList.add('on');d[i]&&d[i].classList.add('on');var im=sl[i].querySelector('img[data-src]');if(im){im.src=im.dataset.src;im.removeAttribute('data-src')}}d.forEach(function(b,k){b.onclick=function(){show(k);clearInterval(tm);tm=setInterval(function(){show(i+1)},7000)}});var tm=setInterval(function(){show(i+1)},7000);})();
+(function(){var dl=document.querySelector('dialog.offer');if(!dl)return;document.querySelectorAll('[data-offer]').forEach(function(b){b.onclick=function(){dl.showModal()}});dl.querySelector('[data-close]').onclick=function(){dl.close()};})();
 var sf=document.querySelector('.search');if(sf)sf.onsubmit=function(e){e.preventDefault();var r=sf.r.value,t=sf.t.value;location.href=sf.dataset[t]+(r?'?r='+r:'');};
 </script>
 </body></html>`;
@@ -243,7 +266,7 @@ const VER = Date.now().toString(36);
 function write(p, html) { const f = path.join(OUT, p, 'index.html'); fs.mkdirSync(path.dirname(f), { recursive: true }); fs.writeFileSync(f, html.replace(/<img (?!referrerpolicy)/g, '<img referrerpolicy="no-referrer" ')); }
 const allAlts = (key, id) => Object.fromEntries(LANGS.map((l) => [l, url(l, key, id)]));
 const filters = (lang, list) => { const t = T[lang]; const regs = REG.filter((r) => list.some((v) => v.reg === r.k));
-  return `<div class="filters"><button data-fr="">${t.filterAll}</button>${regs.map((r) => `<button data-fr="${r.k}">${r.n[lang]}</button>`).join('')}<span class="sep"></span>${COL.filter((c) => list.some((v) => v.cols.includes(c.k))).map((c) => `<button data-fc="${c.k}">${c.n[lang]}</button>`).join('')}</div>`; };
+  return `<div class="filters"><button data-fr="">${t.filterAll}</button>${regs.map((r) => `<button data-fr="${r.k}">${r.n[lang]}</button>`).join('')}<span class="sep"></span>${COL.filter((c) => list.some((v) => v.cols.includes(c.k))).map((c) => `<button data-fc="${c.k}">${c.n[lang]}</button>`).join('')}<span class="sep"></span>${[3, 4, 5, 6].filter((b) => list.some((v) => beds(v) >= b)).map((b) => `<button data-fb="${b}">${b}+ ${lang === 'tr' ? 'yatak odası' : lang === 'ru' ? 'спален' : 'bedrooms'}</button>`).join('')}</div>`; };
 
 // ---------- sayfalar ----------
 fs.rmSync(OUT, { recursive: true, force: true }); fs.mkdirSync(OUT, { recursive: true });
@@ -260,15 +283,24 @@ for (const lang of LANGS) {
 
   // ana sayfa
   write(BASE[lang], layout({ lang, title: t.homeTitle, desc: t.homeDesc, canon: url(lang), alts: allAlts(), image: HERO, body: `
-<section class="hero"><picture><source media="(max-width:700px)" srcset="${HERO_M}"><img src="${HERO}" alt="" fetchpriority="high"></picture><div class="wrap hc"><p class="eyebrow">ACC VILLAS · ${t.tag}</p><h1>${t.h1}</h1><p>${t.sub}</p>
-<form class="search" data-sale="${url(lang, 'list')}" data-rent="${url(lang, 'rent')}"><label><span>${t.s.region}</span><select name="r"><option value="">${t.s.any}</option>${REG.map((r) => `<option value="${r.k}">${r.n[lang]}</option>`).join('')}</select></label><label><span>${t.s.type}</span><select name="t"><option value="sale">${t.s.sale}</option><option value="rent">${t.s.rent}</option></select></label><button class="btn" type="submit">${t.s.go}</button></form></div></section>
+<section class="hero slider">${X[lang].slides.map((sd, i) => `<div class="slide${i ? '' : ' on'}"><picture>${sd.imgM ? `<source media="(max-width:700px)" srcset="${sd.imgM}">` : ''}<img ${i ? `data-src="${sd.img}"` : `src="${sd.img}" fetchpriority="high"`} alt=""></picture><div class="wrap hc"><p class="eyebrow">${sd.eyebrow}</p>${i ? `<p class="h1">${sd.h}</p>` : `<h1>${sd.h}</h1>`}<p>${sd.p}</p><p><a class="btn light" href="${url(lang, sd.btn[1])}">${sd.btn[0]}</a></p></div></div>`).join('')}
+<div class="wrap hsearch"><form class="search" data-sale="${url(lang, 'list')}" data-rent="${url(lang, 'rent')}"><label><span>${t.s.region}</span><select name="r"><option value="">${t.s.any}</option>${REG.filter((r) => regCount(r)).map((r) => `<option value="${r.k}">${r.n[lang]}</option>`).join('')}</select></label><label><span>${t.s.type}</span><select name="t"><option value="sale">${t.s.sale}</option><option value="rent">${t.s.rent}</option></select></label><button class="btn" type="submit">${t.s.go}</button></form><div class="dots">${X[lang].slides.map((_, i) => `<button type="button" aria-label="${i + 1}"${i ? '' : ' class="on"'}></button>`).join('')}</div></div></section>
+<section class="wrap sec why"><p class="eyebrow dark">ACC VILLAS</p><h2>${X[lang].whyT}</h2><p class="lead">${X[lang].whyP}</p></section>
 <section class="wrap sec"><div class="sh"><h2>${t.featured}</h2><a href="${url(lang, 'list')}">${t.all} →</a></div><div class="grid">${active.slice(0, 6).map((v) => card(v, lang)).join('')}</div></section>
 <section class="wrap sec"><div class="sh"><h2>${t.regionsT}</h2><a href="${url(lang, 'regions')}">${t.nav.regions} →</a></div><p class="lead">${t.regionsP}</p><div class="regs">${REG.filter((r) => regCount(r)).map((r) => { const c = regCover(r); const n = regCount(r); return `<a class="reg${c ? '' : ' noimg'}" href="${url(lang, 'regions', r.k)}">${c ? `<img src="${esc(c)}" alt="${r.n[lang]}" loading="lazy">` : ''}<span><b>${r.n[lang]}</b>${n ? `<small>${n} ${t.villas}</small>` : ''}</span></a>`; }).join('')}</div></section>
 <section class="band"><div class="wrap"><h2>${t.colT}</h2><div class="cols">${COL.map((c) => `<a href="${url(lang, 'list')}?c=${c.k}">${c.n[lang]}</a>`).join('')}<a href="${url(lang, 'projects')}">${t.projT}</a><a href="${url(lang, 'rent')}">${t.nav.rent}</a></div></div></section>
 <section class="wrap sec"><div class="sh"><h2>${t.livT}</h2><a href="${url(lang, 'living')}">${t.livT} →</a></div><div class="two liv"><p class="lead">${t.livP}</p><a class="partner" href="${url(lang, 'living')}"><img src="/enne-antalya.webp" alt="ENNE Antalya" width="300" height="104"><span>${t.enneT}</span></a></div></section>
 <section class="wrap sec"><h2>${t.svcT}</h2><div class="svc">${t.svc.map(([a, b]) => `<div><b>${a}</b><span>${b}</span></div>`).join('')}</div></section>
 <section class="band"><div class="wrap two"><div class="off"><p class="eyebrow dark">Private</p><h2>${t.offT}</h2><p>${t.offP}</p><a class="btn" href="https://wa.me/${PHONE.wa}?text=${encodeURIComponent(t.offT)}">${t.offBtn}</a></div><div class="ceo">${ceoPic('big')}<blockquote>“${t.ceoQ}”</blockquote><p class="bn">${CEO.name}</p><p class="br">${CEO.role[lang]}, ACC VILLAS</p><p class="acts"><a class="btn ghost dark" href="https://wa.me/${PHONE.wa}">${t.meet}</a></p></div></div></section>
-<section class="wrap sec two"><div><h2>${t.sellT}</h2><p class="lead">${t.sellP}</p><p class="acts"><a class="btn" href="${url(lang, 'value')}">${t.valueT}</a><a class="btn ghost dark" href="${url(lang, 'sell')}">${t.nav.sell}</a></p></div></section>` }));
+<section class="wrap sec two"><div><h2>${t.sellT}</h2><p class="lead">${t.sellP}</p><p class="acts"><a class="btn" href="${url(lang, 'value')}">${t.valueT}</a><a class="btn ghost dark" href="${url(lang, 'sell')}">${t.nav.sell}</a></p></div></section>
+<section class="band"><div class="wrap"><div class="sh"><h2>${X[lang].revT}</h2><a href="${GOOGLE.url}" target="_blank" rel="noopener">${X[lang].revBadge} →</a></div><div class="revs">${REVIEWS.map((r) => `<figure class="rev"><p class="stars">★★★★★</p><blockquote>${esc(r[lang])}</blockquote><figcaption>${r.n} · Google · ${r.when[lang]}</figcaption></figure>`).join('')}</div><p class="small">${X[lang].revNote}</p></div></section>
+<section class="wrap sec ig"><div><p class="eyebrow dark">${IG.handle}</p><h2>${X[lang].igT}</h2><p class="lead">${X[lang].igP}</p><a class="btn" href="${IG.url}" target="_blank" rel="noopener">${X[lang].igBtn}</a></div><div class="iggrid">${ANTALLE_GAL.slice(0, 6).map((g) => `<a href="${IG.url}" target="_blank" rel="noopener"><img src="${g}" alt="" loading="lazy"></a>`).join('')}</div></section>
+<section class="wrap sec pop"><h2>${X[lang].popT}</h2><div class="popc">
+<div><p class="fh">${X[lang].popCols[0]}</p>${REG.filter((r) => regCount(r)).map((r) => `<a href="${url(lang, 'regions', r.k)}">${t.regionH(r.n[lang])}</a>`).join('')}<a href="${url(lang, 'regions')}">${t.nav.regions} →</a></div>
+<div><p class="fh">${X[lang].popCols[1]}</p>${COL.map((c) => `<a href="${url(lang, 'list')}?c=${c.k}">${c.n[lang]}</a>`).join('')}<a href="${url(lang, 'rent')}">${t.rentT}</a></div>
+<div><p class="fh">${X[lang].popCols[2]}</p><a href="${url(lang, 'antalle')}">Antalle Concept Houses</a>${projects.filter((p) => !/antalle/i.test(p)).slice(0, 6).map((p) => `<a href="${url(lang, 'projects')}#${encodeURIComponent(p)}">${esc(p)}</a>`).join('')}<a href="${url(lang, 'projects')}">${t.projT} →</a></div>
+<div><p class="fh">${X[lang].popCols[3]}</p><a href="${url(lang, 'value')}">${t.valueT}</a><a href="${url(lang, 'sell')}">${t.nav.sell}</a><a href="${url(lang, 'openhouse')}">${X[lang].oh.nav}</a><a href="${url(lang, 'living')}">${t.livT}</a><a href="${url(lang, 'founder')}">${CEO.name}</a></div>
+</div></section>` }));
   sitemap.push(url(lang));
 
   // satılık / kiralık listeleri
@@ -295,11 +327,11 @@ for (const lang of LANGS) {
     const specs = [[t.price, price(v, lang)], [t.rooms, v.oda], [t.gross, v.brut && v.brut + ' m²'], [t.land, v.arsa && v.arsa + ' m²'], [lang === 'tr' ? 'Konum' : lang === 'ru' ? 'Расположение' : 'Location', area(v, lang)], [lang === 'tr' ? 'Isıtma' : lang === 'ru' ? 'Отопление' : 'Heating', lang === 'tr' && v.isitma], [lang === 'tr' ? 'Tapu' : lang === 'ru' ? 'Тапу' : 'Title deed', lang === 'tr' && v.tapu], [lang === 'tr' ? 'Kredi' : lang === 'ru' ? 'Ипотека' : 'Mortgage', v.kredi === 'Evet' && (lang === 'tr' ? 'Krediye uygun' : lang === 'ru' ? 'Подходит' : 'Eligible')], ['', v.site === 'Evet' ? t.site : '']].filter(([, x]) => x);
     const ld = { '@context': 'https://schema.org', '@type': 'RealEstateListing', name: title, url: DOMAIN + url(lang, 'villa', v.slug), image: v.foto.slice(0, 6), description: v.meta(lang) || text.slice(0, 300), ...(v.fiyatGizli ? {} : { offers: { '@type': 'Offer', price: Number(v.fiyat), priceCurrency: v.para === 'TL' ? 'TRY' : v.para, availability: v.satildi ? 'https://schema.org/SoldOut' : 'https://schema.org/InStock' } }) };
     const similar = VILLAS.filter((x) => x !== v && !x.satildi && (x.reg === v.reg)).slice(0, 3);
-    write(BASE[lang] + '/villa/' + v.slug, layout({ lang, title: `${title} | ACC VILLAS`, desc: (v.meta(lang) || text).slice(0, 158), canon: url(lang, 'villa', v.slug), alts: allAlts('villa', v.slug), image: v.foto[0], ld: [ld], body: `
+    write(BASE[lang] + '/villa/' + v.slug, layout({ lang, title: `${title} | ACC VILLAS`, desc: (v.meta(lang) || text).slice(0, 158), canon: url(lang, 'villa', v.slug), alts: allAlts('villa', v.slug), image: v.foto[0], ld: [ld], offer: !v.satildi, body: `${offerDlg(lang, v, title)}
 <section class="wrap sec vd"><p class="crumb"><a href="${url(lang, v.kiralik ? 'rent' : 'list')}">← ${t.back}</a>${v.reg ? ` · <a href="${url(lang, 'regions', v.reg)}">${regName(v.reg, lang)}</a>` : ''}</p><h1>${esc(title)}</h1><p class="loc">${esc(area(v, lang))} · ${v.id}</p>
 <div class="gal">${v.foto.slice(0, 12).map((f, i) => `<a href="${esc(f)}" target="_blank" rel="noopener"><img src="${esc(f)}" alt="${esc(title)} ${i + 1}" ${i ? 'loading="lazy"' : 'fetchpriority="high"'} width="800" height="533"></a>`).join('')}</div>
 <div class="vcols"><div><h2>${t.details}</h2><dl class="spec">${specs.map(([a, b]) => `<dt>${a}</dt><dd>${esc(b)}</dd>`).join('')}</dl>${text ? `<div class="txt">${text.split(/\n+/).map((p) => `<p>${esc(p)}</p>`).join('')}</div>` : ''}${lang === 'tr' && (v.ozellikler || []).length ? `<h2>${t.features}</h2><ul class="feat">${v.ozellikler.slice(0, 40).map((o) => `<li>${esc(o)}</li>`).join('')}</ul>` : ''}</div>
-<aside class="box"><p class="pr big">${esc(price(v, lang))}</p>${broker(lang, `${v.id} — ${title}`)}<h3>${t.ask}</h3>${form(lang, 'villa-talep', url(lang, 'villa', v.slug), `<input type="hidden" name="ilan" value="${v.id}">`)}</aside></div></section>
+<aside class="box"><p class="pr big">${priceH(v, lang)}</p>${!v.satildi ? `<p><button class="btn wide" type="button" data-offer>${X[lang].offer.btn}</button></p>` : ''}${broker(lang, `${v.id} — ${title}`)}<h3>${t.ask}</h3>${form(lang, 'villa-talep', url(lang, 'villa', v.slug), `<input type="hidden" name="ilan" value="${v.id}">`)}</aside></div></section>
 ${similar.length ? `<section class="wrap sec"><h2>${regName(v.reg, lang)}</h2><div class="grid">${similar.map((x) => card(x, lang)).join('')}</div></section>` : ''}` }));
     sitemap.push(url(lang, 'villa', v.slug));
   }
@@ -324,10 +356,41 @@ ${similar.length ? `<section class="wrap sec"><h2>${regName(v.reg, lang)}</h2><d
 <section class="wrap sec two"><div>${broker(lang)}</div><aside class="box"><h2>${t.livAsk}</h2>${form(lang, 'villa-talep', url(lang, 'living'), `<input type="hidden" name="konu" value="villa-yasami">`)}</aside></section>` }));
   sitemap.push(url(lang, 'living'));
 
+  // open house
+  { const o = X[lang].oh;
+  write(BASE[lang] + '/' + SEG[lang].openhouse, layout({ lang, title: o.title, desc: o.desc, canon: url(lang, 'openhouse'), alts: allAlts('openhouse'), image: OH_GAL[0], body: `
+<section class="wrap sec"><h1>${o.h1}</h1><p class="lead">${o.lead}</p><ol class="steps four">${o.how.map(([a, b]) => `<li><b>${a}</b><span>${b}</span></li>`).join('')}</ol></section>
+<section class="band"><div class="wrap two"><div><p class="eyebrow dark">${o.nextT}</p><h2>${o.next}</h2><p><a class="btn" href="${url(lang, 'antalle')}">Antalle Concept Houses</a></p><p class="eyebrow dark" style="margin-top:28px">${o.pastT}</p><h3>${o.past}</h3><p>${o.pastP}</p></div><div class="ohg">${OH_GAL.map((g) => `<img src="${g}" alt="Antalle Open House" loading="lazy">`).join('')}</div></div></section>
+<section class="wrap sec two"><div><h2>${o.ownT}</h2><p class="lead">${o.ownP}</p>${broker(lang)}</div><aside class="box"><h2>${o.formT}</h2>${form(lang, 'etkinlik-talep', url(lang, 'openhouse'))}</aside></section>` }));
+  sitemap.push(url(lang, 'openhouse')); }
+
+  // antalle
+  { const a = X[lang].an; const av = VILLAS.filter((v) => /antalle/i.test(`${v.proje || ''} ${v.title('tr')}`));
+  write(BASE[lang] + '/' + SEG[lang].antalle, layout({ lang, title: a.title, desc: a.desc, canon: url(lang, 'antalle'), alts: allAlts('antalle'), image: ANTALLE_GAL[0], ld: [{ '@context': 'https://schema.org', '@type': 'Residence', name: 'Antalle Concept Houses', address: { '@type': 'PostalAddress', addressLocality: 'Altınkale, Döşemealtı', addressRegion: 'Antalya', addressCountry: 'TR' }, image: ANTALLE_GAL.slice(0, 4) }], body: `
+<section class="hero slim"><img src="${ANTALLE_GAL[0]}" alt="Antalle Concept Houses" fetchpriority="high"><div class="wrap hc"><p class="eyebrow">Altınkale · Döşemealtı</p><h1>${a.h1}</h1><p>${a.lead}</p><p><a class="btn light" href="#form">${a.formT}</a></p></div></section>
+<section class="wrap sec"><div class="facts">${a.facts.map(([n, l]) => `<div><b>${n}</b><span>${l}</span></div>`).join('')}</div></section>
+<section class="wrap sec two"><div><h2>${a.bodyT}</h2><p class="lead">${a.body}</p></div><div><h2>${a.teamT}</h2><ul class="team">${a.team.map(([n, r]) => `<li><b>${n}</b><span>${r}</span></li>`).join('')}</ul></div></section>
+<section class="wrap sec"><h2>${a.galT}</h2><div class="agal">${ANTALLE_GAL.map((g, i) => `<img src="${g}" alt="Antalle Concept Houses ${i + 1}" loading="lazy">`).join('')}</div></section>
+${av.length ? `<section class="wrap sec"><h2>${a.villasT}</h2><div class="grid">${av.map((v) => card(v, lang)).join('')}</div></section>` : ''}
+<section class="wrap sec two" id="form"><div>${broker(lang, 'Antalle Concept Houses')}</div><aside class="box"><h2>${a.formT}</h2>${form(lang, 'antalle-talep', url(lang, 'antalle'))}</aside></section>` }));
+  sitemap.push(url(lang, 'antalle')); }
+
+  // kurucu
+  { const fd = X[lang].fd;
+  write(BASE[lang] + '/' + SEG[lang].founder, layout({ lang, title: fd.title, desc: fd.desc, canon: url(lang, 'founder'), alts: allAlts('founder'), image: CEO_IMG ? DOMAIN + CEO_IMG : undefined, ld: [{ '@context': 'https://schema.org', '@type': 'Person', name: CEO.name, jobTitle: 'Founder & CEO', worksFor: { '@type': 'RealEstateAgent', name: 'ACC VILLAS', url: DOMAIN }, alumniOf: ['Yıldız Technical University', 'Kuleli Military High School'], knowsLanguage: ['tr', 'en'], sameAs: FOUNDER_LINKS.map((l) => l[1]), image: CEO_IMG ? DOMAIN + CEO_IMG : undefined }], body: `
+<section class="wrap sec founder"><div class="fhead">${ceoPic('xl')}<div><p class="eyebrow dark">ACC VILLAS</p><h1>${fd.h1}</h1><p class="br">${fd.role}</p><p class="lead">${fd.intro}</p><p class="acts"><a class="btn" href="https://wa.me/${PHONE.wa}">${fd.meet}</a><a class="btn ghost dark" href="tel:${PHONE.raw}">${PHONE.text}</a></p></div></div>
+<div class="fsecs">${fd.secs.map(([h, p]) => `<div><h2>${h}</h2><p>${p}</p></div>`).join('')}</div></section>
+<section class="band"><div class="wrap"><h2>${X[lang].revT}</h2><div class="revs">${[REVIEWS[2], { ...REV_PROJECT, when: { tr: '2025', en: '2025', ru: '2025' } }].map((r) => `<figure class="rev"><p class="stars">★★★★★</p><blockquote>${esc(r[lang])}</blockquote><figcaption>${r.n} · Google · ${r.when[lang]}</figcaption></figure>`).join('')}</div></div></section>
+<section class="wrap sec"><h2>${fd.linksT}</h2><p class="flinks big">${FOUNDER_LINKS.map(([n, h]) => `<a href="${h}" target="_blank" rel="noopener">${n}</a>`).join('')}<a href="${url(lang, 'antalle')}">Antalle Concept Houses</a></p></section>` }));
+  sitemap.push(url(lang, 'founder')); }
+
+  // kvkk
+  write(BASE[lang] + '/' + SEG[lang].privacy, layout({ lang, title: X[lang].kv.title, desc: X[lang].kv.title, canon: url(lang, 'privacy'), alts: allAlts('privacy'), body: `<section class="wrap sec legal"><h1>${X[lang].kv.h1}</h1>${KVKK_HTML[lang]}</section>` }));
+
   // projeler
   const pp = t.projPage;
   write(BASE[lang] + '/' + SEG[lang].projects, layout({ lang, title: pp.title, desc: pp.desc, canon: url(lang, 'projects'), alts: allAlts('projects'), body: `
-<section class="wrap sec"><h1>${t.projT}</h1><p class="lead">${t.projP}</p>${projects.map((p) => `<h2 id="${esc(encodeURIComponent(p))}">${esc(p)}</h2><div class="grid">${VILLAS.filter((v) => v.proje === p).map((v) => card(v, lang)).join('')}</div>`).join('')}</section>` }));
+<section class="wrap sec"><h1>${t.projT}</h1><p class="lead">${t.projP}</p><p><a class="btn" href="${url(lang, 'antalle')}">Antalle Concept Houses →</a></p><figure class="rev solo"><p class="stars">★★★★★</p><blockquote>${esc(REV_PROJECT[lang])}</blockquote><figcaption>${REV_PROJECT.n} · Google</figcaption></figure>${projects.map((p) => `<h2 id="${esc(encodeURIComponent(p))}">${esc(p)}</h2><div class="grid">${VILLAS.filter((v) => v.proje === p).map((v) => card(v, lang)).join('')}</div>`).join('')}</section>` }));
   sitemap.push(url(lang, 'projects'));
 }
 
@@ -335,7 +398,7 @@ ${similar.length ? `<section class="wrap sec"><h2>${regName(v.reg, lang)}</h2><d
 fs.copyFileSync(path.join(HERE, 'style.css'), path.join(OUT, 'style.css'));
 for (const f of fs.existsSync(path.join(HERE, 'static')) ? fs.readdirSync(path.join(HERE, 'static')) : []) fs.copyFileSync(path.join(HERE, 'static', f), path.join(OUT, f));
 const php = fs.readFileSync(path.join(ROOT, 'server/form.php'), 'utf8')
-  .replace("'rehber-indir'];", "'rehber-indir', 'villa-talep', 'villa-sat', 'villa-degerleme'];")
+  .replace("'rehber-indir'];", "'rehber-indir', 'villa-talep', 'villa-sat', 'villa-degerleme', 'villa-teklif', 'antalle-talep', 'etkinlik-talep'];")
   .replace("'From: ACC HOMES Web <'", "'From: ACC VILLAS Web <'")
   // addon alan adı eski PHP sürümüyle çalışabilir: PHP 8 fonksiyonları için yedek
   // bu hostingde mail() kapalı: yoksa atla, talep yine panele düşer

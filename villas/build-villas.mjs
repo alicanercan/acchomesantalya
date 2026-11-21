@@ -216,5 +216,7 @@ const php = fs.readFileSync(path.join(ROOT, 'server/form.php'), 'utf8')
 fs.writeFileSync(path.join(OUT, 'form.php'), php);
 fs.writeFileSync(path.join(OUT, 'robots.txt'), `User-agent: *\nAllow: /\nSitemap: ${DOMAIN}/sitemap.xml\n`);
 fs.writeFileSync(path.join(OUT, 'sitemap.xml'), `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">${sitemap.map((u) => `<url><loc>${DOMAIN}${u}</loc></url>`).join('')}</urlset>\n`);
-fs.writeFileSync(path.join(OUT, '.htaccess'), `RewriteEngine On\nRewriteCond %{HTTPS} off [OR]\nRewriteCond %{HTTP_HOST} ^www\\. [NC]\nRewriteRule ^ https://accvillas.com%{REQUEST_URI} [L,R=301]\nErrorDocument 404 /\n<IfModule mod_expires.c>\nExpiresActive On\nExpiresByType text/css "access plus 30 days"\n</IfModule>\n`);
+// SSL sertifikası çıkana kadar https zorlaması kapalı (FORCE_HTTPS=1 ile açılır)
+const HTTPS_ON = process.env.FORCE_HTTPS === '1';
+fs.writeFileSync(path.join(OUT, '.htaccess'), `RewriteEngine On\n${HTTPS_ON ? 'RewriteCond %{HTTPS} off [OR]\n' : ''}RewriteCond %{HTTP_HOST} ^www\\. [NC]\nRewriteRule ^ ${HTTPS_ON ? 'https' : 'http'}://accvillas.com%{REQUEST_URI} [L,R=301]\nErrorDocument 404 /\n<IfModule mod_expires.c>\nExpiresActive On\nExpiresByType text/css "access plus 30 days"\n</IfModule>\n`);
 console.log(`OK — ${sitemap.length} sayfa`);

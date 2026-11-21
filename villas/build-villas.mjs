@@ -101,6 +101,8 @@ try {
   rows = JSON.parse(fs.readFileSync(snap, 'utf8'));
   console.warn('Panel: ağ yok, anlık görüntü kullanıldı');
 }
+// Sahibinden fotoğrafları (filigranlı) kullanılmaz
+for (const v of rows) v.foto = (v.foto || []).filter((f) => !/shbdn\.com|sahibinden/i.test(f));
 const isVilla = (v) => ['Villa', 'Müstakil Ev'].includes(v.altTip) || v.ekstra?.tur === 'Villa';
 const VILLAS = rows.filter((v) => isVilla(v) && (v.foto || []).length && v.satis_durumu !== 'Pasif')
   .map((v) => {
@@ -150,7 +152,8 @@ ${[ORG, ...ld].map((o) => `<script type="application/ld+json">${JSON.stringify(o
 </body></html>`;
 }
 const VER = Date.now().toString(36);
-function write(p, html) { const f = path.join(OUT, p, 'index.html'); fs.mkdirSync(path.dirname(f), { recursive: true }); fs.writeFileSync(f, html); }
+// acchomesantalya.com görselleri hotlink korumalı: referrer göndermeden yükle
+function write(p, html) { const f = path.join(OUT, p, 'index.html'); fs.mkdirSync(path.dirname(f), { recursive: true }); fs.writeFileSync(f, html.replace(/<img /g, '<img referrerpolicy="no-referrer" ')); }
 const allAlts = (key, id) => Object.fromEntries(LANGS.map((l) => [l, url(l, key, id)]));
 
 // ---------- sayfalar ----------

@@ -145,18 +145,20 @@
   });
 })();
 
-// "Beni arayın" penceresi: 40 sn sonra ya da masaüstünde sayfadan çıkarken; oturumda bir kez
+// "Beni arayın" penceresi (4 sitede aynı kural): 45 sn ya da 2. sayfa; masaüstünde çıkarken. Bir kez; 30 gün tekrar yok
 (function () {
   var pop = document.querySelector('[data-cpop]'); if (!pop) return;
   var ss = function (k, v) { try { if (v === undefined) return sessionStorage.getItem(k); sessionStorage.setItem(k, v); } catch (e) { return null; } };
   var ls = function (k, v) { try { if (v === undefined) return localStorage.getItem(k); localStorage.setItem(k, v); } catch (e) { return null; } };
-  if (ls('acc-called') || ss('acc-pop') || /[?&]ok=1/.test(location.search)) return;
-  var shown = false, last;
+  var ok=function(){if(ls('acc-called'))return false;var u=+ls('acc-pop-until')||0;return Date.now()>u};
+if(!ok()||/[?&](ok|bulten)=1/.test(location.search))return;
+var t0=+ss('acc-t0')||0;if(!t0){t0=Date.now();ss('acc-t0',String(t0))}var pv=(+ss('acc-pv')||0)+1;ss('acc-pv',String(pv));
+var shown=false,last;
   function show() {
-    if (shown || ss('acc-pop')) return;
+    if(shown||!ok())return;
     var sp = document.querySelector('[data-set-panel]'); if (sp && !sp.hidden) return;
     if (document.activeElement && /INPUT|TEXTAREA|SELECT/.test(document.activeElement.tagName)) return;
-    shown = true; ss('acc-pop', '1'); last = document.activeElement;
+    shown = true; ls('acc-pop-until', String(Date.now() + 30 * 864e5)); last = document.activeElement;
     pop.querySelector('[data-cpop-page]').value = location.pathname;
     pop.hidden = false; document.body.classList.add('noscroll');
     setTimeout(function () { var f = pop.querySelector('input[name=ad]'); f && f.focus(); }, 50);
@@ -166,10 +168,10 @@
   pop.addEventListener('click', function (e) { if (e.target === pop) hide(); });
   document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && !pop.hidden) hide(); });
   pop.querySelector('[data-cpop-form]').addEventListener('submit', function () { ls('acc-called', '1'); });
-  setTimeout(show, 40000);
+  setTimeout(show, pv >= 2 ? 2500 : Math.max(2500, 45000 - (Date.now() - t0)));
   if (window.matchMedia('(pointer:fine)').matches) setTimeout(function () {
     document.addEventListener('mouseout', function (e) { if (!e.relatedTarget && e.clientY < 10) show(); });
-  }, 12000);
+  }, 8000);
 })();
 
 // favoriler ve karşılaştırma (bu cihazda saklanır)

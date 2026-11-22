@@ -224,7 +224,7 @@ html,body{overflow-x:clip}
 .cpform .btn{justify-self:start;padding:13px 30px}
 .cpx{position:absolute;top:10px;inset-inline-end:12px;background:none;border:0;font-size:22px;cursor:pointer;color:var(--ink)}
 body.noscroll{overflow:hidden}
-@media (max-width:760px){.cpbox{grid-template-columns:1fr;padding:28px 20px;gap:16px}.cptext h2{font-size:22px}.cptext p{font-size:16px}.cpform .btn{justify-self:stretch}}
+@media (max-width:760px){.cpop{place-items:end center;padding:0}.cpbox{grid-template-columns:1fr;padding:26px 18px 22px;gap:14px;border-radius:18px 18px 0 0;max-height:88vh;overflow:auto}.cptext h2{font-size:22px}.cptext p{font-size:16px}.cpform .btn{justify-self:stretch}}
 .foot .copy a{color:inherit;text-decoration:underline}
 /* üstte sabit telefon şeridi */
 .tbar{background:var(--ink);color:#fff;font-size:13px}

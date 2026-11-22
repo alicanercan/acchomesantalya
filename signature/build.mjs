@@ -312,11 +312,11 @@ function head({ lang, title, desc, canon, alt, ld = [], image, type = 'website',
 <meta property="og:type" content="${type}"><meta property="og:site_name" content="Ali Caner Can"><meta property="og:title" content="${esc(title)}"><meta property="og:description" content="${esc(desc)}"><meta property="og:url" content="${DOMAIN}${canon}"><meta property="og:image" content="${og}"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:image:alt" content="Ali Caner Can, ${esc(T[lang].role)}"><meta property="og:locale" content="${t.locale}">${LANGS.filter((l) => l !== lang).map((l) => `<meta property="og:locale:alternate" content="${T[l].locale}">`).join('')}
 <meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="${esc(title)}"><meta name="twitter:description" content="${esc(desc)}"><meta name="twitter:image" content="${og}">
 <link rel="icon" href="/favicon.ico" sizes="any"><link rel="icon" href="/favicon.svg" type="image/svg+xml"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><meta name="theme-color" content="#1d1d1f">
-<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Anton&display=swap"><link rel="stylesheet" href="/style.css?v=5">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Anton&display=swap"><link rel="stylesheet" href="/style.css?v=6">
 ${ld.map((x) => `<script type="application/ld+json">${JSON.stringify(x)}</script>`).join('')}
 </head>`;
 }
-const navKeys = ['about', 'insights', 'stage', 'advisory'];
+const navKeys = ['about', 'insights', 'stage', 'advisory', 'contact'];
 function header(lang, alt, cur) {
   const t = T[lang];
   const lsw = LANGS.map((l) => `<a href="${(alt && alt[l]) || url(l, 'home')}"${l === lang ? ' class="on" aria-current="true"' : ''} hreflang="${l}">${l.toUpperCase()}</a>`).join('');
@@ -324,14 +324,14 @@ function header(lang, alt, cur) {
 <header class="top"><div class="wrap hb"><a class="wm" href="${url(lang, 'home')}" aria-label="Ali Caner Can"><span class="wm1">ALİ CANER CAN</span><span class="wm2">${t.role}</span></a>
 <nav class="nav" aria-label="Menu">${navKeys.map((k) => `<a href="${url(lang, k)}"${cur === k ? ' aria-current="page"' : ''}>${t.nav[k]}</a>`).join('')}</nav>
 <div class="hr"><span class="lsw">${lsw}</span><a class="btn sm" href="${url(lang, 'contact')}">${t.cta}</a><button class="burger" type="button" aria-label="Menu"><i></i><i></i><i></i></button></div></div>
-<div class="mpanel">${[...navKeys, 'contact'].map((k) => `<a href="${url(lang, k)}">${t.nav[k]}</a>`).join('')}<span class="lsw">${lsw}</span></div></header>`;
+<div class="mpanel">${navKeys.map((k) => `<a href="${url(lang, k)}">${t.nav[k]}</a>`).join('')}<span class="lsw">${lsw}</span></div></header>`;
 }
 function footer(lang) {
   const t = T[lang];
   return `<section class="ctaband"><div class="wrap cb"><div><h2>${t.ctaT}</h2><p>${t.ctaL}</p></div><div class="cbb"><a class="btn" href="${url(lang, 'contact')}#randevu">${t.cta}</a><a class="btn ghost" href="https://wa.me/${PHONE.wa}" target="_blank" rel="noopener">${ICO.wa}${t.wa}</a></div></div></section>
 <section class="nl"><div class="wrap nlg"><div><h2>${t.nlT}</h2><p>${t.nlL}</p></div><form class="nlf" method="POST" action="/form.php"><input type="hidden" name="form-name" value="bulten"><input type="hidden" name="_next" value="${url(lang, 'home')}?bulten=1"><input type="hidden" name="dil" value="${lang}"><input type="hidden" name="site" value="alicanercan.com"><p class="hpf"><input name="bot" tabindex="-1" autocomplete="off"></p><div class="nlrow"><input name="eposta" type="email" required placeholder="${t.form.email} *" autocomplete="email" aria-label="${t.form.email}"><button class="btn" type="submit">${t.nlBtn}</button></div><label class="chk"><input type="checkbox" name="kvkk_onay" value="evet" required> <span>${t.form.consent} <a href="${ACC.kvkk[lang]}" target="_blank" rel="noopener">${t.form.kvkk}</a> *</span></label><p class="okmsg nlok" hidden>${t.nlOk}</p></form></div></section>
 <footer class="ft"><div class="wrap fg"><div><img class="flogo" src="/img/logo-acc-ali-caner-can.webp" alt="ACC · Ali Caner Can" width="520" height="46" loading="lazy"><p class="muted">${t.footNote}</p><p class="soc">${SOCIAL.map(([k, n, , u]) => `<a href="${u}" target="_blank" rel="noopener" aria-label="${n}">${ICO[k]}</a>`).join('')}</p></div>
-<div><p class="fh">ALİ CANER CAN</p>${[...navKeys, 'contact'].map((k) => `<a href="${url(lang, k)}">${t.nav[k]}</a>`).join('')}</div>
+<div><p class="fh">ALİ CANER CAN</p>${navKeys.map((k) => `<a href="${url(lang, k)}">${t.nav[k]}</a>`).join('')}</div>
 <div><p class="fh">ACC</p><a href="${ACC.home[lang]}" target="_blank" rel="noopener">ACC HOMES</a><a href="${ACC.villas[lang]}" target="_blank" rel="noopener">ACC VILLAS</a><a href="${ACC.antalle[lang]}" target="_blank" rel="noopener">Antalle Concept Houses</a><a href="${ACC.news[lang]}" target="_blank" rel="noopener">ACC NEWS</a><a href="https://www.instagram.com/acchomesantalya/" target="_blank" rel="noopener">Instagram @acchomesantalya</a><a href="https://www.instagram.com/acc.villas/" target="_blank" rel="noopener">Instagram @acc.villas</a></div>
 <div><p class="fh">${t.nav.contact}</p><a href="tel:${PHONE.raw}">${PHONE.text}</a><a href="https://wa.me/${PHONE.wa}" target="_blank" rel="noopener">WhatsApp</a><a href="mailto:${MAIL}">${MAIL}</a><a href="${G.url}" target="_blank" rel="noopener">${t.office}</a></div></div>
 <div class="wrap fb"><span>© ${new Date().getFullYear()} Ali Caner Can</span><span><a href="${ACC.kvkk[lang]}" target="_blank" rel="noopener">${t.privacy}</a></span></div></footer>

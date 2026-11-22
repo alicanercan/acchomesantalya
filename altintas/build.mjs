@@ -8,6 +8,7 @@ import { enSpan } from '../en-span.mjs';
 import { NEWS, GUIDE, PROJELER, FIRMALAR } from './content.mjs';
 import { LAND, HOMESEO, POP, SEOFAQ_T, dataFaq } from './seo-pages.mjs';
 import { callPop, newsBand } from '../callpop.mjs';
+import { featL, valL, missingFeat } from './feat-i18n.mjs';
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.join(HERE, '..');
@@ -447,8 +448,8 @@ for (const l of AREA.filter((x) => x.own)) {
   for (const lang of LANGS) {
     const t = T[lang], d = DL[lang], title = l.baslik[lang], P = genText(l, lang), canon = l.url[lang];
     const fx = [[d.id, l.id], [d.oda, l.oda], [d.brut, l.brut && `${l.brut} m²`], [d.net, l.net && `${l.net} m²`], [d.kat, v.kat], [d.katS, v.katSayisi], [d.yas, v.yas === 0 || v.yas === '0' ? d.yas0 : v.yas], [d.banyo, v.banyo],
-      ...(lang === 'tr' ? [[d.isitma, v.isitma !== 'Yok' && v.isitma], [d.esya, v.esya], [d.otopark, v.otopark], [d.asansor, v.asansor], [d.tapu, v.tapu]] : []), [d.site, v.site === 'Evet' && d.yes], [d.aidat, v.aidat && `${Number(v.aidat).toLocaleString('tr-TR')} TL`]].filter(([, x]) => x !== null && x !== undefined && x !== false && x !== '');
-    const feats = lang === 'tr' ? (v.ozellikler || []).filter((x) => !/^(Kuzey|Güney|Doğu|Batı)$/.test(x)) : [];
+      [d.isitma, v.isitma !== 'Yok' && valL(v.isitma, lang)], [d.esya, valL(v.esya, lang)], [d.otopark, valL(v.otopark, lang)], [d.asansor, valL(v.asansor, lang)], [d.tapu, valL(v.tapu, lang)], [d.site, v.site === 'Evet' && d.yes], [d.aidat, v.aidat && `${Number(v.aidat).toLocaleString('tr-TR')} TL`]].filter(([, x]) => x !== null && x !== undefined && x !== false && x !== '');
+    const feats = [...new Set((v.ozellikler || []).filter((x) => !/^(Kuzey|Güney|Doğu|Batı)$/.test(x)).map((x) => featL(x, lang)).filter(Boolean))];
     const wa = `https://wa.me/${PHONE.wa}?text=${encodeURIComponent(d.waMsg(l.id, DOMAIN + canon))}`;
     const sim = AREA.filter((x) => x !== l && x.tip === l.tip).sort((a, b) => Math.abs((a.fiyat || 0) - (l.fiyat || 0)) - Math.abs((b.fiyat || 0) - (l.fiyat || 0))).slice(0, 3);
     const listKey = l.tip === 'Kiralık' ? 'rent' : 'sale';
@@ -469,6 +470,7 @@ ${sim.length ? `<section class="sec bg2"><div class="wrap"><h2>${d.sim}</h2><div
     sitemap.push([canon, alt]);
   }
 }
+{ const miss = missingFeat(AREA.filter((x) => x.own).flatMap((x) => x.row.ozellikler || [])); if (miss.length) console.warn('EN/RU çevirisi olmayan özellikler:', miss.join(', ')); }
 console.log(`İlan sayfaları: ${AREA.filter((x) => x.own).length} ilan × 3 dil`);
 
 // 404, sitemap, robots, .htaccess

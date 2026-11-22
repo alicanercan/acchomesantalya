@@ -6,7 +6,7 @@ name: Signature yayını
 on:
   push:
     branches: [main]
-    paths: ['signature/**', 'en-span.mjs', '!signature/media/**', '!signature/media-sources.txt', '.github/workflows/signature.yml', 'data/reviews.json', 'data/site.json']
+    paths: ['signature/**', 'en-span.mjs', 'callpop.mjs', '!signature/media/**', '!signature/media-sources.txt', '.github/workflows/signature.yml', 'data/reviews.json', 'data/site.json']
   workflow_dispatch:
 
 permissions:

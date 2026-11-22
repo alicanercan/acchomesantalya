@@ -6,7 +6,7 @@ name: ACC VILLAS yayını
 on:
   push:
     branches: [main]
-    paths: ['villas/**', 'en-span.mjs', 'data/ilan-seo.json', '.github/workflows/villas.yml']
+    paths: ['villas/**', 'en-span.mjs', 'callpop.mjs', 'data/ilan-seo.json', '.github/workflows/villas.yml']
   workflow_run:
     workflows: ['Turhost yayını']
     types: [completed]

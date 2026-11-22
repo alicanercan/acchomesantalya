@@ -7,7 +7,7 @@ name: Altıntaş yayını
 on:
   push:
     branches: [main]
-    paths: ['altintas/**', 'en-span.mjs', 'server/form.php', '.github/workflows/altintas.yml', 'data/reviews.json', 'data/site.json']
+    paths: ['altintas/**', 'en-span.mjs', 'callpop.mjs', 'server/form.php', '.github/workflows/altintas.yml', 'data/reviews.json', 'data/site.json']
   workflow_run:
     workflows: ['Turhost yayını']
     types: [completed]

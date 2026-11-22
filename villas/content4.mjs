@@ -40,7 +40,7 @@ export const PLAZA = {
 
 // ---------- yapay zekâ, sanal tur ve modelleme: hizmet sayfası (SEO) ----------
 export const MKT = {
-  tr: { nav: 'Pazarlama ve Tasarım', title: 'Villa Pazarlama: Yapay Zekâ ile Sanal Eşyalandırma, Sanal Tur ve 3D Modelleme | ACC VILLAS',
+  tr: { nav: 'Pazarlama ve Tasarım', title: 'Villa Pazarlama: Yapay Zekâ, Sanal Eşyalandırma, Sanal Tur ve 3D',
     desc: 'Antalya’da villanızı yapay zekâ destekli sanal eşyalandırma (virtual staging), yapay zekâ videoları, 360° sanal tur, 3D modelleme, drone çekimi ve Google, Yandex, Meta reklamlarıyla pazarlıyoruz.',
     h1: 'Villanızı geleceğin araçlarıyla pazarlıyoruz', lead: 'Villa alıcısı kararını çoğu zaman ilk görselde verir. Yapay zekâ ile sanal eşyalandırma, yapay zekâ videoları, 360° sanal turlar ve 3D modelleme ile villanızı, alıcı daha kapıdan girmeden yaşanır hâle getiriyoruz.',
     home: { eyebrow: 'Pazarlama ve tasarım', h: 'Yapay zekâ, sanal tur ve modelleme ile villa pazarlaması', p: 'Boş bir salonu yapay zekâ ile eşyalandırıyor, henüz bitmemiş bir villayı 3D modelle gezdiriyor, yurt dışındaki alıcıya 360° sanal turla evin her köşesini gösteriyoruz.', btn: 'Nasıl çalışıyoruz' },
@@ -62,7 +62,7 @@ export const MKT = {
       ['Bu hizmetler için ayrıca ücret ödüyor muyum?', 'Yetkili olarak pazarladığımız villalarda fotoğraf, video, sanal tur ve dijital pazarlama hizmetimizin parçasıdır. Kapsam villaya göre belirlenir; detayları görüşmemizde paylaşırız.'],
       ['Villam hangi kanallarda yayınlanır?', 'ACC VILLAS ve ACC HOMES web siteleri, uluslararası emlak portalları, Instagram hesaplarımız, Google, Yandex ve Meta reklamları ile Türkçe, İngilizce ve Rusça kampanyalar.'],
     ], cta: 'Villanız için pazarlama planı isteyin' },
-  en: { nav: 'Marketing & Design', title: 'Villa Marketing: AI Virtual Staging, Virtual Tours and 3D Modelling | ACC VILLAS',
+  en: { nav: 'Marketing & Design', title: 'Villa Marketing: AI Virtual Staging, Virtual Tours and 3D',
     desc: 'We market your villa in Antalya with AI virtual staging, AI video, 360° virtual tours, 3D modelling, drone footage and Google, Yandex and Meta advertising.',
     h1: 'We market your villa with tomorrow’s tools', lead: 'Villa buyers often decide at the first image. With AI virtual staging, AI video, 360° virtual tours and 3D modelling, we let buyers live in your villa before they even reach the door.',
     home: { eyebrow: 'Marketing and design', h: 'Villa marketing with AI, virtual tours and 3D modelling', p: 'We furnish empty rooms with AI virtual staging, walk buyers through unfinished villas in 3D, and show overseas buyers every corner with 360° virtual tours.', btn: 'How we work' },
@@ -84,7 +84,7 @@ export const MKT = {
       ['Do I pay extra for these services?', 'For villas we market with an exclusive mandate, photography, video, virtual tours and digital marketing are part of our service. The scope depends on the villa; we share details when we meet.'],
       ['Where will my villa be published?', 'The ACC VILLAS and ACC HOMES websites, international property portals, our Instagram accounts, and Google, Yandex and Meta ads, with campaigns in Turkish, English and Russian.'],
     ], cta: 'Ask for a marketing plan for your villa' },
-  ru: { nav: 'Маркетинг и дизайн', title: 'Маркетинг вилл: виртуальная расстановка мебели с ИИ, виртуальные туры и 3D-моделирование | ACC VILLAS',
+  ru: { nav: 'Маркетинг и дизайн', title: 'Маркетинг вилл: ИИ, виртуальные туры 360° и 3D-моделирование',
     desc: 'Продвигаем вашу виллу в Анталии с помощью виртуальной расстановки мебели (ИИ), видео с ИИ, 3D-туров 360°, 3D-моделирования, съёмки с дрона и рекламы в Google, Яндексе и Meta.',
     h1: 'Продвигаем вашу виллу инструментами будущего', lead: 'Покупатель виллы часто принимает решение по первому кадру. Виртуальная расстановка мебели с ИИ, видео с ИИ, туры 360° и 3D-моделирование позволяют «пожить» в вилле ещё до визита.',
     home: { eyebrow: 'Маркетинг и дизайн', h: 'Маркетинг вилл с ИИ, виртуальными турами и 3D', p: 'Обставляем пустые комнаты с помощью ИИ, показываем недостроенные виллы в 3D и проводим иностранных покупателей по каждому уголку дома в туре 360°.', btn: 'Как мы работаем' },
@@ -168,7 +168,7 @@ export const LIV = {
 
 // ---------- kurucu sayfası: tam içerik (acchomesantalya'dan farklı, villa odaklı anlatım) ----------
 export const FD2 = {
-  tr: { title: 'Ali Caner Can: Antalya Villa ve Müstakil Ev Satışı, Villa Proje Yönetimi | ACC VILLAS', desc: 'ACC VILLAS kurucusu Ali Caner Can: makine mühendisi, çok uluslu şirketlerden gelen satış ve pazarlama tecrübesi, Antalya’da villa ve büyük müstakil ev satışı, villa projelerinin pazarlama yönetimi.',
+  tr: { title: 'Ali Caner Can: Antalya Villa Satışı ve Villa Proje Yönetimi', desc: 'ACC VILLAS kurucusu Ali Caner Can: makine mühendisi, çok uluslu şirketlerden gelen satış ve pazarlama tecrübesi, Antalya’da villa ve büyük müstakil ev satışı, villa projelerinin pazarlama yönetimi.',
     eyebrow: 'Kurucu & CEO · ACC VILLAS', h1: 'Ali Caner Can', role: 'Villa ve büyük müstakil ev satışı · Villa proje yönetimi · ACC HOMES International Real Estate Broker’ı',
     intro: 'Ali Caner Can için bir villa, bir mühendislik eseri ve bir aile hikâyesidir. Makine mühendisi olarak yapının nasıl çalıştığına, çok uluslu şirketlerde geçen satış ve pazarlama kariyerinden gelen tecrübeyle de alıcının neye ihtiyaç duyduğuna bakar. ACC VILLAS’ı, Antalya’da villa alıp satmanın daha şeffaf, daha planlı ve daha zarif bir yolu olsun diye kurdu.',
     stats: [['290+', 'satış ve kiralama işlemi'], ['~50', 'iş ortağından oluşan ACC ekibi'], ['5', 'çok uluslu şirkette kariyer'], ['1.000 m²', 'ACC Plaza genel merkezi']],
@@ -178,7 +178,7 @@ export const FD2 = {
     valT: 'Değerleri', val: 'Şeffaflık, dürüstlük ve etik, mesleğinin merkezindedir. 2022’den bu yana her bayramda ve özel günde müşterilerinin her birine tek tek mesaj atar. Her yıl bir gün ticari işler durur ve tüm ACC ekibi yalnızca topluma faydaya odaklanır: ACC Day.',
     comT: 'Diller ve topluluk', com: ['Türkçe (anadil)', 'İngilizce (ileri)', 'ANTİAD, Antalya İş İnsanları Derneği üyesi', 'Beşiktaş JK Kongre Üyesi', 'Profesyonel tenisçi'],
     meet: 'Ali Caner Can ile görüşün', linksT: 'Ali Caner Can’ı takip edin' },
-  en: { title: 'Ali Caner Can: Villa and Detached Home Sales, Villa Project Management in Antalya | ACC VILLAS', desc: 'Ali Caner Can, founder of ACC VILLAS: mechanical engineer with a sales and marketing career at multinationals, specialising in villa and large detached-home sales and villa project marketing in Antalya.',
+  en: { title: 'Ali Caner Can: Villa Sales and Villa Project Management, Antalya', desc: 'Ali Caner Can, founder of ACC VILLAS: mechanical engineer with a sales and marketing career at multinationals, specialising in villa and large detached-home sales and villa project marketing in Antalya.',
     eyebrow: 'Founder & CEO · ACC VILLAS', h1: 'Ali Caner Can', role: 'Villa and large detached-home sales · Villa project management · Broker of ACC HOMES International Real Estate',
     intro: 'For Ali Caner Can a villa is both a piece of engineering and a family story. As a mechanical engineer he looks at how a building works; with a sales and marketing career at multinationals behind him, he looks at what a buyer really needs. He founded ACC VILLAS to make buying and selling a villa in Antalya more transparent, better planned and more refined.',
     stats: [['290+', 'sales and rentals'], ['~50', 'partners in the ACC team'], ['5', 'multinationals in his career'], ['1,000 m²', 'ACC Plaza headquarters']],
@@ -188,7 +188,7 @@ export const FD2 = {
     valT: 'Values', val: 'Transparency, honesty and ethics are at the centre of his work. Since 2022 he has personally messaged every client on every holiday and special day. Once a year all business stops and the ACC team focuses only on giving back: ACC Day.',
     comT: 'Languages and community', com: ['Turkish (native)', 'English (advanced)', 'Member of ANTİAD, Antalya Business People’s Association', 'Beşiktaş JK congress member', 'Professional tennis player'],
     meet: 'Meet Ali Caner Can', linksT: 'Follow Ali Caner Can' },
-  ru: { title: 'Али Джанер Джан: продажа вилл и частных домов, управление проектами вилл в Анталии | ACC VILLAS', desc: 'Основатель ACC VILLAS Али Джанер Джан: инженер-механик с опытом продаж и маркетинга в международных корпорациях, специалист по продаже вилл и больших частных домов в Анталии.',
+  ru: { title: 'Али Джанер Джан: продажа вилл в Анталии и проекты вилл', desc: 'Основатель ACC VILLAS Али Джанер Джан: инженер-механик с опытом продаж и маркетинга в международных корпорациях, специалист по продаже вилл и больших частных домов в Анталии.',
     eyebrow: 'Основатель и CEO · ACC VILLAS', h1: 'Али Джанер Джан', role: 'Продажа вилл и больших частных домов · Управление проектами вилл · Брокер ACC HOMES International Real Estate',
     intro: 'Для Али Джанера Джана вилла — это и инженерное сооружение, и семейная история. Как инженер-механик он смотрит, как работает здание; как человек с карьерой в продажах международных корпораций — что действительно нужно покупателю. Он основал ACC VILLAS, чтобы покупка и продажа виллы в Анталии стали прозрачнее, продуманнее и изящнее.',
     stats: [['290+', 'сделок продажи и аренды'], ['~50', 'партнёров в команде ACC'], ['5', 'международных корпораций в карьере'], ['1 000 м²', 'штаб-квартира ACC Plaza']],

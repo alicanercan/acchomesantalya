@@ -379,3 +379,20 @@ footer .flogo img{height:44px!important}footer .flogo .lg-v{font-size:49.7px!imp
 .abadges div{background:rgba(0,0,0,.38)!important;border-color:rgba(255,255,255,.22)!important;color:#fff}
 .davet{background:#fff!important;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}.davet h2{color:var(--ink)!important}.davet .lead,.davet .small{color:var(--mut)!important}
 @media (max-width:860px){.scap{left:16px;right:16px;bottom:82px}.ssub{font-size:13px;margin-bottom:10px}.sbtn{padding:6px 14px;font-size:12.5px}.scap .eyebrow{font-size:10.5px!important}}
+/* 9. tur: blog kategorileri, bölge yaşam kartları, Caner Instagram kartı */
+.bcats{display:flex;flex-wrap:wrap;gap:8px;margin:22px 0 6px}.bcats a{border:1px solid var(--line);border-radius:999px;padding:8px 16px;font:700 14px Nunito,sans-serif;color:var(--ink);text-decoration:none;background:#fff}.bcats a small{color:var(--mut);font-weight:600;margin-left:4px}.bcats a.on,.bcats a:hover{background:var(--ink);color:#fff;border-color:var(--ink)}.bcats a.on small,.bcats a:hover small{color:rgba(255,255,255,.7)}
+.post .ph{position:relative;aspect-ratio:16/10;overflow:hidden}.post .ph img{width:100%;height:100%;object-fit:cover;transition:transform .6s}.post:hover .ph img{transform:scale(1.04)}
+.pcat{position:absolute;left:12px;top:12px;background:#fff;color:var(--redt);font:800 11.5px Nunito,sans-serif;letter-spacing:.04em;border-radius:999px;padding:5px 11px}
+.pmeta{font:700 12px Nunito,sans-serif!important;color:var(--mut)!important;margin:14px 20px 0!important;padding:0!important;letter-spacing:.02em}
+.rlife{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:22px 0 18px}.rlife>div{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:18px}.rlife h3{font-size:15px;margin:0 0 6px;color:var(--redt)!important}.rlife p{margin:0;font-size:14.5px;color:var(--mut)}
+.cig{display:flex;align-items:center;gap:14px;margin-top:22px;max-width:440px;border:1px solid var(--line);border-radius:var(--radius);padding:12px 14px;text-decoration:none;color:var(--ink);background:#fff;transition:box-shadow .25s}.cig:hover{box-shadow:0 10px 26px rgba(0,0,0,.08)}
+.cigav{flex:none;width:58px;height:58px;border-radius:50%;padding:2px;background:conic-gradient(#feda75,#fa7e1e,#d62976,#962fbf,#4f5bd5,#feda75)}.cigav img,.cigav .pic{width:100%!important;height:100%!important;border-radius:50%;border:2px solid #fff;object-fit:cover}
+.cigt{flex:1;min-width:0;display:flex;flex-direction:column}.cigt b{display:flex;align-items:center;gap:6px;font-size:15px}.cigt .igi{width:16px;height:16px}.cigt small{color:var(--mut);font-size:12.5px}
+.cigf{flex:none;background:linear-gradient(90deg,#d62976,#962fbf);color:#fff;font:800 12.5px Nunito,sans-serif;border-radius:999px;padding:8px 14px}
+@media (max-width:860px){.rlife{grid-template-columns:1fr 1fr}.top nav a{font-size:14px!important}}
+@media (max-width:1180px) and (min-width:861px){.top nav{gap:16px!important}.top nav a,.dd>button{font-size:12.5px!important}}
+.cigav .ceopic{width:100%!important;height:100%!important;margin:0!important}
+.steps b::before{color:var(--redt)!important}.steps li{border-radius:var(--radius)!important}
+:root{--gold:#C21E2E;--champ:#E02A3C}
+@media (max-width:1180px) and (min-width:861px){.top .cur{display:none}.top nav{gap:12px!important}.logo .lg-v{font-size:39.5px!important;line-height:35px!important;height:35px!important}.logo img{height:35px!important}}
+@media (max-width:1100px) and (min-width:861px){.top .igl{display:none}.top nav{gap:10px!important}.top nav a,.dd>button{font-size:12px!important;letter-spacing:0!important}.hb{gap:12px!important}.wrap.hb{padding-left:16px;padding-right:16px}}

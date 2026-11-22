@@ -1,14 +1,14 @@
 // ACC VILLAS 3. tur içerikleri: hizmetler, bölge profilleri ve SSS, journal yazıları, istatistik şeridi.
 export const SEG3 = {
-  tr: { services: 'hizmetlerimiz', journal: 'journal' },
-  en: { services: 'services', journal: 'journal' },
-  ru: { services: 'uslugi', journal: 'zhurnal' },
+  tr: { services: 'hizmetlerimiz', journal: 'blog' },
+  en: { services: 'services', journal: 'blog' },
+  ru: { services: 'uslugi', journal: 'blog' },
 };
 
 export const NAV3 = {
-  tr: { more: 'Kurumsal', services: 'Hizmetlerimiz', journal: 'Journal', founder: 'Ali Caner Can' },
-  en: { more: 'About', services: 'Our services', journal: 'Journal', founder: 'Ali Caner Can' },
-  ru: { more: 'О нас', services: 'Услуги', journal: 'Журнал', founder: 'Али Джанер Джан' },
+  tr: { more: 'Kurumsal', services: 'Hizmetlerimiz', journal: 'Blog ve Yazılar', founder: 'Ali Caner Can' },
+  en: { more: 'About', services: 'Our services', journal: 'Blog & Articles', founder: 'Ali Caner Can' },
+  ru: { more: 'О нас', services: 'Услуги', journal: 'Блог и статьи', founder: 'Али Джанер Джан' },
 };
 
 export const STATS = {

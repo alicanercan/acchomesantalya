@@ -276,3 +276,44 @@ a{color:inherit}img{max-width:100%;display:block}svg{width:20px;height:20px;flex
 @media(max-width:1340px) and (min-width:901px){.acclogo img{height:34px}.acclogo .lg-v{font-size:38px;line-height:34px;height:34px}}
 @media(max-width:900px){.acclogo img{height:32px}.acclogo .lg-v{font-size:36px;line-height:32px;height:32px}}
 @media(max-width:380px){.acclogo img{height:28px}.acclogo .lg-v{font-size:31px;line-height:28px;height:28px}}
+/* ===== ACC VILLAS görünümü (22.11.2026) ===== */
+.tbar{background:#efe7dc;border-bottom:1px solid #e2d7c9;font:600 14px Nunito,sans-serif}
+.tbi{min-height:46px;gap:14px}.tbar a{color:#3d362f}.tad svg{width:16px;height:16px;color:#8a7f72}
+.tr8{display:flex;align-items:center;gap:16px;margin-left:auto}
+.tph{background:#1f2022;color:#fff!important;border-radius:999px;padding:7px 15px;font-weight:800}.tph svg{fill:#fff}
+.twa svg{color:#25D366}.tbar .lsw{background:#fff;border:1px solid #e2d7c9}.tbi .tig{margin-left:0;background:#fff;border:1px solid #e2d7c9;border-radius:999px;padding:4px 12px 4px 5px}
+.top{background:#fff}.hb{min-height:88px;gap:30px}
+.acclogo img{height:40px}.acclogo .lg-v{font:400 51px/.8 Anton,"Bebas Neue",Impact,sans-serif;height:40px;line-height:40px;color:#1f2022;letter-spacing:.005em;margin-left:5px;overflow:visible}
+.flogo .lg-v{color:#fff}
+.nav{gap:30px}.nav a{font:800 15.5px Nunito,sans-serif;letter-spacing:.03em;color:var(--ink)}
+.btn.hcta{border-radius:999px;padding:13px 24px;font:800 15px Nunito,sans-serif;white-space:nowrap}
+@media(max-width:1340px) and (min-width:901px){.nav{gap:16px}.nav a{font-size:14px}.btn.hcta{padding:11px 16px;font-size:13.5px}.acclogo img{height:34px}.acclogo .lg-v{font-size:43px;height:34px;line-height:34px}}
+@media(max-width:1100px) and (min-width:901px){.btn.hcta{display:none}}
+@media(max-width:1180px){.tml,.tad{display:none}.tr8{margin:0 auto}}
+@media(max-width:700px){.tbar .lsw,.tbi .tig{display:none}.tr8{gap:12px}.tph{padding:5px 12px}}
+@media(max-width:900px){.acclogo img{height:32px}.acclogo .lg-v{font-size:41px;height:32px;line-height:32px}.hr .btn.hcta{display:none}}
+/* hero */
+.hero3{position:relative;min-height:600px;display:flex;align-items:flex-end;color:#fff;overflow:hidden}
+.hero3>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.hero3::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.15) 0%,rgba(0,0,0,0) 30%,rgba(0,0,0,.25) 55%,rgba(0,0,0,.66) 100%)}
+.hc3{position:relative;z-index:2;padding-bottom:130px;width:100%}
+.hc3 .eyebrow{color:#fff;letter-spacing:.22em}
+.hero3 h1{font:900 clamp(34px,4.3vw,58px)/1.12 Nunito,sans-serif;color:#fff;margin:.2em 0 .3em;max-width:900px;text-shadow:0 2px 18px rgba(0,0,0,.25)}
+.hl3{color:rgba(255,255,255,.92);font-size:clamp(16px,1.4vw,19px);max-width:720px;margin:0}
+.hero3 .hsearch2{position:absolute;z-index:3;left:50%;transform:translateX(-50%);bottom:28px;margin:0;width:min(780px,calc(100% - 32px));max-width:none}
+@media(max-width:900px){.hero3{min-height:560px}.hc3{padding-bottom:170px}.hl3{display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}}
+/* üç seçenek */
+.intentsec{padding-top:30px;padding-bottom:0}.intent{padding:20px 22px;font-size:17px;border-radius:18px}.intent i{width:46px;height:46px}.intent svg{width:22px;height:22px}
+/* modern rakamlar */
+.stats2{padding:22px 0 8px}.sg2{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.stats2 .st{display:block;text-decoration:none;color:var(--ink);background:#fff;border:1px solid var(--line);border-radius:18px;padding:20px 22px;border-left:1px solid var(--line)}
+.stats2 .st b{display:flex;align-items:center;gap:8px;font:900 34px/1 Nunito,sans-serif;color:var(--red)}.stats2 .st span{display:block;margin-top:6px;color:#6e6e73;font-weight:700;font-size:14.5px}
+.stats2 .gst b svg{width:26px;height:26px}.stats2 .gst:hover{border-color:#cfcac3}
+@media(max-width:800px){.sg2{grid-template-columns:1fr 1fr;gap:10px}.stats2 .st{padding:16px}.stats2 .st b{font-size:28px}}
+@media(max-width:700px){.intent{font-size:12.5px;padding:10px 6px}.intent i{width:32px;height:32px}}
+.tbar a,.tph{white-space:nowrap}
+@media(max-width:1400px){.tbar .tml{display:none}}
+@media(max-width:1180px){.tbar .tad{display:none}}
+@media(max-width:700px){.tbar .twa{display:none}}
+.stats2 .st{padding:18px 22px}
+.ilg>*{min-width:0}.igal{max-width:100%}

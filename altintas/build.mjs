@@ -309,10 +309,10 @@ ${ld.map((x) => `<script type="application/ld+json">${JSON.stringify(x).replace(
 const navKeys = ['sale', 'rent', 'projects', 'guide', 'news', 'sell', 'contact'];
 function header(lang, alt, cur) {
   const t = T[lang]; const lsw = LANGS.map((l) => `<a href="${alt[l]}"${l === lang ? ' class="on" aria-current="true"' : ''} hreflang="${l}">${l.toUpperCase()}</a>`).join('');
-  return `<div class="tbar"><div class="wrap tbi"><a href="tel:${PHONE.raw}">${ICO.ph}${PHONE.text}</a><a href="https://wa.me/${PHONE.wa}" target="_blank" rel="noopener">${ICO.wa}WhatsApp</a><a class="tig" href="${IG}" target="_blank" rel="noopener">${ICO.ig}@acc.altintas.realestate</a></div></div>
+  return `<div class="tbar"><div class="wrap tbi"><a class="tad" href="${G.url}" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s7-6.2 7-12a7 7 0 1 0-14 0c0 5.8 7 12 7 12z"/><circle cx="12" cy="10" r="2.6"/></svg>ACC HOMES Altıntaş · Kardeş Kentler Cd. No:51, Aksu</a><span class="tr8"><a class="tph" href="tel:${PHONE.raw}">${ICO.ph}${PHONE.text}</a><a class="twa" href="https://wa.me/${PHONE.wa}" target="_blank" rel="noopener">${ICO.wa}WhatsApp</a><a class="tml" href="mailto:${MAIL}">${MAIL}</a><span class="lsw">${lsw}</span><a class="tig" href="${IG}" target="_blank" rel="noopener">${ICO.ig}@acc.altintas.realestate</a></span></div></div>
 <header class="top"><div class="wrap hb"><a class="wm acclogo" href="${url(lang, 'home')}" aria-label="ACC ALTINTAŞ"><img src="/acc-kirmizi.svg" alt="ACC" width="57" height="40"><span class="lg-v">ALTINTAŞ</span></a>
 <nav class="nav" aria-label="Menu">${navKeys.map((k) => `<a href="${url(lang, k)}"${cur === k ? ' aria-current="page"' : ''}>${t.nav[k]}</a>`).join('')}</nav>
-<div class="hr"><span class="lsw">${lsw}</span><a class="btn sm" href="https://wa.me/${PHONE.wa}" target="_blank" rel="noopener">${ICO.wa} WhatsApp</a><button class="burger" aria-label="Menu" aria-expanded="false"><i></i><i></i><i></i></button></div></div>
+<div class="hr"><a class="btn hcta" href="${url(lang, 'sell')}#form">${t.freeExp}</a><button class="burger" aria-label="Menu" aria-expanded="false"><i></i><i></i><i></i></button></div></div>
 <div class="mpanel">${navKeys.map((k) => `<a href="${url(lang, k)}">${t.nav[k]}</a>`).join('')}<span class="lsw">${lsw}</span></div></header>`;
 }
 function footer(lang) {
@@ -355,10 +355,9 @@ const MAH = {
 for (const lang of LANGS) {
   const t = T[lang];
   page({ lang, key: 'home', title: t.homeTitle, desc: t.homeDesc, ld: [ORG(lang), { '@context': 'https://schema.org', '@type': 'WebSite', name: t.brand, url: DOMAIN + url(lang, 'home'), inLanguage: lang }, itemList(SALE, lang), faqLd(lang)], body: `
-<section class="hero2" style="--bg:url('${MAIN}/img/primelara/hero.webp')"><div class="wrap"><p class="eyebrow">${t.by} · Aksu / Antalya</p><h1>${t.h1}</h1><p class="lead">${t.lead}</p>${hsearch(lang)}
-<p class="qk"><a href="${url(lang, 'sale')}">${t.nav.sale} <b>${SALE.length}</b></a><a href="${url(lang, 'rent')}">${t.nav.rent} <b>${RENT.length}</b></a><a href="${url(lang, 'projects')}">${t.nav.projects} <b>${t.proj.length}</b></a><a href="${url(lang, 'sell')}">${t.freeExp} →</a><a href="${url(lang, 'news')}">${t.newsT} →</a></p></div></section>
+<section class="hero3"><img src="${MAIN}/img/primelara/hero.webp" alt="${esc(t.h1)}" fetchpriority="high"><div class="wrap hc3"><p class="eyebrow">${t.by} · Aksu / Antalya</p><h1>${t.h1}</h1><p class="hl3">${t.lead}</p></div>${hsearch(lang)}</section>
 <section class="wrap intentsec"><div class="intents">${INTENT[lang].map(([k, l], n) => `<a class="intent" href="${url(lang, k)}${n === 2 ? '#form' : ''}"><i>${INTENT_ICO[n]}</i><span>${l}</span></a>`).join('')}</div></section>
-<section class="stats"><div class="wrap sg"><div class="st"><b>${SALE.length}</b><span>${t.statSale}</span></div><div class="st"><b>${RENT.length}</b><span>${t.statRent}</span></div><div class="st"><b>${t.proj.length}</b><span>${t.statProj}</span></div><div class="st"><b>${lang === 'en' ? G.rating : String(G.rating).replace('.', ',')} ★</b><span>${G.count} ${t.statG}</span></div></div></section>
+<section class="stats2"><div class="wrap sg2"><div class="st"><b>${SALE.length}</b><span>${t.statSale}</span></div><div class="st"><b>${RENT.length}</b><span>${t.statRent}</span></div><div class="st"><b>${t.proj.length}</b><span>${t.statProj}</span></div><a class="st gst" href="${G.url}" target="_blank" rel="noopener"><b>${ICO.g}${lang === 'en' ? G.rating : String(G.rating).replace('.', ',')} ★</b><span>${G.count} ${t.statG}</span></a></div></section>
 <section class="sec" id="ilanlar"><div class="wrap"><div class="sh"><div><h2>${t.saleT}</h2><p class="lead">${t.saleL}</p></div><a class="all" href="${url(lang, 'sale')}">${t.all} (${SALE.length}) →</a></div>${igrid(SALE, lang, 9)}</div></section>
 ${projBlock(lang)}
 <section class="sec"><div class="wrap"><div class="sh"><div><h2>${t.rentT}</h2><p class="lead">${t.rentL}</p></div><a class="all" href="${url(lang, 'rent')}">${t.all} (${RENT.length}) →</a></div>${igrid(RENT, lang, 6)}</div></section>

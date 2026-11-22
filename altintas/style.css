@@ -219,3 +219,4 @@ a{color:inherit}img{max-width:100%;display:block}svg{width:20px;height:20px;flex
 @media(max-width:1000px) and (min-width:901px){.wm1{font-size:16px}.nav{gap:11px}.nav a{font-size:13px}}
 @media(max-width:1060px) and (min-width:901px){.hr .lsw{display:none}}
 .wm{min-width:0;flex-shrink:1}@media(max-width:1060px){.wm1{white-space:normal;line-height:1.05}}@media(max-width:600px){.wm1{font-size:17px}}
+.dp h3{font-size:.98rem;margin:0}

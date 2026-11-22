@@ -312,7 +312,7 @@ function head({ lang, title, desc, canon, alt, ld = [], image, type = 'website',
 <meta property="og:type" content="${type}"><meta property="og:site_name" content="Ali Caner Can"><meta property="og:title" content="${esc(title)}"><meta property="og:description" content="${esc(desc)}"><meta property="og:url" content="${DOMAIN}${canon}"><meta property="og:image" content="${og}"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:image:alt" content="Ali Caner Can, ${esc(T[lang].role)}"><meta property="og:locale" content="${t.locale}">${LANGS.filter((l) => l !== lang).map((l) => `<meta property="og:locale:alternate" content="${T[l].locale}">`).join('')}
 <meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="${esc(title)}"><meta name="twitter:description" content="${esc(desc)}"><meta name="twitter:image" content="${og}">
 <link rel="icon" href="/favicon.ico" sizes="any"><link rel="icon" href="/favicon.svg" type="image/svg+xml"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><meta name="theme-color" content="#1d1d1f">
-<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Anton&display=swap"><link rel="stylesheet" href="/style.css?v=6">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Anton&display=swap"><link rel="stylesheet" href="/style.css?v=7">
 ${ld.map((x) => `<script type="application/ld+json">${JSON.stringify(x)}</script>`).join('')}
 </head>`;
 }
@@ -365,6 +365,30 @@ const reviews = (lang) => {
 <div class="revs">${list.map((r) => `<figure class="rev rv"><blockquote lang="${r.lang}">“${esc(r.text.replace(/^…\s*/, ''))}”</blockquote><figcaption><b>${esc(r.name)}</b> · ${esc(r.topic)} · Google</figcaption></figure>`).join('')}</div>
 <p class="center"><a class="btn ghost" href="${G.url}" target="_blank" rel="noopener">${T[lang].revAll} →</a></p></div></section>`;
 };
+const FEAT = JSON.parse(fs.readFileSync(path.join(HERE, 'featured.json'), 'utf8'));
+const LSEG = { tr: '/ilan/', en: '/en/listing/', ru: '/ru/obekt/' };
+const PF = {
+  tr: { e: 'Portföy', t: 'Seçtiğim portföyler', l: 'ACC HOMES portföyünden öne çıkan, bizzat takip ettiğim ilanlar. Tüm arama ve filtreler ACC HOMES ile ACC VILLAS sitelerinde.', q: [['Satılık daireler', 'listings'], ['Satılık villalar', 'villasSale'], ['Projeler', 'projects']], all: 'Tüm portföy', prT: 'Yetkili olduğumuz projeler', prL: 'Satış ve pazarlamasını ACC HOMES olarak yürüttüğümüz projeler.', go: 'İlanı incele' },
+  en: { e: 'Portfolio', t: 'Selected listings', l: 'Featured listings from the ACC HOMES portfolio that I follow personally. Full search and filters live on ACC HOMES and ACC VILLAS.', q: [['Apartments for sale', 'listings'], ['Villas for sale', 'villasSale'], ['Projects', 'projects']], all: 'Full portfolio', prT: 'Projects we represent', prL: 'Developments whose sales and marketing ACC HOMES runs as authorized agent.', go: 'View listing' },
+  ru: { e: 'Портфель', t: 'Избранные объекты', l: 'Избранные объекты портфеля ACC HOMES, которые я веду лично. Полный поиск и фильтры — на сайтах ACC HOMES и ACC VILLAS.', q: [['Квартиры на продажу', 'listings'], ['Виллы на продажу', 'villasSale'], ['Проекты', 'projects']], all: 'Весь портфель', prT: 'Проекты, которые мы представляем', prL: 'Проекты, продажи и маркетинг которых ведёт ACC HOMES как уполномоченное агентство.', go: 'Смотреть объект' },
+};
+const QURL = { listings: { tr: `${MAIN}/ilanlar/`, en: `${MAIN}/en/listings/`, ru: `${MAIN}/ru/obekty/` }, villasSale: { tr: `${VILLAS}/satilik-villalar/`, en: `${VILLAS}/en/villas-for-sale/`, ru: `${VILLAS}/ru/villy-na-prodazhu/` } };
+// Capital İnşaat yalnızca referans (marquee/logo); aktif portföyü çalışılmıyor — buraya eklenmez.
+const PROJ = [
+  ['Antalle Concept Houses', 'Döşemealtı · Altınkale', 'antalle-concept-houses', '/img/antalle/gece-havadan-villa-havuz.webp', true],
+  ['Prime Lara', 'Altıntaş · Aksu', 'prime-lara-altintas', '/img/primelara/hero.webp'],
+  ['Falez Manzara', 'Altıntaş · Aksu', 'falez-manzara-altintas', '/img/falez/dis-1.webp'],
+  ['Tap Vita Ruby', 'Beşkonaklılar · Kepez', 'tap-vita-ruby-kepez', '/img/tapvita/cephe-havuz.webp'],
+  ['Math UNO & DOS', 'Altınova · Kepez', 'math-uno-dos', ''],
+  ['Nox Apt', 'Yeniköy · Döşemealtı', 'nox-apt-dosemealti', ''],
+];
+const projUrl = (lang, slug, loc) => (loc && lang !== 'tr' ? `${MAIN}/${lang}/${lang === 'en' ? 'projects' : 'proekty'}/${slug}/` : `${MAIN}/projeler/${slug}/`);
+const money = (n, c, lang) => `${n.toLocaleString(lang === 'tr' ? 'tr-TR' : lang === 'ru' ? 'ru-RU' : 'en-US')} ${c}`;
+const portfolio = (lang) => { const p = PF[lang], q = (k) => (k === 'projects' ? ACC.projects[lang] : QURL[k][lang]); return `<section class="sec bg2"><div class="wrap"><div class="sh"><div><p class="eyebrow">${p.e}</p><h2>${p.t}</h2><p class="lead">${p.l}</p></div><a class="all" href="${QURL.listings[lang]}" target="_blank" rel="noopener">${p.all} →</a></div>
+<p class="qk">${p.q.map(([n, k]) => `<a href="${q(k)}" target="_blank" rel="noopener">${n} →</a>`).join('')}</p>
+<div class="pf">${FEAT.map((l) => `<a class="pfc rv" href="${MAIN}${LSEG[lang]}${l.slug}/" target="_blank" rel="noopener"><span class="pfi"><img src="${MAIN}${l.foto}" alt="${esc(l.t[lang] || l.t.tr)}" loading="lazy" width="800" height="600"><b>${money(l.fiyat, l.para, lang)}</b></span><span class="pfb"><small>${l.ilce} · ${l.mahalle}</small><h3>${esc(l.t[lang] || l.t.tr)}</h3><span class="pfm">${l.oda}${l.brut ? ` · ${l.brut} m²` : ''}</span><span class="more">${p.go} →</span></span></a>`).join('')}</div>
+<div class="sh prh"><div><h3>${p.prT}</h3><p>${p.prL}</p></div></div>
+<div class="prj">${PROJ.map(([n, loc, slug, im, l10n]) => `<a class="pjc${im ? '' : ' noimg'}" href="${projUrl(lang, slug, l10n)}" target="_blank" rel="noopener">${im ? `<img src="${MAIN}${im}" alt="${esc(n)}" loading="lazy" width="600" height="400">` : ''}<span><b>${esc(n)}</b><small>${loc}</small></span></a>`).join('')}</div></div></section>`; };
 const followBlock = (lang) => `<section class="sec"><div class="wrap"><div class="sh"><div><p class="eyebrow">${T[lang].followE}</p><h2>${T[lang].followT}</h2><p class="lead">${T[lang].followL}</p></div></div>
 <div class="fol">${FOLLOW.map(([k, n, h, u, d]) => `<a class="fo f-${k} rv" href="${u}" target="_blank" rel="noopener"><i>${ICO[k]}</i><span><b>${n}</b><em>${h}</em><small>${d[lang]}</small></span><span class="fgo">${T[lang].followBtn} →</span></a>`).join('')}</div></div></section>`;
 const careerLogos = `<div class="logos">${['nestle', 'kraft-heinz', 'reckitt', 'hasbro'].map((n) => `<img src="/img/logo-${n}.webp" alt="${n.replace('-', ' ')}" loading="lazy">`).join('')}<span class="lt">BOSCH</span><a class="lt li" href="https://www.linkedin.com/in/alicanercantherealtor/" target="_blank" rel="noopener">LinkedIn →</a></div>`;
@@ -383,6 +407,7 @@ for (const lang of LANGS) {
 <div class="now">${t.now.map(([h, p, k, l], i) => `<a class="nc rv" href="${ACC[k][lang]}" target="_blank" rel="noopener"><span class="nn">0${i + 1}</span><h3>${h}</h3><p>${p}</p><span class="more">${l} →</span></a>`).join('')}</div></div></section>
 <section class="sec bg2"><div class="wrap"><div class="sh"><div><p class="eyebrow">02</p><h2>${t.insT}</h2><p class="lead">${t.insL}</p></div><a class="all" href="${url(lang, 'insights')}">${t.all} →</a></div>
 <div class="posts">${POSTS.slice(0, 3).map((p) => postCard(p, lang)).join('')}</div></div></section>
+${portfolio(lang)}
 <section class="sec"><div class="wrap career"><div><p class="eyebrow">03</p><h2>${t.careerT}</h2><p class="lead">${t.careerL}</p><a class="all" href="${url(lang, 'about')}">${t.nav.about} →</a></div>${careerLogos}</div></section>
 <section class="sec dark"><div class="wrap"><div class="sh"><div><p class="eyebrow">04</p><h2>${t.stageT}</h2><p class="lead">${t.stageL}</p></div><a class="all" href="${url(lang, 'stage')}">${t.all} →</a></div>
 <div class="gal">${GAL.slice(0, 6).map((g) => galCard(g, lang)).join('')}</div></div></section>

@@ -1,0 +1,104 @@
+[
+ {
+  "id": "ACC-0001",
+  "slug": "satilik-dosemealti-altinkale-6-1-villa-acc-0001",
+  "t": {
+   "tr": "Döşemealtı Altınkale’de Müstakil Havuzlu Akıllı 6+1 Lüks Villa",
+   "en": "Detached Smart 6+1 Luxury Villa with Pool in Altınkale, Döşemealtı",
+   "ru": "Отдельная умная люкс-вилла 6+1 с бассейном, Алтынкале"
+  },
+  "fiyat": 65000000,
+  "para": "TL",
+  "oda": "6+1",
+  "brut": 478,
+  "ilce": "Döşemealtı",
+  "mahalle": "Altınkale",
+  "tur": "Villa",
+  "foto": "/img/ACC-0001/01.webp"
+ },
+ {
+  "id": "ACC-0002",
+  "slug": "satilik-dosemealti-altinkale-likya-city-6-1-villa-acc-0002",
+  "t": {
+   "tr": "Likya City’de Asansörlü, Havuzlu Müstakil 6+1 Lüks Villa",
+   "en": "Detached 6+1 Luxury Villa with Pool and Lift in Likya City, Altınkale",
+   "ru": "Отдельная люкс-вилла 6+1 с бассейном и лифтом, Likya City"
+  },
+  "fiyat": 49000000,
+  "para": "TL",
+  "oda": "6+1",
+  "brut": 640,
+  "ilce": "Döşemealtı",
+  "mahalle": "Altınkale",
+  "tur": "Villa",
+  "foto": "/img/ACC-0002/01.webp"
+ },
+ {
+  "id": "ACC-0003",
+  "slug": "satilik-dosemealti-altinkale-antalle-concept-houses-6-2-villa-acc-0003",
+  "t": {
+   "tr": "Antalle Concept Houses’ta Havuzlu 6+2 Komple Villa, Çift Tapu",
+   "en": "Whole 6+2 Villa with Private Pool at Antalle Concept Houses, Two Deeds",
+   "ru": "Вилла 6+2 целиком с бассейном, Antalle Concept Houses, два титула"
+  },
+  "fiyat": 50000000,
+  "para": "TL",
+  "oda": "6+2",
+  "brut": 360,
+  "ilce": "Döşemealtı",
+  "mahalle": "Altınkale",
+  "tur": "Villa",
+  "foto": "/img/ACC-0003/01.webp"
+ },
+ {
+  "id": "ACC-0005",
+  "slug": "satilik-dosemealti-altinkale-mustakil-havuzlu-8-1-villa-acc-0005",
+  "t": {
+   "tr": "Altınkale’de Kapalı ve Açık Havuzlu Müstakil 8+1 Ultra Lüks Villa",
+   "en": "Detached 8+1 Ultra-Luxury Villa with Indoor and Outdoor Pools, Altınkale",
+   "ru": "Отдельная вилла 8+1 с крытым и открытым бассейнами, Алтынкале"
+  },
+  "fiyat": 44900000,
+  "para": "TL",
+  "oda": "8+1",
+  "brut": 646,
+  "ilce": "Döşemealtı",
+  "mahalle": "Altınkale",
+  "tur": "Villa",
+  "foto": "/img/ACC-0005/01.webp"
+ },
+ {
+  "id": "ACC-0008",
+  "slug": "satilik-muratpasa-fener-muhsin-adiyaman-sitesi-deniz-manzarali-3-1-daire-acc-0008",
+  "t": {
+   "tr": "Fener’de Özel Plajlı Muhsin Adıyaman Sitesi’nde Deniz Manzaralı 3+1, 3. Kat",
+   "en": "Sea-View 3+1 with Private Beach, Muhsin Adıyaman Site, Fener (3rd floor)",
+   "ru": "Квартира 3+1 с видом на море и пляжем, Фенер (3-й этаж)"
+  },
+  "fiyat": 41000000,
+  "para": "TL",
+  "oda": "3+1",
+  "brut": 175,
+  "ilce": "Muratpaşa",
+  "mahalle": "Fener",
+  "tur": "Daire",
+  "foto": "/img/ACC-0008/01.webp"
+ },
+ {
+  "id": "ACC-0009",
+  "slug": "satilik-muratpasa-fener-muhsin-adiyaman-sitesi-deniz-manzarali-3-1-daire-acc-0009",
+  "t": {
+   "tr": "Fener’de Özel Plajlı Muhsin Adıyaman Sitesi’nde Deniz Manzaralı 3+1, 4. Kat",
+   "en": "Sea-View 3+1 with Private Beach, Muhsin Adıyaman Site, Fener (4th floor)",
+   "ru": "Квартира 3+1 с видом на море и пляжем, Фенер (4-й этаж)"
+  },
+  "fiyat": 42000000,
+  "para": "TL",
+  "oda": "3+1",
+  "brut": 175,
+  "ilce": "Muratpaşa",
+  "mahalle": "Fener",
+  "tur": "Daire",
+  "foto": "/img/ACC-0009/03.webp"
+ }
+]

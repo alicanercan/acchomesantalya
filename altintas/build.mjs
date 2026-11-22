@@ -20,7 +20,7 @@ const SITE = JSON.parse(fs.readFileSync(path.join(ROOT, 'data/site.json'), 'utf8
 const G = { url: 'https://maps.google.com/maps?cid=15609211507457388653', review: 'https://search.google.com/local/writereview?placeid=ChIJn7nvobuDwxQRbfDvNSoPn9g', rating: 4.9, count: 59 };
 const INTENT = { tr: [['sale', 'Altıntaş’ta daire almak istiyorum'], ['sell', 'Dairemi satmak istiyorum'], ['sell', 'Ücretsiz ekspertiz istiyorum']], en: [['sale', 'I want to buy in Altıntaş'], ['sell', 'I want to sell my apartment'], ['sell', 'I want a free valuation']], ru: [['sale', 'Хочу купить квартиру в Алтынташе'], ['sell', 'Хочу продать квартиру'], ['sell', 'Бесплатная оценка']] };
 const INTENT_ICO = ['<svg viewBox="0 0 24 24"><path d="M3 11 12 4l9 7v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></svg>', '<svg viewBox="0 0 24 24"><circle cx="8" cy="15" r="4"/><path d="m11 12 9-9m-3 3 3 3m-6 0 2 2"/></svg>', '<svg viewBox="0 0 24 24"><path d="M4 20V10m6 10V4m6 16v-7m4 7H2"/></svg>'];
-const REVIEWS = JSON.parse(fs.readFileSync(path.join(ROOT, 'data/reviews.json'), 'utf8'));
+const REVIEWS = JSON.parse(fs.readFileSync(path.join(HERE, 'reviews.json'), 'utf8')); // ACC HOMES Altıntaş Google profilinden (ekip adı geçen ve yakınlardan gelen yorumlar hariç)
 const LANGS = ['tr', 'en', 'ru'];
 const CSSV = (await import('node:crypto')).createHash('md5').update(fs.readFileSync(path.join(HERE, 'style.css'))).digest('hex').slice(0, 8);
 const BASE = { tr: '', en: '/en', ru: '/ru' };
@@ -285,7 +285,7 @@ function form(lang, topic = 0) {
 <label class="chk"><input type="checkbox" name="kvkk_onay" value="evet" required> <span>${f.consent} <a href="${KVKK[lang]}" target="_blank" rel="noopener">${f.kvkk}</a> *</span></label><button class="btn" type="submit">${f.send}</button></form>`;
 }
 const reviews = (lang) => {
-  const t = T[lang]; const list = REVIEWS.slice().sort((a, b) => (a.lang === (lang === 'tr' ? 'tr' : 'en') ? -1 : 1)).slice(0, 6);
+  const t = T[lang]; const list = REVIEWS.slice(0, 6);
   return `<section class="sec bg2"><div class="wrap"><div class="sh"><div><h2>${t.revT}</h2></div><a class="gb" href="${G.url}" target="_blank" rel="noopener">${ICO.g}<b>${lang === 'en' ? G.rating : String(G.rating).replace('.', ',')}</b> ★ · ${G.count}</a></div>
 <div class="revs">${list.map((r) => `<figure class="rev rv"><blockquote lang="${r.lang}">“${esc(r.text.replace(/^…\s*/, ''))}”</blockquote><figcaption><b>${esc(r.name)}</b> · Google</figcaption></figure>`).join('')}</div>
 <p class="center"><a class="btn ghost" href="${G.url}" target="_blank" rel="noopener">${t.revAll} →</a></p></div></section>`;

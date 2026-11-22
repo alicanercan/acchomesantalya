@@ -20,6 +20,8 @@ import { ROADMAP, TRUST, FOUNDER } from './story.mjs';
 import { BLOG, BLOG_POSTS } from './blog.mjs';
 import { NEWS, NEWS_UI } from './news.mjs';
 import { GUIDES, FAQ, GUIDE_SEG, GUIDE_TITLE, GUIDE_LEAD, GUIDE_UPDATED } from './guide.mjs';
+import { REGRET_LOC } from './guide-regret-i18n.mjs';
+GUIDES.find((g) => g.slug === 'ev-aldiktan-sonra-pisman-olmamak').loc = REGRET_LOC;
 import { SEO_META } from './seo-meta.mjs';
 import { T_EXTRA, S, s, SEGS, LOCALE, RTL, extend, PACKS } from './i18n.mjs';
 import { STAFF_PHOTOS, PARTNERS, PHOTO_BASE, LANG_NAMES, PARTNER_ROLE, SWORN_ROLE } from './team.mjs';
@@ -777,6 +779,10 @@ function pageNews(lang) {
 // ---------- alıcı rehberi ----------
 const gUrl = (lang, g) => (lang === 'tr' ? `/${GUIDE_SEG.tr}/${g.slug}/` : `/en/${GUIDE_SEG.en}/${g.en}/`);
 const gC = (g, lang) => (lang === 'tr' ? g.tr : g.enc);
+// rehberin kendi dil çevirisi varsa (g.loc) o dilde sayfa, yoksa EN
+const gUrlL = (lang, g) => (g.loc && g.loc[lang] ? url(lang, 'buyersguide') + g.loc[lang].slug + '/' : gUrl(GL(lang), g));
+const gCL = (g, lang) => (g.loc && g.loc[lang]) || gC(g, GL(lang));
+const gAlts = (g) => ({ tr: gUrl('tr', g), en: gUrl('en', g), ...Object.fromEntries(Object.keys(g.loc || {}).map((l) => [l, gUrlL(l, g)])) });
 // ---------- bölge rehberleri ----------
 const aUrl = (lang, a) => (lang === 'tr' ? `/${SEGS.areas.tr}/${a.slug}/` : `/en/${SEGS.areas.en}/${a.slugEn}/`);
 function areaCards(lang) {
@@ -839,7 +845,7 @@ function pageGuideHub(lang) {
   const L = GL(lang);
   const tr = lang === 'tr';
   const body = `<section class="wrap sec page"><nav class="crumbs"><a href="${home(lang)}">${T[lang].nav.home}</a> / <span>${GUIDE_TITLE[lang]}</span></nav><h1>${GUIDE_TITLE[lang]}</h1><p class="sub">${GUIDE_LEAD[lang]}</p>
-<div class="gcards">${GUIDES.map((g) => `<a class="gcard" href="${gUrl(L, g)}"><span>${g.icon}</span><h3>${esc(gC(g, L).title)}</h3><p>${esc(gC(g, L).short)}</p></a>`).join('')}</div>
+<div class="gcards">${GUIDES.map((g) => `<a class="gcard" href="${gUrlL(lang, g)}"><span>${g.icon}</span><h3>${esc(gCL(g, lang).title)}</h3><p>${esc(gCL(g, lang).short)}</p></a>`).join('')}</div>
 <h2>${s('areasTitle', lang)}</h2>${areaCards(lang)}
 <h2 id="sss">${s('faq', lang)}</h2>${faqHtml(L)}
 <div class="ctas"><a class="btn" href="${waLink(T[lang].waGeneral)}" target="_blank" rel="noopener">${s('askWa', lang)}</a><a class="btn ghost" href="${url(lang, 'contact')}">${T[lang].nav.contact}</a></div>
@@ -848,12 +854,12 @@ function pageGuideHub(lang) {
   write(path.join(url(lang, 'buyersguide'), 'index.html'), layout({ lang, title: `${GUIDE_TITLE[lang]} | ACC HOMES`, desc: GUIDE_LEAD[lang], canonical: url(lang, 'buyersguide'), alternates: alts('buyersguide'), body, schema }));
 }
 function pageGuideItem(g, lang) {
-  const c = gC(g, lang);
+  const c = gCL(g, lang);
   const html = c.html.replaceAll('{{CALC}}', calcBlock(lang));
   const body = `<section class="wrap sec page"><nav class="crumbs"><a href="${home(lang)}">${T[lang].nav.home}</a> / <a href="${url(lang, 'buyersguide')}">${GUIDE_TITLE[lang]}</a></nav><div class="glayout"><article class="prose"><h1>${g.icon} ${esc(c.title)}</h1><p class="sub">${esc(c.short)}</p>${html}
 <div class="ctas"><a class="btn" href="${waLink(T[lang].waGeneral)}" target="_blank" rel="noopener">${s('askConsultant', lang)}</a></div></article>${guideSide(lang, g)}</div></section>`;
-  const alt = { tr: gUrl('tr', g), en: gUrl('en', g) };
-  write(gUrl(lang, g) + 'index.html', layout({ lang, title: `${c.title} | ${GUIDE_TITLE[lang]} | ACC HOMES`, desc: c.desc || c.short, canonical: gUrl(lang, g), alternates: alt, body }));
+  const alt = gAlts(g);
+  write(gUrlL(lang, g) + 'index.html', layout({ lang, title: `${c.title} | ${GUIDE_TITLE[lang] || GUIDE_TITLE.en} | ACC HOMES`, desc: c.desc || c.short, canonical: gUrlL(lang, g), alternates: alt, body }));
 }
 function pageReviews(lang) {
   const t = T[lang];
@@ -1373,6 +1379,7 @@ await fetchBrokerImages();
 const urls = [];
 for (const lang of LANGS) {
   pageHome(lang); pageList(lang); pageGuide(lang); pageContact(lang); pageBlog(lang); pageProjects(lang); pageGuideHub(lang); pageReviews(lang); pageFavorites(lang); pageEvents(lang); pageNews(lang); urls.push(url(lang, 'events'), ...EVENTS.events.map((e) => evUrl(lang, e))); pageDownloads(lang); urls.push(url(lang, 'projects'), url(lang, 'buyersguide'), url(lang, 'reviews'));
+  if (lang !== 'tr' && lang !== 'en') for (const g of GUIDES) if (g.loc && g.loc[lang]) { pageGuideItem(g, lang); urls.push(gUrlL(lang, g)); }
   if (lang === 'tr' || lang === 'en') { for (const g of GUIDES) { pageGuideItem(g, lang); urls.push(gUrl(lang, g)); } for (const a of AREA_GUIDES) { pageAreaItem(a, lang); urls.push(aUrl(lang, a)); } for (const m of MAHALLELER) { pageMahalle(m, lang); urls.push(mUrl(lang, m)); } }
   pageAreaHub(lang); urls.push(url(lang, 'areas'));
   for (const k of Object.keys(PAGES)) { pageCorporate(k, lang); urls.push(url(lang, k)); }

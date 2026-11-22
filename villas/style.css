@@ -331,3 +331,8 @@ footer .flogo .lg-s{color:var(--ink)!important}footer .flogo small{color:var(--m
 .logo .lg-v{font:400 51px/.8 Anton,"Bebas Neue",Impact,sans-serif;color:var(--ink);letter-spacing:.005em;display:block;height:40px;overflow:visible;transform:translateY(1px)}
 footer .flogo img{height:44px}footer .flogo .lg-v{font-size:56px;height:44px}
 @media (max-width:860px){.logo .lg-v{font-size:41px;height:32px}}
+/* VILLAS = ACC ile birebir aynı harf boyu (Anton büyük harf yüksekliği 0,867em; ACC'nin A harfi logo yüksekliğinin %98'i) */
+.logo{align-items:flex-end!important}.logo img{height:40px!important}
+.logo .lg-v{font-size:45.2px!important;line-height:40px!important;height:40px!important;transform:translateY(.37px)!important;margin-left:2px}
+footer .flogo img{height:44px!important}footer .flogo .lg-v{font-size:49.7px!important;line-height:44px!important;height:44px!important;transform:translateY(.4px)!important}
+@media (max-width:860px){.logo img{height:32px!important}.logo .lg-v{font-size:36.2px!important;line-height:32px!important;height:32px!important;transform:translateY(.3px)!important}}

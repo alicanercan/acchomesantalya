@@ -30,7 +30,7 @@ export const PLAZA = {
     badges: [
       ['🏢', '1.000 m² Genel Merkez', 'Muratpaşa Yeşilbahçe’de modern ve teknolojik çalışma alanı'],
       ['🤝', '50 Profesyonel İş Ortağı', 'Her bölgeye ve projeye hakim uzman kadro'],
-      ['🌍', '10 Dilde Global Hizmet', 'Yabancı yatırımcılar için baştan sona anadilde destek'],
+      ['🌍', '12 Dilde Global Hizmet', 'Yabancı yatırımcılar için baştan sona anadilde destek'],
       ['💎', 'Münhasır Projeler', 'Sadece ACC Homes güvencesiyle sunulan yetkili portföyler'],
     ],
     cta1: 'Uzman Ekibimizle Tanışın', cta2: 'ACC Plaza’ya Yol Tarifi Al',
@@ -41,12 +41,12 @@ export const PLAZA = {
     sub: 'Hundreds of happy clients, and a global service that goes beyond borders',
     body: [
       'At ACC Plaza, our new 1,000 m² headquarters in the heart of Yeşilbahçe, Muratpaşa, we are setting a new standard for property investment and fine living. We are more than an estate agency: we are an international investment hub that brings the region’s finest authorised projects, global investment opportunities and professional property management under one roof.',
-      'With 50 expert partners and uninterrupted service in 10 languages, we manage your investment with care and full transparency, wherever in the world you are. Our strength comes from hundreds of successful references, and we would love to welcome you to ACC Plaza for a coffee and Antalya’s most corporate real estate experience.',
+      'With 50 expert partners and uninterrupted service in 12 languages, we manage your investment with care and full transparency, wherever in the world you are. Our strength comes from hundreds of successful references, and we would love to welcome you to ACC Plaza for a coffee and Antalya’s most corporate real estate experience.',
     ],
     badges: [
       ['🏢', '1,000 m² Headquarters', 'A modern, tech-enabled workspace in Yeşilbahçe, Muratpaşa'],
       ['🤝', '50 Professional Partners', 'Specialists who know every district and project'],
-      ['🌍', 'Service in 10 Languages', 'End-to-end support in your own language'],
+      ['🌍', 'Service in 12 Languages', 'End-to-end support in your own language'],
       ['💎', 'Exclusive Projects', 'Authorised portfolios offered only through ACC Homes'],
     ],
     cta1: 'Meet Our Team', cta2: 'Get Directions to ACC Plaza',
@@ -57,12 +57,12 @@ export const PLAZA = {
     sub: 'Сотни довольных клиентов и сервис международного уровня',
     body: [
       'В нашем новом главном офисе ACC Plaza площадью 1 000 м² в самом центре района Ешильбахче (Муратпаша) мы задаём новый стандарт инвестиций в недвижимость. Мы больше, чем агентство: это международный инвестиционный центр, где под одной крышей собраны лучшие проекты региона, на продажу которых у нас есть официальные полномочия, глобальные инвестиционные возможности и профессиональное управление недвижимостью.',
-      '50 экспертов-партнёров и обслуживание на 10 языках позволяют нам сопровождать вашу сделку надёжно и прозрачно, где бы вы ни находились. Приглашаем вас на чашку кофе в ACC Plaza.',
+      '50 экспертов-партнёров и обслуживание на 12 языках позволяют нам сопровождать вашу сделку надёжно и прозрачно, где бы вы ни находились. Приглашаем вас на чашку кофе в ACC Plaza.',
     ],
     badges: [
       ['🏢', 'Офис 1 000 м²', 'Современное рабочее пространство в Ешильбахче'],
       ['🤝', '50 партнёров-экспертов', 'Знание каждого района и проекта'],
-      ['🌍', 'Сервис на 10 языках', 'Поддержка на вашем родном языке'],
+      ['🌍', 'Сервис на 12 языках', 'Поддержка на вашем родном языке'],
       ['💎', 'Эксклюзивные проекты', 'Объекты, доступные только через ACC Homes'],
     ],
     cta1: 'Познакомиться с командой', cta2: 'Маршрут до ACC Plaza',
@@ -74,12 +74,12 @@ export const PAGES = {
     seg: { tr: 'hakkimizda', en: 'about', ru: 'o-nas' },
     nav: { tr: 'Biz Kimiz', en: 'About Us', ru: 'О нас' },
     tr: {
-      title: 'Biz Kimiz', desc: 'ACC HOMES International Real Estate: Antalya ACC Plaza’da 50 iş ortağı ve 10 dilde hizmet veren kurumsal gayrimenkul ofisi.',
+      title: 'Biz Kimiz', desc: 'ACC HOMES International Real Estate: Antalya ACC Plaza’da 50 iş ortağı ve 12 dilde hizmet veren kurumsal gayrimenkul ofisi.',
       lead: 'Antalya merkezli, kurumsal, şeffaf ve veriye dayalı çalışan uluslararası bir gayrimenkul ofisiyiz.',
       html: `
 <h2>Hikayemiz</h2>
 <p>ACC HOMES International Real Estate, mühendislik ve çok uluslu şirketlerde kurumsal satış geçmişine sahip Broker <a href="{{URL:broker}}">Ali Caner Can</a> tarafından 2024 yılında Antalya’da kuruldu. Çıkış noktamız basitti: Emlak sektörüne kurumsal dünyanın disiplinini, veriye dayalı fiyatlamayı ve gerçek bir müşteri deneyimini getirmek.</p>
-<p>Bugün Muratpaşa Yeşilbahçe’deki 1.000 m²’lik genel merkezimiz ACC Plaza’da, yaklaşık 50 iş ortağımız ve 10 dilde hizmet veren ekibimizle konut, villa, yeni proje, ticari mülk ve yatırım danışmanlığında hizmet veriyoruz.</p>
+<p>Bugün Muratpaşa Yeşilbahçe’deki 1.000 m²’lik genel merkezimiz ACC Plaza’da, yaklaşık 50 iş ortağımız ve 12 dilde hizmet veren ekibimizle konut, villa, yeni proje, ticari mülk ve yatırım danışmanlığında hizmet veriyoruz.</p>
 {{STATS}}
 <h2>Kurucumuz</h2>
 {{FOUNDER}}
@@ -109,12 +109,12 @@ export const PAGES = {
 <div class="ctas"><a class="btn" href="{{URL:team}}">Ekibimizle tanışın</a><a class="btn ghost" href="{{URL:services}}">Hizmetlerimiz</a></div>`,
     },
     en: {
-      title: 'About Us', desc: 'ACC HOMES International Real Estate: a corporate real estate agency at ACC Plaza, Antalya, with 50 partners and service in 10 languages.',
+      title: 'About Us', desc: 'ACC HOMES International Real Estate: a corporate real estate agency at ACC Plaza, Antalya, with 50 partners and service in 12 languages.',
       lead: 'An Antalya-based international real estate agency built on corporate standards, transparency and data.',
       html: `
 <h2>Our story</h2>
 <p>ACC HOMES International Real Estate was founded in Antalya in 2024 by broker <a href="{{URL:broker}}">Ali Caner Can</a>, an engineer with a background in corporate sales at multinational companies. The idea was simple: bring corporate discipline, data-driven pricing and a genuine client experience to real estate.</p>
-<p>Today, from ACC Plaza, our 1,000 m² headquarters in Yeşilbahçe, Muratpaşa, around 50 partners serve clients in 10 languages across residential sales and rentals, villas, new developments, commercial property and investment advisory.</p>
+<p>Today, from ACC Plaza, our 1,000 m² headquarters in Yeşilbahçe, Muratpaşa, around 50 partners serve clients in 12 languages across residential sales and rentals, villas, new developments, commercial property and investment advisory.</p>
 {{STATS}}
 <h2>Our founder</h2>
 {{FOUNDER}}
@@ -144,12 +144,12 @@ export const PAGES = {
 <div class="ctas"><a class="btn" href="{{URL:team}}">Meet the team</a><a class="btn ghost" href="{{URL:services}}">Our services</a></div>`,
     },
     ru: {
-      title: 'О нас', desc: 'ACC HOMES International Real Estate — корпоративное агентство недвижимости в Анталии: 50 партнёров, обслуживание на 10 языках.',
+      title: 'О нас', desc: 'ACC HOMES International Real Estate — корпоративное агентство недвижимости в Анталии: 50 партнёров, обслуживание на 12 языках.',
       lead: 'Международное агентство недвижимости в Анталии: корпоративные стандарты, прозрачность и работа на основе данных.',
       html: `
 <h2>Наша история</h2>
 <p>ACC HOMES International Real Estate основано в Анталии в 2024 году брокером <a href="{{URL:broker}}">Али Джанером Джаном</a> — инженером с опытом корпоративных продаж в международных компаниях. Наша цель — привнести в сферу недвижимости корпоративную дисциплину, ценообразование на основе данных и настоящий клиентский сервис.</p>
-<p>Сегодня в главном офисе ACC Plaza (1 000 м², Ешильбахче, Муратпаша) около 50 партнёров обслуживают клиентов на 10 языках: продажа и аренда жилья, виллы, новые проекты, коммерческая недвижимость и инвестиционный консалтинг.</p>
+<p>Сегодня в главном офисе ACC Plaza (1 000 м², Ешильбахче, Муратпаша) около 50 партнёров обслуживают клиентов на 12 языках: продажа и аренда жилья, виллы, новые проекты, коммерческая недвижимость и инвестиционный консалтинг.</p>
 {{STATS}}
 <h2>ACC Plaza</h2>
 {{OFFICE}}
@@ -211,7 +211,7 @@ export const PAGES = {
 <p>Şeffaflık, dürüstlük ve etik, mesleğinin merkezindedir. 2022’den bu yana her bayramda ve özel günde müşterilerinin her birine tek tek mesaj atar; ekibinden de aynısını bekler. ACC HOMES’ta her yıl bir gün ticari işler durur ve tüm ekip yalnızca topluma faydaya odaklanır: <a href="{{URL:events}}">ACC Day</a>.</p>
 <h2>Diller ve topluluk</h2>
 <ul class="chips"><li>Türkçe (anadil)</li><li>İngilizce (ileri)</li></ul>
-<p>Yabancı yatırımcılara, ekibinin konuştuğu 10 dilde hizmet verilir.</p>
+<p>Yabancı yatırımcılara, ekibinin konuştuğu 12 dilde hizmet verilir.</p>
 <p>Antalya İş İnsanları Derneği (ANTİAD) üyesi ve Beşiktaş JK Kongre Üyesi.</p>
 {{BROKER_GALLERY}}
 {{BROKER_LINKS}}
@@ -258,7 +258,7 @@ export const PAGES = {
 <p>Transparency, honesty and ethics are at the centre of his work. Since 2022 he has personally messaged every client on every holiday and special day, and asks his team to do the same. Once a year ACC HOMES stops all business for a day and the whole team focuses on giving back: <a href="{{URL:events}}">ACC Day</a>.</p>
 <h2>Languages and community</h2>
 <ul class="chips"><li>Turkish (native)</li><li>English (advanced)</li></ul>
-<p>Foreign investors are served in the 10 languages spoken across his team.</p>
+<p>Foreign investors are served in the 12 languages spoken across his team.</p>
 <p>Member of ANTİAD (Antalya Business People’s Association) and of the Beşiktaş JK Congress.</p>
 {{BROKER_GALLERY}}
 {{BROKER_LINKS}}
@@ -284,8 +284,8 @@ export const PAGES = {
     seg: { tr: 'ekibimiz', en: 'our-team', ru: 'komanda' },
     nav: { tr: 'Ekibimiz', en: 'Our Team', ru: 'Команда' },
     tr: {
-      title: 'Ekibimiz', desc: 'ACC HOMES ekibi: Broker, operasyon ve destek ekibi ile 10 dilde hizmet veren yaklaşık 50 iş ortağı.',
-      lead: 'Yaklaşık 50 iş ortağı, 10 dil ve tek bir hedef: müşterimize kurumsal ve güvenilir bir deneyim yaşatmak.',
+      title: 'Ekibimiz', desc: 'ACC HOMES ekibi: Broker, operasyon ve destek ekibi ile 12 dilde hizmet veren yaklaşık 50 iş ortağı.',
+      lead: 'Yaklaşık 50 iş ortağı, 12 dil ve tek bir hedef: müşterimize kurumsal ve güvenilir bir deneyim yaşatmak.',
       html: `
 {{TEAMPHOTOS}}
 <h2>Yönetim ve destek ekibi</h2>
@@ -298,8 +298,8 @@ export const PAGES = {
 <div class="ctas"><a class="btn" href="{{URL:join}}">İş ortağımız olun</a><a class="btn ghost" href="{{URL:contact}}">Bize ulaşın</a></div>`,
     },
     en: {
-      title: 'Our Team', desc: 'The ACC HOMES team: broker, operations and support staff, and around 50 partners serving clients in 10 languages.',
-      lead: 'Around 50 partners, 10 languages and one goal: a corporate, trustworthy experience for every client.',
+      title: 'Our Team', desc: 'The ACC HOMES team: broker, operations and support staff, and around 50 partners serving clients in 12 languages.',
+      lead: 'Around 50 partners, 12 languages and one goal: a corporate, trustworthy experience for every client.',
       html: `
 {{TEAMPHOTOS}}
 <h2>Management and support</h2>
@@ -312,8 +312,8 @@ export const PAGES = {
 <div class="ctas"><a class="btn" href="{{URL:join}}">Join us</a><a class="btn ghost" href="{{URL:contact}}">Contact us</a></div>`,
     },
     ru: {
-      title: 'Наша команда', desc: 'Команда ACC HOMES: брокер, операционный отдел и около 50 партнёров, работающих на 10 языках.',
-      lead: 'Около 50 партнёров, 10 языков и одна цель — надёжный корпоративный сервис для каждого клиента.',
+      title: 'Наша команда', desc: 'Команда ACC HOMES: брокер, операционный отдел и около 50 партнёров, работающих на 12 языках.',
+      lead: 'Около 50 партнёров, 12 языков и одна цель — надёжный корпоративный сервис для каждого клиента.',
       html: `
 {{TEAMPHOTOS}}
 <h2>Руководство и поддержка</h2>
@@ -339,7 +339,7 @@ export const PAGES = {
 <div><span>🔑</span><h3>Kiralama</h3><p>Doğru kiracı seçimi, kira sözleşmesi ve teslim süreçleri. Mülk sahibine ve kiracıya şeffaf, yazılı süreç.</p></div>
 <div><span>🛠️</span><h3>Mülk yönetimi</h3><p>Yıl boyu kira takibi, kiracı iletişimi ve sorun çözümü. Her onarım mülk sahibinin önceden onayıyla yapılır.</p></div>
 <div><span>🏗️</span><h3>Proje pazarlaması</h3><p>Müteahhitlere satış ofisi yönetimi, satış koordinasyonu ve 360° pazarlama. Prime Lara ve Antalle projelerinin yetkili satış ofisiyiz.</p></div>
-<div><span>🌍</span><h3>Yabancıya satış</h3><p>10 dilde hizmet; yabancı alıcılar için tapu, vekaletname ve resmi süreçlerde baştan sona destek.</p></div>
+<div><span>🌍</span><h3>Yabancıya satış</h3><p>12 dilde hizmet; yabancı alıcılar için tapu, vekaletname ve resmi süreçlerde baştan sona destek.</p></div>
 <div><span>📊</span><h3>Değerleme ve fiyat analizi</h3><p>Emsal satışlar ve bölge verisiyle hazırlanan, savunulabilir fiyat raporu.</p></div>
 <div><span>📈</span><h3>Yatırım danışmanlığı</h3><p>Kira getirisi, değer artışı ve proje yatırımları için bölge ve fırsat analizi.</p></div>
 <div><span>🏬</span><h3>Ticari mülk ve arsa</h3><p>Dükkan, ofis, otel ve yatırım arsası alım satımı ile kiralamasında uzman danışmanlık.</p></div>
@@ -370,7 +370,7 @@ export const PAGES = {
 <li>Profesyonel fotoğraf, drone ve video çekimi</li>
 <li>İlan portallarında yayın ve Meta (Instagram, Facebook) reklamları</li>
 <li>Gösterim, pazarlık, sözleşme, banka ve tapu takibi</li>
-<li>Veriye dayalı fiyat analizi ve 10 dilde hizmet</li>
+<li>Veriye dayalı fiyat analizi ve 12 dilde hizmet</li>
 </ul>
 <div class="ctas"><a class="btn" href="{{WA}}" target="_blank" rel="noopener">Ücretsiz değerleme isteyin</a><a class="btn ghost" href="{{URL:contact}}">Bize ulaşın</a></div>`,
     },
@@ -383,7 +383,7 @@ export const PAGES = {
 <div><span>🔑</span><h3>Rentals</h3><p>The right tenant, a clear contract and a documented handover for owners and tenants.</p></div>
 <div><span>🛠️</span><h3>Property management</h3><p>Year-round rent tracking, tenant communication and issue resolution. Every repair is pre-approved by the owner.</p></div>
 <div><span>🏗️</span><h3>Project marketing</h3><p>Sales-office management, sales coordination and 360° marketing for developers. Authorised sales office for Prime Lara and Antalle.</p></div>
-<div><span>🌍</span><h3>Sales to foreign buyers</h3><p>Service in 10 languages and full support with title deed, power of attorney and official procedures.</p></div>
+<div><span>🌍</span><h3>Sales to foreign buyers</h3><p>Service in 12 languages and full support with title deed, power of attorney and official procedures.</p></div>
 <div><span>📊</span><h3>Valuation</h3><p>A defensible price report built on comparable sales and local data.</p></div>
 <div><span>📈</span><h3>Investment advice</h3><p>Area and opportunity analysis for rental yield, capital growth and off-plan investments.</p></div>
 <div><span>🏬</span><h3>Commercial and land</h3><p>Shops, offices, hotels and investment land, for sale or rent.</p></div>
@@ -414,7 +414,7 @@ export const PAGES = {
 <li>Professional photography, drone and video</li>
 <li>Portal listings and Meta (Instagram, Facebook) advertising</li>
 <li>Viewings, negotiation, contract, bank and title-deed follow-up</li>
-<li>Data-driven pricing and service in 10 languages</li>
+<li>Data-driven pricing and service in 12 languages</li>
 </ul>
 <div class="ctas"><a class="btn" href="{{WA}}" target="_blank" rel="noopener">Request a free valuation</a><a class="btn ghost" href="{{URL:contact}}">Contact us</a></div>`,
     },
@@ -427,7 +427,7 @@ export const PAGES = {
 <div><span>🔑</span><h3>Аренда</h3><p>Подбор арендатора, договор и передача объекта — прозрачно для обеих сторон.</p></div>
 <div><span>🛠️</span><h3>Управление</h3><p>Контроль арендных платежей, связь с арендатором и решение вопросов круглый год.</p></div>
 <div><span>🏗️</span><h3>Маркетинг проектов</h3><p>Офис продаж, координация и маркетинг 360° для застройщиков.</p></div>
-<div><span>🌍</span><h3>Продажа иностранцам</h3><p>Обслуживание на 10 языках, помощь с тапу и доверенностью.</p></div>
+<div><span>🌍</span><h3>Продажа иностранцам</h3><p>Обслуживание на 12 языках, помощь с тапу и доверенностью.</p></div>
 <div><span>📊</span><h3>Оценка</h3><p>Отчёт о цене на основе сопоставимых сделок.</p></div>
 <div><span>📈</span><h3>Инвестиции</h3><p>Анализ доходности аренды и роста стоимости.</p></div>
 <div><span>🏬</span><h3>Коммерция и земля</h3><p>Магазины, офисы, отели и инвестиционные участки.</p></div>

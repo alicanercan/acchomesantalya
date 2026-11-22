@@ -12,7 +12,7 @@ export default {
     nav: { home: 'Strona główna', list: 'Nieruchomości', guide: 'Przewodnik po Altıntaş', contact: 'Kontakt' },
     seg: { list: 'nieruchomosci', listing: 'oferta', guide: 'przewodnik-altintas', contact: 'kontakt' },
     heroTitle: 'Nieruchomości na sprzedaż i wynajem w Antalyi',
-    heroSub: 'Z biura ACC Plaza, 50 partnerów i obsługa w 10 językach: mieszkania, wille, autoryzowane inwestycje i nieruchomości komercyjne – profesjonalnie, przejrzyście i w oparciu o dane',
+    heroSub: 'Z biura ACC Plaza, 50 partnerów i obsługa w 12 językach: mieszkania, wille, autoryzowane inwestycje i nieruchomości komercyjne – profesjonalnie, przejrzyście i w oparciu o dane',
     heroCta: 'Zobacz oferty', heroCta2: 'Zapytaj na WhatsApp',
     featured: 'Polecane nieruchomości', all: 'Wszystkie oferty', seeAll: 'Zobacz wszystkie oferty',
     why: 'Dlaczego ACC HOMES',
@@ -50,7 +50,7 @@ export default {
     projects: 'Inwestycje', projectsLead: 'Inwestycje, dla których ACC HOMES jest autoryzowanym biurem sprzedaży (strony po turecku)', projectsCta: 'Zobacz inwestycję',
     company: 'Firma', blog: 'Blog', blogLead: 'Poradniki i analizy rynku nieruchomości w Antalyi (po angielsku)', readMore: 'Czytaj dalej', menu: 'Menu',
     gReviews: (n) => `${n} opinii w Google`, readReviews: 'Czytaj opinie', igFollow: 'Obserwuj nas na Instagramie', mapTitle: 'Nasze biuro na mapie', directions: 'Wyznacz trasę', trustTitle: 'Opinie naszych klientów',
-    metaHome: 'ACC HOMES International Real Estate: mieszkania, wille, autoryzowane inwestycje i nieruchomości komercyjne na sprzedaż i wynajem w Antalyi. Obsługa w 10 językach, także po polsku.',
+    metaHome: 'ACC HOMES International Real Estate: mieszkania, wille, autoryzowane inwestycje i nieruchomości komercyjne na sprzedaż i wynajem w Antalyi. Obsługa w 12 językach, także po polsku.',
   },
   S: {
     partners: 'partnerów', langsSvc: 'języków', waJoin: 'Dzień dobry, chcę zostać partnerem ACC HOMES.', aboutUs: 'O nas',
@@ -110,12 +110,12 @@ export default {
     sub: 'Setki zadowolonych klientów i obsługa bez granic',
     body: [
       'W ACC Plaza, naszej nowej siedzibie o powierzchni 1000 m² w sercu Yeşilbahçe (Muratpaşa), wyznaczamy nowy standard inwestowania w nieruchomości. Jesteśmy kimś więcej niż biurem nieruchomości: to międzynarodowe centrum inwestycyjne, które pod jednym dachem łączy najlepsze autoryzowane inwestycje w regionie, globalne możliwości inwestycyjne i profesjonalne zarządzanie nieruchomościami.',
-      'Dzięki 50 doświadczonym partnerom i obsłudze w 10 językach prowadzimy Twoją inwestycję starannie i przejrzyście – gdziekolwiek jesteś. Naszą siłą są setki udanych transakcji. Zapraszamy na kawę do ACC Plaza.',
+      'Dzięki 50 doświadczonym partnerom i obsłudze w 12 językach prowadzimy Twoją inwestycję starannie i przejrzyście – gdziekolwiek jesteś. Naszą siłą są setki udanych transakcji. Zapraszamy na kawę do ACC Plaza.',
     ],
     badges: [
       ['🏢', 'Siedziba 1000 m²', 'Nowoczesne biuro w Yeşilbahçe, Muratpaşa'],
       ['🤝', '50 partnerów', 'Eksperci w każdej dzielnicy i inwestycji'],
-      ['🌍', 'Obsługa w 10 językach', 'Wsparcie w Twoim języku'],
+      ['🌍', 'Obsługa w 12 językach', 'Wsparcie w Twoim języku'],
       ['💎', 'Ekskluzywne inwestycje', 'Autoryzowane oferty dostępne tylko w ACC Homes'],
     ],
     cta1: 'Poznaj nasz zespół', cta2: 'Trasa do ACC Plaza',
@@ -130,19 +130,19 @@ export default {
     'Derya Plyatner': 'Graficzka', 'Zeynep Çarıkçı': 'Obsługa biura', 'Kamil Bey': 'Kot biurowy',
   },
   p2: {
-    sell: { title: 'Sprzedamy Twoją nieruchomość za właściwą cenę właściwemu kupującemu', desc: 'Chcesz sprzedać nieruchomość w Antalyi? Bezpłatna wycena, cena oparta na danych, profesjonalny marketing i kupujący z Turcji i zagranicy w 10 językach.', lead: 'Zacznij od bezpłatnej wyceny: realna cena na podstawie porównywalnych transakcji, profesjonalna prezentacja i przejrzysty proces aż do aktu własności.', cards: [['Bezpłatna wycena', 'Określamy realną wartość nieruchomości na podstawie aktualnych danych sprzedażowych i ofert i przekazujemy ją na piśmie.'], ['Profesjonalny marketing', 'Zdjęcia, wideo i dron; portale, Instagram i reklamy Meta; sieć kupujących w 10 językach.'], ['Z Tobą aż do aktu własności', 'Prezentacje, negocjacje, zadatek, bank i akt własności – z pisemną informacją na każdym etapie.']], formTitle: 'Poproś o bezpłatną wycenę', note: 'Wycena jest bezpłatna i nie zobowiązuje do sprzedaży.' },
+    sell: { title: 'Sprzedamy Twoją nieruchomość za właściwą cenę właściwemu kupującemu', desc: 'Chcesz sprzedać nieruchomość w Antalyi? Bezpłatna wycena, cena oparta na danych, profesjonalny marketing i kupujący z Turcji i zagranicy w 12 językach.', lead: 'Zacznij od bezpłatnej wyceny: realna cena na podstawie porównywalnych transakcji, profesjonalna prezentacja i przejrzysty proces aż do aktu własności.', cards: [['Bezpłatna wycena', 'Określamy realną wartość nieruchomości na podstawie aktualnych danych sprzedażowych i ofert i przekazujemy ją na piśmie.'], ['Profesjonalny marketing', 'Zdjęcia, wideo i dron; portale, Instagram i reklamy Meta; sieć kupujących w 12 językach.'], ['Z Tobą aż do aktu własności', 'Prezentacje, negocjacje, zadatek, bank i akt własności – z pisemną informacją na każdym etapie.']], formTitle: 'Poproś o bezpłatną wycenę', note: 'Wycena jest bezpłatna i nie zobowiązuje do sprzedaży.' },
     viewing: { title: 'Oglądanie online i wizyta zapoznawcza', desc: 'Obejrzyj nieruchomości przez wideo przed przyjazdem do Antalyi, a na miejscu zobacz dzielnice i wybrane oferty w jeden dzień.', lead: 'Dwuetapowy proces dla kupujących z zagranicy lub innego miasta.', cards: [['📱', 'Oglądanie na żywo przez wideo', 'Doradca pokazuje nieruchomość przez WhatsApp lub Zoom: widok, ekspozycję, osiedle i okolicę, i od razu odpowiada na pytania.'], ['🚗', 'Wizyta zapoznawcza', 'Po przyjeździe do Antalyi planujemy objazd dzielnic i wybranych ofert oraz omawiamy proces i koszty osobiście w ACC Plaza.'], ['📝', 'Zakup na odległość', 'Po decyzji przeniesienie aktu własności może nastąpić na podstawie pełnomocnictwa, bez przyjazdu do Turcji. Szczegóły w poradniku kupującego.']], cta1: 'Umów oglądanie wideo', cta2: 'Poradnik kupującego' },
     licences: { title: 'Licencje i dokumenty', desc: 'Numery licencji, dane biura i opinie klientów ACC HOMES International Real Estate.', lead: 'Działamy na podstawie oficjalnej licencji, z zarejestrowanego biura, w pełni przejrzyście.', l: ['Nazwa firmy', 'Licencja na obrót nieruchomościami (Turcja)', 'Siedziba', 'Ocena w Google'], note: 'Numery licencji można zweryfikować w systemie EİDS tureckiego Ministerstwa Handlu.', recTitle: 'Wyróżnienia', rec: ['2023: nasz założyciel Ali Caner Can – najlepszy doradca roku w Realty World MES Real Estate', '2026: autoryzowane biuro sprzedaży Prime Lara i Antalle Concept Houses'], cta1: 'O nas', cta2: 'Opinie klientów' },
   },
   pages: {
     about: {
       seg: 'o-nas', nav: 'O nas',
-      title: 'O nas', desc: 'ACC HOMES International Real Estate: profesjonalne biuro nieruchomości w Antalyi, około 50 partnerów i obsługa w 10 językach.',
+      title: 'O nas', desc: 'ACC HOMES International Real Estate: profesjonalne biuro nieruchomości w Antalyi, około 50 partnerów i obsługa w 12 językach.',
       lead: 'Międzynarodowe biuro nieruchomości w Antalyi: profesjonalne standardy, przejrzystość i doradztwo oparte na danych.',
       html: `
 <h2>Nasza historia</h2>
 <p>ACC HOMES International Real Estate założył w 2024 roku w Antalyi broker <a href="{{URL:broker}}">Ali Caner Can</a> – inżynier mechanik z wieloletnim doświadczeniem w sprzedaży korporacyjnej w międzynarodowych firmach. Naszym celem jest wniesienie do branży nieruchomości korporacyjnej dyscypliny, wyceny opartej na danych i prawdziwej obsługi klienta.</p>
-<p>Dziś około 50 partnerów z naszej siedziby ACC Plaza (1000 m², Yeşilbahçe, Muratpaşa) obsługuje klientów w 10 językach: sprzedaż i wynajem mieszkań, wille, nowe inwestycje, nieruchomości komercyjne i doradztwo inwestycyjne.</p>
+<p>Dziś około 50 partnerów z naszej siedziby ACC Plaza (1000 m², Yeşilbahçe, Muratpaşa) obsługuje klientów w 12 językach: sprzedaż i wynajem mieszkań, wille, nowe inwestycje, nieruchomości komercyjne i doradztwo inwestycyjne.</p>
 {{STATS}}
 <h2>ACC Plaza</h2>
 {{OFFICE}}
@@ -175,8 +175,8 @@ export default {
     },
     team: {
       seg: 'zespol', nav: 'Nasz zespół',
-      title: 'Nasz zespół', desc: 'Zespół ACC HOMES: broker, zespół wsparcia i około 50 partnerów obsługujących klientów w 10 językach.',
-      lead: 'Około 50 partnerów, 10 języków i jeden cel: profesjonalna i rzetelna obsługa każdego klienta.',
+      title: 'Nasz zespół', desc: 'Zespół ACC HOMES: broker, zespół wsparcia i około 50 partnerów obsługujących klientów w 12 językach.',
+      lead: 'Około 50 partnerów, 12 języków i jeden cel: profesjonalna i rzetelna obsługa każdego klienta.',
       html: `
 {{TEAMPHOTOS}}
 <h2>Zarząd i wsparcie</h2>
@@ -199,7 +199,7 @@ export default {
 <div><span>🔑</span><h3>Wynajem</h3><p>Znalezienie najemcy, umowa i przekazanie – przejrzyście dla obu stron.</p></div>
 <div><span>🛠️</span><h3>Zarządzanie</h3><p>Kontrola czynszu, kontakt z najemcą i rozwiązywanie spraw przez cały rok.</p></div>
 <div><span>🏗️</span><h3>Marketing inwestycji</h3><p>Biuro sprzedaży, koordynacja i marketing 360° dla deweloperów.</p></div>
-<div><span>🌍</span><h3>Klienci zagraniczni</h3><p>Obsługa w 10 językach, pomoc przy akcie własności i pełnomocnictwie.</p></div>
+<div><span>🌍</span><h3>Klienci zagraniczni</h3><p>Obsługa w 12 językach, pomoc przy akcie własności i pełnomocnictwie.</p></div>
 <div><span>📊</span><h3>Wycena</h3><p>Raport cenowy na podstawie porównywalnych transakcji.</p></div>
 <div><span>📈</span><h3>Inwestycje</h3><p>Analiza rentowności najmu i wzrostu wartości.</p></div>
 <div><span>🏬</span><h3>Komercja i działki</h3><p>Sklepy, biura, hotele i działki inwestycyjne.</p></div>

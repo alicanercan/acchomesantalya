@@ -75,7 +75,7 @@ export const POSTS10 = [
 <li><b>Masraf sizden çıkmaz:</b> Fotoğraf, drone ve video çekimi, ilan ve reklam masrafları ACC HOMES tarafından karşılanır.</li>
 <li><b>Veriye dayalı fiyat:</b> Emsal ve piyasa verileriyle hazırlanan fiyat analizi ile satışa doğru fiyatla başlanır.</li>
 <li><b>Baştan sona süreç yönetimi ve takip:</b> Yetkiden tapuya kadar gösterim, pazarlık, sözleşme, banka ve tapu süreçlerinin tamamını yönetiyoruz.</li>
-<li><b>Yabancı alıcı deneyimi:</b> Rus, Ukraynalı ve Avrupalı alıcılarla tamamlanmış çok sayıda satış; 10 dilde hizmet veren profesyonel ekip.</li>
+<li><b>Yabancı alıcı deneyimi:</b> Rus, Ukraynalı ve Avrupalı alıcılarla tamamlanmış çok sayıda satış; 12 dilde hizmet veren profesyonel ekip.</li>
 </ul>
 <p><b>Son satışlarımızı merak ediyorsanız:</b> Bölgenizde yakın zamanda sattığımız villaların fiyatlarını ve satış sürelerini görmek isterseniz, sizinle özel bir görüşme ayarlayalım. Bu bilgiler alıcı ve satıcılarımızın gizliliği nedeniyle sitede yayımlanmıyor; birebir görüşmede bölgenize özel emsalleri paylaşıyoruz.</p>
 <p>Müşterilerimizin deneyimi ortada: Google’da 472 yorum ve 4,9 puan.</p>
@@ -154,7 +154,7 @@ export const POSTS10 = [
 <li><b>No marketing costs for you:</b> photography, drone and video, listing and advertising costs are covered by ACC HOMES.</li>
 <li><b>Data-driven pricing</b> based on comparables and market data.</li>
 <li><b>End-to-end service</b> from listing agreement to title deed: viewings, negotiation, contract, bank and land registry.</li>
-<li><b>International experience:</b> many completed sales to Russian, Ukrainian and European buyers, and a team serving clients in 10 languages.</li>
+<li><b>International experience:</b> many completed sales to Russian, Ukrainian and European buyers, and a team serving clients in 12 languages.</li>
 </ul>
 <p><b>Curious about our recent sales?</b> If you would like to see the prices and selling times of villas we have recently sold in your area, let’s arrange a private meeting. To protect our clients’ privacy we do not publish them on the website, but we share area-specific comparables one-to-one.</p>
 <p>Our clients’ experience speaks for itself: 472 Google reviews with a 4.9 rating.</p>
@@ -233,7 +233,7 @@ export const POSTS10 = [
 <li><b>Без расходов для вас:</b> съёмка, дрон, видео, объявления и реклама — за счёт ACC HOMES.</li>
 <li><b>Цена на основе данных</b> об аналогах и рынке.</li>
 <li><b>Полное сопровождение</b> от договора до тапу: показы, переговоры, договор, банк и кадастр.</li>
-<li><b>Опыт с иностранцами:</b> множество сделок с покупателями из России, Украины и Европы, команда на 10 языках.</li>
+<li><b>Опыт с иностранцами:</b> множество сделок с покупателями из России, Украины и Европы, команда на 12 языках.</li>
 </ul>
 <p><b>Хотите узнать о наших последних продажах?</b> Если вам интересны цены и сроки продажи вилл, которые мы недавно продали в вашем районе, давайте назначим личную встречу. Из уважения к конфиденциальности клиентов мы не публикуем эти данные на сайте, но делимся аналогами по вашему району лично.</p>
 <p>Опыт наших клиентов говорит сам за себя: 472 отзыва в Google и рейтинг 4,9.</p>

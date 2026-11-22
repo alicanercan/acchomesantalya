@@ -108,7 +108,7 @@ export const POSTS5 = [
 <li><b>Teklif toplama ve karşılaştırma:</b> Birden fazla müteahhitten teklif alıp oran, süre, teminat ve teknik şartnameyi aynı tabloda karşılaştırma.</li>
 <li><b>Hukuk ve mühendislik koordinasyonu:</b> Sözleşme için avukat, teknik şartname ve zemin etüdü için mühendis desteği.</li>
 <li><b>İnşaat dönemi:</b> Maliklere ve kiracılara kiralık ev bulma.</li>
-<li><b>Teslimden sonra:</b> Yeni dairenin satışı ya da kiralanması; yurt dışındaki alıcılara 10 dilde pazarlama.</li>
+<li><b>Teslimden sonra:</b> Yeni dairenin satışı ya da kiralanması; yurt dışındaki alıcılara 12 dilde pazarlama.</li>
 </ul>
 <p>Yeşilbahçe’deki ACC Plaza’da yaklaşık 50 iş ortağımızla Muratpaşa ve Konyaaltı’nın her mahallesinde sahadayız. Binanız için ilk değerlendirmeyi birlikte yapalım: <a href="{{WA}}" target="_blank" rel="noopener">WhatsApp’tan yazın →</a> ya da <a href="{{URL:sell}}">mülkünüzü değerlendirelim</a>.</p>
 <p>Bu kategoride her iki haftada bir yeni yazı yayımlıyoruz: mahalle bazlı dönüşüm notları, mevzuat değişiklikleri ve örnek hesaplar.</p>
@@ -186,7 +186,7 @@ export const POSTS5 = [
 <h2>Key public bodies and developers in Antalya</h2>
 <p>Compiled from public projects and announcements; not a ranking or recommendation. Kentsel Dönüşüm Başkanlığı and the provincial directorate of the ministry; Antalya Metropolitan Municipality (Kepezaltı–Santral, Güneş); Muratpaşa Municipality (Balbey); Kendirciler İnşaat (Konyaaltı); Masal Yapı (Muratpaşa and Konyaaltı); HDY İnşaat with Pratikiz Mimarlık (Yıldız, Muratpaşa); Verado İnşaat (Altıntaş and Döşemealtı); Keleşoğlu İnşaat (Konyaaltı); Andeva Şirketler Grubu.</p>
 <h2>How ACC HOMES helps</h2>
-<p>We work on the owners’ side: preliminary analysis of zoning, areas and values; organising owners’ meetings; collecting and comparing offers from several developers; coordinating lawyers and engineers; finding rental homes during construction; and selling or letting the new flat afterwards, with marketing in 10 languages. Around 50 partners work with us from ACC Plaza in Yeşilbahçe. <a href="{{WA}}" target="_blank" rel="noopener">Message us on WhatsApp →</a></p>
+<p>We work on the owners’ side: preliminary analysis of zoning, areas and values; organising owners’ meetings; collecting and comparing offers from several developers; coordinating lawyers and engineers; finding rental homes during construction; and selling or letting the new flat afterwards, with marketing in 12 languages. Around 50 partners work with us from ACC Plaza in Yeşilbahçe. <a href="{{WA}}" target="_blank" rel="noopener">Message us on WhatsApp →</a></p>
 <p class="note">This article is general information and is not legal, tax or technical advice. Rules and support amounts can change; check the current position with the relevant authorities.</p>`,
       faq: [
         ['How many owners must agree to urban renewal in Turkey?', 'Since Law No. 7471 (9 November 2023), a simple majority of shares is enough for a building certified as risky. The old two-thirds rule no longer applies.'],

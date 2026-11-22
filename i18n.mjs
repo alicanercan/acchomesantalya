@@ -175,7 +175,7 @@ export const T_EXTRA = {
     nav: { home: 'Startseite', list: 'Immobilien', guide: 'Altıntaş-Ratgeber', contact: 'Kontakt' },
     seg: { list: 'immobilien', listing: 'objekt', guide: 'altintas-ratgeber', contact: 'kontakt' },
     heroTitle: 'Immobilien in Antalya kaufen und mieten',
-    heroSub: 'Von ACC Plaza aus, mit 50 Partnern in 10 Sprachen: Wohnungen, Villen, autorisierte Projekte und Gewerbeimmobilien – professionell, transparent und datenbasiert',
+    heroSub: 'Von ACC Plaza aus, mit 50 Partnern in 12 Sprachen: Wohnungen, Villen, autorisierte Projekte und Gewerbeimmobilien – professionell, transparent und datenbasiert',
     heroCta: 'Immobilien ansehen', heroCta2: 'Per WhatsApp fragen',
     featured: 'Ausgewählte Immobilien', all: 'Alle Immobilien', seeAll: 'Alle Immobilien ansehen',
     why: 'Warum ACC HOMES',
@@ -213,14 +213,14 @@ export const T_EXTRA = {
     projects: 'Projekte', projectsLead: 'Projekte, für die ACC HOMES das autorisierte Verkaufsbüro ist (Seiten auf Türkisch)', projectsCta: 'Projekt ansehen',
     company: 'Unternehmen', blog: 'Blog', blogLead: 'Ratgeber und Analysen zum Immobilienmarkt Antalya (auf Englisch)', readMore: 'Weiterlesen', menu: 'Menü',
     gReviews: (n) => `${n} Google-Bewertungen`, readReviews: 'Bewertungen lesen', igFollow: 'Folgen Sie uns auf Instagram', mapTitle: 'Unser Büro auf der Karte', directions: 'Route planen', trustTitle: 'Das sagen unsere Kunden',
-    metaHome: 'ACC HOMES International Real Estate: Wohnungen, Villen, autorisierte Projekte und Gewerbeimmobilien in Antalya kaufen und mieten. Beratung in 10 Sprachen, auch auf Deutsch.',
+    metaHome: 'ACC HOMES International Real Estate: Wohnungen, Villen, autorisierte Projekte und Gewerbeimmobilien in Antalya kaufen und mieten. Beratung in 12 Sprachen, auch auf Deutsch.',
   },
   fa: {
     htmlLang: 'fa', locale: 'fa_IR',
     nav: { home: 'صفحه اصلی', list: 'املاک', guide: 'راهنمای آلتین‌تاش', contact: 'تماس با ما' },
     seg: { list: 'amlak', listing: 'melk', guide: 'rahnama-altintash', contact: 'tamas' },
     heroTitle: 'خرید و اجاره ملک در آنتالیا',
-    heroSub: 'از دفتر ACC Plaza با ۵۰ همکار و خدمات به ۱۰ زبان: آپارتمان، ویلا، پروژه‌های رسمی و املاک تجاری؛ مشاوره‌ای حرفه‌ای، شفاف و مبتنی بر داده',
+    heroSub: 'از دفتر ACC Plaza با ۵۰ همکار و خدمات به ۱۲ زبان: آپارتمان، ویلا، پروژه‌های رسمی و املاک تجاری؛ مشاوره‌ای حرفه‌ای، شفاف و مبتنی بر داده',
     heroCta: 'مشاهده املاک', heroCta2: 'پرسش در واتس‌اپ',
     featured: 'املاک منتخب', all: 'همه املاک', seeAll: 'مشاهده همه املاک',
     why: 'چرا ACC HOMES',
@@ -258,7 +258,7 @@ export const T_EXTRA = {
     projects: 'پروژه‌ها', projectsLead: 'پروژه‌هایی که ACC HOMES دفتر فروش رسمی آن‌هاست (صفحات به زبان ترکی)', projectsCta: 'مشاهده پروژه',
     company: 'شرکت', blog: 'وبلاگ', blogLead: 'راهنماها و تحلیل‌های بازار ملک آنتالیا (به زبان انگلیسی)', readMore: 'ادامه مطلب', menu: 'منو',
     gReviews: (n) => `${n} نظر در گوگل`, readReviews: 'خواندن نظرات', igFollow: 'ما را در اینستاگرام دنبال کنید', mapTitle: 'دفتر ما روی نقشه', directions: 'مسیریابی', trustTitle: 'نظر مشتریان ما',
-    metaHome: 'ACC HOMES International Real Estate: خرید و اجاره آپارتمان، ویلا، پروژه‌های رسمی و املاک تجاری در آنتالیا. مشاوره به ۱۰ زبان، از جمله فارسی.',
+    metaHome: 'ACC HOMES International Real Estate: خرید و اجاره آپارتمان، ویلا، پروژه‌های رسمی و املاک تجاری در آنتالیا. مشاوره به ۱۲ زبان، از جمله فارسی.',
   },
 };
 
@@ -269,12 +269,12 @@ const PLAZA_X = {
     sub: 'Hunderte zufriedene Kunden und ein Service über Grenzen hinweg',
     body: [
       'In ACC Plaza, unserem neuen 1.000 m² großen Hauptsitz im Herzen von Yeşilbahçe (Muratpaşa), setzen wir neue Maßstäbe für Immobilieninvestitionen und gehobenes Wohnen. Wir sind mehr als ein Maklerbüro: ein internationales Investitionszentrum, das die besten autorisierten Projekte der Region, globale Investitionsmöglichkeiten und professionelle Immobilienverwaltung unter einem Dach vereint.',
-      'Mit 50 erfahrenen Partnern und Service in 10 Sprachen begleiten wir Ihre Investition sorgfältig und transparent – wo auch immer Sie sind. Unsere Stärke sind Hunderte erfolgreiche Referenzen. Besuchen Sie uns auf einen Kaffee in ACC Plaza.',
+      'Mit 50 erfahrenen Partnern und Service in 12 Sprachen begleiten wir Ihre Investition sorgfältig und transparent – wo auch immer Sie sind. Unsere Stärke sind Hunderte erfolgreiche Referenzen. Besuchen Sie uns auf einen Kaffee in ACC Plaza.',
     ],
     badges: [
       ['🏢', '1.000 m² Hauptsitz', 'Modernes Büro in Yeşilbahçe, Muratpaşa'],
       ['🤝', '50 Partner', 'Experten für jede Region und jedes Projekt'],
-      ['🌍', 'Service in 10 Sprachen', 'Betreuung in Ihrer Muttersprache, auch auf Deutsch'],
+      ['🌍', 'Service in 12 Sprachen', 'Betreuung in Ihrer Muttersprache, auch auf Deutsch'],
       ['💎', 'Exklusive Projekte', 'Autorisierte Portfolios nur bei ACC Homes'],
     ],
     cta1: 'Unser Team kennenlernen', cta2: 'Route zu ACC Plaza',
@@ -285,12 +285,12 @@ const PLAZA_X = {
     sub: 'صدها مشتری راضی و خدماتی فراتر از مرزها',
     body: [
       'در ACC Plaza، دفتر مرکزی جدید ما با ۱۰۰۰ متر مربع مساحت در قلب یشیل‌باغچه (مورات‌پاشا)، استاندارد تازه‌ای برای سرمایه‌گذاری در ملک و زندگی مجلل ارائه می‌کنیم. ما فقط یک دفتر املاک نیستیم؛ مرکزی بین‌المللی هستیم که بهترین پروژه‌های رسمی منطقه، فرصت‌های سرمایه‌گذاری جهانی و مدیریت حرفه‌ای ملک را زیر یک سقف گرد آورده است.',
-      'با ۵۰ همکار متخصص و خدمات پیوسته به ۱۰ زبان، هر جای دنیا که باشید روند سرمایه‌گذاری شما را با دقت و شفافیت مدیریت می‌کنیم. شما را برای صرف یک فنجان قهوه به ACC Plaza دعوت می‌کنیم.',
+      'با ۵۰ همکار متخصص و خدمات پیوسته به ۱۲ زبان، هر جای دنیا که باشید روند سرمایه‌گذاری شما را با دقت و شفافیت مدیریت می‌کنیم. شما را برای صرف یک فنجان قهوه به ACC Plaza دعوت می‌کنیم.',
     ],
     badges: [
       ['🏢', 'دفتر مرکزی ۱۰۰۰ متری', 'فضای کاری مدرن در یشیل‌باغچه'],
       ['🤝', '۵۰ همکار متخصص', 'آشنا به هر منطقه و هر پروژه'],
-      ['🌍', 'خدمات به ۱۰ زبان', 'پشتیبانی به زبان مادری شما، از جمله فارسی'],
+      ['🌍', 'خدمات به ۱۲ زبان', 'پشتیبانی به زبان مادری شما، از جمله فارسی'],
       ['💎', 'پروژه‌های انحصاری', 'سبد املاکی که فقط از طریق ACC Homes عرضه می‌شود'],
     ],
     cta1: 'آشنایی با تیم ما', cta2: 'مسیریابی به ACC Plaza',
@@ -323,12 +323,12 @@ const PAGES_X = {
   about: {
     seg: { de: 'ueber-uns', fa: 'darbare-ma' }, nav: { de: 'Über uns', fa: 'درباره ما' },
     de: {
-      title: 'Über uns', desc: 'ACC HOMES International Real Estate: professionelles Immobilienbüro in Antalya mit rund 50 Partnern und Service in 10 Sprachen.',
+      title: 'Über uns', desc: 'ACC HOMES International Real Estate: professionelles Immobilienbüro in Antalya mit rund 50 Partnern und Service in 12 Sprachen.',
       lead: 'Ein internationales Immobilienbüro in Antalya: professionelle Standards, Transparenz und datenbasierte Beratung.',
       html: `
 <h2>Unsere Geschichte</h2>
 <p>ACC HOMES International Real Estate wurde 2024 in Antalya von Broker <a href="{{URL:broker}}">Ali Caner Can</a> gegründet, einem Maschinenbauingenieur mit langjähriger Erfahrung im Konzernvertrieb internationaler Unternehmen. Unser Ziel: professionelle Disziplin, datenbasierte Preisfindung und echten Kundenservice in die Immobilienbranche zu bringen.</p>
-<p>Heute betreuen rund 50 Partner von unserem 1.000 m² großen Hauptsitz ACC Plaza (Yeşilbahçe, Muratpaşa) aus Kunden in 10 Sprachen: Kauf und Miete von Wohnungen, Villen, Neubauprojekte, Gewerbeimmobilien und Investitionsberatung.</p>
+<p>Heute betreuen rund 50 Partner von unserem 1.000 m² großen Hauptsitz ACC Plaza (Yeşilbahçe, Muratpaşa) aus Kunden in 12 Sprachen: Kauf und Miete von Wohnungen, Villen, Neubauprojekte, Gewerbeimmobilien und Investitionsberatung.</p>
 {{STATS}}
 <h2>ACC Plaza</h2>
 {{OFFICE}}
@@ -345,12 +345,12 @@ const PAGES_X = {
 <div class="ctas"><a class="btn" href="{{URL:team}}">Unser Team</a><a class="btn ghost" href="{{URL:services}}">Leistungen</a></div>`,
     },
     fa: {
-      title: 'درباره ما', desc: 'ACC HOMES International Real Estate: دفتر املاک حرفه‌ای در آنتالیا با حدود ۵۰ همکار و خدمات به ۱۰ زبان.',
+      title: 'درباره ما', desc: 'ACC HOMES International Real Estate: دفتر املاک حرفه‌ای در آنتالیا با حدود ۵۰ همکار و خدمات به ۱۲ زبان.',
       lead: 'یک دفتر املاک بین‌المللی در آنتالیا: استانداردهای حرفه‌ای، شفافیت و مشاوره مبتنی بر داده.',
       html: `
 <h2>داستان ما</h2>
 <p>ACC HOMES International Real Estate در سال ۲۰۲۴ در آنتالیا توسط <a href="{{URL:broker}}">علی جانر جان</a> تأسیس شد؛ مهندس مکانیک با سابقه طولانی در فروش سازمانی شرکت‌های بین‌المللی. هدف ما آوردن نظم حرفه‌ای، قیمت‌گذاری مبتنی بر داده و خدمات واقعی به مشتری در صنعت املاک است.</p>
-<p>امروز حدود ۵۰ همکار از دفتر مرکزی ۱۰۰۰ متری ACC Plaza (یشیل‌باغچه، مورات‌پاشا) به ۱۰ زبان به مشتریان خدمت می‌کنند: خرید و اجاره آپارتمان، ویلا، پروژه‌های نوساز، املاک تجاری و مشاوره سرمایه‌گذاری.</p>
+<p>امروز حدود ۵۰ همکار از دفتر مرکزی ۱۰۰۰ متری ACC Plaza (یشیل‌باغچه، مورات‌پاشا) به ۱۲ زبان به مشتریان خدمت می‌کنند: خرید و اجاره آپارتمان، ویلا، پروژه‌های نوساز، املاک تجاری و مشاوره سرمایه‌گذاری.</p>
 {{STATS}}
 <h2>ACC Plaza</h2>
 {{OFFICE}}
@@ -401,8 +401,8 @@ const PAGES_X = {
   team: {
     seg: { de: 'team', fa: 'tim-ma' }, nav: { de: 'Unser Team', fa: 'تیم ما' },
     de: {
-      title: 'Unser Team', desc: 'Das Team von ACC HOMES: Broker, Verwaltungs- und Supportteam sowie rund 50 Partner mit Service in 10 Sprachen.',
-      lead: 'Rund 50 Partner, 10 Sprachen und ein Ziel: ein professionelles, verlässliches Erlebnis für jeden Kunden.',
+      title: 'Unser Team', desc: 'Das Team von ACC HOMES: Broker, Verwaltungs- und Supportteam sowie rund 50 Partner mit Service in 12 Sprachen.',
+      lead: 'Rund 50 Partner, 12 Sprachen und ein Ziel: ein professionelles, verlässliches Erlebnis für jeden Kunden.',
       html: `
 {{TEAMPHOTOS}}
 <h2>Leitung und Support</h2>
@@ -415,8 +415,8 @@ const PAGES_X = {
 <div class="ctas"><a class="btn" href="{{URL:contact}}">Kontakt aufnehmen</a></div>`,
     },
     fa: {
-      title: 'تیم ما', desc: 'تیم ACC HOMES: بروکر، تیم پشتیبانی و حدود ۵۰ همکار با خدمات به ۱۰ زبان.',
-      lead: 'حدود ۵۰ همکار، ۱۰ زبان و یک هدف: تجربه‌ای حرفه‌ای و قابل اعتماد برای هر مشتری.',
+      title: 'تیم ما', desc: 'تیم ACC HOMES: بروکر، تیم پشتیبانی و حدود ۵۰ همکار با خدمات به ۱۲ زبان.',
+      lead: 'حدود ۵۰ همکار، ۱۲ زبان و یک هدف: تجربه‌ای حرفه‌ای و قابل اعتماد برای هر مشتری.',
       html: `
 {{TEAMPHOTOS}}
 <h2>مدیریت و پشتیبانی</h2>
@@ -441,7 +441,7 @@ const PAGES_X = {
 <div><span>🔑</span><h3>Vermietung</h3><p>Mietersuche, Vertrag und Übergabe – transparent für beide Seiten.</p></div>
 <div><span>🛠️</span><h3>Verwaltung</h3><p>Mietzahlungen, Kontakt zu Mietern und Lösungen das ganze Jahr.</p></div>
 <div><span>🏗️</span><h3>Projektvermarktung</h3><p>Verkaufsbüro, Koordination und 360°-Marketing für Bauträger.</p></div>
-<div><span>🌍</span><h3>Ausländische Käufer</h3><p>Service in 10 Sprachen, Hilfe bei Grundbuch und Vollmacht.</p></div>
+<div><span>🌍</span><h3>Ausländische Käufer</h3><p>Service in 12 Sprachen, Hilfe bei Grundbuch und Vollmacht.</p></div>
 <div><span>📊</span><h3>Bewertung</h3><p>Preisbericht auf Basis von Vergleichstransaktionen.</p></div>
 <div><span>📈</span><h3>Investition</h3><p>Analyse von Mietrendite und Wertsteigerung.</p></div>
 <div><span>🏬</span><h3>Gewerbe und Grundstücke</h3><p>Läden, Büros, Hotels und Investitionsgrundstücke.</p></div>
@@ -460,7 +460,7 @@ const PAGES_X = {
 <div><span>🔑</span><h3>اجاره</h3><p>یافتن مستأجر، قرارداد و تحویل ملک؛ شفاف برای هر دو طرف.</p></div>
 <div><span>🛠️</span><h3>مدیریت ملک</h3><p>پیگیری اجاره‌بها، ارتباط با مستأجر و حل مسائل در تمام سال.</p></div>
 <div><span>🏗️</span><h3>بازاریابی پروژه</h3><p>دفتر فروش، هماهنگی و بازاریابی ۳۶۰ درجه برای سازندگان.</p></div>
-<div><span>🌍</span><h3>خریداران خارجی</h3><p>خدمات به ۱۰ زبان از جمله فارسی، کمک در انتقال سند و وکالت‌نامه.</p></div>
+<div><span>🌍</span><h3>خریداران خارجی</h3><p>خدمات به ۱۲ زبان از جمله فارسی، کمک در انتقال سند و وکالت‌نامه.</p></div>
 <div><span>📊</span><h3>ارزیابی</h3><p>گزارش قیمت بر پایه معاملات مشابه.</p></div>
 <div><span>📈</span><h3>سرمایه‌گذاری</h3><p>تحلیل بازده اجاره و رشد ارزش ملک.</p></div>
 <div><span>🏬</span><h3>تجاری و زمین</h3><p>مغازه، دفتر کار، هتل و زمین سرمایه‌گذاری.</p></div>

@@ -5,6 +5,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { enSpan } from '../en-span.mjs';
+import { NEWS, GUIDE, PROJELER, FIRMALAR } from './content.mjs';
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.join(HERE, '..');
@@ -25,6 +26,8 @@ const SEG = {
   sale: { tr: 'satilik-daireler', en: 'apartments-for-sale', ru: 'kvartiry-na-prodazhu' },
   rent: { tr: 'kiralik-daireler', en: 'apartments-for-rent', ru: 'arenda-kvartir' },
   projects: { tr: 'projeler', en: 'projects', ru: 'proekty' },
+  guide: { tr: 'bolge-rehberi', en: 'area-guide', ru: 'gid-po-rajonu' },
+  news: { tr: 'bolge-haberleri', en: 'area-news', ru: 'novosti-rajona' },
   sell: { tr: 'evinizi-satin', en: 'sell-your-home', ru: 'prodat-kvartiru' },
   contact: { tr: 'iletisim', en: 'contact', ru: 'kontakty' },
 };
@@ -63,8 +66,8 @@ const ICO = {
 // ---------- metinler ----------
 const T = {
   tr: {
-    locale: 'tr_TR', brand: 'Altıntaş Satılık Daire', by: 'ACC HOMES Altıntaş',
-    nav: { sale: 'Satılık', rent: 'Kiralık', projects: 'Projeler', sell: 'Evinizi satın', contact: 'İletişim' },
+    locale: 'tr_TR', newsT: 'Bölge haberleri', newsL: 'Altıntaş, Ermenek ve Kemerağzı’nda imar, tapu, altyapı ve piyasaya dair doğrulanmış gelişmeler ve ACC HOMES yorumu.', newsTitle: 'Altıntaş Bölge Haberleri: İmar, Tapu, Altyapı | ACC HOMES', newsDesc: 'Aksu Altıntaş bölge haberleri: parselasyon iptali ve tapu şerhleri, imar, altyapı ve konut piyasası gelişmeleri.', read: 'Haberi oku', srcT: 'Kaynaklar', guideT: 'Altıntaş’ı sahadan tanıyın', guideL: 'Konum, projeler, kira talebi, altyapı ve imar: Altıntaş, Ermenek ve Kemerağzı rehberimiz.', guideBtn: 'Bölge rehberini oku', dirT: 'Altıntaş’taki projeler ve müteahhitler', dirL: 'Bölgede gidip geldiğimiz, takip ettiğimiz projeler ve inşaat firmaları. Yetkili olduğumuz projeler işaretlidir; diğer projelerde de ikinci el ve projeden satış için bize ulaşabilirsiniz.', auth: 'Yetkili ofis', firmT: 'Bölgede çalışan inşaat firmaları', landT: 'Arsanız ya da dükkânınız mı var?', landL: 'Altıntaş’ta arsanızı kat karşılığı değerlendirmek için müteahhit ağımızla buluşturuyor; ana yol üzerindeki bütçe dostu dükkânların satış ve kiralamasını yönetiyoruz.', rentOutT: 'Dairenizi kiraya mı vereceksiniz?', rentOutL: 'Altıntaş’ta kiralık daireler çok hızlı kiralanıyor. Doğru fiyat ve güvenilir kiracı için ilanınızı biz hazırlayalım.', freeExp: 'Ücretsiz ekspertiz', brand: 'Altıntaş Satılık Daire', by: 'ACC HOMES Altıntaş',
+    nav: { sale: 'Satılık', rent: 'Kiralık', projects: 'Projeler', guide: 'Bölge rehberi', news: 'Haberler', sell: 'Evinizi satın', contact: 'İletişim' },
     homeTitle: 'Altıntaş Satılık Daire | Antalya Aksu Altıntaş Emlak · ACC HOMES', homeDesc: 'Antalya Aksu Altıntaş’ta satılık ve kiralık daireler, yetkili projeler ve bölge rehberi. Altıntaş satış ofisimiz ve ACC HOMES güvencesiyle.',
     h1: 'Altıntaş’ta satılık ve kiralık daireler', lead: 'Antalya’nın en hızlı büyüyen konut bölgesi Altıntaş’ta güncel ilanlar, yetkili projeler ve sahadan bilgi. Altıntaş satış ofisimiz ve ACC HOMES ekibiyle alımdan tapuya kadar yanınızdayız.',
     ctaSale: 'Satılık ilanlar', ctaWa: 'WhatsApp ile sor', statSale: 'satılık ilan', statRent: 'kiralık ilan', statProj: 'yetkili proje', statG: 'Google yorumu (ACC HOMES)',
@@ -92,8 +95,8 @@ const T = {
     foot: 'altintassatilikdaire.com, ACC HOMES International Real Estate’in Altıntaş bölge sitesidir.', other: 'Diğer sitelerimiz',
   },
   en: {
-    locale: 'en_US', brand: 'Altıntaş Apartments', by: 'ACC HOMES Altıntaş',
-    nav: { sale: 'For sale', rent: 'For rent', projects: 'Projects', sell: 'Sell your home', contact: 'Contact' },
+    locale: 'en_US', newsT: 'Area news', newsL: 'Verified developments on zoning, title deeds, infrastructure and the market in Altıntaş, Ermenek and Kemerağzı, with ACC HOMES commentary.', newsTitle: 'Altıntaş Area News: Zoning, Title Deeds, Infrastructure | ACC HOMES', newsDesc: 'Altıntaş area news: parcellation annulment and title deed annotations, zoning, infrastructure and housing market updates.', read: 'Read', srcT: 'Sources', guideT: 'Know Altıntaş from the ground', guideL: 'Location, projects, rental demand, infrastructure and zoning: our guide to Altıntaş, Ermenek and Kemerağzı.', guideBtn: 'Read the area guide', dirT: 'Projects and developers in Altıntaş', dirL: 'Projects and builders we follow in the area. Our authorised projects are marked; contact us for resale and off-plan units in other projects too.', auth: 'Authorised', firmT: 'Developers active in the area', landT: 'Own land or a shop?', landL: 'We introduce landowners to developers for flat-for-land deals and manage sales and lettings of affordable shops on the main roads.', rentOutT: 'Letting your apartment?', rentOutL: 'Rentals move fast in Altıntaş. Let us price and market your flat and find a reliable tenant.', freeExp: 'Free valuation', brand: 'Altıntaş Apartments', by: 'ACC HOMES Altıntaş',
+    nav: { sale: 'For sale', rent: 'For rent', projects: 'Projects', guide: 'Area guide', news: 'News', sell: 'Sell', contact: 'Contact' },
     homeTitle: 'Apartments for Sale in Altıntaş, Antalya | ACC HOMES', homeDesc: 'Apartments for sale and rent in Altıntaş, Aksu, Antalya: current listings, authorised projects and a local area guide from ACC HOMES.',
     h1: 'Apartments for sale and rent in Altıntaş', lead: 'Current listings, authorised projects and on-the-ground insight in Altıntaş, Antalya’s fastest-growing residential area. Our Altıntaş sales office and the ACC HOMES team are with you from viewing to title deed.',
     ctaSale: 'Homes for sale', ctaWa: 'Ask on WhatsApp', statSale: 'for sale', statRent: 'for rent', statProj: 'authorised projects', statG: 'Google reviews (ACC HOMES)',
@@ -121,8 +124,8 @@ const T = {
     foot: 'altintassatilikdaire.com is the Altıntaş area site of ACC HOMES International Real Estate.', other: 'Our other sites',
   },
   ru: {
-    locale: 'ru_RU', brand: 'Квартиры в Алтынташе', by: 'ACC HOMES Altıntaş',
-    nav: { sale: 'Продажа', rent: 'Аренда', projects: 'Проекты', sell: 'Продать', contact: 'Контакты' },
+    locale: 'ru_RU', newsT: 'Новости района', newsL: 'Проверенные новости о зонировании, тапу, инфраструктуре и рынке в Алтынташе, Эрменеке и Кемерагзы.', newsTitle: 'Новости Алтынташа: зонирование, тапу | ACC HOMES', newsDesc: 'Новости района Алтынташ: отмена парцелляции, отметки в тапу, инфраструктура и рынок жилья.', read: 'Читать', srcT: 'Источники', guideT: 'Алтынташ изнутри', guideL: 'Расположение, проекты, аренда, инфраструктура и зонирование: наш гид по району.', guideBtn: 'Читать гид', dirT: 'Проекты и застройщики Алтынташа', dirL: 'Проекты и застройщики, которых мы знаем. Наши проекты отмечены; по другим проектам тоже обращайтесь.', auth: 'Наш проект', firmT: 'Застройщики района', landT: 'Есть участок или магазин?', landL: 'Помогаем владельцам участков найти застройщика и продаём/сдаём доступные магазины на главных дорогах.', rentOutT: 'Сдаёте квартиру?', rentOutL: 'Квартиры в Алтынташе сдаются очень быстро. Подготовим объявление и найдём надёжного арендатора.', freeExp: 'Бесплатная оценка', brand: 'Квартиры в Алтынташе', by: 'ACC HOMES Altıntaş',
+    nav: { sale: 'Продажа', rent: 'Аренда', projects: 'Проекты', guide: 'Гид', news: 'Новости', sell: 'Продать', contact: 'Контакты' },
     homeTitle: 'Квартиры в Алтынташе, Анталия: продажа и аренда | ACC HOMES', homeDesc: 'Квартиры на продажу и в аренду в Алтынташе (Аксу, Анталия): актуальные объекты, проекты и гид по району от ACC HOMES.',
     h1: 'Квартиры в Алтынташе: продажа и аренда', lead: 'Актуальные объекты, проекты и знание района Алтынташ — самого быстрорастущего жилого района Анталии. Наш офис продаж в Алтынташе и команда ACC HOMES сопровождают вас до оформления тапу.',
     ctaSale: 'Объекты на продажу', ctaWa: 'Написать в WhatsApp', statSale: 'на продажу', statRent: 'в аренду', statProj: 'проекта', statG: 'отзывов Google (ACC HOMES)',
@@ -195,7 +198,7 @@ function head({ lang, title, desc, canon, alt, ld }) {
 <link rel="icon" href="/favicon.ico" sizes="any"><link rel="icon" href="/favicon.svg" type="image/svg+xml"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Anton&family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet"><link rel="stylesheet" href="/style.css?v=1">
 ${ld.map((x) => `<script type="application/ld+json">${JSON.stringify(x).replace(/</g, '\\u003c')}</script>`).join('')}</head>`;
 }
-const navKeys = ['sale', 'rent', 'projects', 'sell', 'contact'];
+const navKeys = ['sale', 'rent', 'projects', 'guide', 'news', 'sell', 'contact'];
 function header(lang, alt, cur) {
   const t = T[lang]; const lsw = LANGS.map((l) => `<a href="${alt[l]}"${l === lang ? ' class="on" aria-current="true"' : ''} hreflang="${l}">${l.toUpperCase()}</a>`).join('');
   return `<div class="tbar"><div class="wrap tbi"><a href="tel:${PHONE.raw}">${ICO.ph}${PHONE.text}</a><a href="https://wa.me/${PHONE.wa}" target="_blank" rel="noopener">${ICO.wa}WhatsApp</a><a class="tig" href="${IG}" target="_blank" rel="noopener">${ICO.ig}@acc.altintas.realestate</a></div></div>
@@ -225,26 +228,50 @@ function page({ lang, key, title, desc, ld = [], body }) {
 }
 const phero = (e, h, l) => `<section class="phero"><div class="wrap"><p class="eyebrow">${e}</p><h1>${h}</h1><p class="lead">${l}</p></div></section>`;
 
+
+// ---------- rehber, haberler, proje rehberi ----------
+const newsUrl = (lang, n) => `${url(lang, 'news')}${n.slug}/`;
+const fdate = (d, lang) => new Date(d + 'T12:00:00').toLocaleDateString(lang === 'tr' ? 'tr-TR' : lang === 'ru' ? 'ru-RU' : 'en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
+const newsCards = (lang, n = 6) => `<div class="nws">${NEWS.slice(0, n).map((x) => `<a class="nw rv" href="${newsUrl(lang, x)}"><small>${fdate(x.date, lang)}</small><h3>${esc(x[lang].t)}</h3><p>${esc(x[lang].s)}</p><span class="more">${T[lang].read} →</span></a>`).join('')}</div>`;
+const guideBand = (lang) => { const t = T[lang]; return `<section class="sec bg2"><div class="wrap"><div class="sh"><div><h2>${t.guideT}</h2><p class="lead">${t.guideL}</p></div><a class="all" href="${url(lang, 'news')}">${t.newsT} →</a></div><div class="gb2"><a class="gcard rv" href="${url(lang, 'guide')}"><b>${GUIDE[lang].h}</b><span>${GUIDE[lang].secs.map(([h]) => h).slice(0, 5).join(' · ')}</span><em>${t.guideBtn} →</em></a>${newsCards(lang, 2)}</div></div></section>`; };
+const dirBlock = (lang) => { const t = T[lang]; const cnt = (n) => AREA.filter((l) => l.proje && n.toLocaleLowerCase('tr').includes(l.proje.toLocaleLowerCase('tr'))).length;
+  return `<section class="sec"><div class="wrap"><h2>${t.dirT}</h2><p class="lead">${t.dirL}</p><div class="dir">${PROJELER.map(([n, f, a]) => { const c = cnt(n); return `<div class="dp${a ? ' au' : ''}"><b>${esc(n)}</b>${f ? `<small>${esc(f)}</small>` : ''}${a ? `<em>${t.auth}</em>` : ''}${c ? `<i>${c} ${lang === 'tr' ? 'ilan' : lang === 'ru' ? 'объект.' : 'listings'}</i>` : ''}</div>`; }).join('')}</div>
+<h3 class="mt">${t.firmT}</h3><p class="firms">${FIRMALAR.map((f) => `<span>${esc(f)}</span>`).join('')}</p></div></section>`; };
+const landBand = (lang) => { const t = T[lang]; return `<section class="sec"><div class="wrap two2"><div class="lb2 rv"><h3>${t.landT}</h3><p>${t.landL}</p><a class="btn sm" href="${url(lang, 'contact')}">${t.nav.contact} →</a></div><div class="lb2 rv"><h3>${t.rentOutT}</h3><p>${t.rentOutL}</p><a class="btn sm" href="${url(lang, 'sell')}">${t.freeExp} →</a></div></div></section>`; };
 // ---------- sayfalar ----------
 for (const lang of LANGS) {
   const t = T[lang];
   page({ lang, key: 'home', title: t.homeTitle, desc: t.homeDesc, ld: [ORG(lang), { '@context': 'https://schema.org', '@type': 'WebSite', name: t.brand, url: DOMAIN + url(lang, 'home'), inLanguage: lang }, itemList(SALE, lang), faqLd(lang)], body: `
 <section class="hero2" style="--bg:url('${MAIN}/img/primelara/hero.webp')"><div class="wrap"><p class="eyebrow">${t.by} · Aksu / Antalya</p><h1>${t.h1}</h1><p class="lead">${t.lead}</p><div class="ctas"><a class="btn" href="${url(lang, 'sale')}">${t.ctaSale} →</a><a class="btn ghost light" href="https://wa.me/${PHONE.wa}" target="_blank" rel="noopener">${ICO.wa} ${t.ctaWa}</a></div>
-<p class="qk"><a href="${url(lang, 'sale')}">${t.nav.sale} <b>${SALE.length}</b></a><a href="${url(lang, 'rent')}">${t.nav.rent} <b>${RENT.length}</b></a><a href="${url(lang, 'projects')}">${t.nav.projects} <b>${t.proj.length}</b></a><a href="${url(lang, 'sell')}">${t.nav.sell} →</a></p></div></section>
+<p class="qk"><a href="${url(lang, 'sale')}">${t.nav.sale} <b>${SALE.length}</b></a><a href="${url(lang, 'rent')}">${t.nav.rent} <b>${RENT.length}</b></a><a href="${url(lang, 'projects')}">${t.nav.projects} <b>${t.proj.length}</b></a><a href="${url(lang, 'sell')}">${t.freeExp} →</a><a href="${url(lang, 'news')}">${t.newsT} →</a></p></div></section>
 <section class="stats"><div class="wrap sg"><div class="st"><b>${SALE.length}</b><span>${t.statSale}</span></div><div class="st"><b>${RENT.length}</b><span>${t.statRent}</span></div><div class="st"><b>${t.proj.length}</b><span>${t.statProj}</span></div><div class="st"><b>${lang === 'en' ? G.rating : String(G.rating).replace('.', ',')} ★</b><span>${G.count} ${t.statG}</span></div></div></section>
 <section class="sec" id="ilanlar"><div class="wrap"><div class="sh"><div><h2>${t.saleT}</h2><p class="lead">${t.saleL}</p></div><a class="all" href="${url(lang, 'sale')}">${t.all} (${SALE.length}) →</a></div>${igrid(SALE, lang, 9)}</div></section>
 ${projBlock(lang)}
 <section class="sec"><div class="wrap"><div class="sh"><div><h2>${t.rentT}</h2><p class="lead">${t.rentL}</p></div><a class="all" href="${url(lang, 'rent')}">${t.all} (${RENT.length}) →</a></div>${igrid(RENT, lang, 6)}</div></section>
 <section class="sec bg2"><div class="wrap"><h2>${t.whyT}</h2><div class="vals">${t.why.map(([h, p]) => `<div class="val rv"><h3>${h}</h3><p>${p}</p></div>`).join('')}</div><p class="center"><a class="btn ghost" href="${t.guideUrl}" target="_blank" rel="noopener">${t.guide} →</a></p></div></section>
+${guideBand(lang)}
 ${sellBand(lang)}
+${landBand(lang)}
 ${faqBlock(lang)}
 ${reviews(lang)}` });
+
+  const G2 = GUIDE[lang];
+  page({ lang, key: 'guide', title: G2.title, desc: G2.desc, ld: [crumbs(lang, 'guide'), { '@context': 'https://schema.org', '@type': 'Article', headline: G2.h, description: G2.desc, inLanguage: lang, author: { '@type': 'Person', name: 'Ali Caner Can', url: 'https://alicanercan.com/' }, publisher: { '@id': `${DOMAIN}/#org` }, about: { '@type': 'Place', name: 'Altıntaş, Aksu, Antalya' }, dateModified: new Date().toISOString().slice(0, 10) }], body: `${phero(t.nav.guide, G2.h, G2.lead)}
+<section class="sec tight"><div class="wrap glay"><article class="prose">${G2.secs.map(([h, x]) => `<h2>${h}</h2>${x.replace(/\{\{NEWS\}\}/g, url(lang, 'news'))}`).join('')}<p class="sig">${lang === 'tr' ? 'Ali Caner Can ve ACC HOMES Altıntaş ekibinin saha deneyimleriyle hazırlanmıştır.' : lang === 'ru' ? 'Подготовлено Али Джанер Джаном и командой ACC HOMES Altıntaş.' : 'Written by Ali Caner Can and the ACC HOMES Altıntaş team from first-hand experience.'}</p></article>
+<aside class="gside"><b>${t.nav.sale}</b><a href="${url(lang, 'sale')}">${t.saleT} (${SALE.length})</a><a href="${url(lang, 'rent')}">${t.rentT} (${RENT.length})</a><b>${t.newsT}</b>${NEWS.slice(0, 3).map((x) => `<a href="${newsUrl(lang, x)}">${esc(x[lang].t)}</a>`).join('')}<b>${t.nav.sell}</b><a href="${url(lang, 'sell')}">${t.freeExp}</a></aside></div></section>${landBand(lang)}` });
+  page({ lang, key: 'news', title: t.newsTitle, desc: t.newsDesc, ld: [crumbs(lang, 'news')], body: `${phero(t.by, t.newsT, t.newsL)}<section class="sec tight"><div class="wrap">${newsCards(lang, 50)}</div></section>` });
+  for (const n of NEWS) {
+    const c = n[lang]; const canon = newsUrl(lang, n); const alt = Object.fromEntries(LANGS.map((l) => [l, newsUrl(l, n)])); const src = n.tr.src || [];
+    const ld = [{ '@context': 'https://schema.org', '@type': 'NewsArticle', headline: c.t, description: c.s, datePublished: n.date, dateModified: n.date, inLanguage: lang, author: { '@type': 'Person', name: 'Ali Caner Can', url: 'https://alicanercan.com/' }, publisher: { '@id': `${DOMAIN}/#org`, '@type': 'Organization', name: 'ACC HOMES Altıntaş' }, mainEntityOfPage: DOMAIN + canon, image: `${MAIN}/img/primelara/hero.webp` }, { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [{ '@type': 'ListItem', position: 1, name: t.brand, item: DOMAIN + url(lang, 'home') }, { '@type': 'ListItem', position: 2, name: t.newsT, item: DOMAIN + url(lang, 'news') }, { '@type': 'ListItem', position: 3, name: c.t, item: DOMAIN + canon }] }];
+    write(canon.slice(1), enSpan(`${head({ lang, title: `${c.t} | ACC HOMES Altıntaş`.slice(0, 110), desc: c.s, canon, alt, ld })}<body>${header(lang, alt, 'news')}<main><section class="phero"><div class="wrap narrow"><p class="eyebrow">${t.newsT} · ${fdate(n.date, lang)}</p><h1>${esc(c.t)}</h1><p class="lead">${esc(c.s)}</p></div></section><section class="sec tight"><div class="wrap narrow prose">${c.html}${src.length ? `<h2>${t.srcT}</h2><ul class="srcs">${src.map(([a, u]) => `<li><a href="${u}" target="_blank" rel="noopener nofollow">${esc(a)}</a></li>`).join('')}</ul>` : ''}<div class="ctas"><a class="btn" href="${url(lang, 'contact')}">${t.nav.contact} →</a><a class="btn ghost" href="${url(lang, 'guide')}">${t.nav.guide}</a></div></div></section></main>${footer(lang)}</body></html>`));
+    sitemap.push([canon, alt]);
+  }
   page({ lang, key: 'sale', title: t.saleTitle, desc: t.saleDesc, ld: [crumbs(lang, 'sale'), itemList(SALE, lang)], body: `${phero(t.by, t.saleT, t.saleL)}<section class="sec tight"><div class="wrap">${grid(SALE, lang)}<p class="center"><a class="btn ghost" href="${MAIN}${lang === 'tr' ? '/ilanlar/' : `/${lang}/${lang === 'en' ? 'listings' : 'obekty'}/`}?ilce=Aksu" target="_blank" rel="noopener">${t.allOn} →</a></p></div></section>${sellBand(lang)}` });
   page({ lang, key: 'rent', title: t.rentTitle, desc: t.rentDesc, ld: [crumbs(lang, 'rent'), itemList(RENT, lang)], body: `${phero(t.by, t.rentT, t.rentL)}<section class="sec tight"><div class="wrap">${grid(RENT, lang)}</div></section><section class="sec bg2"><div class="wrap two"><div><h2>${t.contactH}</h2><p class="lead">${t.contactL}</p></div>${form(lang, 1)}</div></section>` });
-  page({ lang, key: 'projects', title: t.projTitle, desc: t.projDesc, ld: [crumbs(lang, 'projects')], body: `${phero(t.by, t.projT, t.projL)}${projBlock(lang, true)}<section class="sec bg2"><div class="wrap two"><div><h2>${t.contactH}</h2><p class="lead">${t.contactL}</p></div>${form(lang, 4)}</div></section>` });
+  page({ lang, key: 'projects', title: t.projTitle, desc: t.projDesc, ld: [crumbs(lang, 'projects')], body: `${phero(t.by, t.projT, t.projL)}${projBlock(lang, true)}${dirBlock(lang)}<section class="sec bg2"><div class="wrap two"><div><h2>${t.contactH}</h2><p class="lead">${t.contactL}</p></div>${form(lang, 4)}</div></section>` });
   page({ lang, key: 'sell', title: t.sellTitle, desc: t.sellDesc, ld: [crumbs(lang, 'sell'), { '@context': 'https://schema.org', '@type': 'Service', serviceType: 'Real estate sales', name: t.sellTitle, provider: { '@id': `${DOMAIN}/#org` }, areaServed: { '@type': 'Place', name: 'Altıntaş, Aksu, Antalya' } }], body: `${phero(t.nav.sell, t.sellH, t.sellLead)}
 <section class="sec tight"><div class="wrap narrow"><ol class="tl">${t.steps.map(([h, p], i) => `<li class="rv"><span class="ty">0${i + 1}</span><div><h3>${h}</h3><p>${p}</p></div></li>`).join('')}</ol></div></section>
-<section class="sec bg2"><div class="wrap two"><div><h2>${t.sellBtn}</h2><p class="lead">${t.sellL}</p></div>${form(lang, 2)}</div></section>${reviews(lang)}` });
+<section class="sec bg2"><div class="wrap two"><div><h2>${t.sellBtn}</h2><p class="lead">${t.sellL}</p></div>${form(lang, 2)}</div></section>${landBand(lang)}${reviews(lang)}` });
   page({ lang, key: 'contact', title: t.contactTitle, desc: t.contactDesc, ld: [crumbs(lang, 'contact'), ORG(lang)], body: `${phero(t.nav.contact, t.contactH, t.contactL)}
 <section class="sec tight"><div class="wrap two"><div><div class="cinfo"><a class="ci" href="https://wa.me/${PHONE.wa}" target="_blank" rel="noopener">${ICO.wa}<span><b>WhatsApp</b>${PHONE.text}</span></a><a class="ci" href="tel:${PHONE.raw}">${ICO.ph}<span><b>${t.form.phone}</b>${PHONE.text}</span></a><a class="ci" href="${IG}" target="_blank" rel="noopener">${ICO.ig}<span><b>Instagram</b>@acc.altintas.realestate</span></a></div>
 <h3 class="mt">${t.offT}</h3>${t.off.map(([h, p]) => `<p><b>${h}</b><br>${p}</p>`).join('')}</div>${form(lang)}</div></section>

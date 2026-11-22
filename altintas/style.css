@@ -201,3 +201,21 @@ a{color:inherit}img{max-width:100%;display:block}svg{width:20px;height:20px;flex
 @media(max-width:1000px){.lg{grid-template-columns:1fr 1fr}}
 @media(max-width:800px){.sellb{grid-template-columns:1fr;padding:28px 22px}.pj2{grid-template-columns:1fr}.hero2{padding:60px 0 48px}}
 @media(max-width:600px){.lg{grid-template-columns:1fr}.tbi .tig{display:none}.wm1{font-size:19px}}
+.nws{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}.nws>*{min-width:0}.nw{display:flex;flex-direction:column;gap:6px;text-decoration:none;color:var(--ink);background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:22px;transition:.2s}.nw:hover{border-color:var(--red);transform:translateY(-2px)}.nw small{color:var(--red);font-weight:800;font-size:.8rem;letter-spacing:.04em}.nw h3{margin:0;font-size:1.12rem}.nw p{margin:0;color:#5f6368;font-size:.95rem}.nw .more{color:var(--red);font-weight:800;margin-top:auto}
+.gb2{display:grid;grid-template-columns:1fr 2fr;gap:18px}.gb2>*{min-width:0}.gb2 .nws{grid-template-columns:1fr 1fr}
+.gcard{display:flex;flex-direction:column;gap:10px;text-decoration:none;color:#fff;background:linear-gradient(160deg,var(--ink),#3a2a2c);border-radius:var(--r);padding:26px}.gcard b{font-size:1.4rem}.gcard span{color:#d7d7dc;font-size:.92rem}.gcard em{font-style:normal;font-weight:800;color:#ff8a95;margin-top:auto}
+.dir{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}.dir>*{min-width:0}.dp{border:1px solid var(--line);border-radius:12px;padding:12px 14px;background:#fff;display:flex;flex-direction:column;gap:2px}.dp b{font-size:.98rem}.dp small{color:#6e6e73;font-size:.82rem}.dp em{font-style:normal;font-size:.72rem;font-weight:800;color:#fff;background:var(--red);align-self:flex-start;padding:2px 8px;border-radius:999px;margin-top:4px}.dp i{font-style:normal;color:var(--red);font-weight:800;font-size:.82rem}.dp.au{border-color:var(--red)}
+.firms{display:flex;flex-wrap:wrap;gap:8px}.firms span{background:var(--bg2);border:1px solid var(--line);border-radius:999px;padding:6px 12px;font-size:.88rem;font-weight:700}
+.two2{display:grid;grid-template-columns:1fr 1fr;gap:18px}.two2>*{min-width:0}.lb2{background:var(--sand);border-radius:var(--r);padding:26px}.lb2 h3{margin-top:0}
+.glay{display:grid;grid-template-columns:1fr 300px;gap:44px}.glay>*{min-width:0}.prose h2{font-size:1.6rem;margin-top:1.6em}.prose p,.prose li{color:#2f3135}.ticks{padding-left:0;list-style:none}.ticks li{padding-left:26px;position:relative;margin:.4em 0}.ticks li:before{content:"✓";position:absolute;left:0;color:var(--red);font-weight:800}
+.gside{position:sticky;top:96px;align-self:start;display:flex;flex-direction:column;gap:8px;background:var(--bg2);border-radius:var(--r);padding:20px}.gside b{margin-top:8px;font-size:.8rem;letter-spacing:.1em;text-transform:uppercase;color:var(--red)}.gside a{text-decoration:none;font-weight:700;font-size:.93rem}
+.sig{font-style:italic;color:#6e6e73;margin-top:2em}.note{font-size:.9rem;color:#6e6e73;border-left:3px solid var(--line);padding-left:12px}.srcs a{color:var(--red)}
+@media(max-width:1180px) and (min-width:901px){.nav{gap:14px}.nav a{font-size:13.5px}.hr .btn{display:none}}
+@media(max-width:1000px){.dir{grid-template-columns:repeat(3,1fr)}.gb2,.glay{grid-template-columns:1fr}.gside{position:static}}
+@media(max-width:700px){.nws,.gb2 .nws,.two2{grid-template-columns:1fr}.dir{grid-template-columns:1fr 1fr}}
+.nav{gap:18px}.nav a{white-space:nowrap;font-size:14.5px}.wm1{white-space:nowrap;font-size:22px}.hb{gap:22px}
+@media(max-width:1340px) and (min-width:901px){.hr .btn{display:none}.nav{gap:14px}.nav a{font-size:13.5px}.wm1{font-size:19px}}
+@media(max-width:1060px) and (min-width:901px){.nav a[href*="haber"],.nav a[href*="news"],.nav a[href*="novosti"]{display:none}}
+@media(max-width:1000px) and (min-width:901px){.wm1{font-size:16px}.nav{gap:11px}.nav a{font-size:13px}}
+@media(max-width:1060px) and (min-width:901px){.hr .lsw{display:none}}
+.wm{min-width:0;flex-shrink:1}@media(max-width:1060px){.wm1{white-space:normal;line-height:1.05}}@media(max-width:600px){.wm1{font-size:17px}}

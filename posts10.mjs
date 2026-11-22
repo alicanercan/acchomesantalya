@@ -74,7 +74,7 @@ export const POSTS10 = [
 <li><b>Dijital pazarlama:</b> Villanız web sitemizde 12 dilde, ilan portallarında ve hedefli Meta ve Yandex reklamlarıyla doğru kitleye gösterilir.</li>
 <li><b>Masraf sizden çıkmaz:</b> Fotoğraf, drone ve video çekimi, ilan ve reklam masrafları ACC HOMES tarafından karşılanır.</li>
 <li><b>Veriye dayalı fiyat:</b> Emsal ve piyasa verileriyle hazırlanan fiyat analizi ile satışa doğru fiyatla başlanır.</li>
-<li><b>Uçtan uca takip:</b> Yetkiden tapuya kadar gösterim, pazarlık, sözleşme, banka ve tapu süreçlerinin tamamını yönetiyoruz.</li>
+<li><b>Baştan sona süreç yönetimi ve takip:</b> Yetkiden tapuya kadar gösterim, pazarlık, sözleşme, banka ve tapu süreçlerinin tamamını yönetiyoruz.</li>
 <li><b>Yabancı alıcı deneyimi:</b> Rus, Ukraynalı ve Avrupalı alıcılarla tamamlanmış çok sayıda satış; 10 dilde hizmet veren profesyonel ekip.</li>
 </ul>
 <p><b>Son satışlarımızı merak ediyorsanız:</b> Bölgenizde yakın zamanda sattığımız villaların fiyatlarını ve satış sürelerini görmek isterseniz, sizinle özel bir görüşme ayarlayalım. Bu bilgiler alıcı ve satıcılarımızın gizliliği nedeniyle sitede yayımlanmıyor; birebir görüşmede bölgenize özel emsalleri paylaşıyoruz.</p>

@@ -1198,7 +1198,7 @@ function pageList(lang) {
 const LIST_URLS = [];
 function joinBlock(lang) {
   const L = GL(lang);
-  const c = L === 'tr' ? ['İş ortağımız olmak ister misiniz?', 'ACC Plaza’da yaklaşık 50 iş ortağıyla çalışıyoruz. Kurumsal portföy erişimi, eğitim, pazarlama ve uçtan uca operasyon desteğiyle kariyerinizi büyütün.', 'İş ortağımız olun', 'İş ortağı girişi'] : ['Want to become our partner?', 'Around 50 partners work with us at ACC Plaza. Grow your career with access to our portfolio, training, marketing and end-to-end operational support.', 'Join us', 'Partner login'];
+  const c = L === 'tr' ? ['İş ortağımız olmak ister misiniz?', 'ACC Plaza’da yaklaşık 50 iş ortağıyla çalışıyoruz. Kurumsal portföy erişimi, eğitim, pazarlama ve baştan sona operasyon desteğiyle kariyerinizi büyütün.', 'İş ortağımız olun', 'İş ortağı girişi'] : ['Want to become our partner?', 'Around 50 partners work with us at ACC Plaza. Grow your career with access to our portfolio, training, marketing and end-to-end operational support.', 'Join us', 'Partner login'];
   return `<div class="joinblk"><div><h2>${c[0]}</h2><p>${c[1]}</p></div><div class="jbtns"><a class="btn" href="${url(lang, 'join')}">${c[2]} →</a><a class="btn ghost" href="${SITE.crmUrl}" target="_blank" rel="noopener">${c[3]}</a></div></div>`;
 }
 

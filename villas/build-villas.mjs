@@ -78,7 +78,7 @@ const T = {
     livTitle: 'Villa Yaşamı: Mobilya, İç Mimari ve VIP Hizmetler | ACC VILLAS', livDesc: 'Antalya’da villanız için mobilya, iç mimari, akıllı ev, peyzaj ve güvenlik çözümleri. Mobilya ve tasarım çözüm ortağımız ENNE Antalya.', nav: { list: 'Satılık', rent: 'Kiralık', projects: 'Projeler', regions: 'Bölgeler', sell: 'Villanızı Satın' },
     homeTitle: 'Antalya Satılık Villa | Yalnızca Villa · ACC VILLAS',
     homeDesc: 'Antalya’da yalnızca villa ile çalışan uzman ekip: satılık ve kiralık villalar, villa projeleri ve ücretsiz değerleme. Konyaaltı, Döşemealtı, Lara, Belek, Kaş ve Alanya’da seçkin villalar; alımdan tapuya VIP hizmet.',
-    h1: 'Antalya’nın seçkin villaları', sub: 'Satılık ve kiralık villalar, villa projeleri ve alımdan tapuya kadar uçtan uca VIP hizmet. Siz karar verin, gerisini biz halledelim.',
+    h1: 'Antalya’nın seçkin villaları', sub: 'Satılık ve kiralık villalar, villa projeleri ve alımdan tapuya kadar baştan sona VIP hizmet. Siz karar verin, gerisini biz halledelim.',
     s: { region: 'Bölge', any: 'Tüm bölgeler', type: 'İşlem', sale: 'Satılık', rent: 'Kiralık', go: 'Villaları göster' },
     featured: 'Öne çıkan villalar', all: 'Tüm villalar', regionsT: 'Bölgelere göre villalar', regionsP: 'Antalya’nın her bölgesinin kendine has bir hayatı var. Size uygun olanı birlikte bulalım.',
     colT: 'Koleksiyonlar', offT: 'Gizli satış (off-market)', offP: 'Bazı villalar ilan olarak yayınlanmaz. Sahibinin isteğiyle yalnızca doğrulanmış alıcılara gösterilir. Aradığınızı söyleyin, size özel portföyümüzü açalım.', offBtn: 'Özel portföyü sor',

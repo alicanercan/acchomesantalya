@@ -30,7 +30,7 @@ export const PLAZA = {
     badges: [
       ['🏢', '1.000 m² Genel Merkez', 'Muratpaşa Yeşilbahçe’de modern ve teknolojik çalışma alanı'],
       ['🤝', '50 Profesyonel İş Ortağı', 'Her bölgeye ve projeye hakim uzman kadro'],
-      ['🌍', '10 Dilde Global Hizmet', 'Yabancı yatırımcılar için uçtan uca anadilde destek'],
+      ['🌍', '10 Dilde Global Hizmet', 'Yabancı yatırımcılar için baştan sona anadilde destek'],
       ['💎', 'Münhasır Projeler', 'Sadece ACC Homes güvencesiyle sunulan yetkili portföyler'],
     ],
     cta1: 'Uzman Ekibimizle Tanışın', cta2: 'ACC Plaza’ya Yol Tarifi Al',
@@ -332,7 +332,7 @@ export const PAGES = {
     nav: { tr: 'Hizmetlerimiz', en: 'Services', ru: 'Услуги' },
     tr: {
       title: 'Hizmetlerimiz', desc: 'ACC HOMES hizmetleri: konut satış ve kiralama, mülk yönetimi, proje pazarlaması, yabancıya satış, değerleme ve yatırım danışmanlığı.',
-      lead: 'Satıştan kiralamaya, proje pazarlamasından yabancı yatırımcıya kadar uçtan uca gayrimenkul hizmeti.',
+      lead: 'Satıştan kiralamaya, proje pazarlamasından yabancı yatırımcıya kadar baştan sona gayrimenkul hizmeti.',
       html: `
 <div class="svc">
 <div><span>🏠</span><h3>Satış</h3><p>Konut, rezidans ve villa satışında veriye dayalı fiyatlama, profesyonel tanıtım ve yetkiden tapuya kadar süreç yönetimi.</p></div>

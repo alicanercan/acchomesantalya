@@ -64,14 +64,11 @@ SITES.push(
   G('caja-garden', 'Caja Garden', 'dosemealti', 'Çıplaklı', 'Döşemealtı', 'Osmangazi Cd. No:359', 'site', /caja/i),
   G('villa-voila', 'Villa Voila', 'dosemealti', 'Tomalar', 'Döşemealtı', 'Mevlana Cd. No:80/A', 'site', /voila/i),
   G('pine-village', 'Pine Village', 'dosemealti', 'Düzlerçamı', 'Döşemealtı', '', 'villa', /pine ?village/i, { tr: 'Düzlerçamı, çam ormanlarına yakın sakin bir villa bölgesidir.', en: 'Düzlerçamı is a quiet villa area close to pine forests.', ru: 'Дюзлерчамы — тихий район вилл рядом с сосновыми лесами.' }),
-  G('koru-antalya-villalari', 'Koru Antalya Villaları', 'konyaalti', 'Molla Yusuf', 'Konyaaltı', '1456. Sk. No:1', 'villa', /koru/i),
-  G('pandora-konaklari', 'Pandora Konakları', 'konyaalti', 'Hurma', 'Konyaaltı', '252. Sk. No:2', 'konak', /pandora/i),
-  G('gokdemir-sky-garden', 'Gökdemir Sky Garden', 'muratpasa', 'Ermenek', 'Muratpaşa', 'Birlik Sk.', 'site', /g[oö]kdemir/i),
-  G('ozkan-konutlari', 'Özkan Konutları', 'muratpasa', 'Güzeloba', 'Muratpaşa', '2241. Sk. No:1', 'site', /[oö]zkan konut/i),
+  G('koru-antalya-villalari', 'Koru Antalya Villaları', 'konyaalti', 'Molla Yusuf', 'Konyaaltı', '1456. Sk. No:1', 'villa', /koru/i, { tr: 'Başaran İnşaat ve Keleşoğlu İnşaat tarafından geliştirilen proje.', en: 'Developed by Başaran İnşaat and Keleşoğlu İnşaat.', ru: 'Застройщики — Başaran İnşaat и Keleşoğlu İnşaat.' }),
 );
 
 // Konumu kesinleşmeyenler: Caner'e sorulacak (yalnız ad)
-export const SITES_OTHER = ['Granda Villaları', 'Panora Villas', 'Serenity Villa Exclusive', 'Sky Villaları'];
+export const SITES_OTHER = [];
 
 // İletişim: merkez ofis ACC Plaza, şube ACC HOMES Döşemealtı (Google işletme profilleri)
 export const OFFICES = [

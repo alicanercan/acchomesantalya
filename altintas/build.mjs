@@ -22,6 +22,7 @@ const INTENT = { tr: [['sale', 'Altıntaş’ta daire almak istiyorum'], ['sell'
 const INTENT_ICO = ['<svg viewBox="0 0 24 24"><path d="M3 11 12 4l9 7v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></svg>', '<svg viewBox="0 0 24 24"><circle cx="8" cy="15" r="4"/><path d="m11 12 9-9m-3 3 3 3m-6 0 2 2"/></svg>', '<svg viewBox="0 0 24 24"><path d="M4 20V10m6 10V4m6 16v-7m4 7H2"/></svg>'];
 const REVIEWS = JSON.parse(fs.readFileSync(path.join(ROOT, 'data/reviews.json'), 'utf8'));
 const LANGS = ['tr', 'en', 'ru'];
+const CSSV = (await import('node:crypto')).createHash('md5').update(fs.readFileSync(path.join(HERE, 'style.css'))).digest('hex').slice(0, 8);
 const BASE = { tr: '', en: '/en', ru: '/ru' };
 const SEG = {
   home: { tr: '', en: '', ru: '' },
@@ -302,7 +303,7 @@ function head({ lang, title, desc, canon, alt, ld, img }) {
   const t = T[lang];
   return `<!DOCTYPE html><html lang="${lang}"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>${esc(title)}</title><meta name="description" content="${esc(desc)}"><meta name="keywords" content="${esc(KW[lang])}"><link rel="canonical" href="${DOMAIN}${canon}">${LANGS.map((l) => `<link rel="alternate" hreflang="${l}" href="${DOMAIN}${alt[l]}">`).join('')}<link rel="alternate" hreflang="x-default" href="${DOMAIN}${alt.tr}"><meta name="robots" content="index,follow,max-image-preview:large">
 <meta property="og:type" content="website"><meta property="og:site_name" content="${t.brand}"><meta property="og:title" content="${esc(title)}"><meta property="og:description" content="${esc(desc)}"><meta property="og:url" content="${DOMAIN}${canon}"><meta property="og:image" content="${esc(img || `${MAIN}/img/primelara/hero.webp`)}"><meta property="og:locale" content="${t.locale}"><meta name="twitter:card" content="summary_large_image"><meta name="theme-color" content="#E02A3C">
-<link rel="icon" href="/favicon.ico" sizes="any"><link rel="icon" href="/favicon.svg" type="image/svg+xml"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Anton&family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet"><link rel="stylesheet" href="/style.css?v=1">
+<link rel="icon" href="/favicon.ico" sizes="any"><link rel="icon" href="/favicon.svg" type="image/svg+xml"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Anton&family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet"><link rel="stylesheet" href="/style.css?v=${CSSV}">
 ${ld.map((x) => `<script type="application/ld+json">${JSON.stringify(x).replace(/</g, '\\u003c')}</script>`).join('')}</head>`;
 }
 const navKeys = ['sale', 'rent', 'projects', 'guide', 'news', 'sell', 'contact'];

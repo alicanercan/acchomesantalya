@@ -9,6 +9,7 @@ name: Turhost yayını
 on:
   push:
     branches: [main]
+    paths-ignore: ['signature/**', '.github/workflows/signature-media.yml']
   workflow_dispatch:
 
 permissions:

@@ -470,3 +470,8 @@ img{-webkit-user-drag:none;user-drag:none;-webkit-touch-callout:none}
 .mp-spec{color:#3d3532;font-weight:600;font-size:15px}.mp-spec i{font-style:normal;color:#b8aea9;margin:0 7px}
 .mp-act{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px}.mp-act .btn{text-align:center;justify-content:center;padding:11px 8px}}
 .bcov{overflow:hidden}.bcov img{position:absolute;inset:0}@media (min-width:901px){.bcard.big .bcov{align-self:center;min-height:0;aspect-ratio:16/9}}
+/* bülten (ACC NEWS) — 22.11.2026 */
+.nlb{background:#1d1d1f;color:#fff;margin-top:40px}.nlbi{display:grid;grid-template-columns:1fr 1fr;gap:32px;align-items:center;padding:40px 24px}.nlb h2{margin:0 0 6px;color:#fff;font-size:clamp(22px,2.4vw,30px)}.nlb p{margin:0;color:rgba(255,255,255,.72)}
+.nlb form{display:grid;gap:10px;background:none;border:0;padding:0;box-shadow:none}.nlrow{display:flex;gap:10px}.nlrow input{flex:1;min-width:0;font:inherit;font-size:16px;padding:12px 18px;border-radius:999px;border:1px solid rgba(255,255,255,.25);background:rgba(255,255,255,.07);color:#fff}.nlrow input::placeholder{color:rgba(255,255,255,.55)}
+.nlrow .btn{border-radius:999px;white-space:nowrap}.nlb .chk{color:rgba(255,255,255,.62);font-size:13px}.nlb .chk a{color:#fff}.nlb .nlok{background:#1f3b2a;color:#b9f0c9;border-radius:12px;padding:10px 14px;font-weight:700}.nlb .hp{display:none}
+@media (max-width:820px){.nlbi{grid-template-columns:1fr}.nlrow{flex-direction:column}}

@@ -5,7 +5,7 @@ declare(strict_types=1);
 
 const TO       = 'info@acchomesantalya.com';
 const FROM     = 'web@acchomesantalya.com';
-const FORMS    = ['iletisim', 'ilan-talep', 'gosterim-talep', 'degerleme-talep', 'beni-ara', 'danisman-gorusme', 'danismanlik', 'proje-talep', 'rehber-indir'];
+const FORMS    = ['iletisim', 'ilan-talep', 'gosterim-talep', 'degerleme-talep', 'beni-ara', 'danisman-gorusme', 'danismanlik', 'proje-talep', 'rehber-indir', 'bulten'];
 const LOG_DIR  = __DIR__ . '/../form-kayitlari';
 
 function back(string $to): void {

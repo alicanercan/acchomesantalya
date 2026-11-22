@@ -63,6 +63,7 @@ const FOLLOW = [
   ['ig', 'Instagram', '@acc.villas', 'https://www.instagram.com/acc.villas/', { tr: 'ACC VILLAS: Antalya’nın villaları', en: 'ACC VILLAS: Antalya’s villas', ru: 'ACC VILLAS: виллы Анталии' }],
   ['tg', 'Telegram', '@alicanertherealtor', 'https://t.me/alicanertherealtor', { tr: 'Doğrudan mesaj', en: 'Direct message', ru: 'Прямое сообщение' }],
 ];
+const MQ = [['img', 'logo-nestle', 'Nestlé'], ['img', 'logo-kraft-heinz', 'Kraft Heinz'], ['img', 'logo-reckitt', 'Reckitt'], ['img', 'logo-hasbro', 'Hasbro'], ['txt', 'BOSCH'], ['txt', 'REALTY WORLD'], ['txt', 'TEUS GROUP'], ['img', 'logo-acc-homes', 'ACC HOMES'], ['txt', 'ACC VILLAS'], ['img', 'logo-antalle', 'Antalle Concept Houses'], ['img', 'logo-lejant', 'Lejant Proje'], ['img', 'logo-capital', 'Capital İnşaat'], ['txt', 'DANUBE PROPERTIES'], ['txt', 'ANTİAD'], ['img', 'logo-endeksa', 'Endeksa']];
 const ICO = {
   ig: '<svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="17.5" cy="6.5" r="1.3" fill="currentColor"/></svg>',
   in: '<svg viewBox="0 0 24 24"><path fill="currentColor" d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9h4v12H3zM9 9h3.8v1.7h.1c.5-1 1.8-2 3.8-2 4 0 4.8 2.6 4.8 6V21h-4v-5.5c0-1.3 0-3-1.8-3s-2.1 1.4-2.1 2.9V21H9z"/></svg>',
@@ -77,16 +78,16 @@ const ICO = {
 const T = {
   tr: {
     locale: 'tr_TR', nav: { about: 'Hakkımda', insights: 'Yazılar', stage: 'Sahne ve medya', advisory: 'Danışmanlık', contact: 'İletişim' },
-    role: 'Broker & Kurucu, ACC HOMES', call: 'Ara', cta: 'Görüşme planla', ctaRead: 'Yazılarımı okuyun', wa: 'WhatsApp’tan yazın',
+    role: 'Broker & Kurucu, ACC HOMES', call: 'Ara', mqL: 'Çalıştığım ve birlikte ürettiğim markalar', nlT: 'ACC NEWS bültenine abone olun', nlL: 'Antalya gayrimenkul gündemi, piyasa analizlerim ve yeni projeler; haftada bir e-posta.', nlBtn: 'Abone ol', nlOk: 'Teşekkürler, bültene kaydoldunuz.', mapT: 'ACC Plaza’da görüşelim', addr: 'Yeşilbahçe Mah. Portakal Çiçeği Blv. No:36/B, Muratpaşa / Antalya', dirBtn: 'Yol tarifi al', cta: 'Görüşme planla', ctaRead: 'Yazılarımı okuyun', wa: 'WhatsApp’tan yazın',
     homeTitle: 'Ali Caner Can | Antalya Gayrimenkul Brokerı, ACC HOMES Kurucusu',
     homeDesc: 'Ali Caner Can: makine mühendisi, eski çok uluslu satış yöneticisi, ACC HOMES ve ACC VILLAS kurucusu. Antalya’da veriye dayalı, şeffaf emlak danışmanlığı.',
     eyebrow: 'Broker & Kurucu · ACC HOMES International Real Estate',
     h1: 'Ali Caner Can',
     lead: 'Makine mühendisi, Nestlé ve Kraft Heinz gibi şirketlerde yetişmiş bir satış yöneticisi. 2024’ten bu yana ACC HOMES ile Antalya’da gayrimenkulü veriyle, şeffaflıkla ve sahada anlatıyorum.',
-    stats: [['290+', 'kendi yaptığım satış ve kiralama işlemi'], ['~50', 'iş ortağı, 10 dilde hizmet'], [`${String(G.rating).replace('.', ',')} ★`, `${G.count} Google yorumu (ACC HOMES)`], ['1.000 m²', 'ACC Plaza genel merkezi']],
+    stats: [['290+', 'kendi yaptığım satış ve kiralama işlemi'], ['50', 'iş ortağı, 10 dilde hizmet'], [`${String(G.rating).replace('.', ',')} ★`, `${G.count} Google yorumu (ACC HOMES)`], ['1.000 m²', 'ACC Plaza genel merkezi']],
     nowT: 'Bugün ne yapıyorum', nowL: 'Kurduğum ve yönettiğim yapılar. Her biri kendi alanında, aynı ilkelerle çalışır.',
     now: [
-      ['ACC HOMES International Real Estate', 'Antalya’da satış, kiralama, proje pazarlama ve yabancı yatırımcı danışmanlığı. ACC Plaza’da yaklaşık 50 iş ortağı.', 'home', 'acchomesantalya.com'],
+      ['ACC HOMES International Real Estate', 'Antalya’da satış, kiralama, proje pazarlama ve yabancı yatırımcı danışmanlığı. ACC Plaza’da 50 iş ortağı.', 'home', 'acchomesantalya.com'],
       ['ACC VILLAS', 'Yalnızca villa ve büyük müstakil evlere odaklanan iştirakimiz: alım, satım, değerleme ve villa siteleri rehberi.', 'villas', 'accvillas.com'],
       ['Antalle Concept Houses', 'Döşemealtı Altınkale’de konsept villa projesi; satış ve pazarlamasını ACC HOMES yürütüyor.', 'antalle', 'Proje sayfası'],
       ['ACC NEWS', 'Her hafta Antalya ve Türkiye gayrimenkul gündemini, ekonomi ve mevzuat başlıklarıyla özetlediğimiz bülten.', 'news', 'Bültenleri okuyun'],
@@ -112,7 +113,7 @@ const T = {
       ['2023–2024', 'TEUS Group · Satış Direktörü', 'Türkiye projelerinde satış ekibinin kurulması ve yönetimi, fiyatlama ve pazara giriş stratejisi, B2B ve B2C satış.'],
       ['2024', 'ACC HOMES International Real Estate', 'Kendi markamı kurdum: kurumsal disiplin, dijital pazarlama, video ve CRM’i gayrimenkulle birleştirdim.'],
       ['2025', 'ACC Plaza · ANTİAD', '1.000 m² genel merkez; Antalya İş İnsanları Derneği üyeliği; Danube Properties ile yatırımcı buluşması.'],
-      ['2026', 'ACC VILLAS', 'Bugün 10 dilde hizmet veren yaklaşık 50 iş ortağı ve villalara odaklanan iştirak.'],
+      ['2026', 'ACC VILLAS', 'Bugün 10 dilde hizmet veren 50 iş ortağı ve villalara odaklanan iştirak.'],
     ],
     valT: 'Nasıl çalışırım',
     vals: [['Veri', 'Fiyatı his değil emsal, bölge verisi ve piyasa raporu belirler.'], ['Şeffaflık', 'Masrafı, riski ve süreci baştan, yazılı olarak konuşurum.'], ['Saha', 'Her mülkü yerinde görür, her müşteriyle bizzat ilgilenirim.'], ['Ekip', 'Eğitimli iş ortakları ve tek merkezden yönetilen süreç.']],
@@ -136,16 +137,16 @@ const T = {
   },
   en: {
     locale: 'en_US', nav: { about: 'About', insights: 'Insights', stage: 'Speaking & media', advisory: 'Advisory', contact: 'Contact' },
-    role: 'Broker & Founder, ACC HOMES', call: 'Call', cta: 'Book a meeting', ctaRead: 'Read my insights', wa: 'Message on WhatsApp',
+    role: 'Broker & Founder, ACC HOMES', call: 'Call', mqL: 'Brands I have worked with and built with', nlT: 'Subscribe to the ACC NEWS bulletin', nlL: 'The Antalya property agenda, my market analysis and new projects; one e-mail a week.', nlBtn: 'Subscribe', nlOk: 'Thank you, you are subscribed.', mapT: 'Meet me at ACC Plaza', addr: 'Yeşilbahçe, Portakal Çiçeği Blv. No:36/B, Muratpaşa, Antalya', dirBtn: 'Get directions', cta: 'Book a meeting', ctaRead: 'Read my insights', wa: 'Message on WhatsApp',
     homeTitle: 'Ali Caner Can | Antalya Real Estate Broker, Founder of ACC HOMES',
     homeDesc: 'Ali Caner Can: mechanical engineer, ex-multinational sales manager, founder of ACC HOMES and ACC VILLAS. Data-driven, transparent property advice in Antalya.',
     eyebrow: 'Broker & Founder · ACC HOMES International Real Estate',
     h1: 'Ali Caner Can',
     lead: 'A mechanical engineer and sales manager trained at companies like Nestlé and Kraft Heinz. Since 2024, through ACC HOMES, I explain Antalya real estate with data, transparency and time in the field.',
-    stats: [['290+', 'sales and rentals I closed personally'], ['~50', 'partners serving in 10 languages'], [`${G.rating} ★`, `${G.count} Google reviews (ACC HOMES)`], ['1,000 m²', 'ACC Plaza headquarters']],
+    stats: [['290+', 'sales and rentals I closed personally'], ['50', 'partners serving in 10 languages'], [`${G.rating} ★`, `${G.count} Google reviews (ACC HOMES)`], ['1,000 m²', 'ACC Plaza headquarters']],
     nowT: 'What I do today', nowL: 'The businesses I founded and lead. Each has its own focus, all share the same principles.',
     now: [
-      ['ACC HOMES International Real Estate', 'Sales, rentals, project marketing and foreign investor advisory in Antalya. Around 50 partners at ACC Plaza.', 'home', 'acchomesantalya.com'],
+      ['ACC HOMES International Real Estate', 'Sales, rentals, project marketing and foreign investor advisory in Antalya. 50 partners at ACC Plaza.', 'home', 'acchomesantalya.com'],
       ['ACC VILLAS', 'Our division for villas and large detached homes: buying, selling, valuation and a guide to villa complexes.', 'villas', 'accvillas.com'],
       ['Antalle Concept Houses', 'A concept villa development in Altınkale, Döşemealtı; sales and marketing run by ACC HOMES.', 'antalle', 'Project page'],
       ['ACC NEWS', 'A weekly bulletin on Antalya and Türkiye property, with economy and regulation updates.', 'news', 'Read the bulletins'],
@@ -171,7 +172,7 @@ const T = {
       ['2023–2024', 'TEUS Group · Sales Director', 'Built and led the sales team for Türkiye projects; pricing and go-to-market strategy, B2B and B2C sales.'],
       ['2024', 'ACC HOMES International Real Estate', 'Founded my own brand, bringing corporate discipline, digital marketing, video and CRM into real estate.'],
       ['2025', 'ACC Plaza · ANTİAD', 'A 1,000 m² headquarters; membership of the Antalya Business People’s Association; investor meeting with Danube Properties.'],
-      ['2026', 'ACC VILLAS', 'Today around 50 partners serving in 10 languages, and a division focused on villas.'],
+      ['2026', 'ACC VILLAS', 'Today 50 partners serving in 10 languages, and a division focused on villas.'],
     ],
     valT: 'How I work',
     vals: [['Data', 'Comparables, area data and market reports set the price, not gut feeling.'], ['Transparency', 'Costs, risks and process are discussed up front, in writing.'], ['Field', 'I see every property in person and work with every client directly.'], ['Team', 'Trained partners and one centrally managed process.']],
@@ -195,16 +196,16 @@ const T = {
   },
   ru: {
     locale: 'ru_RU', nav: { about: 'Обо мне', insights: 'Статьи', stage: 'Выступления', advisory: 'Консультации', contact: 'Контакты' },
-    role: 'Брокер и основатель ACC HOMES', call: 'Позвонить', cta: 'Назначить встречу', ctaRead: 'Читать статьи', wa: 'Написать в WhatsApp',
+    role: 'Брокер и основатель ACC HOMES', call: 'Позвонить', mqL: 'Бренды, с которыми я работал и работаю', nlT: 'Подпишитесь на бюллетень ACC NEWS', nlL: 'Повестка рынка Анталии, моя аналитика и новые проекты; одно письмо в неделю.', nlBtn: 'Подписаться', nlOk: 'Спасибо, вы подписаны.', mapT: 'Встретимся в ACC Plaza', addr: 'Ешильбахче, бульвар Портакал Чичеги, 36/B, Муратпаша, Анталия', dirBtn: 'Проложить маршрут', cta: 'Назначить встречу', ctaRead: 'Читать статьи', wa: 'Написать в WhatsApp',
     homeTitle: 'Али Джанер Джан | Брокер недвижимости в Анталии, ACC HOMES',
     homeDesc: 'Али Джанер Джан: инженер-механик, экс-руководитель продаж в международных компаниях, основатель ACC HOMES и ACC VILLAS. Консультации по недвижимости Анталии.',
     eyebrow: 'Брокер и основатель · ACC HOMES International Real Estate',
     h1: 'Али Джанер Джан',
     lead: 'Инженер-механик и руководитель продаж с опытом в Nestlé и Kraft Heinz. С 2024 года вместе с ACC HOMES рассказываю о недвижимости Анталии на основе данных, открыто и по опыту работы на объектах.',
-    stats: [['290+', 'сделок продажи и аренды, проведённых лично'], ['~50', 'партнёров, 10 языков'], [`${String(G.rating).replace('.', ',')} ★`, `${G.count} отзывов Google (ACC HOMES)`], ['1 000 м²', 'штаб-квартира ACC Plaza']],
+    stats: [['290+', 'сделок продажи и аренды, проведённых лично'], ['50', 'партнёров, 10 языков'], [`${String(G.rating).replace('.', ',')} ★`, `${G.count} отзывов Google (ACC HOMES)`], ['1 000 м²', 'штаб-квартира ACC Plaza']],
     nowT: 'Чем я занимаюсь сегодня', nowL: 'Компании, которые я основал и которыми руковожу. У каждой своя специализация и общие принципы.',
     now: [
-      ['ACC HOMES International Real Estate', 'Продажа, аренда, маркетинг проектов и консультации иностранных инвесторов в Анталии. Около 50 партнёров в ACC Plaza.', 'home', 'acchomesantalya.com'],
+      ['ACC HOMES International Real Estate', 'Продажа, аренда, маркетинг проектов и консультации иностранных инвесторов в Анталии. 50 партнёров в ACC Plaza.', 'home', 'acchomesantalya.com'],
       ['ACC VILLAS', 'Направление по виллам и большим частным домам: покупка, продажа, оценка и гид по комплексам вилл.', 'villas', 'accvillas.com'],
       ['Antalle Concept Houses', 'Концептуальный проект вилл в Алтынкале, Дёшемеалты; продажами и маркетингом занимается ACC HOMES.', 'antalle', 'Страница проекта'],
       ['ACC NEWS', 'Еженедельный бюллетень о рынке недвижимости Анталии и Турции, экономике и законодательстве.', 'news', 'Читать выпуски'],
@@ -230,7 +231,7 @@ const T = {
       ['2023–2024', 'TEUS Group · директор по продажам', 'Создание и руководство командой продаж проектов в Турции; ценообразование и стратегия выхода на рынок, B2B и B2C.'],
       ['2024', 'ACC HOMES International Real Estate', 'Основал собственный бренд, объединив корпоративную дисциплину, цифровой маркетинг, видео и CRM.'],
       ['2025', 'ACC Plaza · ANTİAD', 'Штаб-квартира 1 000 м²; членство в Ассоциации деловых людей Анталии; встреча инвесторов с Danube Properties.'],
-      ['2026', 'ACC VILLAS', 'Сегодня около 50 партнёров, работающих на 10 языках, и направление по виллам.'],
+      ['2026', 'ACC VILLAS', 'Сегодня 50 партнёров, работающих на 10 языках, и направление по виллам.'],
     ],
     valT: 'Как я работаю',
     vals: [['Данные', 'Цену определяют аналоги, данные по району и отчёты рынка, а не интуиция.'], ['Прозрачность', 'Расходы, риски и процесс обсуждаем заранее и письменно.'], ['Объекты', 'Лично смотрю каждый объект и работаю с каждым клиентом.'], ['Команда', 'Обученные партнёры и процесс, управляемый из одного центра.']],
@@ -311,7 +312,7 @@ function head({ lang, title, desc, canon, alt, ld = [], image, type = 'website',
 <meta property="og:type" content="${type}"><meta property="og:site_name" content="Ali Caner Can"><meta property="og:title" content="${esc(title)}"><meta property="og:description" content="${esc(desc)}"><meta property="og:url" content="${DOMAIN}${canon}"><meta property="og:image" content="${og}"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:image:alt" content="Ali Caner Can, ${esc(T[lang].role)}"><meta property="og:locale" content="${t.locale}">${LANGS.filter((l) => l !== lang).map((l) => `<meta property="og:locale:alternate" content="${T[l].locale}">`).join('')}
 <meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="${esc(title)}"><meta name="twitter:description" content="${esc(desc)}"><meta name="twitter:image" content="${og}">
 <link rel="icon" href="/favicon.ico" sizes="any"><link rel="icon" href="/favicon.svg" type="image/svg+xml"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><meta name="theme-color" content="#1d1d1f">
-<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Anton&display=swap"><link rel="stylesheet" href="/style.css?v=4">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Anton&display=swap"><link rel="stylesheet" href="/style.css?v=5">
 ${ld.map((x) => `<script type="application/ld+json">${JSON.stringify(x)}</script>`).join('')}
 </head>`;
 }
@@ -328,13 +329,14 @@ function header(lang, alt, cur) {
 function footer(lang) {
   const t = T[lang];
   return `<section class="ctaband"><div class="wrap cb"><div><h2>${t.ctaT}</h2><p>${t.ctaL}</p></div><div class="cbb"><a class="btn" href="${url(lang, 'contact')}#randevu">${t.cta}</a><a class="btn ghost" href="https://wa.me/${PHONE.wa}" target="_blank" rel="noopener">${ICO.wa}${t.wa}</a></div></div></section>
-<footer class="ft"><div class="wrap fg"><div><p class="wm1 big">ALİ CANER CAN</p><p class="muted">${t.footNote}</p><p class="soc">${SOCIAL.map(([k, n, , u]) => `<a href="${u}" target="_blank" rel="noopener" aria-label="${n}">${ICO[k]}</a>`).join('')}</p></div>
+<section class="nl"><div class="wrap nlg"><div><h2>${t.nlT}</h2><p>${t.nlL}</p></div><form class="nlf" method="POST" action="/form.php"><input type="hidden" name="form-name" value="bulten"><input type="hidden" name="_next" value="${url(lang, 'home')}?bulten=1"><input type="hidden" name="dil" value="${lang}"><input type="hidden" name="site" value="alicanercan.com"><p class="hpf"><input name="bot" tabindex="-1" autocomplete="off"></p><div class="nlrow"><input name="eposta" type="email" required placeholder="${t.form.email} *" autocomplete="email" aria-label="${t.form.email}"><button class="btn" type="submit">${t.nlBtn}</button></div><label class="chk"><input type="checkbox" name="kvkk_onay" value="evet" required> <span>${t.form.consent} <a href="${ACC.kvkk[lang]}" target="_blank" rel="noopener">${t.form.kvkk}</a> *</span></label><p class="okmsg nlok" hidden>${t.nlOk}</p></form></div></section>
+<footer class="ft"><div class="wrap fg"><div><img class="flogo" src="/img/logo-acc-ali-caner-can.webp" alt="ACC · Ali Caner Can" width="520" height="46" loading="lazy"><p class="muted">${t.footNote}</p><p class="soc">${SOCIAL.map(([k, n, , u]) => `<a href="${u}" target="_blank" rel="noopener" aria-label="${n}">${ICO[k]}</a>`).join('')}</p></div>
 <div><p class="fh">ALİ CANER CAN</p>${[...navKeys, 'contact'].map((k) => `<a href="${url(lang, k)}">${t.nav[k]}</a>`).join('')}</div>
 <div><p class="fh">ACC</p><a href="${ACC.home[lang]}" target="_blank" rel="noopener">ACC HOMES</a><a href="${ACC.villas[lang]}" target="_blank" rel="noopener">ACC VILLAS</a><a href="${ACC.antalle[lang]}" target="_blank" rel="noopener">Antalle Concept Houses</a><a href="${ACC.news[lang]}" target="_blank" rel="noopener">ACC NEWS</a><a href="https://www.instagram.com/acchomesantalya/" target="_blank" rel="noopener">Instagram @acchomesantalya</a><a href="https://www.instagram.com/acc.villas/" target="_blank" rel="noopener">Instagram @acc.villas</a></div>
 <div><p class="fh">${t.nav.contact}</p><a href="tel:${PHONE.raw}">${PHONE.text}</a><a href="https://wa.me/${PHONE.wa}" target="_blank" rel="noopener">WhatsApp</a><a href="mailto:${MAIL}">${MAIL}</a><a href="${G.url}" target="_blank" rel="noopener">${t.office}</a></div></div>
 <div class="wrap fb"><span>© ${new Date().getFullYear()} Ali Caner Can</span><span><a href="${ACC.kvkk[lang]}" target="_blank" rel="noopener">${t.privacy}</a></span></div></footer>
-<a class="fwa" href="https://wa.me/${PHONE.wa}" target="_blank" rel="noopener" aria-label="WhatsApp">${ICO.wa}</a><div class="dock"><a class="d-call" href="tel:${PHONE.raw}">${ICO.ph}${t.call}</a><a class="d-wa" href="https://wa.me/${PHONE.wa}" target="_blank" rel="noopener">${ICO.wa}WhatsApp</a></div>
-<script>(function(){var b=document.querySelector('.burger'),h=document.querySelector('.top');b&&(b.onclick=function(){h.classList.toggle('open')});var io='IntersectionObserver'in window?new IntersectionObserver(function(e){e.forEach(function(x){if(x.isIntersecting){x.target.classList.add('in');io.unobserve(x.target)}})},{rootMargin:'0px 0px -8% 0px'}):null;document.querySelectorAll('.rv').forEach(function(el){io?io.observe(el):el.classList.add('in')});document.querySelectorAll('[data-meet]').forEach(function(a){a.onclick=function(){var s=document.querySelector('select[name=gorusme_turu]');if(s)s.selectedIndex=+a.dataset.meet}});if(/[?&]ok=1/.test(location.search)){var m=document.querySelector('.okmsg');m&&(m.hidden=false)}})();</script>`;
+<div class="dock"><a class="d-call" href="tel:${PHONE.raw}">${ICO.ph}${t.call}</a><a class="d-wa" href="https://wa.me/${PHONE.wa}" target="_blank" rel="noopener">${ICO.wa}WhatsApp</a></div>
+<script>(function(){var b=document.querySelector('.burger'),h=document.querySelector('.top');b&&(b.onclick=function(){h.classList.toggle('open')});var io='IntersectionObserver'in window?new IntersectionObserver(function(e){e.forEach(function(x){if(x.isIntersecting){x.target.classList.add('in');io.unobserve(x.target)}})},{rootMargin:'0px 0px -8% 0px'}):null;document.querySelectorAll('.rv').forEach(function(el){io?io.observe(el):el.classList.add('in')});document.querySelectorAll('[data-meet]').forEach(function(a){a.onclick=function(){var s=document.querySelector('select[name=gorusme_turu]');if(s)s.selectedIndex=+a.dataset.meet}});if(/[?&]bulten=1/.test(location.search)){var n=document.querySelector('.nlok');if(n){n.hidden=false;n.scrollIntoView({block:'center'})}}else if(/[?&]ok=1/.test(location.search)){var m=document.querySelector('.okmsg');m&&(m.hidden=false)}})();</script>`;
 }
 function page({ lang, key, title, desc, ld = [], body, image, type }) {
   const alt = alts(key); const canon = url(lang, key);
@@ -374,7 +376,8 @@ for (const lang of LANGS) {
   page({ lang, key: 'home', title: t.homeTitle, desc: t.homeDesc, ld: [PERSON(lang), { '@context': 'https://schema.org', '@type': 'ProfilePage', mainEntity: { '@id': `${DOMAIN}/#person` }, url: DOMAIN + url(lang, 'home'), inLanguage: lang }, { '@context': 'https://schema.org', '@type': 'WebSite', name: 'Ali Caner Can', url: DOMAIN + '/', inLanguage: ['tr', 'en', 'ru'] }], type: 'profile', body: `
 <section class="hero"><div class="wrap hg"><div class="ht"><p class="eyebrow">${t.eyebrow}</p><h1>${t.h1}</h1><p class="lead">${t.lead}</p><div class="ctas"><a class="btn" href="${url(lang, 'contact')}">${t.cta}</a><a class="btn ghost" href="${url(lang, 'insights')}">${t.ctaRead}</a></div>
 <p class="soc">${SOCIAL.map(([k, n, h, u]) => `<a href="${u}" target="_blank" rel="noopener" aria-label="${n} ${h}">${ICO[k]}</a>`).join('')}</p></div>
-<div class="hp"><img src="/img/ali-caner-can-portre.webp" alt="Ali Caner Can" width="852" height="930" fetchpriority="high"><span class="badge"><b>ACC</b> HOMES</span></div></div></section>
+<div class="hp"><img src="/img/ali-caner-can-portre-cut.webp" alt="Ali Caner Can" width="852" height="930" fetchpriority="high"><span class="badge"><b>ACC</b> HOMES</span></div></div></section>
+<section class="mq" aria-label="${t.mqL}"><p class="mqt">${t.mqL}</p><div class="mqv"><div class="mqr">${[0, 1].map((r) => MQ.map((m) => (m[0] === 'img' ? `<img src="/img/${m[1]}.webp" alt="${m[2]}" loading="lazy"${r ? ' aria-hidden="true"' : ''}>` : `<span${r ? ' aria-hidden="true"' : ''}>${m[1]}</span>`)).join('')).join('')}</div></div></section>
 <section class="stats"><div class="wrap sg">${t.stats.map(([n, l]) => `<div class="st"><b>${n}</b><span>${l}</span></div>`).join('')}</div></section>
 <section class="sec"><div class="wrap"><div class="sh"><div><p class="eyebrow">01</p><h2>${t.nowT}</h2><p class="lead">${t.nowL}</p></div></div>
 <div class="now">${t.now.map(([h, p, k, l], i) => `<a class="nc rv" href="${ACC[k][lang]}" target="_blank" rel="noopener"><span class="nn">0${i + 1}</span><h3>${h}</h3><p>${p}</p><span class="more">${l} →</span></a>`).join('')}</div></div></section>
@@ -417,6 +420,7 @@ ${reviews(lang)}` });
 <section class="phero sm"><div class="wrap"><p class="eyebrow">${t.nav.contact}</p><h1>${t.contactH}</h1><p class="lead">${t.contactLead}</p></div></section>
 <section class="sec"><div class="wrap two"><div class="cinfo"><a class="ci" href="https://wa.me/${PHONE.wa}" target="_blank" rel="noopener">${ICO.wa}<span><b>WhatsApp</b>${PHONE.text}</span></a><a class="ci" href="tel:${PHONE.raw}">${ICO.ph}<span><b>${t.form.phone}</b>${PHONE.text}</span></a><a class="ci" href="mailto:${MAIL}"><svg viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" d="M3 6h18v12H3zM3 7l9 6 9-6"/></svg><span><b>${t.form.email}</b>${MAIL}</span></a><a class="ci" href="${G.url}" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" d="M12 22s7-6.2 7-12a7 7 0 1 0-14 0c0 5.8 7 12 7 12z"/><circle cx="12" cy="10" r="2.5" fill="none" stroke="currentColor" stroke-width="2"/></svg><span><b>${t.directions}</b>${t.office}</span></a>
 <p class="soc">${SOCIAL.map(([k, n, h, u]) => `<a href="${u}" target="_blank" rel="noopener" aria-label="${n} ${h}">${ICO[k]}</a>`).join('')}</p></div><div id="randevu">${form(lang, 'gorusme-talebi', url(lang, 'contact'), undefined, true)}</div></div></section>
+<section class="sec"><div class="wrap off"><div class="offi"><p class="eyebrow">ACC PLAZA</p><h2>${t.mapT}</h2><p class="lead">${t.addr}</p><img src="/img/acc-plaza-ofis-800.webp" alt="ACC Plaza, ACC HOMES International Real Estate" loading="lazy"><div class="ctas"><a class="btn" href="${G.url}" target="_blank" rel="noopener">${t.dirBtn} →</a><a class="btn ghost" href="tel:${PHONE.raw}">${ICO.ph}${PHONE.text}</a></div></div><iframe class="map" src="${SITE.google.embedUrl}" title="ACC Plaza" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe></div></section>
 <section class="sec bg2"><div class="wrap"><h2>${t.meetH}</h2><p class="lead">${t.meetL}</p><div class="meet">${t.meet.map(([h, p], i) => `<a class="mt rv" href="#randevu" data-meet="${i}"><span class="mi">${['☕', '💻', '🍽️'][i]}</span><h3>${h}</h3><p>${p}</p><span class="more">${t.meetBtn} →</span></a>`).join('')}</div></div></section>
 ${followBlock(lang)}` });
 }
@@ -436,7 +440,7 @@ for (const f of ['favicon.ico', 'favicon.svg', 'apple-touch-icon.png', 'icon-192
 
 // form.php: ACC HOMES ile aynı, panele düşer
 const php = fs.readFileSync(path.join(ROOT, 'server/form.php'), 'utf8')
-  .replace("'rehber-indir'];", "'rehber-indir', 'gorusme-talebi', 'konusmaci-davet'];")
+  .replace("'bulten'];", "'bulten', 'gorusme-talebi', 'konusmaci-davet'];")
   .replace("'From: ACC HOMES Web <'", "'From: Ali Caner Can Web <'")
   .replace("$sent = @mail(", "$sent = function_exists('mail') && @mail(")
   .replace("$ip = $_SERVER['HTTP_X_FORWARDED_FOR'] ?? $_SERVER['REMOTE_ADDR'] ?? '';", "$ip = $_SERVER['REMOTE_ADDR'] ?? '';")

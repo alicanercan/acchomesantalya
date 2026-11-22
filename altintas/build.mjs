@@ -6,6 +6,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { enSpan } from '../en-span.mjs';
 import { NEWS, GUIDE, PROJELER, FIRMALAR } from './content.mjs';
+import { LAND, HOMESEO, POP, SEOFAQ_T, dataFaq } from './seo-pages.mjs';
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.join(HERE, '..');
@@ -36,6 +37,7 @@ const SEG = {
   sell: { tr: 'evinizi-satin', en: 'sell-your-home', ru: 'prodat-kvartiru' },
   contact: { tr: 'iletisim', en: 'contact', ru: 'kontakty' },
 };
+for (const L of LAND) SEG[L.k] = L.seg;
 const url = (lang, k) => (SEG[k][lang] ? `${BASE[lang]}/${SEG[k][lang]}/` : `${BASE[lang]}/`);
 const esc = (s) => String(s ?? '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 const sitemap = [];
@@ -125,6 +127,10 @@ for (const l of SRC) if (l.own) l.baslik = Object.fromEntries(LANGS.map((lg) => 
 const AREA = SRC.sort((a, b) => (b.mahalle === 'Altıntaş') - (a.mahalle === 'Altıntaş') || (b.fiyat > 0) - (a.fiyat > 0) || String(b.row?.created_at || '').localeCompare(String(a.row?.created_at || '')));
 const SALE = AREA.filter((l) => l.tip === 'Satılık');
 const RENT = AREA.filter((l) => l.tip === 'Kiralık');
+for (const L of LAND) L.list = AREA.filter(L.f);
+const LIVE = LAND.filter((L) => L.list.length || L.k === 'l_yab');
+const fmtTL = (n) => `${Math.round(n).toLocaleString('tr-TR')} TL`;
+const TODAY = (lang) => new Date().toLocaleDateString(lang === 'tr' ? 'tr-TR' : lang === 'ru' ? 'ru-RU' : 'en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
 console.log(`Altıntaş/Aksu: ${AREA.length} ilan (${SALE.length} satılık, ${RENT.length} kiralık)`);
 
 const ICO = {
@@ -277,6 +283,11 @@ const HS = { tr: ['Satılık', 'Kiralık', 'Projeler', 'Tüm mahalleler', 'Daire
 const hsearch = (lang) => { const h = HS[lang]; const mahs = [...new Set(AREA.map((l) => l.mahalle).filter(Boolean))];
   return `<div class="hsearch2"><form class="search" data-sale="${url(lang, 'sale')}" data-rent="${url(lang, 'rent')}" data-proj="${url(lang, 'projects')}"><div class="tabrow"><button type="button" class="on" data-t="sale">${h[0]}</button><button type="button" data-t="rent">${h[1]}</button><button type="button" data-t="proj">${h[2]}</button></div><div class="sbar"><select name="m" aria-label="${h[5]}"><option value="">${h[3]}</option>${mahs.map((m) => `<option value="${esc(m)}">${esc(mahOf({ mahalle: m }, lang))}</option>`).join('')}</select><button class="sgo" type="submit"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></svg><span>${h[4]}</span></button></div></form></div>
 <script>(()=>{const f=document.querySelector('.hsearch2 form');let t='sale';f.querySelectorAll('[data-t]').forEach(b=>b.onclick=()=>{t=b.dataset.t;f.querySelectorAll('[data-t]').forEach(x=>x.classList.toggle('on',x===b));f.querySelector('select').disabled=t==='proj'});f.onsubmit=e=>{e.preventDefault();const m=f.querySelector('select').value;location.href=f.dataset[t]+(m&&t!=='proj'?'?m='+encodeURIComponent(m):'')}})();</script>`; };
+const faqHtml = (title, items) => items.length ? `<section class="sec"><div class="wrap narrow"><h2>${title}</h2>${items.map(([q, a]) => `<details class="faq"><summary>${esc(q)}</summary><p>${esc(a)}</p></details>`).join('')}</div></section>` : '';
+const faqLdOf = (items) => ({ '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: items.map(([q, a]) => ({ '@type': 'Question', name: q, acceptedAnswer: { '@type': 'Answer', text: a } })) });
+const homeSeo = (lang) => { const H = HOMESEO[lang]; return `<section class="sec seoblk"><div class="wrap narrow"><h2>${H.h}</h2>${H.secs.map(([h, x]) => `<h3>${h}</h3><p>${x}</p>`).join('')}</div></section>`; };
+const popBand = (lang) => { const t = T[lang]; const links = [[url(lang, 'sale'), t.saleT, SALE.length], [url(lang, 'rent'), t.rentT, RENT.length], ...LIVE.map((L) => [url(lang, L.k), L.h[lang], L.k === 'l_yab' ? 0 : L.list.length]), [url(lang, 'ermenek'), t.nav.ermenek, 0], [url(lang, 'kemeragzi'), t.nav.kemeragzi, 0], [url(lang, 'projects'), t.nav.projects, 0], [url(lang, 'guide'), t.nav.guide, 0], [url(lang, 'news'), t.newsT, 0], [url(lang, 'sell'), t.freeExp, 0]];
+  return `<section class="popb"><div class="wrap"><p class="fh">${POP[lang]}</p><p class="popl">${links.map(([u, x, n]) => `<a href="${u}">${esc(x)}${n ? ` <i>${n}</i>` : ''}</a>`).join('')}</p></div></section>`; };
 const igrid = (list, lang, n) => `<div class="lg">${list.slice(0, n).map((l) => card(l, lang)).join('')}</div>`;
 function form(lang, topic = 0) {
   const f = T[lang].form;
@@ -296,7 +307,7 @@ const projBlock = (lang, full) => { const t = T[lang]; return `<section class="s
 const faqBlock = (lang) => `<section class="sec"><div class="wrap narrow"><h2>${T[lang].faqT}</h2>${T[lang].faq.map(([q, a]) => `<details class="faq"><summary>${q}</summary><p>${a}</p></details>`).join('')}</div></section>`;
 const faqLd = (lang) => ({ '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: T[lang].faq.map(([q, a]) => ({ '@type': 'Question', name: q, acceptedAnswer: { '@type': 'Answer', text: a } })) });
 const ORG = (lang) => ({ '@context': 'https://schema.org', '@type': 'RealEstateAgent', '@id': `${DOMAIN}/#org`, name: 'ACC HOMES Altıntaş', alternateName: 'ACC HOMES International Real Estate', url: DOMAIN + url(lang, 'home'), logo: `${MAIN}/img/logo/acc-homes-logo.png`, image: `${MAIN}/img/primelara/hero.webp`, telephone: PHONE.raw, areaServed: [{ '@type': 'Place', name: 'Altıntaş, Aksu, Antalya' }, { '@type': 'City', name: 'Antalya' }], parentOrganization: { '@type': 'Organization', name: 'ACC HOMES International Real Estate', url: MAIN }, sameAs: [IG, MAIN, G.url], aggregateRating: { '@type': 'AggregateRating', ratingValue: G.rating, reviewCount: G.count } });
-const crumbs = (lang, key) => ({ '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [{ '@type': 'ListItem', position: 1, name: T[lang].brand, item: DOMAIN + url(lang, 'home') }, ...(key === 'home' ? [] : [{ '@type': 'ListItem', position: 2, name: T[lang].nav[key], item: DOMAIN + url(lang, key) }])] });
+const crumbs = (lang, key) => ({ '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [{ '@type': 'ListItem', position: 1, name: T[lang].brand, item: DOMAIN + url(lang, 'home') }, ...(key === 'home' ? [] : [{ '@type': 'ListItem', position: 2, name: T[lang].nav[key] || LAND.find((L) => L.k === key)?.h[lang] || key, item: DOMAIN + url(lang, key) }])] });
 const itemList = (list, lang) => ({ '@context': 'https://schema.org', '@type': 'ItemList', itemListElement: list.slice(0, 30).map((l, i) => ({ '@type': 'ListItem', position: i + 1, url: (l.url[lang].startsWith('/') ? DOMAIN : '') + l.url[lang], name: l.baslik[lang] })) });
 
 function head({ lang, title, desc, canon, alt, ld, img }) {
@@ -317,7 +328,7 @@ function header(lang, alt, cur) {
 }
 function footer(lang) {
   const t = T[lang];
-  return `<footer class="ft"><div class="wrap fg"><div><a class="acclogo flogo" href="${url(lang, 'home')}" aria-label="ACC ALTINTAŞ"><img src="/acc-kirmizi.svg" alt="ACC" width="62" height="44"><span class="lg-v">ALTINTAŞ</span></a><p class="muted">${t.foot}</p></div>
+  return `${popBand(lang)}<footer class="ft"><div class="wrap fg"><div><a class="acclogo flogo" href="${url(lang, 'home')}" aria-label="ACC ALTINTAŞ"><img src="/acc-kirmizi.svg" alt="ACC" width="62" height="44"><span class="lg-v">ALTINTAŞ</span></a><p class="muted">${t.foot}</p></div>
 <div><p class="fh">${t.brand}</p>${navKeys.map((k) => `<a href="${url(lang, k)}">${t.nav[k]}</a>`).join('')}<a href="${url(lang, 'ermenek')}">${t.nav.ermenek}</a><a href="${url(lang, 'kemeragzi')}">${t.nav.kemeragzi}</a></div>
 <div><p class="fh">${t.other}</p><a href="${MAIN}${lang === 'tr' ? '/' : `/${lang}/`}" target="_blank" rel="noopener">ACC HOMES</a><a href="${VILLAS}${lang === 'tr' ? '/' : `/${lang}/`}" target="_blank" rel="noopener">ACC VILLAS</a><a href="https://alicanercan.com${lang === 'tr' ? '/' : `/${lang}/`}" target="_blank" rel="noopener">Ali Caner Can</a><a href="${t.guideUrl}" target="_blank" rel="noopener">${t.guide}</a></div>
 <div><p class="fh">${t.nav.contact}</p><a href="tel:${PHONE.raw}">${PHONE.text}</a><a href="https://wa.me/${PHONE.wa}" target="_blank" rel="noopener">WhatsApp</a><a href="mailto:${MAIL}">${MAIL}</a><a href="${IG}" target="_blank" rel="noopener">Instagram</a></div></div>
@@ -354,7 +365,7 @@ const MAH = {
 // ---------- sayfalar ----------
 for (const lang of LANGS) {
   const t = T[lang];
-  page({ lang, key: 'home', title: t.homeTitle, desc: t.homeDesc, ld: [ORG(lang), { '@context': 'https://schema.org', '@type': 'WebSite', name: t.brand, url: DOMAIN + url(lang, 'home'), inLanguage: lang }, itemList(SALE, lang), faqLd(lang)], body: `
+  page({ lang, key: 'home', title: t.homeTitle, desc: t.homeDesc, ld: [ORG(lang), { '@context': 'https://schema.org', '@type': 'WebSite', name: t.brand, url: DOMAIN + url(lang, 'home'), inLanguage: lang }, itemList(SALE, lang), faqLdOf([...T[lang].faq, ...dataFaq(SALE, lang, TODAY(lang), fmtTL)])], body: `
 <section class="hero3"><img src="${MAIN}/img/primelara/hero.webp" alt="${esc(t.h1)}" fetchpriority="high"><div class="wrap hc3"><p class="eyebrow">${t.by} · Aksu / Antalya</p><h1>${t.h1}</h1><p class="hl3">${t.lead}</p></div>${hsearch(lang)}</section>
 <section class="wrap intentsec"><div class="intents">${INTENT[lang].map(([k, l], n) => `<a class="intent" href="${url(lang, k)}${n === 2 ? '#form' : ''}"><i>${INTENT_ICO[n]}</i><span>${l}</span></a>`).join('')}</div></section>
 <section class="stats2"><div class="wrap sg2"><div class="st"><b>${SALE.length}</b><span>${t.statSale}</span></div><div class="st"><b>${RENT.length}</b><span>${t.statRent}</span></div><div class="st"><b>${t.proj.length}</b><span>${t.statProj}</span></div><a class="st gst" href="${G.url}" target="_blank" rel="noopener"><b>${ICO.g}${lang === 'en' ? G.rating : String(G.rating).replace('.', ',')} ★</b><span>${G.count} ${t.statG}</span></a></div></section>
@@ -366,8 +377,14 @@ ${igLive(lang)}
 ${guideBand(lang)}
 ${sellBand(lang)}
 ${landBand(lang)}
-${faqBlock(lang)}
+${homeSeo(lang)}
+${faqHtml(T[lang].faqT, [...T[lang].faq, ...dataFaq(SALE, lang, TODAY(lang), fmtTL)])}
 ${reviews(lang)}` });
+  for (const L of LIVE) {
+    const list = L.list.length ? L.list : SALE; const items = dataFaq(list.filter((l) => l.tip === 'Satılık').length >= 3 ? list.filter((l) => l.tip === 'Satılık') : list, lang, TODAY(lang), fmtTL);
+    const title = `${L.h[lang]}${lang === 'tr' && L.k !== 'l_yab' ? ' İlanları' : ''} | ACC HOMES Altıntaş`;
+    page({ lang, key: L.k, title, desc: L.p[lang].slice(0, 155), ld: [crumbs(lang, L.k), itemList(list, lang), ...(items.length ? [faqLdOf(items)] : [])], body: `${phero(t.by, L.h[lang], L.p[lang])}<section class="sec tight"><div class="wrap">${listLay(lang, list)}</div></section>${faqHtml(SEOFAQ_T[lang], items)}${sellBand(lang)}` });
+  }
 
   const G2 = GUIDE[lang];
   page({ lang, key: 'guide', title: G2.title, desc: G2.desc, ld: [crumbs(lang, 'guide'), { '@context': 'https://schema.org', '@type': 'Article', headline: G2.h, description: G2.desc, inLanguage: lang, author: { '@type': 'Person', name: 'Ali Caner Can', url: 'https://alicanercan.com/' }, publisher: { '@id': `${DOMAIN}/#org` }, about: { '@type': 'Place', name: 'Altıntaş, Aksu, Antalya' }, dateModified: new Date().toISOString().slice(0, 10) }], body: `${phero(t.nav.guide, G2.h, G2.lead)}

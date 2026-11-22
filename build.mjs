@@ -1,3 +1,4 @@
+import { enSpan } from './en-span.mjs';
 // ACC HOMES — altintassatilikdaire.com statik site üreticisi
 // Bağımlılık yok: Netlify'da "node build.mjs" ile çalışır, çıktı dist/ klasörüne yazılır.
 import { enrich as ilanSeo, temizle as ilanTemizle } from './ilan-seo.mjs';
@@ -292,7 +293,7 @@ function heroOpt(html) {
   if (first) html = html.replace('</head>', `<link rel="preload" as="image" href="${first}"${/^\/img\//.test(first) ? ` imagesrcset="${rimg(first, 640)} 640w, ${rimg(first, 960)} 960w, ${first} 1200w" imagesizes="100vw"` : ''} fetchpriority="high"></head>`);
   return html;
 }
-const write = (rel, html) => { if (typeof html === 'string' && rel.endsWith('.html')) html = heroOpt(html.replace(/<iframe([^>]*?) src="/g, '<iframe$1 data-csrc="')); if (HOST === 'turhost' && typeof html === 'string' && rel.endsWith('.html')) html = turhostForms(html); const f = path.join(OUT, rel); fs.mkdirSync(path.dirname(f), { recursive: true }); fs.writeFileSync(f, html); };
+const write = (rel, html) => { if (typeof html === 'string' && rel.endsWith('.html')) html = enSpan(heroOpt(html.replace(/<iframe([^>]*?) src="/g, '<iframe$1 data-csrc="'))); if (HOST === 'turhost' && typeof html === 'string' && rel.endsWith('.html')) html = turhostForms(html); const f = path.join(OUT, rel); fs.mkdirSync(path.dirname(f), { recursive: true }); fs.writeFileSync(f, html); };
 const placeholder = `<div class="ph"><svg viewBox="0 0 64 64" aria-hidden="true"><path d="M8 30 32 10l24 20v24H40V38H24v16H8z" fill="none" stroke="currentColor" stroke-width="3" stroke-linejoin="round"/></svg></div>`;
 
 const AREAS_SERVED = ['Muratpaşa', 'Konyaaltı', 'Kepez', 'Aksu', 'Döşemealtı', 'Serik', 'Kemer'];

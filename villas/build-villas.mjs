@@ -1,3 +1,4 @@
+import { enSpan } from '../en-span.mjs';
 // ACC VILLAS (accvillas.com) — ACC HOMES'un Antalya villa sitesi.
 // Veri: ACC HOMES Panel (site_ilanlari) → yalnız Villa / Müstakil Ev ilanları. Metinler: data/ilan-seo.json (varsa).
 // Çıktı: villas/dist  →  Turhost (accvillas.com) FTP ile yüklenir (.github/workflows/villas.yml).
@@ -370,7 +371,7 @@ var sf=document.querySelector('.search');if(sf){sf.querySelectorAll('[data-t]').
 }
 const VER = Date.now().toString(36);
 // acchomesantalya.com görselleri hotlink korumalı: referrer göndermeden yükle
-function write(p, html) { const f = path.join(OUT, p, 'index.html'); fs.mkdirSync(path.dirname(f), { recursive: true }); fs.writeFileSync(f, html.replace(/<img (?!referrerpolicy)/g, '<img referrerpolicy="no-referrer" ')); }
+function write(p, html) { const f = path.join(OUT, p, 'index.html'); fs.mkdirSync(path.dirname(f), { recursive: true }); fs.writeFileSync(f, enSpan(html).replace(/<img (?!referrerpolicy)/g, '<img referrerpolicy="no-referrer" ')); }
 const allAlts = (key, id) => Object.fromEntries(LANGS.map((l) => [l, url(l, key, id)]));
 const FL = { tr: { t: 'Filtrele', reg: 'Bölge', price: 'Fiyat aralığı', min: 'En az', max: 'En çok', beds: 'Yatak odası', any: 'Farketmez', feat: 'Özellikler', m2: 'En az brüt m²', sort: 'Sırala', s: ['Önerilen', 'Fiyat: düşükten yükseğe', 'Fiyat: yüksekten düşüğe', 'En geniş'], clear: 'Temizle', show: 'villa', open: 'Filtrele', apply: 'Sonuçları göster' },
   en: { t: 'Filter', reg: 'Area', price: 'Price range', min: 'Min', max: 'Max', beds: 'Bedrooms', any: 'Any', feat: 'Features', m2: 'Min. gross m²', sort: 'Sort', s: ['Recommended', 'Price: low to high', 'Price: high to low', 'Largest'], clear: 'Clear', show: 'villas', open: 'Filters', apply: 'Show results' },

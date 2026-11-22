@@ -1,3 +1,4 @@
+import { enSpan } from '../en-span.mjs';
 // alicanercan.com — Ali Caner Can kişisel "signature" sitesi (TR / EN / RU)
 // ACC HOMES ve ACC VILLAS ile aynı altyapı: statik HTML, Turhost'a FTP ile yüklenir.
 // Çalıştır: node signature/build.mjs  →  signature/dist
@@ -369,7 +370,8 @@ function footer(lang) {
 }
 function page({ lang, key, title, desc, ld = [], body, image, type }) {
   const alt = alts(key); const canon = url(lang, key);
-  write(canon.slice(1), `${head({ lang, title, desc, canon, alt, ld, image, type, kw: `${PKW[key][lang]}, ${KW[lang]}` })}<body>${header(lang, alt, key)}<main>${body}</main>${footer(lang)}</body></html>`);
+  let html = `<body>${header(lang, alt, key)}<main>${body}</main>${footer(lang)}</body></html>`;
+  write(canon.slice(1), enSpan(`${head({ lang, title, desc, canon, alt, ld, image, type, kw: `${PKW[key][lang]}, ${KW[lang]}` })}${html}`));
   sitemap.push([canon, alt]);
 }
 const crumbs = (lang, key) => ({ '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [{ '@type': 'ListItem', position: 1, name: 'Ali Caner Can', item: DOMAIN + url(lang, 'home') }, ...(key === 'home' ? [] : [{ '@type': 'ListItem', position: 2, name: T[lang].nav[key], item: DOMAIN + url(lang, key) }])] });

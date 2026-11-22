@@ -1,0 +1,15 @@
+# Eski WordPress (Houzez) adresleri → yeni sayfalar
+/blog/ /
+/contact/ /iletisim/
+/about/ /iletisim/
+/agencies/ /iletisim/
+/agents/ /iletisim/
+/listings/ /satilik-daireler/
+/search-results/ /satilik-daireler/
+/property-type/konut/ /satilik-daireler/
+/property-type/villa/ /satilik-daireler/
+/property-type/ticari/ /satilik-daireler/
+/property-type/projeler/ /projeler/
+/insights/ /
+/privacy/ /iletisim/
+/ornek-sayfa/ /

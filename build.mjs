@@ -1530,6 +1530,14 @@ const NOINDEX_PATHS = (u) => (!LISTINGS.length && LANGS.some((l) => u === url(l,
 urls.push(...LIST_URLS);
 const SITEMAP_URLS = [...new Set(urls)].filter((u) => !FALLBACK.has(u) && !NOINDEX_PATHS(u));
 write('sitemap.xml', `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">${SITEMAP_URLS.map((u) => `<url><loc>${SITE.domain}${u}</loc></url>`).join('')}</urlset>`);
+// Diğer sitelerimiz (altintassatilikdaire.com vb.) için herkese açık ilan dizini: yalnız yayındaki ilanlar, kişisel veri yok
+write('ilan-index.json', JSON.stringify({ updated: new Date().toISOString().slice(0, 10), ilanlar: LISTINGS.filter((l) => l.durum !== 'Satıldı').map((l) => ({
+  id: l.id, tip: l.tip, kategori: l.kategori, emlakTipi: l.emlakTipi, altTip: l.altTip || '', ilce: l.ilce, mahalle: l.mahalle, proje: l.proje || '',
+  fiyat: l.teklifAl ? 0 : l.fiyat, para: l.para, oda: l.oda || '', brut: l.brut || '', net: l.net || '', etiketler: l.etiketler || [],
+  baslik: Object.fromEntries(['tr', 'en', 'ru'].map((g) => [g, pick(l.baslik, g)])),
+  url: Object.fromEntries(['tr', 'en', 'ru'].map((g) => [g, SITE.domain + url(g, 'listing', slugOf(l))])),
+  foto: (l.foto || [])[0] ? (/^https?:/.test(l.foto[0]) ? l.foto[0] : SITE.domain + l.foto[0]) : '',
+})) }));
 write('robots.txt', DEMO ? 'User-agent: *\nDisallow: /\n' : `User-agent: *\nAllow: /\nDisallow: /favorilerim/\n\n# Yapay zekâ arama ve asistan botları: açıkça izinli\n${['GPTBot', 'OAI-SearchBot', 'ChatGPT-User', 'ClaudeBot', 'Claude-SearchBot', 'Claude-User', 'PerplexityBot', 'Perplexity-User', 'Google-Extended', 'Applebot-Extended', 'Bingbot', 'YandexBot'].map((b) => `User-agent: ${b}\nAllow: /\n`).join('\n')}\nSitemap: ${SITE.domain}/sitemap.xml\n`);
 write('llms.txt', LLMS());
 write('404.html', layout({ lang: 'tr', title: 'Sayfa bulunamadı | ACC HOMES', desc: '', canonical: '/404', body: `<section class="wrap sec narrow"><h1>Sayfa bulunamadı</h1><p><a class="btn" href="/">Ana sayfa</a></p></section>` }));

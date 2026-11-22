@@ -1,0 +1,67 @@
+# altintassatilikdaire.com (ACC HOMES Altıntaş): derleyip Turhost'taki public_html'e yükler.
+# Gizli ayarlar: ALT_FTP_SERVER, ALT_FTP_USERNAME, ALT_FTP_PASSWORD (Caner girer).
+# İlanlar acchomesantalya.com/ilan-index.json'dan çekilir; ACC HOMES yayınından sonra ve her gün otomatik yenilenir.
+# WordPress dosyaları silinmez; .htaccess "DirectoryIndex index.html" ile yeni site öne geçer.
+name: Altıntaş yayını
+
+on:
+  push:
+    branches: [main]
+    paths: ['altintas/**', 'en-span.mjs', 'server/form.php', '.github/workflows/altintas.yml', 'data/reviews.json', 'data/site.json']
+  workflow_run:
+    workflows: ['Turhost yayını']
+    types: [completed]
+  schedule:
+    - cron: '17 4 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: altintas-deploy
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      FTP_SERVER: ${{ secrets.ALT_FTP_SERVER }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Siteyi derle
+        run: node altintas/build.mjs
+      - name: altintassatilikdaire.com'a yükle
+        if: env.FTP_SERVER != ''
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.ALT_FTP_SERVER }}
+          username: ${{ secrets.ALT_FTP_USERNAME }}
+          password: ${{ secrets.ALT_FTP_PASSWORD }}
+          protocol: ftps
+          local-dir: ./altintas/dist/
+          server-dir: ./
+          state-name: .ftp-deploy-sync-state-altintas.json
+          exclude: |
+            **/.git*
+            **/.git*/**
+      - name: IndexNow (Bing, Yandex) bildir
+        if: env.FTP_SERVER != '' && github.event_name != 'schedule'
+        continue-on-error: true
+        run: |
+          python3 - <<'PY'
+          import json, re, urllib.request
+          xml = open('altintas/dist/sitemap.xml', encoding='utf8').read()
+          urls = sorted(set(re.findall(r'<loc>([^<]+)</loc>', xml)))
+          body = json.dumps({'host': 'altintassatilikdaire.com', 'key': '0b60e0b5010e731d23d52aa40b7e7203', 'keyLocation': 'https://altintassatilikdaire.com/0b60e0b5010e731d23d52aa40b7e7203.txt', 'urlList': urls}).encode()
+          for ep in ('https://api.indexnow.org/indexnow', 'https://yandex.com/indexnow'):
+              try:
+                  r = urllib.request.urlopen(urllib.request.Request(ep, data=body, headers={'Content-Type': 'application/json; charset=utf-8'}), timeout=20)
+                  print(ep, r.status, len(urls), 'URL')
+              except Exception as e:
+                  print(ep, 'hata:', e)
+          PY

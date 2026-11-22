@@ -444,3 +444,22 @@ footer .flogo img{height:44px!important}footer .flogo .lg-v{font-size:49.7px!imp
 @media (max-width:700px){.sarr{display:none}}
 body{-webkit-user-select:none;user-select:none;-webkit-touch-callout:none}input,textarea,select,[contenteditable],.form{-webkit-user-select:text;user-select:text}
 img{-webkit-user-drag:none;user-drag:none}
+/* 10. tur: iki satırlı header (villa tonları) */
+.tbar{background:#efe7dc;color:#3d362f;border-bottom:1px solid #e2d7c9;font:600 13.5px Nunito,sans-serif}
+.tbi{display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:42px}
+.tbar svg{width:15px;height:15px;flex:none}.tad{display:flex;align-items:center;gap:7px;color:#6b5f55}.tad svg{fill:none;stroke:#b08b5c;stroke-width:2}
+.tr8{display:flex;align-items:center;gap:18px}.tr8 a{display:inline-flex;align-items:center;gap:7px;color:#3d362f;text-decoration:none;transition:color .2s}.tr8 a:hover{color:var(--redt)}
+.tph{background:#1d1d1f;color:#fff!important;border-radius:999px;padding:6px 15px;font-weight:800;letter-spacing:.02em}.tph svg{fill:#fff}.tph:hover{background:#000}
+.twa svg{fill:#1f9d55}
+.tig{background:#fff;border:1px solid #e2d7c9;border-radius:999px;padding:3px 12px 3px 3px;font-weight:800}.tig i{width:24px;height:24px;border-radius:50%;display:grid;place-items:center;background:radial-gradient(circle at 30% 107%,#fdf497 0%,#fd5949 45%,#d6249f 60%,#285AEB 90%)}.tig .igi{width:14px;height:14px;color:#fff}
+.hcta{background:var(--red);color:#fff!important;border-radius:999px;padding:10px 18px;font:800 13.5px Nunito,sans-serif;text-decoration:none;white-space:nowrap;box-shadow:0 6px 16px rgba(224,42,60,.25);transition:background .2s}.hcta:hover{background:var(--redt)}
+@media (max-width:1280px){.tml{display:none!important}}
+@media (max-width:1180px){.hcta{display:none}}
+@media (max-width:860px){.tad,.twa{display:none!important}.tbi{justify-content:center;min-height:38px}.tr8{gap:10px}.tph{padding:5px 12px;font-size:12.5px}.tig{font-size:12.5px}}
+@media (max-width:380px){.tig{padding:3px}.tig{font-size:0}}
+.tset{display:inline-flex;align-items:center;gap:6px;background:#fff;border:1px solid #e2d7c9;border-radius:999px;padding:2px 6px 2px 4px}.tset .cur{display:inline-block!important;border:0!important;background:transparent!important;font:800 12.5px Nunito,sans-serif;color:#3d362f;padding:3px 4px;border-radius:999px}.tset .lsw{display:flex;gap:2px}.tset .lsw a{font:800 12px Nunito,sans-serif;padding:3px 6px;border-radius:999px;color:#8a7d70;letter-spacing:.04em;text-decoration:none;border:0!important}.tset .lsw a.on,.tset .lsw a[aria-current]{background:#1d1d1f;color:#fff}
+.top .tools{display:flex;align-items:center;margin-left:18px}
+@media (max-width:1180px){.top .tools{display:none}}
+@media (max-width:860px){.tset .cur{display:none!important}}
+.tph{white-space:nowrap}
+@media (max-width:480px){.tph{font-size:0!important;padding:7px!important;width:32px;height:32px;justify-content:center}.tph svg{width:15px;height:15px}.tr8{gap:8px}}

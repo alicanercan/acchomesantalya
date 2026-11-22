@@ -22,6 +22,21 @@ const esc = (s) => String(s ?? '').replace(/&/g, '&amp;').replace(/</g, '&lt;').
 
 fs.rmSync(OUT, { recursive: true, force: true });
 fs.mkdirSync(OUT, { recursive: true });
+
+// ---------- Instagram akışı (@alicanercan.therealtor) ----------
+// Veri: signature/instagram.json (Windsor'dan güncellenir). CDN linkleri süreli olduğu için görseller derlemede indirilir.
+const IGC = JSON.parse(fs.readFileSync(path.join(HERE, 'instagram.json'), 'utf8'));
+fs.mkdirSync(path.join(OUT, 'ig'), { recursive: true });
+await Promise.all(IGC.media.slice(0, 9).map(async (m) => {
+  const code = (m.permalink.match(/\/(?:p|reel)\/([^/]+)/) || [])[1];
+  if (!code) return;
+  try {
+    const r = await fetch(m.image, { signal: AbortSignal.timeout(15000) });
+    if (!r.ok) throw new Error(r.status);
+    fs.writeFileSync(path.join(OUT, 'ig', `${code}.jpg`), Buffer.from(await r.arrayBuffer()));
+    m.local = `/ig/${code}.jpg`;
+  } catch (e) { console.warn('IG görsel indirilemedi:', code, e.message); }
+}));
 const write = (rel, html) => { const f = path.join(OUT, rel.endsWith('.html') || rel.endsWith('.xml') || rel.endsWith('.txt') ? rel : path.join(rel, 'index.html')); fs.mkdirSync(path.dirname(f), { recursive: true }); fs.writeFileSync(f, html); };
 
 // ---------- URL yapısı ----------
@@ -342,7 +357,7 @@ function head({ lang, title, desc, canon, alt, ld = [], image, type = 'website',
 <meta property="og:type" content="${type}"><meta property="og:site_name" content="Ali Caner Can"><meta property="og:title" content="${esc(title)}"><meta property="og:description" content="${esc(desc)}"><meta property="og:url" content="${DOMAIN}${canon}"><meta property="og:image" content="${og}"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:image:alt" content="Ali Caner Can, ${esc(T[lang].role)}"><meta property="og:locale" content="${t.locale}">${LANGS.filter((l) => l !== lang).map((l) => `<meta property="og:locale:alternate" content="${T[l].locale}">`).join('')}
 <meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="${esc(title)}"><meta name="twitter:description" content="${esc(desc)}"><meta name="twitter:image" content="${og}">
 <link rel="icon" href="/favicon.ico" sizes="any"><link rel="icon" href="/favicon.svg" type="image/svg+xml"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><meta name="theme-color" content="#1d1d1f">
-<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Anton&display=swap"><link rel="stylesheet" href="/style.css?v=9">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Anton&display=swap"><link rel="stylesheet" href="/style.css?v=10">
 ${ld.map((x) => `<script type="application/ld+json">${JSON.stringify(x)}</script>`).join('')}
 </head>`;
 }
@@ -428,6 +443,18 @@ const portfolio = (lang) => { const p = PF[lang], q = (k) => (k === 'projects' ?
 <div class="pf">${FEAT.map((l) => `<a class="pfc rv" href="${MAIN}${LSEG[lang]}${l.slug}/" target="_blank" rel="noopener"><span class="pfi"><img src="${MAIN}${l.foto}" alt="${esc(l.t[lang] || l.t.tr)}" loading="lazy" width="800" height="600"><b>${money(l.fiyat, l.para, lang)}</b></span><span class="pfb"><small>${l.ilce} · ${l.mahalle}</small><h3>${esc(l.t[lang] || l.t.tr)}</h3><span class="pfm">${l.oda}${l.brut ? ` · ${l.brut} m²` : ''}</span><span class="more">${p.go} →</span></span></a>`).join('')}</div>
 <div class="sh prh"><div><h3>${p.prT}</h3><p>${p.prL}</p></div></div>
 <div class="prj">${PROJ.map(([n, loc, slug, im, l10n]) => `<a class="pjc${im ? '' : ' noimg'}" href="${projUrl(lang, slug, l10n)}" target="_blank" rel="noopener">${im ? `<img src="${MAIN}${im}" alt="${esc(n)}" loading="lazy" width="600" height="400">` : ''}<span><b>${esc(n)}</b><small>${loc}</small></span></a>`).join('')}</div>${fieldStrip(lang)}</div></section>`; };
+const IGT = {
+  tr: { e: 'Instagram', t: 'Sahadan canlı akış', l: 'Portföyler, piyasa yorumları ve ACC HOMES’tan kareler; en güncel paylaşımlarım burada.', btn: 'Takip et', f: 'takipçi', p: 'gönderi', more: 'Instagram’da tümünü gör' },
+  en: { e: 'Instagram', t: 'Live from the field', l: 'Listings, market takes and moments from ACC HOMES; my latest posts, right here.', btn: 'Follow', f: 'followers', p: 'posts', more: 'See all on Instagram' },
+  ru: { e: 'Instagram', t: 'Прямо с объектов', l: 'Объекты, комментарии о рынке и моменты из ACC HOMES — мои последние публикации.', btn: 'Подписаться', f: 'подписчиков', p: 'публикаций', more: 'Смотреть всё в Instagram' },
+};
+const igFeed = (lang) => {
+  const g = IGT[lang], u = SOCIAL[0][3], nf = new Intl.NumberFormat(lang === 'tr' ? 'tr-TR' : lang === 'ru' ? 'ru-RU' : 'en-US');
+  const ok = IGC.media.filter((m) => m.local), pool = ok.length >= 3 ? ok : IGC.media, items = pool.slice(0, 5);
+  if (!items.length) return '';
+  return `<section class="sec igs"><div class="wrap"><div class="igh"><a class="iga" href="${u}" target="_blank" rel="noopener"><img src="/img/ali-caner-can-portre-800.webp" alt="@${IGC.username}" width="72" height="72" loading="lazy"></a><div class="igm"><p class="eyebrow">${g.e}</p><h2>${g.t}</h2><p class="igst"><a href="${u}" target="_blank" rel="noopener"><b>@${IGC.username}</b></a>${IGC.followers ? `<span><b>${nf.format(IGC.followers)}</b> ${g.f}</span>` : ''}${IGC.posts ? `<span><b>${nf.format(IGC.posts)}</b> ${g.p}</span>` : ''}</p><p class="lead">${g.l}</p></div><a class="btn ig" href="${u}" target="_blank" rel="noopener">${ICO.ig} ${g.btn}</a></div>
+<div class="igg">${items.map((m) => `<a class="igi" href="${esc(m.permalink)}" target="_blank" rel="noopener"><img src="${esc(m.local || m.image)}" alt="${esc(m.caption)}" width="400" height="500" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentNode.remove()">${m.type === 'VIDEO' ? '<span class="igp" aria-hidden="true">▶</span>' : ''}<span class="igc">${esc(m.caption)}</span></a>`).join('')}<a class="igi igx" href="${u}" target="_blank" rel="noopener">${ICO.ig}<b>@${IGC.username}</b><span>${g.more} →</span></a></div></div></section>`;
+};
 const followBlock = (lang) => `<section class="sec"><div class="wrap"><div class="sh"><div><p class="eyebrow">${T[lang].followE}</p><h2>${T[lang].followT}</h2><p class="lead">${T[lang].followL}</p></div></div>
 <div class="fol">${FOLLOW.map(([k, n, h, u, d]) => `<a class="fo f-${k} rv" href="${u}" target="_blank" rel="noopener"><i>${ICO[k]}</i><span><b>${n}</b><em>${h}</em><small>${d[lang]}</small></span><span class="fgo">${T[lang].followBtn} →</span></a>`).join('')}</div></div></section>`;
 const careerLogos = `<div class="logos">${['nestle', 'kraft-heinz', 'reckitt', 'hasbro'].map((n) => `<img src="/img/logo-${n}.webp" alt="${n.replace('-', ' ')}" loading="lazy">`).join('')}<span class="lt">BOSCH</span><a class="lt li" href="https://www.linkedin.com/in/alicanercantherealtor/" target="_blank" rel="noopener">LinkedIn →</a></div>`;
@@ -451,6 +478,7 @@ ${portfolio(lang)}
 <section class="sec dark"><div class="wrap"><div class="sh"><div><p class="eyebrow">04</p><h2>${t.stageT}</h2><p class="lead">${t.stageL}</p></div><a class="all" href="${url(lang, 'stage')}">${t.all} →</a></div>
 <div class="gal">${GAL.slice(0, 6).map((g) => galCard(g, lang)).join('')}</div></div></section>
 <section class="sec"><div class="wrap"><div class="sh"><div><p class="eyebrow">05</p><h2>${t.keysT}</h2><p class="lead">${t.keysL}</p></div><a class="all" href="${url(lang, 'gallery')}#teslim">${GT[lang].more} →</a></div><div class="keys">${KEYS.map((k) => `<img class="rv" src="${img(k, 800)}" alt="${esc(t.keysT)}" loading="lazy" width="800" height="1000">`).join('')}</div></div></section>
+${igFeed(lang)}
 ${followBlock(lang)}
 ${reviews(lang)}` });
 
@@ -469,7 +497,7 @@ ${reviews(lang)}` });
 <section class="sec"><div class="wrap"><div class="posts">${POSTS.map((p) => postCard(p, lang)).join('')}</div></div></section>` });
 
   // Galeri
-  page({ lang, key: 'gallery', title: GT[lang].title, desc: GT[lang].desc, ld: [crumbs(lang, 'gallery'), galleryLd(lang)], body: galleryBody(lang) });
+  page({ lang, key: 'gallery', title: GT[lang].title, desc: GT[lang].desc, ld: [crumbs(lang, 'gallery'), galleryLd(lang)], body: galleryBody(lang) + igFeed(lang) });
 
   // Sahne ve medya
   page({ lang, key: 'stage', title: t.stageTitle, desc: t.stageDesc, ld: [crumbs(lang, 'stage')], body: `

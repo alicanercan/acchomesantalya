@@ -357,11 +357,11 @@ const LX = {
 const SB = {"tr": ["Mülk sahipleri için", "Villanızı ya da değerli konutunuzu mu satıyorsunuz?", "Antalya’da villa, büyük müstakil ev ve lüks konut satışında fiyatı emsallerle belirliyor, mülkü profesyonelce tanıtıyor ve yerli-yabancı alıcıya ulaştırıyorum.", ["Emsal analizli, yazılı değerleme", "Drone, video ve sanal turla tanıtım", "10 dilde yerli ve yabancı alıcı ağı", "İsterseniz ilana çıkmadan özel satış"], "Satış sürecini inceleyin"], "en": ["For property owners", "Selling a villa or high-value home?", "For villas, large detached homes and luxury residences in Antalya, I price against comparables, present the property professionally and bring local and international buyers.", ["Written, comparable-based valuation", "Drone, video and virtual tour marketing", "Buyer network in 10 languages", "Off-market sale if you prefer"], "See how I sell"], "ru": ["Для владельцев", "Продаёте виллу или ценную недвижимость?", "Для вилл, больших частных домов и элитного жилья в Анталии я определяю цену по аналогам, профессионально представляю объект и привожу местных и иностранных покупателей.", ["Письменная оценка по аналогам", "Дрон, видео и виртуальный тур", "Покупатели на 10 языках", "Закрытая продажа по желанию"], "Как я продаю"]};
 const sellBand = (lang) => { const [e, h, l, li, c] = SB[lang]; return `<section class="sec"><div class="wrap"><div class="sellb rv"><div><p class="eyebrow">${e}</p><h2>${h}</h2><p class="lead">${l}</p><div class="ctas"><a class="btn" href="${url(lang, 'luxsell')}">${c} →</a></div></div><ul>${li.map((x) => `<li>${x}</li>`).join('')}</ul></div></div></section>`; };
 const AREAS = [
-  ['Yeşilbahçe', 'muratpasa', { tr: 'ACC Plaza’nın bulunduğu mahalle; Yeşilbahçe emlakçısı olarak kapınızdayız', en: 'Home of ACC Plaza, our headquarters', ru: 'Здесь находится наш офис ACC Plaza' }],
+  ['Yeşilbahçe', 'yesilbahce', { tr: 'ACC Plaza’nın bulunduğu mahalle; Yeşilbahçe emlakçısı olarak kapınızdayız', en: 'Home of ACC Plaza, our headquarters', ru: 'Здесь находится наш офис ACC Plaza' }],
   ['Fener', 'fener', { tr: 'Deniz manzaralı geniş daireler ve site içi konutlar', en: 'Sea-view apartments and gated homes', ru: 'Квартиры с видом на море и комплексы' }],
   ['Şirinyalı', 'sirinyali', { tr: 'Falez hattında deniz manzaralı, değerli konutlar', en: 'High-value sea-view homes on the cliffs', ru: 'Ценное жильё с видом на море у скал' }],
   ['Lara · Güzeloba', 'lara-guzeloba', { tr: 'Lüks konut, villa ve rezidanslar', en: 'Luxury homes, villas and residences', ru: 'Элитное жильё, виллы и резиденции' }],
-  ['Çağlayan', 'muratpasa', { tr: 'Lara’ya yakın, aileler için sakin konut bölgesi', en: 'Quiet family area next to Lara', ru: 'Спокойный семейный район рядом с Ларой' }],
+  ['Çağlayan', 'caglayan', { tr: 'Lara’ya yakın, aileler için sakin konut bölgesi', en: 'Quiet family area next to Lara', ru: 'Спокойный семейный район рядом с Ларой' }],
   ['Konyaaltı', 'konyaalti', { tr: 'Sahile yakın daire ve villalar', en: 'Apartments and villas near the beach', ru: 'Квартиры и виллы у пляжа' }],
   ['Döşemealtı', 'dosemealti', { tr: 'Havuzlu müstakil villalar ve villa projeleri', en: 'Detached pool villas and villa projects', ru: 'Отдельные виллы с бассейном и проекты' }],
   ['Altıntaş · Aksu', 'aksu-altintas', { tr: 'Antalya’nın en hızlı büyüyen yeni konut pazarı', en: 'Antalya’s fastest-growing new-build market', ru: 'Самый быстрорастущий рынок новостроек Анталии' }],
@@ -479,7 +479,7 @@ const PROJ = [
   ['Falez Manzara', 'Altıntaş · Aksu', 'falez-manzara-altintas', '/img/falez/dis-1.webp'],
   ['Tap Vita Ruby', 'Beşkonaklılar · Kepez', 'tap-vita-ruby-kepez', '/img/tapvita/cephe-havuz.webp'],
   ['Math UNO & DOS', 'Altınova · Kepez', 'math-uno-dos', ''],
-  ['Nox Apt', 'Yeniköy · Döşemealtı', 'nox-apt-dosemealti', ''],
+  ['Nox Apt', 'Yeniköy · Döşemealtı', 'nox-apt-dosemealti', 'https://drive.google.com/thumbnail?id=1JHI8LuaQ_I6WGX3ZgOCdtvBgxhDv5c32&sz=w800'],
 ];
 const projUrl = (lang, slug, loc) => (loc && lang !== 'tr' ? `${MAIN}/${lang}/${lang === 'en' ? 'projects' : 'proekty'}/${slug}/` : `${MAIN}/projeler/${slug}/`);
 const money = (n, c, lang) => `${n.toLocaleString(lang === 'tr' ? 'tr-TR' : lang === 'ru' ? 'ru-RU' : 'en-US')} ${c}`;
@@ -495,7 +495,7 @@ const portfolio = (lang) => { const p = PF[lang], q = (k) => (k === 'projects' ?
 <p class="qk">${p.q.map(([n, k]) => `<a href="${q(k)}" target="_blank" rel="noopener">${n} →</a>`).join('')}</p>
 <div class="pf">${FEAT.map((l) => `<a class="pfc rv" href="${MAIN}${LSEG[lang]}${l.slug}/" target="_blank" rel="noopener"><span class="pfi"><img src="${MAIN}${l.foto}" alt="${esc(l.t[lang] || l.t.tr)}" loading="lazy" width="800" height="600"><b>${money(l.fiyat, l.para, lang)}</b></span><span class="pfb"><small>${l.ilce} · ${l.mahalle}</small><h3>${esc(l.t[lang] || l.t.tr)}</h3><span class="pfm">${l.oda}${l.brut ? ` · ${l.brut} m²` : ''}</span><span class="more">${p.go} →</span></span></a>`).join('')}</div>
 <div class="sh prh"><div><h3>${p.prT}</h3><p>${p.prL}</p></div></div>
-<div class="prj">${PROJ.map(([n, loc, slug, im, l10n]) => `<a class="pjc${im ? '' : ' noimg'}" href="${projUrl(lang, slug, l10n)}" target="_blank" rel="noopener">${im ? `<img src="${MAIN}${im}" alt="${esc(n)}" loading="lazy" width="600" height="400">` : ''}<span><b>${esc(n)}</b><small>${loc}</small></span></a>`).join('')}</div>${fieldStrip(lang)}</div></section>`; };
+<div class="prj">${PROJ.map(([n, loc, slug, im, l10n]) => `<a class="pjc${im ? '' : ' noimg'}" href="${projUrl(lang, slug, l10n)}" target="_blank" rel="noopener">${im ? `<img src="${im.startsWith('http') ? esc(im) : MAIN + im}" referrerpolicy="no-referrer" alt="${esc(n)}" loading="lazy" width="600" height="400">` : ''}<span><b>${esc(n)}</b><small>${loc}</small></span></a>`).join('')}</div>${fieldStrip(lang)}</div></section>`; };
 const IGT = {
   tr: { e: 'Instagram', t: 'Sahadan canlı akış', l: 'Portföyler, piyasa yorumları ve ACC HOMES’tan kareler; en güncel paylaşımlarım burada.', btn: 'Takip et', f: 'takipçi', p: 'gönderi', more: 'Instagram’da tümünü gör' },
   en: { e: 'Instagram', t: 'Live from the field', l: 'Listings, market takes and moments from ACC HOMES; my latest posts, right here.', btn: 'Follow', f: 'followers', p: 'posts', more: 'See all on Instagram' },

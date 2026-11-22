@@ -65,6 +65,48 @@ export const MAHALLELER = [
     },
   },
   {
+    slug: 'yesilbahce', parent: 'muratpasa', ilce: 'Muratpaşa', icon: '🌳',
+    tr: {
+      name: 'Yeşilbahçe', title: 'Yeşilbahçe Mahalle Rehberi', short: 'Avni Tolunay, Metin Kasapoğlu ve Portakal Çiçeği akslarında, şehrin merkezinde yerleşik bir konut mahallesi.',
+      html: `<p>Yeşilbahçe, Muratpaşa’nın merkezi konut mahallelerinden biridir. Avni Tolunay Caddesi, Metin Kasapoğlu Caddesi ve Portakal Çiçeği Bulvarı gibi kentin ana ulaşım aksları mahalleden geçer; Lara, Şirinyalı ve şehir merkezine bağlantısı kolaydır. ACC HOMES’un genel merkezi ACC Plaza da Yeşilbahçe’de, Portakal Çiçeği Bulvarı üzerindedir; bu yüzden mahalleyi her gün yerinde takip ediyoruz.</p>
+<h2>Konut yapısı</h2><ul class="ticks"><li>Ağırlıklı olarak geniş planlı, aile tipi daireler (3+1 ve 4+1).</li><li>Havuzlu ve güvenlikli siteler ile cadde üzeri apartmanlar bir arada.</li><li>Ana caddeler boyunca dükkân ve ofis gibi ticari mülkler.</li></ul>
+<h2>Kimler için uygun?</h2><p>Şehrin merkezinde, okullara, hastanelere ve alışverişe yakın yaşamak isteyen aileler; geniş daire arayanlar ve cadde üzeri ticari gelir hedefleyen yatırımcılar.</p>
+<h2>Alırken dikkat</h2><p>Mahallede bina yaşı ve site olanakları sokaktan sokağa değişir. Eski binalarda deprem yönetmeliğine uygunluğu, yalıtımı ve otopark durumunu; sitelerde aidat ve yönetim planını mutlaka kontrol ediyoruz.</p>
+<h2>Yeşilbahçe’de evinizi mi satıyorsunuz?</h2><p>Ofisimiz mahallenin içinde. Mülkünüzü yerinde görüp bölgedeki emsallerle değerlendirmek için bize ulaşın.</p>`,
+      faq: [['Yeşilbahçe hangi ilçede?', 'Yeşilbahçe, Antalya’nın Muratpaşa ilçesine bağlı merkezi bir mahalledir; Lara ve Şirinyalı’ya yakındır.'], ['Yeşilbahçe’de emlak ofisiniz var mı?', 'Evet. ACC HOMES’un genel merkezi ACC Plaza, Yeşilbahçe Mahallesi’nde Portakal Çiçeği Bulvarı üzerindedir.'], FQ_FOREIGN.tr, FQ_PRICE.tr],
+    },
+    en: {
+      name: 'Yeşilbahçe', title: 'Yeşilbahçe Neighbourhood Guide', short: 'A settled, central residential neighbourhood on the Avni Tolunay, Metin Kasapoğlu and Portakal Çiçeği axes.',
+      html: `<p>Yeşilbahçe is one of Muratpaşa’s central residential neighbourhoods. Main city routes such as Avni Tolunay Street, Metin Kasapoğlu Street and Portakal Çiçeği Boulevard run through it, with easy links to Lara, Şirinyalı and the city centre. ACC HOMES’ headquarters, ACC Plaza, is on Portakal Çiçeği Boulevard in Yeşilbahçe, so we follow the neighbourhood on the ground every day.</p>
+<h2>Housing</h2><ul class="ticks"><li>Mostly spacious family apartments (3+1 and 4+1).</li><li>Gated complexes with pools alongside street-front buildings.</li><li>Shops and offices along the main streets.</li></ul>
+<h2>Who it suits</h2><p>Families who want central living near schools, hospitals and shopping; buyers looking for larger apartments; investors targeting street-front commercial income.</p>
+<h2>What to check</h2><p>Building age and facilities vary street by street. For older buildings we check earthquake-code compliance, insulation and parking; in complexes, service charges and the management plan.</p>
+<h2>Selling in Yeşilbahçe?</h2><p>Our office is right here. Contact us to have your property seen in person and assessed against local comparables.</p>`,
+      faq: [['Which district is Yeşilbahçe in?', 'Yeşilbahçe is a central neighbourhood of Muratpaşa, Antalya, close to Lara and Şirinyalı.'], ['Do you have an office in Yeşilbahçe?', 'Yes. ACC HOMES’ headquarters, ACC Plaza, is on Portakal Çiçeği Boulevard in Yeşilbahçe.'], FQ_FOREIGN.en, FQ_PRICE.en],
+    },
+  },
+  {
+    slug: 'caglayan', parent: 'muratpasa', ilce: 'Muratpaşa', icon: '🏡',
+    tr: {
+      name: 'Çağlayan', title: 'Çağlayan Mahalle Rehberi', short: 'Lara semtinde, Barınaklar Bulvarı çevresinde site içi daireler ve müstakil villalar.',
+      html: `<p>Çağlayan, Muratpaşa ilçesinin Lara semtinde yer alan bir konut mahallesidir. Barınaklar Bulvarı mahallenin ana arterlerinden biridir; Rusya Federasyonu ve Almanya’nın Antalya konsoloslukları da Çağlayan’dadır. Lara sahiline, Güzeloba’ya ve havalimanı yönüne kolay ulaşım sunar.</p>
+<h2>Konut yapısı</h2><ul class="ticks"><li>Havuzlu, güvenlikli site içi daireler (2+1’den geniş dairelere).</li><li>Barınaklar çevresinde bahçeli, müstakil villalar.</li><li>Cadde üzeri dükkânlar ve hizmet işletmeleri.</li></ul>
+<h2>Kimler için uygun?</h2><p>Lara’nın olanaklarına yakın, daha sakin bir sokakta yaşamak isteyen aileler; yabancı yerleşimciler ve okul, sahil ve havalimanı erişimini birlikte arayanlar.</p>
+<h2>Alırken dikkat</h2><p>Villa alımlarında imar durumu, yapı ruhsatı ve iskân; site içi dairelerde aidat ve site olanakları fiyatı belirgin şekilde etkiler. Uçuş rotasına yakın sokaklarda ses düzeyini yerinde kontrol etmenizi öneririz.</p>
+<h2>Çağlayan’da evinizi mi satıyorsunuz?</h2><p>Lara ve Çağlayan’da sahadayız. Mülkünüzü yerinde görüp emsallerle değerlendirelim.</p>`,
+      faq: [['Çağlayan hangi semtte?', 'Çağlayan, Antalya Muratpaşa ilçesinde, Lara semtinde yer alan bir mahalledir.'], ['Çağlayan’da villa var mı?', 'Evet. Özellikle Barınaklar çevresinde bahçeli ve havuzlu müstakil villalar bulunur; site içi daireler de yaygındır.'], FQ_FOREIGN.tr, FQ_PRICE.tr],
+    },
+    en: {
+      name: 'Çağlayan', title: 'Çağlayan Neighbourhood Guide', short: 'Gated apartments and detached villas around Barınaklar Boulevard in the Lara area.',
+      html: `<p>Çağlayan is a residential neighbourhood in the Lara area of Muratpaşa. Barınaklar Boulevard is one of its main roads, and the Russian and German consulates in Antalya are located here. It offers easy access to the Lara coast, Güzeloba and the airport road.</p>
+<h2>Housing</h2><ul class="ticks"><li>Gated complexes with pools and security, from 2+1 to large apartments.</li><li>Detached villas with gardens around Barınaklar.</li><li>Street-front shops and services.</li></ul>
+<h2>Who it suits</h2><p>Families who want Lara’s amenities on a quieter street, foreign residents, and buyers who want schools, the beach and the airport within easy reach.</p>
+<h2>What to check</h2><p>For villas, zoning, building permit and occupancy certificate; for apartments, service charges and facilities, which strongly affect price. Near the flight path, check noise levels in person.</p>
+<h2>Selling in Çağlayan?</h2><p>We work on the ground in Lara and Çağlayan. Let us see your property and assess it against comparables.</p>`,
+      faq: [['Where is Çağlayan?', 'Çağlayan is a neighbourhood in the Lara area of Muratpaşa, Antalya.'], ['Are there villas in Çağlayan?', 'Yes, especially around Barınaklar there are detached villas with gardens and pools; gated apartments are also common.'], FQ_FOREIGN.en, FQ_PRICE.en],
+    },
+  },
+  {
     slug: 'kundu', parent: 'aksu-altintas', ilce: 'Aksu', icon: '🏨',
     tr: {
       name: 'Kundu', title: 'Kundu Mahalle Rehberi', short: 'Büyük tatil otelleri, Lara sahilinin doğu ucu ve havalimanına yakınlık.',

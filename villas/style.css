@@ -265,3 +265,64 @@ footer{background:#1d1d1f!important}footer .flogo{background:none!important}foot
 .tline{list-style:none;padding:0;margin:0;border-left:2px solid var(--red)}.tline li{padding:0 0 18px 20px;position:relative}.tline li::before{content:"";position:absolute;left:-7px;top:6px;width:12px;height:12px;border-radius:50%;background:var(--red)}.tline b{display:block}.tline span{color:var(--mut)}
 @media (max-width:860px){.pgrid,.plaza .pgrid,.intl .pgrid,.mhome,.mblocks,.eds{grid-template-columns:1fr}.eds.rev>div{order:0}.pull{font-size:38px}.logo img{height:32px}.logo .lg-s{font-size:28px!important}.logo small{display:none}}
 @media (max-width:860px){.hb{flex-wrap:wrap;gap:8px 14px;align-items:center}.hb>.logo{order:1}.burger{order:2;margin-left:auto!important;position:relative;z-index:2}.top .tools{order:3;width:100%;justify-content:flex-end;margin:0 0 8px!important}.top nav{order:4;width:100%}}
+
+/* ===== 6. tur: sade kahraman, 3 niyet, yuvarlak köşeler (ACC HOMES), mobil düzen ===== */
+html,body{overflow-x:hidden}
+:root{--radius:14px}
+.sh{flex-wrap:wrap;row-gap:8px}
+/* kahraman: daha kısa, alttaki bölüm görünsün */
+.slider{min-height:0!important;height:clamp(460px,70vh,720px)!important;max-height:none!important}
+.slide::after{background:linear-gradient(180deg,rgba(0,0,0,.12) 0%,rgba(0,0,0,0) 30%,rgba(0,0,0,.08) 55%,rgba(0,0,0,.6) 100%)!important}
+.hbottom{position:absolute;left:0;right:0;bottom:118px!important;z-index:3;display:flex;justify-content:space-between;align-items:flex-end;padding:0 max(24px,calc((100vw - 1240px)/2))}
+.hbottom h1{color:#fff!important;font-size:clamp(26px,3vw,40px)!important;font-weight:800!important;text-shadow:0 2px 18px rgba(0,0,0,.35);margin:0;max-width:640px}
+.hbottom .dots button{background:rgba(255,255,255,.45)!important}.hbottom .dots button.on{background:#fff!important}
+.chip{display:none!important}.scroll{display:none!important}
+.intents{position:absolute;left:50%;transform:translateX(-50%);bottom:28px;z-index:3;width:min(1240px,calc(100% - 48px));display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.intent{display:flex;align-items:center;gap:12px;background:rgba(255,255,255,.94);backdrop-filter:blur(8px);border-radius:var(--radius);padding:14px 18px;text-decoration:none;color:var(--ink);font:700 15px/1.25 Nunito,sans-serif;box-shadow:0 10px 30px rgba(0,0,0,.12);transition:transform .25s,box-shadow .25s}
+.intent:hover{transform:translateY(-3px);box-shadow:0 16px 36px rgba(0,0,0,.18)}
+.intent i{flex:none;width:38px;height:38px;border-radius:50%;background:#fdecee;display:grid;place-items:center}.intent svg{width:20px;height:20px;fill:none;stroke:var(--red);stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+/* ACC HOMES yuvarlak köşeler */
+.card,.reg,.cat,.box,.post,.unit,.phase,.faq details,.viewbox,.endbox,.vmap,.rev,.partner,.enne,.cols a,.mhome img,.eds img,.rimg,.agal img,.iggrid a,.vgal .main,.art .cover{border-radius:var(--radius)!important;overflow:hidden}
+.stats,.pgrid,.svc,.awhy,.facts{border-radius:var(--radius)!important;overflow:hidden}
+input,select,textarea{border-radius:10px!important}.tel select{border-radius:10px 0 0 10px!important}
+.chips li,.mh span{border-radius:999px!important}
+/* kategoriler: okunaklı etiket */
+.catg{gap:14px}.cat{aspect-ratio:4/5}.cat::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,0) 45%,rgba(0,0,0,.7) 100%)}
+.cat span{position:absolute;left:16px;right:16px;bottom:14px;z-index:1;color:#fff!important;font:800 17px/1.25 Nunito,sans-serif!important;letter-spacing:0!important;text-transform:none!important;display:flex;align-items:center;justify-content:space-between;gap:8px}
+.cat span::after{content:"→";font-weight:400;opacity:.85}
+.cat:hover img{transform:scale(1.05)}.cat img{transition:transform .6s}
+/* bölgeler: koyu geçiş, beyaz yazı */
+.reg::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,0) 40%,rgba(0,0,0,.72) 100%);z-index:0}
+.reg span{left:16px!important;right:16px!important;bottom:14px!important}.reg b{color:#fff!important;font:800 19px/1.2 Nunito,sans-serif!important}.reg small{color:rgba(255,255,255,.85)!important;font-weight:700}
+/* başlık önü el yazısı kaldırıldı */
+.why h2::before,.cats h2::before{content:none!important}.pend{font:italic 600 20px/1.5 Nunito,sans-serif!important;color:var(--mut)!important}
+/* Google */
+.gg{width:18px;height:18px;flex:none;vertical-align:-3px}
+.gstat{display:inline-flex;align-items:center;gap:10px;text-decoration:none}.gstat .gg{width:26px;height:26px}
+.gbadge{display:inline-flex!important;align-items:center;gap:8px;border:1px solid var(--line)!important;border-radius:999px;padding:8px 16px!important;background:#fff;text-transform:none!important;letter-spacing:0!important;color:var(--ink)!important;font-size:14px!important}
+.gbadge b{font-size:18px}.gbadge .stars{color:#FBBC04!important;letter-spacing:1px}.gbadge small{color:var(--mut)}
+.rev figcaption{display:flex;align-items:center;gap:8px}.rev .stars{color:#FBBC04!important}
+/* Instagram profil kartı */
+.ig{grid-template-columns:1fr 1.3fr!important}
+.igprof{display:flex;gap:22px;align-items:flex-start}.igav{flex:none;width:96px;height:96px;border-radius:50%;padding:3px;background:conic-gradient(#feda75,#fa7e1e,#d62976,#962fbf,#4f5bd5,#feda75)}
+.igav img{width:100%;height:100%;border-radius:50%;background:var(--red);border:3px solid #fff;object-fit:contain;padding:18px}
+.igh{display:flex;align-items:center;gap:8px;margin:4px 0 2px;font-size:20px}.igi{width:20px;height:20px}.ign{color:var(--mut);font-size:13.5px;margin:0 0 10px}.igb{margin:0 0 16px}
+.igbtn{display:inline-flex!important;align-items:center;gap:8px;background:linear-gradient(90deg,#d62976,#962fbf)!important;border:0!important}
+.iggrid a{position:relative;display:block}.iggrid a i{position:absolute;right:8px;top:8px;color:#fff;opacity:.9}.iggrid a i .igi{width:18px;height:18px}
+/* footer: ACC HOMES gibi beyaz */
+footer{background:#fff!important;color:var(--mut)!important;border-top:1px solid var(--line)}footer .fh{color:var(--ink)!important}footer a{color:var(--ink)!important}footer a:hover{color:var(--redt)!important}
+footer .flogo .lg-s{color:var(--ink)!important}footer .flogo small{color:var(--mut)!important}footer .cp{border-color:var(--line)!important;color:var(--mut)}
+@media (max-width:860px){
+ .slider{height:62vh!important;min-height:440px!important}
+ .hbottom{bottom:112px!important;padding:0 16px}.hbottom h1{font-size:24px!important}.dots{display:none!important}
+ .intents{bottom:14px;width:calc(100% - 20px);gap:6px}
+ .intent{flex-direction:column;justify-content:center;text-align:center;gap:6px;padding:10px 6px;font-size:11.5px;line-height:1.2;min-height:86px}.intent i{width:30px;height:30px}.intent svg{width:16px;height:16px}
+ .catg{grid-template-columns:1fr 1fr!important}.catg .cat:last-child{grid-column:span 2;aspect-ratio:2/1}
+ .regs{grid-template-columns:1fr 1fr!important}.reg{aspect-ratio:1/1}.reg b{font-size:16px!important}
+ .grid{grid-template-columns:1fr 1fr!important;gap:10px!important}.cb{padding:10px 10px 12px!important}.cb h3{font-size:13.5px!important}.pr{font-size:14px!important}.loc{font-size:10.5px!important}
+ .sec{padding-top:44px;padding-bottom:44px}.philo,.plaza{padding:56px 0}
+ .igprof{gap:14px}.igav{width:72px;height:72px}.igav img{padding:12px}
+ .stats{grid-template-columns:1fr 1fr!important}
+}
+@media (max-width:380px){.grid{grid-template-columns:1fr!important}}
+@media (max-width:860px){.hbottom{bottom:124px!important}.intent{min-height:92px}}

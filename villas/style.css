@@ -326,3 +326,8 @@ footer .flogo .lg-s{color:var(--ink)!important}footer .flogo small{color:var(--m
 }
 @media (max-width:380px){.grid{grid-template-columns:1fr!important}}
 @media (max-width:860px){.hbottom{bottom:124px!important}.intent{min-height:92px}}
+/* logo: ACC + aynı kalın dar yazıyla VILLAS */
+.logo{gap:7px!important;align-items:flex-end!important}
+.logo .lg-v{font:400 51px/.8 Anton,"Bebas Neue",Impact,sans-serif;color:var(--ink);letter-spacing:.005em;display:block;height:40px;overflow:visible;transform:translateY(1px)}
+footer .flogo img{height:44px}footer .flogo .lg-v{font-size:56px;height:44px}
+@media (max-width:860px){.logo .lg-v{font-size:41px;height:32px}}

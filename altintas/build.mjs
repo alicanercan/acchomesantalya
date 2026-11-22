@@ -173,6 +173,10 @@ const grid = (list, lang, chips = true) => {
   const alts = [...new Set(list.map((l) => l.altTip).filter(Boolean))].slice(0, 6);
   return `${chips && alts.length > 1 ? `<p class="gf"><button class="on" data-f="*">${t.all} <i>${list.length}</i></button>${alts.map((a) => `<button data-f="${esc(a)}">${esc(a)} <i>${list.filter((l) => l.altTip === a).length}</i></button>`).join('')}</p>` : ''}<div class="lg">${list.map((l) => card(l, lang)).join('')}</div>`;
 };
+const BEHOLD = 'https://feeds.behold.so/jcCQi8BN21VNmW9MKU9A';
+const IGT = { tr: { e: 'Instagram', t: 'Altıntaş’tan güncel paylaşımlar', f: 'takipçi', b: 'Takip et' }, en: { e: 'Instagram', t: 'Latest from Altıntaş', f: 'followers', b: 'Follow' }, ru: { e: 'Instagram', t: 'Свежие публикации из Алтынташа', f: 'подписчиков', b: 'Подписаться' } };
+const igLive = (lang) => { const g = IGT[lang]; return `<section class="sec igs" id="instagram"><div class="wrap"><div class="igh"><a class="iga" href="${IG}" target="_blank" rel="noopener"><img data-ig="pic" src="/favicon.svg" alt="@acc.altintas.realestate" width="72" height="72" loading="lazy" referrerpolicy="no-referrer"></a><div class="igm"><p class="eyebrow">${g.e}</p><h2>${g.t}</h2><p class="igst"><a href="${IG}" target="_blank" rel="noopener"><b>@acc.altintas.realestate</b></a><span data-ig="fol" hidden></span></p></div><a class="btn ig" href="${IG}" target="_blank" rel="noopener">${ICO.ig} ${g.b}</a></div><div class="igg" data-ig="grid"></div></div></section>
+<script>(()=>{const s=document.getElementById('instagram'),g=s.querySelector('[data-ig=grid]'),e=t=>String(t||'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));fetch('${BEHOLD}').then(r=>r.ok?r.json():Promise.reject()).then(d=>{const ps=(d.posts||[]).slice(0,6);if(!ps.length)throw 0;if(d.profilePictureUrl)s.querySelector('[data-ig=pic]').src=d.profilePictureUrl;if(d.followersCount){const f=s.querySelector('[data-ig=fol]');f.textContent=new Intl.NumberFormat('${lang === 'tr' ? 'tr-TR' : lang === 'ru' ? 'ru-RU' : 'en-US'}').format(d.followersCount)+' ${g.f}';f.hidden=false}g.innerHTML=ps.map(p=>{const z=p.sizes||{},src=(z.medium&&z.medium.mediaUrl)||(z.small&&z.small.mediaUrl)||p.thumbnailUrl||p.mediaUrl,c=e(p.prunedCaption||p.caption);return '<a class="igi" href="'+e(p.permalink)+'" target="_blank" rel="noopener"><img src="'+e(src)+'" alt="'+c.slice(0,120)+'" width="400" height="500" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentNode.remove()">'+(p.mediaType==='VIDEO'||p.isReel?'<span class="igp" aria-hidden="true">▶</span>':'')+'<span class="igc">'+c+'</span></a>'}).join('')}).catch(()=>{g.remove()})})();</script>`; };
 const igrid = (list, lang, n) => `<div class="lg">${list.slice(0, n).map((l) => card(l, lang)).join('')}</div>`;
 function form(lang, topic = 0) {
   const f = T[lang].form;
@@ -259,6 +263,7 @@ for (const lang of LANGS) {
 ${projBlock(lang)}
 <section class="sec"><div class="wrap"><div class="sh"><div><h2>${t.rentT}</h2><p class="lead">${t.rentL}</p></div><a class="all" href="${url(lang, 'rent')}">${t.all} (${RENT.length}) →</a></div>${igrid(RENT, lang, 6)}</div></section>
 <section class="sec bg2"><div class="wrap"><h2>${t.whyT}</h2><div class="vals">${t.why.map(([h, p]) => `<div class="val rv"><h3>${h}</h3><p>${p}</p></div>`).join('')}</div><p class="center"><a class="btn ghost" href="${t.guideUrl}" target="_blank" rel="noopener">${t.guide} →</a></p></div></section>
+${igLive(lang)}
 ${guideBand(lang)}
 ${sellBand(lang)}
 ${landBand(lang)}

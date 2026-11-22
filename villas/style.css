@@ -583,3 +583,7 @@ footer.ft2 .fbot a{color:#3d362f!important}footer.ft2 .fbot a:hover{color:var(--
 @media (max-width:860px){.hb>.mset{order:1;margin-left:auto}.hb>.burger{margin-left:0!important}.hb>.logo{flex:none}}
 @media (max-width:430px){.hb>.logo{zoom:.84}.mset{gap:5px;margin-right:8px}.mph,.mig{width:32px;height:32px}}
 @media (max-width:392px){.mph{display:none}}
+/* 22.11 iOS: sabit alt butonların kaymaması (overflow-x:hidden yerine clip) */
+html,body{overflow-x:visible}
+body{overflow-x:clip}
+.dock{bottom:calc(10px + env(safe-area-inset-bottom,0px));transform:translateZ(0);-webkit-transform:translateZ(0)}

@@ -541,3 +541,17 @@ footer.ft2 .fbot a{color:#3d362f!important}footer.ft2 .fbot a:hover{color:var(--
 .rhero .wrap:has(.smap){display:grid;grid-template-columns:1.2fr 1fr;gap:28px;align-items:end}.rhero .wrap:has(.smap)>*:not(.sfacts):not(.smap){grid-column:1/-1}
 .smap{border-radius:18px;overflow:hidden;border:1px solid var(--line);min-height:260px;background:#e9e4de}.smap iframe{width:100%;height:100%;min-height:260px;border:0;display:block}
 @media (max-width:860px){.rhero .wrap:has(.smap){grid-template-columns:1fr}}
+/* 11. tur: bölümler arası boşlukları sıkılaştır */
+.sec{padding-top:40px!important;padding-bottom:40px!important}
+.sec.cats{padding-top:36px!important}
+.philo,.plaza{padding-top:56px!important;padding-bottom:56px!important}
+.band{padding-top:44px!important;padding-bottom:44px!important}
+.sec .sh{margin-bottom:18px}
+.philo>.wrap>p:last-child,.philo .pq,.philo em{margin-bottom:0}
+@media (max-width:760px){.sec{padding-top:30px!important;padding-bottom:30px!important}.philo,.plaza{padding-top:40px!important;padding-bottom:40px!important}}
+.sec{padding-top:34px!important;padding-bottom:34px!important}
+.sec .sh{align-items:flex-end}.sec .sh h2,.sec>h2:first-child,.sec .sh+.lead{margin-top:0}.sec .sh h2{margin-bottom:0}
+.sec .sh+.lead{margin-bottom:22px}
+.two.liv{align-items:start!important}.two.liv>div:first-child p:first-child{margin-top:0}
+.why .stats{margin-top:26px}
+@media (min-width:900px){.regs{grid-template-columns:repeat(3,1fr)!important}.regs .reg{aspect-ratio:16/10!important;height:auto!important}}

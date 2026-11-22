@@ -11,6 +11,7 @@ import { ANTALLE_SEO } from '../antalle-seo.mjs';
 import { DAVET_AKTIF, davetTx } from '../antalle-davet.mjs';
 import { SEG4, PHILO, PLAZA, MKT, LIV, FD2, INTL } from './content4.mjs';
 import { BLOG_UI, BLOG_CATS, POST_CAT, POST_DATE, POSTS2, REG_LIFE } from './content5.mjs';
+import { SEOTXT } from './content6.mjs';
 import { SEG3, NAV3, STATS, REG_EXTRA, MANAVGAT, REG_FAQ, SVC, POSTS, JOURNAL } from './content3.mjs';
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.join(HERE, '..');
@@ -291,6 +292,7 @@ const NAVK = ['list', 'rent', 'antalle', 'regions', 'living', 'journal'];
 const NAVM0 = ['projects'];
 const NAVM = ['services', 'marketing', 'projects', 'founder', 'openhouse', 'sell', 'value'];
 const navL = (lang, k) => ({ living: T[lang].nav2, openhouse: X[lang].oh.nav, services: NAV3[lang].services, journal: NAV3[lang].journal, founder: NAV3[lang].founder, value: T[lang].valueT, antalle: 'Antalle Concept Houses', marketing: MKT[lang].nav }[k] || T[lang].nav[k]);
+const seoGuide = (lang) => { const S = SEOTXT[lang]; return `<section class="wrap sec seog" id="rehber"><h2>${S.h}</h2>${S.intro.map((p) => `<p>${p}</p>`).join('')}<h3>${S.whyH}</h3><div class="seow">${S.why.map(([a, b]) => `<div><b>${a}</b><p>${b}</p></div>`).join('')}</div><h3>${S.regH}</h3><ul class="seor">${S.regs.map(([k, n, d]) => `<li><a href="${url(lang, 'regions', k)}">${n}</a> ${d}</li>`).join('')}</ul><h3>${S.typH}</h3><ul class="seor">${S.typ.map(([a, b]) => `<li><b>${a}:</b> ${b}</li>`).join('')}</ul><h3>${S.priceH}</h3><p>${S.price}</p><h3>${S.accH}</h3><p>${S.acc}</p><p class="acts"><a class="btn" href="${url(lang, 'value')}">${S.cta[0]}</a><a class="btn ghost dark" href="${url(lang, 'regions')}">${S.cta[1]}</a><a class="btn ghost dark" href="https://wa.me/${PHONE.wa}">${S.cta[2]}</a></p></section>`; };
 function layout({ lang, title, desc, canon, alts, body, ld = [], image, offer = false }) {
   const t = T[lang]; const x = X[lang];
   if (title.length > 65 && title.endsWith(' | ACC VILLAS')) title = title.slice(0, -13);
@@ -365,6 +367,7 @@ for (const lang of LANGS) {
 <section class="band"><div class="wrap"><div class="sh"><h2>${X[lang].revT}</h2><a class="gbadge" href="${GOOGLE.url}" target="_blank" rel="noopener">${GSVG}<b>4,9</b><span class="stars">★★★★★</span><small>475 · Google</small></a></div><div class="revs">${REVIEWS.map((r) => `<figure class="rev"><p class="stars">★★★★★</p><blockquote>${esc(r[lang])}</blockquote><figcaption>${GSVG}${r.n} · ${r.when[lang]}</figcaption></figure>`).join('')}</div><p class="small">${X[lang].revNote}</p></div></section>
 <section class="wrap sec ig"><div class="igprof"><a class="igav" href="${IG.url}" target="_blank" rel="noopener"><img src="/acc-beyaz.svg" alt="ACC VILLAS"></a><div><p class="igh">${IGSVG}<b>${IG.handle}</b></p><p class="ign">ACC VILLAS · by ACC HOMES International Real Estate</p><p class="igb">${X[lang].igP}</p><a class="btn igbtn" href="${IG.url}" target="_blank" rel="noopener">${IGSVG}${X[lang].igBtn}</a></div></div><div class="iggrid">${ANTALLE_GAL.slice(0, 6).map((g) => `<a href="${IG.url}" target="_blank" rel="noopener"><img src="${g}" alt="${IG.handle}" loading="lazy"><i>${IGSVG}</i></a>`).join('')}</div></section>
 <section class="wrap sec"><div class="sh"><h2>${BLOG_UI[lang].h1}</h2><a href="${url(lang, 'journal')}">${BLOG_UI[lang].all} →</a></div><div class="posts">${[...POSTS2].slice(0, 3).map((p) => `<a class="post" href="${url(lang, 'journal', lang === 'tr' ? p.slug : lang === 'en' ? p.slugEn : p.slugRu)}"><p class="pmeta">${BLOG_CATS.find((c) => c.k === p.cat).n[lang]}</p><h3>${p[lang].t}</h3><p>${p[lang].d}</p><span class="more">${BLOG_UI[lang].read} →</span></a>`).join('')}</div></section>
+<section class="wrap sec seohome"><div><h2>${SEOTXT[lang].homeH}</h2><p class="lead">${SEOTXT[lang].homeP}</p></div><a class="btn ghost dark" href="${url(lang, 'list')}#rehber">${SEOTXT[lang].homeBtn} →</a></section>
 <section class="wrap sec pop"><h2>${X[lang].popT}</h2><div class="popc">
 <div><p class="fh">${X[lang].popCols[0]}</p>${REG.filter((r) => regCount(r)).map((r) => `<a href="${url(lang, 'regions', r.k)}">${t.regionH(r.n[lang])}</a>`).join('')}<a href="${url(lang, 'regions')}">${t.nav.regions} →</a></div>
 <div><p class="fh">${X[lang].popCols[1]}</p>${COL.map((c) => `<a href="${url(lang, 'list')}?c=${c.k}">${c.n[lang]}</a>`).join('')}<a href="${url(lang, 'rent')}">${t.rentT}</a></div>
@@ -376,7 +379,7 @@ for (const lang of LANGS) {
   // satılık / kiralık listeleri
   for (const [key, list, T1, D1] of [['list', sale, t.listT, t.listD], ['rent', rent, t.rentT, t.rentD]]) {
     write(BASE[lang] + '/' + SEG[lang][key], layout({ lang, title: `${T1} | ACC VILLAS`, desc: D1, canon: url(lang, key), alts: allAlts(key), body: `
-<section class="wrap sec"><h1>${T1}</h1><p class="lead">${D1}</p>${list.length ? filters(lang, list) : ''}<div class="grid" data-filter>${list.map((v) => card(v, lang)).join('')}</div>${emptyBox(lang, url(lang, key))}</section>` }));
+<section class="wrap sec"><h1>${T1}</h1><p class="lead">${key === 'list' ? SEOTXT[lang].top : D1}</p>${list.length ? filters(lang, list) : ''}<div class="grid" data-filter>${list.map((v) => card(v, lang)).join('')}</div>${emptyBox(lang, url(lang, key))}</section>${key === 'list' ? seoGuide(lang) : ''}` }));
     sitemap.push(url(lang, key));
   }
 

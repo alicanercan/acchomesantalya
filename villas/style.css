@@ -564,3 +564,22 @@ footer.ft2 .fbot a{color:#3d362f!important}footer.ft2 .fbot a:hover{color:var(--
 .gnote{background:#efe7dc;border-left:4px solid var(--red);border-radius:12px;padding:14px 18px;font-weight:700}
 .gbody .rcta{margin:10px 0 34px}.gdisc{font-size:13.5px!important;color:var(--mut)!important;border-top:1px solid var(--line);padding-top:14px}
 @media (max-width:960px){.glay{grid-template-columns:1fr}.gtoc{position:static}.gside{display:none}}
+/* 22.11 mobil: tek satır header + ana sayfa off-market kartı */
+.mset{display:none}
+@media (max-width:860px){
+.tbar{display:none!important}
+.mset{display:inline-flex;align-items:center;gap:6px;margin-left:auto;margin-right:10px}
+.mset a{text-decoration:none}
+.mph,.mig{width:34px;height:34px;border-radius:50%;display:grid;place-items:center;flex:none}
+.mph{background:#1d1d1f}.mph svg{width:15px;height:15px;fill:#fff}
+.mig{background:radial-gradient(circle at 30% 107%,#fdf497 0%,#fd5949 45%,#d6249f 60%,#285AEB 90%)}.mig svg{width:16px;height:16px;color:#fff}
+.mlsw{display:inline-flex;background:#f3eee7;border:1px solid #e2d7c9;border-radius:999px;padding:2px}
+.mlsw a{font:800 11.5px Nunito,sans-serif;padding:5px 7px;border-radius:999px;color:#8a7d70;letter-spacing:.03em;border:0!important;margin:0!important}
+.mlsw a.on{background:#1d1d1f;color:#fff!important}
+}
+@media (max-width:380px){.mlsw a{padding:5px 6px}}
+.band .off{padding:34px 32px;overflow:visible}
+@media (max-width:860px){.band .off{padding:26px 22px}}
+@media (max-width:860px){.hb>.mset{order:1;margin-left:auto}.hb>.burger{margin-left:0!important}.hb>.logo{flex:none}}
+@media (max-width:430px){.hb>.logo{zoom:.84}.mset{gap:5px;margin-right:8px}.mph,.mig{width:32px;height:32px}}
+@media (max-width:392px){.mph{display:none}}

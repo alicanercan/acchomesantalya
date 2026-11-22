@@ -29,6 +29,7 @@ const SEG = {
   about: { tr: 'hakkimda', en: 'about', ru: 'obo-mne' },
   insights: { tr: 'yazilar', en: 'insights', ru: 'statyi' },
   stage: { tr: 'sahne-ve-medya', en: 'speaking-and-media', ru: 'vystupleniya-i-media' },
+  gallery: { tr: 'galeri', en: 'gallery', ru: 'galereya' },
   advisory: { tr: 'danismanlik', en: 'advisory', ru: 'konsultacii' },
   contact: { tr: 'iletisim', en: 'contact', ru: 'kontakty' },
 };
@@ -77,7 +78,7 @@ const ICO = {
 // ---------- metinler ----------
 const T = {
   tr: {
-    locale: 'tr_TR', nav: { about: 'Hakkımda', insights: 'Yazılar', stage: 'Sahne ve medya', advisory: 'Danışmanlık', contact: 'İletişim' },
+    locale: 'tr_TR', nav: { about: 'Hakkımda', insights: 'Yazılar', stage: 'Sahne ve medya', gallery: 'Galeri', advisory: 'Danışmanlık', contact: 'İletişim' },
     role: 'Broker & Kurucu, ACC HOMES', call: 'Ara', mqL: 'Çalıştığım ve birlikte ürettiğim markalar', nlT: 'ACC NEWS bültenine abone olun', nlL: 'Antalya gayrimenkul gündemi, piyasa analizlerim ve yeni projeler; haftada bir e-posta.', nlBtn: 'Abone ol', nlOk: 'Teşekkürler, bültene kaydoldunuz.', mapT: 'ACC Plaza’da görüşelim', addr: 'Yeşilbahçe Mah. Portakal Çiçeği Blv. No:36/B, Muratpaşa / Antalya', dirBtn: 'Yol tarifi al', cta: 'Görüşme planla', ctaRead: 'Yazılarımı okuyun', wa: 'WhatsApp’tan yazın',
     homeTitle: 'Ali Caner Can | Antalya Gayrimenkul Brokerı, ACC HOMES Kurucusu',
     homeDesc: 'Ali Caner Can: makine mühendisi, eski çok uluslu satış yöneticisi, ACC HOMES ve ACC VILLAS kurucusu. Antalya’da veriye dayalı, şeffaf emlak danışmanlığı.',
@@ -136,7 +137,7 @@ const T = {
     n404: 'Aradığınız sayfa bulunamadı', home: 'Ana sayfa', privacy: 'KVKK aydınlatma metni',
   },
   en: {
-    locale: 'en_US', nav: { about: 'About', insights: 'Insights', stage: 'Speaking & media', advisory: 'Advisory', contact: 'Contact' },
+    locale: 'en_US', nav: { about: 'About', insights: 'Insights', stage: 'Speaking & media', gallery: 'Gallery', advisory: 'Advisory', contact: 'Contact' },
     role: 'Broker & Founder, ACC HOMES', call: 'Call', mqL: 'Brands I have worked with and built with', nlT: 'Subscribe to the ACC NEWS bulletin', nlL: 'The Antalya property agenda, my market analysis and new projects; one e-mail a week.', nlBtn: 'Subscribe', nlOk: 'Thank you, you are subscribed.', mapT: 'Meet me at ACC Plaza', addr: 'Yeşilbahçe, Portakal Çiçeği Blv. No:36/B, Muratpaşa, Antalya', dirBtn: 'Get directions', cta: 'Book a meeting', ctaRead: 'Read my insights', wa: 'Message on WhatsApp',
     homeTitle: 'Ali Caner Can | Antalya Real Estate Broker, Founder of ACC HOMES',
     homeDesc: 'Ali Caner Can: mechanical engineer, ex-multinational sales manager, founder of ACC HOMES and ACC VILLAS. Data-driven, transparent property advice in Antalya.',
@@ -195,7 +196,7 @@ const T = {
     n404: 'Page not found', home: 'Home', privacy: 'Privacy notice',
   },
   ru: {
-    locale: 'ru_RU', nav: { about: 'Обо мне', insights: 'Статьи', stage: 'Выступления', advisory: 'Консультации', contact: 'Контакты' },
+    locale: 'ru_RU', nav: { about: 'Обо мне', insights: 'Статьи', stage: 'Выступления', gallery: 'Галерея', advisory: 'Консультации', contact: 'Контакты' },
     role: 'Брокер и основатель ACC HOMES', call: 'Позвонить', mqL: 'Бренды, с которыми я работал и работаю', nlT: 'Подпишитесь на бюллетень ACC NEWS', nlL: 'Повестка рынка Анталии, моя аналитика и новые проекты; одно письмо в неделю.', nlBtn: 'Подписаться', nlOk: 'Спасибо, вы подписаны.', mapT: 'Встретимся в ACC Plaza', addr: 'Ешильбахче, бульвар Портакал Чичеги, 36/B, Муратпаша, Анталия', dirBtn: 'Проложить маршрут', cta: 'Назначить встречу', ctaRead: 'Читать статьи', wa: 'Написать в WhatsApp',
     homeTitle: 'Али Джанер Джан | Брокер недвижимости в Анталии, ACC HOMES',
     homeDesc: 'Али Джанер Джан: инженер-механик, экс-руководитель продаж в международных компаниях, основатель ACC HOMES и ACC VILLAS. Консультации по недвижимости Анталии.',
@@ -285,6 +286,33 @@ const GAL = [
 const KEYS = [1, 2, 3, 4, 5, 6].map((i) => `tapu-teslim-${i}`);
 const img = (n, w) => `/img/${n}${w === 800 && !n.startsWith('sosyal/') ? '-800' : ''}.webp`;
 
+
+// ---------- galeri ----------
+const GALERI = JSON.parse(fs.readFileSync(path.join(HERE, 'galeri.json'), 'utf8'));
+const GCAT = { saha: ['Sahada', 'On site', 'На объектах'], teslim: ['Tapu ve anahtar teslimleri', 'Handovers', 'Передача ключей'], sahne: ['Sahne ve etkinlikler', 'Stage & events', 'Сцена и события'], ekip: ['ACC HOMES ekibi', 'ACC HOMES team', 'Команда ACC HOMES'], portre: ['Portreler', 'Portraits', 'Портреты'] };
+const GLI = { tr: 0, en: 1, ru: 2 };
+const GT = {
+  tr: { title: 'Galeri | Ali Caner Can, Antalya Emlak Danışmanı ve Broker', desc: 'Ali Caner Can ve ACC HOMES ekibinden kareler: Antalya’da sahada portföy çekimleri, tapu ve anahtar teslimleri, sahne ve etkinlikler, ACC Plaza.', h1: 'Sahada, tapuda, sahnede', lead: 'Antalya’da her portföyü yerinde görüyor, her müşterimi tapuya kadar götürüyorum. Bu galeri; sahadaki çekimlerden mutlu teslimlere, sahnelerden ACC Plaza’daki ekibimize kadar işimin fotoğraf albümü. Yeni kareler eklendikçe büyüyor.', all: 'Tümü', ctaT: 'Bir sonraki teslim sizinki olsun', ctaL: 'Antalya’da ev, villa ya da yatırım için görüşme planlayın; satıştan tapuya kadar süreci birlikte yönetelim.', cta: 'Görüşme planla', more: 'Galeriye git', n: 'kare' },
+  en: { title: 'Gallery | Ali Caner Can, Antalya Real Estate Broker', desc: 'Moments with Ali Caner Can and the ACC HOMES team: on-site listing shoots in Antalya, title deed and key handovers, stage and events, ACC Plaza.', h1: 'On site, at the title deed office, on stage', lead: 'In Antalya I see every listing in person and walk every client through to the title deed. This gallery is the photo album of that work, from on-site shoots and happy handovers to stages and our team at ACC Plaza. It grows as new moments are added.', all: 'All', ctaT: 'Let the next handover be yours', ctaL: 'Book a meeting about a home, villa or investment in Antalya; we manage everything from offer to title deed together.', cta: 'Book a meeting', more: 'Open the gallery', n: 'photos' },
+  ru: { title: 'Галерея | Али Джанер Джан, брокер по недвижимости в Анталии', desc: 'Кадры Али Джанер Джана и команды ACC HOMES: съёмки объектов в Анталии, передача ключей и тапу, сцена и мероприятия, ACC Plaza.', h1: 'На объекте, в тапу, на сцене', lead: 'В Анталии я лично смотрю каждый объект и сопровождаю каждого клиента до оформления тапу. Эта галерея — фотоальбом моей работы: от съёмок на объектах и счастливых сделок до сцены и команды в ACC Plaza. Она пополняется новыми кадрами.', all: 'Все', ctaT: 'Пусть следующая сделка будет вашей', ctaL: 'Запишитесь на встречу о квартире, вилле или инвестиции в Анталии — проведём весь процесс до тапу вместе.', cta: 'Записаться на встречу', more: 'Открыть галерею', n: 'фото' },
+};
+const galAlt = (g, lang) => `${g.cap[lang]} | ${['Ali Caner Can, Antalya emlak danışmanı', 'Ali Caner Can, Antalya real estate broker', 'Али Джанер Джан, риелтор в Анталии'][GLI[lang]]}`;
+const galleryBody = (lang) => { const g = GT[lang], cats = Object.keys(GCAT).filter((c) => GALERI.some((x) => x.cat === c));
+  return `<section class="phero sm"><div class="wrap"><p class="eyebrow">${T[lang].nav.gallery} · ${GALERI.length} ${g.n}</p><h1>${g.h1}</h1><p class="lead">${g.lead}</p></div></section>
+<section class="sec gpage"><div class="wrap"><div class="gf" role="tablist"><button class="on" data-c="*">${g.all} <i>${GALERI.length}</i></button>${cats.map((c) => `<button data-c="${c}" id="${c}">${GCAT[c][GLI[lang]]} <i>${GALERI.filter((x) => x.cat === c).length}</i></button>`).join('')}</div>
+<div class="mas">${GALERI.map((x, i) => `<figure class="mi rv" data-c="${x.cat}"><a href="${x.b}" data-i="${i}"><img src="${x.s}" alt="${esc(galAlt(x, lang))}" width="${x.w}" height="${x.h}" loading="${i < 6 ? 'eager' : 'lazy'}" decoding="async"></a><figcaption>${esc(x.cap[lang])}</figcaption></figure>`).join('')}</div>
+<div class="cb gcta"><div><h2>${g.ctaT}</h2><p>${g.ctaL}</p></div><a class="btn" href="${url(lang, 'contact')}#randevu">${g.cta}</a></div></div></section>
+<dialog class="lb" aria-label="${T[lang].nav.gallery}"><button class="lbx" aria-label="×">×</button><button class="lbp" aria-label="‹">‹</button><figure><img alt=""><figcaption></figcaption></figure><button class="lbn" aria-label="›">›</button></dialog>
+<script>(()=>{const B=[...document.querySelectorAll('.gf button')],F=[...document.querySelectorAll('.mi')],D=document.querySelector('.lb'),I=D.querySelector('img'),C=D.querySelector('figcaption');let cur=0;const vis=()=>F.filter(f=>!f.hidden);
+const set=c=>{B.forEach(b=>b.classList.toggle('on',b.dataset.c===c));F.forEach(f=>f.hidden=!(c==='*'||f.dataset.c===c))};B.forEach(b=>b.onclick=()=>{set(b.dataset.c);history.replaceState(null,'',b.dataset.c==='*'?location.pathname:'#'+b.dataset.c)});
+const h=location.hash.slice(1);if(h&&B.some(b=>b.dataset.c===h))set(h);
+const show=k=>{const v=vis();cur=(k+v.length)%v.length;const a=v[cur].querySelector('a'),im=a.querySelector('img');I.src=a.href;I.alt=im.alt;C.textContent=v[cur].querySelector('figcaption').textContent};
+F.forEach(f=>f.querySelector('a').onclick=e=>{e.preventDefault();show(vis().indexOf(f));D.showModal()});
+D.querySelector('.lbx').onclick=()=>D.close();D.querySelector('.lbp').onclick=()=>show(cur-1);D.querySelector('.lbn').onclick=()=>show(cur+1);D.onclick=e=>{if(e.target===D)D.close()};
+document.addEventListener('keydown',e=>{if(!D.open)return;if(e.key==='ArrowRight')show(cur+1);if(e.key==='ArrowLeft')show(cur-1)});
+let x0=0;D.addEventListener('touchstart',e=>x0=e.touches[0].clientX,{passive:true});D.addEventListener('touchend',e=>{const d=e.changedTouches[0].clientX-x0;if(Math.abs(d)>40)show(cur+(d<0?1:-1))})})();</script>`; };
+const galleryLd = (lang) => ({ '@context': 'https://schema.org', '@type': 'ImageGallery', name: GT[lang].title, description: GT[lang].desc, url: DOMAIN + url(lang, 'gallery'), inLanguage: lang, author: { '@id': `${DOMAIN}/#person` }, associatedMedia: GALERI.map((x) => ({ '@type': 'ImageObject', contentUrl: DOMAIN + x.b, thumbnailUrl: DOMAIN + x.s, caption: x.cap[lang], width: x.w, height: x.h, creditText: 'Ali Caner Can', copyrightHolder: { '@id': `${DOMAIN}/#person` } })) });
+
 // ---------- anahtar kelimeler ----------
 const KW = {
   tr: 'Ali Caner Can, Antalya emlak danışmanı, Antalya gayrimenkul brokerı, ACC HOMES, ACC VILLAS, Antalya satılık daire, Antalya satılık villa, Antalya gayrimenkul yatırımı',
@@ -292,6 +320,7 @@ const KW = {
   ru: 'Али Джанер Джан, Ali Caner Can, риелтор Анталия, брокер недвижимости Анталия, ACC HOMES, ACC VILLAS, недвижимость в Анталии, купить виллу в Анталии',
 };
 const PKW = {
+  gallery: { tr: 'Antalya emlak danışmanı fotoğrafları, tapu teslimi Antalya, anahtar teslimi, Antalya emlakçı, Antalya satılık daire, Antalya satılık villa, gayrimenkul brokerı', en: 'Antalya realtor photos, property handover Antalya, title deed handover Turkey, Antalya real estate agent, homes for sale Antalya', ru: 'риелтор Анталия фото, передача ключей Анталия, тапу, агент по недвижимости Анталия, недвижимость в Анталии' },
   home: { tr: 'en iyi emlakçı Antalya, Antalya emlak ofisi', en: 'best realtor Antalya, Antalya property advisor', ru: 'лучший риелтор Анталии, агентство недвижимости Анталия' },
   about: { tr: 'Ali Caner Can kimdir, makine mühendisi emlak, Kraft Heinz Nestlé satış yöneticisi', en: 'who is Ali Caner Can, engineer turned realtor, Kraft Heinz Nestlé sales manager', ru: 'кто такой Али Джанер Джан, биография брокера' },
   insights: { tr: 'Antalya gayrimenkul piyasası, tapu süreci, konut kredisi, villa alırken dikkat', en: 'Antalya property market, title deed process, buying a villa in Turkey', ru: 'рынок недвижимости Анталии, оформление тапу, покупка виллы в Турции' },
@@ -312,11 +341,11 @@ function head({ lang, title, desc, canon, alt, ld = [], image, type = 'website',
 <meta property="og:type" content="${type}"><meta property="og:site_name" content="Ali Caner Can"><meta property="og:title" content="${esc(title)}"><meta property="og:description" content="${esc(desc)}"><meta property="og:url" content="${DOMAIN}${canon}"><meta property="og:image" content="${og}"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:image:alt" content="Ali Caner Can, ${esc(T[lang].role)}"><meta property="og:locale" content="${t.locale}">${LANGS.filter((l) => l !== lang).map((l) => `<meta property="og:locale:alternate" content="${T[l].locale}">`).join('')}
 <meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="${esc(title)}"><meta name="twitter:description" content="${esc(desc)}"><meta name="twitter:image" content="${og}">
 <link rel="icon" href="/favicon.ico" sizes="any"><link rel="icon" href="/favicon.svg" type="image/svg+xml"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><meta name="theme-color" content="#1d1d1f">
-<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Anton&display=swap"><link rel="stylesheet" href="/style.css?v=8">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Anton&display=swap"><link rel="stylesheet" href="/style.css?v=9">
 ${ld.map((x) => `<script type="application/ld+json">${JSON.stringify(x)}</script>`).join('')}
 </head>`;
 }
-const navKeys = ['about', 'insights', 'stage', 'advisory', 'contact'];
+const navKeys = ['about', 'insights', 'stage', 'gallery', 'advisory', 'contact'];
 function header(lang, alt, cur) {
   const t = T[lang];
   const lsw = LANGS.map((l) => `<a href="${(alt && alt[l]) || url(l, 'home')}"${l === lang ? ' class="on" aria-current="true"' : ''} hreflang="${l}">${l.toUpperCase()}</a>`).join('');
@@ -391,7 +420,7 @@ const FIELD = [
 ];
 const AB = {"tr": ["İlk portföy, ilk tabela", "Realty World MES döneminde, Master Team adıyla kendi tabelamı astığım ilk portföylerimden biri. Bugün ACC HOMES’ta aynı sahada olma alışkanlığını ekibimle sürdürüyorum."], "en": ["First listing, first sign", "One of my first listings from my Realty World MES years, under my own Master Team sign. Today at ACC HOMES my team and I keep the same habit of being on site."], "ru": ["Первый объект, первая вывеска", "Один из моих первых объектов периода Realty World MES, под собственной вывеской Master Team. Сегодня в ACC HOMES мы с командой сохраняем ту же привычку — быть на объекте."]};
 const FT = { tr: ['Sahadan', 'Her portföyü yerinde görüyor, kamerayı kendim tutuyorum.'], en: ['From the field', 'I see every listing in person and film it myself.'], ru: ['С объектов', 'Каждый объект я смотрю лично и снимаю сам.'] };
-const fieldStrip = (lang) => `<div class="sh prh"><div><h3>${FT[lang][0]}</h3><p>${FT[lang][1]}</p></div></div><div class="fld">${FIELD.map(([n, c]) => `<figure class="rv"><img src="/img/${n}-600.webp" srcset="/img/${n}-600.webp 600w, /img/${n}-1200.webp 1200w" sizes="(max-width:600px) 90vw, 33vw" alt="${esc(c[lang])} – Ali Caner Can" loading="lazy" width="600" height="${n.includes('ilk-portfoy') ? 750 : 1067}"><figcaption>${c[lang]}</figcaption></figure>`).join('')}</div>`;
+const fieldStrip = (lang) => `<div class="sh prh"><div><h3>${FT[lang][0]}</h3><p>${FT[lang][1]}</p></div><a class="all" href="${url(lang, 'gallery')}">${GT[lang].more} →</a></div><div class="fld">${FIELD.map(([n, c]) => `<figure class="rv"><img src="/img/${n}-600.webp" srcset="/img/${n}-600.webp 600w, /img/${n}-1200.webp 1200w" sizes="(max-width:600px) 90vw, 33vw" alt="${esc(c[lang])} – Ali Caner Can" loading="lazy" width="600" height="${n.includes('ilk-portfoy') ? 750 : 1067}"><figcaption>${c[lang]}</figcaption></figure>`).join('')}</div>`;
 const portfolio = (lang) => { const p = PF[lang], q = (k) => (k === 'projects' ? ACC.projects[lang] : QURL[k][lang]); return `<section class="sec bg2"><div class="wrap"><div class="sh"><div><p class="eyebrow">${p.e}</p><h2>${p.t}</h2><p class="lead">${p.l}</p></div><a class="all" href="${QURL.listings[lang]}" target="_blank" rel="noopener">${p.all} →</a></div>
 <p class="qk">${p.q.map(([n, k]) => `<a href="${q(k)}" target="_blank" rel="noopener">${n} →</a>`).join('')}</p>
 <div class="pf">${FEAT.map((l) => `<a class="pfc rv" href="${MAIN}${LSEG[lang]}${l.slug}/" target="_blank" rel="noopener"><span class="pfi"><img src="${MAIN}${l.foto}" alt="${esc(l.t[lang] || l.t.tr)}" loading="lazy" width="800" height="600"><b>${money(l.fiyat, l.para, lang)}</b></span><span class="pfb"><small>${l.ilce} · ${l.mahalle}</small><h3>${esc(l.t[lang] || l.t.tr)}</h3><span class="pfm">${l.oda}${l.brut ? ` · ${l.brut} m²` : ''}</span><span class="more">${p.go} →</span></span></a>`).join('')}</div>
@@ -419,7 +448,7 @@ ${portfolio(lang)}
 <section class="sec"><div class="wrap career"><div><p class="eyebrow">03</p><h2>${t.careerT}</h2><p class="lead">${t.careerL}</p><a class="all" href="${url(lang, 'about')}">${t.nav.about} →</a></div>${careerLogos}</div></section>
 <section class="sec dark"><div class="wrap"><div class="sh"><div><p class="eyebrow">04</p><h2>${t.stageT}</h2><p class="lead">${t.stageL}</p></div><a class="all" href="${url(lang, 'stage')}">${t.all} →</a></div>
 <div class="gal">${GAL.slice(0, 6).map((g) => galCard(g, lang)).join('')}</div></div></section>
-<section class="sec"><div class="wrap"><div class="sh"><div><p class="eyebrow">05</p><h2>${t.keysT}</h2><p class="lead">${t.keysL}</p></div></div><div class="keys">${KEYS.map((k) => `<img class="rv" src="${img(k, 800)}" alt="${esc(t.keysT)}" loading="lazy" width="800" height="1000">`).join('')}</div></div></section>
+<section class="sec"><div class="wrap"><div class="sh"><div><p class="eyebrow">05</p><h2>${t.keysT}</h2><p class="lead">${t.keysL}</p></div><a class="all" href="${url(lang, 'gallery')}#teslim">${GT[lang].more} →</a></div><div class="keys">${KEYS.map((k) => `<img class="rv" src="${img(k, 800)}" alt="${esc(t.keysT)}" loading="lazy" width="800" height="1000">`).join('')}</div></div></section>
 ${followBlock(lang)}
 ${reviews(lang)}` });
 
@@ -436,6 +465,9 @@ ${reviews(lang)}` });
   page({ lang, key: 'insights', title: t.insTitle, desc: t.insDesc, ld: [crumbs(lang, 'insights'), { '@context': 'https://schema.org', '@type': 'CollectionPage', name: t.insT, url: DOMAIN + url(lang, 'insights'), author: { '@id': `${DOMAIN}/#person` }, hasPart: POSTS.map((p) => ({ '@type': 'Article', headline: p.t[lang], url: p.u[lang] })) }], body: `
 <section class="phero sm"><div class="wrap"><p class="eyebrow">${t.nav.insights}</p><h1>${t.insT}</h1><p class="lead">${t.insL}</p></div></section>
 <section class="sec"><div class="wrap"><div class="posts">${POSTS.map((p) => postCard(p, lang)).join('')}</div></div></section>` });
+
+  // Galeri
+  page({ lang, key: 'gallery', title: GT[lang].title, desc: GT[lang].desc, ld: [crumbs(lang, 'gallery'), galleryLd(lang)], body: galleryBody(lang) });
 
   // Sahne ve medya
   page({ lang, key: 'stage', title: t.stageTitle, desc: t.stageDesc, ld: [crumbs(lang, 'stage')], body: `

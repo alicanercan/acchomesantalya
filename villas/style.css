@@ -401,3 +401,46 @@ footer .flogo img{height:44px!important}footer .flogo .lg-v{font-size:49.7px!imp
 .seor{padding-left:18px;line-height:1.75;color:#3a3a3c}.seor li{margin-bottom:6px}.seor a{color:var(--redt);font-weight:800}
 .seohome{display:flex;justify-content:space-between;align-items:center;gap:24px;border:1px solid var(--line);border-radius:var(--radius);padding:28px 32px!important;margin-top:20px;margin-bottom:20px}.seohome h2{margin:0 0 6px}.seohome .lead{margin:0}
 @media (max-width:860px){.seohome{flex-direction:column;align-items:flex-start;padding:22px!important}}
+/* 10. tur: solda filtre paneli, yuvarlak modern kontroller */
+.filters{display:none!important}
+.lay{display:grid;grid-template-columns:270px minmax(0,1fr);gap:28px;align-items:start;margin-top:22px}
+.fside{position:sticky;top:96px;background:#fff;border:1px solid var(--line);border-radius:18px;padding:18px 18px 16px;box-shadow:0 8px 26px rgba(0,0,0,.05);max-height:calc(100vh - 120px);overflow:auto}
+.fsh{display:flex;align-items:center;justify-content:space-between;margin-bottom:6px}.fsh b{font:800 17px Nunito,sans-serif}.fclear{border:0;background:none;color:var(--redt);font:700 13px Nunito,sans-serif;cursor:pointer}.fx{display:none;border:0;background:#f3f1ee;width:32px;height:32px;border-radius:50%;font-size:20px;cursor:pointer}
+.fside fieldset{border:0;border-top:1px solid var(--line);margin:0;padding:14px 0 10px}.fside legend{font:800 13px Nunito,sans-serif;color:var(--ink);padding:0;margin-bottom:10px;float:left;width:100%}.fside fieldset>*:not(legend){clear:both}
+.ck{display:flex;align-items:center;gap:10px;padding:6px 4px;border-radius:10px;cursor:pointer;font:600 14.5px Nunito,sans-serif}.ck:hover{background:#faf8f5}.ck input{appearance:none;width:18px;height:18px;border:1.5px solid #cfcac3;border-radius:6px;margin:0;display:grid;place-items:center;flex:none}.ck input:checked{background:var(--red);border-color:var(--red)}.ck input:checked::after{content:"";width:9px;height:5px;border-left:2px solid #fff;border-bottom:2px solid #fff;transform:rotate(-45deg) translate(1px,-1px)}.ck span{flex:1}.ck small{color:var(--mut);font-weight:700;background:#f3f1ee;border-radius:999px;padding:1px 8px;font-size:11.5px}
+.prr{display:flex;align-items:center;gap:6px}.prr input{width:100%;min-width:0;border:1px solid var(--line)!important;border-radius:12px!important;padding:10px 12px;font:600 14px Nunito,sans-serif;background:#faf8f5}.prr input:focus{outline:2px solid #f6c6cc;background:#fff}
+.pq{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}.pills{display:flex;flex-wrap:wrap;gap:6px}
+.pq button,.pills button{border:1px solid var(--line);background:#fff;border-radius:999px;padding:7px 13px;font:700 13px Nunito,sans-serif;color:var(--ink);cursor:pointer;transition:all .2s}.pq button:hover,.pills button:hover{border-color:#cfcac3}.pills button.on{background:var(--red);border-color:var(--red);color:#fff;box-shadow:0 4px 12px rgba(224,42,60,.25)}
+.fapply{display:none!important}
+.ltop{display:flex;align-items:center;gap:14px;margin-bottom:14px}.lcount{margin:0;color:var(--mut);font:600 14.5px Nunito,sans-serif}.lcount b{color:var(--ink);font-weight:900}.lsort{margin-left:auto;display:flex;align-items:center;gap:8px;font:700 13px Nunito,sans-serif;color:var(--mut)}.lsort select{border:1px solid var(--line);border-radius:999px!important;padding:8px 14px;font:700 13.5px Nunito,sans-serif;background:#fff}
+.fopen{display:none;align-items:center;gap:8px;border:1px solid var(--line);border-radius:999px;background:#fff;padding:9px 16px;font:800 14px Nunito,sans-serif;cursor:pointer}.fopen svg{width:18px;height:18px;fill:none;stroke:var(--ink);stroke-width:2;stroke-linecap:round}
+.grid.g3{grid-template-columns:repeat(3,1fr)!important}
+@media (max-width:1100px){.grid.g3{grid-template-columns:1fr 1fr!important}}
+@media (max-width:860px){.lay{grid-template-columns:1fr}.fopen{display:inline-flex}
+ .fside{position:fixed;inset:auto 0 0 0;top:auto;z-index:60;border-radius:22px 22px 0 0;max-height:82vh;transform:translateY(105%);transition:transform .35s ease;box-shadow:0 -10px 40px rgba(0,0,0,.2)}
+ body.fopen-on .fside{transform:none}body.fopen-on::after{content:"";position:fixed;inset:0;background:rgba(0,0,0,.35);z-index:55}
+ .fx{display:block}.fapply{display:block!important;width:100%;margin-top:8px}.lsort select{max-width:150px}.grid.g3{grid-template-columns:1fr 1fr!important}}
+@media (max-width:380px){.grid.g3{grid-template-columns:1fr!important}}
+/* 10. tur: bölgeler sayfası */
+.rhero{background:linear-gradient(180deg,#f3eee8,#faf8f5);border-bottom:1px solid var(--line);padding:34px 0 26px}.rhero h1{margin:.15em 0 .3em;font-size:clamp(34px,4.4vw,56px)}.rhero .lead{max-width:780px}
+.rstat{display:flex;gap:12px;flex-wrap:wrap;margin:22px 0 20px}.rstat div{background:#fff;border:1px solid var(--line);border-radius:16px;padding:12px 20px;min-width:120px}.rstat b{display:block;font:900 26px Nunito,sans-serif;color:var(--red)}.rstat span{font:700 13px Nunito,sans-serif;color:var(--mut)}
+.rjump{display:flex;flex-wrap:wrap;gap:8px}.rjump a{background:#fff;border:1px solid var(--line);border-radius:999px;padding:7px 14px;font:700 13.5px Nunito,sans-serif;color:var(--ink);text-decoration:none;transition:.2s}.rjump a:hover{border-color:var(--red);color:var(--redt)}.rjump small{background:var(--red);color:#fff;border-radius:999px;padding:0 7px;margin-left:4px;font-size:11px}
+.rgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.rcard{background:#fff;border:1px solid var(--line);border-radius:18px;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 6px 22px rgba(0,0,0,.04);transition:transform .3s,box-shadow .3s;scroll-margin-top:110px}.rcard:hover{transform:translateY(-4px);box-shadow:0 16px 36px rgba(0,0,0,.09)}
+.rpic{position:relative;display:block;aspect-ratio:4/3;background:#e9e4de;overflow:hidden}.rpic img{width:100%;height:100%;object-fit:cover;transition:transform .6s}.rcard:hover .rpic img{transform:scale(1.05)}
+.rpic.noimg{background:radial-gradient(circle at 30% 20%,#3a3a3d,#1d1d1f);display:grid;place-items:center}.rpic.noimg span{color:#fff;font:900 30px Nunito,sans-serif;letter-spacing:-.5px;opacity:.9}
+.rpic em{position:absolute;left:14px;top:14px;background:rgba(255,255,255,.95);color:var(--ink);font:800 12.5px Nunito,sans-serif;font-style:normal;border-radius:999px;padding:5px 12px;box-shadow:0 4px 12px rgba(0,0,0,.12)}
+.rbody{padding:18px 20px 20px;display:flex;flex-direction:column;flex:1}.rbody h2{font-size:24px;margin:0 0 6px}.rbody h2 a{color:var(--ink);text-decoration:none}.rbody>p{color:var(--mut);font-size:15px;line-height:1.55;margin:0 0 12px}
+.rtags{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 14px!important}.rtags span{background:#f6f1ec;color:#6b5f55;border-radius:999px;padding:4px 11px;font:700 12px Nunito,sans-serif}
+.rfoot{margin-top:auto;display:flex;align-items:center;justify-content:space-between;gap:10px;border-top:1px solid var(--line);padding-top:14px}.rfrom small{display:block;font:700 11.5px Nunito,sans-serif;color:var(--mut);text-transform:uppercase;letter-spacing:.06em}.rfrom .pz{font:900 18px Nunito,sans-serif;color:var(--ink)}.btn.sm{padding:9px 16px;font-size:13.5px}
+.rcmp .tscroll{overflow-x:auto;border:1px solid var(--line);border-radius:18px;background:#fff}.rcmp table{width:100%;border-collapse:collapse;font-size:14.5px}.rcmp th{background:#1d1d1f;color:#fff;text-align:left;padding:12px 16px;font-weight:800}.rcmp td{padding:12px 16px;border-top:1px solid var(--line);color:#4a4a4f}.rcmp td:first-child a{font-weight:800;color:var(--ink)}.rcmp tr:nth-child(even) td{background:#faf8f5}
+.rhow{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}.rhow div{background:#fff;border:1px solid var(--line);border-radius:18px;padding:20px}.rhow b{color:var(--red);font:900 22px Nunito,sans-serif}.rhow h3{margin:6px 0;font-size:17px}.rhow p{color:var(--mut);font-size:14.5px;margin:0}
+.rcta{background:#1d1d1f;color:#fff;border-radius:22px;padding:34px 36px;display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap}.rcta h2{color:#fff;margin:0 0 6px}.rcta p{color:#cfcfd3;margin:0;max-width:560px}.rcta .btn.ghost{color:#fff;border-color:rgba(255,255,255,.5)}
+@media (max-width:1000px){.rgrid{grid-template-columns:1fr 1fr}.rhow{grid-template-columns:1fr 1fr}}
+@media (max-width:640px){.rgrid,.rhow{grid-template-columns:1fr}.rstat div{flex:1;min-width:0;padding:10px 12px}.rcta{padding:26px 22px}.rcmp td:nth-child(2),.rcmp th:nth-child(2){display:none}}
+/* 10. tur: slider sürükleme + içerik koruma */
+.hero.slider{touch-action:pan-y;cursor:grab;user-select:none}.hero.slider.drag{cursor:grabbing}
+.sarr{position:absolute;top:50%;transform:translateY(-50%);z-index:5;width:46px;height:46px;border-radius:50%;border:0;background:rgba(255,255,255,.18);backdrop-filter:blur(6px);color:#fff;font-size:30px;line-height:1;cursor:pointer;transition:background .2s}.sarr:hover{background:rgba(255,255,255,.35)}.sarr.prev{left:18px}.sarr.next{right:18px}
+@media (max-width:700px){.sarr{display:none}}
+body{-webkit-user-select:none;user-select:none;-webkit-touch-callout:none}input,textarea,select,[contenteditable],.form{-webkit-user-select:text;user-select:text}
+img{-webkit-user-drag:none;user-drag:none}

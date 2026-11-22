@@ -45,3 +45,19 @@ jobs:
           exclude: |
             **/.git*
             **/.git*/**
+      - name: IndexNow (Bing, Yandex, Seznam, Naver) bildir
+        if: env.FTP_SERVER != ''
+        continue-on-error: true
+        run: |
+          python3 - <<'PY'
+          import json, re, urllib.request
+          xml = open('signature/dist/sitemap.xml', encoding='utf8').read()
+          urls = sorted(set(re.findall(r'<loc>([^<]+)</loc>', xml)))
+          body = json.dumps({'host': 'alicanercan.com', 'key': 'a28aa418ac5a0e4af006534991efe72d', 'keyLocation': 'https://alicanercan.com/a28aa418ac5a0e4af006534991efe72d.txt', 'urlList': urls}).encode()
+          for ep in ('https://api.indexnow.org/indexnow', 'https://yandex.com/indexnow'):
+              try:
+                  r = urllib.request.urlopen(urllib.request.Request(ep, data=body, headers={'Content-Type': 'application/json; charset=utf-8'}), timeout=20)
+                  print(ep, r.status, len(urls), 'URL')
+              except Exception as e:
+                  print(ep, 'hata:', e)
+          PY

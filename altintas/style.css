@@ -268,3 +268,11 @@ a{color:inherit}img{max-width:100%;display:block}svg{width:20px;height:20px;flex
 .hsearch2 .sgo svg{width:17px;height:17px;fill:none;stroke:#fff;stroke-width:2.4;stroke-linecap:round}
 @media(max-width:700px){.hsearch2 .search{flex-wrap:wrap;border-radius:20px}.hsearch2 .tabrow{width:100%}.hsearch2 .tabrow button{flex:1;padding:8px 6px;font-size:12.5px}.hsearch2 .sgo span{display:none}.hsearch2 .sgo{padding:11px 13px}}
 .intentsec{padding-top:28px;padding-bottom:6px}
+/* ACC ALTINTAŞ logosu (ACC VILLAS ile aynı yapı) */
+.acclogo,.wm.acclogo{display:inline-flex;flex-direction:row;align-items:flex-end;gap:2px;text-decoration:none;flex-shrink:0}
+.acclogo img{height:40px;width:auto;display:block}
+.acclogo .lg-v{font:400 45px/40px Anton,Impact,sans-serif;height:40px;color:var(--ink);letter-spacing:.005em;display:block;white-space:nowrap}
+.flogo{margin:0 0 14px}.flogo img{height:44px}.flogo .lg-v{font-size:50px;line-height:44px;height:44px;color:#fff}
+@media(max-width:1340px) and (min-width:901px){.acclogo img{height:34px}.acclogo .lg-v{font-size:38px;line-height:34px;height:34px}}
+@media(max-width:900px){.acclogo img{height:32px}.acclogo .lg-v{font-size:36px;line-height:32px;height:32px}}
+@media(max-width:380px){.acclogo img{height:28px}.acclogo .lg-v{font-size:31px;line-height:28px;height:28px}}

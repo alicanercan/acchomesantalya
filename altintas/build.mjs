@@ -309,14 +309,14 @@ const navKeys = ['sale', 'rent', 'projects', 'guide', 'news', 'sell', 'contact']
 function header(lang, alt, cur) {
   const t = T[lang]; const lsw = LANGS.map((l) => `<a href="${alt[l]}"${l === lang ? ' class="on" aria-current="true"' : ''} hreflang="${l}">${l.toUpperCase()}</a>`).join('');
   return `<div class="tbar"><div class="wrap tbi"><a href="tel:${PHONE.raw}">${ICO.ph}${PHONE.text}</a><a href="https://wa.me/${PHONE.wa}" target="_blank" rel="noopener">${ICO.wa}WhatsApp</a><a class="tig" href="${IG}" target="_blank" rel="noopener">${ICO.ig}@acc.altintas.realestate</a></div></div>
-<header class="top"><div class="wrap hb"><a class="wm" href="${url(lang, 'home')}"><span class="wm1">${t.brand.toLocaleUpperCase(lang === 'tr' ? 'tr' : 'en')}</span><span class="wm2">${t.by}</span></a>
+<header class="top"><div class="wrap hb"><a class="wm acclogo" href="${url(lang, 'home')}" aria-label="ACC ALTINTAŞ"><img src="/acc-kirmizi.svg" alt="ACC" width="57" height="40"><span class="lg-v">ALTINTAŞ</span></a>
 <nav class="nav" aria-label="Menu">${navKeys.map((k) => `<a href="${url(lang, k)}"${cur === k ? ' aria-current="page"' : ''}>${t.nav[k]}</a>`).join('')}</nav>
 <div class="hr"><span class="lsw">${lsw}</span><a class="btn sm" href="https://wa.me/${PHONE.wa}" target="_blank" rel="noopener">${ICO.wa} WhatsApp</a><button class="burger" aria-label="Menu" aria-expanded="false"><i></i><i></i><i></i></button></div></div>
 <div class="mpanel">${navKeys.map((k) => `<a href="${url(lang, k)}">${t.nav[k]}</a>`).join('')}<span class="lsw">${lsw}</span></div></header>`;
 }
 function footer(lang) {
   const t = T[lang];
-  return `<footer class="ft"><div class="wrap fg"><div><p class="wm1 big">${t.brand.toLocaleUpperCase(lang === 'tr' ? 'tr' : 'en')}</p><p class="muted">${t.foot}</p></div>
+  return `<footer class="ft"><div class="wrap fg"><div><a class="acclogo flogo" href="${url(lang, 'home')}" aria-label="ACC ALTINTAŞ"><img src="/acc-kirmizi.svg" alt="ACC" width="62" height="44"><span class="lg-v">ALTINTAŞ</span></a><p class="muted">${t.foot}</p></div>
 <div><p class="fh">${t.brand}</p>${navKeys.map((k) => `<a href="${url(lang, k)}">${t.nav[k]}</a>`).join('')}<a href="${url(lang, 'ermenek')}">${t.nav.ermenek}</a><a href="${url(lang, 'kemeragzi')}">${t.nav.kemeragzi}</a></div>
 <div><p class="fh">${t.other}</p><a href="${MAIN}${lang === 'tr' ? '/' : `/${lang}/`}" target="_blank" rel="noopener">ACC HOMES</a><a href="${VILLAS}${lang === 'tr' ? '/' : `/${lang}/`}" target="_blank" rel="noopener">ACC VILLAS</a><a href="https://alicanercan.com${lang === 'tr' ? '/' : `/${lang}/`}" target="_blank" rel="noopener">Ali Caner Can</a><a href="${t.guideUrl}" target="_blank" rel="noopener">${t.guide}</a></div>
 <div><p class="fh">${t.nav.contact}</p><a href="tel:${PHONE.raw}">${PHONE.text}</a><a href="https://wa.me/${PHONE.wa}" target="_blank" rel="noopener">WhatsApp</a><a href="mailto:${MAIL}">${MAIL}</a><a href="${IG}" target="_blank" rel="noopener">Instagram</a></div></div>

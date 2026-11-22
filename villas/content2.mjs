@@ -169,3 +169,9 @@ export const KVKK_HTML = {
 <h2>Your rights</h2><p>You may exercise your rights under Article 11 of KVKK by writing to info@acchomesantalya.com or to our office address. We respond free of charge within 30 days.</p>`,
 };
 KVKK_HTML.ru = KVKK_HTML.en;
+
+// Kurucu sayfası: sosyal hesaplar (ikon anahtarı, ad, kullanıcı adı, link)
+export const SOCIAL = {
+  person: [['ig', 'Instagram', '@alicanercan.therealtor', 'https://www.instagram.com/alicanercan.therealtor/'], ['in', 'LinkedIn', 'Ali Caner Can', 'https://www.linkedin.com/in/alicanercantherealtor/'], ['yt', 'YouTube', '@alicanercan.therealtor', 'https://www.youtube.com/@alicanercan.therealtor'], ['web', 'acchomesantalya.com', 'Ali Caner Can · Broker', `${MAIN}/ali-caner-can/`]],
+  brand: [['web', 'ACC HOMES', 'acchomesantalya.com', `${MAIN}/`], ['ig', 'Instagram', '@acchomesantalya', 'https://www.instagram.com/acchomesantalya/'], ['in', 'LinkedIn', 'ACC HOMES International Real Estate', 'https://www.linkedin.com/company/80229227/'], ['ig', 'Instagram', '@acc.villas', 'https://www.instagram.com/acc.villas/'], ['ig', 'Instagram', '@antalleconcepthouses', 'https://www.instagram.com/antalleconcepthouses/'], ['g', 'Google', 'ACC HOMES · 4,9 ★', GOOGLE.url]],
+};

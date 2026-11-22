@@ -129,6 +129,9 @@ const SALE = AREA.filter((l) => l.tip === 'Satılık');
 const RENT = AREA.filter((l) => l.tip === 'Kiralık');
 for (const L of LAND) L.list = AREA.filter(L.f);
 const LIVE = LAND.filter((L) => L.list.length || L.k === 'l_yab');
+let RATES = { USD: 0, EUR: 0 };
+try { const xml = await (await fetch('https://www.tcmb.gov.tr/kurlar/today.xml', { signal: AbortSignal.timeout(15000) })).text(); const g = (c) => Number((xml.match(new RegExp(`CurrencyCode="${c}"[\\s\\S]*?<ForexSelling>([\\d.]+)<`)) || [])[1] || 0); RATES = { USD: g('USD'), EUR: g('EUR') }; } catch (e) { console.warn('TCMB kuru alınamadı:', e.message); }
+const DEF_CUR = { tr: 'TRY', en: 'USD', ru: 'USD' };
 const fmtTL = (n) => `${Math.round(n).toLocaleString('tr-TR')} TL`;
 const TODAY = (lang) => new Date().toLocaleDateString(lang === 'tr' ? 'tr-TR' : lang === 'ru' ? 'ru-RU' : 'en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
 console.log(`Altıntaş/Aksu: ${AREA.length} ilan (${SALE.length} satılık, ${RENT.length} kiralık)`);
@@ -239,7 +242,10 @@ const KW = {
 };
 
 // ---------- parçalar ----------
-const fmt = (l, lang) => (l.fiyat ? `${Number(l.fiyat).toLocaleString(lang === 'tr' ? 'tr-TR' : lang === 'ru' ? 'ru-RU' : 'en-US')} ${l.para}${l.tip === 'Kiralık' ? (lang === 'tr' ? '/ay' : lang === 'ru' ? '/мес' : '/mo') : ''}` : (lang === 'tr' ? 'Fiyat için arayın' : lang === 'ru' ? 'Цена по запросу' : 'Price on request'));
+const CUR = { TL: 'TRY', TRY: 'TRY', USD: 'USD', EUR: 'EUR', '$': 'USD', '€': 'EUR' };
+const fmt = (l, lang) => { const per = l.tip === 'Kiralık' ? (lang === 'tr' ? '/ay' : lang === 'ru' ? '/мес' : '/mo') : '';
+  if (!l.fiyat) return lang === 'tr' ? 'Fiyat için arayın' : lang === 'ru' ? 'Цена по запросу' : 'Price on request';
+  return `<span class="pz" data-p="${l.fiyat}" data-c="${CUR[l.para] || 'TRY'}">${Number(l.fiyat).toLocaleString(lang === 'tr' ? 'tr-TR' : lang === 'ru' ? 'ru-RU' : 'en-US')} ${l.para}</span>${per}`; };
 const card = (l, lang) => `<a class="lc rv" href="${esc(l.url[lang])}"${l.own ? '' : ' target="_blank" rel="noopener"'} data-t="${l.tip === 'Satılık' ? 's' : l.tip === 'Kiralık' ? 'k' : 'd'}" data-a="${esc(l.altTip)}" data-m="${esc(l.mahalle)}" data-o="${parseInt(l.oda) || 0}" data-p="${l.para === 'TL' ? l.fiyat || 0 : 0}" data-b="${l.brut || 0}" data-f="${l.own ? Object.entries(featOf(l)).filter(([, x]) => x).map(([k]) => k).join(' ') : ''}"><span class="lci">${l.foto ? `<img src="${esc(l.foto)}" alt="${esc(l.baslik[lang])}" loading="lazy" referrerpolicy="no-referrer" width="640" height="480">` : ''}<b>${fmt(l, lang)}</b>${l.kapora ? `<i class="kp">${lang === 'tr' ? 'Kaporalı' : lang === 'ru' ? 'Задаток внесён' : 'Under offer'}</i>` : ''}<em>${esc(l.tip === 'Satılık' ? T[lang].nav.sale : l.tip === 'Kiralık' ? T[lang].nav.rent : l.tip)}</em></span><span class="lcb"><small>${esc([l.mahalle, l.ilce].filter(Boolean).join(' · '))}${l.proje && l.proje !== 'SİTE' ? ` · ${esc(l.proje)}` : ''}</small><h3>${esc(l.baslik[lang])}</h3><span class="lcm">${[l.oda, l.brut ? `${l.brut} m²` : ''].filter(Boolean).join(' · ')}</span></span></a>`;
 const grid = (list, lang, chips = true) => {
   const t = T[lang]; if (!list.length) return `<p class="none">${t.none}</p>`;
@@ -320,7 +326,7 @@ ${ld.map((x) => `<script type="application/ld+json">${JSON.stringify(x).replace(
 const navKeys = ['sale', 'rent', 'projects', 'guide', 'news', 'sell', 'contact'];
 function header(lang, alt, cur) {
   const t = T[lang]; const lsw = LANGS.map((l) => `<a href="${alt[l]}"${l === lang ? ' class="on" aria-current="true"' : ''} hreflang="${l}">${l.toUpperCase()}</a>`).join('');
-  return `<div class="tbar"><div class="wrap tbi"><a class="tad" href="${G.url}" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s7-6.2 7-12a7 7 0 1 0-14 0c0 5.8 7 12 7 12z"/><circle cx="12" cy="10" r="2.6"/></svg>ACC HOMES Altıntaş · Kardeş Kentler Cd. No:51, Aksu</a><span class="tr8"><a class="tph" href="tel:${PHONE.raw}">${ICO.ph}${PHONE.text}</a><a class="twa" href="https://wa.me/${PHONE.wa}" target="_blank" rel="noopener">${ICO.wa}WhatsApp</a><a class="tml" href="mailto:${MAIL}">${MAIL}</a><span class="lsw">${lsw}</span><a class="tig" href="${IG}" target="_blank" rel="noopener">${ICO.ig}@acc.altintas.realestate</a></span></div></div>
+  return `<div class="tbar"><div class="wrap tbi"><a class="tad" href="${G.url}" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s7-6.2 7-12a7 7 0 1 0-14 0c0 5.8 7 12 7 12z"/><circle cx="12" cy="10" r="2.6"/></svg>ACC HOMES Altıntaş · Kardeş Kentler Cd. No:51, Aksu</a><span class="tr8"><a class="tph" href="tel:${PHONE.raw}">${ICO.ph}${PHONE.text}</a><a class="twa" href="https://wa.me/${PHONE.wa}" target="_blank" rel="noopener">${ICO.wa}WhatsApp</a><a class="tml" href="mailto:${MAIL}">${MAIL}</a><select class="cur" aria-label="Currency"><option value="TRY">₺ TRY</option><option value="USD">$ USD</option><option value="EUR">€ EUR</option></select><span class="lsw">${lsw}</span><a class="tig" href="${IG}" target="_blank" rel="noopener">${ICO.ig}@acc.altintas.realestate</a></span></div></div>
 <header class="top"><div class="wrap hb"><a class="wm acclogo" href="${url(lang, 'home')}" aria-label="ACC ALTINTAŞ"><img src="/acc-kirmizi.svg" alt="ACC" width="57" height="40"><span class="lg-v">ALTINTAŞ</span></a>
 <nav class="nav" aria-label="Menu">${navKeys.map((k) => `<a href="${url(lang, k)}"${cur === k ? ' aria-current="page"' : ''}>${t.nav[k]}</a>`).join('')}</nav>
 <div class="hr"><a class="btn hcta" href="${url(lang, 'sell')}#form">${t.freeExp}</a><button class="burger" aria-label="Menu" aria-expanded="false"><i></i><i></i><i></i></button></div></div>
@@ -337,6 +343,9 @@ function footer(lang) {
 <script>(()=>{const b=document.querySelector('.burger'),p=document.querySelector('.mpanel');b&&b.addEventListener('click',()=>{const o=p.classList.toggle('open');b.setAttribute('aria-expanded',o)});
 document.querySelectorAll('.gf').forEach(g=>{const bs=[...g.querySelectorAll('button')],cs=[...g.nextElementSibling.querySelectorAll('.lc')];bs.forEach(x=>x.onclick=()=>{bs.forEach(y=>y.classList.toggle('on',y===x));cs.forEach(c=>c.hidden=!(x.dataset.f==='*'||c.dataset.a===x.dataset.f))})});
 if(/[?&]ok=1/.test(location.search))document.querySelectorAll('.okmsg').forEach(m=>{m.hidden=false;m.scrollIntoView({block:'center'})});
+(()=>{const R=${JSON.stringify({ TRY: 1, USD: RATES.USD, EUR: RATES.EUR })},S={TRY:'₺',USD:'$',EUR:'€'},sel=document.querySelector('.cur');if(!sel)return;if(!R.USD){sel.style.display='none';return}let cur='${DEF_CUR[lang]}';try{cur=localStorage.getItem('cur')||cur}catch(e){}sel.value=cur;const nf=new Intl.NumberFormat('${lang === 'tr' ? 'tr-TR' : lang === 'ru' ? 'ru-RU' : 'en-US'}',{maximumFractionDigits:0});
+const go=()=>document.querySelectorAll('.pz').forEach(e=>{if(!e.dataset.o)e.dataset.o=e.textContent;const p=+e.dataset.p,c=e.dataset.c;if(!R[c]||c===cur){e.textContent=e.dataset.o;e.title='';return}let v=p*R[c]/R[cur];v=v>1e5?Math.round(v/1000)*1000:Math.round(v);e.textContent='≈ '+S[cur]+' '+nf.format(v);e.title='${lang === 'tr' ? 'TCMB kuruyla yaklaşık' : lang === 'ru' ? 'Приблизительно по курсу ЦБ Турции' : 'Approximate, CBRT rate'}'});
+sel.onchange=()=>{cur=sel.value;try{localStorage.setItem('cur',cur)}catch(e){}go()};go()})();
 const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{rootMargin:'0px 0px -40px'});document.querySelectorAll('.rv').forEach(x=>io.observe(x))})();</script>`;
 }
 function write(rel, html) { const f = path.join(OUT, rel, 'index.html'); fs.mkdirSync(path.dirname(f), { recursive: true }); fs.writeFileSync(f, html.replace(/<img (?!referrerpolicy)/g, '<img referrerpolicy="no-referrer" ')); }

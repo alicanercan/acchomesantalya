@@ -1,4 +1,5 @@
 import { enSpan } from '../en-span.mjs';
+import { callPop } from '../callpop.mjs';
 // alicanercan.com — Ali Caner Can kişisel "signature" sitesi (TR / EN / RU)
 // ACC HOMES ve ACC VILLAS ile aynı altyapı: statik HTML, Turhost'a FTP ile yüklenir.
 // Çalıştır: node signature/build.mjs  →  signature/dist
@@ -438,7 +439,7 @@ function footer(lang) {
 }
 function page({ lang, key, title, desc, ld = [], body, image, type }) {
   const alt = alts(key); const canon = url(lang, key);
-  let html = `<body>${header(lang, alt, key)}<main>${body}</main>${footer(lang)}</body></html>`;
+  let html = `<body>${header(lang, alt, key)}<main>${body}</main>${footer(lang)}${callPop({ lang, site: 'alicanercan.com', kvkk: ACC.kvkk[lang], next: url(lang, 'contact') + '?ok=1', personal: true })}</body></html>`;
   write(canon.slice(1), enSpan(`${head({ lang, title, desc, canon, alt, ld, image, type, kw: `${PKW[key][lang]}, ${KW[lang]}` })}${html}`));
   sitemap.push([canon, alt]);
 }

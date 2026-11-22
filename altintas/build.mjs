@@ -7,6 +7,7 @@ import { fileURLToPath } from 'node:url';
 import { enSpan } from '../en-span.mjs';
 import { NEWS, GUIDE, PROJELER, FIRMALAR } from './content.mjs';
 import { LAND, HOMESEO, POP, SEOFAQ_T, dataFaq } from './seo-pages.mjs';
+import { callPop, newsBand } from '../callpop.mjs';
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.join(HERE, '..');
@@ -334,12 +335,12 @@ function header(lang, alt, cur) {
 }
 function footer(lang) {
   const t = T[lang];
-  return `${popBand(lang)}<footer class="ft"><div class="wrap fg"><div><a class="acclogo flogo" href="${url(lang, 'home')}" aria-label="ACC ALTINTAŞ"><img src="/acc-kirmizi.svg" alt="ACC" width="62" height="44"><span class="lg-v">ALTINTAŞ</span></a><p class="muted">${t.foot}</p></div>
+  return `${newsBand({ lang, site: 'altintassatilikdaire.com', kvkk: KVKK[lang], next: url(lang, 'home') + '?bulten=1' })}${popBand(lang)}<footer class="ft"><div class="wrap fg"><div><a class="acclogo flogo" href="${url(lang, 'home')}" aria-label="ACC ALTINTAŞ"><img src="/acc-kirmizi.svg" alt="ACC" width="62" height="44"><span class="lg-v">ALTINTAŞ</span></a><p class="muted">${t.foot}</p></div>
 <div><p class="fh">${t.brand}</p>${navKeys.map((k) => `<a href="${url(lang, k)}">${t.nav[k]}</a>`).join('')}<a href="${url(lang, 'ermenek')}">${t.nav.ermenek}</a><a href="${url(lang, 'kemeragzi')}">${t.nav.kemeragzi}</a></div>
 <div><p class="fh">${t.other}</p><a href="${MAIN}${lang === 'tr' ? '/' : `/${lang}/`}" target="_blank" rel="noopener">ACC HOMES</a><a href="${VILLAS}${lang === 'tr' ? '/' : `/${lang}/`}" target="_blank" rel="noopener">ACC VILLAS</a><a href="https://alicanercan.com${lang === 'tr' ? '/' : `/${lang}/`}" target="_blank" rel="noopener">Ali Caner Can</a><a href="${t.guideUrl}" target="_blank" rel="noopener">${t.guide}</a></div>
 <div><p class="fh">${t.nav.contact}</p><a href="tel:${PHONE.raw}">${PHONE.text}</a><a href="https://wa.me/${PHONE.wa}" target="_blank" rel="noopener">WhatsApp</a><a href="mailto:${MAIL}">${MAIL}</a><a href="${IG}" target="_blank" rel="noopener">Instagram</a></div></div>
 <div class="wrap fb"><span>© ${new Date().getFullYear()} ACC HOMES International Real Estate</span><a href="${KVKK[lang]}" target="_blank" rel="noopener">${t.privacy}</a></div></footer>
-<div class="dock"><a class="d-call" href="tel:${PHONE.raw}">${ICO.ph} ${t.call}</a><a class="d-wa" href="https://wa.me/${PHONE.wa}" target="_blank" rel="noopener">${ICO.wa} WhatsApp</a></div>
+${callPop({ lang, site: 'altintassatilikdaire.com', kvkk: KVKK[lang], next: url(lang, 'contact') + '?ok=1' })}<div class="dock"><a class="d-call" href="tel:${PHONE.raw}">${ICO.ph} ${t.call}</a><a class="d-wa" href="https://wa.me/${PHONE.wa}" target="_blank" rel="noopener">${ICO.wa} WhatsApp</a></div>
 <script>(()=>{const b=document.querySelector('.burger'),p=document.querySelector('.mpanel');b&&b.addEventListener('click',()=>{const o=p.classList.toggle('open');b.setAttribute('aria-expanded',o)});
 document.querySelectorAll('.gf').forEach(g=>{const bs=[...g.querySelectorAll('button')],cs=[...g.nextElementSibling.querySelectorAll('.lc')];bs.forEach(x=>x.onclick=()=>{bs.forEach(y=>y.classList.toggle('on',y===x));cs.forEach(c=>c.hidden=!(x.dataset.f==='*'||c.dataset.a===x.dataset.f))})});
 if(/[?&]ok=1/.test(location.search))document.querySelectorAll('.okmsg').forEach(m=>{m.hidden=false;m.scrollIntoView({block:'center'})});

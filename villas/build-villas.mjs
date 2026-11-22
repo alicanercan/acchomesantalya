@@ -1,4 +1,5 @@
 import { enSpan } from '../en-span.mjs';
+import { callPop } from '../callpop.mjs';
 // ACC VILLAS (accvillas.com) — ACC HOMES'un Antalya villa sitesi.
 // Veri: ACC HOMES Panel (site_ilanlari) → yalnız Villa / Müstakil Ev ilanları. Metinler: data/ilan-seo.json (varsa).
 // Çıktı: villas/dist  →  Turhost (accvillas.com) FTP ile yüklenir (.github/workflows/villas.yml).
@@ -339,7 +340,7 @@ ${(() => { const n = {"tr": ["ACC NEWS bültenine abone olun", "Antalya gayrimen
 <div><p class="fh">${NAV3[lang].more}</p><p class="flinks"><a href="${url(lang, 'founder')}">${CEO.name}</a><a href="${url(lang, 'services')}">${NAV3[lang].services}</a><a href="${url(lang, 'marketing')}">${MKT[lang].nav}</a><a href="${url(lang, 'openhouse')}">${x.oh.nav}</a><a href="${url(lang, 'projects')}">${navL(lang, 'projects')}</a></p></div>
 <div class="fcon"><p class="fh">${lang === 'tr' ? 'İletişim' : lang === 'ru' ? 'Контакты' : 'Contact'}</p><p>ACC Plaza<br>Portakal Çiçeği Blv. No:36/B<br>Yeşilbahçe, Muratpaşa / Antalya</p><p><a class="fph" href="tel:${PHONE.raw}">${PHONE.text}</a></p><p><a href="mailto:info@acchomesantalya.com">info@acchomesantalya.com</a></p><p class="fhr">${lang === 'tr' ? 'Pzt–Cmt 08:30–19:30' : lang === 'ru' ? 'Пн–Сб 08:30–19:30' : 'Mon–Sat 08:30–19:30'}</p><p class="fbr"><b>${lang === 'tr' ? 'Döşemealtı şubesi' : lang === 'ru' ? 'Филиал Дёшемеалты' : 'Döşemealtı branch'}</b><br>Altınkale Mah. 5203 Sokak No:10<br>Döşemealtı / Antalya</p><p><a href="${url(lang, 'contact')}">${CONTACT_UI[lang].dir} →</a></p></div></div></div>
 <div class="fbot"><div class="wrap fboti"><span>© ${new Date().getFullYear()} ACC VILLAS · by ACC HOMES International Real Estate</span><span><a href="${KVKK[lang]}">${t.form.kvkk}</a><a href="/sitemap.xml">Sitemap</a></span></div></div></footer>
-<div class="dock"><a class="d-call" href="tel:${PHONE.raw}">${x.call}</a><a class="d-wa" href="https://wa.me/${PHONE.wa}">WhatsApp</a>${offer ? `<button class="d-off" type="button" data-offer>${x.offer.btn}</button>` : ''}</div>
+${callPop({ lang, site: 'accvillas.com', kvkk: KVKK[lang], next: url(lang) + '?ok=1' })}<div class="dock"><a class="d-call" href="tel:${PHONE.raw}">${x.call}</a><a class="d-wa" href="https://wa.me/${PHONE.wa}">WhatsApp</a>${offer ? `<button class="d-off" type="button" data-offer>${x.offer.btn}</button>` : ''}</div>
 <script>
 if(/[?&]ok=1/.test(location.search))document.querySelector('.okmsg').hidden=false;
 (function(){var g=document.querySelector('.grid[data-filter]');if(!g)return;var R=${JSON.stringify({ TRY: 1, USD: RATES.USD, EUR: RATES.EUR })};var q=new URLSearchParams(location.search),st={r:[],c:[],b:0,m:0,pmin:0,pmax:0,sort:0};if(q.get('r'))st.r=[q.get('r')];if(q.get('c'))st.c=[q.get('c')];

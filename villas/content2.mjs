@@ -148,7 +148,7 @@ export const X = {
 
 export const ANTALLE_GAL = ['gece-havadan-1-etap', 'on-cephe-dag-manzarasi', 'dubleks-cephe-havuz', 'sonsuzluk-havuzu', 'tas-setli-bahce', 'ic-avlu-yuruyus-yolu', 'galeri-bosluklu-salon', 'havuza-acilan-salon', 'ada-mutfak', 'teras-dag-manzarasi', 'teras-daire-salon', 'havadan-dag-manzarasi'].map(AI);
 export const OH_GAL = ['satis-ofisi', 'karsilama', 'lounge', 'ikram'].map((f) => `${MAIN}/img/sosyal/antalle-open-house-2025-${f}.webp`);
-export const FOUNDER_LINKS = [['acchomesantalya.com · Ali Caner Can', `${MAIN}/ali-caner-can/`], ['Instagram', 'https://www.instagram.com/alicanercan.therealtor/'], ['LinkedIn', 'https://www.linkedin.com/in/alicanercantherealtor/'], ['YouTube', 'https://www.youtube.com/@alicanercan.therealtor']];
+export const FOUNDER_LINKS = [['alicanercan.com', 'https://alicanercan.com/'], ['acchomesantalya.com · Ali Caner Can', `${MAIN}/ali-caner-can/`], ['Instagram', 'https://www.instagram.com/alicanercan.therealtor/'], ['LinkedIn', 'https://www.linkedin.com/in/alicanercantherealtor/'], ['YouTube', 'https://www.youtube.com/@alicanercan.therealtor']];
 
 // KVKK (TR tam metin; EN/RU özet). Veri sorumlusu: ACC HOMES şahıs şirketi (Ali Caner Can).
 export const KVKK_HTML = {
@@ -172,6 +172,6 @@ KVKK_HTML.ru = KVKK_HTML.en;
 
 // Kurucu sayfası: sosyal hesaplar (ikon anahtarı, ad, kullanıcı adı, link)
 export const SOCIAL = {
-  person: [['ig', 'Instagram', '@alicanercan.therealtor', 'https://www.instagram.com/alicanercan.therealtor/'], ['in', 'LinkedIn', 'Ali Caner Can', 'https://www.linkedin.com/in/alicanercantherealtor/'], ['yt', 'YouTube', '@alicanercan.therealtor', 'https://www.youtube.com/@alicanercan.therealtor'], ['web', 'acchomesantalya.com', 'Ali Caner Can · Broker', `${MAIN}/ali-caner-can/`]],
+  person: [['web', 'alicanercan.com', 'Ali Caner Can', 'https://alicanercan.com/'], ['ig', 'Instagram', '@alicanercan.therealtor', 'https://www.instagram.com/alicanercan.therealtor/'], ['in', 'LinkedIn', 'Ali Caner Can', 'https://www.linkedin.com/in/alicanercantherealtor/'], ['yt', 'YouTube', '@alicanercan.therealtor', 'https://www.youtube.com/@alicanercan.therealtor'], ['web', 'acchomesantalya.com', 'Ali Caner Can · Broker', `${MAIN}/ali-caner-can/`]],
   brand: [['web', 'ACC HOMES', 'acchomesantalya.com', `${MAIN}/`], ['ig', 'Instagram', '@acchomesantalya', 'https://www.instagram.com/acchomesantalya/'], ['in', 'LinkedIn', 'ACC HOMES International Real Estate', 'https://www.linkedin.com/company/80229227/'], ['ig', 'Instagram', '@acc.villas', 'https://www.instagram.com/acc.villas/'], ['ig', 'Instagram', '@antalleconcepthouses', 'https://www.instagram.com/antalleconcepthouses/'], ['g', 'Google', 'ACC HOMES · 4,9 ★', GOOGLE.url]],
 };

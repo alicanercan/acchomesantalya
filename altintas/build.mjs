@@ -17,7 +17,9 @@ const PHONE = { raw: '+905498043843', wa: '905498043843', text: '+90 549 804 38 
 const MAIL = 'info@acchomesantalya.com';
 const IG = 'https://www.instagram.com/acc.altintas.realestate/';
 const SITE = JSON.parse(fs.readFileSync(path.join(ROOT, 'data/site.json'), 'utf8'));
-const G = { url: SITE.google.mapsUrl, rating: SITE.google.rating, count: SITE.google.reviews };
+const G = { url: 'https://maps.google.com/maps?cid=15609211507457388653', review: 'https://search.google.com/local/writereview?placeid=ChIJn7nvobuDwxQRbfDvNSoPn9g', rating: 4.9, count: 59 };
+const INTENT = { tr: [['sale', 'Altıntaş’ta daire almak istiyorum'], ['sell', 'Dairemi satmak istiyorum'], ['sell', 'Ücretsiz ekspertiz istiyorum']], en: [['sale', 'I want to buy in Altıntaş'], ['sell', 'I want to sell my apartment'], ['sell', 'I want a free valuation']], ru: [['sale', 'Хочу купить квартиру в Алтынташе'], ['sell', 'Хочу продать квартиру'], ['sell', 'Бесплатная оценка']] };
+const INTENT_ICO = ['<svg viewBox="0 0 24 24"><path d="M3 11 12 4l9 7v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></svg>', '<svg viewBox="0 0 24 24"><circle cx="8" cy="15" r="4"/><path d="m11 12 9-9m-3 3 3 3m-6 0 2 2"/></svg>', '<svg viewBox="0 0 24 24"><path d="M4 20V10m6 10V4m6 16v-7m4 7H2"/></svg>'];
 const REVIEWS = JSON.parse(fs.readFileSync(path.join(ROOT, 'data/reviews.json'), 'utf8'));
 const LANGS = ['tr', 'en', 'ru'];
 const BASE = { tr: '', en: '/en', ru: '/ru' };
@@ -72,7 +74,7 @@ const T = {
     nav: { ermenek: 'Ermenek', kemeragzi: 'Kemerağzı', sale: 'Satılık', rent: 'Kiralık', projects: 'Projeler', guide: 'Bölge rehberi', news: 'Haberler', sell: 'Evinizi satın', contact: 'İletişim' },
     homeTitle: 'Altıntaş Satılık Daire | Antalya Aksu Altıntaş Emlak · ACC HOMES', homeDesc: 'Antalya Aksu Altıntaş’ta satılık ve kiralık daireler, yetkili projeler ve bölge rehberi. Altıntaş satış ofisimiz ve ACC HOMES güvencesiyle.',
     h1: 'Altıntaş’ta satılık ve kiralık daireler', lead: 'Antalya’nın en hızlı büyüyen konut bölgesi Altıntaş’ta güncel ilanlar, yetkili projeler ve sahadan bilgi. Altıntaş satış ofisimiz ve ACC HOMES ekibiyle alımdan tapuya kadar yanınızdayız.',
-    ctaSale: 'Satılık ilanlar', ctaWa: 'WhatsApp ile sor', statSale: 'satılık ilan', statRent: 'kiralık ilan', statProj: 'yetkili proje', statG: 'Google yorumu (ACC HOMES)',
+    ctaSale: 'Satılık ilanlar', ctaWa: 'WhatsApp ile sor', statSale: 'satılık ilan', statRent: 'kiralık ilan', statProj: 'yetkili proje', statG: 'Google yorumu (ACC HOMES Altıntaş)',
     saleT: 'Altıntaş satılık daire ilanları', saleL: 'Altıntaş ve Aksu’daki satılık daire, villa ve arsa ilanlarımız. İlan detayları ACC HOMES sitesinde açılır.',
     rentT: 'Altıntaş kiralık daire ilanları', rentL: 'Altıntaş ve Aksu’da kiralık daireler; site içi, havuzlu, eşyalı ve eşyasız seçenekler.',
     all: 'Tümü', allOn: 'ACC HOMES’ta tüm Aksu ilanları', none: 'Şu an bu kategoride yayında ilan yok. Talebinizi bırakın, uygun ilan çıktığında ilk size haber verelim.',
@@ -101,7 +103,7 @@ const T = {
     nav: { ermenek: 'Ermenek', kemeragzi: 'Kemerağzı', sale: 'For sale', rent: 'For rent', projects: 'Projects', guide: 'Area guide', news: 'News', sell: 'Sell', contact: 'Contact' },
     homeTitle: 'Apartments for Sale in Altıntaş, Antalya | ACC HOMES', homeDesc: 'Apartments for sale and rent in Altıntaş, Aksu, Antalya: current listings, authorised projects and a local area guide from ACC HOMES.',
     h1: 'Apartments for sale and rent in Altıntaş', lead: 'Current listings, authorised projects and on-the-ground insight in Altıntaş, Antalya’s fastest-growing residential area. Our Altıntaş sales office and the ACC HOMES team are with you from viewing to title deed.',
-    ctaSale: 'Homes for sale', ctaWa: 'Ask on WhatsApp', statSale: 'for sale', statRent: 'for rent', statProj: 'authorised projects', statG: 'Google reviews (ACC HOMES)',
+    ctaSale: 'Homes for sale', ctaWa: 'Ask on WhatsApp', statSale: 'for sale', statRent: 'for rent', statProj: 'authorised projects', statG: 'Google reviews (ACC HOMES Altıntaş)',
     saleT: 'Altıntaş apartments for sale', saleL: 'Our apartments, villas and land for sale in Altıntaş and Aksu. Listing details open on the ACC HOMES website.',
     rentT: 'Altıntaş apartments for rent', rentL: 'Apartments for rent in Altıntaş and Aksu: gated, with pools, furnished and unfurnished.',
     all: 'All', allOn: 'All Aksu listings on ACC HOMES', none: 'No listings in this category right now. Leave your request and we will let you know first.',
@@ -130,7 +132,7 @@ const T = {
     nav: { ermenek: 'Эрменек', kemeragzi: 'Кемерагзы', sale: 'Продажа', rent: 'Аренда', projects: 'Проекты', guide: 'Гид', news: 'Новости', sell: 'Продать', contact: 'Контакты' },
     homeTitle: 'Квартиры в Алтынташе, Анталия: продажа и аренда | ACC HOMES', homeDesc: 'Квартиры на продажу и в аренду в Алтынташе (Аксу, Анталия): актуальные объекты, проекты и гид по району от ACC HOMES.',
     h1: 'Квартиры в Алтынташе: продажа и аренда', lead: 'Актуальные объекты, проекты и знание района Алтынташ — самого быстрорастущего жилого района Анталии. Наш офис продаж в Алтынташе и команда ACC HOMES сопровождают вас до оформления тапу.',
-    ctaSale: 'Объекты на продажу', ctaWa: 'Написать в WhatsApp', statSale: 'на продажу', statRent: 'в аренду', statProj: 'проекта', statG: 'отзывов Google (ACC HOMES)',
+    ctaSale: 'Объекты на продажу', ctaWa: 'Написать в WhatsApp', statSale: 'на продажу', statRent: 'в аренду', statProj: 'проекта', statG: 'отзывов Google (ACC HOMES Altıntaş)',
     saleT: 'Квартиры на продажу в Алтынташе', saleL: 'Квартиры, виллы и участки на продажу в Алтынташе и Аксу. Подробности объекта открываются на сайте ACC HOMES.',
     rentT: 'Аренда квартир в Алтынташе', rentL: 'Квартиры в аренду в Алтынташе и Аксу: в комплексах, с бассейном, с мебелью и без.',
     all: 'Все', allOn: 'Все объекты Аксу на ACC HOMES', none: 'Сейчас объектов в этой категории нет. Оставьте заявку — сообщим первыми.',
@@ -174,7 +176,7 @@ const grid = (list, lang, chips = true) => {
 const igrid = (list, lang, n) => `<div class="lg">${list.slice(0, n).map((l) => card(l, lang)).join('')}</div>`;
 function form(lang, topic = 0) {
   const f = T[lang].form;
-  return `<form class="form" method="POST" action="/form.php"><p class="okmsg" hidden>${f.ok}</p><input type="hidden" name="form-name" value="altintas-talep"><input type="hidden" name="_next" value="${url(lang, 'contact')}?ok=1"><input type="hidden" name="dil" value="${lang}"><input type="hidden" name="site" value="altintassatilikdaire.com"><p hidden><input name="bot-field" tabindex="-1" autocomplete="off"></p>
+  return `<form id="form" class="form" method="POST" action="/form.php"><p class="okmsg" hidden>${f.ok}</p><input type="hidden" name="form-name" value="altintas-talep"><input type="hidden" name="_next" value="${url(lang, 'contact')}?ok=1"><input type="hidden" name="dil" value="${lang}"><input type="hidden" name="site" value="altintassatilikdaire.com"><p hidden><input name="bot-field" tabindex="-1" autocomplete="off"></p>
 <input name="ad" placeholder="${f.name} *" required autocomplete="name"><input name="telefon" type="tel" placeholder="${f.phone} *" required autocomplete="tel"><input name="eposta" type="email" placeholder="${f.email}" autocomplete="email"><select name="konu" aria-label="${f.topic}">${f.topics.map((x, i) => `<option${i === topic ? ' selected' : ''}>${x}</option>`).join('')}</select><textarea name="mesaj" rows="4" placeholder="${f.msg}"></textarea>
 <label class="chk"><input type="checkbox" name="kvkk_onay" value="evet" required> <span>${f.consent} <a href="${KVKK[lang]}" target="_blank" rel="noopener">${f.kvkk}</a> *</span></label><button class="btn" type="submit">${f.send}</button></form>`;
 }
@@ -252,6 +254,7 @@ for (const lang of LANGS) {
 <section class="hero2" style="--bg:url('${MAIN}/img/primelara/hero.webp')"><div class="wrap"><p class="eyebrow">${t.by} · Aksu / Antalya</p><h1>${t.h1}</h1><p class="lead">${t.lead}</p><div class="ctas"><a class="btn" href="${url(lang, 'sale')}">${t.ctaSale} →</a><a class="btn ghost light" href="https://wa.me/${PHONE.wa}" target="_blank" rel="noopener">${ICO.wa} ${t.ctaWa}</a></div>
 <p class="qk"><a href="${url(lang, 'sale')}">${t.nav.sale} <b>${SALE.length}</b></a><a href="${url(lang, 'rent')}">${t.nav.rent} <b>${RENT.length}</b></a><a href="${url(lang, 'projects')}">${t.nav.projects} <b>${t.proj.length}</b></a><a href="${url(lang, 'sell')}">${t.freeExp} →</a><a href="${url(lang, 'news')}">${t.newsT} →</a></p></div></section>
 <section class="stats"><div class="wrap sg"><div class="st"><b>${SALE.length}</b><span>${t.statSale}</span></div><div class="st"><b>${RENT.length}</b><span>${t.statRent}</span></div><div class="st"><b>${t.proj.length}</b><span>${t.statProj}</span></div><div class="st"><b>${lang === 'en' ? G.rating : String(G.rating).replace('.', ',')} ★</b><span>${G.count} ${t.statG}</span></div></div></section>
+<section class="wrap intentsec"><div class="intents">${INTENT[lang].map(([k, l], n) => `<a class="intent" href="${url(lang, k)}${n === 2 ? '#form' : ''}"><i>${INTENT_ICO[n]}</i><span>${l}</span></a>`).join('')}</div></section>
 <section class="sec" id="ilanlar"><div class="wrap"><div class="sh"><div><h2>${t.saleT}</h2><p class="lead">${t.saleL}</p></div><a class="all" href="${url(lang, 'sale')}">${t.all} (${SALE.length}) →</a></div>${igrid(SALE, lang, 9)}</div></section>
 ${projBlock(lang)}
 <section class="sec"><div class="wrap"><div class="sh"><div><h2>${t.rentT}</h2><p class="lead">${t.rentL}</p></div><a class="all" href="${url(lang, 'rent')}">${t.all} (${RENT.length}) →</a></div>${igrid(RENT, lang, 6)}</div></section>

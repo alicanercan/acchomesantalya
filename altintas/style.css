@@ -220,3 +220,6 @@ a{color:inherit}img{max-width:100%;display:block}svg{width:20px;height:20px;flex
 @media(max-width:1060px) and (min-width:901px){.hr .lsw{display:none}}
 .wm{min-width:0;flex-shrink:1}@media(max-width:1060px){.wm1{white-space:normal;line-height:1.05}}@media(max-width:600px){.wm1{font-size:17px}}
 .dp h3{font-size:.98rem;margin:0}
+
+.intentsec{padding-top:28px}.intents{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.intent{display:flex;align-items:center;gap:12px;background:#fff;border:1px solid var(--line);border-radius:var(--radius,10px);padding:16px 18px;text-decoration:none;color:var(--ink);font:700 15px/1.25 Nunito,sans-serif;box-shadow:0 6px 22px rgba(0,0,0,.06);transition:transform .25s,box-shadow .25s}.intent:hover{transform:translateY(-3px);box-shadow:0 16px 36px rgba(0,0,0,.14)}.intent i{flex:none;width:38px;height:38px;border-radius:50%;background:#fdecee;display:grid;place-items:center}.intent svg{width:20px;height:20px;fill:none;stroke:var(--red);stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+@media (max-width:700px){.intents{gap:6px}.intent{flex-direction:column;justify-content:center;text-align:center;gap:6px;padding:10px 6px;font-size:12px;min-height:88px}.intent i{width:30px;height:30px}.intent svg{width:16px;height:16px}}

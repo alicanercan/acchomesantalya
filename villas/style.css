@@ -495,3 +495,13 @@ footer.ft2 .fbot a{color:#3d362f!important}footer.ft2 .fbot a:hover{color:var(--
 .sstep{list-style:none;counter-reset:s;padding:0;margin:18px 0 0;display:grid;gap:10px}.sstep li{counter-increment:s;display:flex;gap:12px;align-items:center;font-weight:700;color:var(--ink)}.sstep li::before{content:counter(s);width:30px;height:30px;flex:none;border-radius:50%;background:#1d1d1f;color:#fff;display:grid;place-items:center;font:900 13px Nunito,sans-serif}
 .sform{background:#fff;border-radius:18px;padding:22px;box-shadow:0 10px 30px rgba(0,0,0,.06)}.sform .form{margin:0}.sform select,.sform input,.sform textarea{border-radius:12px!important}
 @media (max-width:860px){.sfi{grid-template-columns:1fr;padding:22px}}
+/* iletişim */
+.cqk{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px}.cqk a{display:inline-flex;align-items:center;border-radius:999px;padding:9px 18px;font:800 14px Nunito,sans-serif;text-decoration:none}.cbtn{background:#fff;border:1px solid var(--line);color:var(--ink)}.cbtn:hover{border-color:var(--red);color:var(--redt)}
+.offs{display:grid;grid-template-columns:1fr 1fr;gap:24px}.off{background:#fff;border:1px solid var(--line);border-radius:20px;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 6px 22px rgba(0,0,0,.04)}
+.omap{aspect-ratio:16/9;background:#e9e4de}.omap iframe{width:100%;height:100%;border:0;display:block}
+.obody{padding:22px 24px 24px;display:flex;flex-direction:column;flex:1}.orole{color:#b08b5c;font:800 12.5px Nunito,sans-serif;text-transform:uppercase;letter-spacing:.08em;margin:0 0 6px}.obody h2{margin:0 0 8px;font-size:26px}.oadr{font-size:16px;color:var(--ink);margin:0 0 6px;line-height:1.55}.ohr{color:var(--mut);font-weight:700;margin:0 0 14px}.obody h3{font-size:15px;margin:4px 0 4px}.obody>p{color:#4a4a4f}.obody .acts{margin-top:auto;padding-top:10px}
+.cform{display:grid;grid-template-columns:1fr 1fr;gap:34px;align-items:start}.lic{color:var(--mut);font-size:13px}
+.fbr{margin-top:16px!important;color:rgba(255,255,255,.66)}.fbr b{color:#fff}
+@media (max-width:860px){.offs,.cform{grid-template-columns:1fr}}
+.tad{text-decoration:none}.tad:hover{color:var(--redt)}
+.tad{white-space:nowrap}@media (max-width:1500px){.tml{display:none!important}}

@@ -853,7 +853,7 @@ function pageGuideItem(g, lang) {
   const body = `<section class="wrap sec page"><nav class="crumbs"><a href="${home(lang)}">${T[lang].nav.home}</a> / <a href="${url(lang, 'buyersguide')}">${GUIDE_TITLE[lang]}</a></nav><div class="glayout"><article class="prose"><h1>${g.icon} ${esc(c.title)}</h1><p class="sub">${esc(c.short)}</p>${html}
 <div class="ctas"><a class="btn" href="${waLink(T[lang].waGeneral)}" target="_blank" rel="noopener">${s('askConsultant', lang)}</a></div></article>${guideSide(lang, g)}</div></section>`;
   const alt = { tr: gUrl('tr', g), en: gUrl('en', g) };
-  write(gUrl(lang, g) + 'index.html', layout({ lang, title: `${c.title} | ${GUIDE_TITLE[lang]} | ACC HOMES`, desc: c.short, canonical: gUrl(lang, g), alternates: alt, body }));
+  write(gUrl(lang, g) + 'index.html', layout({ lang, title: `${c.title} | ${GUIDE_TITLE[lang]} | ACC HOMES`, desc: c.desc || c.short, canonical: gUrl(lang, g), alternates: alt, body }));
 }
 function pageReviews(lang) {
   const t = T[lang];

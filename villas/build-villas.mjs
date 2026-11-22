@@ -14,6 +14,7 @@ import { BLOG_UI, BLOG_CATS, POST_CAT, POST_DATE, POSTS2, REG_LIFE } from './con
 import { SEOTXT } from './content6.mjs';
 import { SEG7, SITES_UI, SITES, SITES_OTHER, OFFICES, CONTACT_UI } from './content7.mjs';
 import { SEG8, GUIDE } from './content8.mjs';
+import { REGRET_POST } from './content9.mjs';
 import { SEG3, NAV3, STATS, REG_EXTRA, MANAVGAT, REG_FAQ, SVC, POSTS, JOURNAL } from './content3.mjs';
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.join(HERE, '..');
@@ -417,7 +418,7 @@ for (const lang of LANGS) {
 <section class="wrap sec intl"><p class="eyebrow dark">${INTL[lang].eyebrow}</p><h2>${INTL[lang].h}</h2><p class="lead">${INTL[lang].p}</p><div class="pgrid">${INTL[lang].items.map(([a, b]) => `<div><h3>${a}</h3><p>${b}</p></div>`).join('')}</div><p class="acts"><a class="btn ghost dark" href="${url(lang, 'founder')}">${CEO.name}</a><a class="btn ghost dark" href="${url(lang, 'services')}">${NAV3[lang].services}</a></p></section>
 <section class="band"><div class="wrap"><div class="sh"><h2>${X[lang].revT}</h2><a class="gbadge" href="${GOOGLE.url}" target="_blank" rel="noopener">${GSVG}<b>4,9</b><span class="stars">★★★★★</span><small>475 · Google</small></a></div><div class="revs">${REVIEWS.map((r) => `<figure class="rev"><p class="stars">★★★★★</p><blockquote>${esc(r[lang])}</blockquote><figcaption>${GSVG}${r.n} · ${r.when[lang]}</figcaption></figure>`).join('')}</div><p class="small">${X[lang].revNote}</p></div></section>
 <section class="wrap sec ig"><div class="igprof"><a class="igav" href="${IG.url}" target="_blank" rel="noopener"><img src="/acc-beyaz.svg" alt="ACC VILLAS"></a><div><p class="igh">${IGSVG}<b>${IG.handle}</b></p><p class="ign">ACC VILLAS · by ACC HOMES International Real Estate</p><p class="igb">${X[lang].igP}</p><a class="btn igbtn" href="${IG.url}" target="_blank" rel="noopener">${IGSVG}${X[lang].igBtn}</a></div></div><div class="iggrid">${ANTALLE_GAL.slice(0, 6).map((g) => `<a href="${IG.url}" target="_blank" rel="noopener"><img src="${g}" alt="${IG.handle}" loading="lazy"><i>${IGSVG}</i></a>`).join('')}</div></section>
-<section class="wrap sec"><div class="sh"><h2>${BLOG_UI[lang].h1}</h2><a href="${url(lang, 'journal')}">${BLOG_UI[lang].all} →</a></div><div class="posts">${[...POSTS2].slice(0, 3).map((p) => `<a class="post" href="${url(lang, 'journal', lang === 'tr' ? p.slug : lang === 'en' ? p.slugEn : p.slugRu)}"><p class="pmeta">${BLOG_CATS.find((c) => c.k === p.cat).n[lang]}</p><h3>${p[lang].t}</h3><p>${p[lang].d}</p><span class="more">${BLOG_UI[lang].read} →</span></a>`).join('')}</div></section>
+<section class="wrap sec"><div class="sh"><h2>${BLOG_UI[lang].h1}</h2><a href="${url(lang, 'journal')}">${BLOG_UI[lang].all} →</a></div><div class="posts">${[REGRET_POST, ...POSTS2].slice(0, 3).map((p) => `<a class="post" href="${url(lang, 'journal', lang === 'tr' ? p.slug : lang === 'en' ? p.slugEn : p.slugRu)}"><p class="pmeta">${BLOG_CATS.find((c) => c.k === p.cat).n[lang]}</p><h3>${p[lang].t}</h3><p>${p[lang].d}</p><span class="more">${BLOG_UI[lang].read} →</span></a>`).join('')}</div></section>
 <section class="wrap sec seohome"><div><h2>${SEOTXT[lang].homeH}</h2><p class="lead">${SEOTXT[lang].homeP}</p></div><a class="btn ghost dark" href="${url(lang, 'list')}#rehber">${SEOTXT[lang].homeBtn} →</a></section>
 <section class="wrap sec pop"><h2>${X[lang].popT}</h2><div class="popc">
 <div><p class="fh">${X[lang].popCols[0]}</p>${REG.filter((r) => regCount(r)).map((r) => `<a href="${url(lang, 'regions', r.k)}">${t.regionH(r.n[lang])}</a>`).join('')}<a href="${url(lang, 'regions')}">${t.nav.regions} →</a></div>
@@ -670,11 +671,11 @@ ${faq.length ? `<section class="band"><div class="wrap"><h2>${esc(SE.h || 'SSS')
 
   // blog ve yazılar (kategorili)
   { const B = BLOG_UI[lang]; const ps = (p) => (lang === 'tr' ? p.slug : lang === 'en' ? p.slugEn : p.slugRu);
-  const ALLP = [...POSTS2, ...POSTS.map((p) => ({ ...p, cat: POST_CAT[p.slug] || 'rehber', date: POST_DATE[p.slug] || '2026-11-21' }))];
+  const ALLP = [REGRET_POST, ...POSTS2, ...POSTS.map((p) => ({ ...p, cat: POST_CAT[p.slug] || 'rehber', date: POST_DATE[p.slug] || '2026-11-21' }))];
   const pimg = (p) => { for (const v of VILLAS) { const f = v.foto.find((x) => x.includes(p.img)); if (f) return f; } const a = ANTALLE_SHARED.photos.find((x) => x[0] === p.img); return a ? `${MAIN}/img/antalle/${a[0]}.webp` : VILLAS[ALLP.indexOf(p) % VILLAS.length]?.foto[0]; };
   const catOf = (k) => BLOG_CATS.find((c) => c.k === k);
   const curl = (c, l = lang) => url(l, 'journal') + 'kategori/' + c.slug[l] + '/';
-  const mins = (p) => Math.max(2, Math.round(p[lang].b.reduce((n, [h, x]) => n + (h + ' ' + x).split(/\s+/).length, 0) / 200));
+  const mins = (p) => Math.max(2, Math.round(p[lang].b.reduce((n, [h, x]) => n + (h + ' ' + x.replace(/<[^>]+>/g, ' ')).split(/\s+/).length, 0) / 200));
   const dt = (d) => new Date(d).toLocaleDateString(lang === 'tr' ? 'tr-TR' : lang === 'ru' ? 'ru-RU' : 'en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
   const pcard = (p) => { const c = catOf(p.cat); return `<a class="post" data-cat="${p.cat}" href="${url(lang, 'journal', ps(p))}"><div class="ph"><img src="${esc(pimg(p))}" alt="${esc(p[lang].t)}" loading="lazy"><span class="pcat">${c.n[lang]}</span></div><p class="pmeta">${dt(p.date)} · ${mins(p)} ${B.min}</p><h2>${p[lang].t}</h2><p>${p[lang].d}</p><span class="more">${B.read} →</span></a>`; };
   const chips = (act) => `<nav class="bcats"><a href="${url(lang, 'journal')}"${act ? '' : ' class="on"'}>${B.all}</a>${BLOG_CATS.filter((c) => ALLP.some((p) => p.cat === c.k)).map((c) => `<a href="${curl(c)}"${act === c.k ? ' class="on"' : ''}>${c.n[lang]} <small>${ALLP.filter((p) => p.cat === c.k).length}</small></a>`).join('')}</nav>`;
@@ -692,7 +693,7 @@ ${faq.length ? `<section class="band"><div class="wrap"><h2>${esc(SE.h || 'SSS')
     const rel = sorted.filter((x) => x !== p && x.cat === p.cat).concat(sorted.filter((x) => x !== p && x.cat !== p.cat)).slice(0, 3);
     write(alts[lang], layout({ lang, title: `${c.t} | ACC VILLAS`, desc: c.d, canon: alts[lang], alts, image: pimg(p), ld: [{ '@context': 'https://schema.org', '@type': 'BlogPosting', headline: c.t, description: c.d, image: pimg(p), articleSection: cat.n[lang], author: { '@type': 'Person', name: CEO.name, url: DOMAIN + url(lang, 'founder') }, publisher: { '@type': 'Organization', name: 'ACC VILLAS', url: DOMAIN, logo: { '@type': 'ImageObject', url: DOMAIN + '/acc-kirmizi.svg' } }, datePublished: p.date, dateModified: p.date, inLanguage: lang, mainEntityOfPage: DOMAIN + alts[lang] }, bcl([['ACC VILLAS', url(lang)], [B.h1, url(lang, 'journal')], [cat.n[lang], curl(cat)], [c.t, alts[lang]]])], body: `
 <article class="wrap sec art"><p class="crumb"><a href="${url(lang, 'journal')}">${B.h1}</a> · <a href="${curl(cat)}">${cat.n[lang]}</a></p><h1>${c.t}</h1><p class="lead">${c.d}</p><p class="byl">${CEO.name} · ${dt(p.date)} · ${mins(p)} ${B.min}</p><img class="cover" src="${esc(pimg(p))}" alt="${esc(c.t)}" fetchpriority="high">
-${c.b.map(([h, x]) => `<h2>${h}</h2><p>${x}</p>`).join('')}<div class="endbox"><p>${c.end}</p>${broker(lang, c.t)}</div></article>
+${c.b.map(([h, x]) => `<h2>${h}</h2>${x.startsWith('<') ? x : `<p>${x}</p>`}`).join('')}<div class="endbox"><p>${c.end}</p>${broker(lang, c.t)}</div></article>
 <section class="wrap sec"><div class="sh"><h2>${B.related}</h2><a href="${url(lang, 'journal')}">${B.h1} →</a></div><div class="posts">${rel.map(pcard).join('')}</div></section>
 <section class="wrap sec"><div class="sh"><h2>${t.featured}</h2><a href="${url(lang, 'list')}">${t.all} →</a></div><div class="grid">${VILLAS.filter((v) => !v.satildi && !v.kiralik).slice(0, 4).map((v) => card(v, lang)).join('')}</div></section>` }));
     sitemap.push(alts[lang]); } }

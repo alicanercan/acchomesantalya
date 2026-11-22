@@ -42,6 +42,45 @@ const sitemap = [];
 fs.rmSync(OUT, { recursive: true, force: true });
 fs.mkdirSync(OUT, { recursive: true });
 
+// ---------- ilan başlık/metin üretimi (bu siteye özgü; ana sitedeki metinle çakışmaz) ----------
+const ALT3 = { Daire: ['Daire', 'Apartment', 'Квартира'], Villa: ['Villa', 'Villa', 'Вилла'], 'Müstakil Ev': ['Müstakil Ev', 'Detached House', 'Частный дом'], Rezidans: ['Rezidans', 'Residence', 'Резиденция'], Dükkan: ['Dükkân', 'Shop', 'Магазин'], 'Dükkan & Mağaza': ['Dükkân', 'Shop', 'Магазин'], Arsa: ['Arsa', 'Land Plot', 'Земельный участок'], 'Çatı Dubleksi': ['Çatı Dubleksi', 'Penthouse Duplex', 'Пентхаус-дуплекс'], 'Bahçe Dubleksi': ['Bahçe Dubleksi', 'Garden Duplex', 'Дуплекс с садом'], Dubleks: ['Dubleks', 'Duplex', 'Дуплекс'], Ofis: ['Ofis', 'Office', 'Офис'], 'Konut İmarlı': ['Konut İmarlı Arsa', 'Residential Land Plot', 'Участок под жилую застройку'], 'Villa İmarlı': ['Villa İmarlı Arsa', 'Villa Land Plot', 'Участок под виллу'], 'Depo & Antrepo': ['Depo', 'Warehouse', 'Склад'], 'Restoran & Lokanta': ['Restoran', 'Restaurant', 'Ресторан'] };
+const altOf = (l, lang) => (ALT3[l.altTip] || [l.altTip || 'Daire', l.altTip || 'Property', l.altTip || 'Объект'])[['tr', 'en', 'ru'].indexOf(lang)];
+const MAHN = { Altıntaş: ['Altıntaş', 'Altıntaş', 'Алтынташ'], Kemerağzı: ['Kemerağzı', 'Kemerağzı', 'Кемерагзы'], Ermenek: ['Ermenek', 'Ermenek', 'Эрменек'] };
+const mahOf = (l, lang) => (MAHN[l.mahalle] || [l.mahalle, l.mahalle, l.mahalle])[['tr', 'en', 'ru'].indexOf(lang)] || '';
+const featOf = (l) => { const o = (l.row?.ozellikler || []).join(' ').toLocaleLowerCase('tr'); return { pool: /havuz/.test(o), site: l.row?.site === 'Evet', esya: /eşyalı/i.test(l.row?.esya || '') && !/eşyasız/i.test(l.row?.esya || ''), park: /otopark/i.test(l.row?.otopark || ''), sifir: Number(l.row?.yas) === 0, sec: /güvenlik/.test(o) }; };
+const tipWord = (l, lang) => ({ Satılık: ['Satılık', 'for Sale', 'на продажу'], Kiralık: ['Kiralık', 'for Rent', 'в аренду'], Devren: ['Devren', 'for Transfer', 'передача бизнеса'] }[l.tip] || [l.tip, '', ''])[['tr', 'en', 'ru'].indexOf(lang)];
+const genTitle = (l, lang) => {
+  const f = featOf(l); const m2 = l.brut ? ` · ${l.brut} m²` : ''; const m = mahOf(l, lang);
+  if (lang === 'tr') return `${m} ${tipWord(l, 'tr')} ${l.oda || ''} ${altOf(l, 'tr')}${f.site ? (f.pool ? ' · Havuzlu Site' : ' · Site İçinde') : ''}${f.sifir ? ' · Sıfır' : ''}${m2}`.replace(/\s+/g, ' ').trim();
+  if (lang === 'en') return `${f.sifir ? 'New ' : ''}${l.oda || ''} ${altOf(l, 'en')} ${tipWord(l, 'en')} in ${m}, Antalya${f.pool ? ' · Pool' : ''}${m2}`.replace(/\s+/g, ' ').trim();
+  return `${altOf(l, 'ru')} ${l.oda || ''} ${tipWord(l, 'ru')}, ${m}, Анталия${f.pool ? ' · бассейн' : ''}${m2}`.replace(/\s+/g, ' ').trim();
+};
+const AREA_P = {
+  Altıntaş: ['Altıntaş, Antalya Havalimanı’na ve Lara plajlarına kısa mesafede, Aksu’nun yeni imarlı ve hızla yapılaşan mahallesidir; site tipi yeni projeler ağırlıktadır.', 'Altıntaş is a newly zoned, fast-growing neighbourhood of Aksu, a short drive from Antalya Airport and the Lara beaches; most housing here is in new gated complexes.', 'Алтынташ — новый быстро застраиваемый район Аксу рядом с аэропортом Анталии и пляжами Лары; здесь преобладают новые жилые комплексы.'],
+  Kemerağzı: ['Kemerağzı, Lara–Kundu sahil hattına yakın, Aksu’nun denize en yakın mahallelerindendir.', 'Kemerağzı is one of the Aksu neighbourhoods closest to the sea, near the Lara–Kundu coastline.', 'Кемерагзы — один из ближайших к морю районов Аксу, рядом с побережьем Лара–Кунду.'],
+};
+const genText = (l, lang) => {
+  const v = l.row || {}; const f = featOf(l); const i = ['tr', 'en', 'ru'].indexOf(lang); const m = mahOf(l, lang); const P = [];
+  if (lang === 'tr') {
+    P.push(`Aksu ${m}’ta ${l.tip.toLocaleLowerCase('tr')} ${l.oda || ''} ${altOf(l, 'tr').toLocaleLowerCase('tr')}${l.brut ? `; ${l.brut} m² brüt${l.net ? `, ${l.net} m² net` : ''} kullanım alanı` : ''}.${v.kat ? ` ${v.katSayisi ? `${v.katSayisi} katlı binanın ` : ''}${v.kat}. katında.` : ''}`.replace(/\s+/g, ' '));
+    const h = [f.site && 'site içinde', f.pool && 'yüzme havuzu', f.sec && '7/24 güvenlik', f.park && (v.otopark || 'otopark').toLocaleLowerCase('tr'), v.asansor === 'Var' && 'asansör', f.esya && 'eşyalı', f.sifir && 'sıfır bina'].filter(Boolean);
+    if (h.length) P.push(`Öne çıkanlar: ${h.join(', ')}.`);
+  } else if (lang === 'en') {
+    P.push(`${l.oda || ''} ${altOf(l, 'en').toLowerCase()} ${tipWord(l, 'en')} in ${m}, Aksu${l.brut ? `, with ${l.brut} m² gross${l.net ? ` / ${l.net} m² net` : ''} living space` : ''}.${v.kat ? ` On floor ${v.kat}${v.katSayisi ? ` of a ${v.katSayisi}-storey building` : ''}.` : ''}`.replace(/\s+/g, ' ').trim());
+    const h = [f.site && 'gated complex', f.pool && 'swimming pool', f.sec && '24/7 security', f.park && 'parking', v.asansor === 'Var' && 'lift', f.esya && 'furnished', f.sifir && 'brand-new building'].filter(Boolean);
+    if (h.length) P.push(`Highlights: ${h.join(', ')}.`);
+  } else {
+    P.push(`${altOf(l, 'ru')} ${l.oda || ''} ${tipWord(l, 'ru')} в районе ${m}, Аксу${l.brut ? `: ${l.brut} м² общая${l.net ? `, ${l.net} м² полезная` : ''} площадь` : ''}.${v.kat ? ` ${v.kat}-й этаж${v.katSayisi ? ` ${v.katSayisi}-этажного дома` : ''}.` : ''}`.replace(/\s+/g, ' ').trim());
+    const h = [f.site && 'охраняемый комплекс', f.pool && 'бассейн', f.sec && 'охрана 24/7', f.park && 'парковка', v.asansor === 'Var' && 'лифт', f.esya && 'с мебелью', f.sifir && 'новый дом'].filter(Boolean);
+    if (h.length) P.push(`Особенности: ${h.join(', ')}.`);
+  }
+  if (AREA_P[l.mahalle]) P.push(AREA_P[l.mahalle][i]);
+  P.push([l.tip === 'Kiralık' ? 'ACC HOMES Altıntaş olarak daireyi yerinde gösteriyor, kira sözleşmesi ve teslim sürecinde yanınızda oluyoruz.' : 'ACC HOMES Altıntaş olarak mülkü yerinde ya da görüntülü gösterimle tanıtıyor; tapu ve imar ön kontrolü, emsal karşılaştırması ve tapu devrinde yanınızda oluyoruz.',
+    l.tip === 'Kiralık' ? 'ACC HOMES Altıntaş arranges viewings on site and supports you through the lease and handover.' : 'ACC HOMES Altıntaş shows the property on site or by video call and supports you with title-deed and zoning checks, comparable prices and the title transfer.',
+    l.tip === 'Kiralık' ? 'ACC HOMES Altıntaş организует показ и сопровождает заключение договора аренды и передачу ключей.' : 'ACC HOMES Altıntaş проводит показ на месте или по видео, проверяет тапу и градостроительный статус, даёт сравнение цен и сопровождает сделку до переоформления тапу.'][i]);
+  return P;
+};
+
 // ---------- ilanlar ----------
 let IDX;
 try {
@@ -55,7 +94,34 @@ try {
   IDX = JSON.parse(fs.readFileSync(local, 'utf8'));
   console.warn('İlan dizini yerelden:', local, e.message);
 }
-const AREA = IDX.ilanlar.filter((l) => l.ilce === 'Aksu').sort((a, b) => (b.mahalle === 'Altıntaş') - (a.mahalle === 'Altıntaş') || (b.fiyat > 0) - (a.fiyat > 0));
+// Panelde "Altıntaş sitesine de gönder" işaretli ilanlar (altintas_ilanlari): bu sitede kendi sayfalarıyla yayınlanır.
+// Görünüm okunamazsa ana sitenin ilan dizinine düşülür (kartlar acchomesantalya.com'a gider).
+const PANEL = { url: 'https://vqsocwdfmvpgdpxkcubz.supabase.co', key: 'sb_publishable_Fv0kalSrYIRLNjCoER1y2Q_31N9fJ_z' };
+const tr2a = (x) => String(x || '').toLocaleLowerCase('tr').replace(/ç/g, 'c').replace(/ğ/g, 'g').replace(/ı/g, 'i').replace(/ö/g, 'o').replace(/ş/g, 's').replace(/ü/g, 'u').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+const LSEG = { tr: 'ilan', en: 'listing', ru: 'obekt' };
+let OWN = null;
+try {
+  const r = await fetch(`${PANEL.url}/rest/v1/altintas_ilanlari?select=*`, { headers: { apikey: PANEL.key }, signal: AbortSignal.timeout(20000) });
+  if (!r.ok) throw new Error('HTTP ' + r.status);
+  OWN = await r.json();
+  fs.writeFileSync(path.join(HERE, 'altintas-ilanlari-cache.json'), JSON.stringify(OWN));
+} catch (e) {
+  const c = path.join(HERE, 'altintas-ilanlari-cache.json');
+  if (fs.existsSync(c)) { OWN = JSON.parse(fs.readFileSync(c, 'utf8')); console.warn('Altıntaş ilanları önbellekten:', e.message); }
+  else console.warn('Altıntaş ilanları okunamadı, ana site dizini kullanılıyor:', e.message);
+}
+const IDXBY = Object.fromEntries(IDX.ilanlar.map((l) => [l.id, l]));
+const ownRow = (v) => {
+  const f = (v.foto || []).filter(Boolean); const mine = f.filter((x) => !/shbdn\.com|sahibinden/i.test(x)); const fotos = mine.length ? mine : f;
+  const slug = tr2a([v.tip, v.mahalle, v.oda, v.altTip, v.id].filter(Boolean).join(' '));
+  const ix = IDXBY[v.id];
+  return { id: v.id, tip: v.tip, emlakTipi: v.emlakTipi, altTip: v.altTip, ilce: v.ilce, mahalle: v.mahalle, proje: v.proje || '', fiyat: v.fiyat, para: v.para, oda: v.oda, brut: v.brut, net: v.net, etiketler: v.etiketler || [],
+    own: true, row: v, slug, fotos, foto: fotos[0] || '', kapora: v.satis_durumu === 'Kaporalı',
+    url: Object.fromEntries(LANGS.map((l) => [l, `${BASE[l]}/${LSEG[l]}/${slug}/`])), main: ix ? ix.url : null };
+};
+const SRC = OWN && OWN.length ? OWN.filter((v) => (v.foto || []).length && v.satis_durumu !== 'Pasif').map(ownRow) : IDX.ilanlar.filter((l) => l.ilce === 'Aksu');
+for (const l of SRC) if (l.own) l.baslik = Object.fromEntries(LANGS.map((lg) => [lg, genTitle(l, lg)]));
+const AREA = SRC.sort((a, b) => (b.mahalle === 'Altıntaş') - (a.mahalle === 'Altıntaş') || (b.fiyat > 0) - (a.fiyat > 0) || String(b.row?.created_at || '').localeCompare(String(a.row?.created_at || '')));
 const SALE = AREA.filter((l) => l.tip === 'Satılık');
 const RENT = AREA.filter((l) => l.tip === 'Kiralık');
 console.log(`Altıntaş/Aksu: ${AREA.length} ilan (${SALE.length} satılık, ${RENT.length} kiralık)`);
@@ -167,7 +233,7 @@ const KW = {
 
 // ---------- parçalar ----------
 const fmt = (l, lang) => (l.fiyat ? `${Number(l.fiyat).toLocaleString(lang === 'tr' ? 'tr-TR' : lang === 'ru' ? 'ru-RU' : 'en-US')} ${l.para}${l.tip === 'Kiralık' ? (lang === 'tr' ? '/ay' : lang === 'ru' ? '/мес' : '/mo') : ''}` : (lang === 'tr' ? 'Fiyat için arayın' : lang === 'ru' ? 'Цена по запросу' : 'Price on request'));
-const card = (l, lang) => `<a class="lc rv" href="${esc(l.url[lang])}" target="_blank" rel="noopener" data-t="${l.tip === 'Satılık' ? 's' : l.tip === 'Kiralık' ? 'k' : 'd'}" data-a="${esc(l.altTip)}"><span class="lci">${l.foto ? `<img src="${esc(l.foto)}" alt="${esc(l.baslik[lang])}" loading="lazy" referrerpolicy="no-referrer" width="640" height="480">` : ''}<b>${fmt(l, lang)}</b><em>${esc(l.tip === 'Satılık' ? T[lang].nav.sale : l.tip === 'Kiralık' ? T[lang].nav.rent : l.tip)}</em></span><span class="lcb"><small>${esc([l.mahalle, l.ilce].filter(Boolean).join(' · '))}${l.proje && l.proje !== 'SİTE' ? ` · ${esc(l.proje)}` : ''}</small><h3>${esc(l.baslik[lang])}</h3><span class="lcm">${[l.oda, l.brut ? `${l.brut} m²` : ''].filter(Boolean).join(' · ')}</span></span></a>`;
+const card = (l, lang) => `<a class="lc rv" href="${esc(l.url[lang])}"${l.own ? '' : ' target="_blank" rel="noopener"'} data-t="${l.tip === 'Satılık' ? 's' : l.tip === 'Kiralık' ? 'k' : 'd'}" data-a="${esc(l.altTip)}"><span class="lci">${l.foto ? `<img src="${esc(l.foto)}" alt="${esc(l.baslik[lang])}" loading="lazy" referrerpolicy="no-referrer" width="640" height="480">` : ''}<b>${fmt(l, lang)}</b>${l.kapora ? `<i class="kp">${lang === 'tr' ? 'Kaporalı' : lang === 'ru' ? 'Задаток внесён' : 'Under offer'}</i>` : ''}<em>${esc(l.tip === 'Satılık' ? T[lang].nav.sale : l.tip === 'Kiralık' ? T[lang].nav.rent : l.tip)}</em></span><span class="lcb"><small>${esc([l.mahalle, l.ilce].filter(Boolean).join(' · '))}${l.proje && l.proje !== 'SİTE' ? ` · ${esc(l.proje)}` : ''}</small><h3>${esc(l.baslik[lang])}</h3><span class="lcm">${[l.oda, l.brut ? `${l.brut} m²` : ''].filter(Boolean).join(' · ')}</span></span></a>`;
 const grid = (list, lang, chips = true) => {
   const t = T[lang]; if (!list.length) return `<p class="none">${t.none}</p>`;
   const alts = [...new Set(list.map((l) => l.altTip).filter(Boolean))].slice(0, 6);
@@ -197,12 +263,12 @@ const faqBlock = (lang) => `<section class="sec"><div class="wrap narrow"><h2>${
 const faqLd = (lang) => ({ '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: T[lang].faq.map(([q, a]) => ({ '@type': 'Question', name: q, acceptedAnswer: { '@type': 'Answer', text: a } })) });
 const ORG = (lang) => ({ '@context': 'https://schema.org', '@type': 'RealEstateAgent', '@id': `${DOMAIN}/#org`, name: 'ACC HOMES Altıntaş', alternateName: 'ACC HOMES International Real Estate', url: DOMAIN + url(lang, 'home'), logo: `${MAIN}/img/logo/acc-homes-logo.png`, image: `${MAIN}/img/primelara/hero.webp`, telephone: PHONE.raw, areaServed: [{ '@type': 'Place', name: 'Altıntaş, Aksu, Antalya' }, { '@type': 'City', name: 'Antalya' }], parentOrganization: { '@type': 'Organization', name: 'ACC HOMES International Real Estate', url: MAIN }, sameAs: [IG, MAIN, G.url], aggregateRating: { '@type': 'AggregateRating', ratingValue: G.rating, reviewCount: G.count } });
 const crumbs = (lang, key) => ({ '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [{ '@type': 'ListItem', position: 1, name: T[lang].brand, item: DOMAIN + url(lang, 'home') }, ...(key === 'home' ? [] : [{ '@type': 'ListItem', position: 2, name: T[lang].nav[key], item: DOMAIN + url(lang, key) }])] });
-const itemList = (list, lang) => ({ '@context': 'https://schema.org', '@type': 'ItemList', itemListElement: list.slice(0, 30).map((l, i) => ({ '@type': 'ListItem', position: i + 1, url: l.url[lang], name: l.baslik[lang] })) });
+const itemList = (list, lang) => ({ '@context': 'https://schema.org', '@type': 'ItemList', itemListElement: list.slice(0, 30).map((l, i) => ({ '@type': 'ListItem', position: i + 1, url: (l.url[lang].startsWith('/') ? DOMAIN : '') + l.url[lang], name: l.baslik[lang] })) });
 
-function head({ lang, title, desc, canon, alt, ld }) {
+function head({ lang, title, desc, canon, alt, ld, img }) {
   const t = T[lang];
   return `<!DOCTYPE html><html lang="${lang}"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>${esc(title)}</title><meta name="description" content="${esc(desc)}"><meta name="keywords" content="${esc(KW[lang])}"><link rel="canonical" href="${DOMAIN}${canon}">${LANGS.map((l) => `<link rel="alternate" hreflang="${l}" href="${DOMAIN}${alt[l]}">`).join('')}<link rel="alternate" hreflang="x-default" href="${DOMAIN}${alt.tr}"><meta name="robots" content="index,follow,max-image-preview:large">
-<meta property="og:type" content="website"><meta property="og:site_name" content="${t.brand}"><meta property="og:title" content="${esc(title)}"><meta property="og:description" content="${esc(desc)}"><meta property="og:url" content="${DOMAIN}${canon}"><meta property="og:image" content="${MAIN}/img/primelara/hero.webp"><meta property="og:locale" content="${t.locale}"><meta name="twitter:card" content="summary_large_image"><meta name="theme-color" content="#E02A3C">
+<meta property="og:type" content="website"><meta property="og:site_name" content="${t.brand}"><meta property="og:title" content="${esc(title)}"><meta property="og:description" content="${esc(desc)}"><meta property="og:url" content="${DOMAIN}${canon}"><meta property="og:image" content="${esc(img || `${MAIN}/img/primelara/hero.webp`)}"><meta property="og:locale" content="${t.locale}"><meta name="twitter:card" content="summary_large_image"><meta name="theme-color" content="#E02A3C">
 <link rel="icon" href="/favicon.ico" sizes="any"><link rel="icon" href="/favicon.svg" type="image/svg+xml"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Anton&family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet"><link rel="stylesheet" href="/style.css?v=1">
 ${ld.map((x) => `<script type="application/ld+json">${JSON.stringify(x).replace(/</g, '\\u003c')}</script>`).join('')}</head>`;
 }
@@ -309,6 +375,41 @@ const php = fs.readFileSync(path.join(ROOT, 'server/form.php'), 'utf8')
   .replace("$ip = $_SERVER['HTTP_X_FORWARDED_FOR'] ?? $_SERVER['REMOTE_ADDR'] ?? '';", "$ip = $_SERVER['REMOTE_ADDR'] ?? '';")
   .replace("$next = (string)($_POST['_next'] ?? '/');", "$next = (string)($_POST['_next'] ?? '/');\n$org = (string)($_SERVER['HTTP_ORIGIN'] ?? $_SERVER['HTTP_REFERER'] ?? '');\nif ($org !== '' && !preg_match('~^https?://([a-z0-9-]+\\.)?(altintassatilikdaire\\.com|acchomesantalya\\.com)(/|$)~i', $org)) { header('Location: /', true, 303); exit; }");
 fs.writeFileSync(path.join(OUT, 'form.php'), php);
+
+// ---------- ilan detay sayfaları (yalnızca panelden "Altıntaş sitesine de gönder" ile gelenler) ----------
+const DL = {
+  tr: { facts: 'İlan bilgileri', feat: 'Özellikler', desc: 'Açıklama', id: 'İlan no', oda: 'Oda', brut: 'Brüt', net: 'Net', kat: 'Bulunduğu kat', katS: 'Kat sayısı', yas: 'Bina yaşı', yas0: 'Sıfır', isitma: 'Isıtma', banyo: 'Banyo', site: 'Site içinde', esya: 'Eşya', otopark: 'Otopark', asansor: 'Asansör', aidat: 'Aidat', tapu: 'Tapu durumu', yes: 'Evet', ask: 'Bu ilanı sor', waMsg: (id, t) => `Merhaba, ${id} numaralı ilan hakkında bilgi almak istiyorum: ${t}`, call: 'Ara', sim: 'Benzer ilanlar', back: 'Tüm ilanlar', formT: 'Bu ilan için bilgi isteyin', alsoMain: 'Bu ilan ACC HOMES ana sitesinde de yayında', photo: 'fotoğraf' },
+  en: { facts: 'Key facts', feat: 'Features', desc: 'Description', id: 'Listing no', oda: 'Rooms', brut: 'Gross', net: 'Net', kat: 'Floor', katS: 'Floors in building', yas: 'Building age', yas0: 'New', isitma: 'Heating', banyo: 'Bathrooms', site: 'In a complex', esya: 'Furniture', otopark: 'Parking', asansor: 'Lift', aidat: 'Service charge', tapu: 'Title deed', yes: 'Yes', ask: 'Ask about this listing', waMsg: (id, t) => `Hello, I would like information about listing ${id}: ${t}`, call: 'Call', sim: 'Similar listings', back: 'All listings', formT: 'Request information on this listing', alsoMain: 'Also listed on the ACC HOMES main website', photo: 'photos' },
+  ru: { facts: 'Основные данные', feat: 'Особенности', desc: 'Описание', id: 'Номер объекта', oda: 'Комнаты', brut: 'Общая', net: 'Полезная', kat: 'Этаж', katS: 'Этажность', yas: 'Возраст дома', yas0: 'Новый', isitma: 'Отопление', banyo: 'Санузлы', site: 'В комплексе', esya: 'Мебель', otopark: 'Парковка', asansor: 'Лифт', aidat: 'Обслуживание', tapu: 'Тапу', yes: 'Да', ask: 'Спросить об объекте', waMsg: (id, t) => `Здравствуйте, меня интересует объект ${id}: ${t}`, call: 'Позвонить', sim: 'Похожие объекты', back: 'Все объекты', formT: 'Запросить информацию об объекте', alsoMain: 'Объект также опубликован на основном сайте ACC HOMES', photo: 'фото' },
+};
+for (const l of AREA.filter((x) => x.own)) {
+  const v = l.row;
+  for (const lang of LANGS) {
+    const t = T[lang], d = DL[lang], title = l.baslik[lang], P = genText(l, lang), canon = l.url[lang];
+    const fx = [[d.id, l.id], [d.oda, l.oda], [d.brut, l.brut && `${l.brut} m²`], [d.net, l.net && `${l.net} m²`], [d.kat, v.kat], [d.katS, v.katSayisi], [d.yas, v.yas === 0 || v.yas === '0' ? d.yas0 : v.yas], [d.banyo, v.banyo],
+      ...(lang === 'tr' ? [[d.isitma, v.isitma !== 'Yok' && v.isitma], [d.esya, v.esya], [d.otopark, v.otopark], [d.asansor, v.asansor], [d.tapu, v.tapu]] : []), [d.site, v.site === 'Evet' && d.yes], [d.aidat, v.aidat && `${Number(v.aidat).toLocaleString('tr-TR')} TL`]].filter(([, x]) => x !== null && x !== undefined && x !== false && x !== '');
+    const feats = lang === 'tr' ? (v.ozellikler || []).filter((x) => !/^(Kuzey|Güney|Doğu|Batı)$/.test(x)) : [];
+    const wa = `https://wa.me/${PHONE.wa}?text=${encodeURIComponent(d.waMsg(l.id, DOMAIN + canon))}`;
+    const sim = AREA.filter((x) => x !== l && x.tip === l.tip).sort((a, b) => Math.abs((a.fiyat || 0) - (l.fiyat || 0)) - Math.abs((b.fiyat || 0) - (l.fiyat || 0))).slice(0, 3);
+    const listKey = l.tip === 'Kiralık' ? 'rent' : 'sale';
+    const ld = [{ '@context': 'https://schema.org', '@type': 'RealEstateListing', name: title, description: P.join(' '), url: DOMAIN + canon, image: l.fotos.slice(0, 6), datePosted: String(v.created_at || '').slice(0, 10) || undefined, inLanguage: lang,
+      offers: { '@type': 'Offer', price: l.fiyat || undefined, priceCurrency: l.para === 'TL' ? 'TRY' : l.para, availability: 'https://schema.org/InStock', businessFunction: l.tip === 'Kiralık' ? 'http://purl.org/goodrelations/v1#LeaseOut' : 'http://purl.org/goodrelations/v1#Sell', seller: { '@id': `${DOMAIN}/#org` } },
+      about: { '@type': 'Accommodation', numberOfRooms: l.oda || undefined, floorSize: l.brut ? { '@type': 'QuantitativeValue', value: l.brut, unitCode: 'MTK' } : undefined, address: { '@type': 'PostalAddress', addressLocality: `${l.mahalle}, Aksu`, addressRegion: 'Antalya', addressCountry: 'TR' } } },
+      { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [{ '@type': 'ListItem', position: 1, name: t.brand, item: DOMAIN + url(lang, 'home') }, { '@type': 'ListItem', position: 2, name: listKey === 'rent' ? t.rentT : t.saleT, item: DOMAIN + url(lang, listKey) }, { '@type': 'ListItem', position: 3, name: title, item: DOMAIN + canon }] }];
+    const body = `<section class="ilh"><div class="wrap"><p class="eyebrow"><a href="${url(lang, listKey)}">← ${d.back}</a> · ${esc(mahOf(l, lang))}, Aksu</p><h1>${esc(title)}</h1><p class="ilp"><b>${fmt(l, lang)}</b>${l.kapora ? `<i class="kp">${lang === 'tr' ? 'Kaporalı' : lang === 'ru' ? 'Задаток внесён' : 'Under offer'}</i>` : ''}<span>${[l.oda, l.brut ? `${l.brut} m²` : ''].filter(Boolean).join(' · ')}</span></p></div></section>
+<section class="sec tight"><div class="wrap ilg"><div><div class="igal" data-gal><div class="gm"><img src="${esc(l.fotos[0])}" alt="${esc(title)}" width="1200" height="900" fetchpriority="high"><span class="gn">1 / ${l.fotos.length}</span>${l.fotos.length > 1 ? '<button class="gp" aria-label="‹">‹</button><button class="gx" aria-label="›">›</button>' : ''}</div>${l.fotos.length > 1 ? `<div class="gt">${l.fotos.map((f, i) => `<button${i ? '' : ' class="on"'} data-i="${i}"><img src="${esc(f)}" alt="${esc(title)} ${i + 1}" width="120" height="90" loading="lazy"></button>`).join('')}</div>` : ''}</div>
+<h2>${d.desc}</h2><div class="prose">${P.map((x) => `<p>${esc(x)}</p>`).join('')}</div>${feats.length ? `<h2>${d.feat}</h2><ul class="fts">${feats.map((x) => `<li>${esc(x)}</li>`).join('')}</ul>` : ''}</div>
+<aside class="ils"><div class="ilbox"><h2>${d.facts}</h2><dl>${fx.map(([k, x]) => `<dt>${k}</dt><dd>${esc(x)}</dd>`).join('')}</dl><a class="btn wa" href="${wa}" target="_blank" rel="noopener">${ICO.wa} ${d.ask}</a><a class="btn ghost" href="tel:${PHONE.raw}">${ICO.ph} ${d.call} ${PHONE.text}</a></div></aside></div></section>
+${sim.length ? `<section class="sec bg2"><div class="wrap"><h2>${d.sim}</h2><div class="lg">${sim.map((x) => card(x, lang)).join('')}</div></div></section>` : ''}
+<section class="sec"><div class="wrap two"><div><h2>${d.formT}</h2><p class="lead">${esc(title)} · ${l.id}</p></div>${form(lang, l.tip === 'Kiralık' ? 1 : 0).replace('<input type="hidden" name="dil"', `<input type="hidden" name="ilan" value="${l.id}"><input type="hidden" name="dil"`).replace('</textarea>', `${esc(d.waMsg(l.id, DOMAIN + canon))}</textarea>`)}</div></section>
+<script>(()=>{const g=document.querySelector('[data-gal]');if(!g)return;const m=g.querySelector('.gm img'),n=g.querySelector('.gn'),b=[...g.querySelectorAll('.gt button')],s=b.map(x=>x.querySelector('img').src);let i=0;const go=k=>{if(!s.length)return;i=(k+s.length)%s.length;m.src=s[i];n.textContent=(i+1)+' / '+s.length;b.forEach((x,j)=>x.classList.toggle('on',j===i));b[i].scrollIntoView({block:'nearest',inline:'center'})};b.forEach((x,j)=>x.onclick=()=>go(j));const p=g.querySelector('.gp'),x=g.querySelector('.gx');p&&(p.onclick=()=>go(i-1));x&&(x.onclick=()=>go(i+1));let t0=null;m.addEventListener('touchstart',e=>t0=e.touches[0].clientX,{passive:true});m.addEventListener('touchend',e=>{if(t0===null)return;const dx=e.changedTouches[0].clientX-t0;if(Math.abs(dx)>40)go(i+(dx<0?1:-1));t0=null})})();</script>`;
+    const alt = l.url;
+    const desc = `${P[0]} ${P[1] || ''}`.replace(/\s+/g, ' ').slice(0, 155);
+    write(canon.slice(1), enSpan(`${head({ lang, title: `${title} | ${l.id} | ACC HOMES Altıntaş`.slice(0, 110), desc, canon, alt, ld, img: l.fotos[0] })}<body>${header(lang, alt, listKey)}<main>${body}</main>${footer(lang)}</body></html>`));
+    sitemap.push([canon, alt]);
+  }
+}
+console.log(`İlan sayfaları: ${AREA.filter((x) => x.own).length} ilan × 3 dil`);
 
 // 404, sitemap, robots, .htaccess
 fs.writeFileSync(path.join(OUT, '404.html'), `${head({ lang: 'tr', title: 'Sayfa bulunamadı | Altıntaş Satılık Daire', desc: '', canon: '/404', alt: { tr: '/', en: '/en/', ru: '/ru/' }, ld: [] }).replace('index,follow,max-image-preview:large', 'noindex')}<body>${header('tr', { tr: '/', en: '/en/', ru: '/ru/' }, '')}<main><section class="phero"><div class="wrap"><h1>Sayfa bulunamadı</h1><p class="lead">Aradığınız sayfa taşınmış olabilir. Altıntaş’taki güncel ilanlara göz atın.</p><div class="ctas"><a class="btn" href="/satilik-daireler/">Satılık daireler →</a><a class="btn ghost" href="/">Ana sayfa</a></div></div></section></main>${footer('tr')}</body></html>`);

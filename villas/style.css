@@ -505,3 +505,25 @@ footer.ft2 .fbot a{color:#3d362f!important}footer.ft2 .fbot a:hover{color:var(--
 @media (max-width:860px){.offs,.cform{grid-template-columns:1fr}}
 .tad{text-decoration:none}.tad:hover{color:var(--redt)}
 .tad{white-space:nowrap}@media (max-width:1500px){.tml{display:none!important}}
+/* 11. tur: yeni menü sistemi */
+.top .mnav{display:flex;align-items:center;gap:26px;margin-left:auto}
+.mnav>a,.mdd>button{font:800 14px Nunito,sans-serif!important;letter-spacing:.01em!important;text-transform:none!important;color:var(--ink)!important;text-decoration:none;padding:24px 0!important;background:none;border:0;cursor:pointer;display:inline-flex;align-items:center;gap:6px;white-space:nowrap}
+.mnav>a.mhl{color:var(--redt)!important}.mnav>a::after,.mdd>button::after{display:none!important}
+.mdd>button i{width:7px;height:7px;border-right:2px solid currentColor;border-bottom:2px solid currentColor;transform:rotate(45deg) translateY(-2px);transition:transform .2s;opacity:.7}
+.mdd:hover>button i,.mdd.open>button i{transform:rotate(225deg) translateY(-1px)}
+.mdd:hover>button,.mdd.open>button,.mnav>a:hover{color:var(--redt)!important}
+.mpanel{position:absolute!important;left:50%!important;right:auto!important;top:calc(100% - 6px)!important;transform:translate(-50%,8px);min-width:320px;background:#fff!important;border:1px solid var(--line)!important;border-radius:18px!important;padding:10px!important;box-shadow:0 24px 50px rgba(0,0,0,.12)!important;display:grid!important;gap:2px;opacity:0;visibility:hidden;transition:opacity .2s,transform .2s,visibility .2s;z-index:50}
+.mdd:hover .mpanel,.mdd.open .mpanel,.mdd:focus-within .mpanel{opacity:1;visibility:visible;transform:translate(-50%,0)}
+.mpanel a{display:block;padding:11px 14px!important;border-radius:12px!important;text-decoration:none;color:var(--ink)!important}
+.mpanel a:hover{background:#f6f1ec!important}.mpanel b{display:block;font:800 14.5px Nunito,sans-serif}.mpanel small{display:block;color:var(--mut);font:600 12.5px Nunito,sans-serif;margin-top:2px}
+.mpanel.mreg{grid-template-columns:1fr 1fr;min-width:420px}.mpanel.mreg a{padding:9px 14px!important}.mpanel .mall{grid-column:1/-1;border-top:1px solid var(--line);border-radius:0 0 12px 12px!important;margin-top:4px}.mall b{color:var(--redt)}
+.mdd:last-child .mpanel{left:auto!important;right:0!important;transform:translate(0,8px)}.mdd:last-child:hover .mpanel,.mdd:last-child.open .mpanel{transform:translate(0,0)}
+@media (max-width:1250px) and (min-width:861px){.top .mnav{gap:16px}.mnav>a,.mdd>button{font-size:13px!important}}
+@media (max-width:1060px) and (min-width:861px){.mnav>a.mhl{display:none}}
+@media (max-width:860px){
+ .top .mnav{display:none;flex-direction:column;align-items:stretch;gap:0;width:100%;margin:0;order:4;border-top:1px solid var(--line);padding:6px 0 12px}.top.open .mnav{display:flex}
+ .mnav>a,.mdd>button{display:flex!important;width:100%;justify-content:space-between;padding:14px 2px!important;font-size:16px!important;border-bottom:1px solid var(--line)}
+ .mpanel{position:static!important;transform:none!important;opacity:1;visibility:visible;display:none!important;box-shadow:none!important;border:0!important;min-width:0!important;padding:4px 0 10px!important;background:#faf8f5!important;border-radius:12px!important}
+ .mdd.open .mpanel{display:grid!important}.mdd:hover .mpanel{transform:none}.mpanel.mreg{grid-template-columns:1fr 1fr}
+}
+.mpanel a,.mpanel b,.mpanel small{letter-spacing:0!important;text-transform:none!important}.mpanel small{line-height:1.35}@media (max-width:860px){.mnav>a.mhl{font-size:16px!important;border-bottom:1px solid var(--line)}}

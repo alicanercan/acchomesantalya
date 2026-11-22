@@ -85,3 +85,27 @@ a{color:inherit}img{max-width:100%;display:block}svg{width:20px;height:20px;flex
 .posts,.gal,.revs{grid-template-columns:1fr 1fr}.sh{flex-direction:column;align-items:flex-start}.cb{flex-direction:column;align-items:flex-start}.fg{grid-template-columns:1fr 1fr}.ag img{margin:0 auto;max-height:420px}
 .sec{padding:56px 0}}
 @media (max-width:600px){body{font-size:16px}.wm1{font-size:22px}.wm2{font-size:9.5px}.now,.posts,.gal,.revs,.vals,.g3{grid-template-columns:1fr}.keys{grid-template-columns:repeat(2,1fr)}.fg{grid-template-columns:1fr}.tl li{grid-template-columns:1fr;gap:4px}.st b{font-size:32px}.lead{font-size:17px}.fb{flex-direction:column;gap:8px}.logos{grid-template-columns:repeat(2,1fr)}}
+/* üst şerit */
+.tbar{background:var(--sand);font:700 13.5px Nunito,sans-serif;border-bottom:1px solid #e2d7c9}.tbi{display:flex;justify-content:space-between;align-items:center;min-height:40px;gap:16px}
+.tbar a{display:inline-flex;align-items:center;gap:6px;text-decoration:none;color:#3d362f}.tbar svg{width:15px;height:15px}.tl1,.tl2{display:flex;gap:18px;align-items:center}
+.tig{background:#fff;border:1px solid #e2d7c9;border-radius:999px;padding:3px 12px 3px 4px;font-weight:800}.tig svg{width:22px;height:22px;padding:4px;border-radius:50%;color:#fff;background:radial-gradient(circle at 30% 107%,#fdf497 0%,#fd5949 45%,#d6249f 60%,#285AEB 90%)}
+.tyt svg{color:#ff0000;width:20px;height:20px}.tin svg{color:#0a66c2;width:18px;height:18px}
+/* takip et */
+.fol{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}.fo{display:flex;align-items:center;gap:14px;text-decoration:none;background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:18px;transition:.2s}.fo:hover{transform:translateY(-3px);box-shadow:0 14px 34px rgba(0,0,0,.08)}
+.fo i{width:52px;height:52px;border-radius:14px;display:grid;place-items:center;color:#fff;flex:none}.fo i svg{width:26px;height:26px}.f-ig i{background:radial-gradient(circle at 30% 107%,#fdf497 0%,#fd5949 45%,#d6249f 60%,#285AEB 90%)}.f-yt i{background:#ff0000}.f-in i{background:#0a66c2}.f-tg i{background:#229ED9}
+.fo span{display:flex;flex-direction:column;min-width:0}.fo b{font-size:13px;color:var(--mut);text-transform:uppercase;letter-spacing:.08em}.fo em{font-style:normal;font-weight:900;font-size:17px;overflow:hidden;text-overflow:ellipsis}.fo small{color:#4a4d52;font-size:13.5px;line-height:1.35}.fgo{margin-left:auto;font-weight:800;color:var(--red);font-size:13.5px;white-space:nowrap}
+/* randevu */
+.meet{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}.mt{text-decoration:none;background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:24px;transition:.2s}.mt:hover{border-color:var(--red);transform:translateY(-3px)}.mi{font-size:30px}.mt p{color:#4a4d52;font-size:15.5px}
+.dtt{display:grid;grid-template-columns:1fr 1fr;gap:12px}.dtt label{font-size:13px;color:var(--mut);display:grid;gap:4px}
+/* mobil alt dock */
+.dock{display:none}
+@media (max-width:900px){.tml{display:none}.fol{grid-template-columns:1fr 1fr}.meet{grid-template-columns:1fr}}
+@media (max-width:700px){.tbar .tl1 a:nth-child(2){display:none}.tbi{justify-content:center}.fwa{display:none}
+.dock{display:flex;position:fixed;left:12px;right:12px;bottom:calc(10px + env(safe-area-inset-bottom,0px));z-index:40;gap:8px;transform:translateZ(0)}.dock a{flex:1;display:flex;align-items:center;justify-content:center;gap:8px;padding:13px 8px;border-radius:999px;text-decoration:none;color:#fff;font-weight:800;box-shadow:0 6px 18px rgba(0,0,0,.18)}.d-call{background:var(--ink)}.d-wa{background:#25D366}.dock svg{width:18px;height:18px}.ft{padding-bottom:70px}}
+@media (max-width:600px){.fol{grid-template-columns:1fr}.tl1{gap:12px}.tbar{font-size:12.5px}}
+.lt.li{color:#0a66c2;text-decoration:none;font:800 16px Nunito,sans-serif;letter-spacing:0}
+@media (max-width:700px){.tl1 .tml{display:none}.tbar .tyt,.tbar .tin{display:none}.tbi{gap:10px}.tl1{gap:10px}}
+@media (max-width:380px){.tbar .tl1{display:none}}
+.fo{min-width:0}.fo>span:not(.fgo){flex:1}
+@media (max-width:600px){.fgo{display:none}}
+.two>*{min-width:0}.ci span{min-width:0;overflow-wrap:anywhere}

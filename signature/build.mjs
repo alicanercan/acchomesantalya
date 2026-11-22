@@ -55,6 +55,14 @@ const SOCIAL = [
   ['yt', 'YouTube', '@alicanercan.therealtor', 'https://www.youtube.com/@alicanercan.therealtor'],
   ['tg', 'Telegram', '@alicanertherealtor', 'https://t.me/alicanertherealtor'],
 ];
+const FOLLOW = [
+  ['ig', 'Instagram', '@alicanercan.therealtor', 'https://www.instagram.com/alicanercan.therealtor/', { tr: 'Kişisel hesabım: saha, piyasa ve günlük notlar', en: 'My personal account: field, market and daily notes', ru: 'Личный аккаунт: объекты, рынок, заметки' }],
+  ['yt', 'YouTube', '@alicanercan.therealtor', 'https://www.youtube.com/@alicanercan.therealtor', { tr: 'Mülk turları, piyasa yorumları ve röportajlar', en: 'Property tours, market commentary and interviews', ru: 'Обзоры объектов, комментарии рынка, интервью' }],
+  ['in', 'LinkedIn', '2.230+', 'https://www.linkedin.com/in/alicanercantherealtor/', { tr: 'Piyasa analizlerim ve kariyer yazılarım', en: 'My market analysis and career posts', ru: 'Аналитика рынка и деловые публикации' }],
+  ['ig', 'Instagram', '@acchomesantalya', 'https://www.instagram.com/acchomesantalya/', { tr: 'ACC HOMES: portföy, projeler ve ekip', en: 'ACC HOMES: listings, projects and team', ru: 'ACC HOMES: объекты, проекты, команда' }],
+  ['ig', 'Instagram', '@acc.villas', 'https://www.instagram.com/acc.villas/', { tr: 'ACC VILLAS: Antalya’nın villaları', en: 'ACC VILLAS: Antalya’s villas', ru: 'ACC VILLAS: виллы Анталии' }],
+  ['tg', 'Telegram', '@alicanertherealtor', 'https://t.me/alicanertherealtor', { tr: 'Doğrudan mesaj', en: 'Direct message', ru: 'Прямое сообщение' }],
+];
 const ICO = {
   ig: '<svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="17.5" cy="6.5" r="1.3" fill="currentColor"/></svg>',
   in: '<svg viewBox="0 0 24 24"><path fill="currentColor" d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9h4v12H3zM9 9h3.8v1.7h.1c.5-1 1.8-2 3.8-2 4 0 4.8 2.6 4.8 6V21h-4v-5.5c0-1.3 0-3-1.8-3s-2.1 1.4-2.1 2.9V21H9z"/></svg>',
@@ -69,13 +77,13 @@ const ICO = {
 const T = {
   tr: {
     locale: 'tr_TR', nav: { about: 'Hakkımda', insights: 'Yazılar', stage: 'Sahne ve medya', advisory: 'Danışmanlık', contact: 'İletişim' },
-    role: 'Broker & Kurucu, ACC HOMES', cta: 'Görüşme planla', ctaRead: 'Yazılarımı okuyun', wa: 'WhatsApp’tan yazın',
+    role: 'Broker & Kurucu, ACC HOMES', call: 'Ara', cta: 'Görüşme planla', ctaRead: 'Yazılarımı okuyun', wa: 'WhatsApp’tan yazın',
     homeTitle: 'Ali Caner Can | Antalya Gayrimenkul Brokerı, ACC HOMES Kurucusu',
-    homeDesc: 'Ali Caner Can: makine mühendisi, eski çok uluslu satış yöneticisi, ACC HOMES ve ACC VILLAS’ın kurucusu. Antalya gayrimenkulünde veriye dayalı, şeffaf danışmanlık.',
+    homeDesc: 'Ali Caner Can: makine mühendisi, eski çok uluslu satış yöneticisi, ACC HOMES ve ACC VILLAS kurucusu. Antalya’da veriye dayalı, şeffaf emlak danışmanlığı.',
     eyebrow: 'Broker & Kurucu · ACC HOMES International Real Estate',
     h1: 'Ali Caner Can',
     lead: 'Makine mühendisi, Nestlé ve Kraft Heinz gibi şirketlerde yetişmiş bir satış yöneticisi. 2024’ten bu yana ACC HOMES ile Antalya’da gayrimenkulü veriyle, şeffaflıkla ve sahada anlatıyorum.',
-    stats: [['290+', 'kendi yaptığım satış ve kiralama işlemi'], ['~50', 'iş ortağından oluşan ekip'], [`${String(G.rating).replace('.', ',')} ★`, `${G.count} Google yorumu (ACC HOMES)`], ['1.000 m²', 'ACC Plaza genel merkezi']],
+    stats: [['290+', 'kendi yaptığım satış ve kiralama işlemi'], ['~50', 'iş ortağı, 10 dilde hizmet'], [`${String(G.rating).replace('.', ',')} ★`, `${G.count} Google yorumu (ACC HOMES)`], ['1.000 m²', 'ACC Plaza genel merkezi']],
     nowT: 'Bugün ne yapıyorum', nowL: 'Kurduğum ve yönettiğim yapılar. Her biri kendi alanında, aynı ilkelerle çalışır.',
     now: [
       ['ACC HOMES International Real Estate', 'Antalya’da satış, kiralama, proje pazarlama ve yabancı yatırımcı danışmanlığı. ACC Plaza’da yaklaşık 50 iş ortağı.', 'home', 'acchomesantalya.com'],
@@ -88,20 +96,23 @@ const T = {
     stageT: 'Sahada ve sahnede', stageL: 'Ödüller, yatırımcı buluşmaları, dernek çalışmaları ve sosyal sorumluluk projeleri.',
     keysT: 'Anahtar teslim anları', keysL: 'Tapu günü, işin en güzel anı. Bu fotoğraflar müşterilerimizin izniyle paylaşılmıştır.',
     revT: 'Müşterilerim ne diyor', revL: 'ACC HOMES’un Google profilindeki gerçek yorumlardan.', revAll: 'Tüm Google yorumları',
-    ctaT: 'Antalya’da gayrimenkul kararı mı veriyorsunuz?', ctaL: 'Alım, satım ya da yatırım; önce konuşalım, veriyi birlikte okuyalım.',
-    follow: 'Takip edin', footNote: 'Ali Caner Can, ACC HOMES International Real Estate’in kurucusu ve brokerıdır.',
-    aboutTitle: 'Hakkımda | Ali Caner Can', aboutDesc: 'Antalya doğumlu makine mühendisi Ali Caner Can’ın hikâyesi: Kuleli, YTÜ, çok uluslu şirketlerde satış yöneticiliği ve 2024’te kurduğu ACC HOMES.',
+    ctaT: 'Antalya’da gayrimenkul kararı mı veriyorsunuz?', ctaL: 'Ofiste, online ya da bir kahve veya iş yemeğinde; önce konuşalım, veriyi birlikte okuyalım.',
+    follow: 'Takip edin', followE: 'Sosyal medya', followT: 'Beni takip edin', followL: 'Piyasayı, sahayı ve yeni projeleri ilk elden paylaştığım hesaplar.', followBtn: 'Takip et', top: 'Instagram’da takip edin', footNote: 'Ali Caner Can, ACC HOMES International Real Estate’in kurucusu ve brokerıdır.',
+    aboutTitle: 'Ali Caner Can Kimdir? Mühendislikten Gayrimenkule', aboutDesc: 'Antalya doğumlu makine mühendisi Ali Caner Can’ın hikâyesi: Kuleli, YTÜ, çok uluslu şirketlerde satış yöneticiliği ve 2024’te kurduğu ACC HOMES.',
     aboutH: 'Mühendislikten gayrimenkule', aboutLead: 'Antalya’da doğdum. Disiplini Kuleli’de, analitik düşünmeyi Yıldız Teknik’te, satışı ve ekip yönetmeyi dünyanın en talepkâr şirketlerinde öğrendim. 2022’de gayrimenkule geçtim; 2024’te ACC HOMES’u kurdum.',
     tlT: 'Yolculuk',
     tl: [
       ['2004–2008', 'Kuleli Askeri Lisesi', 'Disiplin, planlama ve sorumluluk duygusunun temeli.'],
       ['2009–2013', 'Yıldız Teknik Üniversitesi, Makine Mühendisliği', 'Analitik düşünme ve veriyle karar verme alışkanlığı.'],
-      ['2013 →', 'Bosch, Decathlon', 'Kurumsal hayata ilk adımlar: operasyon, verimlilik, ölçülebilir hedefler.'],
-      ['→ 2022', 'Reckitt, Hasbro, Nestlé, Kraft Heinz', 'Satış ve trade marketing yöneticiliği; büyük bütçeler, saha ekipleri, pazar payı.'],
-      ['2022', 'Gayrimenkule geçiş · Realty World MES', 'Antalya’da broker olarak sahaya çıktım; 2022 yılı ciro ödülü.'],
-      ['Mayıs 2024', 'ACC HOMES International Real Estate', 'Kendi markamı kurdum; dijital pazarlama, video ve CRM’i emlakla birleştirdim.'],
-      ['2025', 'ACC Plaza · yatırımcı buluşmaları', '1.000 m² genel merkez, Akra Hotel’de Danube Properties ile yatırımcı buluşması, Antalle open house.'],
-      ['2026', 'ACC VILLAS', 'Villa ve büyük müstakil evlere odaklanan iştirak.'],
+      ['2011–2013', 'Robert Bosch · Reckitt Benckiser', 'Bosch’ta pazarlama, Reckitt’te trade marketing stajı (Finish kategorisi).'],
+      ['2013–2016', 'Hasbro', 'Müşteri satış temsilcisi, ardından oyuncak uzmanı ve e-ticaret kanalı kilit müşteri yöneticisi: Toyzz Shop, Boyner, Hepsiburada, Trendyol.'],
+      ['2016–2018', 'Nestlé', 'Ulusal kilit müşteriler yönetici yardımcısı.'],
+      ['2018–2022', 'Kraft Heinz', 'Ulusal ve indirim marketleri kilit müşteri yöneticisi (Migros, Carrefour, BİM, ŞOK, A101), Orta Doğu ve Afrika bölge trade marketing yöneticisi (6 Körfez ülkesi), e-ticaret ve B2C kanal yöneticisi.'],
+      ['2022–2024', 'Realty World · broker', 'Antalya, Mersin ve İstanbul’da alım, satım, kiralama; kat karşılığı, otel, fabrika ve plaza gibi ticari işler. 10 kişilik ekip, 80’i aşkın portföy, 2022 yılı ciro ödülü.'],
+      ['2023–2024', 'TEUS Group · Satış Direktörü', 'Türkiye projelerinde satış ekibinin kurulması ve yönetimi, fiyatlama ve pazara giriş stratejisi, B2B ve B2C satış.'],
+      ['2024', 'ACC HOMES International Real Estate', 'Kendi markamı kurdum: kurumsal disiplin, dijital pazarlama, video ve CRM’i gayrimenkulle birleştirdim.'],
+      ['2025', 'ACC Plaza · ANTİAD', '1.000 m² genel merkez; Antalya İş İnsanları Derneği üyeliği; Danube Properties ile yatırımcı buluşması.'],
+      ['2026', 'ACC VILLAS', 'Bugün 10 dilde hizmet veren yaklaşık 50 iş ortağı ve villalara odaklanan iştirak.'],
     ],
     valT: 'Nasıl çalışırım',
     vals: [['Veri', 'Fiyatı his değil emsal, bölge verisi ve piyasa raporu belirler.'], ['Şeffaflık', 'Masrafı, riski ve süreci baştan, yazılı olarak konuşurum.'], ['Saha', 'Her mülkü yerinde görür, her müşteriyle bizzat ilgilenirim.'], ['Ekip', 'Eğitimli iş ortakları ve tek merkezden yönetilen süreç.']],
@@ -109,7 +120,7 @@ const T = {
     insTitle: 'Yazılar ve Rehberler | Ali Caner Can', insDesc: 'Ali Caner Can’ın Antalya gayrimenkulü üzerine yazıları: tapu süreci, alım masrafları, villa ve ev alırken dikkat edilecekler, haftalık ACC NEWS.',
     stageTitle: 'Sahne ve Medya | Ali Caner Can', stageDesc: 'Ödüller, yatırımcı buluşmaları, ANTİAD, kentsel dönüşüm zirvesi ve ACC Day: Ali Caner Can’ın sahadan ve sahneden kareleri.',
     speakT: 'Konuşmacı olarak davet edin', speakL: 'Antalya gayrimenkul piyasası, yabancı yatırımcı, satış ve ekip liderliği konularında etkinliklere katılıyorum.',
-    advTitle: 'Danışmanlık | Ali Caner Can', advDesc: 'Yatırımcılar, yabancı alıcılar, müteahhitler ve mülk sahipleri için Ali Caner Can ve ACC HOMES ile Antalya gayrimenkul danışmanlığı.',
+    advTitle: 'Antalya Gayrimenkul Danışmanlığı | Ali Caner Can', advDesc: 'Yatırımcılar, yabancı alıcılar, müteahhitler ve mülk sahipleri için Ali Caner Can ve ACC HOMES ile Antalya gayrimenkul danışmanlığı.',
     advH: 'Kiminle, nasıl çalışıyorum', advLead: 'Danışmanlık hizmetlerini ACC HOMES çatısı altında, ekibimle birlikte veriyorum. Her iş için sorumluluk bende.',
     adv: [
       ['Yatırımcılar ve yabancı alıcılar', 'Bölge seçimi, emsal analizi, tapu ve resmi süreçler, yabancı alıcı için anadilde baştan sona destek.', 'guide', 'Alıcı rehberi'],
@@ -117,21 +128,21 @@ const T = {
       ['Mülk sahipleri', 'Ücretsiz değerleme, profesyonel çekim ve video, hedefli reklam ve tapuya kadar süreç yönetimi.', 'sell', 'Mülkünüzü satın'],
       ['Villa alım ve satımı', 'Villa ve büyük müstakil evler için ACC VILLAS’ın özel süreci.', 'villas', 'accvillas.com'],
     ],
-    contactTitle: 'İletişim | Ali Caner Can', contactDesc: 'Ali Caner Can ile görüşme planlayın: WhatsApp, telefon, e-posta ve ACC Plaza, Yeşilbahçe, Muratpaşa / Antalya.',
-    contactH: 'Görüşme planlayalım', contactLead: 'Formu doldurun ya da doğrudan WhatsApp’tan yazın; en kısa sürede dönüş yaparım.',
+    contactTitle: 'Ali Caner Can ile Görüşme ve Randevu | İletişim', contactDesc: 'Ali Caner Can ile görüşme planlayın: WhatsApp, telefon, e-posta ve ACC Plaza, Yeşilbahçe, Muratpaşa / Antalya.',
+    contactH: 'Görüşme planlayalım', meetH: "Nasıl görüşelim?", meetL: "Size en uygun yolu seçin; formda tarih ve saat önerebilirsiniz.", meet: [["Ofiste görüşme", "ACC Plaza, Yeşilbahçe. Kahvemiz hazır."], ["Online görüşme", "Zoom, Google Meet ya da WhatsApp görüntülü arama."], ["Kahve ya da iş yemeği", "Antalya’da size yakın bir yerde, daha uzun bir sohbet için."]], meetBtn: "Bu seçenekle randevu iste", meetType: "Görüşme türü", meetDate: "Tercih ettiğiniz tarih", meetTime: "Saat", contactLead: 'Formu doldurun ya da doğrudan WhatsApp’tan yazın; en kısa sürede dönüş yaparım.',
     form: { name: 'Adınız soyadınız', phone: 'Telefon', email: 'E-posta', topic: 'Konu', topics: ['Alım', 'Satış', 'Yatırım', 'Proje pazarlama', 'Konuşmacı daveti', 'Diğer'], msg: 'Mesajınız', send: 'Gönder', consent: 'Kişisel verilerimin işlenmesine ilişkin', kvkk: 'aydınlatma metnini okudum', ok: 'Teşekkürler, mesajınız ulaştı. En kısa sürede dönüş yapacağım.' },
     office: 'ACC Plaza · Yeşilbahçe, Muratpaşa / Antalya', directions: 'Yol tarifi', read: 'Oku', all: 'Tümü',
     n404: 'Aradığınız sayfa bulunamadı', home: 'Ana sayfa', privacy: 'KVKK aydınlatma metni',
   },
   en: {
     locale: 'en_US', nav: { about: 'About', insights: 'Insights', stage: 'Speaking & media', advisory: 'Advisory', contact: 'Contact' },
-    role: 'Broker & Founder, ACC HOMES', cta: 'Book a meeting', ctaRead: 'Read my insights', wa: 'Message on WhatsApp',
+    role: 'Broker & Founder, ACC HOMES', call: 'Call', cta: 'Book a meeting', ctaRead: 'Read my insights', wa: 'Message on WhatsApp',
     homeTitle: 'Ali Caner Can | Antalya Real Estate Broker, Founder of ACC HOMES',
-    homeDesc: 'Ali Caner Can: mechanical engineer, former multinational sales manager, founder of ACC HOMES and ACC VILLAS. Data-driven, transparent real estate advice in Antalya.',
+    homeDesc: 'Ali Caner Can: mechanical engineer, ex-multinational sales manager, founder of ACC HOMES and ACC VILLAS. Data-driven, transparent property advice in Antalya.',
     eyebrow: 'Broker & Founder · ACC HOMES International Real Estate',
     h1: 'Ali Caner Can',
     lead: 'A mechanical engineer and sales manager trained at companies like Nestlé and Kraft Heinz. Since 2024, through ACC HOMES, I explain Antalya real estate with data, transparency and time in the field.',
-    stats: [['290+', 'sales and rentals I closed personally'], ['~50', 'partners in the team'], [`${G.rating} ★`, `${G.count} Google reviews (ACC HOMES)`], ['1,000 m²', 'ACC Plaza headquarters']],
+    stats: [['290+', 'sales and rentals I closed personally'], ['~50', 'partners serving in 10 languages'], [`${G.rating} ★`, `${G.count} Google reviews (ACC HOMES)`], ['1,000 m²', 'ACC Plaza headquarters']],
     nowT: 'What I do today', nowL: 'The businesses I founded and lead. Each has its own focus, all share the same principles.',
     now: [
       ['ACC HOMES International Real Estate', 'Sales, rentals, project marketing and foreign investor advisory in Antalya. Around 50 partners at ACC Plaza.', 'home', 'acchomesantalya.com'],
@@ -144,20 +155,23 @@ const T = {
     stageT: 'In the field and on stage', stageL: 'Awards, investor meetings, business association work and community projects.',
     keysT: 'Handover moments', keysL: 'Title deed day is the best part of the job. These photos are shared with our clients’ permission.',
     revT: 'What clients say', revL: 'From real reviews on the ACC HOMES Google profile.', revAll: 'All Google reviews',
-    ctaT: 'Making a property decision in Antalya?', ctaL: 'Buying, selling or investing: let’s talk first and read the data together.',
-    follow: 'Follow', footNote: 'Ali Caner Can is the founder and broker of ACC HOMES International Real Estate.',
-    aboutTitle: 'About | Ali Caner Can', aboutDesc: 'The story of Ali Caner Can, an Antalya-born mechanical engineer: Kuleli, YTÜ, sales leadership at multinationals and founding ACC HOMES in 2024.',
+    ctaT: 'Making a property decision in Antalya?', ctaL: 'At the office, online or over coffee or lunch: let’s talk first and read the data together.',
+    follow: 'Follow', followE: 'Social media', followT: 'Follow me', followL: 'Where I share the market, the field and new projects first-hand.', followBtn: 'Follow', top: 'Follow on Instagram', footNote: 'Ali Caner Can is the founder and broker of ACC HOMES International Real Estate.',
+    aboutTitle: 'About Ali Caner Can | Engineer Turned Antalya Broker', aboutDesc: 'The story of Ali Caner Can, an Antalya-born mechanical engineer: Kuleli, YTÜ, sales leadership at multinationals and founding ACC HOMES in 2024.',
     aboutH: 'From engineering to real estate', aboutLead: 'I was born in Antalya. I learned discipline at Kuleli, analytical thinking at Yıldız Technical University, and sales and team leadership at some of the world’s most demanding companies. I moved into real estate in 2022 and founded ACC HOMES in 2024.',
     tlT: 'The journey',
     tl: [
       ['2004–2008', 'Kuleli Military High School', 'The foundation of discipline, planning and responsibility.'],
       ['2009–2013', 'Yıldız Technical University, Mechanical Engineering', 'Analytical thinking and data-based decisions.'],
-      ['2013 →', 'Bosch, Decathlon', 'First corporate steps: operations, efficiency, measurable goals.'],
-      ['→ 2022', 'Reckitt, Hasbro, Nestlé, Kraft Heinz', 'Sales and trade marketing management: large budgets, field teams, market share.'],
-      ['2022', 'Into real estate · Realty World MES', 'Started as a broker in Antalya; 2022 revenue award.'],
-      ['May 2024', 'ACC HOMES International Real Estate', 'Founded my own brand, bringing digital marketing, video and CRM into real estate.'],
-      ['2025', 'ACC Plaza · investor events', 'A 1,000 m² headquarters, an investor meeting with Danube Properties at Akra Hotel, the Antalle open house.'],
-      ['2026', 'ACC VILLAS', 'A division focused on villas and large detached homes.'],
+      ['2011–2013', 'Robert Bosch · Reckitt Benckiser', 'Marketing intern at Bosch, trade marketing intern at Reckitt (Finish category).'],
+      ['2013–2016', 'Hasbro', 'Customer sales representative, then key account executive for toy specialists and e-commerce: Toyzz Shop, Boyner, Hepsiburada, Trendyol.'],
+      ['2016–2018', 'Nestlé', 'Assistant national key accounts manager.'],
+      ['2018–2022', 'Kraft Heinz', 'National and discounter key accounts manager (Migros, Carrefour, BİM, ŞOK, A101), regional trade marketing manager for the Middle East and Africa (6 GCC countries), e-commerce and B2C channel manager.'],
+      ['2022–2024', 'Realty World · broker', 'Buying, selling and renting in Antalya, Mersin and Istanbul; land-for-flats deals, hotels, factories and plazas. A team of 10, over 80 listings, the 2022 revenue award.'],
+      ['2023–2024', 'TEUS Group · Sales Director', 'Built and led the sales team for Türkiye projects; pricing and go-to-market strategy, B2B and B2C sales.'],
+      ['2024', 'ACC HOMES International Real Estate', 'Founded my own brand, bringing corporate discipline, digital marketing, video and CRM into real estate.'],
+      ['2025', 'ACC Plaza · ANTİAD', 'A 1,000 m² headquarters; membership of the Antalya Business People’s Association; investor meeting with Danube Properties.'],
+      ['2026', 'ACC VILLAS', 'Today around 50 partners serving in 10 languages, and a division focused on villas.'],
     ],
     valT: 'How I work',
     vals: [['Data', 'Comparables, area data and market reports set the price, not gut feeling.'], ['Transparency', 'Costs, risks and process are discussed up front, in writing.'], ['Field', 'I see every property in person and work with every client directly.'], ['Team', 'Trained partners and one centrally managed process.']],
@@ -165,7 +179,7 @@ const T = {
     insTitle: 'Insights and Guides | Ali Caner Can', insDesc: 'Ali Caner Can on Antalya real estate: the title deed process, purchase costs, what to check before buying a villa or home, and the weekly ACC NEWS.',
     stageTitle: 'Speaking and Media | Ali Caner Can', stageDesc: 'Awards, investor meetings, ANTİAD, the urban renewal summit and ACC Day: Ali Caner Can in the field and on stage.',
     speakT: 'Invite me to speak', speakL: 'I take part in events on the Antalya property market, foreign investment, sales and team leadership.',
-    advTitle: 'Advisory | Ali Caner Can', advDesc: 'Antalya real estate advisory with Ali Caner Can and ACC HOMES for investors, foreign buyers, developers and property owners.',
+    advTitle: 'Real Estate Advisory in Antalya | Ali Caner Can', advDesc: 'Antalya real estate advisory with Ali Caner Can and ACC HOMES for investors, foreign buyers, developers and property owners.',
     advH: 'Who I work with, and how', advLead: 'I provide advisory services under ACC HOMES, together with my team. I take responsibility for every engagement.',
     adv: [
       ['Investors and foreign buyers', 'Area selection, comparable analysis, title deed and official steps, start-to-finish support in your language.', 'guide', 'Buyer’s guide'],
@@ -173,21 +187,21 @@ const T = {
       ['Property owners', 'Free valuation, professional photo and video, targeted ads and process management through to the title deed.', 'sell', 'Sell your property'],
       ['Villa buying and selling', 'ACC VILLAS’ dedicated process for villas and large detached homes.', 'villas', 'accvillas.com'],
     ],
-    contactTitle: 'Contact | Ali Caner Can', contactDesc: 'Book a meeting with Ali Caner Can: WhatsApp, phone, e-mail and ACC Plaza, Yeşilbahçe, Muratpaşa, Antalya.',
-    contactH: 'Let’s set up a meeting', contactLead: 'Fill in the form or message me directly on WhatsApp; I will get back to you shortly.',
+    contactTitle: 'Book a Meeting with Ali Caner Can | Contact', contactDesc: 'Book a meeting with Ali Caner Can at ACC Plaza, online or over coffee or lunch. WhatsApp, phone and e-mail; Yeşilbahçe, Muratpaşa, Antalya.',
+    contactH: 'Let’s set up a meeting', meetH: "How shall we meet?", meetL: "Pick what suits you; suggest a date and time in the form.", meet: [["Meeting at the office", "ACC Plaza, Yeşilbahçe. The coffee is on us."], ["Online meeting", "Zoom, Google Meet or a WhatsApp video call."], ["Coffee or a business lunch", "Somewhere near you in Antalya, for a longer conversation."]], meetBtn: "Request this meeting", meetType: "Meeting type", meetDate: "Preferred date", meetTime: "Time", contactLead: 'Fill in the form or message me directly on WhatsApp; I will get back to you shortly.',
     form: { name: 'Full name', phone: 'Phone', email: 'E-mail', topic: 'Topic', topics: ['Buying', 'Selling', 'Investment', 'Project marketing', 'Speaking invitation', 'Other'], msg: 'Your message', send: 'Send', consent: 'I have read the', kvkk: 'privacy notice', ok: 'Thank you, your message has arrived. I will get back to you shortly.' },
     office: 'ACC Plaza · Yeşilbahçe, Muratpaşa, Antalya', directions: 'Directions', read: 'Read', all: 'All',
     n404: 'Page not found', home: 'Home', privacy: 'Privacy notice',
   },
   ru: {
     locale: 'ru_RU', nav: { about: 'Обо мне', insights: 'Статьи', stage: 'Выступления', advisory: 'Консультации', contact: 'Контакты' },
-    role: 'Брокер и основатель ACC HOMES', cta: 'Назначить встречу', ctaRead: 'Читать статьи', wa: 'Написать в WhatsApp',
-    homeTitle: 'Али Джанер Джан | Брокер недвижимости в Анталии, основатель ACC HOMES',
+    role: 'Брокер и основатель ACC HOMES', call: 'Позвонить', cta: 'Назначить встречу', ctaRead: 'Читать статьи', wa: 'Написать в WhatsApp',
+    homeTitle: 'Али Джанер Джан | Брокер недвижимости в Анталии, ACC HOMES',
     homeDesc: 'Али Джанер Джан: инженер-механик, экс-руководитель продаж в международных компаниях, основатель ACC HOMES и ACC VILLAS. Консультации по недвижимости Анталии.',
     eyebrow: 'Брокер и основатель · ACC HOMES International Real Estate',
     h1: 'Али Джанер Джан',
     lead: 'Инженер-механик и руководитель продаж с опытом в Nestlé и Kraft Heinz. С 2024 года вместе с ACC HOMES рассказываю о недвижимости Анталии на основе данных, открыто и по опыту работы на объектах.',
-    stats: [['290+', 'сделок продажи и аренды, проведённых лично'], ['~50', 'партнёров в команде'], [`${String(G.rating).replace('.', ',')} ★`, `${G.count} отзывов Google (ACC HOMES)`], ['1 000 м²', 'штаб-квартира ACC Plaza']],
+    stats: [['290+', 'сделок продажи и аренды, проведённых лично'], ['~50', 'партнёров, 10 языков'], [`${String(G.rating).replace('.', ',')} ★`, `${G.count} отзывов Google (ACC HOMES)`], ['1 000 м²', 'штаб-квартира ACC Plaza']],
     nowT: 'Чем я занимаюсь сегодня', nowL: 'Компании, которые я основал и которыми руковожу. У каждой своя специализация и общие принципы.',
     now: [
       ['ACC HOMES International Real Estate', 'Продажа, аренда, маркетинг проектов и консультации иностранных инвесторов в Анталии. Около 50 партнёров в ACC Plaza.', 'home', 'acchomesantalya.com'],
@@ -200,20 +214,23 @@ const T = {
     stageT: 'На объектах и на сцене', stageL: 'Награды, встречи с инвесторами, работа в деловой ассоциации и социальные проекты.',
     keysT: 'Моменты передачи ключей', keysL: 'День оформления тапу — лучший момент в работе. Фото опубликованы с согласия наших клиентов.',
     revT: 'Что говорят клиенты', revL: 'Из реальных отзывов в профиле ACC HOMES в Google.', revAll: 'Все отзывы Google',
-    ctaT: 'Принимаете решение о недвижимости в Анталии?', ctaL: 'Покупка, продажа или инвестиции: давайте сначала поговорим и вместе посмотрим на данные.',
-    follow: 'Подписывайтесь', footNote: 'Али Джанер Джан — основатель и брокер ACC HOMES International Real Estate.',
-    aboutTitle: 'Обо мне | Али Джанер Джан', aboutDesc: 'История Али Джанера Джана, инженера-механика из Анталии: Кулели, YTÜ, руководство продажами в международных компаниях и основание ACC HOMES в 2024 году.',
+    ctaT: 'Принимаете решение о недвижимости в Анталии?', ctaL: 'В офисе, онлайн или за кофе и деловым обедом: давайте сначала поговорим и вместе посмотрим на данные.',
+    follow: 'Подписывайтесь', followE: 'Соцсети', followT: 'Подписывайтесь', followL: 'Здесь я первым делюсь новостями рынка, объектами и проектами.', followBtn: 'Подписаться', top: 'Instagram', footNote: 'Али Джанер Джан — основатель и брокер ACC HOMES International Real Estate.',
+    aboutTitle: 'Али Джанер Джан: путь брокера в Анталии | Обо мне', aboutDesc: 'История Али Джанера Джана, инженера-механика из Анталии: Кулели, YTÜ, руководство продажами в международных компаниях и основание ACC HOMES в 2024 году.',
     aboutH: 'От инженерии к недвижимости', aboutLead: 'Я родился в Анталии. Дисциплине учился в Кулели, аналитическому мышлению — в Техническом университете Йылдыз, продажам и управлению командой — в одних из самых требовательных компаний мира. В 2022 году пришёл в недвижимость, в 2024 году основал ACC HOMES.',
     tlT: 'Путь',
     tl: [
       ['2004–2008', 'Военный лицей Кулели', 'Основа дисциплины, планирования и ответственности.'],
       ['2009–2013', 'Технический университет Йылдыз, машиностроение', 'Аналитическое мышление и решения на основе данных.'],
-      ['2013 →', 'Bosch, Decathlon', 'Первые шаги в корпорациях: операции, эффективность, измеримые цели.'],
-      ['→ 2022', 'Reckitt, Hasbro, Nestlé, Kraft Heinz', 'Руководство продажами и trade marketing: крупные бюджеты, полевые команды, доля рынка.'],
-      ['2022', 'Приход в недвижимость · Realty World MES', 'Начал работать брокером в Анталии; награда по обороту за 2022 год.'],
-      ['Май 2024', 'ACC HOMES International Real Estate', 'Основал собственный бренд и объединил цифровой маркетинг, видео и CRM с недвижимостью.'],
-      ['2025', 'ACC Plaza · встречи с инвесторами', 'Штаб-квартира 1 000 м², встреча инвесторов с Danube Properties в Akra Hotel, open house Antalle.'],
-      ['2026', 'ACC VILLAS', 'Направление по виллам и большим частным домам.'],
+      ['2011–2013', 'Robert Bosch · Reckitt Benckiser', 'Стажировка в маркетинге Bosch и в trade marketing Reckitt (категория Finish).'],
+      ['2013–2016', 'Hasbro', 'Торговый представитель, затем менеджер ключевых клиентов в канале игрушек и e-commerce: Toyzz Shop, Boyner, Hepsiburada, Trendyol.'],
+      ['2016–2018', 'Nestlé', 'Помощник менеджера по национальным ключевым клиентам.'],
+      ['2018–2022', 'Kraft Heinz', 'Менеджер национальных сетей и дискаунтеров (Migros, Carrefour, BİM, ŞOK, A101), региональный менеджер trade marketing по Ближнему Востоку и Африке (6 стран Залива), руководитель e-commerce и B2C.'],
+      ['2022–2024', 'Realty World · брокер', 'Покупка, продажа и аренда в Анталии, Мерсине и Стамбуле; сделки «земля за квартиры», отели, заводы, плазы. Команда из 10 человек, более 80 объектов, награда по обороту за 2022 год.'],
+      ['2023–2024', 'TEUS Group · директор по продажам', 'Создание и руководство командой продаж проектов в Турции; ценообразование и стратегия выхода на рынок, B2B и B2C.'],
+      ['2024', 'ACC HOMES International Real Estate', 'Основал собственный бренд, объединив корпоративную дисциплину, цифровой маркетинг, видео и CRM.'],
+      ['2025', 'ACC Plaza · ANTİAD', 'Штаб-квартира 1 000 м²; членство в Ассоциации деловых людей Анталии; встреча инвесторов с Danube Properties.'],
+      ['2026', 'ACC VILLAS', 'Сегодня около 50 партнёров, работающих на 10 языках, и направление по виллам.'],
     ],
     valT: 'Как я работаю',
     vals: [['Данные', 'Цену определяют аналоги, данные по району и отчёты рынка, а не интуиция.'], ['Прозрачность', 'Расходы, риски и процесс обсуждаем заранее и письменно.'], ['Объекты', 'Лично смотрю каждый объект и работаю с каждым клиентом.'], ['Команда', 'Обученные партнёры и процесс, управляемый из одного центра.']],
@@ -229,8 +246,8 @@ const T = {
       ['Владельцы недвижимости', 'Бесплатная оценка, профессиональные фото и видео, таргетированная реклама и сопровождение до тапу.', 'sell', 'Продать недвижимость'],
       ['Покупка и продажа вилл', 'Отдельный процесс ACC VILLAS для вилл и больших частных домов.', 'villas', 'accvillas.com'],
     ],
-    contactTitle: 'Контакты | Али Джанер Джан', contactDesc: 'Назначьте встречу с Али Джанером Джаном: WhatsApp, телефон, e-mail и ACC Plaza, Ешильбахче, Муратпаша, Анталия.',
-    contactH: 'Давайте встретимся', contactLead: 'Заполните форму или напишите мне в WhatsApp; я отвечу в ближайшее время.',
+    contactTitle: 'Встреча с Али Джанером Джаном | Контакты', contactDesc: 'Назначьте встречу с Али Джанером Джаном: WhatsApp, телефон, e-mail и ACC Plaza, Ешильбахче, Муратпаша, Анталия.',
+    contactH: 'Давайте встретимся', meetH: "Как встретимся?", meetL: "Выберите удобный формат и предложите дату и время в форме.", meet: [["Встреча в офисе", "ACC Plaza, Ешильбахче. Кофе за нами."], ["Онлайн-встреча", "Zoom, Google Meet или видеозвонок в WhatsApp."], ["Кофе или деловой обед", "В удобном для вас месте в Анталии, для долгого разговора."]], meetBtn: "Выбрать этот формат", meetType: "Формат встречи", meetDate: "Желаемая дата", meetTime: "Время", contactLead: 'Заполните форму или напишите мне в WhatsApp; я отвечу в ближайшее время.',
     form: { name: 'Имя и фамилия', phone: 'Телефон', email: 'E-mail', topic: 'Тема', topics: ['Покупка', 'Продажа', 'Инвестиции', 'Маркетинг проекта', 'Приглашение выступить', 'Другое'], msg: 'Сообщение', send: 'Отправить', consent: 'Я прочитал(а)', kvkk: 'уведомление о конфиденциальности', ok: 'Спасибо, сообщение получено. Я отвечу в ближайшее время.' },
     office: 'ACC Plaza · Ешильбахче, Муратпаша, Анталия', directions: 'Маршрут', read: 'Читать', all: 'Все',
     n404: 'Страница не найдена', home: 'Главная', privacy: 'Политика конфиденциальности',
@@ -238,7 +255,9 @@ const T = {
 };
 
 // Yazılar: yayımlanmış, Caner imzalı içerik (ACC HOMES / ACC VILLAS)
+const LI = 'https://www.linkedin.com/in/alicanercantherealtor/recent-activity/all/';
 const POSTS = [
+  { tag: { tr: 'Piyasa analizi · LinkedIn', en: 'Market analysis · LinkedIn', ru: 'Аналитика · LinkedIn' }, t: { tr: 'BDDK’nın 19 Kasım kararı: ikinci konutta kredi kısıtı gevşedi', en: 'BDDK’s 19 November decision: the second-home loan limit eases', ru: 'Решение BDDK от 19 ноября: смягчение ипотеки на второе жильё' }, d: { tr: 'Tek evi olan alıcı için azami kredi 1,125 milyon TL’den 4,5 milyon TL’ye çıkıyor. Kimler yeniden alıcı oluyor, talep nerede güçlenir?', en: 'For a buyer with one home, the maximum loan on a TRY 5m home rises from TRY 1.125m to TRY 4.5m. Who returns to the market and where demand strengthens.', ru: 'Для владельца одного жилья максимум кредита на жильё за 5 млн TL растёт с 1,125 до 4,5 млн TL. Кто возвращается на рынок и где вырастет спрос.' }, u: { tr: LI, en: LI, ru: LI }, img: 'acc-plaza-ofis' },
   { tag: { tr: 'Alıcı rehberi', en: 'Buyer’s guide', ru: 'Гид покупателя' }, t: { tr: 'Ev alırken pişman olmamak için dikkat edilecekler', en: 'Buying a home without regrets', ru: 'Как не пожалеть о покупке жилья' }, d: { tr: 'Daireden villaya ya da büyük siteye geçerken bakım bütçesi, aidat, vergi ve yaşam değişimi.', en: 'Upkeep, service charges, tax and lifestyle change when moving to a villa or large complex.', ru: 'Содержание, взносы, налог и образ жизни при переезде в виллу или большой комплекс.' }, u: { tr: `${MAIN}/alici-rehberi/ev-aldiktan-sonra-pisman-olmamak/`, en: `${MAIN}/en/buyers-guide/buying-a-home-without-regrets/`, ru: `${MAIN}/ru/buyers-guide/kak-ne-pozhalet-o-pokupke/` }, img: 'antalle-concept-houses-villalar' },
   { tag: { tr: 'ACC VILLAS', en: 'ACC VILLAS', ru: 'ACC VILLAS' }, t: { tr: 'Villa alırken pişman olmamak için dikkat edilecekler', en: 'Buying a villa without regrets: what to check first', ru: 'Как не пожалеть о покупке виллы' }, d: { tr: 'Havuz, bahçe, yalıtım, ısınma, güvenlik ve villa sitesi yönetimi; yıllık bakım bütçesiyle.', en: 'Pool, garden, insulation, heating, security and complex management, with a yearly upkeep budget.', ru: 'Бассейн, сад, утепление, отопление, безопасность и управление комплексом, с годовым бюджетом.' }, u: { tr: `${VILLAS}/blog/villa-aldiktan-sonra-pisman-olmamak/`, en: `${VILLAS}/en/blog/avoid-regret-after-buying-a-villa/`, ru: `${VILLAS}/ru/blog/kak-ne-pozhalet-o-pokupke-villy/` }, img: 'antalle-concept-houses' },
   { tag: { tr: 'Alıcı rehberi', en: 'Buyer’s guide', ru: 'Гид покупателя' }, t: { tr: 'Tapu süreci ve gerekli belgeler 2026', en: 'Title deed process and documents 2026', ru: 'Тапу и документы 2026' }, d: { tr: 'Yeni DASK kuralı, Web Tapu, gerçek bedel beyanı ve yabancı alıcılar için süreç.', en: 'The new DASK rule, Web Tapu, real price declaration and the process for foreign buyers.', ru: 'Новое правило DASK, Web Tapu, декларация реальной цены и процесс для иностранцев.' }, u: { tr: `${MAIN}/alici-rehberi/tapu-sureci-gerekli-belgeler/`, en: `${MAIN}/en/buyers-guide/title-deed-process-documents/`, ru: `${MAIN}/en/buyers-guide/title-deed-process-documents/` }, img: 'tapu-teslim-2' },
@@ -265,19 +284,34 @@ const GAL = [
 const KEYS = [1, 2, 3, 4, 5, 6].map((i) => `tapu-teslim-${i}`);
 const img = (n, w) => `/img/${n}${w === 800 && !n.startsWith('sosyal/') ? '-800' : ''}.webp`;
 
+// ---------- anahtar kelimeler ----------
+const KW = {
+  tr: 'Ali Caner Can, Antalya emlak danışmanı, Antalya gayrimenkul brokerı, ACC HOMES, ACC VILLAS, Antalya satılık daire, Antalya satılık villa, Antalya gayrimenkul yatırımı',
+  en: 'Ali Caner Can, Antalya real estate broker, Antalya realtor, ACC HOMES, ACC VILLAS, property in Antalya, villas for sale Antalya, Antalya real estate investment',
+  ru: 'Али Джанер Джан, Ali Caner Can, риелтор Анталия, брокер недвижимости Анталия, ACC HOMES, ACC VILLAS, недвижимость в Анталии, купить виллу в Анталии',
+};
+const PKW = {
+  home: { tr: 'en iyi emlakçı Antalya, Antalya emlak ofisi', en: 'best realtor Antalya, Antalya property advisor', ru: 'лучший риелтор Анталии, агентство недвижимости Анталия' },
+  about: { tr: 'Ali Caner Can kimdir, makine mühendisi emlak, Kraft Heinz Nestlé satış yöneticisi', en: 'who is Ali Caner Can, engineer turned realtor, Kraft Heinz Nestlé sales manager', ru: 'кто такой Али Джанер Джан, биография брокера' },
+  insights: { tr: 'Antalya gayrimenkul piyasası, tapu süreci, konut kredisi, villa alırken dikkat', en: 'Antalya property market, title deed process, buying a villa in Turkey', ru: 'рынок недвижимости Анталии, оформление тапу, покупка виллы в Турции' },
+  stage: { tr: 'gayrimenkul konuşmacı Antalya, emlak ödülü, ANTİAD, yatırımcı buluşması', en: 'real estate speaker Antalya, investor events Turkey, ANTİAD', ru: 'спикер по недвижимости Анталия, встречи инвесторов' },
+  advisory: { tr: 'gayrimenkul danışmanlığı Antalya, proje pazarlama, yabancıya konut satışı, mülk değerleme', en: 'real estate advisory Antalya, project marketing Turkey, foreign buyers Turkey, property valuation', ru: 'консультации по недвижимости Анталия, маркетинг проектов, покупка недвижимости иностранцами' },
+  contact: { tr: 'Ali Caner Can iletişim, emlak randevu Antalya, ACC Plaza', en: 'contact Ali Caner Can, book a meeting with a realtor Antalya, ACC Plaza', ru: 'контакты Али Джанер Джан, встреча с риелтором Анталия' },
+};
+
 // ---------- şablon ----------
 const RTLX = (s) => s;
-function head({ lang, title, desc, canon, alt, ld = [], image, type = 'website' }) {
+function head({ lang, title, desc, canon, alt, ld = [], image, type = 'website', kw }) {
   const t = T[lang];
   const og = image || `${DOMAIN}/og-alicanercan.jpg`;
   const altLinks = alt ? LANGS.map((l) => `<link rel="alternate" hreflang="${l}" href="${DOMAIN}${alt[l]}">`).join('') + `<link rel="alternate" hreflang="x-default" href="${DOMAIN}${alt.tr}">` : '';
   return `<!DOCTYPE html><html lang="${lang}"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>${esc(title)}</title><meta name="description" content="${esc(desc)}"><link rel="canonical" href="${DOMAIN}${canon}">${altLinks}
-<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1"><meta name="author" content="Ali Caner Can">
-<meta property="og:type" content="${type}"><meta property="og:site_name" content="Ali Caner Can"><meta property="og:title" content="${esc(title)}"><meta property="og:description" content="${esc(desc)}"><meta property="og:url" content="${DOMAIN}${canon}"><meta property="og:image" content="${og}"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:locale" content="${t.locale}">${LANGS.filter((l) => l !== lang).map((l) => `<meta property="og:locale:alternate" content="${T[l].locale}">`).join('')}
+<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1"><meta name="author" content="Ali Caner Can"><meta name="keywords" content="${esc(kw || KW[lang])}">
+<meta property="og:type" content="${type}"><meta property="og:site_name" content="Ali Caner Can"><meta property="og:title" content="${esc(title)}"><meta property="og:description" content="${esc(desc)}"><meta property="og:url" content="${DOMAIN}${canon}"><meta property="og:image" content="${og}"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:image:alt" content="Ali Caner Can, ${esc(T[lang].role)}"><meta property="og:locale" content="${t.locale}">${LANGS.filter((l) => l !== lang).map((l) => `<meta property="og:locale:alternate" content="${T[l].locale}">`).join('')}
 <meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="${esc(title)}"><meta name="twitter:description" content="${esc(desc)}"><meta name="twitter:image" content="${og}">
 <link rel="icon" href="/favicon.ico" sizes="any"><link rel="icon" href="/favicon.svg" type="image/svg+xml"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><meta name="theme-color" content="#1d1d1f">
-<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Anton&display=swap"><link rel="stylesheet" href="/style.css?v=2">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Anton&display=swap"><link rel="stylesheet" href="/style.css?v=4">
 ${ld.map((x) => `<script type="application/ld+json">${JSON.stringify(x)}</script>`).join('')}
 </head>`;
 }
@@ -285,25 +319,26 @@ const navKeys = ['about', 'insights', 'stage', 'advisory'];
 function header(lang, alt, cur) {
   const t = T[lang];
   const lsw = LANGS.map((l) => `<a href="${(alt && alt[l]) || url(l, 'home')}"${l === lang ? ' class="on" aria-current="true"' : ''} hreflang="${l}">${l.toUpperCase()}</a>`).join('');
-  return `<header class="top"><div class="wrap hb"><a class="wm" href="${url(lang, 'home')}" aria-label="Ali Caner Can"><span class="wm1">ALİ CANER CAN</span><span class="wm2">${t.role}</span></a>
+  return `<div class="tbar"><div class="wrap tbi"><span class="tl1"><a href="tel:${PHONE.raw}">${ICO.ph}${PHONE.text}</a><a href="https://wa.me/${PHONE.wa}" target="_blank" rel="noopener">${ICO.wa}WhatsApp</a><a class="tml" href="mailto:${MAIL}">${MAIL}</a></span><span class="tl2"><a class="tig" href="${SOCIAL[0][3]}" target="_blank" rel="noopener">${ICO.ig}${SOCIAL[0][2]}</a><a class="tyt" href="${SOCIAL[2][3]}" target="_blank" rel="noopener" aria-label="YouTube">${ICO.yt}</a><a class="tin" href="${SOCIAL[1][3]}" target="_blank" rel="noopener" aria-label="LinkedIn">${ICO.in}</a></span></div></div>
+<header class="top"><div class="wrap hb"><a class="wm" href="${url(lang, 'home')}" aria-label="Ali Caner Can"><span class="wm1">ALİ CANER CAN</span><span class="wm2">${t.role}</span></a>
 <nav class="nav" aria-label="Menu">${navKeys.map((k) => `<a href="${url(lang, k)}"${cur === k ? ' aria-current="page"' : ''}>${t.nav[k]}</a>`).join('')}</nav>
 <div class="hr"><span class="lsw">${lsw}</span><a class="btn sm" href="${url(lang, 'contact')}">${t.cta}</a><button class="burger" type="button" aria-label="Menu"><i></i><i></i><i></i></button></div></div>
 <div class="mpanel">${[...navKeys, 'contact'].map((k) => `<a href="${url(lang, k)}">${t.nav[k]}</a>`).join('')}<span class="lsw">${lsw}</span></div></header>`;
 }
 function footer(lang) {
   const t = T[lang];
-  return `<section class="ctaband"><div class="wrap cb"><div><h2>${t.ctaT}</h2><p>${t.ctaL}</p></div><div class="cbb"><a class="btn" href="${url(lang, 'contact')}">${t.cta}</a><a class="btn ghost" href="https://wa.me/${PHONE.wa}" target="_blank" rel="noopener">${ICO.wa}${t.wa}</a></div></div></section>
+  return `<section class="ctaband"><div class="wrap cb"><div><h2>${t.ctaT}</h2><p>${t.ctaL}</p></div><div class="cbb"><a class="btn" href="${url(lang, 'contact')}#randevu">${t.cta}</a><a class="btn ghost" href="https://wa.me/${PHONE.wa}" target="_blank" rel="noopener">${ICO.wa}${t.wa}</a></div></div></section>
 <footer class="ft"><div class="wrap fg"><div><p class="wm1 big">ALİ CANER CAN</p><p class="muted">${t.footNote}</p><p class="soc">${SOCIAL.map(([k, n, , u]) => `<a href="${u}" target="_blank" rel="noopener" aria-label="${n}">${ICO[k]}</a>`).join('')}</p></div>
 <div><p class="fh">ALİ CANER CAN</p>${[...navKeys, 'contact'].map((k) => `<a href="${url(lang, k)}">${t.nav[k]}</a>`).join('')}</div>
-<div><p class="fh">ACC</p><a href="${ACC.home[lang]}" target="_blank" rel="noopener">ACC HOMES</a><a href="${ACC.villas[lang]}" target="_blank" rel="noopener">ACC VILLAS</a><a href="${ACC.antalle[lang]}" target="_blank" rel="noopener">Antalle Concept Houses</a><a href="${ACC.news[lang]}" target="_blank" rel="noopener">ACC NEWS</a></div>
+<div><p class="fh">ACC</p><a href="${ACC.home[lang]}" target="_blank" rel="noopener">ACC HOMES</a><a href="${ACC.villas[lang]}" target="_blank" rel="noopener">ACC VILLAS</a><a href="${ACC.antalle[lang]}" target="_blank" rel="noopener">Antalle Concept Houses</a><a href="${ACC.news[lang]}" target="_blank" rel="noopener">ACC NEWS</a><a href="https://www.instagram.com/acchomesantalya/" target="_blank" rel="noopener">Instagram @acchomesantalya</a><a href="https://www.instagram.com/acc.villas/" target="_blank" rel="noopener">Instagram @acc.villas</a></div>
 <div><p class="fh">${t.nav.contact}</p><a href="tel:${PHONE.raw}">${PHONE.text}</a><a href="https://wa.me/${PHONE.wa}" target="_blank" rel="noopener">WhatsApp</a><a href="mailto:${MAIL}">${MAIL}</a><a href="${G.url}" target="_blank" rel="noopener">${t.office}</a></div></div>
 <div class="wrap fb"><span>© ${new Date().getFullYear()} Ali Caner Can</span><span><a href="${ACC.kvkk[lang]}" target="_blank" rel="noopener">${t.privacy}</a></span></div></footer>
-<a class="fwa" href="https://wa.me/${PHONE.wa}" target="_blank" rel="noopener" aria-label="WhatsApp">${ICO.wa}</a>
-<script>(function(){var b=document.querySelector('.burger'),h=document.querySelector('.top');b&&(b.onclick=function(){h.classList.toggle('open')});var io='IntersectionObserver'in window?new IntersectionObserver(function(e){e.forEach(function(x){if(x.isIntersecting){x.target.classList.add('in');io.unobserve(x.target)}})},{rootMargin:'0px 0px -8% 0px'}):null;document.querySelectorAll('.rv').forEach(function(el){io?io.observe(el):el.classList.add('in')});if(/[?&]ok=1/.test(location.search)){var m=document.querySelector('.okmsg');m&&(m.hidden=false)}})();</script>`;
+<a class="fwa" href="https://wa.me/${PHONE.wa}" target="_blank" rel="noopener" aria-label="WhatsApp">${ICO.wa}</a><div class="dock"><a class="d-call" href="tel:${PHONE.raw}">${ICO.ph}${t.call}</a><a class="d-wa" href="https://wa.me/${PHONE.wa}" target="_blank" rel="noopener">${ICO.wa}WhatsApp</a></div>
+<script>(function(){var b=document.querySelector('.burger'),h=document.querySelector('.top');b&&(b.onclick=function(){h.classList.toggle('open')});var io='IntersectionObserver'in window?new IntersectionObserver(function(e){e.forEach(function(x){if(x.isIntersecting){x.target.classList.add('in');io.unobserve(x.target)}})},{rootMargin:'0px 0px -8% 0px'}):null;document.querySelectorAll('.rv').forEach(function(el){io?io.observe(el):el.classList.add('in')});document.querySelectorAll('[data-meet]').forEach(function(a){a.onclick=function(){var s=document.querySelector('select[name=gorusme_turu]');if(s)s.selectedIndex=+a.dataset.meet}});if(/[?&]ok=1/.test(location.search)){var m=document.querySelector('.okmsg');m&&(m.hidden=false)}})();</script>`;
 }
 function page({ lang, key, title, desc, ld = [], body, image, type }) {
   const alt = alts(key); const canon = url(lang, key);
-  write(canon.slice(1), `${head({ lang, title, desc, canon, alt, ld, image, type })}<body>${header(lang, alt, key)}<main>${body}</main>${footer(lang)}</body></html>`);
+  write(canon.slice(1), `${head({ lang, title, desc, canon, alt, ld, image, type, kw: `${PKW[key][lang]}, ${KW[lang]}` })}<body>${header(lang, alt, key)}<main>${body}</main>${footer(lang)}</body></html>`);
   sitemap.push([canon, alt]);
 }
 const crumbs = (lang, key) => ({ '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [{ '@type': 'ListItem', position: 1, name: 'Ali Caner Can', item: DOMAIN + url(lang, 'home') }, ...(key === 'home' ? [] : [{ '@type': 'ListItem', position: 2, name: T[lang].nav[key], item: DOMAIN + url(lang, key) }])] });
@@ -328,7 +363,9 @@ const reviews = (lang) => {
 <div class="revs">${list.map((r) => `<figure class="rev rv"><blockquote lang="${r.lang}">“${esc(r.text.replace(/^…\s*/, ''))}”</blockquote><figcaption><b>${esc(r.name)}</b> · ${esc(r.topic)} · Google</figcaption></figure>`).join('')}</div>
 <p class="center"><a class="btn ghost" href="${G.url}" target="_blank" rel="noopener">${T[lang].revAll} →</a></p></div></section>`;
 };
-const careerLogos = `<div class="logos">${['nestle', 'kraft-heinz', 'reckitt', 'hasbro'].map((n) => `<img src="/img/logo-${n}.webp" alt="${n.replace('-', ' ')}" loading="lazy">`).join('')}<span class="lt">BOSCH</span><span class="lt">DECATHLON</span></div>`;
+const followBlock = (lang) => `<section class="sec"><div class="wrap"><div class="sh"><div><p class="eyebrow">${T[lang].followE}</p><h2>${T[lang].followT}</h2><p class="lead">${T[lang].followL}</p></div></div>
+<div class="fol">${FOLLOW.map(([k, n, h, u, d]) => `<a class="fo f-${k} rv" href="${u}" target="_blank" rel="noopener"><i>${ICO[k]}</i><span><b>${n}</b><em>${h}</em><small>${d[lang]}</small></span><span class="fgo">${T[lang].followBtn} →</span></a>`).join('')}</div></div></section>`;
+const careerLogos = `<div class="logos">${['nestle', 'kraft-heinz', 'reckitt', 'hasbro'].map((n) => `<img src="/img/logo-${n}.webp" alt="${n.replace('-', ' ')}" loading="lazy">`).join('')}<span class="lt">BOSCH</span><a class="lt li" href="https://www.linkedin.com/in/alicanercantherealtor/" target="_blank" rel="noopener">LinkedIn →</a></div>`;
 
 // ---------- sayfalar ----------
 for (const lang of LANGS) {
@@ -347,6 +384,7 @@ for (const lang of LANGS) {
 <section class="sec dark"><div class="wrap"><div class="sh"><div><p class="eyebrow">04</p><h2>${t.stageT}</h2><p class="lead">${t.stageL}</p></div><a class="all" href="${url(lang, 'stage')}">${t.all} →</a></div>
 <div class="gal">${GAL.slice(0, 6).map((g) => galCard(g, lang)).join('')}</div></div></section>
 <section class="sec"><div class="wrap"><div class="sh"><div><p class="eyebrow">05</p><h2>${t.keysT}</h2><p class="lead">${t.keysL}</p></div></div><div class="keys">${KEYS.map((k) => `<img class="rv" src="${img(k, 800)}" alt="${esc(t.keysT)}" loading="lazy" width="800" height="1000">`).join('')}</div></div></section>
+${followBlock(lang)}
 ${reviews(lang)}` });
 
   // Hakkımda
@@ -378,14 +416,16 @@ ${reviews(lang)}` });
   page({ lang, key: 'contact', title: t.contactTitle, desc: t.contactDesc, ld: [PERSON(lang), crumbs(lang, 'contact'), { '@context': 'https://schema.org', '@type': 'ContactPage', url: DOMAIN + url(lang, 'contact'), about: { '@id': `${DOMAIN}/#person` } }], body: `
 <section class="phero sm"><div class="wrap"><p class="eyebrow">${t.nav.contact}</p><h1>${t.contactH}</h1><p class="lead">${t.contactLead}</p></div></section>
 <section class="sec"><div class="wrap two"><div class="cinfo"><a class="ci" href="https://wa.me/${PHONE.wa}" target="_blank" rel="noopener">${ICO.wa}<span><b>WhatsApp</b>${PHONE.text}</span></a><a class="ci" href="tel:${PHONE.raw}">${ICO.ph}<span><b>${t.form.phone}</b>${PHONE.text}</span></a><a class="ci" href="mailto:${MAIL}"><svg viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" d="M3 6h18v12H3zM3 7l9 6 9-6"/></svg><span><b>${t.form.email}</b>${MAIL}</span></a><a class="ci" href="${G.url}" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" d="M12 22s7-6.2 7-12a7 7 0 1 0-14 0c0 5.8 7 12 7 12z"/><circle cx="12" cy="10" r="2.5" fill="none" stroke="currentColor" stroke-width="2"/></svg><span><b>${t.directions}</b>${t.office}</span></a>
-<p class="soc">${SOCIAL.map(([k, n, h, u]) => `<a href="${u}" target="_blank" rel="noopener" aria-label="${n} ${h}">${ICO[k]}</a>`).join('')}</p></div>${form(lang, 'gorusme-talebi', url(lang, 'contact'))}</div></section>` });
+<p class="soc">${SOCIAL.map(([k, n, h, u]) => `<a href="${u}" target="_blank" rel="noopener" aria-label="${n} ${h}">${ICO[k]}</a>`).join('')}</p></div><div id="randevu">${form(lang, 'gorusme-talebi', url(lang, 'contact'), undefined, true)}</div></div></section>
+<section class="sec bg2"><div class="wrap"><h2>${t.meetH}</h2><p class="lead">${t.meetL}</p><div class="meet">${t.meet.map(([h, p], i) => `<a class="mt rv" href="#randevu" data-meet="${i}"><span class="mi">${['☕', '💻', '🍽️'][i]}</span><h3>${h}</h3><p>${p}</p><span class="more">${t.meetBtn} →</span></a>`).join('')}</div></div></section>
+${followBlock(lang)}` });
 }
 
-function form(lang, name, next, topic) {
-  const f = T[lang].form;
+function form(lang, name, next, topic, meet) {
+  const f = T[lang].form; const t = T[lang];
   const sel = `<select name="konu" aria-label="${f.topic}">${f.topics.map((x, i) => `<option${i === (topic ?? 0) ? ' selected' : ''}>${x}</option>`).join('')}</select>`;
   return `<form class="form" method="POST" action="/form.php"><p class="okmsg" hidden>${f.ok}</p><input type="hidden" name="form-name" value="${name}"><input type="hidden" name="_next" value="${next}"><input type="hidden" name="dil" value="${lang}"><input type="hidden" name="site" value="alicanercan.com"><p class="hpf"><input name="bot" tabindex="-1" autocomplete="off"></p>
-<input name="ad" placeholder="${f.name} *" required autocomplete="name"><input name="telefon" type="tel" placeholder="${f.phone} *" required autocomplete="tel"><input name="eposta" type="email" placeholder="${f.email}" autocomplete="email">${sel}<textarea name="mesaj" rows="4" placeholder="${f.msg}"></textarea>
+<input name="ad" placeholder="${f.name} *" required autocomplete="name"><input name="telefon" type="tel" placeholder="${f.phone} *" required autocomplete="tel"><input name="eposta" type="email" placeholder="${f.email}" autocomplete="email">${sel}${meet ? `<select name="gorusme_turu" aria-label="${t.meetType}">${t.meet.map(([h]) => `<option>${h}</option>`).join('')}</select><div class="dtt"><label>${t.meetDate}<input name="tarih" type="date"></label><label>${t.meetTime}<input name="saat" type="time" step="900"></label></div>` : ''}<textarea name="mesaj" rows="4" placeholder="${f.msg}"></textarea>
 <label class="chk"><input type="checkbox" name="kvkk_onay" value="evet" required> <span>${f.consent} <a href="${ACC.kvkk[lang]}" target="_blank" rel="noopener">${f.kvkk}</a> *</span></label><button class="btn" type="submit">${f.send}</button></form>`;
 }
 

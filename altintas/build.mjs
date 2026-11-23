@@ -108,7 +108,7 @@ let OWN = null;
 try {
   const r = await fetch(`${PANEL.url}/rest/v1/altintas_ilanlari?select=*`, { headers: { apikey: PANEL.key }, signal: AbortSignal.timeout(20000) });
   if (!r.ok) throw new Error('HTTP ' + r.status);
-  OWN = await r.json();
+  OWN = (await r.json()).filter((x) => x.tip !== 'Kat karşılığı');
   fs.writeFileSync(path.join(HERE, 'altintas-ilanlari-cache.json'), JSON.stringify(OWN));
 } catch (e) {
   const c = path.join(HERE, 'altintas-ilanlari-cache.json');

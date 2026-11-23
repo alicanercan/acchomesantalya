@@ -185,6 +185,7 @@ try {
   rows = JSON.parse(fs.readFileSync(snap, 'utf8'));
   console.warn('Panel: ağ yok, anlık görüntü kullanıldı');
 }
+rows = rows.filter((x) => x.tip !== 'Kat karşılığı');
 // Kendi fotoğrafı olmayan ilanlarda Sahibinden görselleri kullanılır (Caner kararı, 22.11.2026); kendi fotoğraf varsa önce onlar
 for (const v of rows) { const f = v.foto || []; const own = f.filter((x) => !/shbdn\.com|sahibinden/i.test(x)); v.foto = own.length ? own : f; }
 const stripTeam = (txt, name) => {

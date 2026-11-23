@@ -63,7 +63,7 @@ function panelIlan(v) {
 try {
   const r = await fetch(`${PANEL.url}/rest/v1/site_ilanlari?select=*`, { headers: { apikey: PANEL.key }, signal: AbortSignal.timeout(20000) });
   if (!r.ok) throw new Error('HTTP ' + r.status);
-  const rows = await r.json(); const byId = new Map(rows.map((v) => [v.id, v]));
+  const rows = (await r.json()).filter((v) => v.tip !== 'Kat karşılığı'); const byId = new Map(rows.map((v) => [v.id, v]));
   for (const l of LISTINGS) { const v = byId.get(l.id); if (v) { const d = panelDanisman(v); if (d) l.danisman = d; byId.delete(l.id); } }
   const yeni = [...byId.values()].map(panelIlan).filter((l) => l.ilce && l.foto.length);
   LISTINGS.push(...yeni);

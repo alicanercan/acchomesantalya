@@ -118,7 +118,7 @@ a{color:inherit}img{max-width:100%;display:block}svg{width:20px;height:20px;flex
 .mqr img{height:38px;width:auto;max-width:170px;object-fit:contain;filter:grayscale(1);opacity:.7;transition:.2s}.mqr img:hover{filter:none;opacity:1}
 .mqr span{font:400 22px Anton,Impact,sans-serif;letter-spacing:.12em;color:#9a9a9a;white-space:nowrap}
 @keyframes mq{to{transform:translateX(-50%)}}
-@media (prefers-reduced-motion:reduce){.mqr{animation:none;flex-wrap:wrap;justify-content:center;width:auto}}
+@media (prefers-reduced-motion:reduce){.mqv{overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch}.mqv::-webkit-scrollbar{display:none}.mqr{animation:none;padding:0 24px}.mqr [aria-hidden="true"]{display:none}}
 .nl{background:var(--ink);color:#fff;border-bottom:1px solid rgba(255,255,255,.1)}.nlg{display:grid;grid-template-columns:1fr 1fr;gap:36px;align-items:center;padding:46px 24px}.nl h2{margin:0 0 6px;font-size:clamp(24px,2.6vw,32px)}.nl p{margin:0;color:rgba(255,255,255,.72)}
 .nlf{display:grid;gap:10px}.nlrow{display:flex;gap:10px}.nlrow input{flex:1;min-width:0;font:inherit;font-size:16px;padding:13px 18px;border-radius:999px;border:1px solid rgba(255,255,255,.25);background:rgba(255,255,255,.06);color:#fff}.nlrow input::placeholder{color:rgba(255,255,255,.55)}.nl .chk{color:rgba(255,255,255,.6)}.nl .chk a{color:#fff}.nlok{background:#1f3b2a!important;color:#b9f0c9!important}
 .flogo{height:auto;width:240px;margin:0 0 14px}

@@ -1452,7 +1452,7 @@ RewriteRule ^(readme\\.html|license\\.txt|wp-config-sample\\.php)$ - [F,L,NC]
 RewriteRule (^|/)\\.(?!well-known/) - [F,L]
 # Başka sitelerin görsellerimizi doğrudan kendi sayfasında göstermesini engelle (arama motorları ve sosyal medya serbest)
 RewriteCond %{HTTP_REFERER} !^$
-RewriteCond %{HTTP_REFERER} !^https?://([a-z0-9-]+\\.)*(acchomesantalya\\.com|altintassatilikdaire\\.com|netlify\\.app|claude\\.ai|claudeusercontent\\.com)(/|$) [NC]
+RewriteCond %{HTTP_REFERER} !^https?://([a-z0-9-]+\\.)*(acchomesantalya\\.com|altintassatilikdaire\\.com|alicanercan\\.com|accvillas\\.com|netlify\\.app|claude\\.ai|claudeusercontent\\.com)(/|$) [NC]
 RewriteCond %{HTTP_REFERER} !(google|bing|yandex|yahoo|duckduckgo|baidu|naver|translate\\.goog|facebook|fb\\.com|instagram|whatsapp|linkedin|twitter|x\\.com|t\\.co|pinterest|telegram|vk\\.com|ok\\.ru|openai|chatgpt|perplexity|microsoft|copilot) [NC]
 RewriteRule \\.(jpe?g|png|webp|gif|avif)$ - [F,NC,L]
 # Var olan dosya ve klasörler yönlendirilmez

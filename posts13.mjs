@@ -132,7 +132,7 @@ export const POSTS13 = [
     en: {
       title: 'Land, Apartment or Farmland? A Guide to Property Investment in Antalya 2026',
       seo: 'Land or Apartment? Antalya Property Investment Guide 2026',
-      desc: 'Land, apartment or farmland in Antalya? Time horizon, rental yield, mortgages, payback, zoning, title deed fees, property tax and capital gains: 2026 guide.',
+      desc: 'Land, apartment or farmland in Antalya? Horizon, rental yield, mortgages, payback, zoning, title deed fees, property tax and capital gains: 2026 guide.',
       html: `
 <p>“I have some savings: should I buy land, an apartment or farmland?” There is no single right answer for everyone. The right investment depends on what you expect (rental income or capital growth), how long you can tie up your money, whether you buy with a mortgage or in cash, and whether you factor in transaction costs and taxes. This guide walks through these questions for property investment in Antalya.</p>
 <h2>Why property, still?</h2>

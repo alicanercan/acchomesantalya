@@ -90,6 +90,8 @@ for (const l of LISTINGS) {
 }
 const PREVIEW = LISTINGS.filter((l) => l.durum === 'Onay Bekliyor').map((l) => ({ ...l, _preview: true })); // onay için gizli önizleme: listelerde ve site haritasında yok, noindex
 LISTINGS = LISTINGS.filter((l) => ['Yayında', 'Opsiyonlu', 'Satıldı'].includes(l.durum));
+// "🛋️ Eşyalı" etiketi panelin eşya alanından otomatik gelir (24.11.2026: Sahibinden'den gelen eşyalı ilanlar etiket filtresinde görünmüyordu)
+for (const l of LISTINGS) { const e = new Set(l.etiketler || []); const es = String(l.esya || '').trim(); if (es === 'Eşyalı') e.add('esyali'); else if (es === 'Eşyasız') e.delete('esyali'); l.etiketler = [...e]; }
 const AGENT_ILAN = new Map(); for (const l of LISTINGS) { const a = l.danisman?.ad || 'Ali Caner Can'; if (!AGENT_ILAN.has(a)) AGENT_ILAN.set(a, []); AGENT_ILAN.get(a).push(l); }
 
 const VER = crypto.createHash('md5').update(fs.readFileSync(path.join(ROOT, 'assets/style.css')) + fs.readFileSync(path.join(ROOT, 'assets/app.js'))).digest('hex').slice(0, 8);

@@ -56,6 +56,12 @@ jobs:
           git add panel-snapshot.json
           git commit -qm "Panel anlık görüntüsü $(date -u +%Y-%m-%dT%H:%MZ)"
           git push -qf "https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}.git" panel-snapshot:panel-snapshot
+      - name: Yayındaki site haritasını sakla (IndexNow farkı için)
+        if: env.FTP_SERVER != ''
+        continue-on-error: true
+        run: |
+          curl -fsSL --max-time 30 https://acchomesantalya.com/sitemap.xml -o /tmp/old-sitemap.xml || : > /tmp/old-sitemap.xml
+          curl -fsS --max-time 20 -o /dev/null https://acchomesantalya.com/bcba52b8a9ece55526718f8b01e80c0f.txt && echo yes > /tmp/indexnow-key-live || echo no > /tmp/indexnow-key-live
       - name: Turhost'a yükle
         if: env.FTP_SERVER != ''
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
@@ -71,3 +77,27 @@ jobs:
             **/.git*
             **/.git*/**
             _redirects
+      # Yeni sayfaları Bing, Yandex, Seznam ve Naver'e bildirir (Google IndexNow kullanmaz; site haritasından tarar).
+      # Anahtar dosyası static/bcba52b8a9ece55526718f8b01e80c0f.txt silinmemeli. İlk kurulumda tüm site haritası, sonra yalnız yeni URL'ler gönderilir.
+      - name: IndexNow (yeni sayfalar)
+        if: env.FTP_SERVER != ''
+        continue-on-error: true
+        run: |
+          python3 - <<'PY'
+          import json, re, urllib.request
+          rd = lambda p: set(re.findall(r'<loc>([^<]+)</loc>', open(p, encoding='utf8', errors='ignore').read()))
+          new = rd('dist/sitemap.xml')
+          try: old = rd('/tmp/old-sitemap.xml'); first = open('/tmp/indexnow-key-live').read().strip() != 'yes'
+          except Exception: old, first = set(), False
+          urls = sorted(new if first else (new - old if old else set()))[:10000]
+          if not urls:
+              print('IndexNow: yeni URL yok'); raise SystemExit
+          key = 'bcba52b8a9ece55526718f8b01e80c0f'
+          body = json.dumps({'host': 'acchomesantalya.com', 'key': key, 'keyLocation': f'https://acchomesantalya.com/{key}.txt', 'urlList': urls}).encode()
+          for ep in ('https://api.indexnow.org/indexnow', 'https://yandex.com/indexnow'):
+              try:
+                  r = urllib.request.urlopen(urllib.request.Request(ep, data=body, headers={'Content-Type': 'application/json; charset=utf-8'}), timeout=20)
+                  print(ep, r.status, len(urls), 'URL')
+              except Exception as e:
+                  print(ep, 'hata:', e)
+          PY

@@ -6,6 +6,326 @@ export const NEWS_UI = {
   ru: { name: 'ACC NEWS', title: 'ACC NEWS: еженедельный обзор недвижимости', lead: 'Еженедельный обзор рынка недвижимости Анталии и Турции: ставки, ипотека, статистика продаж, градостроительство и торги — с источниками и комментарием ACC HOMES.', metaTitle: 'ACC NEWS: еженедельный обзор недвижимости Анталии и Турции | ACC HOMES', issues: 'Выпуски', read: 'Читать выпуск', cta: 'Станьте партнёром ACC HOMES', all: 'Все выпуски', rss: 'RSS' },
 };
 export const NEWS = [
+  { date: '2026-11-25', ...{
+ "tr": {
+  "metaTitle": "ACC NEWS 25 Kasım 2026: Reel Fiyat Kaybı ve Antalya Ruhsat Verisi",
+  "desc": "Konut ilan fiyatları reelde yıllık %9 düştü, ilanlar 58,6 gün bekliyor. Antalya'da 3. çeyrekte 8.733 daireye ruhsat, 7.604 daireye iskân verildi.",
+  "h1": "ACC NEWS — Günün Haberi",
+  "dl": "25 Kasım 2026 · Hazırlayan: Ali Caner Can, Broker",
+  "intro": "İş ortaklarımız ve müşterilerimiz için bugünün iki önemli gelişmesini kısa, kaynaklı ve yorumlu olarak derledik. Ayrıntılı analiz blogumuzda.",
+  "sections": [
+   {
+    "title": "Günün 2 kritik gelişmesi",
+    "items": [
+     {
+      "h": "Satılık konutta reel fiyat kaybı hızlandı, ilanlar 58,6 gün yayında",
+      "p": "BETAM'ın sahibinden.com ilan verisine dayanan Ekim raporuna göre Türkiye'de ortalama ilan fiyatı 47.179 TL/m² oldu. Nominal yıllık artış %18'e geriledi (Eylül %19,6); enflasyondan arındırıldığında fiyatlar yıllık %9 düştü (Eylül −%7,8). İlanların yayında kalma süresi Ağustos'ta 54,2, Eylül'de 57,6 gündü, Ekim'de 58,6 güne çıktı. Talep endeksi aylık %2,9 geriledi.",
+      "src": [
+       "EmlakDream / BETAM",
+       "https://www.emlakdream.com/satilik-konutta-reel-fiyat-kaybi-yeniden-hizlandi-ilanlarin-yayinda-kalma-suresi-58-6-gune-cikti/"
+      ]
+     },
+     {
+      "h": "Antalya'da üç ayda 8.733 daireye ruhsat, 7.604 daireye iskân",
+      "p": "TÜİK'in Temmuz–Eylül 2026 yapı izin istatistiklerine göre Antalya'da 8.733 daire için yapı ruhsatı, 7.604 daire için yapı kullanma izni verildi. Türkiye genelinde ruhsat verilen daire sayısı yıllık yalnızca %1,6 artarken iskân alan daire sayısı %21,1 arttı: teslimatlar hızlı, yeni başlangıçlar yavaş. TÜİK'in Kasım inşaat güven endeksi de aylık %3,8 düşüşle 80,2'ye indi.",
+      "src": [
+       "Akdeniz Gerçek / TÜİK",
+       "https://www.akdenizgercek.com.tr/ekonomi/antalyada-2026nin-ucuncu-ceyreginde-8-bin-733-daireye-yapi-ruhsati-verildi/389913"
+      ]
+     }
+    ]
+   },
+   {
+    "title": "Antalya ve bölge",
+    "items": [
+     {
+      "h": null,
+      "p": "Döşemealtı Altınkale'de 25 bin m² ticaret alanında 70 bin m² inşaat alanlı, 90 mağazalı ve 730 araçlık otoparklı bir AVM projesi için ÇED süreci başlatıldı. Bu aşama onay ya da inşaat başlangıcı anlamına gelmiyor; bölgedeki konut değerlemesi açısından izlenecek bir gelişme.",
+      "src": [
+       "Akdeniz Gerçek",
+       "https://www.akdenizgercek.com.tr/dosemealti/antalya-dosemealtina-dev-alisveris-merkezi-geliyor/389909"
+      ]
+     }
+    ]
+   },
+   {
+    "title": "Kısa kısa",
+    "items": [
+     {
+      "h": null,
+      "p": "TCMB kredi kartı referans faizini %3,11'den %2,94'e indirdi; 30 bin TL altı borçta azami akdi faiz 1 Aralık'tan itibaren %3,08 olacak.",
+      "src": [
+       "Memurlar.net / AA",
+       "https://www.memurlar.net/haber/1185079/kredi-karti-azami-akdi-faiz-orani-yuzde-3-08-e-indirildi.html"
+      ]
+     },
+     {
+      "h": null,
+      "p": "Emlak vergisi 2. taksitinde son ödeme günü 30 Kasım; süresinde ödenmeyen tutara aylık %3,7 gecikme zammı uygulanıyor.",
+      "src": [
+       "Yeni Asır",
+       "https://www.yeniasir.com.tr/gundem/2026/11/25/emlak-vergisinde-son-hafta"
+      ]
+     }
+    ]
+   }
+  ],
+  "calTitle": "Takvim",
+  "cal": [
+   [
+    "26 Kasım",
+    "TCMB haftalık kredi faizi ve BDDK verileri"
+   ],
+   [
+    "27 Kasım",
+    "TCMB Finansal İstikrar Raporu"
+   ],
+   [
+    "30 Kasım",
+    "Emlak vergisi 2. taksit son gün"
+   ],
+   [
+    "3 Aralık",
+    "Kasım enflasyonu ve Aralık kira artış tavanı"
+   ],
+   [
+    "10 Aralık",
+    "TCMB PPK faiz kararı"
+   ]
+  ],
+  "viewTitle": "İş ortağı notu",
+  "view": "Satıcıya: İlanlar her ay biraz daha uzun bekliyor; piyasanın üzerinde fiyatlanan ilan iki ayı rahatça geçer. İlk 30 günde emsale dayalı doğru fiyatla çıkmak, sonradan indirim yapmaktan daha az kaybettirir. Alıcıya: Fiyatlar enflasyonun altında artıyor, pazarlık payı geçen yıla göre daha geniş ve Antalya'da iskânlı hazır stok bol; krediyle alacak müşteriye bu stok öncelikli gösterilmeli. Yabancı alıcıya: TL bazında reel düşüş, döviz bazında alım avantajı olarak anlatılabilir; bunun Türkiye ortalaması olduğu belirtilmeli. Yatırımcıya: Yeni ruhsatların zayıf seyri, 2027–2028'de arzın sınırlı kalabileceğine işaret ediyor; kesin fiyat öngörüsü değil, izlenecek bir eğilim.",
+  "srcTitle": "Kaynaklar",
+  "sources": [
+   [
+    "ACC HOMES Blog: Antalya Konut Piyasası Kasım 2026",
+    "https://acchomesantalya.com/blog/antalya-konut-piyasasi-kasim-2026/"
+   ],
+   [
+    "EmlakDream / BETAM",
+    "https://www.emlakdream.com/satilik-konutta-reel-fiyat-kaybi-yeniden-hizlandi-ilanlarin-yayinda-kalma-suresi-58-6-gune-cikti/"
+   ],
+   [
+    "Akdeniz Gerçek / TÜİK",
+    "https://www.akdenizgercek.com.tr/ekonomi/antalyada-2026nin-ucuncu-ceyreginde-8-bin-733-daireye-yapi-ruhsati-verildi/389913"
+   ],
+   [
+    "EmlakDream / TÜİK güven",
+    "https://www.emlakdream.com/insaat-sektoru-guven-endeksi-kasim-ayinda-yuzde-3-8-azaldi/"
+   ],
+   [
+    "Akdeniz Gerçek / Döşemealtı AVM",
+    "https://www.akdenizgercek.com.tr/dosemealti/antalya-dosemealtina-dev-alisveris-merkezi-geliyor/389909"
+   ],
+   [
+    "Memurlar.net / AA",
+    "https://www.memurlar.net/haber/1185079/kredi-karti-azami-akdi-faiz-orani-yuzde-3-08-e-indirildi.html"
+   ],
+   [
+    "Yeni Asır",
+    "https://www.yeniasir.com.tr/gundem/2026/11/25/emlak-vergisinde-son-hafta"
+   ]
+  ],
+  "note": "Bu sayfa bilgilendirme amaçlıdır, yatırım ve hukuki tavsiye değildir. Haberler kaynaklarından özetlenmiştir."
+ },
+ "en": {
+  "metaTitle": "ACC NEWS 25 Nov 2026: Real Price Decline, Antalya Permits",
+  "desc": "Home asking prices fell 9% in real terms; listings now stay 58.6 days. Antalya issued permits for 8,733 homes and occupancy permits for 7,604 in Q3.",
+  "h1": "ACC NEWS — News of the Day",
+  "dl": "25 November 2026 · By Ali Caner Can, Broker",
+  "intro": "Two developments that matter today for our partners and clients, summarised with sources and our view. Full analysis on our blog.",
+  "sections": [
+   {
+    "title": "Two key developments",
+    "items": [
+     {
+      "h": "Real home prices fall faster; listings stay online 58.6 days",
+      "p": "According to BETAM's October report based on sahibinden.com listings, the average asking price in Turkey was TRY 47,179 per m². Nominal annual growth eased to 18% (September: 19.6%); adjusted for inflation, prices fell 9% year on year (September: −7.8%). Average time on market rose from 54.2 days in August and 57.6 in September to 58.6 days in October. The demand index fell 2.9% month on month.",
+      "src": [
+       "EmlakDream / BETAM",
+       "https://www.emlakdream.com/satilik-konutta-reel-fiyat-kaybi-yeniden-hizlandi-ilanlarin-yayinda-kalma-suresi-58-6-gune-cikti/"
+      ]
+     },
+     {
+      "h": "Antalya: construction permits for 8,733 homes, occupancy permits for 7,604 in three months",
+      "p": "TurkStat's building permit statistics for July–September 2026 show 8,733 dwellings receiving construction permits and 7,604 receiving occupancy permits in Antalya. Nationally, dwellings with construction permits rose only 1.6% year on year, while those with occupancy permits rose 21.1%: completions are fast, new starts slow. TurkStat's construction confidence index fell 3.8% in November to 80.2.",
+      "src": [
+       "Akdeniz Gerçek / TurkStat",
+       "https://www.akdenizgercek.com.tr/ekonomi/antalyada-2026nin-ucuncu-ceyreginde-8-bin-733-daireye-yapi-ruhsati-verildi/389913"
+      ]
+     }
+    ]
+   },
+   {
+    "title": "Antalya and the region",
+    "items": [
+     {
+      "h": null,
+      "p": "An environmental impact (ÇED) process has started for a shopping mall project in Altınkale, Döşemealtı: 70,000 m² of construction on a 25,000 m² commercial plot, 90 shops and 730 parking spaces. This stage is not an approval or a construction start.",
+      "src": [
+       "Akdeniz Gerçek",
+       "https://www.akdenizgercek.com.tr/dosemealti/antalya-dosemealtina-dev-alisveris-merkezi-geliyor/389909"
+      ]
+     }
+    ]
+   },
+   {
+    "title": "In brief",
+    "items": [
+     {
+      "h": null,
+      "p": "The Central Bank cut the credit card reference rate from 3.11% to 2.94%; the maximum contractual rate for balances under TRY 30,000 will be 3.08% from 1 December.",
+      "src": [
+       "Memurlar.net / AA",
+       "https://www.memurlar.net/haber/1185079/kredi-karti-azami-akdi-faiz-orani-yuzde-3-08-e-indirildi.html"
+      ]
+     }
+    ]
+   }
+  ],
+  "calTitle": "Calendar",
+  "cal": [
+   [
+    "26 Nov",
+    "Central Bank weekly loan rates, BDDK data"
+   ],
+   [
+    "27 Nov",
+    "Central Bank Financial Stability Report"
+   ],
+   [
+    "30 Nov",
+    "Property tax 2nd instalment deadline"
+   ],
+   [
+    "3 Dec",
+    "November inflation and December rent cap"
+   ],
+   [
+    "10 Dec",
+    "Central Bank rate decision"
+   ]
+  ],
+  "viewTitle": "Partner note",
+  "view": "Sellers: listings are staying online longer each month, and an overpriced home can easily sit for over two months. Pricing correctly from comparables in the first 30 days costs less than cutting later. Buyers: prices are rising below inflation, there is more room to negotiate than last year, and ready homes with occupancy permits are widely available in Antalya. Foreign buyers: the real decline in lira prices can be an advantage when buying in foreign currency; note that this is a national average. Investors: weak growth in new permits points to limited supply in 2027–2028; a trend to watch, not a price forecast.",
+  "srcTitle": "Sources",
+  "sources": [
+   [
+    "ACC HOMES Blog: Antalya Housing Market November 2026",
+    "https://acchomesantalya.com/en/blog/antalya-konut-piyasasi-kasim-2026/"
+   ],
+   [
+    "EmlakDream / BETAM",
+    "https://www.emlakdream.com/satilik-konutta-reel-fiyat-kaybi-yeniden-hizlandi-ilanlarin-yayinda-kalma-suresi-58-6-gune-cikti/"
+   ],
+   [
+    "Akdeniz Gerçek / TurkStat",
+    "https://www.akdenizgercek.com.tr/ekonomi/antalyada-2026nin-ucuncu-ceyreginde-8-bin-733-daireye-yapi-ruhsati-verildi/389913"
+   ],
+   [
+    "EmlakDream / TurkStat confidence",
+    "https://www.emlakdream.com/insaat-sektoru-guven-endeksi-kasim-ayinda-yuzde-3-8-azaldi/"
+   ],
+   [
+    "Akdeniz Gerçek / Döşemealtı mall",
+    "https://www.akdenizgercek.com.tr/dosemealti/antalya-dosemealtina-dev-alisveris-merkezi-geliyor/389909"
+   ],
+   [
+    "Memurlar.net / AA",
+    "https://www.memurlar.net/haber/1185079/kredi-karti-azami-akdi-faiz-orani-yuzde-3-08-e-indirildi.html"
+   ]
+  ],
+  "note": "This page is for information only and is not investment or legal advice. News items are summarised from their sources."
+ },
+ "ru": {
+  "metaTitle": "ACC NEWS 25.11.2026: реальное снижение цен, разрешения в Анталии",
+  "desc": "Цены предложения жилья снизились на 9% в реальном выражении, объявления висят 58,6 дня. В Анталии за III квартал — разрешения на 8 733 квартиры.",
+  "h1": "ACC NEWS — новость дня",
+  "dl": "25 ноября 2026 · Автор: Али Джанер Джан, брокер",
+  "intro": "Два важных события дня для наших партнёров и клиентов — кратко, с источниками и нашим комментарием. Подробный разбор — в нашем блоге.",
+  "sections": [
+   {
+    "title": "Два ключевых события",
+    "items": [
+     {
+      "h": "Реальное снижение цен на жильё ускорилось, объявления висят 58,6 дня",
+      "p": "По октябрьскому отчёту BETAM на основе объявлений sahibinden.com, средняя цена предложения в Турции составила 47 179 лир за м². Номинальный рост за год замедлился до 18% (сентябрь: 19,6%); с учётом инфляции цены снизились на 9% (сентябрь: −7,8%). Средний срок экспозиции вырос с 54,2 дня в августе и 57,6 в сентябре до 58,6 дня в октябре. Индекс спроса снизился на 2,9% за месяц.",
+      "src": [
+       "EmlakDream / BETAM",
+       "https://www.emlakdream.com/satilik-konutta-reel-fiyat-kaybi-yeniden-hizlandi-ilanlarin-yayinda-kalma-suresi-58-6-gune-cikti/"
+      ]
+     },
+     {
+      "h": "Анталия: за три месяца разрешения на строительство 8 733 квартир и на ввод 7 604",
+      "p": "По данным TÜİK за июль–сентябрь 2026 года, в Анталии выдано разрешений на строительство 8 733 квартир и на ввод в эксплуатацию (искан) 7 604 квартир. По Турции число квартир с разрешением на строительство выросло за год лишь на 1,6%, а с разрешением на ввод — на 21,1%. Индекс доверия в строительстве в ноябре снизился на 3,8%, до 80,2.",
+      "src": [
+       "Akdeniz Gerçek / TÜİK",
+       "https://www.akdenizgercek.com.tr/ekonomi/antalyada-2026nin-ucuncu-ceyreginde-8-bin-733-daireye-yapi-ruhsati-verildi/389913"
+      ]
+     }
+    ]
+   },
+   {
+    "title": "Анталия и регион",
+    "items": [
+     {
+      "h": null,
+      "p": "В Алтынкале (Дёшемеалты) начата процедура экологической экспертизы (ÇED) проекта торгового центра: 70 000 м² строительной площади, 90 магазинов, 730 парковочных мест. Это не одобрение и не начало строительства.",
+      "src": [
+       "Akdeniz Gerçek",
+       "https://www.akdenizgercek.com.tr/dosemealti/antalya-dosemealtina-dev-alisveris-merkezi-geliyor/389909"
+      ]
+     }
+    ]
+   }
+  ],
+  "calTitle": "Календарь",
+  "cal": [
+   [
+    "26 нояб.",
+    "Еженедельные ставки по кредитам ЦБ, данные BDDK"
+   ],
+   [
+    "27 нояб.",
+    "Отчёт ЦБ о финансовой стабильности"
+   ],
+   [
+    "3 дек.",
+    "Инфляция за ноябрь и лимит роста аренды"
+   ],
+   [
+    "10 дек.",
+    "Решение ЦБ по ставке"
+   ]
+  ],
+  "viewTitle": "Комментарий для партнёров",
+  "view": "Продавцам: объявления висят всё дольше, а квартира с завышенной ценой легко провисит больше двух месяцев. Правильная цена по сравнимым объектам в первые 30 дней обходится дешевле последующего снижения. Покупателям: цены растут медленнее инфляции, возможностей для торга больше, чем год назад, готового жилья с исканом в Анталии много. Иностранным покупателям: реальное снижение цен в лирах — преимущество при покупке за валюту; это среднее по стране. Инвесторам: слабый рост новых разрешений указывает на ограниченное предложение в 2027–2028 годах — тренд, а не прогноз цен.",
+  "srcTitle": "Источники",
+  "sources": [
+   [
+    "Блог ACC HOMES: рынок жилья Анталии, ноябрь 2026",
+    "https://acchomesantalya.com/ru/blog/antalya-konut-piyasasi-kasim-2026/"
+   ],
+   [
+    "EmlakDream / BETAM",
+    "https://www.emlakdream.com/satilik-konutta-reel-fiyat-kaybi-yeniden-hizlandi-ilanlarin-yayinda-kalma-suresi-58-6-gune-cikti/"
+   ],
+   [
+    "Akdeniz Gerçek / TÜİK",
+    "https://www.akdenizgercek.com.tr/ekonomi/antalyada-2026nin-ucuncu-ceyreginde-8-bin-733-daireye-yapi-ruhsati-verildi/389913"
+   ],
+   [
+    "EmlakDream / TÜİK",
+    "https://www.emlakdream.com/insaat-sektoru-guven-endeksi-kasim-ayinda-yuzde-3-8-azaldi/"
+   ],
+   [
+    "Akdeniz Gerçek / ТЦ Дёшемеалты",
+    "https://www.akdenizgercek.com.tr/dosemealti/antalya-dosemealtina-dev-alisveris-merkezi-geliyor/389909"
+   ]
+  ],
+  "note": "Материал носит информационный характер и не является инвестиционной или юридической консультацией. Новости кратко изложены по источникам."
+ }
+} },
   { date: '2026-11-18', ...{
  "tr": {
   "metaTitle": "ACC NEWS 18 Kasım 2026: İkamet Kararı ve Ekim Satışları",

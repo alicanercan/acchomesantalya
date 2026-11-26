@@ -5,7 +5,7 @@ const chk = (a) => `<ul class="achk">${a.map((x) => `<li>${x}</li>`).join('')}</
 const faq = (a) => a.map(([q, x]) => `<h3>${q}</h3><p>${x}</p>`).join('');
 
 export const REGRET_POST = {
-  cat: 'lifestyle', date: '2026-11-22', img: 'tas-setli-bahce',
+  cat: 'lifestyle', date: '2026-11-22', img: 'tas-setli-bahce', cover: '/blog-villa-pisman-olmamak.webp',
   slug: 'villa-aldiktan-sonra-pisman-olmamak', slugEn: 'avoid-regret-after-buying-a-villa', slugRu: 'kak-ne-pozhalet-o-pokupke-villy',
   tr: {
     t: 'Villa alırken pişman olmamak için dikkat edilecekler',

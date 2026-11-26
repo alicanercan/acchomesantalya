@@ -79,7 +79,7 @@ a{color:inherit}img{max-width:100%;display:block}svg{width:20px;height:20px;flex
 @media (max-width:1080px){.now{grid-template-columns:repeat(2,1fr)}.vals{grid-template-columns:repeat(2,1fr)}.keys{grid-template-columns:repeat(3,1fr)}}
 @media (max-width:900px){
 .nav,.hr .btn,.hr .lsw{display:none}.hr{margin-left:auto}.burger{display:flex}
-.top.open .mpanel{display:grid;gap:4px;padding:10px 24px 20px;border-top:1px solid var(--line)}.mpanel a{text-decoration:none;font-weight:800;padding:10px 0;border-bottom:1px solid var(--line)}.mpanel .lsw{justify-self:start;margin-top:10px}
+.top.open .mpanel,.mpanel.open{display:grid;gap:4px;padding:10px 24px 20px;border-top:1px solid var(--line)}.mpanel a{text-decoration:none;font-weight:800;padding:10px 0;border-bottom:1px solid var(--line)}.mpanel .lsw{justify-self:start;margin-top:10px}
 .hg,.career,.two,.ag{grid-template-columns:1fr}.hg{gap:0;padding-top:34px}.ht{padding-bottom:10px}.hp img{max-height:440px}
 .sg{grid-template-columns:repeat(2,1fr)}.st{border-left:0;border-top:1px solid rgba(255,255,255,.12)}.st:nth-child(-n+2){border-top:0}.st:nth-child(even){border-left:1px solid rgba(255,255,255,.12)}
 .posts,.gal,.revs{grid-template-columns:1fr 1fr}.sh{flex-direction:column;align-items:flex-start}.cb{flex-direction:column;align-items:flex-start}.fg{grid-template-columns:1fr 1fr}.ag img{margin:0 auto;max-height:420px}

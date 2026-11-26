@@ -28,6 +28,7 @@
 /ru/Тип-недвижимости/* /ru/obekty/
 /ru/Статус/* /ru/obekty/
 /category/* /blog/
+/en/category/investment/* /en/blog/antalyada-gayrimenkul-yatirimi-bolgeler-ve-stratejiler/
 /en/category/* /en/blog/
 /ru/category/* /ru/blog/
 /houzez-studio/* /
@@ -100,8 +101,8 @@
 /en/june-2026-rent-increase-rate-32-24-announced-updated-guide-for-residential-and-commercial-contracts/ /en/blog/kira-artis-orani/
 /en/july-2026-rent-increase-rate-32-04-announced-up-to-date-guide-for-residential-and-commercial-contracts/ /en/blog/kira-artis-orani/
 /en/june-2026-turkstat-turkiye-antalya-housing-sales-statistics-acc-homes-antalya/ /en/blog/antalya-konut-satis-istatistikleri/
-/en/cbrt-policy-rate-decision-37-march-2026-its-impact-on-markets-and-investments/ /en/blog/
-/en/cbrt-june-2026-interest-rate-decision-what-does-holding-the-rate-steady-at-37-mean-for-the-antalya-real-estate-market/ /en/blog/
+/en/cbrt-policy-rate-decision-37-march-2026-its-impact-on-markets-and-investments/ /en/blog/antalya-konut-piyasasi-kasim-2026/
+/en/cbrt-june-2026-interest-rate-decision-what-does-holding-the-rate-steady-at-37-mean-for-the-antalya-real-estate-market/ /en/blog/antalya-konut-piyasasi-kasim-2026/
 /en/buying-a-villa-or-an-apartment-in-antalya-a-comparative-guide-why-acc-homes-international-is-the-right-choice/ /en/blog/antalyada-villa-mi-daire-mi/
 /en/antalyada-guvenilir-ve-etik-emlak-hizmeti-acc-homes-internationalin-farki/ /en/about/
 /en/zero-carbon-living-in-antalya-the-importance-of-solar-panels-and-electric-vehicle-charging-infrastructure-in-dosemealti-villa-projects/ /en/blog/dosemealti-villa-yasami-ve-enerji/
@@ -165,7 +166,7 @@
 /ru/почему-acc-homes-при-поиске-жилья-на-продажу-и/ /ru/blog/muratpasa-fener-sirinyali-bahcelievler-yatirim-rehberi/
 /ru/правильный-адрес-для-вашей-недвижимо/ /ru/blog/muratpasa-fener-sirinyali-bahcelievler-yatirim-rehberi/
 /ru/жизнь-в-самом-сердце-муратпаши-анталь/ /ru/blog/muratpasa-fener-sirinyali-bahcelievler-yatirim-rehberi/
-/ru/сохранение-ключевой-ставки-на-уровне-37/ /ru/blog/
+/ru/сохранение-ключевой-ставки-на-уровне-37/ /ru/blog/antalya-konut-piyasasi-kasim-2026/
 /ru/решение-центрального-банка-турции-по/ /ru/blog/
 /ru/acc-hoвосходящая-звезда-будущего-вместе-с-acc/ /ru/gid-altyntash/
 /ru/алтынташ-новый-инвестиционный-цент/ /ru/gid-altyntash/

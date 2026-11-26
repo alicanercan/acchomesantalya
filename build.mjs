@@ -713,8 +713,19 @@ const BLOG_COVERS = {
   'antalya-tarihi-antik-kentler': 'antalya-tarihi-antik-kentler',
   'belek-golf-spor-etkinlik-turizmi': 'belek-golf-spor-etkinlik-turizmi',
   'antalya-hastaneler-rehberi': 'antalya-hastaneler-rehberi',
+  'antalya-villanizi-satmak-rehberi': 'antalya-villanizi-satmak',
+  'lara-mahalleleri-rehberi': 'lara-mahalleleri',
+  'bddk-konut-kredisi-ikinci-ev-karari-kasim-2026': 'bddk-konut-kredisi',
+  'antalyada-villa-mi-daire-mi': 'villa-mi-daire-mi',
+  'dosemealti-villa-yasami-ve-enerji': 'dosemealti-villa-yasami',
+  'muratpasa-fener-sirinyali-bahcelievler-yatirim-rehberi': 'muratpasa-merkez-mahalleleri',
+  'gayrimenkul-ile-turk-vatandasligi-ve-ikamet-2026': 'vatandaslik-ve-ikamet',
+  'muteahhitler-icin-proje-satis-ve-pazarlama-yonetimi': 'muteahhit-proje-satisi',
+  'antalya-evimi-kiraya-vermek-istiyorum': 'evimi-kiraya-vermek',
+  'antalya-gayrimenkul-yatirimi-arsa-mi-ev-mi': 'yatirim-arsa-mi-ev-mi',
+  'antalya-ev-alirken-dikkat-edilmesi-gerekenler': 'antalya-ev-alirken-dikkat',
 };
-const withCover = (p) => (p.cover || !BLOG_COVERS[p.slug] ? p : { ...p, cover: `/img/blog/${BLOG_COVERS[p.slug]}-600.webp`, coverL: `/img/blog/${BLOG_COVERS[p.slug]}.webp`, coverH: p.slug === 'kira-artis-orani' ? 640 : 675 });
+const withCover = (p) => (!BLOG_COVERS[p.slug] ? p : { ...p, cover: `/img/blog/${BLOG_COVERS[p.slug]}-600.webp`, coverL: `/img/blog/${BLOG_COVERS[p.slug]}.webp`, coverH: p.slug === 'kira-artis-orani' ? 640 : 675 });
 const ALLPOSTS = [...BLOG_POSTS, ...POSTS.map((p) => ({ ...p, cat: BLOG.catOf[p.slug] || 'rehber' }))].map(withCover)
   .sort((x, y) => (y.live ? 1 : 0) - (x.live ? 1 : 0) || (y.updated || y.date).localeCompare(x.updated || x.date));
 const dmy = (d) => d.split('-').reverse().join('.');

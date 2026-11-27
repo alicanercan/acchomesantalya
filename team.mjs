@@ -52,7 +52,7 @@ export const PARTNERS = [
   { name: 'Evren Oral', photo: null, langs: [] },
   { name: 'Gülçin Öztorun', photo: null, langs: [] },
   { name: 'Mehtap İlknur Özyurt', photo: null, langs: [] },
-  { name: 'Naciye Biçkioğlu', photo: null, langs: [] },
+  { name: 'Naciye Dertlioğlu', photo: null, langs: [] },
   { name: 'Gonca Altıntaş', photo: 'local/gonca-altintas-gayrimenkul-danismani-acc-homes-780x780.webp', langs: [] },
   { name: 'Hülya Kızışar', photo: 'local/hulya-kizisar-gayrimenkul-danismani-acc-homes-780x780.webp', langs: [] },
   { name: 'Koray Solmaz', photo: 'local/koray-solmaz-gayrimenkul-danismani-acc-homes-780x780.webp', langs: [] },

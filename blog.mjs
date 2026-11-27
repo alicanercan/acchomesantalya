@@ -11,6 +11,7 @@ import { POSTS12 } from './posts12.mjs';
 import { POSTS13 } from './posts13.mjs';
 import { POSTS14 } from './posts14.mjs';
 import { POSTS15 } from './posts15.mjs';
+import { POSTS16 } from './posts16.mjs';
 // ACC HOMES Blog: yatırımcı, müteahhit ve Antalya odaklı yayın.
 // Kategoriler 12 dilde; yazı içerikleri TR/EN (diğer diller EN'e düşer).
 // AYLIK GÜNCELLEME: RENT dizisine yeni ayı, SALES dizisine yeni ayı ekleyin. Sayfa başlıkları ve tablolar kendiliğinden güncellenir.
@@ -293,4 +294,4 @@ BLOG_POSTS.push(
     },
   },
 );
-BLOG_POSTS.push(...POSTS3, ...POSTS4, ...POSTS5, ...POSTS6, ...POSTS7, ...POSTS8, ...POSTS9, ...POSTS10, ...POSTS11, ...POSTS12, ...POSTS13, ...POSTS14, ...POSTS15);
+BLOG_POSTS.push(...POSTS3, ...POSTS4, ...POSTS5, ...POSTS6, ...POSTS7, ...POSTS8, ...POSTS9, ...POSTS10, ...POSTS11, ...POSTS12, ...POSTS13, ...POSTS14, ...POSTS15, ...POSTS16);
